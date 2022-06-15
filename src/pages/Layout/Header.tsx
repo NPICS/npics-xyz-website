@@ -211,7 +211,7 @@ function XHeader() {
         <LogoLink to={"/"}>
           <img src={imgurl.logo} alt=""/>
         </LogoLink>
-        <BtnLink to={"marketplace"}>
+        <BtnLink to={"marketPlaceRedirect"}>
           Marketplace
         </BtnLink>
         <BtnLink to={"/dashboard/agreement"}>

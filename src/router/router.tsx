@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import loadable from 'react-loadable'
 
 interface RouterT {
@@ -63,6 +63,10 @@ export default function Routers() {
       component: <Marketplace />,
     },
     {
+      path: 'marketPlaceRedirect',
+      component: <Navigate to="/marketPlace" replace />,
+    },
+    {
       path: '/marketPlace/nft/:address/:tokenId',
       component: <MarketItem />
     },
@@ -71,19 +75,19 @@ export default function Routers() {
       component: <Dashboard />,
       children: [
         {
-          path: '/dashboard/agreement',
+          path: 'agreement',
           component: <MyAgreement />
         },
         {
-          path: '/dashboard/rewards',
+          path: 'rewards',
           component: <MyRewards />
         },
         {
-          path: '/dashboard/airdrop',
+          path: 'airdrop',
           component: <MyAirdrop />,
         },
         {
-          path: '/dashboard/airdrop/claim',
+          path: 'airdrop/claim',
           component: <Claim />,
         }
       ]
