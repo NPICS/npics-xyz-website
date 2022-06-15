@@ -2,3 +2,6 @@
   <a href="https://npics.xyz"><img alt="NPics logo" src="./npics-transparent.png" alt="npics.xyz" width="125"></a>
   <h1>👋 Welcome to NPICS.XYZ!👋 </h1>
 </div>
+
+
+This is the repository for the [npics.xyz](https://npics.xyz) website, a resource for the NPICS community. The purpose of the site is "to be the best gateway to our global community to learn about NPICS" - read more about what that means [here](https://non-pics.gitbook.io/npics-v1.0/).
