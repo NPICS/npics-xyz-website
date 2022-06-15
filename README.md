@@ -14,5 +14,5 @@ This is the repository for the [npics.xyz](https://npics.xyz) website, a resourc
 
 
 
-##Contact
+## Contact
 If you want to report an error or file a request, please file an issue [here](https://twitter.com/NPicsNFT). For additional information, please contact any of the main authors, e.g. via our [Discord server](https://medium.com/@npics.xyz).
