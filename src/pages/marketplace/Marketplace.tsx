@@ -217,16 +217,30 @@ const CollectionItem = styled.div`
   overflow: hidden;
   .co-image {
     position: relative;
-    &>img:nth-child(1) {
-      width: 2.96rem;
-      height: 3.07rem;
+    .market {
       position: absolute;
       top: .12rem;
       left: .12rem;
       width: .38rem;
       height: .38rem;
     }
-    &>img:nth-child(2) {
+    .rarity {
+      position: absolute;
+      top: .12rem;
+      right: .12rem;
+      display: flex;
+      align-items: center;
+      font-size: .16rem;
+      padding: 0.05rem;
+      border-radius: 10px;
+      color: #000;
+      font-weight: 500;
+      background: #fff;
+      &>img {
+        margin-right: .05rem;
+      }
+    }
+    .nft-img {
       width: 2.96rem;
       height: 3.07rem;
     }
@@ -458,6 +472,8 @@ function Marketplace() {
             <Select onSelect={onSelect} defaultValue="asc" dropdownClassName="ant-selectDropDown-reset">
               <Option value="asc">Price: Low to High</Option>
               <Option value="desc">Price: high to low</Option>
+              <Option value="rarityScore">Rarity: Common to Rarest</Option>
+              <Option value="rarityScoreDesc">Rarity: Rarest to Common</Option>
             </Select>
           </div>
         </div>
@@ -469,8 +485,12 @@ function Marketplace() {
                   return (
                     <Link to={`nft/${item.address}/${item.tokenId}`}  key={item.id}><CollectionItem key={item.id} >
                       <div className='co-image'>
-                        <img src={imgurl.market[item.market]} alt="" />
-                        <img src={item.imageUrl} alt="" />
+                        <img className='market' src={imgurl.market[item.market]} alt="" />
+                        <div className='rarity'>
+                          <img src={imgurl.market.rarity} alt="" />
+                          <span>{item.rarityScore}</span>
+                        </div>
+                        <img className='nft-img' src={item.imageUrl} alt="" />
                       </div>
                       <div className='co-info'>
                         <span>{realTotalSupply?.name}</span>

@@ -62,6 +62,8 @@ import Group397 from '../assets/images/market/Group397.png'
 import icon49 from '../assets/images/market/icon49.png'
 import info_icon from '../assets/images/market/info_icon.png'
 import loading from '../assets/images/market/loading.gif'
+import rarity from '../assets/images/market/rarity.png'
+
 import gas_icon from '../assets/images/gas_icon.png'
 import agreement from '../assets/images/dashboard/agreement.png'
 import agreementActive from '../assets/images/dashboard/agreement_active.png'
@@ -171,7 +173,8 @@ export const imgurl = {
     price14,
     checked,
     blackPrice,
-    redPrice24
+    redPrice24,
+    rarity
   },
   dashboard: {
     agreement,
