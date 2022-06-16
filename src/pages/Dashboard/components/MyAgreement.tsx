@@ -314,7 +314,7 @@ function MyAgreement() {
     try {
       const result: any = await http.myPost(url, pageInside)
 
-      const orgData: Result[] = result.data
+      const orgData: Result[] = result.data.records
       if (result.code === 200 && orgData.length) {
         const signer = library.getSigner(account)
         let lendPool = new LendPool(signer)
