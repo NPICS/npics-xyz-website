@@ -78,7 +78,7 @@ export class CollectionItems {
   decimals!: string;
   id!: string;
   imageUrl!: string;
-  market!: 'opensea' | 'x2y2' | 'looksrare' | 'nftx' | 'xMarket';
+  market!: 'opensea' | 'x2y2' | 'looksrare' | 'nftx' | 'xMarket' | 'seaport';
   marketUrl!: string;
   paymentSymbol!: string;
   tokenId!: string;

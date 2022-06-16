@@ -281,7 +281,7 @@ const Flex = styled.div`
 `
 const Scroll = styled.div`
   
-  &>div {
+  .marketplace-scroll {
     overflow-y: scroll;
     height: 8.5rem;
     scrollbar-width: none;
@@ -300,6 +300,7 @@ function Marketplace() {
   const [collectionsItems, setCollectionsItems] = useState<CollectionItems[]>([])
   const [isLoading, setIsLoading] = useState<Boolean>(true)
   const [pageIndex, setPageIndex] = useState<number>(1)
+  const [total, setTotal] = useState<number>(0)
 
   useEffect(() => {
     getCollectionsList()
@@ -324,7 +325,7 @@ function Marketplace() {
       const changeData = deserializeArray(Collections, JSON.stringify(orgData));
       setCollectionsList(changeData)
       setRealTotalSupply(changeData[0])
-      const request = Object.assign({}, itemsRequest, { address: changeData[0].address, pageSize: 32, pageIndex: pageIndex, direction: "asc", search: "" })
+      const request = Object.assign({}, itemsRequest, { address: changeData[0].address, pageSize: 30, pageIndex: pageIndex, direction: "asc", search: "" })
       setItemsRequest(request)
     } else {
       setCollectionsList([])
@@ -337,8 +338,8 @@ function Marketplace() {
     orgRequest.pageIndex = pageIndex
     const url = '/npics-nft/app-api/v2/nft/getCollectionItems'
     const result: any = await http.myPost(url, orgRequest)
-    if (result.code === 200 && result.data.length) {
-      const changeData = deserializeArray(CollectionItems, JSON.stringify(result.data));
+    if (result.code === 200 && result.data.records.length) {
+      const changeData = deserializeArray(CollectionItems, JSON.stringify(result.data.records));
       const orgData = collectionsItems.concat(changeData)
       setCollectionsItems(orgData)
     } else {
@@ -352,8 +353,9 @@ function Marketplace() {
     const url = '/npics-nft/app-api/v2/nft/getCollectionItems'
     const result: any = await http.myPost(url, itemsRequest)
     setIsLoading(false)
-    if (result.code === 200 && result.data.length) {
-      const changeData = deserializeArray(CollectionItems, JSON.stringify(result.data));
+    if (result.code === 200 && result.data.records.length) {
+      setTotal(result.data.total)
+      const changeData = deserializeArray(CollectionItems, JSON.stringify(result.data.records));
       setCollectionsItems(changeData)
     } else {
       setCollectionsItems([])
@@ -381,6 +383,29 @@ function Marketplace() {
 
   const onLoadMore = () => {
     setPageIndex(pageIndex + 1)
+  }
+
+  
+
+  let timeout: NodeJS.Timeout | null
+  const getScroll = (e:any) => {
+    
+    if (!timeout) {
+      timeout = setTimeout(function () {
+        let marketDom = document.getElementById("marketplace-content-height") || document.body
+        let height1 = marketDom.clientHeight
+        let height2 = e.target.clientHeight
+        let scrollTop = e.target.scrollTop;
+        if (height1 - height2 < scrollTop + 100) {
+          if(height1 < height2) return
+          if(collectionsItems.length === total) return
+          console.log('checked',height1,height2,scrollTop,);
+          onLoadMore()
+        }
+        
+        timeout = null;
+      }, 400);
+    }
   }
 
   return (
@@ -438,8 +463,8 @@ function Marketplace() {
           </div>
         </div>
         <Scroll>
-          <div>
-            <div className='content-items'>
+          <div className='marketplace-scroll' onScroll={(e) => getScroll(e)}>
+            <div className='content-items' id="marketplace-content-height">
               {isLoading ? <div className='loading'><img src={imgurl.market.loading} alt="" /></div> : collectionsItems.length ? <div>
                 {collectionsItems && collectionsItems.map((item:CollectionItems) => {
                   return (
@@ -469,7 +494,7 @@ function Marketplace() {
               </div>}
             </div>
             <Flex>
-              {isLoading ? null : collectionsItems.length ? <ButtonDefault types='one' onClick={() => onLoadMore()}>
+              {isLoading ? null : collectionsItems.length ? collectionsItems.length === total ? null : <ButtonDefault types='one' onClick={() => onLoadMore()}>
                 Load More
               </ButtonDefault> : null}
             </Flex>

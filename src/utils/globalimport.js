@@ -47,6 +47,7 @@ import Union2 from '../assets/images/market/Union2.png'
 import search from '../assets/images/market/search.png'
 import collect from '../assets/images/market/collect.png'
 import collect2 from '../assets/images/market/collect2.png'
+import seaport from '../assets/images/market/opensea.png'
 import opensea from '../assets/images/market/opensea.png'
 import looksrare from '../assets/images/market/looksrare.svg'
 import nftx from '../assets/images/market/nftx.svg'
@@ -151,6 +152,7 @@ export const imgurl = {
     search,
     collect,
     collect2,
+    seaport,
     opensea,
     looksrare,
     nftx,

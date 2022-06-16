@@ -98,7 +98,7 @@ function Footer() {
         <div>
           {
             terms.map((item) => {
-              return <a href={item.link} target="_blank" rel="noreferrer"><img src={item.icon} alt={item.name}/></a>
+              return <a key={item.name} href={item.link} target="_blank" rel="noreferrer"><img src={item.icon} alt={item.name}/></a>
             })
           }
         </div>
