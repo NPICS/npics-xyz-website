@@ -399,7 +399,6 @@ function Marketplace() {
         if (height1 - height2 < scrollTop + 100) {
           if(height1 < height2) return
           if(collectionsItems.length === total) return
-          console.log('checked',height1,height2,scrollTop,);
           onLoadMore()
         }
         
@@ -494,7 +493,7 @@ function Marketplace() {
               </div>}
             </div>
             <Flex>
-              {isLoading ? null : collectionsItems.length ? collectionsItems.length === total ? null : <ButtonDefault types='one' onClick={() => onLoadMore()}>
+              {isLoading ? null : collectionsItems.length ? collectionsItems.length === total || collectionsItems.length <= 30 ? null : <ButtonDefault types='one' onClick={() => onLoadMore()}>
                 Load More
               </ButtonDefault> : null}
             </Flex>

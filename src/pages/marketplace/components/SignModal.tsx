@@ -70,7 +70,6 @@ export default function SignModal(props: Iprops) {
       message.warning("please agree to NPics's Terms of service");
       return
     }
-    console.log(collectionItemsDetail);
     // if (payEthBtn && payWethBtn) {
     //   message.warning("1");
     //   return

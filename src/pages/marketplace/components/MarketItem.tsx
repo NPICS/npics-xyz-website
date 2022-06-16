@@ -31,7 +31,6 @@ function MarketItem() {
   const EthPrice = useEthPrice(collectionItemsDetail?.currentBasePrice)
   const navigate = useNavigate();
   let params:any = useParams()
-  console.log(params)
   const modal: any = useRef()
 
   const goBack = () => {
@@ -71,7 +70,6 @@ function MarketItem() {
       // changeData.rarityScore = itemDetails.rarityScore
       const aa = changeData.currentBasePrice.minus(new BigNumber(changeData.availableBorrow.toString()))
       changeData.totalAmount = aa
-      console.log("changeData", changeData);
       setCollectionItemsDetail(changeData)
     } else {
       setCollectionItemsDetail(undefined)

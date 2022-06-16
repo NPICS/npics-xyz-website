@@ -253,72 +253,57 @@
     "name": "tokenId",
     "type": "uint256"
   }, {
-    "internalType": "bytes",
-    "name": "data",
-    "type": "bytes"
-  }, {
-    "internalType": "uint256",
-    "name": "loanAmt",
-    "type": "uint256"
-  }],
-  "name": "downPayBatchBuyWithERC20s",
-  "outputs": [],
-  "stateMutability": "payable",
-  "type": "function"
-}, {
-  "inputs": [{
     "internalType": "address",
-    "name": "nft",
+    "name": "market",
     "type": "address"
-  }, {
-    "internalType": "uint256",
-    "name": "tokenId",
-    "type": "uint256"
   }, {
     "internalType": "bytes",
     "name": "data",
     "type": "bytes"
   }, {
     "internalType": "uint256",
-    "name": "loanAmt",
+    "name": "price",
     "type": "uint256"
-  }],
-  "name": "downPayBatchBuyWithETH",
-  "outputs": [],
-  "stateMutability": "payable",
-  "type": "function"
-}, {
-  "inputs": [{
-    "internalType": "address",
-    "name": "nft",
-    "type": "address"
-  }, {
-    "internalType": "uint256",
-    "name": "tokenId",
-    "type": "uint256"
-  }, {
-    "components": [{
-      "internalType": "uint256",
-      "name": "marketId",
-      "type": "uint256"
-    }, {
-      "internalType": "uint256",
-      "name": "value",
-      "type": "uint256"
-    }, {
-      "internalType": "bytes",
-      "name": "tradeData",
-      "type": "bytes"
-    }],
-    "internalType": "struct TradeDetails[]",
-    "name": "tradeDetails",
-    "type": "tuple[]"
   }, {
     "internalType": "uint256",
     "name": "loanAmt",
     "type": "uint256"
   }],
   "name": "downPayWithETH",
+  "outputs": [],
+  "stateMutability": "payable",
+  "type": "function"
+}, {
+  "inputs": [{
+    "internalType": "address",
+    "name": "nft",
+    "type": "address"
+  }, {
+    "internalType": "uint256",
+    "name": "tokenId",
+    "type": "uint256"
+  }, {
+    "internalType": "address",
+    "name": "market",
+    "type": "address"
+  }, {
+    "internalType": "bytes",
+    "name": "data",
+    "type": "bytes"
+  }, {
+    "internalType": "uint256",
+    "name": "price",
+    "type": "uint256"
+  }, {
+    "internalType": "uint256",
+    "name": "loanAmt",
+    "type": "uint256"
+  }, {
+    "internalType": "uint256",
+    "name": "wethAmt",
+    "type": "uint256"
+  }],
+  "name": "downPayWithWETH",
   "outputs": [],
   "stateMutability": "payable",
   "type": "function"

@@ -104,13 +104,24 @@ export default function SignGif(props: Iprops) {
           setAgreementSign(false)
           return
         }
+        const marketAddress = {
+          opensea:'0x00000000006c3852cbEf3e08E8dF289169EdE581',
+          seaport:'0x00000000A50BB64b4BbEcEB18715748DfacE08af',
+          x2y2:'0x83C8F28c26bF6aaca652Df1DbBE0e1b56F8baBa2',
+          looksrare:'0x83C8F28c26bF6aaca652Df1DbBE0e1b56F8baBa2',
+          nftx:'0x83C8F28c26bF6aaca652Df1DbBE0e1b56F8baBa2',
+          xMarket:'',
+        }
         const params: any = {
           nft: collectionItemsDetail?.address,
           tokenId: collectionItemsDetail?.tokenId,
           tradeDetail: result.data.transaction,
           loadAmt: compute(collectionItemsDetail)?.loanFunds,
           payAmount: compute(collectionItemsDetail)?.agreementPrice,
+          price: collectionItemsDetail?.floorPrice,
+          market:marketAddress[collectionItemsDetail.market]
         }
+        console.log('collectionItemsDetail',collectionItemsDetail);
         action(setIsLoading(true))
         await npics.downPayBatchBuyWithETH(params)
         action(setIsLoading(false))
@@ -119,6 +130,7 @@ export default function SignGif(props: Iprops) {
         setAgreementSign(false)
       }
     } catch (e) {
+      console.log('error',e)
       setSignState('failure')
       setAgreementSign(false)
       action(setIsLoading(false))

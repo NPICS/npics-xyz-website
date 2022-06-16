@@ -104,71 +104,9 @@ const SwiperWrap = styled.div`
     z-index: 2;
   }
 `
-// type Item = {
-//   imgUrl: string,
-//   time: string,
-//   name: string,
-//   color: string,
-//   icon: string
-// }
 export default function SwiperFn() {
   const [listData, setListData] = useState<SwiperModel[]>([])
 
-  // const list = [
-  //   {
-  //     imgUrl: imgurl.home.SwiperItem,
-  //     time: '1 minutes ago',
-  //     name: 'BoreApe...',
-  //     color: '#6226',
-  //     icon: imgurl.home.SwiperIcon
-  //   },
-  //   {
-  //     imgUrl: imgurl.home.SwiperItem,
-  //     time: '2 minutes ago',
-  //     name: 'BoreApe...',
-  //     color: '#6226',
-  //     icon: imgurl.home.SwiperIcon
-  //   },
-  //   {
-  //     imgUrl: imgurl.home.SwiperItem,
-  //     time: '3 minutes ago',
-  //     name: 'BoreApe...',
-  //     color: '#6226',
-  //     icon: imgurl.home.SwiperIcon
-  //   },
-  //   {
-  //     imgUrl: imgurl.home.SwiperItem,
-  //     time: '4 minutes ago',
-  //     name: 'BoreApe...',
-  //     color: '#6226',
-  //     icon: imgurl.home.SwiperIcon
-  //   },
-  //   {
-  //     imgUrl: imgurl.home.SwiperItem,
-  //     time: '5 minutes ago',
-  //     name: 'BoreApe...',
-  //     color: '#6226',
-  //     icon: imgurl.home.SwiperIcon
-  //   },
-  //   {
-  //     imgUrl: imgurl.home.SwiperItem,
-  //     time: '6 minutes ago',
-  //     name: 'BoreApe...',
-  //     color: '#6226',
-  //     icon: imgurl.home.SwiperIcon
-  //   },
-  //   {
-  //     imgUrl: imgurl.home.SwiperItem,
-  //     time: '7 minutes ago',
-  //     name: 'BoreApe...',
-  //     color: '#6226',
-  //     icon: imgurl.home.SwiperIcon
-  //   },
-  // ]
-
-  // const handleClick = (e: Item) => {
-  //   console.log(e);
-  // }
 
   useEffect(() => {
     http.myPost("/npics-nft/app-api/v2/nfthome/getRecord", {
@@ -192,7 +130,6 @@ export default function SwiperFn() {
         initialSlide={4}
         transition-timing-function={'linear'}
         speed= {300}
-        loop={false}
         autoplay={{
           delay: 1500,
           disableOnInteraction: false,
