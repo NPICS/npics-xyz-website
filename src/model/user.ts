@@ -121,5 +121,19 @@ export class Activities {
   amount!: BigNumber
   @TransformBigNumber()
   startAmount!: BigNumber
-  
+
+  @Expose()
+  eventTypeExplain(): string | undefined {
+    if (this.eventType === "null") {
+      return undefined
+    } else if (this.eventType === "transfer") {
+      return "Transfer"
+    } else if (this.eventType === "offer_entered") {
+      return "Offer"
+    } else if (this.eventType === "created") {
+      return "List"
+    } else {
+      return undefined
+    }
+  }
 }

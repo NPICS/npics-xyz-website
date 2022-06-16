@@ -1,6 +1,7 @@
 import axios from 'axios'
 import {message} from 'antd';
 import {SessionStorageKey} from "./enums";
+// import store from "../store";
 // import {Params} from "react-router-dom";
 // import store from "../store";
 
@@ -74,7 +75,7 @@ export function myGet(url: any, param: any) {
     })
 }
 
-export async function getWithJSON(uri: string, params?: {}) {
+export function getWithJSON(uri: string, params?: {}) {
     return new Promise((resolve, reject) => {
         axios.get(uri, {
             params: params ?? {},
@@ -83,6 +84,7 @@ export async function getWithJSON(uri: string, params?: {}) {
             }
         }).then(resp => {
             // http request success
+
             if (resp.status === 200) {
                 /// service return success
                 switch (resp.data.code) {
@@ -100,9 +102,10 @@ export async function getWithJSON(uri: string, params?: {}) {
                 }
             } else {
                 /// http request failed
+
             }
         }).catch((error) => {
-
+          console.error(`HTTP => ${error}`)
         }).finally(() => {
 
         })

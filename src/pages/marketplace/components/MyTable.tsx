@@ -164,7 +164,7 @@ export default function MyTable(props: Iprops) {
           for (let i = 0; i < changeData.length; i++) {
             relData.push({
               key: `${i}`,
-              eventType: changeData[i].eventType || '--',
+              eventType: changeData[i].eventTypeExplain() || '--',
               amount: (changeData[i] && (+changeData[i].amount.div(10 ** 18).toFixed(2).toString())),
               fromAccount: changeData[i].fromAccount,
               toAccount: changeData[i].toAccount,
