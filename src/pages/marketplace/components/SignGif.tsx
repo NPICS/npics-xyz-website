@@ -43,24 +43,27 @@ const Wrap = styled.div`
   .bottomBtn {
     display: flex;
     justify-content: space-evenly;
-    img {
-      width: .28rem;
-      height: .28rem;
+    .logo {
+      display: flex;
+      align-items: center;
+      img {
+        margin-right: .1rem;
+      }
     }
   }
 `
 const list = [
   {
-    imgurl: imgurl.market.opensea,
-    text: 'OpenSea1',
+    imgurl: imgurl.market.OpenseaBuy,
+    text: 'OpenSea',
   },
   {
-    imgurl: imgurl.market.opensea,
-    text: 'OpenSea2',
+    imgurl: imgurl.market.DYDXBuy,
+    text: 'DYDX',
   },
   {
-    imgurl: imgurl.market.opensea,
-    text: 'OpenSea3',
+    imgurl: imgurl.market.BendDAOBuy,
+    text: 'BendDAO',
   }
 ]
 interface Iprops {
@@ -121,7 +124,6 @@ export default function SignGif(props: Iprops) {
           price: collectionItemsDetail?.floorPrice,
           market:marketAddress[collectionItemsDetail.market]
         }
-        console.log('collectionItemsDetail',collectionItemsDetail);
         action(setIsLoading(true))
         await npics.downPayBatchBuyWithETH(params)
         action(setIsLoading(false))
@@ -130,10 +132,10 @@ export default function SignGif(props: Iprops) {
         setAgreementSign(false)
       }
     } catch (e) {
-      console.log('error',e)
       setSignState('failure')
       setAgreementSign(false)
       action(setIsLoading(false))
+      console.log(JSON.parse(JSON.stringify(e)));
       message.error(JSON.parse(JSON.stringify(e)).reason || 'User rejected the request')
     }
   }
@@ -176,7 +178,7 @@ export default function SignGif(props: Iprops) {
         {list.map((item) => {
           return (
             <ButtonDefault onClick={sign} types='two' width='1.8rem' height='.52rem' key={item.text}>
-              <div>
+              <div className='logo'>
                 <img src={item.imgurl} alt="" />
                 <span>{item.text}</span>
               </div>

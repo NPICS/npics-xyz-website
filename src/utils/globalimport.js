@@ -63,6 +63,9 @@ import icon49 from '../assets/images/market/icon49.png'
 import info_icon from '../assets/images/market/info_icon.png'
 import loading from '../assets/images/market/loading.gif'
 import rarity from '../assets/images/market/rarity.png'
+import DYDXBuy from '../assets/images/market/DYDXBuy.png'
+import BendDAOBuy from '../assets/images/market/BendDAOBuy.png'
+import OpenseaBuy from '../assets/images/market/OpenseaBuy.png'
 
 import gas_icon from '../assets/images/gas_icon.png'
 import agreement from '../assets/images/dashboard/agreement.png'
@@ -92,6 +95,7 @@ import redPrice14 from '../assets/images/dashboard/redPrice14.png'
 import greyPrice7 from '../assets/images/dashboard/greyPrice7.png'
 import catalogue26 from '../assets/images/dashboard/catalogue26.png'
 import airdropIcon from '../assets/images/dashboard/airdropIcon.png'
+
 import metamaskLogo from '../assets/images/home/metamask_logo.png'
 
 export const imgurl = {
@@ -174,7 +178,10 @@ export const imgurl = {
     checked,
     blackPrice,
     redPrice24,
-    rarity
+    rarity,
+    DYDXBuy,
+    BendDAOBuy,
+    OpenseaBuy
   },
   dashboard: {
     agreement,

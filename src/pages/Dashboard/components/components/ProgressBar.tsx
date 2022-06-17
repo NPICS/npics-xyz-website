@@ -1,3 +1,4 @@
+import { font1665 } from "component/styled";
 import { FC, ReactElement, useRef } from "react";
 import styled from "styled-components";
 
@@ -23,9 +24,10 @@ const Container = styled.div`
   div {
     height: 0.06rem;
     background: linear-gradient(284.2deg, #FF0000 0%, #FEB240 101.06%);
+    border-radius: 5px;
   }
 }
-&>:last-child {
+.point {
   background: rgba(255,255,255,.6);
     width: .16rem;
     height: .16rem;
@@ -33,9 +35,15 @@ const Container = styled.div`
     position: absolute;
   cursor: pointer;
     transform: translateX(-0.5vw);
-  svg {
-    width: 0.9vw;
+    svg {
+      width: 0.9vw;
+    }
   }
+  .text {
+    ${font1665};
+    position: absolute;
+    top: .13rem;
+    transform: translateX(-0.5vw);
 }
 `
 
@@ -48,6 +56,7 @@ const ProgressBar: FC<IProps> = ({ value, onChange }): ReactElement => {
         <div style={{ width: value * 100 + "%" }} />
       </div>
       <div
+        className="point"
         onMouseDown={(e) => {
           const { offsetWidth } = totalRef.current!;
           const stop = e.currentTarget;
@@ -72,6 +81,7 @@ const ProgressBar: FC<IProps> = ({ value, onChange }): ReactElement => {
         }}
         style={{ left: value * 100 + "%" }}
       ></div>
+      <div className="text" style={{ left: value * 100 + "%" }}>{(+value*100).toFixed(0)}%</div>
     </Container>
   );
 };

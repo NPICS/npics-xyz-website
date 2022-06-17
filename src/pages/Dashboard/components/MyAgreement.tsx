@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { Select, Table, message, notification } from 'antd';
 import styled from 'styled-components';
 import { imgurl } from 'utils/globalimport';
@@ -10,20 +10,13 @@ import { BgTable, Record, DebtData, LiquidatePrice, DataSource } from './compone
 import AgDetail from './components/AgDetail'
 import { LendPool } from 'abi/LendPool'
 import { useWeb3React } from '@web3-react/core';
-import { useEthPrice } from 'utils/hook';
-import { SortOrder } from 'antd/lib/table/interface';
+import { useEthPrice, useUpdateEffect } from 'utils/hook';
 import { getSignMessage } from 'utils/sign';
 import { fetchUser, setIsLogin } from 'store/app';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { connectors } from 'utils/connectors';
 import { SessionStorageKey } from 'utils/enums';
-// import {deserialize} from "class-transformer";
-// import { deserialize } from "class-transformer";
-// import { User } from "../../../model/user";
-// import { SessionStorageKey } from "../../../utils/enums";
-
 const { Option } = Select
-
 interface Result {
   createTime: string,
   id: number,
@@ -46,19 +39,15 @@ const Wrap = styled.div`
         font-size: .3rem;
         color: #FFFFFF;
       }
-
-      & > div:nth-child(2) {
+      .total-information {
         color: rgba(255, 255, 255, .5);
         font-size: .14rem;
         font-weight: 600;
-
         & > span:nth-child(1) {
           margin-right: .4rem;
         }
-
         & > span:nth-child(2) {
           margin-right: .2rem;
-
           & > img {
             margin-right: .1rem;
             margin-bottom: .05rem;
@@ -69,7 +58,7 @@ const Wrap = styled.div`
 
     .ant-select {
       align-self: end;
-      width: 2.48rem;
+      min-width: 1.2rem;
       height: 0.42rem;
       border: 1px solid rgba(255, 255, 255, 0.5);
       border-radius: 0.1rem;
@@ -106,7 +95,6 @@ const Wrap = styled.div`
     margin-top: .2rem;
   }
 `
-
 function MyAgreement() {
   const { activate, account, library } = useWeb3React()
   const [activities, setActivities] = useState<DataSource[]>()
@@ -114,12 +102,12 @@ function MyAgreement() {
   const [isShowDetail, setIsShowDetail] = useState<boolean>(false)
   const [detailInfo, setDetailInfo] = useState<DataSource>()
   const [totalDebt, setTotalDebt] = useState<BigNumber>(new BigNumber(0))
-  const [sortedInfo, setSortedInfo] = useState<SortOrder>("descend")
+  const [sortedInfo, setSortedInfo] = useState("All")
   const DollarDebt = useEthPrice(totalDebt)
   const action = useAppDispatch()
   // const currentUser = useAppSelector(state => deserialize(User, state.app.currentUser))
   const isLogin = useAppSelector(state => state.app.isLogin)
-
+  const DebtPosition = useRef<DataSource[]>()
   const columns: ColumnsType<DataSource> = [
     {
       title: 'Items',
@@ -152,18 +140,6 @@ function MyAgreement() {
       title: 'Debt',
       dataIndex: 'debtString',
       key: 'debtString',
-      align: 'center',
-      sorter: (a, b) => +a.debtString - +b.debtString,
-      sortOrder: sortedInfo,
-      render: (text) => <div className='imgPrice'>
-        <img src={imgurl.dashboard.redPrice14} alt="" />
-        {text}
-      </div>
-    },
-    {
-      title: 'Interest',
-      dataIndex: 'interest',
-      key: 'interest',
       align: 'center',
       render: (text) => <div className='imgPrice'>
         <img src={imgurl.dashboard.redPrice14} alt="" />
@@ -218,15 +194,19 @@ function MyAgreement() {
   }, [account])
 
   const onSelect = (val: string) => {
-    let value: SortOrder = null
-    if (val === 'ascend') {
-      value = 'ascend'
-    }
-    if (val === 'descend') {
-      value = 'descend'
-    }
-    setSortedInfo(value)
+    setSortedInfo(val)
   }
+  useUpdateEffect(() => {
+    if(!DebtPosition.current) return
+    if(sortedInfo === 'All') {
+      setActivities(DebtPosition.current)
+      return
+    }
+    const result = DebtPosition.current.filter((item) => {
+      return item.statusSrt === sortedInfo
+    })
+    setActivities(result)
+  },[sortedInfo])
 
   const showDetail = (data: React.SetStateAction<DataSource | undefined>) => {
     setDetailInfo(data)
@@ -236,10 +216,11 @@ function MyAgreement() {
   useEffect(() => {
     if (!activities) return
     let orgTotalDebt = new BigNumber(0)
-    for (let i = 0; i < activities.length; i++) {
-      orgTotalDebt.plus(activities[i].debt)
-    }
-    setTotalDebt(orgTotalDebt)
+    const Debt = activities.reduce((previousValue,currentValue) => {
+      return previousValue.plus(new BigNumber(currentValue.debt))
+    },orgTotalDebt)
+
+    setTotalDebt(Debt)
     // eslint-disable-next-line
   }, [activities])
 
@@ -249,12 +230,6 @@ function MyAgreement() {
     }
     // eslint-disable-next-line
   }, [isLogin])
-  // useEffect(() => {
-  //   let token = sessionStorage.getItem(SessionStorageKey.AccessToken)
-  //   if (token) {
-  //     getNftActivities().then(() => {})
-  //   }
-  // }, [])
 
   useEffect(() => {
     if (account && !isLogin) {
@@ -273,15 +248,6 @@ function MyAgreement() {
     }
     // eslint-disable-next-line
   }, [account, isLogin])
-
-  // useEffect(() => {
-  //   let token = sessionStorage.getItem(SessionStorageKey.AccessToken)
-  //   if (account && token == null) {
-  //     login2()
-  //   }
-  // }, [account])
-
-
 
   async function login2() {
     try {
@@ -303,6 +269,17 @@ function MyAgreement() {
       console.log(`Login Erro => ${e}`)
     }
   }
+  const turnStr = (val: BigNumber) => {
+    let factor = +(new BigNumber(val.toString()).div(10 ** 18).dp(0).toString())
+    if (factor >= 1.5) {
+      return 'Inforce'
+    } else if ( factor >= 1 && factor < 1.5) {
+      return 'In Risk'
+    } else if (factor < 1) {
+      return 'Terminated'
+    }
+    return ''
+  }
 
   const getNftActivities = async () => {
     setLoading(true)
@@ -314,7 +291,7 @@ function MyAgreement() {
     try {
       const result: any = await http.myPost(url, pageInside)
 
-      const orgData: Result[] = result.data.records
+      let orgData: Result[] = result.data.records
       if (result.code === 200 && orgData.length) {
         const signer = library.getSigner(account)
         let lendPool = new LendPool(signer)
@@ -341,30 +318,15 @@ function MyAgreement() {
           return val
         }
 
-        const turnStr = (val: BigNumber) => {
-          const factor = +(new BigNumber(val.toString()).div(10 ** 18).dp(0).toString())
-          if (factor >= 3) {
-            return 'Safe'
-          } else if (2 <= factor && factor < 3) {
-            return 'Careful'
-          } else if (1 < factor && factor < 2) {
-            return 'Risky'
-          } else if (0 <= factor && factor < 1) {
-            return 'Dangerous'
-          }
-          return '--'
-        }
-
         const dataSource: DataSource[] = []
         for (let i = 0; i < len; i++) {
-          dataSource.push({
+        dataSource.push({
             key: `${i}`,
             items: newArray[i].tokenId,
             contract: newArray[i].tokenId,
             debtString: new BigNumber(newArray[i].debtData.totalDebt.toString()).div(10 ** 18).toFixed(4, 1) || `${i}`,
             debt: new BigNumber(newArray[i].debtData.totalDebt.toString()),
             maxDebt: new BigNumber(newArray[i].debtData.totalDebt.toString()).plus(slippage(new BigNumber(newArray[i].debtData.totalDebt.toString()))),
-            interest: "--",
             liquidationPrice: new BigNumber(newArray[i].liquidatePrice.liquidatePrice.toString()).div(10 ** 18).toFixed(4, 1) || "--",
             healthFactor: new BigNumber(newArray[i].debtData.healthFactor.toString()).div(10 ** 18).toFixed(4, 1) || "--",
             status: new BigNumber(newArray[i].debtData.healthFactor.toString()).div(10 ** 18).toFixed(4, 1) || "--",
@@ -375,6 +337,7 @@ function MyAgreement() {
             floorPrice: newArray[i].floorPrice,
           })
         }
+        DebtPosition.current = dataSource
         setActivities(dataSource)
       }
     } catch (e) {
@@ -383,16 +346,14 @@ function MyAgreement() {
       setLoading(false)
     }
   }
-
-
   return (<Wrap>
     {isShowDetail ? <AgDetail setIsShowDetail={setIsShowDetail} detailInfo={detailInfo} /> : <div>
       <div className='info'>
         <div className='total'>
           <div className='title'>
-            My Agreement
+            My Vaults
           </div>
-          <div>
+          <div className='total-information'>
             <span>Total Debt</span>
             <span>
               <img src={imgurl.dashboard.price_icon} alt="" />
@@ -403,11 +364,14 @@ function MyAgreement() {
         </div>
         <Select
           onSelect={onSelect}
-          defaultValue="ascend"
+          defaultValue="All"
           dropdownClassName="ant-selectDropDown-reset"
         >
-          <Option value="ascend">Price: Low to High</Option>
-          <Option value="descend">Price: high to low</Option>
+          <Option value="All">All</Option>
+          <Option value="Safe">Safe</Option>
+          <Option value="Careful">Careful</Option>
+          <Option value="Risky">Risky</Option>
+          <Option value="Dangerous">Dangerous</Option>
         </Select>
       </div>
       <div className='table'>

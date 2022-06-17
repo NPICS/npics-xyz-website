@@ -26,7 +26,8 @@ export default function AgDetail(props: Iprops) {
   const [progressVal, setProgressVal] = useState<number>(1)
   const [showContent, setShowContent] = useState<string>('repay')
   const [walletBalance, setWalletBalance] = useState<BigNumber>()
-  const [orgDebt, setOrgDebt] = useState<BigNumber>()
+  const [payDebt, setPayDebt] = useState<BigNumber>()
+  const [remainingDebt, setRemainingDebt] = useState<BigNumber>()
   const [enough, setEnough] = useState<boolean>()
   const [aprData, setAprData] = useState<{ apr: number, rewardApr: number }>({ apr: 0, rewardApr: 0 })
   const action = useAppDispatch()
@@ -62,8 +63,10 @@ export default function AgDetail(props: Iprops) {
 
   useEffect(() => {
     if (!detailInfo) return
-    const debt = progressVal === 1 ? detailInfo.maxDebt : detailInfo?.debt.times(progressVal)
-    setOrgDebt(debt)
+    const pDebt = progressVal === 1 ? detailInfo.maxDebt : detailInfo?.debt.times(progressVal)
+    const rDebt = progressVal === 1 ? new BigNumber(0) : detailInfo?.debt.times(1 - progressVal)
+    setPayDebt(pDebt)
+    setRemainingDebt(rDebt)
     // eslint-disable-next-line
   }, [progressVal])
 
@@ -81,14 +84,14 @@ export default function AgDetail(props: Iprops) {
     setShowContent(e)
   }
   const onRepay = async () => {
-    if (!detailInfo || !orgDebt) return
+    if (!detailInfo || !payDebt) return
     try {
       const signer = library.getSigner(account)
       const npics = new Npics(signer)
       const nft = detailInfo?.address
       const tokenId = detailInfo?.tokenId
       action(setIsLoading(true))
-      const tx = await npics.repayETH(nft, tokenId, orgDebt)
+      const tx = await npics.repayETH(nft, tokenId, payDebt)
       action(setIsLoading(false))
       if (tx && tx.hash) {
         message.success('successful repayment')
@@ -192,7 +195,7 @@ export default function AgDetail(props: Iprops) {
           </div>
           <div>
             <img src={imgurl.dashboard.catalogue26} alt="" />
-            <span>{`${(aprData.rewardApr - aprData.apr).toFixed(2)}%`}</span>
+            <span>{`${(aprData.rewardApr*100 - aprData.apr).toFixed(2)}%`}</span>
           </div>
         </div>
         <div>
@@ -225,24 +228,32 @@ export default function AgDetail(props: Iprops) {
             </div> : null}
             <div className='repayPrice'>
               <div>
-                <div>{detailInfo && orgDebt && orgDebt.div(10 ** 18).toFixed(4, 1)}</div>
+                <div>{detailInfo && payDebt && payDebt.div(10 ** 18).toFixed(4, 1)}</div>
                 <span>
-                  Remaining debt:
-                  <span>--</span>
+                  Remaining debt :
+                  <span className='space'>{remainingDebt && remainingDebt.div(10 ** 18).toFixed(4, 1)}</span>
                 </span>
               </div>
               <div>
                 <div>--</div>
                 <span>
                   New health factor :
-                  <span>{detailInfo && orgDebt && (new BigNumber(detailInfo?.floorPrice.toString()).div('0.9').div(orgDebt?.div(10 ** 18)).toFixed(4, 1) === 'Infinity' ? '--' : new BigNumber(detailInfo?.floorPrice.toString()).div('0.9').div(orgDebt?.div(10 ** 18)).toFixed(4, 1))}</span>
+                  <span className='space'>{
+                    detailInfo &&
+                    remainingDebt &&
+                    (remainingDebt.eq(0) ?
+                      '--' :
+                      payDebt?.eq(0) ? 
+                      detailInfo?.healthFactor :
+                      new BigNumber(detailInfo?.floorPrice.toString()).times('0.9').div(remainingDebt?.div(10 ** 18)).toFixed(4, 1))
+                  }</span>
                 </span>
               </div>
               <div>
-                <div>{orgDebt && progressVal === 1 ? orgDebt.div(10 ** 18).toFixed(4, 1) : detailInfo?.debtString}</div>
+                <div>{payDebt && progressVal === 1 ? payDebt.div(10 ** 18).toFixed(4, 1) : detailInfo?.debtString}</div>
                 <span>
-                  Wallet balance:
-                  <span>{walletBalance && new BigNumber(walletBalance.toString()).div(10 ** 18).dp(4, 1).toFixed()}</span>
+                  Wallet balance :
+                  <span className='space'>{walletBalance && new BigNumber(walletBalance.toString()).div(10 ** 18).dp(4, 1).toFixed()}</span>
                 </span>
               </div>
             </div>
@@ -257,6 +268,7 @@ export default function AgDetail(props: Iprops) {
             <ButtonDefault
               types='three'
               onClick={onRepay}
+              disabled={progressVal === 0 ? true : false}
             >
               Repay
             </ButtonDefault>

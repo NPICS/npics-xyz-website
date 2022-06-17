@@ -6,6 +6,9 @@ import styled from 'styled-components';
 export const BgTable = styled.div`
   overflow: auto;
   height: 4.7rem;
+  &::-webkit-scrollbar{
+      display:none;
+    }
   .items {
     display: flex;
     .avatar {
@@ -73,15 +76,19 @@ export const BgTable = styled.div`
   .ant-table-thead {
     tr {
       th {
-        width: 1.6rem !important;
+        width: 1.85rem !important;
       }
     }
   }
   .ant-table-tbody {
-    tr {
+    tr {  
       td {
-        width: 1.6rem !important;
+        width: 1.85rem !important;
         height: 0 !important;
+      }
+      &>td:last-child {
+        border-bottom-right-radius: 0 !important;
+        border-top-right-radius: 0 !important;
       }
     }
     .actionBtn {
@@ -113,9 +120,6 @@ export const BgTable = styled.div`
     align-items: center;
     width: 100%;
   }
-
-
-
 `
 
 export const Wrap = styled.div`
@@ -285,6 +289,9 @@ export const Repay = styled.div`
       align-items: center;
       height: 1.92rem;
       color: #ffffff;
+      .space {
+        margin-left: .05rem;
+      }
     }
   }
 
@@ -338,7 +345,6 @@ export interface DataSource {
   debt: BigNumber;
   maxDebt: BigNumber;
   debtString: string;
-  interest: string;
   liquidationPrice: string;
   healthFactor: string;
   status: string;

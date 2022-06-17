@@ -10,10 +10,10 @@ export class Npics {
         this.signer = signer
     }
 
-    async downPayBatchBuyWithETH(params:{nft: string, tokenId: string, tradeDetail: string, loadAmt: BigNumber, payAmount: BigNumber}) {
+    async downPayBatchBuyWithETH(params:{nft: string, tokenId: string, tradeDetail: string, market:string,price: BigNumber, loadAmt: BigNumber, payAmount: BigNumber}) {
         // pay amount need + 2wei
         let contract = new ethers.Contract(ContractAddresses.NpicsProxy, NPICS_ABI, this.signer)
-        return await contract.downPayBatchBuyWithETH(params.nft, params.tokenId, params.tradeDetail, params.loadAmt.dp(0).toFixed(), {
+        return await contract.downPayWithETH(params.nft, params.tokenId, params.market, params.tradeDetail, params.price.dp(0).toFixed(), params.loadAmt.dp(0).toFixed(), {
             value: (params.payAmount.plus(2).dp(0).toFixed())
         })
     }

@@ -1,3 +1,4 @@
+import { font1465 } from 'component/styled';
 import styled from 'styled-components';
 
 export const Wrap = styled.div`
@@ -271,6 +272,27 @@ export const Wrap = styled.div`
     }
     .activities {
       margin-top: .2rem;
+      .ant-select-arrow {
+        color: rgba(255, 255, 255, 0.5);
+      }
+      .ant-select {
+        align-self: end;
+        min-width: 1.2rem;
+        border: transparent;
+        border-radius: 0.1rem;
+      .ant-select-selector {
+        border: none !important;
+        box-shadow: none !important;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        ${font1465}
+        min-width: 1rem;
+        background-color: #1A1a1a;
+        border: 1px solid rgba(255, 255, 255, 0.3) !important;
+        border-radius: 10px;
+      }
+    }
     }
   }
 `

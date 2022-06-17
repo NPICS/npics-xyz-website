@@ -8,7 +8,7 @@ import { CollectionDetail } from '../../../model/user'
 import { deserialize } from 'class-transformer';
 import MyTable from './MyTable';
 import SignModal from './SignModal'
-import { Modal } from 'antd';
+import { Modal, Select } from 'antd';
 import { useRef } from 'react';
 import { compute } from './utils';
 import { useWeb3React } from '@web3-react/core';
@@ -18,7 +18,7 @@ import { useEthPrice } from 'utils/hook';
 import { ethers } from 'ethers';
 import { ContractAddresses } from 'utils/addresses';
 import NPICS_ABI from 'abi/npics.json';
-import { useNavigate, useParams  } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import currency from 'currency.js';
 import BigNumber from 'bignumber.js';
 import { Erc721 } from '../../../abi/Erc721';
@@ -28,9 +28,11 @@ function MarketItem() {
   const action = useAppDispatch()
   const [collectionItemsDetail, setCollectionItemsDetail] = useState<CollectionDetail>()
   const [isShowModal, setIsShowModal] = useState<boolean>(false)
+  const [filterValue, setFilterValue] = useState<string>('')
+  const [aprData, setAprData] = useState<{ apr: number, rewardApr: number }>({ apr: 0, rewardApr: 0 })
   const EthPrice = useEthPrice(collectionItemsDetail?.currentBasePrice)
   const navigate = useNavigate();
-  let params:any = useParams()
+  let params: any = useParams()
   const modal: any = useRef()
 
   const goBack = () => {
@@ -38,10 +40,23 @@ function MarketItem() {
   }
   useEffect(() => {
     getCollectionItemsDetail()
-  
+
     // eslint-disable-next-line
   }, [params])
-  
+
+  useEffect(() => {
+    // get thw arp
+    http.myPost("/npics-nft/app-api/v2/nfthome/getAprInfo", {}).then((resp) => {
+      let _resp = resp as any;
+      if (_resp.code === 200) {
+        setAprData({
+          apr: parseFloat(_resp.data.apr) || 0,
+          rewardApr: parseFloat(_resp.data.rewardApr) || 0
+        })
+      }
+    })
+  }, [])
+
 
 
   const getCollectionItemsDetail = async () => {
@@ -96,6 +111,21 @@ function MarketItem() {
     if (!collectionItemsDetail?.address) return
     window.open(`https://etherscan.io/address/${collectionItemsDetail.address}`)
   }
+  const onSelect = (val:string) => {
+    setFilterValue(val)
+  }
+
+  const ActivitiesSelect = <Select
+    onSelect={onSelect}
+    defaultValue="All"
+    dropdownClassName="ant-selectDropDown-reset"
+  >
+    <Select.Option value="All">All</Select.Option>
+    <Select.Option value="transfer">Transfer</Select.Option>
+    <Select.Option value="offer_entered">offer</Select.Option>
+    <Select.Option value="created">list</Select.Option>
+  </Select>
+
   return (
     <Wrap >
       <div className='left'>
@@ -195,7 +225,7 @@ function MarketItem() {
               </div>
             </div>
             <div onClick={showModal}>
-              <Button width='2rem' height='.48rem' text='Sign Now' fontSize='.2rem'></Button>
+              <Button width='2rem' height='.48rem' text='Buy Now' fontSize='.2rem'></Button>
             </div>
           </div>
 
@@ -224,14 +254,14 @@ function MarketItem() {
                   <span>{compute(collectionItemsDetail)?.loanFunds.div(10 ** 18).toFixed(4, 1)}</span>
                 </div>
                 <div>
-                  <span>Funds Amount</span>
+                  <span>Loan Amount</span>
                   <img src={imgurl.market.info_icon} alt="" />
                 </div>
               </div>
             </div>
             <div className='ARP'>
-              <span>{collectionItemsDetail?.apr.toFixed(2, 1)}%</span>
-              <span>Earn APR</span>
+              <span>{`${(aprData.rewardApr*100 - aprData.apr).toFixed(2)}%`}</span>
+              <span>Vault APR</span>
             </div>
           </div>
         </div>
@@ -241,10 +271,12 @@ function MarketItem() {
             title="Activities"
             headerBackground='#000000'
             height=".76rem"
+            titleSelect={ActivitiesSelect}
           >
             <div>
               <MyTable
                 itemDetails={params}
+                filterValue={filterValue}
               />
             </div>
           </Flexible>

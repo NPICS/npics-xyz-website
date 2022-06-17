@@ -194,7 +194,7 @@ function MyRewards() {
             })()}
           </div>
         </div>
-        <div>
+        <div style={{display:"none"}}>
           <img src={imgurl.dashboard.ARP} alt="" />
           <div>
             <div>
@@ -210,7 +210,7 @@ function MyRewards() {
           <div className='title'>
             Your rewards
           </div>
-          <div className='NPT'>
+          <div className='NPT' style={{display:"none"}}>
             <div><img src={imgurl.dashboard.NPT} alt="" /></div>
             <div className='text'>
               <span>Reward to be received : </span>

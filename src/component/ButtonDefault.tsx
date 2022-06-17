@@ -8,6 +8,7 @@ interface Iprops {
   text?: string,
   border?: string,
   types?: string,
+  disabled?: boolean,
   children: string | any,
   onClick?: Function | any
 }
@@ -50,7 +51,7 @@ const StyledButton = styled.button<Iprops>`
   font-style: normal;
   font-weight: 600;
   font-size: .2rem;
-  cursor: pointer;
+  cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
   ${flex}
 `
 
@@ -63,6 +64,7 @@ function ButtonDefault(props:Iprops) {
   return (<StyledButton 
     {...props}
     onClick={onClick}
+    disabled={props.disabled}
   >
       {props.children}
   </StyledButton>
@@ -75,7 +77,8 @@ ButtonDefault.defaultProps = {
   text: 'button',
   fontSize: '16px',
   types: 'one',
-  color: '#FFFFFF'
+  color: '#FFFFFF',
+  disabled: false,
 }
  
 export default ButtonDefault

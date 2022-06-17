@@ -13,7 +13,8 @@ interface FlexProps {
   border: string,
   background?: string,
   headerBackground?: string,
-  fontSize: string
+  fontSize: string,
+  titleSelect?: React.ReactNode
 }
 const Flex = styled.div`
  ${flex}
@@ -65,6 +66,7 @@ function Flexible(props:FlexProps) {
             <span>{props.title}</span>
           </Flex>
           {props.isExpand ? <div className={`${isShow ? 'up' : 'down'} `} onClick={handleFlex}>&gt;</div> : null }
+          <div>{props.titleSelect}</div>
       </div>
       <UnmountClosed  isOpened={isShow ? true : false}>
         <div>
@@ -83,7 +85,7 @@ Flexible.defaultProps = {
   border: '.01rem solid rgba(255,255,255,.2)',
   background: '',
   headerBackground: '',
-  fontSize: '.16rem'
+  fontSize: '.16rem',
 }
 
 export default Flexible

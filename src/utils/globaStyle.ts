@@ -16,6 +16,7 @@ export const GlobalStyle = createGlobalStyle`
     color: #FFF;
     border: 1px solid rgba(255, 255, 255, .5);
     border-radius: .1rem;
+    text-align: center;
     .ant-select:not(.ant-select-disabled):hover .ant-select-selector {
       border-color: transparent;
       box-shadow: none;

@@ -24,7 +24,6 @@ function XHeader() {
   const history = useLocation()
   useEffect(() => {
     console.log(`Account Change => New: ${account}, Old: ${oldAccount.current}`)
-
     // changed account
     if (account && oldAccount.current) {
       // remove old account data

@@ -59,7 +59,7 @@ const navList = [
   {
     icon: imgurl.dashboard.agreement,
     iconActive: imgurl.dashboard.agreementActive,
-    text:"My Agreement",
+    text:"My Vaults",
     key: 'agreement'
   },
   {
