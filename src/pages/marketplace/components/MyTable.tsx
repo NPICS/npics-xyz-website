@@ -171,7 +171,7 @@ export default function MyTable(props: IProps) {
               amount: (changeData[i] && (+changeData[i].amount.div(10 ** 18).toFixed(2).toString())),
               fromAccount: changeData[i].fromAccount,
               toAccount: changeData[i].toAccount,
-              createdTime: moment(changeData[i].createdTime).endOf('day').fromNow() || '--',
+              createdTime: moment(changeData[i].createdTime).endOf('hour').fromNow() || '--',
               startAmount: (changeData[i] && (+changeData[i].startAmount.div(10 ** 18).toFixed(2).toString())) || '--',
             })
           }

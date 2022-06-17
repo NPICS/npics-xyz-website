@@ -106,6 +106,7 @@ export class CollectionDetail extends CollectionItems {
   apr!: BigNumber
   availableBorrow!: BigNumber
   totalAmount!: BigNumber
+  totalSupply!: number;
   @Expose()
   get agreementPrice() {
     return this.currentBasePrice.minus(new BigNumber(this.availableBorrow.toString()))

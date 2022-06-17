@@ -174,7 +174,7 @@ function MarketItem() {
                       <div>
                         <div>{item.trait_type.toUpperCase()}</div>
                         <div>{item.value}</div>
-                        <div>{`${item.trait_count}(${(item.trait_count / +(collectionItemsDetail?.totalShelves || 0) * 100).toFixed(1)}%) have this trait`}</div>
+                        <div>{`${item.trait_count}(${(item.trait_count / +(collectionItemsDetail?.totalSupply || 0) * 100).toFixed(1)}%) have this trait`}</div>
                       </div>
                     </div>
                   )
