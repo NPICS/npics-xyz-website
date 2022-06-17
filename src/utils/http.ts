@@ -5,7 +5,7 @@ import {SessionStorageKey} from "./enums";
 // import {Params} from "react-router-dom";
 // import store from "../store";
 
-axios.defaults.timeout = 5000;
+axios.defaults.timeout = 8000;
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 if (process.env.NODE_ENV === 'development') {
     axios.defaults.baseURL = ''

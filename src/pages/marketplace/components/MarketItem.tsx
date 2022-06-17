@@ -8,7 +8,7 @@ import { CollectionDetail } from '../../../model/user'
 import { deserialize } from 'class-transformer';
 import MyTable from './MyTable';
 import SignModal from './SignModal'
-import { Modal, Select } from 'antd';
+import { Modal } from 'antd';
 import { useRef } from 'react';
 import { compute } from './utils';
 import { useWeb3React } from '@web3-react/core';
@@ -28,7 +28,7 @@ function MarketItem() {
   const action = useAppDispatch()
   const [collectionItemsDetail, setCollectionItemsDetail] = useState<CollectionDetail>()
   const [isShowModal, setIsShowModal] = useState<boolean>(false)
-  const [filterValue, setFilterValue] = useState<string>('')
+  // const [filterValue, setFilterValue] = useState<string>('')
   const [aprData, setAprData] = useState<{ apr: number, rewardApr: number }>({ apr: 0, rewardApr: 0 })
   const EthPrice = useEthPrice(collectionItemsDetail?.currentBasePrice)
   const navigate = useNavigate();
@@ -111,20 +111,20 @@ function MarketItem() {
     if (!collectionItemsDetail?.address) return
     window.open(`https://etherscan.io/address/${collectionItemsDetail.address}`)
   }
-  const onSelect = (val:string) => {
-    setFilterValue(val)
-  }
+  // const onSelect = (val:string) => {
+  //   setFilterValue(val)
+  // }
 
-  const ActivitiesSelect = <Select
-    onSelect={onSelect}
-    defaultValue="All"
-    dropdownClassName="ant-selectDropDown-reset"
-  >
-    <Select.Option value="All">All</Select.Option>
-    <Select.Option value="transfer">Transfer</Select.Option>
-    <Select.Option value="offer_entered">offer</Select.Option>
-    <Select.Option value="created">list</Select.Option>
-  </Select>
+  // const ActivitiesSelect = <Select
+  //   onSelect={onSelect}
+  //   defaultValue="All"
+  //   dropdownClassName="ant-selectDropDown-reset"
+  // >
+  //   <Select.Option value="All">All</Select.Option>
+  //   <Select.Option value="transfer">Transfer</Select.Option>
+  //   <Select.Option value="offer_entered">offer</Select.Option>
+  //   <Select.Option value="created">list</Select.Option>
+  // </Select>
 
   return (
     <Wrap >
@@ -271,12 +271,12 @@ function MarketItem() {
             title="Activities"
             headerBackground='#000000'
             height=".76rem"
-            titleSelect={ActivitiesSelect}
+            // titleSelect={ActivitiesSelect}
           >
             <div>
               <MyTable
                 itemDetails={params}
-                filterValue={filterValue}
+                // filterValue={filterValue}
               />
             </div>
           </Flexible>

@@ -15,7 +15,7 @@ interface IProps {
     address: string
     tokenId: string
   },
-  filterValue: string | undefined
+  // filterValue: string | undefined
 }
 interface activities {
   key: string;
@@ -130,7 +130,7 @@ const columns:ColumnsType<activities> = [
 // `
 // let num: number = 0
 export default function MyTable(props: IProps) {
-  const { itemDetails, filterValue } = props
+  const { itemDetails } = props
   const [allData, setAllData] = useState<activities[]>()
   // const [activities, setActivities] = useState<activities[]>()
   const [loading, setLoading] = useState<boolean>(false)
@@ -138,7 +138,7 @@ export default function MyTable(props: IProps) {
   useEffect(() => {
     getNftActivities()
     // eslint-disable-next-line
-  }, [itemDetails, filterValue])
+  }, [itemDetails])
 
   // useEffect(() => {
   //   LoadMore()
@@ -154,7 +154,6 @@ export default function MyTable(props: IProps) {
     const params = {
       "address": itemDetails.address,
       "tokenId": itemDetails.tokenId,
-      "eventType": filterValue
     }
     try {
       const result: any = await http.myPost(url, params)

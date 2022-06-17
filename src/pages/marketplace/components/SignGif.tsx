@@ -121,7 +121,7 @@ export default function SignGif(props: Iprops) {
           tradeDetail: result.data.transaction,
           loadAmt: compute(collectionItemsDetail)?.loanFunds,
           payAmount: compute(collectionItemsDetail)?.agreementPrice,
-          price: collectionItemsDetail?.floorPrice,
+          price: collectionItemsDetail?.currentBasePrice,
           market:marketAddress[collectionItemsDetail.market]
         }
         action(setIsLoading(true))
