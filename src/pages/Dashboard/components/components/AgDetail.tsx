@@ -121,10 +121,10 @@ export default function AgDetail(props: Iprops) {
           <div className='title'>
             Contract Detail
           </div>
-          <div>
-            <span>Collateral Bored Ape Yacht Club</span>
+          <div className='collection-name'>
+            <span>{detailInfo?.collectionName}</span>
             <span>
-              {`#${detailInfo?.tokenId}`}
+              {` #${detailInfo?.tokenId}`}
             </span>
           </div>
         </div>

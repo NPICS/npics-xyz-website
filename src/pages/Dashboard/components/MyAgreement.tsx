@@ -24,7 +24,8 @@ interface Result {
   tokenId: string,
   userAddress: string,
   imageUrl: string,
-  floorPrice: string
+  floorPrice: string,
+  collectionName: string,
 }
 
 const Wrap = styled.div`
@@ -118,7 +119,9 @@ function MyAgreement() {
         <img className='avatar' src={row.imageUrl} alt="" />
         <div className='text'>
           <div>
-            {`#${row.tokenId}`}
+            <span title={row.collectionName}>{row.collectionName}</span>
+            <span>{`# ${row.tokenId}`}</span>
+            
           </div>
           <div>
             Floor: <span><img src={imgurl.dashboard.greyPrice7} alt="" />{row.floorPrice}</span>
@@ -335,6 +338,7 @@ function MyAgreement() {
             tokenId: newArray[i].tokenId,
             imageUrl: newArray[i].imageUrl,
             floorPrice: newArray[i].floorPrice,
+            collectionName: newArray[i].collectionName,
           })
         }
         DebtPosition.current = dataSource

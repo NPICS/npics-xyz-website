@@ -1,5 +1,5 @@
 import BigNumber from 'bignumber.js';
-import { flex } from 'component/styled';
+import { flex, font1665 } from 'component/styled';
 import styled from 'styled-components';
 
 
@@ -21,8 +21,21 @@ export const BgTable = styled.div`
       flex-direction: column;
       margin-left: .1rem;
       &>div:nth-child(1) {
+        display: flex;
+        flex-wrap: nowrap;
         color: #fff;
         font-size: .16rem;
+        &>span:nth-child(1) {
+          max-width: 0.42rem;
+          margin-right: .03rem;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+
+        }
+        &>span:nth-child(2) {
+          white-space: nowrap;
+        }
       }
       &>div:nth-child(2) {
         display: flex;
@@ -152,8 +165,8 @@ export const Wrap = styled.div`
       font-size: .3rem;
       color: #FFFFFF;
     }
-    &>div:nth-child(2) {
-      color: #fff;
+    .collection-name {
+      ${font1665};
     }
   }
   .checkBtn {
@@ -321,6 +334,7 @@ export interface Result {
 }
 
 export interface Record extends Result {
+  collectionName: string;
   debtData:DebtData,
   liquidatePrice: LiquidatePrice
 }
@@ -353,4 +367,5 @@ export interface DataSource {
   tokenId: string;
   imageUrl: string;
   floorPrice: string;
+  collectionName: string;
 }

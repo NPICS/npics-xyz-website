@@ -9,7 +9,8 @@
       "userAddress": "0xf26d94d535107a5e0c5a24f6ce3edcc8352f01e2",
       "createTime": "2022-06-16 15:52:56",
       "imageUrl": "https://img.seadn.io/files/fd988b6dda7aeac051fce3e3d4b2fb7e.png?h=1024&w=1024&auto=format",
-      "floorPrice": "10.8"
+      "floorPrice": "10.8",
+      "collectionName": "Bored Ape Yacht Club"
     },
     {
       "id": 2,
@@ -18,7 +19,8 @@
       "userAddress": "0xf26d94d535107a5e0c5a24f6ce3edcc8352f01e2",
       "createTime": "2022-06-16 15:52:56",
       "imageUrl": "https://img.seadn.io/files/fd988b6dda7aeac051fce3e3d4b2fb7e.png?h=1024&w=1024&auto=format",
-      "floorPrice": "10.8"
+      "floorPrice": "10.8",
+      "collectionName": "Doodles"
     },
     {
       "id": 3,
@@ -27,7 +29,8 @@
       "userAddress": "0xf26d94d535107a5e0c5a24f6ce3edcc8352f01e2",
       "createTime": "2022-06-16 15:52:56",
       "imageUrl": "https://img.seadn.io/files/fd988b6dda7aeac051fce3e3d4b2fb7e.png?h=1024&w=1024&auto=format",
-      "floorPrice": "10.8"
+      "floorPrice": "10.8",
+      "collectionName": "Azuki"
     },
     {
       "id": 4,
@@ -36,7 +39,8 @@
       "userAddress": "0xf26d94d535107a5e0c5a24f6ce3edcc8352f01e2",
       "createTime": "2022-06-16 15:52:56",
       "imageUrl": "https://img.seadn.io/files/fd988b6dda7aeac051fce3e3d4b2fb7e.png?h=1024&w=1024&auto=format",
-      "floorPrice": "10.8"
+      "floorPrice": "10.8",
+      "collectionName": "Mutant Ape Yacht Club"
     }],
     "pageIndex": 1,
     "pageSize": 10

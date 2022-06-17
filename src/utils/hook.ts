@@ -51,7 +51,7 @@ export function useUpdateEffect(effect: EffectCallback, deps?: DependencyList) {
 export const useEthPrice = (value: BigNumber | undefined) => {
   const [price, setPrice] = useState<BigNumber | undefined>()
   const EthPrice = useAppSelector((state) => state.app.data.EthPrice)
-  useUpdateEffect(() => {
+  useEffect(() => {
     if(!value) return
     const OrgPrice = new BigNumber(value.toString()).multipliedBy(EthPrice).div(10 ** 18)
     setPrice(OrgPrice)
