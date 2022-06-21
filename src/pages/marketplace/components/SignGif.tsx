@@ -108,8 +108,8 @@ export default function SignGif(props: Iprops) {
           return
         }
         const marketAddress = {
-          opensea:'0x00000000006c3852cbEf3e08E8dF289169EdE581',
-          seaport:'0x00000000A50BB64b4BbEcEB18715748DfacE08af',
+          opensea:'0x00000000A50BB64b4BbEcEB18715748DfacE08af',
+          seaport:'0x00000000006c3852cbEf3e08E8dF289169EdE581',
           x2y2:'0x83C8F28c26bF6aaca652Df1DbBE0e1b56F8baBa2',
           looksrare:'0x83C8F28c26bF6aaca652Df1DbBE0e1b56F8baBa2',
           nftx:'0x83C8F28c26bF6aaca652Df1DbBE0e1b56F8baBa2',
@@ -124,6 +124,8 @@ export default function SignGif(props: Iprops) {
           price: collectionItemsDetail?.currentBasePrice,
           market:marketAddress[collectionItemsDetail.market]
         }
+        // console.log(`tokenId => ${params.tokenId}, nft => ${params.nft}`)
+        console.log(params)
         action(setIsLoading(true))
         await npics.downPayBatchBuyWithETH(params)
         action(setIsLoading(false))
