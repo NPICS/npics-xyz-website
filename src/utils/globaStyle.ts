@@ -6,6 +6,9 @@ export const GlobalStyle = createGlobalStyle`
     -webkit-user-drag: none !important;
     object-fit: cover;
   }
+  img:not([src]) {
+    opacity: 0;
+  }
 
   body {
     min-width: 1280px;

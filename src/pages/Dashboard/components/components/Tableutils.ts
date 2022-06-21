@@ -11,6 +11,7 @@ export const BgTable = styled.div`
     }
   .items {
     display: flex;
+    cursor: pointer;
     .avatar {
       width: .48rem;
       height: .48rem;
@@ -56,6 +57,14 @@ export const BgTable = styled.div`
     font-weight: 500;
     font-size: .16rem;
     color: #fff;
+    cursor: pointer;
+    &>span {
+      max-width: 0.42rem;
+      margin-right: .03rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
     &>img {
       width: .16rem;
       height: .16rem;

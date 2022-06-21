@@ -107,7 +107,6 @@ function Footer() {
           <a href="/">Contact Us</a>
           <a href="/">Resources</a>
           <a href="/">Audit Report</a>
-          <a href="/">Brand</a>
           <a href="/">Terms of service</a>
         </div>
       </div>

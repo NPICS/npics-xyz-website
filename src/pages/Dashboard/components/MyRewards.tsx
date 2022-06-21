@@ -147,6 +147,7 @@ function MyRewards() {
     const signer = library.getSigner(account)
     let npics = new Npics(signer)
     const Balance: BigNumber = await npics.getRewardsBalance(userInfo?.address || '')
+    console.log(Balance.toString())
     setBalance(Balance)
   }
 
@@ -229,7 +230,7 @@ function MyRewards() {
       </div>
 
       <div className='reward-button'>
-        <ButtonDefault types='three' onClick={onRewards}>
+        <ButtonDefault disabled={balance?.toString() === '0'} types={`${balance?.toString() === '0' ? 'disabled' : 'three' }`} onClick={onRewards}>
           Claim
         </ButtonDefault>
       </div>

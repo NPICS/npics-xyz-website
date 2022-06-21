@@ -75,6 +75,10 @@ export default function MyTable() {
       dataIndex: 'index',
       key: 'index',
       align: 'center',
+      render: (text,row,index) => {
+      return <div>
+        {index+1}
+      </div>}
     },
     {
       title: 'collection',
@@ -82,7 +86,7 @@ export default function MyTable() {
       key: 'collection',
       align: 'left',
       render: (text, row) => <div style={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center'}}>
-        <img src={row.imageUrl} alt="" style={{ width: ".6rem", height: ".6rem", marginRight: ".1rem", borderRadius: '20px'}} />
+        <img src={row.imageUrl} alt="" style={{ width: ".6rem", height: ".6rem", marginRight: ".1rem", borderRadius: '30px'}} />
         <span>{text}</span>
       </div>,
     },

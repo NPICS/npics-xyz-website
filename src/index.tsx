@@ -32,7 +32,6 @@ const web3GetLibrary = (provider: any) => {
 }
 
 root.render(
-  <React.StrictMode>
     <Provider store={store}>
       <StyledThemeProvider>
         <Web3ReactProvider getLibrary={web3GetLibrary}>
@@ -43,7 +42,6 @@ root.render(
         </Web3ReactProvider>
       </StyledThemeProvider>
     </Provider>
-  </React.StrictMode>
 );
 
 reportWebVitals();

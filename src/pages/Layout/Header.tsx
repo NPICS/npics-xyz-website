@@ -173,7 +173,7 @@ function XHeader() {
       </div>
       <div className='account-item'>
         {accountNav.map((item) => {
-          return <Link to={item.path} key={item.text}><div className="account-nav">
+          return <Link to={item.path} key={item.text} onClick={() => setAccountPop(false)} ><div className="account-nav">
             <img src={item.icon} alt=""/>
             <span>{item.text}</span>
           </div></Link>

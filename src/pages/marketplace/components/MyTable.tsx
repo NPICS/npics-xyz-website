@@ -69,6 +69,7 @@ const BgTable = styled.div`
     width: 100%;
   }
 `
+// https://etherscan.io/address/0xed5af388653567af2f388e6224dc7c4b3241c544
 
 const columns:ColumnsType<activities> = [
   {
@@ -92,7 +93,7 @@ const columns:ColumnsType<activities> = [
     dataIndex: 'fromAccount',
     key: 'fromAccount',
     align: 'center',
-    render: (text) => <div title={text}>
+    render: (text) => <div title={text} style={{cursor: 'pointer'}} onClick={() => window.open(`https://etherscan.io/address/${text}`)}>
     { text ? text.replace(text.substr(7, 31), '...') : '--'}
  </div>
   },
@@ -101,7 +102,7 @@ const columns:ColumnsType<activities> = [
     dataIndex: 'toAccount',
     key: 'toAccount',
     align: 'center',
-    render: (text) => <div title={text}>
+    render: (text) => <div title={text} style={{cursor: 'pointer'}} onClick={() => window.open(`https://etherscan.io/address/${text}`)}>
         { text ? text.replace(text.substr(7, 31), '...') : '--'}
     </div>
   },
@@ -112,40 +113,16 @@ const columns:ColumnsType<activities> = [
     align: 'center',
   },
 ]
-// const Flex = styled.div`
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   margin-top: .3rem;
-//   margin-bottom: .3rem;
-//   .load-more {
-//     padding: .17rem .48rem;
-//     color: #FFFFFF;
-//     font-size: .16rem;
-//     font-weight: 600;
-//     background: rgba(255,255,255,.1);
-//     border-radius: 10px;
-//     cursor: pointer;
-//   }
-// `
-// let num: number = 0
+
 export default function MyTable(props: IProps) {
   const { itemDetails } = props
   const [allData, setAllData] = useState<activities[]>()
-  // const [activities, setActivities] = useState<activities[]>()
   const [loading, setLoading] = useState<boolean>(false)
 
   useEffect(() => {
     getNftActivities()
     // eslint-disable-next-line
   }, [itemDetails])
-
-  // useEffect(() => {
-  //   LoadMore()
-  //   // eslint-disable-next-line
-  // }, [allData])
-
-
 
   const getNftActivities = async () => {
     if (!itemDetails) return
@@ -187,29 +164,11 @@ export default function MyTable(props: IProps) {
     setLoading(false)
   }
 
-  // const LoadMore = () => {
-  //   if (!allData) return
-  //   const len = allData.length
-  //   num = num + 8
-  //   if (num > len) num = len
-  //   const actives: activities[] = []
-  //   for (let i = 0; i < num; i++) {
-  //     actives.push(allData[i])
-  //   }
-
-  //   setActivities(actives)
-  // }
-
   return (<BgTable>
     {loading ? <div className='loading'><img src={imgurl.market.loading} alt="" /></div> : <Table
       columns={columns}
       dataSource={allData}
       pagination={false}
     ></Table>}
-    {/* <Flex>
-      <div className='load-more' onClick={() => LoadMore()}>
-        Load More
-      </div>
-    </Flex> */}
   </BgTable>)
 }

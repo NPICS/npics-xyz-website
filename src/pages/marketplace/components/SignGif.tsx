@@ -10,6 +10,8 @@ import http from 'utils/http';
 import { compute } from './utils';
 import { setIsLoading } from 'store/app';
 import { useAppDispatch } from 'store/hooks';
+import BigNumber from 'bignumber.js';
+
 const Wrap = styled.div`
   text-align: center;
   width: 8rem;
@@ -70,32 +72,92 @@ interface Iprops {
   setAgreementSign: React.Dispatch<React.SetStateAction<boolean>>
   setSignState: React.Dispatch<React.SetStateAction<string>>
   collectionItemsDetail: CollectionDetail | undefined
+  payWith: string
+  WETHBalance: BigNumber | undefined
+  walletBalance: BigNumber | undefined
 }
-let interval: NodeJS.Timeout
+// let interval: NodeJS.Timeout
 export default function SignGif(props: Iprops) {
   const { account, library } = useWeb3React()
   const [percent, setPercent] = useState<number>(30)
-  const { setAgreementSign, setSignState, collectionItemsDetail } = props
+  const { setAgreementSign, setSignState, collectionItemsDetail, payWith, WETHBalance } = props
   const action = useAppDispatch()
   useEffect(() => {
     pushAgreement()
-    return () => {
-      return clearTimeout(interval)
-    }
+    // return () => {
+    //   return clearTimeout(interval)
+    // }
     // eslint-disable-next-line
   }, [])
+
 
   const pushAgreement = async() => {
     try {
       const signer = library.getSigner(account)
       const npics = new Npics(signer)
+      let balanceToken:string = "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+      // let sell: any[] | string = ''
+      let payWethAmt : BigNumber = new BigNumber(0)
+      let payEthAmt : BigNumber = new BigNumber(0)
+      let payAmount = compute(collectionItemsDetail)?.agreementPrice as BigNumber
+      let loadAmt = compute(collectionItemsDetail)?.loanFunds
+      let payWithType = ''
+
+      if(payWith === 'all') {
+        // balanceToken = "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
+        payWithType = 'weth'
+        if(WETHBalance?.gt(payAmount)) {
+          payWethAmt = WETHBalance
+          payEthAmt = new BigNumber(0)
+          // sell = ""
+        } else {
+          payWethAmt = WETHBalance as BigNumber
+          payEthAmt = payAmount.minus(payWethAmt) as BigNumber
+          // sell = [
+          //   {
+          //     standard: "ERC20",
+          //     address: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+          //     priceInfo: {
+          //       asset: "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          //       decimals: 18,
+          //       price: {
+          //         type: "BigNumber",
+          //         hex: "0x11c37937e08000"
+          //       }
+          //     },
+          //     balance: {
+          //       type: "BigNumber",
+          //       hex: "0x2386f26fc10000"
+          //     },
+          //     quantity: {
+          //       type: "BigNumber",
+          //       hex: "0x11c37937e08000"
+          //     }
+          //   }
+          // ]
+          // sell = JSON.stringify(sell)
+        }
+      } else if ( payWith === 'eth' ) {
+        // sell = ''
+        // balanceToken = "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+        payWithType = 'eth'
+        payWethAmt = new BigNumber(0)
+        payEthAmt = payAmount
+      } else if ( payWith === 'weth' ) {
+        // sell = ''
+        // balanceToken = "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
+        payWethAmt = compute(collectionItemsDetail)?.agreementPrice as BigNumber
+        payEthAmt= new BigNumber(0)
+        payWithType = 'weth'
+      }
+      
       const url = "/npics-nft/app-api/v2/nft/route"
       const raw = {
         "address": collectionItemsDetail?.address,
         "amount": 1,
-        "balanceToken": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
-        // "balanceToken": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "balanceToken": balanceToken,
         "sender": account,
+        // "sell": sell,
         "standard": collectionItemsDetail?.standard,
         "tokenId": collectionItemsDetail?.tokenId
       }
@@ -119,17 +181,28 @@ export default function SignGif(props: Iprops) {
           nft: collectionItemsDetail?.address,
           tokenId: collectionItemsDetail?.tokenId,
           tradeDetail: result.data.transaction,
-          loadAmt: compute(collectionItemsDetail)?.loanFunds,
-          payAmount: compute(collectionItemsDetail)?.agreementPrice,
+          loadAmt: loadAmt,
+          payEthAmt: payEthAmt,
           price: collectionItemsDetail?.currentBasePrice,
-          market:marketAddress[collectionItemsDetail.market]
+          market:marketAddress[collectionItemsDetail.market],
+          wethAmt:payWethAmt,
         }
         action(setIsLoading(true))
-        await npics.downPayBatchBuyWithETH(params)
+        let tx
+        if(payWithType === 'eth') {
+          tx = await npics.downPayWithETH(params)
+        } else {
+          tx = await npics.downPayWithWETH(params)
+        }
+        await tx.wait()
         action(setIsLoading(false))
         setPercent(100)
         setSignState('success')
         setAgreementSign(false)
+      } else {
+        setSignState('failure')
+        setAgreementSign(false)
+        action(setIsLoading(false))
       }
     } catch (e) {
       setSignState('failure')
@@ -141,17 +214,17 @@ export default function SignGif(props: Iprops) {
   }
 
 
-  const sign = () => {
-    interval = setTimeout(() => {
-      setAgreementSign(false)
-    }, 500);
-    if ('success') {
-      setSignState('failure')
-      setPercent(100)
-    } else {
-      setSignState('success')
-    }
-  }
+  // const sign = () => {
+  //   interval = setTimeout(() => {
+  //     setAgreementSign(false)
+  //   }, 500);
+  //   if ('success') {
+  //     setSignState('failure')
+  //     setPercent(100)
+  //   } else {
+  //     setSignState('success')
+  //   }
+  // }
 
   return (
     <Wrap>
@@ -177,7 +250,7 @@ export default function SignGif(props: Iprops) {
       <div className='bottomBtn'>
         {list.map((item) => {
           return (
-            <ButtonDefault onClick={sign} types='two' width='1.8rem' height='.52rem' key={item.text}>
+            <ButtonDefault types='two' width='1.8rem' height='.52rem' key={item.text}>
               <div className='logo'>
                 <img src={item.imgurl} alt="" />
                 <span>{item.text}</span>

@@ -1,3 +1,4 @@
+import { font1455, font1651, font2071 } from 'component/styled';
 import styled, { css } from 'styled-components';
 
 export const title = css`
@@ -347,7 +348,7 @@ export const BorrowBox = styled.div`
 ` 
 export const BorrowGlass = styled.div`
   width: 14.7rem;
-  height: 6rem;
+  min-height: 8.62rem;
   margin: 0 auto;
   margin-top: 1.44rem;
   position: relative;
@@ -368,7 +369,7 @@ export const BorrowContent = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
-  padding: 0.84rem 0 1.12rem;
+  padding: 0.84rem 0 .6rem;
   box-sizing: border-box;
   .title {
     width: 9.82rem;
@@ -435,53 +436,75 @@ export const BorrowContent = styled.div`
   .BorrowChannel {
     display: flex;
     flex-direction: row;
-    width: 13rem;
-    padding-top: .6rem;
-    box-sizing: border-box;
+    align-items: center;
+    width: 11rem;
     margin: 0 auto;
-    &>:first-child {
-      margin-right: 1rem;
-    }
-    .content {
+    margin-top: .78rem;
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    .left {
       display: flex;
-      align-items: center;
-      .text {
+      flex-direction: column;
+      padding: .77rem .81rem .77rem .91rem;
+      &>span:nth-child(1) {
+        ${font2071}
+      }
+      &>span:nth-child(2) {
+        display: inline-block;
+        font-family: 'Montserrat';
+        font-style: italic;
+        font-weight: 800;
+        font-size: .6rem;
+        background: linear-gradient(268.82deg, #FF0000 0.48%, #FEB240 96.5%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-fill-color: transparent;
+      }
+    }
+    .right {
+      display: flex;
+      flex-direction: column;
+      padding: .45rem 0 .45rem 1rem;
+      gap: .6rem;
+      .content {
         display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        margin-left: .3rem;
-        &>div {
+        align-items: center;
+        .text {
           display: flex;
-          flex-direction: row;
-          align-items: center;
-          &>span:nth-child(1) {
-            font-family: 'Montserrat';
+          flex-direction: column;
+          justify-content: space-between;
+          margin-left: .3rem;
+          &>div {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            &>span:nth-child(1) {
+              ${font1651}
+              font-family: 'Montserrat';
+              font-style: normal;
+              margin-right: .3rem;
+            }
+            &>span:nth-child(2) {
+              display: inline-block;
+              font-family: 'Montserrat';
+              font-style: italic;
+              font-weight: 700;
+              font-size: .3rem;
+              background: linear-gradient(268.82deg, #FF0000 0.48%, #FEB240 96.5%); 
+              background-clip: text;
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+              text-fill-color: transparent;
+            }
+          }
+          &>span {
+            ${font1455}
+            font-family: 'PingFang HK';
             font-style: normal;
-            font-weight: 700;
-            font-size: .38rem;
-            margin-right: .3rem;
-            color: #FFFFFF;
+            line-height: .17rem;
           }
-          &>span:nth-child(2) {
-            display: inline-block;
-            font-family: 'Montserrat';
-            font-style: italic;
-            font-weight: 800;
-            font-size: .5rem;
-            background: linear-gradient(265.23deg, #FF0F0F 0%, #FF820F 97.96%);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-fill-color: transparent;
-          }
-        }
-        &>span {
-          font-family: 'PingFang HK';
-          font-style: normal;
-          font-weight: 400;
-          font-size: .16rem;
-          line-height: .22rem;
-          color: #FFFFFF;
         }
       }
     }

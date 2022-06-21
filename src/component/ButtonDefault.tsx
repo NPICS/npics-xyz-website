@@ -24,6 +24,8 @@ const StyledButton = styled.button<Iprops>`
        return 'linear-gradient(284.2deg, #FF0000 0%, #FEB240 101.06%);';
       case 'four':
        return 'rgba(255, 255, 255, 0.1)';
+      case 'disabled':
+       return '#999';
       default:
         return null;
     }
@@ -38,6 +40,8 @@ const StyledButton = styled.button<Iprops>`
        return '0';
       case 'four':
        return '.01rem solid rgba(255, 255, 255, 0.3)';
+      case 'disabled':
+       return '0';
       default:
         return null;
     }
@@ -58,6 +62,7 @@ const StyledButton = styled.button<Iprops>`
 function ButtonDefault(props:Iprops) {
 
   const onClick = () => {
+    if(props.disabled) return
     return props.onClick()
   }
 

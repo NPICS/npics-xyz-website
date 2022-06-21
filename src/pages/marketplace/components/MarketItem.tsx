@@ -16,18 +16,21 @@ import { useAppDispatch } from 'store/hooks';
 import { setIsShowConnect } from 'store/app';
 import { useEthPrice } from 'utils/hook';
 import { ethers } from 'ethers';
-import { ContractAddresses } from 'utils/addresses';
-import NPICS_ABI from 'abi/npics.json';
+// import { ContractAddresses } from 'utils/addresses';
+// import NPICS_ABI from 'abi/npics.json';
 import { useNavigate, useParams } from 'react-router-dom';
 import currency from 'currency.js';
 import BigNumber from 'bignumber.js';
 import { Erc721 } from '../../../abi/Erc721';
+import { Npics } from 'abi/Npics';
 
 function MarketItem() {
   const { active } = useWeb3React()
   const action = useAppDispatch()
   const [collectionItemsDetail, setCollectionItemsDetail] = useState<CollectionDetail>()
   const [isShowModal, setIsShowModal] = useState<boolean>(false)
+  const [owner, setOwner] = useState<string>('')
+  // const [availableBorrow, setAvailableBorrow] = useState<BigNumber>(new BigNumber(0))
   // const [filterValue, setFilterValue] = useState<string>('')
   const [aprData, setAprData] = useState<{ apr: number, rewardApr: number }>({ apr: 0, rewardApr: 0 })
   const EthPrice = useEthPrice(collectionItemsDetail?.currentBasePrice)
@@ -40,7 +43,8 @@ function MarketItem() {
   }
   useEffect(() => {
     getCollectionItemsDetail()
-
+    getOwner()
+    // getAvailableBorrow()
     // eslint-disable-next-line
   }, [params])
 
@@ -57,23 +61,32 @@ function MarketItem() {
     })
   }, [])
 
+  const getOwner = async () => {
+    if (!params || !params?.address) return
+    // let contract = new ethers.Contract(ContractAddresses.NpicsProxy, NPICS_ABI, ethers.getDefaultProvider())
+    // const availableBorrow = await contract.availableBorrowsInETH(params.address)
+    let erc721 = new Erc721(params.address, ethers.getDefaultProvider())
+    const owner = await erc721.OwnerOf(params.tokenId)
+    setOwner(owner)
+  }
+
+  // const getAvailableBorrow = async () => {
+  //   let contract = new ethers.Contract(ContractAddresses.NpicsProxy, NPICS_ABI, ethers.getDefaultProvider())
+  //   const ableBorrow = await contract.availableBorrowsInETH(params.address)
+  //   setAvailableBorrow(ableBorrow)
+  // }
+
 
 
   const getCollectionItemsDetail = async () => {
     if (!params || !params?.address) return
-
     const detailRequest = {
       address: params.address,
       tokenId: params.tokenId
     }
-    // if(!account) {
-    //   availableBorrow = new BigNumber(0)
-    // } else {
-    let contract = new ethers.Contract(ContractAddresses.NpicsProxy, NPICS_ABI, ethers.getDefaultProvider())
-    const availableBorrow = await contract.availableBorrowsInETH(params.address)
-    // }
-    let erc721 = new Erc721(params.address, ethers.getDefaultProvider())
-    const owner = await erc721.OwnerOf(params.tokenId)
+
+    let contract = new Npics(ethers.getDefaultProvider())
+    const availableBorrow = await contract.getAvailableBorrowsln(params.address)
 
     const url = '/npics-nft/app-api/v2/nft/getCollectionItemsDetail'
     const result: any = await http.myPost(url, detailRequest)
@@ -81,7 +94,6 @@ function MarketItem() {
       const orgData = result.data
       const changeData = deserialize(CollectionDetail, JSON.stringify(orgData));
       changeData.availableBorrow = availableBorrow
-      changeData.owner = owner
       // changeData.rarityScore = itemDetails.rarityScore
       const aa = changeData.currentBasePrice.minus(new BigNumber(changeData.availableBorrow.toString()))
       changeData.totalAmount = aa
@@ -104,27 +116,13 @@ function MarketItem() {
   }
 
   const jumpToMarket = () => {
-    if (!collectionItemsDetail?.owner) return
-    window.open(`https://etherscan.io/address/${collectionItemsDetail.owner}`)
+    if (!owner) return
+    window.open(`https://etherscan.io/address/${owner}`)
   }
   const jumpToContract = () => {
     if (!collectionItemsDetail?.address) return
     window.open(`https://etherscan.io/address/${collectionItemsDetail.address}`)
   }
-  // const onSelect = (val:string) => {
-  //   setFilterValue(val)
-  // }
-
-  // const ActivitiesSelect = <Select
-  //   onSelect={onSelect}
-  //   defaultValue="All"
-  //   dropdownClassName="ant-selectDropDown-reset"
-  // >
-  //   <Select.Option value="All">All</Select.Option>
-  //   <Select.Option value="transfer">Transfer</Select.Option>
-  //   <Select.Option value="offer_entered">offer</Select.Option>
-  //   <Select.Option value="created">list</Select.Option>
-  // </Select>
 
   return (
     <Wrap >
@@ -207,7 +205,7 @@ function MarketItem() {
               <img src={imgurl.home.SwiperIcon} alt="" />
               <span>Owner</span>
               <div className='address'>
-                <span>{collectionItemsDetail?.owner.replace(collectionItemsDetail?.owner.substr(7, 31), '...')}</span>
+                <span>{owner.replace(owner.substr(7, 31), '...')}</span>
                 <img src={imgurl.market.exportIcon} alt="" />
               </div>
             </div>

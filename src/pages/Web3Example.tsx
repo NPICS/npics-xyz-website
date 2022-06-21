@@ -238,6 +238,16 @@ export default function Web3Example() {
     console.log(`${balance.toFixed()}, ${balance}, ${balance.toString()}`)
   }
 
+  const Authorize = async () => {
+    let signer = library.getSigner(account)
+    let weth = new Erc20(ContractAddresses.WETH, signer)
+    const tx = await weth.approve(ContractAddresses.NpicsProxy,new BigNumber('50000000000000').toString())
+    await tx.wait()
+
+  }
+
+  
+
   const signTestMessage = async () => {
     console.log(dayjs())
     // console.log(dayjs().utcOffset())
@@ -294,6 +304,7 @@ export default function Web3Example() {
     </button>
     <br/>
     <button onClick={getProvider}>getProvider</button>
+    <button onClick={Authorize}>Authorize</button>
     <br/>
     <button onClick={() => {
       setCount(count + 1)

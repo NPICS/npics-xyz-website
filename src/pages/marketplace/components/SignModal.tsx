@@ -29,6 +29,7 @@ export default function SignModal(props: Iprops) {
   const [signState, setSignState] = useState<string>('pending')
   const [walletBalance, setWalletBalance] = useState<BigNumber>()
   const [WETHBalance, setWETHBalance] = useState<BigNumber>()
+  const [payWith, setPayWith] = useState<string>('')
   const EthPrice = useEthPrice(collectionItemsDetail?.currentBasePrice)
   const FundsAmount = useEthPrice(collectionItemsDetail?.availableBorrow)
   // const agreementPrice = collectionItemsDetail.currentBasePrice.minus(new BigNumber(collectionItemsDetail.availableBorrow.toString()))
@@ -45,7 +46,7 @@ export default function SignModal(props: Iprops) {
       return
     }
     const balance = await library.getBalance(account)
-    setWalletBalance(balance)
+    setWalletBalance(new BigNumber(balance.toString()))
   }
   const getWETHBalance = async () => {
     if (!account) {
@@ -62,27 +63,42 @@ export default function SignModal(props: Iprops) {
   }
 
   const onSign = () => {
+    if(!WETHBalance) return
+    if(!walletBalance) return
     if (!payEthBtn && !payWethBtn) {
-      message.warning("chose");
+      message.warning("Please select payment method");
       return
     }
     if (!checkbox) {
       message.warning("please agree to NPics's Terms of service");
       return
     }
-    // if (payEthBtn && payWethBtn) {
-    //   message.warning("1");
-    //   return
-    // }
-    // if (payEthBtn && !payWethBtn) {
-    //   message.warning("2");
-    //   return
-    // }
-    // if (!payEthBtn && payWethBtn) {
-    //   message.warning("3");
-    //   return
-    // }
-
+    let downPayment = compute(collectionItemsDetail)?.agreementPrice
+    let accountBalance = walletBalance.plus(WETHBalance)
+    if(downPayment && downPayment.gt(accountBalance)) {
+      message.error("Insufficient account balance")
+      return
+    }
+    if (payEthBtn && payWethBtn) {
+      // pay eth and weth
+      setPayWith('all')
+    }
+    if (payEthBtn && !payWethBtn) {
+       // pay eth
+       if(downPayment?.gt(walletBalance)) {
+        message.error("Insufficient account balance")
+        return
+       }
+       setPayWith('eth')
+    }
+    if (!payEthBtn && payWethBtn) {
+       // pay weth
+       if(downPayment?.gt(WETHBalance)) {
+        message.error("Insufficient account balance")
+        return
+       }
+       setPayWith('weth')
+    }
     setAgreementSign(true)
   }
 
@@ -103,7 +119,14 @@ export default function SignModal(props: Iprops) {
   }
 
 
-  return (agreementSign ? <SignGif collectionItemsDetail={collectionItemsDetail} setAgreementSign={setAgreementSign} setSignState={setSignState} /> : <ModalBody>
+  return (agreementSign ? <SignGif
+      collectionItemsDetail={collectionItemsDetail}
+      setAgreementSign={setAgreementSign}
+      setSignState={setSignState}
+      payWith={payWith}
+      walletBalance={walletBalance}
+      WETHBalance={WETHBalance}
+    /> : <ModalBody>
     <div className='content'>
       <div className='content-top'>
         <span>item</span>
@@ -193,7 +216,7 @@ export default function SignModal(props: Iprops) {
                   </div>
                 </div>
               </PayButton>
-              <PayButton onClick={onWETHClick} active={payWethBtn} disabled={true}>
+              <PayButton onClick={onWETHClick} active={payWethBtn}>
                 {payWethBtn ? <img src={imgurl.market.checked} alt="" /> : null}
                 <div>
                   <div>WETH</div>

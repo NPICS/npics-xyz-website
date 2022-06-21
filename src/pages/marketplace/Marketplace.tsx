@@ -39,7 +39,7 @@ const Wrap = styled.div`
     .collections-box {
       display: flex;
       border: .01rem solid rgba(255,255,255,.3);
-      border-radius: .12rem;
+      border-radius: .25rem;
       color: #fff;
       justify-content: space-between;
       align-items: center;
@@ -343,6 +343,7 @@ function Marketplace() {
       setItemsRequest(request)
     } else {
       setCollectionsList([])
+      setItemsRequest(undefined)
     }
   }
 
@@ -362,7 +363,10 @@ function Marketplace() {
   }
 
   const getCollectionItems = async () => {
-    if (!itemsRequest || !itemsRequest.address) return
+    if (!itemsRequest || !itemsRequest.address) {
+      setCollectionsItems([])
+      return
+    }
     setIsLoading(true)
     const url = '/npics-nft/app-api/v2/nft/getCollectionItems'
     const result: any = await http.myPost(url, itemsRequest)
@@ -472,8 +476,8 @@ function Marketplace() {
             <Select onSelect={onSelect} defaultValue="asc" dropdownClassName="ant-selectDropDown-reset">
               <Option value="asc">Price: Low to High</Option>
               <Option value="desc">Price: high to low</Option>
-              <Option value="rarityScore">Rarity: Common to Rarest</Option>
-              <Option value="rarityScoreDesc">Rarity: Rarest to Common</Option>
+              <Option value="rarityScoreDesc">Rarity: Common to Rarest</Option>
+              <Option value="rarityScore">Rarity: Rarest to Common</Option>
             </Select>
           </div>
         </div>

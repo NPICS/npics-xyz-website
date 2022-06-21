@@ -16,6 +16,7 @@ import { fetchUser, setIsLogin } from 'store/app';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { connectors } from 'utils/connectors';
 import { SessionStorageKey } from 'utils/enums';
+// import aa from 'abi/aa.json'
 const { Option } = Select
 interface Result {
   createTime: string,
@@ -111,11 +112,11 @@ function MyAgreement() {
   const DebtPosition = useRef<DataSource[]>()
   const columns: ColumnsType<DataSource> = [
     {
-      title: 'Items',
+      title: 'Asset',
       dataIndex: 'items',
       key: 'items',
       align: 'center',
-      render: (text, row) => <div className='items'>
+      render: (text, row) => <div className='items' onClick={() => jumpToEthscan(row)}>
         <img className='avatar' src={row.imageUrl} alt="" />
         <div className='text'>
           <div>
@@ -130,12 +131,13 @@ function MyAgreement() {
       </div>
     },
     {
-      title: 'Contract No.',
+      title: 'Minted NFT',
       dataIndex: 'contract',
       key: 'contract',
       align: 'center',
-      render: (text) => <div className='contract'>
-        {text}
+      render: (text,row) => <div className='contract' onClick={() => jumpToEthscan(row)}>
+        <span title={row.collectionName}>{row.collectionName}</span>
+        #{text}
         <img src={imgurl.dashboard.href} alt="" />
       </div>
     },
@@ -187,6 +189,10 @@ function MyAgreement() {
       </div>,
     },
   ]
+
+  const jumpToEthscan = (e: DataSource) => {
+    window.open(`https://etherscan.io/nft/${e.address}/${e.tokenId}`)
+  }
 
   useEffect(() => {
     let token = sessionStorage.getItem("ACCESS_TOKEN")
@@ -295,6 +301,7 @@ function MyAgreement() {
       const result: any = await http.myPost(url, pageInside)
 
       let orgData: Result[] = result.data.records
+      // orgData = aa.data.records
       if (result.code === 200 && orgData.length) {
         const signer = library.getSigner(account)
         let lendPool = new LendPool(signer)

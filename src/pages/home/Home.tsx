@@ -213,45 +213,51 @@ function Home() {
               </div>
 
               <div className='BorrowChannel'>
-                <div className='content'>
-                  {/* <img src={imgurl.home.Borrow2} alt="" /> */}
-                  <div className='text'>
-                    <div>
-                      <span>Interest APR</span>
-                      <span>{`-${aprData.apr.toFixed(2)}%`}</span>
-                    </div>
-                    <span>The real-time annual percentage rate of interest to be paid to the lending pool.</span>
-                  </div>
+                <div className='left'>
+                  <span>Vaults APR</span>
+                  <span>{`${(aprData.rewardApr*100 - aprData.apr).toFixed(2)}%`}</span>
                 </div>
-
-                <div className='content'>
-                  {/* <img src={imgurl.home.Borrow1} alt="" /> */}
-                  <div className='text'>
-                    <div>
-                      <span>Rewards APR</span>
-                      <span>{`${(aprData.rewardApr*100).toFixed(2)}%`}</span>
+                <div className='right'>
+                  <div className='content'>
+                    {/* <img src={imgurl.home.Borrow2} alt="" /> */}
+                    <div className='text'>
+                      <div>
+                        <span>Interest APR</span>
+                        <span>{`-${aprData.apr.toFixed(2)}%`}</span>
+                      </div>
+                      <span>The real-time annual percentage rate of interest to be paid to the lending pool.</span>
                     </div>
-                    <span>The rewards APR is real-time annual rate of Agreement subsidy</span>
+                  </div>
+
+                  <div className='content'>
+                    {/* <img src={imgurl.home.Borrow1} alt="" /> */}
+                    <div className='text'>
+                      <div>
+                        <span>Rewards APR</span>
+                        <span>{`${(aprData.rewardApr*100).toFixed(2)}%`}</span>
+                      </div>
+                      <span>The rewards APR is real-time annual rate of Agreement subsidy</span>
+                    </div>
                   </div>
                 </div>
               </div>
 
+              <BorrowBtn>
+                <ButtonDefault types={"one"} onClick={() => {
+                  window.open(urls.resource, "_blank")
+                }}>
+                  Learn More
+                </ButtonDefault>
+                <Link to={'/dashboard/rewards'}>
+                  <ButtonDefault types={"two"}>
+                    Claim Rewards
+                  </ButtonDefault>
+                </Link>
+              </BorrowBtn>
             </BorrowContent>
           </BorrowGlass>
         </div>
 
-        <BorrowBtn>
-          <ButtonDefault types={"one"} onClick={() => {
-            window.open(urls.resource, "_blank")
-          }}>
-            Learn More
-          </ButtonDefault>
-          <Link to={'/dashboard/rewards'}>
-            <ButtonDefault types={"two"}>
-              Claim Rewards
-            </ButtonDefault>
-          </Link>
-        </BorrowBtn>
 
       </BorrowBox>
 
