@@ -104,10 +104,10 @@ function Footer() {
         </div>
         {/*<span>Contact Us     Resources    Audit Report     Brand     Terms of service</span>*/}
         <div className="resources">
-          <a href="/">Contact Us</a>
-          <a href="/">Resources</a>
-          <a href="/">Audit Report</a>
-          <a href="/">Terms of service</a>
+          <a href={urls.contactUs}  target="_blank" rel="noreferrer">Contact Us</a>
+          <a href={urls.Resources} target="_blank" rel="noreferrer">Resources</a>
+          <a href="/" target="_blank" rel="noreferrer">Audit Report</a>
+          <a href={urls.termsOfService} target="_blank" rel="noreferrer">Terms of service</a>
         </div>
       </div>
     </FooterWrap>

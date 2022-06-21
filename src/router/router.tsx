@@ -61,6 +61,12 @@ export default function Routers() {
     {
       path: 'marketPlace',
       component: <Marketplace />,
+      children: [
+        {
+          path: 'abc',
+          component: <>123</>
+        }
+      ]
     },
     {
       path: 'marketPlaceRedirect',
