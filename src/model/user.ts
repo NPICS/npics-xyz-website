@@ -122,6 +122,7 @@ export class Activities {
   amount!: BigNumber
   @TransformBigNumber()
   startAmount!: BigNumber
+  imageUrl!: string
 
   @Expose()
   eventTypeExplain(): string | undefined {

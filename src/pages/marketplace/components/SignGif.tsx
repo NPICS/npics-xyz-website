@@ -75,18 +75,16 @@ interface Iprops {
   payWith: string
   WETHBalance: BigNumber | undefined
   walletBalance: BigNumber | undefined
+  setNeoNftUrl: React.Dispatch<React.SetStateAction<string>>
 }
 // let interval: NodeJS.Timeout
 export default function SignGif(props: Iprops) {
   const { account, library } = useWeb3React()
   const [percent, setPercent] = useState<number>(30)
-  const { setAgreementSign, setSignState, collectionItemsDetail, payWith, WETHBalance } = props
+  const { setAgreementSign, setSignState, collectionItemsDetail, payWith, WETHBalance, setNeoNftUrl } = props
   const action = useAppDispatch()
   useEffect(() => {
     pushAgreement()
-    // return () => {
-    //   return clearTimeout(interval)
-    // }
     // eslint-disable-next-line
   }, [])
 
@@ -187,7 +185,6 @@ export default function SignGif(props: Iprops) {
           market:marketAddress[collectionItemsDetail.market],
           wethAmt:payWethAmt,
         }
-        // console.log(`tokenId => ${params.tokenId}, nft => ${params.nft}`)
         action(setIsLoading(true))
         let tx
         if(payWithType === 'eth') {
@@ -197,6 +194,7 @@ export default function SignGif(props: Iprops) {
         }
         await tx.wait()
         action(setIsLoading(false))
+        setNeoNftUrl(tx)
         setPercent(100)
         setSignState('success')
         setAgreementSign(false)
@@ -212,19 +210,6 @@ export default function SignGif(props: Iprops) {
       message.error(JSON.parse(JSON.stringify(e)).reason || 'User rejected the request')
     }
   }
-
-
-  // const sign = () => {
-  //   interval = setTimeout(() => {
-  //     setAgreementSign(false)
-  //   }, 500);
-  //   if ('success') {
-  //     setSignState('failure')
-  //     setPercent(100)
-  //   } else {
-  //     setSignState('success')
-  //   }
-  // }
 
   return (
     <Wrap>
