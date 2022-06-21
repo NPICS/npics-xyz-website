@@ -34,8 +34,8 @@ const Rewards = styled.div`
   .content-reward {
     width: 12.7rem;
     //height: 5.75rem;
-    background: rgba(255, 255, 255, 0.1);
-    border: .01rem solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, .1);
+    border: .01rem solid rgba(255, 255, 255, .2);
     border-radius: .1rem;
     padding: .3rem .8rem .4rem .6rem;
     display: flex;
@@ -68,7 +68,7 @@ const Rewards = styled.div`
               font-style: normal;
               font-weight: 700;
               font-size: .3rem;
-              color: #FFFFFF;
+              color: #fff;
               margin-right: .18rem;
             }
             &>span:nth-child(2) {
@@ -106,7 +106,7 @@ const Rewards = styled.div`
         font-style: normal;
         font-weight: 600;
         font-size: .16rem;
-        color: #FFFFFF;
+        color: #fff;
         margin-bottom: .1rem;
       }
       .NPT,.BEND {
@@ -114,7 +114,7 @@ const Rewards = styled.div`
         justify-content: space-between;
         align-items: center;
         height: .94rem;
-        border-bottom: .01rem solid rgba(255, 255, 255, 0.1);
+        border-bottom: .01rem solid rgba(255, 255, 255, .1);
         .text {
           span {
             color: rgba(255,255,255,.5);

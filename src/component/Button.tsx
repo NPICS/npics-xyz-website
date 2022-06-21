@@ -18,7 +18,7 @@ const StyledButton = styled.button<Iprops>`
       case 'one':
        return '#FF490F';
       case 'two':
-       return "#FFFFFF";
+       return "#fff";
       default:
         return null;
     }
@@ -26,7 +26,7 @@ const StyledButton = styled.button<Iprops>`
   color: ${(props => {
      switch (props.types) {
       case 'one':
-       return '#FFFFFF';
+       return '#fff';
       case 'two':
        return "#000000";
       default:

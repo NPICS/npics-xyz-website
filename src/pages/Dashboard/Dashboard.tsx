@@ -51,7 +51,7 @@ const Wrap = styled.div`
   }
   .content {
     width: 14.33rem;
-    padding: .6rem 1.2rem 0.3rem .26rem;
+    padding: .6rem 1.2rem .3rem .26rem;
   }
 `
 

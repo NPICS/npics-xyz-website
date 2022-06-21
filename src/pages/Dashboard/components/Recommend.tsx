@@ -24,12 +24,12 @@ const SwiperWrap = styled.div`
       color: #fff;
       bottom: 0;
       width: 4.2rem;
-      height: 0.8rem;
+      height: .8rem;
       display: flex;
       align-items: center;
       padding-left: .3rem;
-      background: rgba(0, 0, 0, 0.8);
-      border: .01rem solid rgba(255, 255, 255, 0.2);
+      background: rgba(0, 0, 0, .8);
+      border: .01rem solid rgba(255, 255, 255, .2);
       backdrop-filter: blur(20px);
       img {
         width: .5rem;

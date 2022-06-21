@@ -13,7 +13,7 @@ const FlashClaim = styled.div`
   grid-template-rows: repeat(2);
   grid-gap: .2rem;
   background: #000000;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, .2);
   border-radius: 10px;
   padding: .24rem 0 .48rem .5rem;
   color: #fff;
@@ -41,8 +41,8 @@ const FlashClaim = styled.div`
 const Information = styled.div`
   display: flex;
   padding: .6rem .46rem;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, .1);
+  border: 1px solid rgba(255, 255, 255, .2);
   border-radius: 10px;
   &>img {
     width: 1.8rem;
@@ -60,7 +60,7 @@ const Information = styled.div`
       &>span {
         ${font1455}
         display: inline-block;
-        margin-bottom: 0.12rem;
+        margin-bottom: .12rem;
       }
       &>div {
         display: flex;
@@ -77,8 +77,8 @@ const Information = styled.div`
 
 `
 const ProgressContent = styled.div`
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, .1);
+  border: 1px solid rgba(255, 255, 255, .2);
   border-radius: 10px;
   padding: .31rem .37rem .5rem .37rem;
 `

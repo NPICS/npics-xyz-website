@@ -23,7 +23,7 @@ const StyledButton = styled.button<Iprops>`
       case 'three':
        return 'linear-gradient(284.2deg, #FF0000 0%, #FEB240 101.06%);';
       case 'four':
-       return 'rgba(255, 255, 255, 0.1)';
+       return 'rgba(255, 255, 255, 1)';
       case 'disabled':
        return '#999';
       default:
@@ -39,7 +39,7 @@ const StyledButton = styled.button<Iprops>`
       case 'three':
        return '0';
       case 'four':
-       return '.01rem solid rgba(255, 255, 255, 0.3)';
+       return '.01rem solid rgba(255, 255, 255, 3)';
       case 'disabled':
        return '0';
       default:
@@ -82,7 +82,7 @@ ButtonDefault.defaultProps = {
   text: 'button',
   fontSize: '16px',
   types: 'one',
-  color: '#FFFFFF',
+  color: '#fff',
   disabled: false,
 }
  

@@ -14,8 +14,8 @@ const MySwiper = styled(Swiper)`
   display: flex;
 `
 const SwiperItem = styled.div`
-  background: rgba(255, 255, 255, 0.1);
-  border: .01rem solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, .1);
+  border: .01rem solid rgba(255, 255, 255, .2);
   border-radius: .12rem;
   display: flex;
   flex-direction: column;
@@ -46,7 +46,7 @@ const SwiperItem = styled.div`
         font-weight: 600;
         font-size: .14rem;
         line-height: 20px;
-        color: rgba(255, 255, 255, 0.6);
+        color: rgba(255, 255, 255, .6);
       }
 
       & > div {
@@ -58,7 +58,7 @@ const SwiperItem = styled.div`
           font-weight: 600;
           font-size: .16rem;
           line-height: .22rem;
-          color: #FFFFFF;
+          color: #fff;
           display: inline-block;
         }
 

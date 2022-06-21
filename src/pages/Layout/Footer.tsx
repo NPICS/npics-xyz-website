@@ -27,7 +27,7 @@ const FooterWrap = styled.div`
     }
 
     span {
-      padding-top: 0.35rem;
+      padding-top: .35rem;
     }
   }
 
@@ -49,7 +49,7 @@ const FooterWrap = styled.div`
     }
 
     //span {
-    //  padding-top: 0.35rem;
+    //  padding-top: .35rem;
     //}
   }
   
@@ -92,7 +92,7 @@ function Footer() {
     <FooterWrap>
       <div className='footer-left'>
         <a href="/"><img src={imgurl.logo} alt=""/></a>
-        <span>© 2022 - 2025 Npics Networks, Inc</span>
+        <span>Copyright © 2022 Npics Foundation Singapore LTD. rights reserved</span>
       </div>
       <div className='footer-right'>
         <div>

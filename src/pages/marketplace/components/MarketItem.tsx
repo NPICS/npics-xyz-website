@@ -23,6 +23,7 @@ import currency from 'currency.js';
 import BigNumber from 'bignumber.js';
 import { Erc721 } from '../../../abi/Erc721';
 import { Npics } from 'abi/Npics';
+import { urls } from 'utils/urls';
 
 function MarketItem() {
   const { active } = useWeb3React()
@@ -39,12 +40,12 @@ function MarketItem() {
   const modal: any = useRef()
 
   const goBack = () => {
-    navigate("/marketplace")
+    if (!params || !params?.address) return
+    navigate(`/marketplace/collections/${params?.address}`)
   }
   useEffect(() => {
     getCollectionItemsDetail()
     getOwner()
-    // getAvailableBorrow()
     // eslint-disable-next-line
   }, [params])
 
@@ -134,7 +135,7 @@ function MarketItem() {
           <Flexible
             title="Information"
             iconUrl={imgurl.market.info}
-            background="rgba(255, 255, 255, 0.1)"
+            background="rgba(255, 255, 255, .1)"
           >
             <ul className='info-content'>
               <li>
@@ -190,7 +191,13 @@ function MarketItem() {
               <div>{collectionItemsDetail?.collectionName}</div>
               <div>{collectionItemsDetail?.collectionName} #{collectionItemsDetail?.tokenId}</div>
               <div>
-                <div>
+                <div style={{ cursor: "pointer" }} onClick={() => { 
+                  if (!collectionItemsDetail) return
+                  let name = collectionItemsDetail.collectionName.replaceAll(' ','-').toLowerCase()
+                  let tokenId = collectionItemsDetail.tokenId
+                  let raritysniperUrl = urls.raritysniper(name,tokenId)
+                  window.open(raritysniperUrl)
+                }}>
                   <img src={imgurl.market.collect2} alt="" />
                   <span>{collectionItemsDetail?.rarityScore}</span>
                 </div>
@@ -216,7 +223,7 @@ function MarketItem() {
         <div className='agreement-price'>
           <div className='agreement-price-top'>
             <div>
-              <span>Agreement Price</span>
+              <span>Down payment</span>
               <div>
                 <img src={imgurl.market.Group105} alt="" />
                 <span>{compute(collectionItemsDetail)?.agreementPrice.div(10 ** 18).toFixed(4, 1)}</span>

@@ -3,8 +3,8 @@ export const baseColors = {
 
 }
 export const lightColors:Colors = {
-  background: "#FFFFFF",
-  btnBackground: "#FFFFFF",
+  background: "#fff",
+  btnBackground: "#fff",
   iconBackground: "#F1EFEF",
   color: "#282626",
   border: ".01rem solid #DCDCDC",

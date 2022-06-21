@@ -1,7 +1,6 @@
 import React, { ReactNode } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import loadable from 'react-loadable'
-
 interface RouterT {
   name?: string,
   path: string,
@@ -18,6 +17,11 @@ const Home = loadable({
 
 const Marketplace = loadable({
   loader: () => import('../pages/marketplace/Marketplace'), 
+  loading: LoadingTip 
+})
+
+const MarketCollection = loadable({
+  loader: () => import('../pages/marketplace/MarketCollection'), 
   loading: LoadingTip 
 })
 
@@ -63,14 +67,14 @@ export default function Routers() {
       component: <Marketplace />,
       children: [
         {
-          path: 'abc',
-          component: <>123</>
+          path: 'collections/:address',
+          component: <MarketCollection />
         }
       ]
     },
     {
       path: 'marketPlaceRedirect',
-      component: <Navigate to="/marketPlace" replace />,
+      component: <Navigate to="/marketPlace/collections/0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D" replace />,
     },
     {
       path: '/marketPlace/nft/:address/:tokenId',

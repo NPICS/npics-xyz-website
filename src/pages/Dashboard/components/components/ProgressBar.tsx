@@ -16,13 +16,13 @@ const Container = styled.div`
   & > :first-child {
   width: inherit;
   background-color: #000000;
-  border: .01rem solid rgba(255, 255, 255, 0.2);
+  border: .01rem solid rgba(255, 255, 255, .2);
   border-radius: .05rem;
   overflow: hidden;
   display: flex;
   align-items: center;
   div {
-    height: 0.06rem;
+    height: .06rem;
     background: linear-gradient(284.2deg, #FF0000 0%, #FEB240 101.06%);
     border-radius: 5px;
   }
@@ -34,16 +34,16 @@ const Container = styled.div`
     border-radius: .08rem;
     position: absolute;
   cursor: pointer;
-    transform: translateX(-0.5vw);
+    transform: translateX(-.5vw);
     svg {
-      width: 0.9vw;
+      width: .9vw;
     }
   }
   .text {
     ${font1665};
     position: absolute;
     top: .13rem;
-    transform: translateX(-0.5vw);
+    transform: translateX(-.5vw);
 }
 `
 

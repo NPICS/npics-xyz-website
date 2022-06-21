@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link , useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { deserializeArray } from 'class-transformer';
-import { Collections, CollectionItems } from "../../model/user";
+import { CollectionItems } from "../../model/user";
 import http from 'utils/http';
 import { imgurl } from 'utils/globalimport';
 import { Input, Select } from 'antd'
@@ -59,8 +59,8 @@ const Collection = styled.div`
       .ant-select {
         align-self: end;
         width: 2.48rem;
-        border: 1px solid rgba(255, 255, 255, 0.5);
-        border-radius: 0.1rem;
+        border: 1px solid rgba(255, 255, 255, .5);
+        border-radius: .1rem;
         .ant-select-arrow {
           color: #fff;
         }
@@ -102,7 +102,7 @@ const Collection = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
-        color: #FFF;
+        color: #fff;
         font-size: .2rem;
         font-weight: 600;
       }
@@ -116,8 +116,8 @@ const CollectionItem = styled.div`
   border-radius: .1rem;
   display: flex;
   flex-direction: column;
-  background: rgba(255, 255, 255, 0.1);
-  box-shadow: 0px .05rem .05rem rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, .1);
+  box-shadow: 0px .05rem .05rem rgba(0, 0, 0, .1);
   margin-bottom: .1rem;
   cursor: pointer;
   overflow: hidden;
@@ -137,7 +137,7 @@ const CollectionItem = styled.div`
       display: flex;
       align-items: center;
       font-size: .16rem;
-      padding: 0.05rem;
+      padding: .05rem;
       border-radius: 10px;
       color: #000;
       font-weight: 500;
@@ -159,7 +159,7 @@ const CollectionItem = styled.div`
     &>span {
       font-weight: 600;
       font-size: .14rem;
-      color: rgba(255, 255, 255, 0.5);
+      color: rgba(255, 255, 255, .5);
     }
     &>div {
       display: flex;
@@ -211,16 +211,14 @@ const Scroll = styled.div`
     }
   }
 `
-
 function MarketCollection() {
 
-  const [realTotalSupply, setRealTotalSupply] = useState<Collections>()
   const [itemsRequest, setItemsRequest] = useState<ItemsRequest>()
   const [collectionsItems, setCollectionsItems] = useState<CollectionItems[]>([])
   const [isLoading, setIsLoading] = useState<Boolean>(true)
   const [pageIndex, setPageIndex] = useState<number>(1)
   const [total, setTotal] = useState<number>(0)
-
+  let params = useParams()
   useEffect(() => {
     getCollectionItems()
     // eslint-disable-next-line
@@ -230,6 +228,12 @@ function MarketCollection() {
     getCollectionItemsMore()
     // eslint-disable-next-line
   }, [pageIndex])
+
+  useEffect(() => {
+    const request = Object.assign({}, itemsRequest, { address: params.address, pageSize: 30, pageIndex: pageIndex, direction: "asc", search: "" })
+    setItemsRequest(request)
+    // eslint-disable-next-line
+  },[params])
 
 
   const getCollectionItemsMore = async () => {
@@ -276,14 +280,6 @@ function MarketCollection() {
     setItemsRequest(request)
   }
 
-  const clickItem = (item: Collections) => {
-    if (!item) return
-    setRealTotalSupply(item)
-    setPageIndex(1)
-    const request = Object.assign({}, itemsRequest, { address: item.address, pageIndex: 1, search: '' })
-    setItemsRequest(request)
-  }
-
   const onLoadMore = () => {
     setPageIndex(pageIndex + 1)
   }
@@ -310,11 +306,11 @@ function MarketCollection() {
     }
   }
 
-  return (<Collection className='content'>
+  return (<Collection>
     <div className='content-search'>
       <div>
         <span>Marketplace</span>
-        <span>{realTotalSupply?.totalShelves} items on sale</span>
+        <span>{total} items on sale</span>
       </div>
       <div>
         <Input
@@ -337,7 +333,7 @@ function MarketCollection() {
           {isLoading ? <div className='loading'><img src={imgurl.market.loading} alt="" /></div> : collectionsItems.length ? <div>
             {collectionsItems && collectionsItems.map((item: CollectionItems) => {
               return (
-                <Link to={`nft/${item.address}/${item.tokenId}`} key={item.id}><CollectionItem key={item.id} >
+                <Link to={`/marketPlace/nft/${item.address}/${item.tokenId}`} key={item.id}><CollectionItem key={item.id} >
                   <div className='co-image'>
                     <img className='market' src={imgurl.market[item.market]} alt="" />
                     <div className='rarity'>
@@ -347,10 +343,10 @@ function MarketCollection() {
                     <img className='nft-img' src={item.imageUrl} alt="" />
                   </div>
                   <div className='co-info'>
-                    <span>{realTotalSupply?.name}</span>
+                    <span>{item.collectionName}</span>
                     <div>
                       <div>
-                        <span>{realTotalSupply?.name}</span>
+                        <span>{item.collectionName}</span>
                         <span>{`#${item.tokenId}`}</span>
                       </div>
                       <div>

@@ -39,7 +39,7 @@ const Wrap = styled.div`
         font-style: normal;
         font-weight: 800;
         font-size: .3rem;
-        color: #FFFFFF;
+        color: #fff;
       }
       .total-information {
         color: rgba(255, 255, 255, .5);
@@ -61,9 +61,9 @@ const Wrap = styled.div`
     .ant-select {
       align-self: end;
       min-width: 1.2rem;
-      height: 0.42rem;
-      border: 1px solid rgba(255, 255, 255, 0.5);
-      border-radius: 0.1rem;
+      height: .42rem;
+      border: 1px solid rgba(255, 255, 255, .5);
+      border-radius: .1rem;
       .ant-select-arrow {
         color: #fff;
       }
@@ -74,7 +74,7 @@ const Wrap = styled.div`
         box-shadow: none !important;
         border-color: rgba(255, 255, 255, .5);
         text-align: center;
-        height: 0.42rem;
+        height: .42rem;
         display: flex;
         align-items: center;
       }
@@ -89,7 +89,7 @@ const Wrap = styled.div`
       font-style: normal;
       font-weight: 500;
       font-size: .2rem;
-      color: #FFFFFF;
+      color: #fff;
     }
   }
   }
@@ -379,10 +379,9 @@ function MyAgreement() {
           dropdownClassName="ant-selectDropDown-reset"
         >
           <Option value="All">All</Option>
-          <Option value="Safe">Safe</Option>
-          <Option value="Careful">Careful</Option>
-          <Option value="Risky">Risky</Option>
-          <Option value="Dangerous">Dangerous</Option>
+          <Option value="Inforce">Inforce</Option>
+          <Option value="In Risk">In Risk</Option>
+          <Option value="Terminated">Terminated</Option>
         </Select>
       </div>
       <div className='table'>

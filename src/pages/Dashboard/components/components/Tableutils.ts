@@ -27,7 +27,7 @@ export const BgTable = styled.div`
         color: #fff;
         font-size: .16rem;
         &>span:nth-child(1) {
-          max-width: 0.42rem;
+          max-width: .42rem;
           margin-right: .03rem;
           white-space: nowrap;
           overflow: hidden;
@@ -40,12 +40,12 @@ export const BgTable = styled.div`
       }
       &>div:nth-child(2) {
         display: flex;
-        color: rgba(255, 255, 255, 0.5);
+        color: rgba(255, 255, 255, .5);
         font-size: .14rem;
         &>span {
           ${flex}
           &>img {
-            margin: 0 0.04rem 0 0.08rem;
+            margin: 0 .04rem 0 .08rem;
             height: .14rem;
           }
         }
@@ -59,7 +59,7 @@ export const BgTable = styled.div`
     color: #fff;
     cursor: pointer;
     &>span {
-      max-width: 0.42rem;
+      max-width: .42rem;
       margin-right: .03rem;
       white-space: nowrap;
       overflow: hidden;
@@ -115,13 +115,13 @@ export const BgTable = styled.div`
     }
     .actionBtn {
       background: #000000;
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, .2);
       border-radius: 10px;
       width: 1.2rem;
-      height: 0.48rem;
+      height: .48rem;
       line-height: .48rem;
       text-align: center;
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, .2);
       font-weight: 600;
       font-size: .14rem;
       cursor: pointer;
@@ -161,8 +161,8 @@ export const Wrap = styled.div`
       justify-content: center;
       align-items: center;
       color: #fff;
-      background: rgba(255, 255, 255, 0.2);
-      border: .01rem solid rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, .2);
+      border: .01rem solid rgba(255, 255, 255, .3);
       border-radius: .05rem;
       margin-right: .15rem;
       cursor: pointer;
@@ -172,7 +172,7 @@ export const Wrap = styled.div`
       font-style: normal;
       font-weight: 800;
       font-size: .3rem;
-      color: #FFFFFF;
+      color: #fff;
     }
     .collection-name {
       ${font1665};
@@ -187,7 +187,7 @@ export const Wrap = styled.div`
     align-items: center;
     color: #fff;
     background: #000000;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, .2);
     border-radius: 10px;
     &>div:nth-child(1) {
       margin-right: .1rem;
@@ -203,8 +203,8 @@ export const Wrap = styled.div`
   /* height: 3.06rem; */
   padding: .2rem;
   align-items: center;
-  background: rgba(255, 255, 255, 0.1);
-  border: .01rem solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, .1);
+  border: .01rem solid rgba(255, 255, 255, .2);
   border-radius: .1rem;
   &>img {
     width: 2.58rem;
@@ -221,7 +221,7 @@ export const Wrap = styled.div`
     display: grid;
     grid-template-columns: repeat(3,auto);
     flex: 1;
-    grid-gap: 0.3rem;
+    grid-gap: .3rem;
     &>div {
       display: flex;
       flex-direction: column;
@@ -256,7 +256,7 @@ export const Wrap = styled.div`
     height: .42rem;
     background: #000000;
     color: #fff;
-    border: .01rem solid rgba(255, 255, 255, 0.2);
+    border: .01rem solid rgba(255, 255, 255, .2);
     border-radius: .1rem;
     font-family: 'PingFang HK';
     font-style: normal;
@@ -268,7 +268,7 @@ export const Wrap = styled.div`
     margin-right: .1rem;
   }
   .active {
-    background: #FFFFFF;
+    background: #fff;
     color: #000000;
   }
 }
@@ -278,8 +278,8 @@ export const Repay = styled.div`
   width: 12.7rem;
   margin-top: .2rem;
   .panel {
-    background: rgba(255, 255, 255, 0.1);
-    border: .01rem solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, .1);
+    border: .01rem solid rgba(255, 255, 255, .2);
     border-radius: .1rem;
     overflow: hidden;
     .enough {

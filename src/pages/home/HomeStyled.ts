@@ -6,7 +6,7 @@ export const title = css`
   font-style: normal;
   font-weight: 800;
   font-size: .36rem;
-  color: #FFFFFF;
+  color: #fff;
 `
 
 export const HomeWrap = styled.div`
@@ -44,7 +44,7 @@ export const Background = styled.div`
   }
   &>img:nth-child(2) {
     position: absolute;
-    right: 0.64rem;
+    right: .64rem;
     top: -3.41rem;
     width: 5.44rem;
     height: 5.44rem;
@@ -64,7 +64,7 @@ export const Projection = styled.div`
 export const Glass = styled.div`
   height: 100%;
   position: relative;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, .1);
   overflow: hidden;
   &::before {
     content: '';
@@ -76,8 +76,8 @@ export const Glass = styled.div`
   }
   .text {
     position: absolute;
-    padding-top: 0.9rem;
-    padding-bottom: 0.9rem;
+    padding-top: .9rem;
+    padding-bottom: .9rem;
     box-sizing: border-box;
     margin-left: 1.83rem;
     margin-top: 2.5rem;
@@ -88,7 +88,7 @@ export const Glass = styled.div`
       font-size: .4rem;
       line-height: .49rem;
       text-transform: uppercase;
-      color: #FFFFFF;
+      color: #fff;
       width: 5.83rem;
       margin-bottom: .1rem;
     }
@@ -98,8 +98,8 @@ export const Glass = styled.div`
       font-weight: 300;
       font-size: .16rem;
       line-height: .32rem;
-      letter-spacing: 0.05em;
-      color: rgba(255, 255, 255, 0.5);
+      letter-spacing: .05em;
+      color: rgba(255, 255, 255, .5);
       width: 5.41rem;
       margin-bottom: .47rem;
     }
@@ -116,8 +116,8 @@ export const Glass = styled.div`
     position: absolute;
     width: 4.24rem;
     height: 4.2rem;
-    /* padding-top: 0.9rem;
-    padding-bottom: 0.9rem; */
+    /* padding-top: .9rem;
+    padding-bottom: .9rem; */
     box-sizing: border-box;
     margin-left: 11rem;
     margin-top: 2.5rem;
@@ -211,7 +211,7 @@ export const PartnerBox = styled.div`
     width: .8rem;
     height: .8rem;
     background-color: #000;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, .2);
     border-radius: 10px;
     display: flex;
     justify-content: center;
@@ -222,7 +222,7 @@ export const PartnerBox = styled.div`
     font-style: normal;
     font-weight: 600;
     font-size: .22rem;
-    color: #FFFFFF;
+    color: #fff;
     margin: .2rem 0 .1rem ;
   }
   &>:nth-child(3) {
@@ -231,11 +231,11 @@ export const PartnerBox = styled.div`
     font-weight: 600;
     white-space: nowrap;
     font-size: .14rem;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, .6);
   }
   &::before {
     content:  '${(props:{content:string}) => props.content}';
-    color: #FFFFFF;
+    color: #fff;
     font-weight: 600;
     font-size: .16rem;;
     position: absolute;
@@ -287,7 +287,7 @@ export const IntroduceBox = styled.div`
   position: relative;
   width: 4.5rem;
   height: 5rem;
-  border: .01rem solid rgba(255, 255, 255, 0.2);
+  border: .01rem solid rgba(255, 255, 255, .2);
   border-radius: .1rem;
   margin-right: 1.03rem;
   box-sizing: border-box;
@@ -296,12 +296,10 @@ export const IntroduceBox = styled.div`
   flex-direction: column;
   justify-content:end ;
   align-items: center;
-  &>:nth-child(1) {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 4.5rem;
-    height: 5rem;
+  &>img {
+    width: 2.2rem;
+    height: 2.2rem;
+    margin-bottom: .6rem;
   }
   &>:nth-child(2) {
     font-family: 'Montserrat';
@@ -311,7 +309,7 @@ export const IntroduceBox = styled.div`
     line-height: .37rem;
     width: 2.76rem;
     text-align: center;
-    color: #FFFFFF;
+    color: #fff;
   }
   &>:nth-child(3) {
     font-family: 'PingFang HK';
@@ -321,7 +319,7 @@ export const IntroduceBox = styled.div`
     line-height: .24rem;
     width: 3.28rem;
     text-align: center;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, .6);
   }
 `
 
@@ -352,7 +350,7 @@ export const BorrowGlass = styled.div`
   margin: 0 auto;
   margin-top: 1.44rem;
   position: relative;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, .1);
   border-radius: .2rem;
   overflow: hidden;
   &::before {
@@ -369,7 +367,7 @@ export const BorrowContent = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
-  padding: 0.84rem 0 .6rem;
+  padding: .84rem 0 .6rem;
   box-sizing: border-box;
   .title {
     width: 9.82rem;
@@ -404,7 +402,7 @@ export const BorrowContent = styled.div`
     .slider {
       width: 8rem;
       height: .1rem;
-      background: #FFFFFF;
+      background: #fff;
       border-radius: .3rem;
       position: relative;
       margin: .18rem auto .24rem;
@@ -430,7 +428,7 @@ export const BorrowContent = styled.div`
       font-style: normal;
       font-weight: 300;
       font-size: .16rem;
-      color: #FFFFFF;
+      color: #fff;
     }
   }
   .BorrowChannel {
@@ -441,7 +439,7 @@ export const BorrowContent = styled.div`
     margin: 0 auto;
     margin-top: .78rem;
     box-sizing: border-box;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, .1);
     border-radius: 20px;
     .left {
       display: flex;

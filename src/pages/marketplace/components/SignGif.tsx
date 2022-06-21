@@ -188,7 +188,6 @@ export default function SignGif(props: Iprops) {
           wethAmt:payWethAmt,
         }
         // console.log(`tokenId => ${params.tokenId}, nft => ${params.nft}`)
-        console.log(params)
         action(setIsLoading(true))
         let tx
         if(payWithType === 'eth') {
@@ -210,7 +209,6 @@ export default function SignGif(props: Iprops) {
       setSignState('failure')
       setAgreementSign(false)
       action(setIsLoading(false))
-      console.log(JSON.parse(JSON.stringify(e)));
       message.error(JSON.parse(JSON.stringify(e)).reason || 'User rejected the request')
     }
   }

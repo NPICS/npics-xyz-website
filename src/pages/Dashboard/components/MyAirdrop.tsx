@@ -12,7 +12,7 @@ const ContractAuthorization = styled.div`
   padding: .24rem .5rem .26rem .5rem;
   grid-gap: .2rem;
   background: #000000;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, .2);
   border-radius: 10px;
   margin-bottom: .3rem;
   .theme {
@@ -68,7 +68,7 @@ const Project = styled.div`
     .actions-btn {
       ${font1461}
       background: #000000;
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, .2);
       border-radius: 10px;
       padding: .14rem 0;
       cursor: pointer;
@@ -76,7 +76,7 @@ const Project = styled.div`
     }
     .disabled {
       cursor: not-allowed;
-      border: 1px solid rgba(255, 255, 255, 0.5);
+      border: 1px solid rgba(255, 255, 255, .5);
       ${font1465}
     }
   }

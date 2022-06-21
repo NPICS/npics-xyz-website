@@ -47,8 +47,8 @@ export const Nav = styled.div`
         display: none;
       }
     .ant-popover-inner {
-      background: rgba(0, 0, 0, 0.4);
-      border: .01rem solid rgba(255, 255, 255, 0.2);
+      background: rgba(0, 0, 0, .4);
+      border: .01rem solid rgba(255, 255, 255, .2);
       backdrop-filter: blur(50px);
       border-radius: 20px;
       margin-top: .2rem;
@@ -99,7 +99,7 @@ export const Nav = styled.div`
             font-size: .16rem;
             .connected {
               font-size: .14rem;
-              color:rgba(255, 255, 255, 0.5);
+              color:rgba(255, 255, 255, .5);
             }
           }
         }
@@ -107,7 +107,7 @@ export const Nav = styled.div`
           margin: .3rem 0;
           display: grid;
           grid-template-columns: repeat(2, 1fr);
-          grid-gap: 0.1rem;
+          grid-gap: .1rem;
           .account-nav {
             height: .68rem;
             padding: 0 .27rem;
@@ -115,8 +115,8 @@ export const Nav = styled.div`
             gap: .06rem;
             align-items: center;
             text-align: left;
-            background: rgba(255, 255, 255, 0.1);
-            border: .01rem solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, .1);
+            border: .01rem solid rgba(255, 255, 255, .2);
             backdrop-filter: blur(50px);
             border-radius: .1rem;
             color: #fff;

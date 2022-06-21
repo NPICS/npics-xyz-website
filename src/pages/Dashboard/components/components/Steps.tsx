@@ -11,7 +11,7 @@ const StepsSquare = styled.div`
   justify-content: space-between;
   align-items: center;
   background: #000000;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, .2);
   border-radius: 5px;
   .progress {
     position: absolute;
@@ -32,15 +32,15 @@ const StepsSquare = styled.div`
     border-radius: 5px;
   }
   .ball {
-    width: 0.35rem;
-    height: 0.35rem;
+    width: .35rem;
+    height: .35rem;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #fff;
     background: #000;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, .3);
     z-index:1;
   }
   .active {

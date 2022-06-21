@@ -7,6 +7,7 @@ import { deserializeArray } from 'class-transformer';
 import styled from 'styled-components';
 import { imgurl } from 'utils/globalimport';
 import BigNumber from 'bignumber.js';
+import { Link } from 'react-router-dom';
 interface DataType {
   index: string,
   key: React.Key,
@@ -21,12 +22,13 @@ interface DataType {
   vol: number,
   dayChange: string,
   dayVolume: BigNumber,
+  address: string
 }
 
 const BgTable = styled.div`
   width: 16rem;
   margin: 0 auto;
-  /* margin-top: 0.5rem; */
+  /* margin-top: .5rem; */
 `
 
 
@@ -60,7 +62,8 @@ export default function MyTable() {
             primePrice: +changeData[i].sPrimePrice,
             vol: +changeData[i].vol,
             dayChange: changeData[i].sDayChange,
-            dayVolume: new BigNumber(changeData[i].dayVolume)
+            dayVolume: new BigNumber(changeData[i].dayVolume),
+            address: changeData[i].address
           })
         }
         setCollections(relData)
@@ -85,10 +88,12 @@ export default function MyTable() {
       dataIndex: 'collection',
       key: 'collection',
       align: 'left',
-      render: (text, row) => <div style={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center'}}>
-        <img src={row.imageUrl} alt="" style={{ width: ".6rem", height: ".6rem", marginRight: ".1rem", borderRadius: '30px'}} />
-        <span>{text}</span>
-      </div>,
+      render: (text, row) => <Link to={`/marketPlace/collections/${row.address}`}>
+        <div style={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center'}}>
+          <img src={row.imageUrl} alt="" style={{ width: ".6rem", height: ".6rem", marginRight: ".1rem", borderRadius: '30px'}} />
+          <span style={{color: '#fff'}}>{text}</span>
+        </div>
+      </Link>,
     },
     {
       title: '24H Vol',

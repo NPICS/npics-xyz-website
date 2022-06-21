@@ -65,8 +65,8 @@ export const ModalBody = styled.div`
           margin-top: .2rem;
           &>div:nth-child(1) {
             &>img {
-              margin-top: 0.12rem;
-              margin-right: 0.15rem;
+              margin-top: .12rem;
+              margin-right: .15rem;
               width: .26rem;
               height: .26rem;
             }
@@ -81,7 +81,7 @@ export const ModalBody = styled.div`
               font-size: .14rem;
               color: rgba(255,255,255,.5);
               font-weight: 400;
-              //letter-spacing: 0.5px;
+              //letter-spacing: .5px;
             }
           }
         }
@@ -104,7 +104,7 @@ export const ModalBody = styled.div`
           flex-direction: row;
           align-items: center;
           img {
-            margin-right: 0.08rem;
+            margin-right: .08rem;
             width: .22rem;
             height: .22rem;
           }
@@ -141,8 +141,8 @@ export const ModalBody = styled.div`
             display: inline-block;
             width: .3rem;
             height: .3rem;
-            margin-top: 0.1rem;
-            margin-right: 0.1rem;
+            margin-top: .1rem;
+            margin-right: .1rem;
           }
           .total-price {
             &>div:nth-child(1) {
@@ -207,15 +207,15 @@ export const ModalBody = styled.div`
         top: 0;
       }
       .ant-checkbox-inner {
-        background: rgba(255, 255, 255, 0.2);
-        border: 1px solid rgba(255, 255, 255, 0.3);
+        background: rgba(255, 255, 255, .2);
+        border: 1px solid rgba(255, 255, 255, .3);
         border-radius: 5px;
-        width: 0.24rem;
-        height: 0.24rem;
+        width: .24rem;
+        height: .24rem;
         animation: all 0;
         &::after {
-          width: 0.09rem;
-          height: 0.15rem;
+          width: .09rem;
+          height: .15rem;
         }
       }
       .ant-checkbox-checked::after {
@@ -254,8 +254,8 @@ export const PayButton = styled.button<{ active: boolean }>`
   display: flex;
   align-items: center;
   border-radius: .1rem;
-  border: ${(props => props.active ? '0' : '.01rem solid #FFFFFF')};
-  color: ${(props => props.active ? '#000000' : '#FFFFFF')};
+  border: ${(props => props.active ? '0' : '.01rem solid #fff')};
+  color: ${(props => props.active ? '#000000' : '#fff')};
   background: ${(props => props.active ? '#7BD742' : '#000000')};
   cursor: pointer;
   position: relative;

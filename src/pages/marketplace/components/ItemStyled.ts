@@ -66,8 +66,8 @@ export const Wrap = styled.div`
         justify-content: center;
         align-items: center;
         color: #fff;
-        background: rgba(255, 255, 255, 0.2);
-        border: .01rem solid rgba(255, 255, 255, 0.3);
+        background: rgba(255, 255, 255, .2);
+        border: .01rem solid rgba(255, 255, 255, .3);
         border-radius: .05rem;
         margin-right: .15rem;
         cursor: pointer;
@@ -87,7 +87,7 @@ export const Wrap = styled.div`
             line-height: .22rem;
             display: flex;
             align-items: center;
-            color: #FFFFFF;
+            color: #fff;
           }
           &>div:nth-child(2) {
             font-family: 'Montserrat';
@@ -95,15 +95,15 @@ export const Wrap = styled.div`
             font-weight: 800;
             font-size: .30rem;
             line-height: .37rem;
-            color: #FFFFFF;
+            color: #fff;
             margin-bottom: .1rem;
           }
           &>div:nth-child(3) {
             display: flex;
             &>div {
               height: .28rem;
-              background: rgba(255, 255, 255, 0.2);
-              border: .01rem solid rgba(255, 255, 255, 0.3);
+              background: rgba(255, 255, 255, .2);
+              border: .01rem solid rgba(255, 255, 255, .3);
               border-radius: .2rem;
               color: #fff;
               padding: .08rem .08rem .08rem .08rem;
@@ -122,8 +122,8 @@ export const Wrap = styled.div`
         .Owner {
           align-self: end;
           padding: .11rem .19rem;
-          background: rgba(255, 255, 255, 0.1);
-          border: .01rem solid rgba(255, 255, 255, 0.2);
+          background: rgba(255, 255, 255, .1);
+          border: .01rem solid rgba(255, 255, 255, .2);
           border-radius: .1rem;
           color: #fff;
           cursor: pointer;
@@ -137,7 +137,7 @@ export const Wrap = styled.div`
               display: inline-block;
               white-space: nowrap;
               font-size: .14rem;
-              color: rgba(255, 255, 255, 0.5);
+              color: rgba(255, 255, 255, .5);
               margin-right: .1rem;
               line-height: .14rem;
               vertical-align: middle;
@@ -150,8 +150,8 @@ export const Wrap = styled.div`
       display: flex;
       flex-direction: column;
       height: 1.88rem;
-      background: rgba(255, 255, 255, 0.1);
-      border: .01rem solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, .1);
+      border: .01rem solid rgba(255, 255, 255, .2);
       border-radius: .1rem;
       .agreement-price-top {
         padding: 0 .6rem 0 .4rem;
@@ -159,7 +159,7 @@ export const Wrap = styled.div`
         display: flex;
         justify-content: space-between;
         align-items: center;
-        border-bottom: .01rem solid rgba(255, 255, 255, 0.2);
+        border-bottom: .01rem solid rgba(255, 255, 255, .2);
         &>div {
           display: flex;
           flex-direction: column;
@@ -168,13 +168,13 @@ export const Wrap = styled.div`
             font-style: normal;
             font-weight: 500;
             font-size: .14rem;
-            color: #FFFFFF;
+            color: #fff;
           }
           &>div {
             img {
               vertical-align: middle;
-              margin-bottom: 0.1rem;
-              margin-right: 0.1rem;
+              margin-bottom: .1rem;
+              margin-right: .1rem;
             }
             span {
               display: inline-block;
@@ -182,14 +182,14 @@ export const Wrap = styled.div`
               font-style: italic;
               font-weight: 800;
               font-size: .36rem;
-              color: #FFFFFF;
+              color: #fff;
             }
           }
         }
       }
       .agreement-price-down {
         display: flex;
-        height: 0.86rem;
+        height: .86rem;
         .Funds {
           width: 100%;
           padding-left: .4rem;
@@ -198,7 +198,7 @@ export const Wrap = styled.div`
           align-items: center;
           .minus {
             background: #000000;
-            border: .01rem solid rgba(255, 255, 255, 0.3);
+            border: .01rem solid rgba(255, 255, 255, .3);
             border-radius: .1rem;
             width: .32rem;
             height: .32rem;
@@ -214,7 +214,7 @@ export const Wrap = styled.div`
             color: #fff;
             margin-right: .46rem;
             &>div:nth-child(2) {
-              color: rgba(255, 255, 255, 0.5);
+              color: rgba(255, 255, 255, .5);
               &>img {
                 margin-left: .05rem;
                 width: .19rem;
@@ -260,12 +260,12 @@ export const Wrap = styled.div`
           justify-content: center;
           align-items: center;
           width: 2.6rem;
-          border-left: .01rem solid rgba(255, 255, 255, 0.2);
+          border-left: .01rem solid rgba(255, 255, 255, .2);
           &>span:nth-child(1) {
             color: #fff;
           }
           &>span:nth-child(2) {
-            color: rgba(255, 255, 255, 0.5);
+            color: rgba(255, 255, 255, .5);
           }
         }
       }
@@ -273,13 +273,13 @@ export const Wrap = styled.div`
     .activities {
       margin-top: .2rem;
       .ant-select-arrow {
-        color: rgba(255, 255, 255, 0.5);
+        color: rgba(255, 255, 255, .5);
       }
       .ant-select {
         align-self: end;
         min-width: 1.2rem;
         border: transparent;
-        border-radius: 0.1rem;
+        border-radius: .1rem;
       .ant-select-selector {
         border: none !important;
         box-shadow: none !important;
@@ -289,7 +289,7 @@ export const Wrap = styled.div`
         ${font1465}
         min-width: 1rem;
         background-color: #1A1a1a;
-        border: 1px solid rgba(255, 255, 255, 0.3) !important;
+        border: 1px solid rgba(255, 255, 255, .3) !important;
         border-radius: 10px;
       }
     }
@@ -314,7 +314,7 @@ export const MyModal = styled.div`
             background-color: #191919;
             border-bottom: none;
             .ant-modal-title {
-              color: #FFFFFF;
+              color: #fff;
               font-family: 'Montserrat';
               font-style: normal;
               font-weight: 800;
@@ -324,7 +324,7 @@ export const MyModal = styled.div`
           }
           .ant-modal-body {
             background-color: #191919;
-            color: #FFFFFF;
+            color: #fff;
             padding: .3rem .6rem;
           }
         }
@@ -368,7 +368,7 @@ export const Properties = styled.div`
       &>div:nth-child(3) {
         font-weight: 600;
         font-size: .14rem;
-        color: rgba(255, 255, 255, 0.5);
+        color: rgba(255, 255, 255, .5);
       }
   
     }

@@ -77,18 +77,18 @@ function Home() {
   const IntroduceData = [
     {
       url: imgurl.home.MaskGroup1,
-      title: "Low threshold",
-      text: "Everyone can have the opportunity to participate in the blue chip NFT",
+      title: "NFT Financialize",
+      text: "A new debt mechanism to help financialize NFT",
     },
     {
       url: imgurl.home.MaskGroup2,
-      title: "Innovative financial method",
-      text: "Everyone can have the opportunity to participate in the blue chip NFT",
+      title: "Multiple Incentive",
+      text: "Multi-market ecology, multiple incentive design, liquidity contribution",
     },
     {
       url: imgurl.home.MaskGroup3,
-      title: "Low threshold3",
-      text: "Everyone can have the opportunity to participate in the blue chip NFT",
+      title: "Atomicity and Transactivity",
+      text: "Full-scenario Bundle transactions,Ensuring security-first atomicity and transactivity",
     },
   ]
   const StepsList = ['Chose','Checkout','Payment','Issued']
@@ -265,7 +265,7 @@ function Home() {
         <div className='title'>
           <span>Why NPics？</span>
           <span>
-            Activate the NFT market + open financial application and unlock the future of NFT
+          With Decentralized Finance as a lever and NFTs as the fulcrum, we will leverage Web3.0
           </span>
         </div>
         <div className='IntroduceGroup'>

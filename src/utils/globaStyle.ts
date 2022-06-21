@@ -16,7 +16,7 @@ export const GlobalStyle = createGlobalStyle`
 
   .ant-selectDropDown-reset {
     background-color: #1a1a1a;
-    color: #FFF;
+    color: #fff;
     border: 1px solid rgba(255, 255, 255, .5);
     border-radius: .1rem;
     text-align: center;
@@ -54,7 +54,7 @@ export const GlobalStyle = createGlobalStyle`
       .ant-modal-close {
         .ant-modal-close-x {
           height: 100%;
-          line-height: 0.73rem;
+          line-height: .73rem;
           font-size: .16rem;
         }
       }
@@ -68,13 +68,13 @@ export const GlobalStyle = createGlobalStyle`
           color: #353945;
           font-weight: 700;
           border-radius: 10px;
-          padding: 0.05rem;
+          padding: .05rem;
           cursor: pointer;
           img {
             width: .4rem;
           }
           &:hover {
-            background: rgba(0, 0, 0, 0.07);
+            background: rgba(0, 0, 0, .07);
           }
         }
       }
@@ -94,9 +94,9 @@ export const GlobalStyle = createGlobalStyle`
       color: red;
     }
     .ant-table-thead {
-      margin-bottom: 0.05rem;
+      margin-bottom: .05rem;
       background: #000000;
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, .2);
       border-radius: 10px;
       tr:first-child th:first-child {
         border-top-left-radius: 10px;
@@ -110,9 +110,9 @@ export const GlobalStyle = createGlobalStyle`
           color: #fff;
           border-bottom: none;
           background-color: #000;
-          height: 0.68rem;
+          height: .68rem;
           width: 2.666rem;
-          padding: 0.16rem;
+          padding: .16rem;
         }
         th:last-child {
           border-bottom-right-radius: 10px;
@@ -122,8 +122,8 @@ export const GlobalStyle = createGlobalStyle`
       color: #fff;
     }
     .ant-table-tbody {
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, .1);
+      border: 1px solid rgba(255, 255, 255, .2);
       border-radius: 10px;
       tr:first-child td:first-child {
         border-top-left-radius: 10px;
@@ -145,8 +145,8 @@ export const GlobalStyle = createGlobalStyle`
         }
         td {
           color: #fff;
-          border-bottom: 0.01rem solid rgba(255,255,255,.2);
-          /* background: rgba(255, 255, 255, 0.1); */
+          border-bottom: .01rem solid rgba(255,255,255,.2);
+          /* background: rgba(255, 255, 255, .1); */
           height: 1rem;
           width: 2.666rem;
         }
@@ -161,7 +161,7 @@ export const GlobalStyle = createGlobalStyle`
             align-items: center;
             &>div:nth-child(1) {
               align-self: start;
-              margin-right: 0.1rem;
+              margin-right: .1rem;
             }
             &>div:nth-child(2) {
               display: flex;
@@ -204,29 +204,29 @@ export const GlobalStyle = createGlobalStyle`
         }
         th {
           color: #fff;
-          border-top: 1px solid rgba(255, 255, 255, 0.2);
+          border-top: 1px solid rgba(255, 255, 255, .2);
           border-bottom: none;
           background-color: #000;
-          padding: 0.16rem;
+          padding: .16rem;
           height: .76rem;
         }
         th:first-child {
           border-top-left-radius: 10px;
-          border-left: 1px solid rgba(255, 255, 255, 0.2);
+          border-left: 1px solid rgba(255, 255, 255, .2);
         }
         th:last-child {
           border-top-right-radius: 10px;
-          border-right: 1px solid rgba(255, 255, 255, 0.2);
+          border-right: 1px solid rgba(255, 255, 255, .2);
         }
       }
       color: #fff;
     }
     .ant-table-tbody {
       background: transparent;
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, .2);
       border-radius: 10px;
       tr:first-child td {
-        border-top: 0.01rem solid rgba(255,255,255,.2);
+        border-top: .01rem solid rgba(255,255,255,.2);
         /* border-top-left-radius: 10px; */
       }
       tr:first-child td:last-child {
@@ -258,8 +258,8 @@ export const GlobalStyle = createGlobalStyle`
         }
         td {
           color: #fff;
-          border-bottom: 0.01rem solid rgba(255,255,255,.2);
-          padding: 0.16rem;
+          border-bottom: .01rem solid rgba(255,255,255,.2);
+          padding: .16rem;
           height: .8rem;
         }
         .ant-table-cell {
@@ -269,7 +269,7 @@ export const GlobalStyle = createGlobalStyle`
             align-items: center;
             &>div:nth-child(1) {
               align-self: start;
-              margin-right: 0.1rem;
+              margin-right: .1rem;
             }
             &>div:nth-child(2) {
               display: flex;
