@@ -12,6 +12,7 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     min-width: 1280px;
+    font-family: 'Montserrat';
   }
 
   .ant-selectDropDown-reset {
@@ -328,4 +329,12 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
   }
+
+  @font-face {
+    font-family: 'Montserrat';
+    src: url('./font/Montserrat-ExtraBold.otf');
+    font-weight: normal;
+    font-style: normal;
+  }
+
 `

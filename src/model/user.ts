@@ -55,7 +55,7 @@ export class  Collections {
   }
   @Expose()
   get sAdvanceRate() {
-    return (this.ltv.div(10 ** 2).toFixed(2))
+    return (new BigNumber('100').minus((this.ltv.div(10 ** 2))).toFixed(2))
   }
   @Expose()
   get sPrimePrice() {
