@@ -80,8 +80,8 @@ interface IconProps extends BoxProps {
 const Icon = styled.div<IconProps>`
   display: inline-block;
   overflow: hidden;
-  background-size: ${props => props.width} ${props => props.height};
   background: transparent url(${(props) => props.url}) no-repeat center;
+  background-size: ${props => props.width} ${props => props.height};
   width: ${props => props.width};
   height: ${props => props.height};
 `

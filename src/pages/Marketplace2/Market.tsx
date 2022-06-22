@@ -76,9 +76,7 @@ export default function Market() {
         padding={"0 160px"}
         background={"transparent"}>
         <Banner/>
-        <Box
-            zIndex={1}
-        >
+        <Box zIndex={1}>
             <Box marginTop={"120px"}>
                 <Typography
                     color={"#fff"}
@@ -95,7 +93,7 @@ export default function Market() {
                 {
                     listData.map((item, idx) => {
                         return <CollectionItem
-                            key={item.key}
+                            key={idx}
                             isSelected={selectedIndex === idx}
                             imgUrl={item.imageUrl}
                             onClick={() => {
