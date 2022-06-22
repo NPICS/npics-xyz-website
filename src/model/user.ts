@@ -47,6 +47,7 @@ export class  Collections {
   address!: string;
   totalShelves!: number;
   dayVolume!: number;
+  description?: string
 
   @Expose()
   get sFloorPrice() {

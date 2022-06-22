@@ -1,7 +1,6 @@
 {
   "name": "untitled",
   "version": "0.1.0",
-  "proxy": "http://192.168.1.61:10099/",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.1",
@@ -17,6 +16,7 @@
     "@types/react-loadable": "5.5.6",
     "@types/react-router-dom": "5.3.3",
     "@types/styled-components": "^5.1.25",
+    "@types/styled-system": "^5.1.15",
     "@web3-react/core": "^6.1.9",
     "@web3-react/injected-connector": "^6.0.7",
     "@web3-react/metamask": "^8.0.0-beta.0",
@@ -44,6 +44,7 @@
     "redux-thunk": "^2.4.1",
     "reflect-metadata": "^0.1.13",
     "styled-components": "^5.3.5",
+    "styled-system": "^5.1.5",
     "swiper": "^8.1.5",
     "typescript": "^4.6.4",
     "web-vitals": "^2.1.4",

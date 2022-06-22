@@ -1,6 +1,8 @@
 import React, { ReactNode } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import loadable from 'react-loadable'
+import Market from "../pages/Marketplace2/Market";
+import MarketList from "../pages/Marketplace2/MarketList";
 interface RouterT {
   name?: string,
   path: string,
@@ -104,7 +106,13 @@ export default function Routers() {
     },
     {
       path: "/web3",
-      component: <Web3 />
+      component: <Market />,
+      children: [
+        {
+          path: "collections/:address",
+          component: <MarketList />
+        }
+      ]
     },
     {
       path: "*",

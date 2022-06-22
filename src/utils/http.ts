@@ -45,9 +45,9 @@ axios.interceptors.response.use((res: any) => {
 });
 
 
-export function myPost(url: any, params: any) {
+export function myPost(url: any, params?: any) {
     return new Promise((resolve, reject) => {
-        axios.post(url, params)
+        axios.post(url, params ?? {})
             .then((response: any) => {
                 resolve(response.data);
             }, (err: any) => {
@@ -84,7 +84,6 @@ export function getWithJSON(uri: string, params?: {}) {
             }
         }).then(resp => {
             // http request success
-
             if (resp.status === 200) {
                 /// service return success
                 switch (resp.data.code) {
@@ -94,10 +93,6 @@ export function getWithJSON(uri: string, params?: {}) {
                     case 4003:
                         /// token invalid
                         sessionStorage.removeItem(SessionStorageKey.AccessToken)
-                        // store.dispatch({
-                        //     type: "app/logout",
-                        //     data: null
-                        // })
                         break
                 }
             } else {

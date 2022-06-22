@@ -219,9 +219,9 @@ function XHeader() {
         {/*<BtnLink to={"/docs"}>*/}
         {/*  Rewards*/}
         {/*</BtnLink>*/}
-        {/*<BtnLink to={"/web3"}>*/}
-        {/*  Resources*/}
-        {/*</BtnLink>*/}
+        <BtnLink to={"/web3"}>
+          Resources
+        </BtnLink>
         <a style={{
           "fontSize": ".16rem",
           "fontWeight": "600",
