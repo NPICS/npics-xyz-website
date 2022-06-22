@@ -234,7 +234,7 @@ function XHeader() {
 
       <FlexDiv>
         <ThemeImg src={imgurl.worldwide}/>
-        <ThemeImg src={imgurl.gas_icon}/>
+        {/* <ThemeImg src={imgurl.gas_icon}/> */}
         <ThemeImg src={imgurl.notification}/>
         <div id="baseAccount" style={{position:'relative'}}>
           <ThemeImg src={userInfo?.avatar || imgurl.Ellipse} onClick={walletPop}/>

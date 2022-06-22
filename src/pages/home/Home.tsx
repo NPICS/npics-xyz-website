@@ -177,12 +177,12 @@ function Home() {
         </Background>
       </FirstDiv>
 
-      <SwiperBox>
+      {/* <SwiperBox>
         <div className='title'>
           NPicser Sweeps
         </div>
         <Swiper />
-      </SwiperBox>
+      </SwiperBox> */}
 
       <div>
         <div className='collections-title'>

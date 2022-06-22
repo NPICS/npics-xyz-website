@@ -65,6 +65,7 @@ const Grid = styled(Box)<GridProps>`
 
 
 const Typography = styled.div<_TypographyProps>`
+  user-select: none;
   ${typography}
   ${layout}
   ${space}
