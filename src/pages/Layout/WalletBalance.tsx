@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import { Erc20 } from 'abi/Erc20';
 import { ContractAddresses } from 'utils/addresses';
 import { useEthPrice } from 'utils/hook';
+import { font01651, font01455 } from 'component/styled';
 
 interface wallet {
   icon: string,
@@ -22,12 +23,10 @@ const Wrap = styled.div`
     .left {
       display: flex;
       align-items: center;
-      color: #fff;
-      font-size: .14rem;
-      font-weight: 600;
+      ${font01651}
       img {
-        width: .36rem;
-        height: .36rem;
+        width: .22rem;
+        height: .22rem;
         margin-right: .1rem;
       }
     }
@@ -35,14 +34,10 @@ const Wrap = styled.div`
       display: flex;
       flex-direction: column;
       &>span:nth-child(1) {
-        font-weight: 600;
-        font-size: .18rem;
-        color: #fff;
+        ${font01651}
       }
       &>span:nth-child(2) {
-        font-weight: 600;
-        font-size: .12rem;
-        color: rgba(255,255,255,.5);
+        ${font01455}
         text-align: right;
       }
     }
@@ -77,13 +72,13 @@ export default function WalletBalance () {
     if(!ETHBalance || !ETHdollar || !WETHBalance || !WETHdollar) return
     const data = [
       {
-        icon: imgurl.ETH36,
+        icon: imgurl.home.ethBlack22,
         text: 'ETH',
         amount: ETHBalance,
         dollar: ETHdollar,
       },
       {
-        icon: imgurl.WETH36,
+        icon: imgurl.home.ethOrange22,
         text: 'WETH',
         amount: WETHBalance,
         dollar: WETHdollar,

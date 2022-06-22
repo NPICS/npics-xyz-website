@@ -60,7 +60,8 @@ Button.defaultProps = {
   width: '2.1rem',
   height: '.58rem',
   text: 'button',
-  fontSize: '.18rem',
+  fontSize: '.2rem',
+  fontWeight: 700,
   borderRadius: '10px',
   types: "one"
 }

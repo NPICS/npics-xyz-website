@@ -5,12 +5,12 @@ import {useWeb3React} from '@web3-react/core';
 import {connectors} from "utils/connectors";
 import {useAppDispatch, useAppSelector} from '../../store/hooks';
 import {clearUserData, fetchUser, fetchUser2, setIsLogin, setIsShowConnect} from 'store/app';
-import {accountNav, BtnLink, FlexDiv, LogoLink, Nav, ThemeImg} from './headerStyled';
+import {BtnLink, FlexDiv, LogoLink, Nav, ThemeImg} from './headerStyled';
 import WalletBalance from './WalletBalance';
 import {deserialize} from "class-transformer";
 import {User} from "../../model/user";
 import {SessionStorageKey} from "../../utils/enums";
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import {urls} from "../../utils/urls";
 
 function XHeader() {
@@ -117,9 +117,9 @@ function XHeader() {
   }, [account])
 
 
-  const onCancel = () => {
-    setAccountPop(false)
-  }
+  // const onCancel = () => {
+  //   setAccountPop(false)
+  // }
 
   const onQuit = () => {
     setAccountPop(false)
@@ -171,14 +171,14 @@ function XHeader() {
         </div>
         <img className='copy-icon' src={imgurl.copy} alt="" onClick={onCopy} />
       </div>
-      <div className='account-item'>
+      {/* <div className='account-item'>
         {accountNav.map((item) => {
           return <Link to={item.path} key={item.text} onClick={() => setAccountPop(false)} ><div className="account-nav">
             <img src={item.icon} alt=""/>
             <span>{item.text}</span>
           </div></Link>
         })}
-      </div>
+      </div> */}
 
       <div className='account-wallet'>
         <div className='wallet-title'>Wallet Balance</div>
@@ -188,9 +188,11 @@ function XHeader() {
     </div>)
   }
   const AccountTitle = () => {
-    return (<div className='account-title' style={{display: "flex", justifyContent: 'space-between'}}>
+    return (<div className='account-title'>
       <span>Account</span>
-      <span onClick={onCancel} style={{cursor: 'pointer'}}>X</span>
+      <span style={{cursor: 'pointer'}}>
+        <img src={imgurl.home.gearIcon} alt="" />
+      </span>
     </div>)
   }
 
@@ -211,6 +213,7 @@ function XHeader() {
           <img src={imgurl.logo} alt=""/>
         </LogoLink>
         <BtnLink to={"marketPlaceRedirect"}>
+          <div className='prime'>Prime</div>
           Marketplace
         </BtnLink>
         <BtnLink to={"/dashboard/agreement"}>

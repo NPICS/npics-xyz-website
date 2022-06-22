@@ -30,6 +30,7 @@ export default function SignModal(props: Iprops) {
   const [walletBalance, setWalletBalance] = useState<BigNumber>()
   const [WETHBalance, setWETHBalance] = useState<BigNumber>()
   const [payWith, setPayWith] = useState<string>('')
+  const [neoNftUrl, setNeoNftUrl] = useState<string>('')
   const EthPrice = useEthPrice(collectionItemsDetail?.currentBasePrice)
   const FundsAmount = useEthPrice(collectionItemsDetail?.availableBorrow)
   // const agreementPrice = collectionItemsDetail.currentBasePrice.minus(new BigNumber(collectionItemsDetail.availableBorrow.toString()))
@@ -126,6 +127,7 @@ export default function SignModal(props: Iprops) {
       payWith={payWith}
       walletBalance={walletBalance}
       WETHBalance={WETHBalance}
+      setNeoNftUrl={setNeoNftUrl}
     /> : <ModalBody>
     <div className='content'>
       <div className='content-top'>
@@ -191,10 +193,12 @@ export default function SignModal(props: Iprops) {
         {signState === 'success' ?
           <div className='success-content'>
             <div className='success'>
-              <div>Hodl Successful！And a N-BAYC has been minted as an Obligation NFT now!   </div>
+              <div>Hodl Successful！And a {collectionItemsDetail?.collectionSymbol} has been minted as an Obligation NFT now!   </div>
               <div>
                 <span>Check Now</span>
-                <span>NO：{'address'}</span>
+                <span onClick={() => {
+                  urls.etherscanTxDetail(neoNftUrl)
+                }}>NO：{neoNftUrl}</span>
               </div>
             </div>
 

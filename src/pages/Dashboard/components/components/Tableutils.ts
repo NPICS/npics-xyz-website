@@ -108,10 +108,6 @@ export const BgTable = styled.div`
         width: 1.85rem !important;
         height: 0 !important;
       }
-      &>td:last-child {
-        border-bottom-right-radius: 0 !important;
-        border-top-right-radius: 0 !important;
-      }
     }
     .actionBtn {
       background: #000000;

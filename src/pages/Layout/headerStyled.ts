@@ -1,6 +1,7 @@
 import { imgurl } from "utils/globalimport";
 import { Link } from 'react-router-dom';
 import styled from "styled-components";
+import { font1251, font01671 } from "component/styled";
 export const accountNav = [
   {
     icon: imgurl.dashboard.agreement,
@@ -47,30 +48,36 @@ export const Nav = styled.div`
         display: none;
       }
     .ant-popover-inner {
-      background: rgba(0, 0, 0, .4);
-      border: .01rem solid rgba(255, 255, 255, .2);
-      backdrop-filter: blur(50px);
+      background: #fff;
+      box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.1);
       border-radius: 20px;
       margin-top: .2rem;
       .ant-popover-title{
         border-bottom: 0;
         &::after {
           content: '';
-          display: inline-block;
+          display: block;
           width: 100%;
           height: .01rem;
-          background-color: rgba(255,255,255,.1);
+          background-color: rgba(0,0,0,.1);
         }
         .account-title {
-          color: #fff;
-          font-size: .16rem;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: .1rem 0;
+          span {
+            color: #000;
+            font-weight: 700;
+            font-size: .16rem;
+          }
         }
       }
       .account-content {
         &>div:nth-child(1) {
           display: flex;
           justify-content: space-between;
-          color: #fff;
+          color: #000;
           font-size: .14rem;
           font-weight: 600;
           margin-bottom: .22rem;
@@ -94,16 +101,16 @@ export const Nav = styled.div`
             cursor: pointer;
           }
           .address-text {
-            color: #fff;
+            color: #000;
             font-weight: 600;
             font-size: .16rem;
             .connected {
               font-size: .14rem;
-              color:rgba(255, 255, 255, .5);
+              color:rgba(0, 0, 0, .5);
             }
           }
         }
-        .account-item {
+        /* .account-item {
           margin: .3rem 0;
           display: grid;
           grid-template-columns: repeat(2, 1fr);
@@ -127,18 +134,17 @@ export const Nav = styled.div`
               height: .3rem;
             }
           }
-        }
+        } */
         .account-wallet {
+          margin-top: .4rem;
           .wallet-title {
-            font-size: .16rem;
-            font-weight: 600;
-            color: #fff;
+            ${font01671}
             &::after {
               content: '';
               display: inline-block;
               width: 100%;
               height: .01rem;
-              background-color: rgba(255,255,255,.1);
+              background-color: rgba(0,0,0,.1);
             }
           }
         }
@@ -147,11 +153,24 @@ export const Nav = styled.div`
   }
 `
 export const BtnLink = styled(Link)`
+  position: relative;
   color: ${(props) => props.theme.color};
   font-weight: 700;
   font-size: .16rem;
   text-decoration: none;
   margin-right: 1.3rem;
+  .prime {
+    position: absolute;
+    top: -.15rem;
+    left: .5rem;
+    ${font1251}
+    padding: 0 .05rem;
+    background: #FF490F;
+    border-radius: 10px;
+  }
+  &:hover {
+    color: #fff;
+  }
 `
 export const LogoLink = styled(Link)`
   display: flex;

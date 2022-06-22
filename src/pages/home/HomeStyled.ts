@@ -81,7 +81,7 @@ export const Glass = styled.div`
     box-sizing: border-box;
     margin-left: 1.83rem;
     margin-top: 2.5rem;
-    &>div:nth-child(1) {
+    .borrowing-rate {
       font-family: 'Montserrat';
       font-style: italic;
       font-weight: 900;
@@ -92,16 +92,13 @@ export const Glass = styled.div`
       width: 5.83rem;
       margin-bottom: .1rem;
     }
-    &>div:nth-child(2) {
+    .loan-description {
+      ${font1651}
       font-family: 'Montserrat';
-      font-style: normal;
-      font-weight: 300;
-      font-size: .16rem;
       line-height: .32rem;
       letter-spacing: .05em;
-      color: rgba(255, 255, 255, .5);
       width: 5.41rem;
-      margin-bottom: .47rem;
+      margin-bottom: 1rem;
     }
     .jumpBtn {
       display: flex;
@@ -193,45 +190,48 @@ export const Partners = styled.div`
     &>:nth-child(3n) {
       margin-right: 0 !important;
     }
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-gap: 0.3rem;
   }
 `
 export const PartnerBox = styled.div`
   position: relative;
   width: 4.6rem;
-  height: 2.1rem;
+  /* height: 2.1rem; */
   border: .01rem solid rgba(255,255,255,.2);
   border-radius: .1rem;
-  padding: .2rem .3rem .32rem .3rem;
-  margin-right: .3rem;
-  margin-bottom: .3rem;
+  padding: .4rem 0;
+  /* padding-left: .4rem; */
   box-sizing: border-box;
-  &>:nth-child(1) {
-    width: .8rem;
-    height: .8rem;
-    background-color: #000;
-    border: 1px solid rgba(255, 255, 255, .2);
-    border-radius: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: .24rem;
+  .marketIcon {
     display: flex;
-    justify-content: center;
+    justify-content: end;
     align-items: center;
   }
-  &>:nth-child(2) {
-    font-family: 'PingFang HK';
-    font-style: normal;
-    font-weight: 600;
-    font-size: .22rem;
-    color: #fff;
-    margin: .2rem 0 .1rem ;
-  }
-  &>:nth-child(3) {
-    font-family: 'PingFang HK';
-    font-style: normal;
-    font-weight: 600;
-    white-space: nowrap;
-    font-size: .14rem;
-    color: rgba(255, 255, 255, .6);
+  .marketInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    &>span:nth-child(1) {
+      font-family: 'PingFang HK';
+      font-style: normal;
+      font-weight: 700;
+      font-size: .2rem;
+      color: #fff;
+      /* margin: .2rem 0 .1rem ; */
+    }
+    &>span:nth-child(2) {
+      font-family: 'PingFang HK';
+      max-width: 2.8rem;
+      white-space: pre-wrap;
+      font-weight: 500;
+      font-size: .14rem;
+      color: rgba(255, 255, 255, .6);
+    }
   }
   &::before {
     content:  '${(props:{content:string}) => props.content}';
@@ -367,10 +367,10 @@ export const BorrowContent = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
-  padding: .84rem 0 .6rem;
+  padding: .8rem 0 .6rem;
   box-sizing: border-box;
   .title {
-    width: 9.82rem;
+    width: 7.82rem;
     margin: 0 auto;
     margin-bottom: .6rem;
     text-align: center;
@@ -384,11 +384,11 @@ export const BorrowContent = styled.div`
       display: flex;
       width: 10rem;
       flex-direction: row;
-      justify-content: center;
+      /* justify-content: center; */
       align-items: center;
       span {
         display: inline-block;
-        width: 2rem;
+        width: 2.5rem;
         text-align: center;
         font-family: 'PingFang HK';
         font-style: normal;
@@ -400,7 +400,7 @@ export const BorrowContent = styled.div`
       }
     }
     .slider {
-      width: 8rem;
+      /* width: 8rem; */
       height: .1rem;
       background: #fff;
       border-radius: .3rem;
@@ -420,13 +420,13 @@ export const BorrowContent = styled.div`
       }
     }
     .text {
-      text-align: center;
-      max-width: 6.94rem;
-      height: .3rem;
+      /* text-align: center; */
+      /* max-width: 6.94rem; */
+      /* height: .3rem; */
       margin: 0 auto;
       font-family: 'PingFang HK';
       font-style: normal;
-      font-weight: 300;
+      font-weight: 500;
       font-size: .16rem;
       color: #fff;
     }
@@ -445,6 +445,7 @@ export const BorrowContent = styled.div`
       display: flex;
       flex-direction: column;
       padding: .77rem .81rem .77rem .91rem;
+      border-right: 2px dashed rgba(255, 255, 255, .1);
       &>span:nth-child(1) {
         ${font2071}
       }

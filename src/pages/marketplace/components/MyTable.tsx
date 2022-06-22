@@ -25,6 +25,7 @@ interface activities {
   toAccount: string
   amount: number | string
   startAmount: number | string
+  imageUrl: string
 }
 
 const BgTable = styled.div`
@@ -62,6 +63,14 @@ const BgTable = styled.div`
       }
     }
   }
+  .ant-table-placeholder {
+    .ant-table-cell {
+      border-bottom: 0;
+      .ant-empty-normal {
+        color: #fff;
+      }
+    }
+  }
   .loading {
     display: flex;
     justify-content: center;
@@ -83,8 +92,8 @@ const columns:ColumnsType<activities> = [
     dataIndex: 'amount',
     key: 'amount',
     align: 'left',
-    render: (text) => text ? <div>
-      <img src={imgurl.market.price14} alt="" style={{width:".14rem", height:".22rem", marginRight: ".1rem", verticalAlign: 'bottom'}}/>
+    render: (text,row) => text ? <div style={{display:"flex", alignItems: "center"}}>
+      <img src={row.imageUrl} alt="" style={{width:".14rem", height:".22rem", marginRight: ".1rem", verticalAlign: 'bottom'}}/>
       <span>{text}</span>
     </div> : <div>--</div>
   },
@@ -93,7 +102,10 @@ const columns:ColumnsType<activities> = [
     dataIndex: 'fromAccount',
     key: 'fromAccount',
     align: 'center',
-    render: (text) => <div title={text} style={{cursor: 'pointer'}} onClick={() => window.open(`https://etherscan.io/address/${text}`)}>
+    render: (text) => <div title={text} style={{cursor: 'pointer'}} onClick={() => {
+      if(!text) return
+      window.open(`https://etherscan.io/address/${text}`)
+    }}>
     { text ? text.replace(text.substr(7, 31), '...') : '--'}
  </div>
   },
@@ -102,7 +114,10 @@ const columns:ColumnsType<activities> = [
     dataIndex: 'toAccount',
     key: 'toAccount',
     align: 'center',
-    render: (text) => <div title={text} style={{cursor: 'pointer'}} onClick={() => window.open(`https://etherscan.io/address/${text}`)}>
+    render: (text) => <div title={text} style={{cursor: 'pointer'}} onClick={() => {
+        if(!text) return
+        window.open(`https://etherscan.io/address/${text}`)
+      }}>
         { text ? text.replace(text.substr(7, 31), '...') : '--'}
     </div>
   },
@@ -149,6 +164,7 @@ export default function MyTable(props: IProps) {
               toAccount: changeData[i].toAccount,
               createdTime: moment(changeData[i].createdTime).endOf('hour').fromNow() || '--',
               startAmount: (changeData[i] && (+changeData[i].startAmount.div(10 ** 18).toFixed(2).toString())) || '--',
+              imageUrl: changeData[i].imageUrl
             })
           }
         }

@@ -102,7 +102,7 @@ export const GlobalStyle = createGlobalStyle`
         border-top-left-radius: 10px;
         border-bottom-left-radius: 10px;
       }
-      tr {
+      &>tr {
         .ant-table-column-has-sorters:hover {
           background: #000;
         }
@@ -122,39 +122,42 @@ export const GlobalStyle = createGlobalStyle`
       color: #fff;
     }
     .ant-table-tbody {
-      background: rgba(255, 255, 255, .1);
-      border: 1px solid rgba(255, 255, 255, .2);
+      /* background: rgba(255, 255, 255, .1); */
+      /* border: 1px solid rgba(255, 255, 255, .2); */
       border-radius: 10px;
-      tr:first-child td:first-child {
+      display: grid;
+      &>tr td:first-child {
         border-top-left-radius: 10px;
-      }
-      tr:last-child td:first-child {
         border-bottom-left-radius: 10px;
+        border-left: 1px solid rgba(255,255,255,.2);
       }
-      tr:last-child td {
+      &>tr td:last-child {
+        border-right: 1px solid rgba(255,255,255,.2);
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+      }
+      /* tr:last-child td {
         border-bottom: none;
-      }
-      tr {
+      } */
+      &>tr {
+        border-bottom: 5px solid #1a1a1a;
         &:hover {
           td {
-            background: transparent;
+            background: rgba(255, 255, 255, .2);
           }
         }
         .ant-table-column-sort {
           background: transparent;
         }
-        td {
+        &>td {
           color: #fff;
-          border-bottom: .01rem solid rgba(255,255,255,.2);
-          /* background: rgba(255, 255, 255, .1); */
+          border-bottom: 1px solid rgba(255,255,255,.2);
+          border-top: 1px solid rgba(255,255,255,.2);
           height: 1rem;
           width: 2.666rem;
         }
-        td:last-child {
-          border-bottom-right-radius: 10px;
-          border-top-right-radius: 10px;
-        }
-        .ant-table-cell {
+        &>.ant-table-cell {
+          background: rgba(255, 255, 255, .1);
           .descend {
             display: flex;
             justify-content: center;
@@ -175,13 +178,16 @@ export const GlobalStyle = createGlobalStyle`
         }
       }
       .ant-table-placeholder {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      &>.ant-table-cell {
-        min-height: 1.5rem;
         display: flex;
+        justify-content: center;
         align-items: center;
+        &>.ant-table-cell {
+          flex: 1;
+          min-height: 1.5rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 10px !important;
       }
     }
       .ant-empty-description {

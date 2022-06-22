@@ -4,8 +4,8 @@ import worldwide from '../assets/images/worldwide.png'
 import notification from '../assets/images/notification.png'
 import Ellipse from '../assets/images/Ellipse.png'
 import logo from '../assets/images/logo.png'
-import copy from '../assets/images/copy_icon.png'
-import address from '../assets/images/address_icon.png'
+import copy from '../assets/images/copyBlack.png'
+import address from '../assets/images/addressBlack.png'
 
 import Group245 from '../assets/images/footer/Group245.png'
 import Group246 from '../assets/images/footer/Group246.png'
@@ -33,7 +33,6 @@ import twitterIcon from '../assets/images/home/twitterIcon.png'
 import gitHubIcon from '../assets/images/home/gitHubIcon.png'
 import telegramIcon from '../assets/images/home/telegramIcon.png'
 import gameIcon from '../assets/images/home/gameIcon.png'
-
 import MetaMask from '../assets/images/home/MetaMask.png'
 import BendDAO from '../assets/images/home/BendDAO.png'
 import gem from '../assets/images/home/gem.png'
@@ -42,6 +41,10 @@ import Opensea2 from '../assets/images/home/OpenSea2.png'
 import Looksrare from '../assets/images/home/Looksrare.png'
 import DYDX from '../assets/images/home/DYDX.png'
 import Trustwallet from '../assets/images/home/Trustwallet.png'
+import gearIcon from '../assets/images/home/gearIcon.png'
+import ethBlack22 from '../assets/images/home/ethBlack22.png'
+import ethOrange22 from '../assets/images/home/ethOrange22.png'
+
 import Union1 from '../assets/images/market/Union1.png'
 import Union2 from '../assets/images/market/Union2.png'
 import search from '../assets/images/market/search.png'
@@ -95,7 +98,6 @@ import redPrice14 from '../assets/images/dashboard/redPrice14.png'
 import greyPrice7 from '../assets/images/dashboard/greyPrice7.png'
 import catalogue26 from '../assets/images/dashboard/catalogue26.png'
 import airdropIcon from '../assets/images/dashboard/airdropIcon.png'
-
 import metamaskLogo from '../assets/images/home/metamask_logo.png'
 
 export const imgurl = {
@@ -150,7 +152,10 @@ export const imgurl = {
     twitterIcon,
     telegramIcon,
     gameIcon,
-    gitHubIcon
+    gitHubIcon,
+    gearIcon,
+    ethBlack22,
+    ethOrange22,
   },
   market: {
     Union1,
