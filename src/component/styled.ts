@@ -6,6 +6,21 @@ justify-content: center;
 align-items: center;
 `
 
+export const font01671 = css`
+  font-weight: 700;
+  font-size: .16rem;
+  color: rgba(0,0,0);
+`
+export const font01651 = css`
+  font-weight: 500;
+  font-size: .16rem;
+  color: rgba(0,0,0);
+`
+export const font01455 = css`
+  font-weight: 500;
+  font-size: .14rem;
+  color: rgba(0,0,0,.5);
+`
 export const font1465 = css`
   font-weight: 600;
   font-size: .14rem;
