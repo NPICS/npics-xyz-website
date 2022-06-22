@@ -3,6 +3,10 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import loadable from 'react-loadable'
 import Market from "../pages/Marketplace2/Market";
 import MarketList from "../pages/Marketplace2/MarketList";
+import Dash from "../pages/Dashboard2/Dashboard"
+import MyVaults from 'pages/Dashboard2/components/MyVaults';
+import MyRewards2 from 'pages/Dashboard2/components/MyRewards';
+import MyAirdop2 from 'pages/Dashboard2/components/MyAirdop';
 interface RouterT {
   name?: string,
   path: string,
@@ -111,6 +115,28 @@ export default function Routers() {
         {
           path: "collections/:address",
           component: <MarketList />
+        }
+      ]
+    },
+    {
+      path: "/dash",
+      component: <Dash/>,
+      children: [
+        {
+          path: 'vaults',
+          component: <MyVaults />
+        },
+        {
+          path: 'rewards',
+          component: <MyRewards2 />
+        },
+        {
+          path: 'airdrop',
+          component: <MyAirdop2 />,
+        },
+        {
+          path: 'airdrop/claim',
+          component: <Claim />,
         }
       ]
     },

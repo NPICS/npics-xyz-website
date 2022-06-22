@@ -6,6 +6,7 @@ import Ellipse from '../assets/images/Ellipse.png'
 import logo from '../assets/images/logo.png'
 import copy from '../assets/images/copyBlack.png'
 import address from '../assets/images/addressBlack.png'
+import notData from '../assets/images/notData.png'
 
 import Group245 from '../assets/images/footer/Group245.png'
 import Group246 from '../assets/images/footer/Group246.png'
@@ -71,6 +72,7 @@ import BendDAOBuy from '../assets/images/market/BendDAOBuy.png'
 import OpenseaBuy from '../assets/images/market/OpenseaBuy.png'
 
 import gas_icon from '../assets/images/gas_icon.png'
+
 import agreement from '../assets/images/dashboard/agreement.png'
 import agreementActive from '../assets/images/dashboard/agreement_active.png'
 import rewards from '../assets/images/dashboard/rewards.png'
@@ -84,6 +86,15 @@ import ARP from '../assets/images/dashboard/ARP.png'
 import href from '../assets/images/dashboard/href.png'
 import notify from '../assets/images/dashboard/notify.png'
 import setting from '../assets/images/dashboard/setting.png'
+import redPrice14 from '../assets/images/dashboard/redPrice14.png'
+import greyPrice7 from '../assets/images/dashboard/greyPrice7.png'
+import catalogue26 from '../assets/images/dashboard/catalogue26.png'
+import airdropIcon from '../assets/images/dashboard/airdropIcon.png'
+import navVaults from '../assets/images/dashboard/navVaults.png'
+import navRewards from '../assets/images/dashboard/navRewards.png'
+import navAirdop from '../assets/images/dashboard/navAirdop.png'
+import ethGrey18 from '../assets/images/dashboard/ethGrey18.png'
+
 import ETH36 from '../assets/images/eth_icon.png'
 import WETH36 from '../assets/images/weth_icon.png'
 import whitePrice from '../assets/images/whitePrice.png'
@@ -94,10 +105,7 @@ import price14 from '../assets/images/market/price14.png'
 import checked from '../assets/images/market/checked.png'
 import blackPrice from '../assets/images/market/blackPrice.png'
 import redPrice24 from '../assets/images/market/redPrice24.png'
-import redPrice14 from '../assets/images/dashboard/redPrice14.png'
-import greyPrice7 from '../assets/images/dashboard/greyPrice7.png'
-import catalogue26 from '../assets/images/dashboard/catalogue26.png'
-import airdropIcon from '../assets/images/dashboard/airdropIcon.png'
+
 import metamaskLogo from '../assets/images/home/metamask_logo.png'
 
 export const imgurl = {
@@ -115,6 +123,7 @@ export const imgurl = {
   whitePrice,
   redPrice,
   metamaskLogo,
+  notData,
   footer: {
     Group245,
     Group246,
@@ -189,6 +198,9 @@ export const imgurl = {
     OpenseaBuy
   },
   dashboard: {
+    navVaults,
+    navRewards,
+    navAirdop,
     agreement,
     agreementActive,
     rewards,
@@ -205,6 +217,7 @@ export const imgurl = {
     redPrice14,
     greyPrice7,
     catalogue26,
-    airdropIcon
+    airdropIcon,
+    ethGrey18
   }
 }

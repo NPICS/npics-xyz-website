@@ -12,6 +12,7 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     min-width: 1280px;
+    font-family: 'Montserrat';
   }
 
   .ant-selectDropDown-reset {
@@ -33,6 +34,27 @@ export const GlobalStyle = createGlobalStyle`
     }
     .ant-select-item {
       color: #fff;
+    }
+  }
+  .ant-select-reset {
+    background-color: #fff;
+    color: rgba(0, 0, 0, .5);
+    border: 1px solid rgba(0, 0, 0, .1);
+    border-radius: .1rem;
+    text-align: center;
+    .ant-select:not(.ant-select-disabled):hover .ant-select-selector {
+      border-color: transparent;
+      box-shadow: none;
+    }
+    .ant-select-item-option-active:not(.ant-select-item-option-disabled) {
+      background-color: transparent;
+    }
+    .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+      font-weight: 600;
+      background-color: transparent;
+    }
+    .ant-select-item {
+      color: rgba(0, 0, 0, .5);
     }
   }
   .ant-input-reset {    
@@ -307,4 +329,12 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
   }
+
+  @font-face {
+    font-family: 'Montserrat';
+    src: url('./font/Montserrat-ExtraBold.otf');
+    font-weight: normal;
+    font-style: normal;
+  }
+
 `
