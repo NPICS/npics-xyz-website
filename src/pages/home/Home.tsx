@@ -91,10 +91,10 @@ function Home() {
       text: "Full-scenario Bundle transactions,Ensuring security-first atomicity and transactivity",
     },
   ]
-  const StepsList = ['Chose','Checkout','Payment','Issued']
+  const StepsList = ['Chose', 'Checkout', 'Payment', 'Issued']
 
   const checkProgress = (e: any) => {
-    setCheckText(e+1)
+    setCheckText(e + 1)
   }
 
   useEffect(() => {
@@ -138,12 +138,11 @@ function Home() {
             <img src={imgurl.home.map} alt="" />
             <Glass>
               <div className='text'>
-                <div>
+                <div className='borrowing-rate'>
                   Pay as Low as 60% to own your favorite NFT
                 </div>
-                <div>
-                  The first NFT market that supports down payment loans Use Low-cost purchase methods to obtain
-                  high-value NFT, which greatly improves the efficiency of your funds.
+                <div className='loan-description'>
+                  The First NFT Leveraged Trading Platform
                 </div>
                 <div className='jumpBtn'>
                   <Link to={'/marketPlace'}><Button types='one' text="Marketplace"></Button></Link>
@@ -172,7 +171,7 @@ function Home() {
                 <a href={urls.telegram} target="_blank" rel="noreferrer"><img src={imgurl.home.telegramIcon} alt="" /></a>
                 <a href={urls.github} target="_blank" rel="noreferrer"><img src={imgurl.home.gitHubIcon} alt="" /></a>
               </div>
-              
+
             </Glass>
           </Projection>
         </Background>
@@ -184,7 +183,7 @@ function Home() {
         </div>
         <Swiper />
       </SwiperBox>
-      
+
       <div>
         <div className='collections-title'>
           Collections
@@ -197,14 +196,14 @@ function Home() {
         <img src={imgurl.home.RectangleRight} alt="" />
         <div>
           <BorrowGlass>
-            <BorrowContent left={`${checkText * 2}rem`}>
+            <BorrowContent left={`${checkText * 2.5}rem`}>
               <div className='title'>
                 Using Npics Leverage to borrow money to buy will get an unexpected earnings.
               </div>
 
               <div className='sliderBox'>
                 <div className='sliderItem'>
-                  {StepsList.map((item,idx) => {
+                  {StepsList.map((item, idx) => {
                     return <span key={item} onClick={() => checkProgress(idx)} >{item}</span>
                   })}
                 </div>
@@ -215,7 +214,7 @@ function Home() {
               <div className='BorrowChannel'>
                 <div className='left'>
                   <span>Vaults APR</span>
-                  <span>{`${(aprData.rewardApr*100 - aprData.apr).toFixed(2)}%`}</span>
+                  <span>{`${(aprData.rewardApr * 100 - aprData.apr).toFixed(2)}%`}</span>
                 </div>
                 <div className='right'>
                   <div className='content'>
@@ -234,7 +233,7 @@ function Home() {
                     <div className='text'>
                       <div>
                         <span>Rewards APR</span>
-                        <span>{`${(aprData.rewardApr*100).toFixed(2)}%`}</span>
+                        <span>{`${(aprData.rewardApr * 100).toFixed(2)}%`}</span>
                       </div>
                       <span>The rewards APR is real-time annual rate of Agreement subsidy</span>
                     </div>
@@ -265,7 +264,7 @@ function Home() {
         <div className='title'>
           <span>Why NPics？</span>
           <span>
-          With Decentralized Finance as a lever and NFTs as the fulcrum, we will leverage Web3.0
+            With Decentralized Finance as a lever and NFTs as the fulcrum, we will leverage Web3.0
           </span>
         </div>
         <div className='IntroduceGroup'>
@@ -290,14 +289,12 @@ function Home() {
           {PartnerData.map((item) => {
             return (
               <PartnerBox key={item.title} content={item.content}>
-                <div>
+                <div className='marketIcon'>
                   <img src={item.url} alt="" />
                 </div>
-                <div>
+                <div className='marketInfo'>
                   <span>{item.title}</span>
-                </div>
-                <div>
-                  <span>{item.text}</span>
+                  {/* <span>{item.text}</span> */}
                 </div>
               </PartnerBox>)
           })}

@@ -36,6 +36,11 @@ export const font1651 = css`
   font-size: .16rem;
   color: rgba(255,255,255);
 `
+export const font1251 = css`
+  font-weight: 500;
+  font-size: .12rem;
+  color: rgba(255,255,255);
+`
 export const font1665 = css`
   font-weight: 600;
   font-size: .16rem;

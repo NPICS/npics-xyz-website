@@ -91,7 +91,7 @@ export default function MyTable() {
       render: (text, row) => <Link to={`/marketPlace/collections/${row.address}`}>
         <div style={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center'}}>
           <img src={row.imageUrl} alt="" style={{ width: ".6rem", height: ".6rem", marginRight: ".1rem", borderRadius: '30px'}} />
-          <span style={{color: '#fff'}}>{text}</span>
+          <span style={{color: '#fff', fontWeight: '700'}}>{text}</span>
         </div>
       </Link>,
     },
