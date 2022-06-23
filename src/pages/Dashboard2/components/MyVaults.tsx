@@ -4,7 +4,7 @@ import { imgurl } from "utils/globalimport";
 import { Select } from "antd";
 import NotFound from "component/NotFound"
 import styled from 'styled-components';
-import VaultsTable from "./VaultsTable";
+import VaultsTable from "./components/VaultsTable";
 const {Option} = Select
 
 const AntdSelect = styled(Select)`
@@ -32,6 +32,7 @@ export default function MyVaults() {
     <Flex
       alignItems={"center"}
       justifyContent={"space-between"}
+      marginBottom={".24rem"}
     >
       <Flex
         flexDirection={"column"}

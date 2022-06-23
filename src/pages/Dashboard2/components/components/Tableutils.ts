@@ -27,12 +27,12 @@ export const BgTable = styled.div`
         color: #000;
         font-size: .16rem;
         &>span:nth-child(1) {
-          max-width: .63rem;
+          width: .63rem;
           margin-right: .03rem;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
-
+          text-align: left;
         }
         &>span:nth-child(2) {
           white-space: nowrap;
@@ -59,11 +59,12 @@ export const BgTable = styled.div`
     color: #000;
     cursor: pointer;
     &>span {
-      max-width: 1.1rem;
+      width: 1.1rem;
       margin-right: .03rem;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      text-align: left;
     }
     &>img {
       width: .16rem;
@@ -104,6 +105,9 @@ export const BgTable = styled.div`
     font-size: .14rem;
     color: #fff;
     cursor: pointer;
+    &:hover {
+      color: #FF490F;
+    }
   }
   .ant-table-thead {
     tr {
@@ -121,7 +125,7 @@ export const BgTable = styled.div`
     }
     .ant-table-placeholder {
       .ant-empty-description {
-        color: #fff;
+        color: #000;
       }
       .ant-empty-normal {
         margin: 0;

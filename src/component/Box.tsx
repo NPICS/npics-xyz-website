@@ -57,6 +57,7 @@ const Flex = styled(Box)<FlexProps>`
   display: flex;
   gap: ${(props) => props.gap};
   ${flexbox}
+  ${grid}
 `;
 
 const Grid = styled(Box)<GridProps>`
@@ -89,5 +90,11 @@ const Icon = styled.div<IconProps>`
   width: ${props => props.width};
   height: ${props => props.height};
 `
+const GridItem = styled(Box)<GridProps>`
+  display: flex;
+  gap: ${(props) => props.gap};
+  ${flexbox}
+  ${grid}
+`;
 
-export {Box, Grid, Flex, Typography, Icon}
+export {Box, Grid, Flex, Typography, Icon, GridItem}

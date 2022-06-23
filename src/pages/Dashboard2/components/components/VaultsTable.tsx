@@ -8,11 +8,12 @@ import { LendPool } from 'abi/LendPool'
 import { useWeb3React } from '@web3-react/core';
 import { getSignMessage } from 'utils/sign';
 import { fetchUser, setIsLogin } from 'store/app';
-import { useAppDispatch, useAppSelector } from '../../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 import { connectors } from 'utils/connectors';
 import { SessionStorageKey } from 'utils/enums';
 import { DataSource, DebtData, LiquidatePrice, BgTable, Record } from './Tableutils';
 import aa from 'abi/aa.json'
+import NotFound from 'component/NotFound';
 interface Result {
   createTime: string,
   id: number,
@@ -26,7 +27,7 @@ interface Result {
 
 function MyAgreement() {
   const { activate, account, library } = useWeb3React()
-  const [activities, setActivities] = useState<DataSource[]>()
+  const [activities, setActivities] = useState<DataSource[]>([])
   const [loading, setLoading] = useState<boolean>(false)
   const action = useAppDispatch()
   const isLogin = useAppSelector(state => state.app.isLogin)
@@ -105,8 +106,8 @@ function MyAgreement() {
       dataIndex: 'actions',
       key: 'actions',
       align: 'center',
-      render: (t, row: any) => <div className='actionBtn'>
-        Detail
+      render: (t, row: any) => row.statusSrt === "Terminated" ? <div /> : <div className='actionBtn' onClick={() => {}}>
+        Repay
       </div>,
     },
   ]
@@ -170,6 +171,7 @@ function MyAgreement() {
   }
   const turnStr = (val: BigNumber) => {
     let factor = +(new BigNumber(val.toString()).div(10 ** 18).dp(0).toString())
+    factor = Math.random() * 2
     if (factor >= 1.5) {
       return 'Inforce'
     } else if (factor >= 1 && factor < 1.5) {
@@ -189,7 +191,6 @@ function MyAgreement() {
     }
     try {
       const result: any = await http.myPost(url, pageInside)
-
       let orgData: Result[] = result.data.records
       orgData = aa.data.records
       if (result.code === 200 && orgData.length) {
@@ -240,6 +241,8 @@ function MyAgreement() {
         }
         DebtPosition.current = dataSource
         setActivities(dataSource)
+      } else {
+        setActivities([])
       }
     } catch (e) {
       console.error(`Error => ${e}`)
@@ -248,13 +251,13 @@ function MyAgreement() {
     }
   }
   return (<BgTable>
-      {loading ? <div className='loading'><img src={imgurl.market.loading} alt="" /></div> : <Table
-        columns={columns}
-        dataSource={activities}
-        pagination={false}
-        className="ant-table-reset-white"
-      ></Table>}
-    </BgTable>)
+    {loading ? <div className='loading'><img src={imgurl.market.loading} alt="" /></div> : activities.length ? <Table
+      columns={columns}
+      dataSource={activities}
+      pagination={false}
+      className="ant-table-reset-white"
+    ></Table> : <NotFound />}
+  </BgTable>)
 
 }
 

@@ -55,6 +55,7 @@ import Trustwallet from '../assets/images/home/Trustwallet.png'
 import gearIcon from '../assets/images/home/gearIcon.png'
 import ethBlack22 from '../assets/images/home/ethBlack22.png'
 import ethOrange22 from '../assets/images/home/ethOrange22.png'
+import ethBlack40 from '../assets/images/home/ethBlack40.png'
 
 import Union1 from '../assets/images/market/Union1.png'
 import Union2 from '../assets/images/market/Union2.png'
@@ -104,6 +105,8 @@ import navVaults from '../assets/images/dashboard/navVaults.png'
 import navRewards from '../assets/images/dashboard/navRewards.png'
 import navAirdop from '../assets/images/dashboard/navAirdop.png'
 import ethGrey18 from '../assets/images/dashboard/ethGrey18.png'
+import rewardBend from '../assets/images/dashboard/rewardBend.png'
+import reback from '../assets/images/dashboard/reback.png'
 
 import ETH36 from '../assets/images/eth_icon.png'
 import WETH36 from '../assets/images/weth_icon.png'
@@ -115,7 +118,6 @@ import price14 from '../assets/images/market/price14.png'
 import checked from '../assets/images/market/checked.png'
 import blackPrice from '../assets/images/market/blackPrice.png'
 import redPrice24 from '../assets/images/market/redPrice24.png'
-
 import metamaskLogo from '../assets/images/home/metamask_logo.png'
 
 export const imgurl = {
@@ -181,6 +183,7 @@ export const imgurl = {
     gitHubIcon,
     gearIcon,
     ethBlack22,
+    ethBlack40,
     ethOrange22,
   },
   market: {
@@ -215,6 +218,8 @@ export const imgurl = {
     OpenseaBuy
   },
   dashboard: {
+    reback,
+    rewardBend,
     navVaults,
     navRewards,
     navAirdop,
