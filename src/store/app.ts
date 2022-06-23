@@ -6,105 +6,122 @@ import http from "../utils/http";
 import {SessionStorageKey} from "../utils/enums";
 
 class Theme {
-    isDark!: Boolean;
+  isDark!: Boolean;
 }
 
 class data {
-    collections!: Collections;
-    isShowConnect!: boolean;
-    isShowLoading!: boolean;
-    EthPrice!: string
+  collections!: Collections;
+  isShowConnect!: boolean;
+  isShowLoading!: boolean;
+  EthPrice!: string
 }
 
 interface IAppState {
-    currentWalletAddress?: string,
-    currentUser: string,
-    Theme: Theme,
-    data: data,
-    isLogin: boolean
+  currentWalletAddress?: string,
+  currentUser: string,
+  Theme: Theme,
+  data: data,
+  isLogin: boolean,
+  interestAPR?: number
+  rewardsAPR?: number
 }
 
 const initialState: IAppState = {
-    currentUser: "{}",
-    Theme: {
-        isDark: true
-    },
-    data: {
-        // eslint-disable-next-line
-        collections: <Collections>{},
-        isShowConnect: false,
-        isShowLoading: false,
-        EthPrice: ''
-    },
-    isLogin: false
+  currentUser: "{}",
+  Theme: {
+    isDark: true
+  },
+  data: {
+    // eslint-disable-next-line
+    collections: <Collections>{},
+    isShowConnect: false,
+    isShowLoading: false,
+    EthPrice: ''
+  },
+  isLogin: false,
 }
 
 export const fetchUser2 = createAsyncThunk("app/fetchUser2", async (args, ThunkAPI) => {
-    let walletAddress = sessionStorage.getItem(SessionStorageKey.WalletAuthorized)
-    if (walletAddress) {
-        return await http.myPost("/npics-server/app-api/v2/user/getUserInfo", {
-            address: walletAddress
-        })
-    } else {
-        return null
-    }
+  let walletAddress = sessionStorage.getItem(SessionStorageKey.WalletAuthorized)
+  if (walletAddress) {
+    return await http.myPost("/npics-server/app-api/v2/user/getUserInfo", {
+      address: walletAddress
+    })
+  } else {
+    return null
+  }
 })
 
+export const updateARP = createAsyncThunk("app/updateARP", async (args, thunkAPI) => {
+  try {
+    let resp: any = await http.myPost("/npics-nft/app-api/v2/nfthome/getAprInfo", {})
+    return resp.code === 200 ? resp.data : undefined
+  } catch (e) {
+    return undefined
+  }
+})
 
 const appSlice = createSlice({
-    name: "app",
-    initialState,
-    reducers: {
-        fetchUser(state, action) {
-            state.currentUser = action.payload
-        },
-        clearUserData(state) {
-            state.currentUser = `{}`
-        },
-        setThemeIsDark: (state, action) => {
-            state.Theme.isDark = action.payload
-        },
-        setCollectionsData: (state, action) => {
-            state.data.collections = action.payload
-        },
-        setIsShowConnect: (state, action) => {
-            state.data.isShowConnect = action.payload
-        },
-        setIsLoading: (state, action) => {
-            state.data.isShowLoading = action.payload
-        },
-        setEthPrice: (state, action) => {
-            state.data.EthPrice = action.payload
-        },
-        setIsLogin(state, action) {
-            state.isLogin = action.payload
-        }
+  name: "app",
+  initialState,
+  reducers: {
+    fetchUser(state, action) {
+      state.currentUser = action.payload
     },
-
-    extraReducers: (builder) => {
-        builder
-            .addCase(fetchUser2.fulfilled, (state, action) => {
-                if (action.payload) {
-                    let obj = action.payload as any
-                    if (obj.code === 200) {
-                        state.currentUser = JSON.stringify(obj.data)
-                    } else {
-                        state.currentUser = JSON.stringify({})
-                    }
-                } else {
-                    state.currentUser = JSON.stringify({})
-                }
-            })
+    clearUserData(state) {
+      state.currentUser = `{}`
+    },
+    setThemeIsDark: (state, action) => {
+      state.Theme.isDark = action.payload
+    },
+    setCollectionsData: (state, action) => {
+      state.data.collections = action.payload
+    },
+    setIsShowConnect: (state, action) => {
+      state.data.isShowConnect = action.payload
+    },
+    setIsLoading: (state, action) => {
+      state.data.isShowLoading = action.payload
+    },
+    setEthPrice: (state, action) => {
+      state.data.EthPrice = action.payload
+    },
+    setIsLogin(state, action) {
+      state.isLogin = action.payload
     }
+  },
+
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchUser2.fulfilled, (state, action) => {
+        if (action.payload) {
+          let obj = action.payload as any
+          if (obj.code === 200) {
+            state.currentUser = JSON.stringify(obj.data)
+          } else {
+            state.currentUser = JSON.stringify({})
+          }
+        } else {
+          state.currentUser = JSON.stringify({})
+        }
+      })
+      .addCase(updateARP.fulfilled, (state, action) => {
+        if (action.payload) {
+          let data: any = action.payload
+          state.rewardsAPR = parseFloat(data.rewardApr)
+          state.interestAPR = parseFloat(data.apr)
+        }
+      })
+  }
 })
 export const {
-    setThemeIsDark,
-    setCollectionsData,
-    fetchUser,
-    setIsShowConnect,
-    setIsLoading,
-    setEthPrice,
-    setIsLogin,
-    clearUserData
+  setThemeIsDark,
+  setCollectionsData,
+  fetchUser,
+  setIsShowConnect,
+  setIsLoading,
+  setEthPrice,
+  setIsLogin,
+  clearUserData
 } = appSlice.actions
 export default appSlice;

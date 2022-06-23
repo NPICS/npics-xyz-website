@@ -1,39 +1,41 @@
 import BigNumber from "bignumber.js";
-import { Expose } from "class-transformer";
-import { TransformBigNumber } from "./transform";
+import {Expose} from "class-transformer";
+import {TransformBigNumber} from "./transform";
+import {AddressAbbreviation} from "../pages/marketplace/components/utils";
 
 export class User {
-    id?: number
+  id?: number
 
-    address?: string
+  address?: string
 
-    avatar?: string
+  avatar?: string
 
-    nickname?: string
+  nickname?: string
 
-    profile?: string
+  profile?: string
 
-    displayMode?: number
+  displayMode?: number
 
-    email?: string
+  email?: string
 
-    instagram?: string
+  instagram?: string
 
-    nonce?: string
+  nonce?: string
 
-    riskNoticeStatus?: boolean
+  riskNoticeStatus?: boolean
 
-    systemNoticeStatus?: boolean
+  systemNoticeStatus?: boolean
 
-    telegram?: string
+  telegram?: string
 
-    twitter?: string
+  twitter?: string
 
-    youtube?: string
+  youtube?: string
 }
-export class  Collections {
-  key? : string
-  imageUrl! : string
+
+export class Collections {
+  key?: string
+  imageUrl!: string
   name!: string
   realTotalSupply!: number
   activeCollaterals!: number
@@ -53,18 +55,22 @@ export class  Collections {
   get sFloorPrice() {
     return (this.floorPrice.div(10 ** 18).toFixed(2))
   }
+
   @Expose()
   get sAdvanceRate() {
     return (new BigNumber('100').minus((this.ltv.div(10 ** 2))).toFixed(2))
   }
+
   @Expose()
   get sPrimePrice() {
     return this.floorPrice.div(10 ** 18).multipliedBy(this.ltv.div(10 ** 4)).toFixed(2)
   }
+
   @Expose()
   get vol() {
     return (this.floorPrice.div(10 ** 18).multipliedBy(this.ltv.div(10 ** 4)).toFixed(2))
   }
+
   @Expose()
   get sDayChange() {
     return this.dayChange.multipliedBy(100).toFixed(2)
@@ -88,7 +94,7 @@ export class CollectionItems {
 
 type Traits = {
   "trait_type": string,
-  "trait_value": string | null,
+  "trait_value": string | undefined,
   "trait_count": number,
   "value": string
 }
@@ -108,9 +114,15 @@ export class CollectionDetail extends CollectionItems {
   availableBorrow!: BigNumber
   totalAmount!: BigNumber
   totalSupply!: number;
+
   @Expose()
   get agreementPrice() {
     return this.currentBasePrice.minus(new BigNumber(this.availableBorrow.toString()))
+  }
+
+  @Expose()
+  basePriceFormat(): string {
+    return this.currentBasePrice.div(10 ** 18).toFixed(4)
   }
 }
 
@@ -124,6 +136,7 @@ export class Activities {
   @TransformBigNumber()
   startAmount!: BigNumber
   imageUrl!: string
+  decimals: number = 18
 
   @Expose()
   eventTypeExplain(): string | undefined {
@@ -136,7 +149,21 @@ export class Activities {
     } else if (this.eventType === "created") {
       return "List"
     } else {
-      return undefined
+      /// if eventType is null, compase from address and to address
+      if (this.fromAccount && this.toAccount) {
+        if (this.fromAccount === this.toAccount) {
+          return "List"
+        } else {
+          return "Offer"
+        }
+      } else {
+        return undefined
+      }
     }
+  }
+
+  @Expose()
+  amountFormat(): string {
+    return this.amount.div(10 ** this.decimals).toFixed(2).toString()
   }
 }

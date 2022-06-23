@@ -29,7 +29,7 @@ export const urls = {
 
 export function numberFormat(
   num: number | string,
-  maxFractionDigits: number = 0
+  maxFractionDigits: number = 4
 ): string {
   return currency(num).format({
     precision: maxFractionDigits,

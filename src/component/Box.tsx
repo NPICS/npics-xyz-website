@@ -43,6 +43,7 @@ export interface _TypographyProps extends TypographyProps, LayoutProps, SpacePro
   family?: string
 }
 
+
 const Box = styled.div<BoxProps>`
   ${background}
   ${border}
@@ -57,7 +58,6 @@ const Flex = styled(Box)<FlexProps>`
   display: flex;
   gap: ${(props) => props.gap};
   ${flexbox}
-  ${grid}
 `;
 
 const Grid = styled(Box)<GridProps>`
@@ -78,7 +78,7 @@ const Typography = styled.div<_TypographyProps>`
 
 interface IconProps extends BoxProps {
     width: string
-    height: string
+    height?: string
     url?: string
     borderRadius?: string
 }
@@ -87,7 +87,7 @@ const Icon = styled.div<IconProps>`
   display: inline-block;
   overflow: hidden;
   background: transparent url(${(props) => props.url}) no-repeat center;
-  background-size: ${props => props.width} ${props => props.height};
+  background-size: ${props => props.width} ${props => props.height ?? props.width};
   width: ${props => props.width};
   height: ${props => props.height};
   border-radius: ${props => props.borderRadius};
