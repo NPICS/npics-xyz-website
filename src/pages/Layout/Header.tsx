@@ -1,19 +1,19 @@
-import React, {useState, useEffect, useRef} from 'react';
-import {imgurl} from 'utils/globalimport';
-import {Modal, notification, Popover, message} from 'antd';
-import {useWeb3React} from '@web3-react/core';
-import {connectors} from "utils/connectors";
-import {useAppDispatch, useAppSelector} from '../../store/hooks';
-import {clearUserData, fetchUser, fetchUser2, setIsLogin, setIsShowConnect} from 'store/app';
-import {BtnLink, FlexDiv, LogoLink, Nav, ThemeImg} from './headerStyled';
+import React, { useState, useEffect, useRef } from 'react';
+import { imgurl } from 'utils/globalimport';
+import { Modal, notification, Popover, message } from 'antd';
+import { useWeb3React } from '@web3-react/core';
+import { connectors } from "utils/connectors";
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { clearUserData, fetchUser, fetchUser2, setIsLogin, setIsShowConnect } from 'store/app';
+import { BtnLink, FlexDiv, LogoLink, Nav, ThemeImg } from './headerStyled';
 import WalletBalance from './WalletBalance';
-import {deserialize} from "class-transformer";
-import {User} from "../../model/user";
-import {SessionStorageKey} from "../../utils/enums";
-import {urls} from "../../utils/urls";
+import { deserialize } from "class-transformer";
+import { User } from "../../model/user";
+import { SessionStorageKey } from "../../utils/enums";
+import { urls } from "../../utils/urls";
 
 function XHeader() {
-  const {activate, account, error } = useWeb3React()
+  const { activate, account, error } = useWeb3React()
   const oldAccount = useRef<string | undefined | null>()
   const [accountPop, setAccountPop] = useState<boolean>(false)
   const action = useAppDispatch()
@@ -60,7 +60,7 @@ function XHeader() {
     // check account, auto connect wallet
     let account = sessionStorage.getItem(SessionStorageKey.WalletAuthorized)
     if (account) {
-      activate(connectors.injected).then(() => {})
+      activate(connectors.injected).then(() => { })
     }
     // check token
     let token = sessionStorage.getItem(SessionStorageKey.AccessToken)
@@ -70,29 +70,29 @@ function XHeader() {
 
 
   const connect = async () => {
-    try{
+    try {
       if (error) {
         const Error = JSON.parse(JSON.stringify(error))
-        if(Error.name === "UnsupportedChainIdError") {
+        if (Error.name === "UnsupportedChainIdError") {
           sessionStorage.removeItem(SessionStorageKey.WalletAuthorized)
           action(fetchUser(`{}`))
-          notification.error({message: "Prompt connection failed, please use the Ethereum network"})
+          notification.error({ message: "Prompt connection failed, please use the Ethereum network" })
         } else {
-          notification.error({message: "Please authorize to access your account"})
+          notification.error({ message: "Please authorize to access your account" })
         }
         return
       }
-      await activate(connectors.injected,(e) => {
-        if(e.name === "UnsupportedChainIdError") {
+      await activate(connectors.injected, (e) => {
+        if (e.name === "UnsupportedChainIdError") {
           sessionStorage.removeItem(SessionStorageKey.WalletAuthorized)
           action(fetchUser(`{}`))
-          notification.error({message: "Prompt connection failed, please use the Ethereum network"})
+          notification.error({ message: "Prompt connection failed, please use the Ethereum network" })
         }
       })
       action(fetchUser2())
-    }catch(e) {
-      console.error('error:',e)
-    }finally {
+    } catch (e) {
+      console.error('error:', e)
+    } finally {
       action(setIsShowConnect(false))
     }
   }
@@ -110,7 +110,7 @@ function XHeader() {
   useEffect(() => {
 
 
-// eslint-disable-next-line
+    // eslint-disable-next-line
   }, [account])
 
 
@@ -179,16 +179,16 @@ function XHeader() {
   const AccountTitle = () => {
     return (<div className='account-title'>
       <span>Account</span>
-      <span style={{cursor: 'pointer'}}>
+      <span style={{ cursor: 'pointer' }}>
         <img src={imgurl.home.gearIcon} alt="" />
       </span>
     </div>)
   }
 
   document.addEventListener("click", event => {
-    if(!accountPop) return
+    if (!accountPop) return
     var cDom = document.getElementById("baseAccount") || document.body;
-    var tDom:any = event.target;
+    var tDom: any = event.target;
     if (cDom === tDom || cDom.contains(tDom)) {
     } else {
       setAccountPop(false)
@@ -199,13 +199,13 @@ function XHeader() {
     <Nav>
       <FlexDiv>
         <LogoLink to={"/"}>
-          <img src={imgurl.logo} alt=""/>
+          <img src={imgurl.logo} alt="" />
         </LogoLink>
         <BtnLink to={"marketPlaceRedirect"}>
           <div className='prime'>Prime</div>
           Marketplace
         </BtnLink>
-        <BtnLink to={"/dashboard/agreement"}>
+        <BtnLink to={"/dashboard/vaults"}>
           Dashboard
         </BtnLink>
         {/*<BtnLink to={"/docs"}>*/}
@@ -222,11 +222,11 @@ function XHeader() {
       </FlexDiv>
 
       <FlexDiv>
-        <ThemeImg src={imgurl.worldwide}/>
+        <ThemeImg src={imgurl.worldwide} />
         {/* <ThemeImg src={imgurl.gas_icon}/> */}
-        <ThemeImg src={imgurl.notification}/>
-        <div id="baseAccount" style={{position:'relative'}}>
-          <ThemeImg src={userInfo?.avatar || imgurl.Ellipse} onClick={walletPop}/>
+        <ThemeImg src={imgurl.notification} />
+        <div id="baseAccount" style={{ position: 'relative' }}>
+          <ThemeImg src={userInfo?.avatar || imgurl.Ellipse} onClick={walletPop} />
         </div>
         <Popover
           content={AccountHTML}

@@ -12,6 +12,7 @@ import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 import { connectors } from 'utils/connectors';
 import { SessionStorageKey } from 'utils/enums';
 import { DataSource, DebtData, LiquidatePrice, BgTable, Record } from './Tableutils';
+import { useNavigate } from "react-router-dom";
 import aa from 'abi/aa.json'
 import NotFound from 'component/NotFound';
 interface Result {
@@ -32,6 +33,7 @@ function MyAgreement() {
   const action = useAppDispatch()
   const isLogin = useAppSelector(state => state.app.isLogin)
   const DebtPosition = useRef<DataSource[]>()
+  const navigate = useNavigate() 
   const columns: ColumnsType<DataSource> = [
     {
       title: 'Asset',
@@ -106,7 +108,7 @@ function MyAgreement() {
       dataIndex: 'actions',
       key: 'actions',
       align: 'center',
-      render: (t, row: any) => row.statusSrt === "Terminated" ? <div /> : <div className='actionBtn' onClick={() => {}}>
+      render: (t, row: any) => row.statusSrt === "Terminated" ? <div /> : <div className='actionBtn' onClick={() => navigate(`/vaultsDetail/${row.address}/${row.tokenId}`)}>
         Repay
       </div>,
     },

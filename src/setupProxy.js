@@ -3,11 +3,11 @@ const {
 } = require('http-proxy-middleware');
 module.exports = function (app) {
   app.use(createProxyMiddleware(
-      "/api", {
-          target: "http://16.162.44.108:18094/",
+      "/npics-nft", {
+          target: "http://192.168.1.61:10099/",
           changeOrigin: true,
           pathRewrite: {
-              "^/api": "/api"
+              "^/npics-nft": "/npics-nft"
           }
       }
   ));

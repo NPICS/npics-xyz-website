@@ -80,6 +80,7 @@ interface IconProps extends BoxProps {
     width: string
     height: string
     url?: string
+    borderRadius?: string
 }
 
 const Icon = styled.div<IconProps>`
@@ -89,6 +90,7 @@ const Icon = styled.div<IconProps>`
   background-size: ${props => props.width} ${props => props.height};
   width: ${props => props.width};
   height: ${props => props.height};
+  border-radius: ${props => props.borderRadius};
 `
 const GridItem = styled(Box)<GridProps>`
   display: flex;

@@ -88,7 +88,7 @@ export default function Routers() {
       component: <MarketItem />
     },
     {
-      path: '/dashboard',
+      path: '/dash',
       component: <Dashboard />,
       children: [
         {
@@ -120,7 +120,7 @@ export default function Routers() {
       ]
     },
     {
-      path: "/dash",
+      path: "/dashboard",
       component: <Dash/>,
       children: [
         {
@@ -138,7 +138,7 @@ export default function Routers() {
       ]
     },
     {
-      path: 'vaultsDetail',
+      path: 'vaultsDetail/:address/:tokenId',
       component: <VaultsDetail />
     },
     {

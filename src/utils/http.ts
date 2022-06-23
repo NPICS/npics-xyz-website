@@ -8,7 +8,7 @@ import {SessionStorageKey} from "./enums";
 axios.defaults.timeout = 15000;
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 if (process.env.NODE_ENV === 'development') {
-    axios.defaults.baseURL = '/api'
+    axios.defaults.baseURL = ''
 } else {
     axios.defaults.baseURL = '/api'
 }

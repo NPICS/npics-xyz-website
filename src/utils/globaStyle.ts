@@ -449,7 +449,7 @@ export const GlobalStyle = createGlobalStyle`
 
   @font-face {
     font-family: 'Montserrat';
-    src: url('./font/Montserrat-ExtraBold.otf');
+    src: url('./font/Montserrat-Medium.otf');
     font-weight: normal;
     font-style: normal;
   }

@@ -252,12 +252,12 @@ function Marketplace() {
                   <span>Floor</span>
                   <div>
                     <img src={imgurl.market.Union1} alt="" />
-                    <span>{(item.floorPrice).toFixed(2, 1).toString()}</span>
+                    <span>{(item.floorPrice).div(10 ** 18).toFixed(2, 1).toString()}</span>
                   </div>
                 </div>
                 <div>
                   <img src={imgurl.market.Union2} alt="" />
-                  <span>{(((item.floorPrice)).multipliedBy(item.ltv.div(10000))).toFixed(2, 1)}</span>
+                  <span>{(((item.floorPrice)).multipliedBy(item.ltv.div(10000))).div(10 ** 18).toFixed(2, 1)}</span>
                 </div>
                 <div>
                   <span>Total:</span>
