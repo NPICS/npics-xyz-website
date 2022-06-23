@@ -2,9 +2,9 @@ import { createGlobalStyle } from 'styled-components'
 
 export const GlobalStyle = createGlobalStyle`
   img {
-    user-select: none !important;
-    -webkit-user-drag: none !important;
-    object-fit: cover;
+    //user-select: none !important;
+    //-webkit-user-drag: none !important;
+    //object-fit: cover;
   }
   img:not([src]) {
     opacity: 0;
@@ -13,6 +13,7 @@ export const GlobalStyle = createGlobalStyle`
   body {
     min-width: 1280px;
     font-family: 'Montserrat';
+    line-height: normal;
   }
 
   .ant-selectDropDown-reset {

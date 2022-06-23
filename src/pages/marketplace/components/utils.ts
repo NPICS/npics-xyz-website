@@ -1,5 +1,6 @@
 import BigNumber from "bignumber.js"
-import { CollectionDetail } from "model/user"
+import {CollectionDetail} from "model/user"
+import {add} from "lodash";
 
 type Price = {
   price: BigNumber,
@@ -25,4 +26,19 @@ export const compute = (value: CollectionDetail | undefined) => {
   result.agreementPrice = result.price.minus(result.loanFunds)
 
   return result
+}
+
+export function AddressAbbreviation(address: string | undefined | null): string | undefined {
+  if (address) {
+    let start = 6
+    let end = 4
+    let reg = new RegExp(`(.{${start}}).+(.{${end}}$)`, "g");
+    return address.replace(reg, "$1...$2")
+  } else {
+    return undefined
+  }
+}
+
+export function percentageFormat(val: number): string {
+  return `${(val * 100).toFixed(2)}%`
 }

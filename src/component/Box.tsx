@@ -41,6 +41,7 @@ export interface GridProps extends FlexProps, _GridProps {
 export interface _TypographyProps extends TypographyProps, LayoutProps, SpaceProps, HTMLAttributes<HTMLDivElement> {
 }
 
+
 const Box = styled.div<BoxProps>`
   ${background}
   ${border}
@@ -65,7 +66,6 @@ const Grid = styled(Box)<GridProps>`
 
 
 const Typography = styled.div<_TypographyProps>`
-  user-select: none;
   ${typography}
   ${layout}
   ${space}
@@ -74,7 +74,7 @@ const Typography = styled.div<_TypographyProps>`
 
 interface IconProps extends BoxProps {
     width: string
-    height: string
+    height?: string
     url?: string
 }
 
@@ -82,9 +82,9 @@ const Icon = styled.div<IconProps>`
   display: inline-block;
   overflow: hidden;
   background: transparent url(${(props) => props.url}) no-repeat center;
-  background-size: ${props => props.width} ${props => props.height};
+  background-size: ${props => props.width} ${props => props.height ?? props.width};
   width: ${props => props.width};
-  height: ${props => props.height};
+  height: ${props => props.height ?? props.width};
 `
 
 export {Box, Grid, Flex, Typography, Icon}
