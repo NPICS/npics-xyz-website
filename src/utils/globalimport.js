@@ -4,14 +4,24 @@ import worldwide from '../assets/images/worldwide.png'
 import notification from '../assets/images/notification.png'
 import Ellipse from '../assets/images/Ellipse.png'
 import logo from '../assets/images/logo.png'
+import lightLogo from '../assets/images/lightLogo.png'
 import copy from '../assets/images/copyBlack.png'
 import address from '../assets/images/addressBlack.png'
 import notData from '../assets/images/notData.png'
 
-import Group245 from '../assets/images/footer/Group245.png'
-import Group246 from '../assets/images/footer/Group246.png'
-import Group247 from '../assets/images/footer/Group247.png'
-import Group248 from '../assets/images/footer/Group248.png'
+import darkTG from '../assets/images/footer/darkTG.png'
+import darkT from '../assets/images/footer/darkT.png'
+import darkG from '../assets/images/footer/darkG.png'
+import darkM from '../assets/images/footer/darkM.png'
+import darkGH from '../assets/images/footer/darkGH.png'
+import lightTG from '../assets/images/footer/lightTG.png'
+import lightT from '../assets/images/footer/lightT.png'
+import lightG from '../assets/images/footer/lightG.png'
+import lightM from '../assets/images/footer/lightM.png'
+import lightGH from '../assets/images/footer/lightGH.png'
+
+
+
 import MaskGroup1 from '../assets/images/home/MaskGroup1.png'
 import MaskGroup2 from '../assets/images/home/MaskGroup2.png'
 import MaskGroup3 from '../assets/images/home/MaskGroup3.png'
@@ -110,6 +120,7 @@ import metamaskLogo from '../assets/images/home/metamask_logo.png'
 
 export const imgurl = {
   logo,
+  lightLogo,
   Vector,
   images11,
   notification,
@@ -125,10 +136,16 @@ export const imgurl = {
   metamaskLogo,
   notData,
   footer: {
-    Group245,
-    Group246,
-    Group247,
-    Group248
+    darkTG,
+    darkG,
+    darkM,
+    darkGH,
+    darkT,
+    lightTG,
+    lightG,
+    lightM,
+    lightGH,
+    lightT,
   },
   home: {
     MaskGroup1,

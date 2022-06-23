@@ -1,10 +1,11 @@
-import React from 'react';
+import React,{useEffect,useState} from 'react';
 import styled from 'styled-components';
 import XHeader from './Header';
 import Content from './Content'
 import Footer from './Footer'
 import Loading from 'component/Loading';
 import { useAppSelector } from '../../store/hooks';
+import { useLocation } from 'react-router-dom';
 
 const Nav = styled.div`
   position: absolute;
@@ -16,12 +17,12 @@ const Nav = styled.div`
 const FooterBox = styled.div`
   height: 2.26rem;
   text-align: center;
-  background-color: #1A1A1A;
+  /* background-color: #1A1A1A; */
   `
 const ContentBox = styled.div`
   color: #000;
   /* min-height: 8rem; */
-  background-color: #1A1A1A;
+  background-color: #E5E5E5;
   flex: 1;
 `
 const Flex = styled.div`
@@ -29,8 +30,12 @@ const Flex = styled.div`
   flex-direction: column;
   height: 100vh;
 `
+
+
+
 function Index() {
   const isShowLoading = useAppSelector(state => state.app.data.isShowLoading)
+
   return (
     <div>
       {isShowLoading ? <Loading></Loading> : null}

@@ -39,6 +39,8 @@ export interface GridProps extends FlexProps, _GridProps {
 }
 
 export interface _TypographyProps extends TypographyProps, LayoutProps, SpaceProps, HTMLAttributes<HTMLDivElement> {
+  userSelect?: string
+  family?: string
 }
 
 const Box = styled.div<BoxProps>`
@@ -65,7 +67,8 @@ const Grid = styled(Box)<GridProps>`
 
 
 const Typography = styled.div<_TypographyProps>`
-  user-select: none;
+  font-family: ${(props) => props.family ?? 'Montserrat'};
+  user-select: ${(props) => props.userSelect ?? 'auto'};
   ${typography}
   ${layout}
   ${space}

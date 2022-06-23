@@ -39,7 +39,7 @@ export const Nav = styled.div`
   margin: 0 auto;
   padding: .2rem 1.5rem;
   /* background: transparent; */
-  background: ${(props:{bgColor:boolean}) => props.bgColor ? 'transparent' : 'rgba(255,255,255,.1)'};
+  background: ${(props) => props.theme.headerBg};
   &>div {
     text-align: center;
   }
@@ -154,7 +154,7 @@ export const Nav = styled.div`
 `
 export const BtnLink = styled(Link)`
   position: relative;
-  color: ${(props) => props.theme.color};
+  color: #fff;
   font-weight: 700;
   font-size: .16rem;
   text-decoration: none;

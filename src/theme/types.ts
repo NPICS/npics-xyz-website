@@ -9,4 +9,7 @@ export type Colors = {
   border: string,
   btnBackground: string,
   iconBackground: string,
+  headerBg: string,
+  footerBg: string,
+  textColor: string,
 }

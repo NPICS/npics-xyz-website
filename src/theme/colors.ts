@@ -3,6 +3,10 @@ export const baseColors = {
 
 }
 export const lightColors:Colors = {
+  headerBg: 'rgba(255,255,255,.1)',
+  footerBg: '#fff',
+  textColor: 'rgba(0,0,0,.5)',
+
   background: "#fff",
   btnBackground: "#fff",
   iconBackground: "#F1EFEF",
@@ -14,6 +18,10 @@ export const lightColors:Colors = {
   }
 }
 export const darkColors:Colors = {
+  headerBg: 'transparent',
+  footerBg: '#1a1a1a',
+  textColor: 'rgba(255,255,255,.5)',
+
   background: "#000000",
   btnBackground: "#000000",
   iconBackground: "#282626",

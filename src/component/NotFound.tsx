@@ -19,12 +19,14 @@ export default function NotFound(props:IProps) {
     flexDirection={"column"}
     justifyContent={"center"}
     alignItems={"center"}
+    padding={".3rem 0"}
   >
     <Icon width={"1rem"} height={"1rem"} url={imgurl.notData}></Icon>
     <Typography
       fontSize={".16rem"}
       fontWeight={"700"}
       color={"#000"}
+      margin={".35rem 0 .1rem 0"}
     >{props.title}</Typography>
     <Typography
       fontSize={".14rem"}

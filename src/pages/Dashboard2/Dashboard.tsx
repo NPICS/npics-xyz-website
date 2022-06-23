@@ -21,10 +21,12 @@ export default function Market() {
 
 
   return <Flex
-    position={"relative"}
-    flexDirection={"column"}
-    padding={"0 160px"}
-    background={"transparent"}>
+      position={"relative"}
+      flexDirection={"column"}
+      padding={"0 1.6rem"}
+      background={"transparent"}
+      marginBottom={"1.6rem"}
+    >
     <Banner />
     <Box
       zIndex={1}
