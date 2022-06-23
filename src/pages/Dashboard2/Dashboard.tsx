@@ -1,8 +1,8 @@
-import React, {useState} from 'react'
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react'
+import { Link, useLocation } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
 import { Box, Flex, Icon, Typography } from "../../component/Box";
-import { NavList } from "./components/data";
+import { NavList } from "./components/components/data";
 
 const Banner = () => {
   return <Box
@@ -18,13 +18,18 @@ const Banner = () => {
 
 export default function Market() {
   const [active, setActive] = useState<number>(0)
-
+  // const history = useLocation()
+  // useEffect(() => {
+  //   setActive(history.pathname.substring(11))
+  // },[history.pathname])
 
   return <Flex
-    position={"relative"}
-    flexDirection={"column"}
-    padding={"0 160px"}
-    background={"transparent"}>
+      position={"relative"}
+      flexDirection={"column"}
+      padding={"0 1.6rem"}
+      background={"transparent"}
+      marginBottom={"1.6rem"}
+    >
     <Banner />
     <Box
       zIndex={1}

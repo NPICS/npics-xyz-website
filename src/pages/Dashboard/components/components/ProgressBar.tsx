@@ -15,7 +15,7 @@ const Container = styled.div`
   align-items: center;
   & > :first-child {
   width: inherit;
-  background-color: #000000;
+  background-color: rgba(0,0,0,.1);
   border: .01rem solid rgba(255, 255, 255, .2);
   border-radius: .05rem;
   overflow: hidden;
@@ -28,22 +28,37 @@ const Container = styled.div`
   }
 }
 .point {
-  background: rgba(255,255,255,.6);
-    width: .16rem;
-    height: .16rem;
-    border-radius: .08rem;
-    position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: .2rem;
+  height: .2rem;
+  border-radius: .1rem;
+  text-align: center;
   cursor: pointer;
-    transform: translateX(-.5vw);
-    svg {
-      width: .9vw;
-    }
+  transform: translateX(-.5vw);
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 20px rgba(202, 175, 156, 0.16);
+  svg {
+    width: .9vw;
   }
-  .text {
-    ${font1665};
-    position: absolute;
-    top: .13rem;
-    transform: translateX(-.5vw);
+  .centerCircle {
+    width: .08rem;
+    height: .08rem;
+    border-radius: .04rem;
+    background-color: #FF490F;
+  }
+}
+.text {
+  user-select: none;
+  font-weight: 500;
+  font-size: .16rem;
+  color: rgba(0,0,0,.5);
+  position: absolute;
+  top: .13rem;
+  transform: translateX(-.5vw);
 }
 `
 
@@ -80,7 +95,7 @@ const ProgressBar: FC<IProps> = ({ value, onChange }): ReactElement => {
           document.addEventListener("mouseleave", clear);
         }}
         style={{ left: value * 100 + "%" }}
-      ></div>
+      ><div className="centerCircle" /></div>
       <div className="text" style={{ left: value * 100 + "%" }}>{(+value*100).toFixed(0)}%</div>
     </Container>
   );

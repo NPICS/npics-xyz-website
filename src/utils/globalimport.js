@@ -4,14 +4,24 @@ import worldwide from '../assets/images/worldwide.png'
 import notification from '../assets/images/notification.png'
 import Ellipse from '../assets/images/Ellipse.png'
 import logo from '../assets/images/logo.png'
+import lightLogo from '../assets/images/lightLogo.png'
 import copy from '../assets/images/copyBlack.png'
 import address from '../assets/images/addressBlack.png'
 import notData from '../assets/images/notData.png'
 
-import Group245 from '../assets/images/footer/Group245.png'
-import Group246 from '../assets/images/footer/Group246.png'
-import Group247 from '../assets/images/footer/Group247.png'
-import Group248 from '../assets/images/footer/Group248.png'
+import darkTG from '../assets/images/footer/darkTG.png'
+import darkT from '../assets/images/footer/darkT.png'
+import darkG from '../assets/images/footer/darkG.png'
+import darkM from '../assets/images/footer/darkM.png'
+import darkGH from '../assets/images/footer/darkGH.png'
+import lightTG from '../assets/images/footer/lightTG.png'
+import lightT from '../assets/images/footer/lightT.png'
+import lightG from '../assets/images/footer/lightG.png'
+import lightM from '../assets/images/footer/lightM.png'
+import lightGH from '../assets/images/footer/lightGH.png'
+
+
+
 import MaskGroup1 from '../assets/images/home/MaskGroup1.png'
 import MaskGroup2 from '../assets/images/home/MaskGroup2.png'
 import MaskGroup3 from '../assets/images/home/MaskGroup3.png'
@@ -45,6 +55,7 @@ import Trustwallet from '../assets/images/home/Trustwallet.png'
 import gearIcon from '../assets/images/home/gearIcon.png'
 import ethBlack22 from '../assets/images/home/ethBlack22.png'
 import ethOrange22 from '../assets/images/home/ethOrange22.png'
+import ethBlack40 from '../assets/images/home/ethBlack40.png'
 
 import Union1 from '../assets/images/market/Union1.png'
 import Union2 from '../assets/images/market/Union2.png'
@@ -94,6 +105,8 @@ import navVaults from '../assets/images/dashboard/navVaults.png'
 import navRewards from '../assets/images/dashboard/navRewards.png'
 import navAirdop from '../assets/images/dashboard/navAirdop.png'
 import ethGrey18 from '../assets/images/dashboard/ethGrey18.png'
+import rewardBend from '../assets/images/dashboard/rewardBend.png'
+import reback from '../assets/images/dashboard/reback.png'
 
 import ETH36 from '../assets/images/eth_icon.png'
 import WETH36 from '../assets/images/weth_icon.png'
@@ -105,11 +118,11 @@ import price14 from '../assets/images/market/price14.png'
 import checked from '../assets/images/market/checked.png'
 import blackPrice from '../assets/images/market/blackPrice.png'
 import redPrice24 from '../assets/images/market/redPrice24.png'
-
 import metamaskLogo from '../assets/images/home/metamask_logo.png'
 
 export const imgurl = {
   logo,
+  lightLogo,
   Vector,
   images11,
   notification,
@@ -125,10 +138,16 @@ export const imgurl = {
   metamaskLogo,
   notData,
   footer: {
-    Group245,
-    Group246,
-    Group247,
-    Group248
+    darkTG,
+    darkG,
+    darkM,
+    darkGH,
+    darkT,
+    lightTG,
+    lightG,
+    lightM,
+    lightGH,
+    lightT,
   },
   home: {
     MaskGroup1,
@@ -164,6 +183,7 @@ export const imgurl = {
     gitHubIcon,
     gearIcon,
     ethBlack22,
+    ethBlack40,
     ethOrange22,
   },
   market: {
@@ -198,6 +218,8 @@ export const imgurl = {
     OpenseaBuy
   },
   dashboard: {
+    reback,
+    rewardBend,
     navVaults,
     navRewards,
     navAirdop,

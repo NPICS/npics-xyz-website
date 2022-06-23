@@ -39,6 +39,8 @@ export interface GridProps extends FlexProps, _GridProps {
 }
 
 export interface _TypographyProps extends TypographyProps, LayoutProps, SpaceProps, HTMLAttributes<HTMLDivElement> {
+  userSelect?: string
+  family?: string
 }
 
 
@@ -66,6 +68,8 @@ const Grid = styled(Box)<GridProps>`
 
 
 const Typography = styled.div<_TypographyProps>`
+  font-family: ${(props) => props.family ?? 'Montserrat'};
+  user-select: ${(props) => props.userSelect ?? 'auto'};
   ${typography}
   ${layout}
   ${space}
@@ -86,5 +90,11 @@ const Icon = styled.div<IconProps>`
   width: ${props => props.width};
   height: ${props => props.height ?? props.width};
 `
+const GridItem = styled(Box)<GridProps>`
+  display: flex;
+  gap: ${(props) => props.gap};
+  ${flexbox}
+  ${grid}
+`;
 
-export {Box, Grid, Flex, Typography, Icon}
+export {Box, Grid, Flex, Typography, Icon, GridItem}

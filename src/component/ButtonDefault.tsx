@@ -14,6 +14,12 @@ interface Iprops {
 }
 
 const StyledButton = styled.button<Iprops>`
+  &:hover {
+    background-color: #FF490F;
+  }
+  &:disabled {
+    background-color: #999;
+  }
   background: ${(props => {
      switch (props.types) {
       case 'one':
@@ -26,6 +32,8 @@ const StyledButton = styled.button<Iprops>`
        return 'rgba(255, 255, 255, 1)';
       case 'disabled':
        return '#999';
+      case 'normal':
+       return '#000';
       default:
         return null;
     }
@@ -42,10 +50,13 @@ const StyledButton = styled.button<Iprops>`
        return '.01rem solid rgba(255, 255, 255, 3)';
       case 'disabled':
        return '0';
+      case 'normal':
+       return '0';
       default:
         return null;
     }
   })};
+  background: ${(props => props.disabled ? '#999' : '')};
   color: ${(props => props.color)};
   width: ${(props => props.width)};
   height: ${(props => props.height)};

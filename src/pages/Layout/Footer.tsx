@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import {imgurl} from 'utils/globalimport';
 import {urls} from "../../utils/urls";
+import { Icon } from 'component/Box';
+import { useLocation } from 'react-router-dom';
 
 
 const FooterWrap = styled.div`
   padding: .5rem 2.83rem .6rem 2.6rem;
   border-top: .02rem solid rgba(255, 255, 255, .1);
+  background: ${(props) => props.theme.footerBg};
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -19,15 +22,12 @@ const FooterWrap = styled.div`
     font-family: 'PingFang HK';
     font-style: normal;
     font-weight: 500;
-    color: rgba(255, 255, 255, .6);
-
-    img {
-      height: .5rem;
-      width: 1.4rem;
+    color: ${(props) => props.theme.textColor};
+    a{
+      text-align: left;
     }
-
     span {
-      padding-top: .35rem;
+      padding-top: .1rem;
     }
   }
 
@@ -38,71 +38,87 @@ const FooterWrap = styled.div`
     font-family: 'PingFang HK';
     font-style: normal;
     font-weight: 500;
-    color: rgba(255, 255, 255, .6);
-
+    color: ${(props) => props.theme.textColor};
     & > div {
-      text-align: right;
-
-      img {
-        margin-left: .19rem;
-      }
+      display: flex;
+      gap: 0.25rem;
+      justify-content: end;
     }
-
-    //span {
-    //  padding-top: .35rem;
-    //}
   }
-  
   .resources {
     display: flex;
     gap: 16px;
     margin-top: .35rem;
     a {
-      color: rgba(255, 255, 255, .6);
+      color: ${(props) => props.theme.textColor};
     }
   }
 `
 
 function Footer() {
+  const history = useLocation()
+  const [isHome, setIsHome] = useState<boolean>(true)
+  useEffect(() => {
+    if (history.pathname === '/') {
+      setIsHome(true)
+    } else {
+      setIsHome(false)
+    }
+    // eslint-disable-next-line
+  }, [history.pathname])
+
 
   const terms = [
     {
-      icon: imgurl.footer.Group245,
+      darkIcon: imgurl.footer.darkT,
+      lightIcon: imgurl.footer.lightT,
+      link: urls.twitter, 
+      name: "Twitter"
+    },
+    {
+      darkIcon: imgurl.footer.darkG,
+      lightIcon: imgurl.footer.lightG,
+      link: "/", 
+      name: "Game"
+    },
+    {
+      darkIcon: imgurl.footer.darkM,
+      lightIcon: imgurl.footer.lightM,
       link: urls.medium,
       name: "Medium"
     },
     {
-      icon: imgurl.footer.Group246,
+      darkIcon: imgurl.footer.darkTG,
+      lightIcon: imgurl.footer.lightTG,
       link: urls.telegram,
       name: "Telegram"
     },
     {
-      icon: imgurl.footer.Group247,
-      link: "/",
-      name: ""
-    },
-    {
-      icon: imgurl.footer.Group248,
-      link: urls.twitter,
-      name: "Twitter"
+      darkIcon: imgurl.footer.darkGH,
+      lightIcon: imgurl.footer.lightGH,
+      link: urls.github,
+      name: "GitHub"
     }
   ]
 
   return (
     <FooterWrap>
       <div className='footer-left'>
-        <a href="/"><img src={imgurl.logo} alt=""/></a>
+        <a href="/">
+          <Icon width='1.4rem' height='.5rem' url={ isHome ? imgurl.logo : imgurl.lightLogo} />
+        </a>
         <span>Copyright © 2022 Npics Foundation Singapore LTD. rights reserved</span>
       </div>
       <div className='footer-right'>
         <div>
           {
             terms.map((item) => {
-              return <a key={item.name} href={item.link} target="_blank" rel="noreferrer"><img src={item.icon} alt={item.name}/></a>
+              return <a key={item.name} href={item.link} target="_blank" rel="noreferrer">
+                <Icon width='.22rem' height='.22rem' url={isHome ? item.darkIcon : item.lightIcon} />
+              </a>
             })
           }
         </div>
-        {/*<span>Contact Us     Resources    Audit Report     Brand     Terms of service</span>*/}
         <div className="resources">
           <a href={urls.contactUs}  target="_blank" rel="noreferrer">Contact Us</a>
           <a href={urls.Resources} target="_blank" rel="noreferrer">Resources</a>

@@ -138,7 +138,7 @@ function MyRewards() {
   const action = useAppDispatch()
   const userInfo = useAppSelector(state => deserialize(User, state.app.currentUser))
   const [option, setOption] = useState<string | number>("Npics Compounder")
-  const [balance, setBalance] = useState<BigNumber>()
+  const [balance, setBalance] = useState<BigNumber>(new BigNumber(0))
   useEffect(() => {
     getBalance()
     // eslint-disable-next-line

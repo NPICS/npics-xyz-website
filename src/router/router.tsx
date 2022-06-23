@@ -7,11 +7,11 @@ import Dash from "../pages/Dashboard2/Dashboard"
 import MyVaults from 'pages/Dashboard2/components/MyVaults';
 import MyRewards2 from 'pages/Dashboard2/components/MyRewards';
 import MyAirdop2 from 'pages/Dashboard2/components/MyAirdop';
-import OneNFT from "../pages/Marketplace2/OneNFT";
 import NFTPay from "../pages/Marketplace2/NFTPay";
 import NFTPayProgressing from "../pages/Marketplace2/NFTPayProgressing";
 import NFTPayCongratulations from "../pages/Marketplace2/NFTPayCongratulations";
 import NFTPayWrong from "../pages/Marketplace2/NFTPayWrong";
+import VaultsDetail from 'pages/Dashboard2/components/components/VaultsDetail';
 interface RouterT {
   name?: string,
   path: string,
@@ -138,12 +138,12 @@ export default function Routers() {
         {
           path: 'airdrop',
           component: <MyAirdop2 />,
-        },
-        {
-          path: 'airdrop/claim',
-          component: <Claim />,
         }
       ]
+    },
+    {
+      path: 'vaultsDetail',
+      component: <VaultsDetail />
     },
     {
       path: "*",

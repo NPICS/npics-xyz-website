@@ -10,7 +10,6 @@ import WalletBalance from './WalletBalance';
 import {deserialize} from "class-transformer";
 import {User} from "../../model/user";
 import {SessionStorageKey} from "../../utils/enums";
-import { useLocation } from 'react-router-dom';
 import {urls} from "../../utils/urls";
 
 function XHeader() {
@@ -20,8 +19,6 @@ function XHeader() {
   const action = useAppDispatch()
   const userInfo = useAppSelector(state => deserialize(User, state.app.currentUser))
   const showConnect = useAppSelector(state => state.app.data.isShowConnect)
-  const [isHome, setIsHome] = useState<boolean>(true)
-  const history = useLocation()
   useEffect(() => {
     console.log(`Account Change => New: ${account}, Old: ${oldAccount.current}`)
     // changed account
@@ -146,14 +143,6 @@ function XHeader() {
     }
     message.success('Copy successfully', 0.5)
   }
-  useEffect(() => {
-    if(history.pathname === '/') {
-      setIsHome(true)
-    } else {
-      setIsHome(false)
-    }
-    // eslint-disable-next-line
-  },[history.pathname])
 
   const AccountHTML = () => {
     return (<div className='account-content'>
@@ -207,7 +196,7 @@ function XHeader() {
   });
 
   return (
-    <Nav bgColor={isHome}>
+    <Nav>
       <FlexDiv>
         <LogoLink to={"/"}>
           <img src={imgurl.logo} alt=""/>

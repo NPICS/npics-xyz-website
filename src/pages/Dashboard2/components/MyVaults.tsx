@@ -2,7 +2,9 @@ import React, { useState,useEffect } from "react"
 import { Box, Flex, Icon, Typography } from "component/Box";
 import { imgurl } from "utils/globalimport";
 import { Select } from "antd";
+import NotFound from "component/NotFound"
 import styled from 'styled-components';
+import VaultsTable from "./components/VaultsTable";
 const {Option} = Select
 
 const AntdSelect = styled(Select)`
@@ -30,20 +32,39 @@ export default function MyVaults() {
     <Flex
       alignItems={"center"}
       justifyContent={"space-between"}
+      marginBottom={".24rem"}
     >
       <Flex
         flexDirection={"column"}
       >
-        <Typography>
+        <Typography
+          fontSize={".3rem"}
+          fontWeight={"800"}
+          color={"#000"}
+          // userSelect={"none"}
+        >
           My Vaults
         </Typography>
         <Flex
           alignItems={"center"}
+
         >
-          <Typography>Total Debt：</Typography>
+          <Typography 
+            fontWeight={500}
+            fontSize={".14rem"}
+            color={"rgba(0,0,0,.5)"}
+          >Total Debt：</Typography>
           <Icon width=".18rem" height=".18rem" url={imgurl.dashboard.ethGrey18} />
-          <Typography> 998.111</Typography>
-          <Typography>($2,210)</Typography>
+          <Typography
+            fontWeight={500}
+            fontSize={".14rem"}
+            color={"rgba(0,0,0,.5)"}
+          > 998.111</Typography>
+          <Typography
+            fontWeight={500}
+            fontSize={".14rem"}
+            color={"rgba(0,0,0,.5)"}
+          >($2,210)</Typography>
         </Flex>
       </Flex>
 
@@ -59,10 +80,11 @@ export default function MyVaults() {
           <Option value="Terminated">Terminated</Option>
         </AntdSelect>
       </Typography>
-
     </Flex>
-
     
+    <VaultsTable />
+
+    {/* <NotFound /> */}
 
   </Box>
 }

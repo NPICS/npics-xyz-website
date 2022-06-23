@@ -213,7 +213,7 @@ export default function MarketList() {
             </Flex>
             <InfiniteScroll
                 pageStart={1}
-                loadMore={(page) => {
+                loadMore={() => {
                     if (!isLoading.current) {
                         setCurrentPage(currentPage + 1)
                     }
