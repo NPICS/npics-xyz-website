@@ -71,8 +71,8 @@ export default function OneNFT() {
         const inner = async () => {
             // prams from level up
             const resp: any = await http.myPost(`/npics-nft/app-api/v2/nft/getCollectionItemsDetail`, {
-                address: "0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d",
-                tokenId: "7369"
+                address: "0x49cf6f5d44e70224e2e23fdcdd2c053f30ada28b",
+                tokenId: "16876"
             })
             if (resp.code === 200 && resp.data) {
                 setDetailData(deserialize(CollectionDetail, JSON.stringify(resp.data)))

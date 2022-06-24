@@ -3,6 +3,7 @@ import {setEthPrice, updateARP} from 'store/app';
 import { useAppDispatch } from 'store/hooks';
 import http from 'utils/http';
 import Layout from './pages/Layout/index'
+
 function App() {
   
   const action = useAppDispatch()

@@ -7,6 +7,7 @@ import {Activities} from "../../model/user";
 import {log} from "util";
 import {AddressAbbreviation} from "../marketplace/components/utils";
 import moment from "moment";
+import titlePrefixIcon from "../../assets/images/market/nft_activities_icon.png"
 
 const _Table = styled.table`
   thead {
@@ -84,11 +85,11 @@ export default function NFTActivities() {
     >
         <Flex
             flexDirection={"row"}
-            gap={".12"}
+            gap={".12rem"}
             borderBottom={"1px solid #0000001A"}
-            padding={".14rem .6rem"}
+            padding={".14rem .25rem"}
         >
-            <Icon width={".16rem"} height={".2rem"}/>
+            <Icon width={".24rem"} height={".24rem"} url={titlePrefixIcon}/>
             <Typography
                 fontWeight={500}
                 fontSize={".16rem"}

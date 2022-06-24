@@ -3,8 +3,22 @@ import styled from "styled-components";
 import paymentPrefixIcon from "../../assets/images/market/nft_pay_payment_prefix.png"
 import ethIcon from "../../assets/images/market/eth_icon_20x34.png"
 import payTypeSelectedIcon from "../../assets/images/market/nft_pay_type_selected.png"
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {tap} from "lodash";
+import {CollectionDetail} from "../../model/user";
+import BigNumber from "bignumber.js";
+import downPayIcon from "../../assets/images/market/down_pay_icon.png"
+import {numberFormat} from "../../utils/urls";
+import {Erc20} from "../../abi/Erc20";
+import {ContractAddresses} from "../../utils/addresses";
+import {useWeb3React} from "@web3-react/core";
+import http from "../../utils/http";
+import {message} from "antd";
+import {Npics} from "../../abi/Npics";
+import Modal from "../../component/Modal";
+import NFTPayProgressing from "./NFTPayProgressing";
+import NFTPayCongratulations from "./NFTPayCongratulations";
+import NFTPayWrong from "./NFTPayWrong";
 
 export function PopupTitle(props: {
     title: string,
@@ -76,8 +90,8 @@ function PayTypeButton(props: {
 
 enum PayType {
     None,
-    ETH = 1 << 1,
-    WETH = 1 << 2
+    ETH = 1 << 0,
+    WETH = 1 << 1
 }
 
 export const CancelButton = styled.button`
@@ -96,21 +110,189 @@ export const ConfirmButton = styled(CancelButton)`
   border: none;
   background: #000;
   color: #fff;
+
+  &:disabled {
+    background: rgba(0, 0, 0, .8);
+  }
 `
 
-export default function NFTPay() {
-    const [payType, setPayType] = useState<PayType>(PayType.ETH)
+export default function NFTPay(props: {
+    nft: CollectionDetail
+    availableBorrow: BigNumber
+    actualAmount: BigNumber
+    dismiss?(): void
+}) {
+    const [payType, setPayType] = useState<PayType>(PayType.None)
+    const [ethBalance, setETHBalance] = useState<BigNumber>()
+    const [wethBalance, setWETHBalance] = useState<BigNumber>()
+    const {library, account} = useWeb3React()
+    const [userSelectedAmount, setUserSelectedAmount] = useState<BigNumber>(new BigNumber(0))
+    const [ethAndWETHAmount, setEthAndWETHAmount] = useState<[BigNumber, BigNumber]>([new BigNumber(0), new BigNumber(0)])
+    const [canBuy, setCanBuy] = useState<boolean>(false)
+    const [hash, setHash] = useState<string>()
+
+    // progressing popup
+    const [progressingPopupOpen, setProgressingPopupOpen] = useState(false)
+    // success popup
+    const [successPopupOpen, setSuccessPopupOpen] = useState(false)
+    // failed popup
+    const [failedPopupOpen, setFailedPopupOpen] = useState(false)
+
+
+    useEffect(() => {
+        const inner = async () => {
+            if (account && library) {
+                // get eth balance
+                const balance = await library.getBalance(account)
+                setETHBalance(new BigNumber(balance.toString()))
+                // get weth balance
+                let signer = library.getSigner(account)
+                let weth = new Erc20(ContractAddresses.WETH, signer)
+                const wethBalance = await weth.balanceOf(account)
+                setWETHBalance(new BigNumber(wethBalance.toString()))
+            }
+        }
+        inner().finally()
+    }, [props.nft, account, library])
+
+    useEffect(() => {
+        let total = new BigNumber(0)
+        if (payType & PayType.ETH && ethBalance) {
+            total = total.plus(ethBalance)
+        }
+        if (payType & PayType.WETH && wethBalance) {
+            total = total.plus(wethBalance)
+        }
+        setUserSelectedAmount(total)
+        console.log(`user select total amount => ${total.div(10 ** 18).toFixed()}`)
+    }, [payType, ethBalance, wethBalance])
+
+    useEffect(() => {
+        // weth first, calculation and allocation
+        let weth = new BigNumber(0)
+        let eth = new BigNumber(0)
+        if (wethBalance && ethBalance) {
+            // only weth can pay
+            if (wethBalance.isGreaterThanOrEqualTo(props.actualAmount)) {
+                weth = props.actualAmount
+                eth = new BigNumber(0)
+            } else {
+                weth = wethBalance
+                eth = props.actualAmount.minus(wethBalance)
+            }
+        }
+        setEthAndWETHAmount([eth, weth])
+        console.log(`ETH: ${eth.div(10 ** 18).toFixed()}, WETH: ${weth.div(10 ** 18).toFixed()}`)
+    }, [
+        ethBalance,
+        wethBalance,
+        props.actualAmount
+    ])
+
+    useEffect(() => {
+        let [eth, weth] = ethAndWETHAmount;
+        setCanBuy(userSelectedAmount.isGreaterThanOrEqualTo(eth.plus(weth)))
+    }, [userSelectedAmount, ethAndWETHAmount])
+
+    useEffect(() => {
+        const inner = async () => await http.myPost(`/npics-nft/app-api/v1/neo/commitNeo`, {
+            hash: hash,
+            nftAddress: props.nft.address,
+            tokenId: props.nft.tokenId
+        })
+        if (hash && props.nft) {
+            inner().finally()
+        }
+    }, [hash])
+
+    async function checkoutBtnClick() {
+        try {
+            // check balance
+            if (!canBuy) {
+                message.error("Insufficient account balance")
+                return
+            }
+            // show progressing
+            setProgressingPopupOpen(true)
+            // get transaction data
+            let data = await getTradeDetailData()
+            if (!data) {
+                message.error("item has been sold")
+                return
+            }
+            /// call contract
+            let [eth, weth] = ethAndWETHAmount;
+            let contractParams = {
+                nft: props.nft.address,
+                tokenId: props.nft.tokenId,
+                tradeDetail: data,
+                loadAmt: props.availableBorrow,
+                payEthAmt: eth,
+                price: props.nft.currentBasePrice,
+                market: ContractAddresses.getMarketAddressByName(props.nft.market) ?? "",
+                wethAmt: weth,
+            }
+            const signer = library.getSigner(account)
+            const c = new Npics(signer)
+            let tx: any;
+            if (payType & PayType.WETH) {
+                tx = await c.downPayWithWETH(contractParams)
+            } else {
+                tx = await c.downPayWithETH(contractParams)
+            }
+            setHash(tx.hash)
+            setProgressingPopupOpen(false)
+            setSuccessPopupOpen(true)
+        } catch (e) {
+            setProgressingPopupOpen(false)
+            setFailedPopupOpen(true)
+        }
+    }
+
+    async function getTradeDetailData(): Promise<string | undefined> {
+        const resp: any = await http.myPost(`/npics-nft/app-api/v2/nft/route`, {
+            address: props.nft.address,
+            amount: 1,
+            balanceToken: "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            sender: account,
+            standard: props.nft.standard,
+            tokenId: props.nft.tokenId
+        })
+        if (resp.code === 200 && resp.data.transaction) {
+            return resp.data.transaction
+        } else {
+            return undefined
+        }
+    }
 
     return <Flex
-        // TODO: debug
-        marginTop={"120px"}
         width={"8.8rem"}
         background={"#fff"}
         borderRadius={".1rem"}
         padding={".4rem"}
         flexDirection={"column"}
     >
+        {/* popup loading */}
+        <Modal isOpen={progressingPopupOpen}>
+            {props.nft && <NFTPayProgressing nft={props.nft}/>}
+        </Modal>
+        {/* popup success ✅ */}
+        <Modal isOpen={successPopupOpen} onRequestClose={() => {
+            setSuccessPopupOpen(false)
+            props.dismiss?.() // success dismiss all popup
+        }}>
+            {props.nft && hash ? <NFTPayCongratulations hash={hash} nft={props.nft!}/> : null}
+        </Modal>
+        {/* popup failed ❌ */}
+        <Modal isOpen={failedPopupOpen}>
+            <NFTPayWrong back={() => {
+                setFailedPopupOpen(false)
+            }}/>
+        </Modal>
+
+        {/* title */}
         <PopupTitle title={"Complete Checkout"} canClose={true}></PopupTitle>
+
         {/* nft info */}
         <Grid
             marginTop={".3rem"}
@@ -130,21 +312,23 @@ export default function NFTPay() {
             gridColumnGap={".16rem"}
             gridRowGap={".16rem"}
         >
-            <Grid gridArea={"cover"}><Cover src={"https://tva1.sinaimg.cn/large/e6c9d24egy1h3g3k3kx7lj20e80e8q3j.jpg"}/></Grid>
+            <Grid gridArea={"cover"}>
+                <Cover src={props.nft.imageUrl}/>
+            </Grid>
             <Grid gridArea={"title"}>
                 <Typography
                     color={"rgba(0,0,0,.5)"}
                     fontSize={".14rem"}
                     fontWeight={500}
                 >
-                    Bored Ape Yacht Club
+                    {props.nft.collectionName}
                 </Typography>
                 <Typography
                     color={"#000"}
                     fontSize={".2rem"}
                     fontWeight={700}
                     marginTop={".06rem"}
-                >Bored Ape Yacht Club #1252</Typography>
+                >{`${props.nft.collectionName} #${props.nft.tokenId}`}</Typography>
             </Grid>
             <Grid
                 gridArea={"payment"}
@@ -153,11 +337,12 @@ export default function NFTPay() {
                 padding={".28rem"}
             >
                 <Flex flexDirection={"row"} alignItems={"center"}>
-                    <Icon width={".24rem"} url={paymentPrefixIcon}/>
+                    <Icon width={".24rem"} height={".24rem"} url={downPayIcon}/>
                     <Typography
                         marginLeft={".1rem"}
                         fontWeight={700}
                         fontSize={".16rem"}
+                        color={"#FF490F"}
                     >Down Payment</Typography>
                     <Flex flex={1}></Flex>
                     <Icon width={".12rem"} height={".18rem"} url={ethIcon}/>
@@ -165,7 +350,7 @@ export default function NFTPay() {
                         fontWeight={700}
                         fontSize={".24rem"}
                         marginLeft={".1rem"}
-                    >999.99</Typography>
+                    >{numberFormat(props.actualAmount.div(10 ** 18).toFixed())}</Typography>
                 </Flex>
             </Grid>
             <Grid
@@ -188,7 +373,7 @@ export default function NFTPay() {
                         fontSize={".16rem"}
                         fontWeight={500}
                         marginLeft={".06rem"}
-                    >998.123</Typography>
+                    >{props.nft.basePriceFormat()}</Typography>
                 </Flex>
                 <Flex alignItems={"center"}>
                     <Typography
@@ -203,7 +388,7 @@ export default function NFTPay() {
                         fontSize={".16rem"}
                         fontWeight={500}
                         marginLeft={".06rem"}
-                    >998.123</Typography>
+                    >{numberFormat(props.availableBorrow.div(10 ** 18).toFixed())}</Typography>
                 </Flex>
             </Grid>
             <Grid gridArea={"payTitle"}>
@@ -222,7 +407,7 @@ export default function NFTPay() {
                 <PayTypeButton
                     isSelected={(payType & PayType.ETH) > 0}
                     name={"ETH"}
-                    balance={"9.090"}
+                    balance={ethBalance ? numberFormat(ethBalance.div(10 ** 18).toFixed()) : "---"}
                     tap={() => {
                         let oldPayType = payType
                         setPayType(payType & PayType.ETH ? oldPayType & ~PayType.ETH : oldPayType |= PayType.ETH)
@@ -230,7 +415,7 @@ export default function NFTPay() {
                 <PayTypeButton
                     isSelected={(payType & PayType.WETH) > 0}
                     name={"WETH"}
-                    balance={"90.90"}
+                    balance={wethBalance ? numberFormat(wethBalance.div(10 ** 18).toFixed()) : "---"}
                     tap={() => {
                         let oldPayType = payType
                         setPayType(payType & PayType.WETH ? oldPayType & ~PayType.WETH : oldPayType |= PayType.WETH)
@@ -249,13 +434,13 @@ export default function NFTPay() {
                         style={{
                             "userSelect": "none"
                         }}
-                    >checking this box,I agree to NPics's <a href={""}>Terms of service</a></Typography>
+                    >Checking this box,I agree to NPics's <a href={""}>Terms of service</a></Typography>
                 </Flex>
             </label>
         </Box>
         <Flex alignItems={"center"} justifyContent={"center"} gap={".2rem"} marginTop={".4rem"}>
-            <CancelButton type={"button"}>Cancel</CancelButton>
-            <ConfirmButton type={"button"}>Checkout</ConfirmButton>
+            <CancelButton type={"button"} onClick={() => props.dismiss?.()}>Cancel</CancelButton>
+            <ConfirmButton type={"button"} onClick={checkoutBtnClick}>Checkout</ConfirmButton>
         </Flex>
     </Flex>
 }
