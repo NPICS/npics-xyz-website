@@ -2,6 +2,7 @@ import { useAppSelector } from '../store/hooks';
 import { DependencyList, EffectCallback, useEffect, useRef } from 'react';
 import { useState } from "react";
 import BigNumber from 'bignumber.js';
+import { numberFormat } from './urls';
 interface icon {
   darkIcon: string,
   lightIcon: string
@@ -54,6 +55,8 @@ export const useEthPrice = (value: BigNumber | undefined) => {
   useEffect(() => {
     if(!value) return
     const OrgPrice = new BigNumber(value.toString()).multipliedBy(EthPrice).div(10 ** 18)
+    
+    // console.log(numberFormat(OrgPrice.toNumber()))
     setPrice(OrgPrice)
     // eslint-disable-next-line
   },[EthPrice,value])

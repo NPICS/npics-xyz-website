@@ -16,6 +16,7 @@ import { useNavigate } from "react-router-dom";
 import NotFound from 'component/NotFound';
 import { useUpdateEffect } from 'utils/hook';
 import aa from 'abi/aa.json'
+import { Icon } from 'component/Box';
 interface Result {
   createTime: string,
   id: number,
@@ -52,10 +53,9 @@ function MyAgreement(props:IProps) {
           <div>
             <span title={row.collectionName}>{row.collectionName}</span>
             <span>{`# ${row.tokenId}`}</span>
-
           </div>
           <div>
-            Floor: <span><img src={imgurl.dashboard.greyPrice7} alt="" />{row.floorPrice}</span>
+            Floor: <span><img src={imgurl.dashboard.ethGrey18} alt="" />{row.floorPrice}</span>
           </div>
         </div>
       </div>
@@ -68,7 +68,7 @@ function MyAgreement(props:IProps) {
       render: (text, row) => <div className='contract' onClick={() => jumpToEthscan(row)}>
         <span title={row.collectionName}>NEO-{row.collectionName}</span>
         #{text}
-        <img src={imgurl.dashboard.href} alt="" />
+        <Icon width=".16rem" height=".16rem" src={imgurl.dashboard.exportBlack18} alt="" />
       </div>
     },
     {
@@ -77,7 +77,7 @@ function MyAgreement(props:IProps) {
       key: 'debtString',
       align: 'center',
       render: (text) => <div className='imgPrice'>
-        <img src={imgurl.dashboard.redPrice14} alt="" />
+        <Icon width=".18rem" height=".18rem" src={imgurl.dashboard.ethBlack18} alt="" />
         {text}
       </div>
     },
@@ -87,7 +87,7 @@ function MyAgreement(props:IProps) {
       align: 'center',
       key: 'liquidationPrice',
       render: (text, row) => <div className='imgPrice'>
-        <img src={imgurl.dashboard.redPrice14} alt="" />
+        <Icon width=".18rem" height=".18rem" src={imgurl.dashboard.ethBlack18} alt="" />
         {new BigNumber(row.debt.toString()).div('0.9').div(10 ** 18).toFixed(4, 1)}
       </div>
     },

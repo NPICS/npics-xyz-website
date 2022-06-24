@@ -90,7 +90,7 @@ const Icon = styled.img<IconProps>`
   user-select: none;
   //pointer-events: none;
   width: ${props => props.width};
-  height: ${props => props.height ?? props.width};
+  height: ${props => props.height ?? "auto"};
   object-fit: contain;
   -webkit-user-drag: none;
   

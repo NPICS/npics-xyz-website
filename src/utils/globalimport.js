@@ -111,6 +111,8 @@ import reback from '../assets/images/dashboard/reback.png'
 import Cancel from '../assets/images/dashboard/Cancel.png'
 import export14 from '../assets/images/dashboard/export14.png'
 import success from '../assets/images/dashboard/success.gif'
+import ethBlack18 from '../assets/images/dashboard/ethBlack18.png'
+import exportBlack18 from '../assets/images/dashboard/exportBlack18.png'
 
 import ETH36 from '../assets/images/eth_icon.png'
 import WETH36 from '../assets/images/weth_icon.png'
@@ -223,6 +225,8 @@ export const imgurl = {
     OpenseaBuy
   },
   dashboard: {
+    exportBlack18,
+    ethBlack18,
     reback,
     rewardBend,
     navVaults,

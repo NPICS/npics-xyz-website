@@ -16,6 +16,7 @@ import {ethers} from "ethers";
 import Modal from "../../component/Modal";
 import NFTPay from "./NFTPay";
 import { globalVariable } from "utils/globalVariable";
+import { useNavigate } from 'react-router-dom';
 
 const Shadow = styled(Flex)`
   background: #fff;
@@ -70,7 +71,8 @@ const OtherNFT = styled.img`
 
 function MoreNFT(props: {
     img: string,
-    total?: number
+    total?: number,
+    tap?(): void
 }) {
     return <Box position={"relative"}
                 borderRadius={".1rem"}
@@ -79,6 +81,7 @@ function MoreNFT(props: {
                 style={{
                     "cursor": "pointer"
                 }}
+                onClick={props.tap}
     >
         <OtherNFT src={props.img}/>
         <Flex
@@ -109,6 +112,7 @@ export default function NFTPrice(props: {
     const [recommendNFTTotal, setRecommendNFTTotal] = useState<number | undefined>(undefined)
     const [availableBorrow, setAvailableBorrow] = useState<BigNumber | undefined>(undefined)
     const [actualAmount, setActualAmount] = useState<BigNumber | undefined>(undefined)
+    const navigate = useNavigate()
 
     const [buyPopOpen, setBuyPopOpen] = useState<boolean>(false)
 
@@ -225,9 +229,11 @@ export default function NFTPrice(props: {
             {
                 recommendNFTs.map((nft, idx) => {
                     if (recommendNFTs.length === idx + 1) {
-                        return <MoreNFT img={nft.imageUrl} total={recommendNFTTotal}/>
+                        return <MoreNFT tap={() => {
+                            navigate(`/marketPlace/collections/${nft?.address}`)
+                        }} img={nft.imageUrl} total={recommendNFTTotal}/>
                     } else {
-                        return <OtherNFT src={nft.imageUrl}/>
+                        return <OtherNFT src={nft.imageUrl} onClick={() => {navigate(`/nftDetail/${nft.address}/${nft.tokenId}`,{replace:true})}}/>
                     }
                 })
             }

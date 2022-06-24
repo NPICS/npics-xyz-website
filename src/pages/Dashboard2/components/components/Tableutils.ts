@@ -78,8 +78,8 @@ export const BgTable = styled.div`
     font-size: .16rem;
     color: #000;
     &>img {
-      width: .14rem;
-      height: .22rem;
+      /* width: .14rem;
+      height: .22rem; */
       margin-right: .06rem;
     }
   }
