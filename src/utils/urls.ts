@@ -1,5 +1,6 @@
 import BigNumber from "bignumber.js";
 import currency from "currency.js";
+import numeral from "numeral";
 
 export const urls = {
   twitter: "https://twitter.com/NPicsNFT",
@@ -31,8 +32,5 @@ export function numberFormat(
   num: number | string,
   maxFractionDigits: number = 4
 ): string {
-  return currency(num).format({
-    precision: maxFractionDigits,
-    symbol: ""
-  })
+  return numeral(num).format("0,0.[0000]")
 }

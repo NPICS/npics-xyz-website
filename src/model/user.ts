@@ -52,6 +52,7 @@ export class Collections {
   totalShelves!: number;
   dayVolume!: number;
   description?: string
+  bannerImageUrl?: string
 
   @Expose()
   get sFloorPrice() {
@@ -134,6 +135,7 @@ export class CollectionDetail extends CollectionItems {
   availableBorrow!: BigNumber
   totalAmount!: BigNumber
   totalSupply!: number;
+  bannerImageUrl?: string
 
   @Expose()
   get agreementPrice() {
@@ -184,6 +186,7 @@ export class Activities {
 
   @Expose()
   amountFormat(): string {
-    return this.amount.div(10 ** this.decimals).toFixed(2).toString()
+    // return this.amount.div(10 ** this.decimals).toFixed(2).toString()
+    return numberFormat(this.amount.div(10 ** this.decimals).toNumber())
   }
 }

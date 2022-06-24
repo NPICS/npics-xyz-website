@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {useEffect, useState} from "react";
 import http from "../../utils/http";
 import {deserializeArray} from "class-transformer";
-import {Activities} from "../../model/user";
+import {Activities, CollectionDetail} from "../../model/user";
 import {log} from "util";
 import {AddressAbbreviation} from "../marketplace/components/utils";
 import moment from "moment";
@@ -59,14 +59,16 @@ function PriceWithSymbol(props: {
     </Flex>
 }
 
-export default function NFTActivities() {
+export default function NFTActivities(props: {
+    item?: CollectionDetail
+}) {
     const [listData, setListData] = useState<Activities[]>([])
 
     useEffect(() => {
         const inner = async () => {
             let resp: any = await http.myPost(`/npics-nft/app-api/v2/nft/getNftActivities`, {
-                address: "0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d",
-                tokenId: "7369"
+                address: props.item?.address,
+                tokenId: props.item?.tokenId
             })
             if (resp.code === 200) {
                 let items = deserializeArray(Activities, JSON.stringify(resp.data))
@@ -75,7 +77,7 @@ export default function NFTActivities() {
             }
         }
         inner().catch((e) => console.error(`Activities Request Error => ${e}`))
-    }, [])
+    }, [props.item])
 
     return <Flex
         flexDirection={"column"}

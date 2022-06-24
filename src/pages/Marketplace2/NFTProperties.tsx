@@ -34,11 +34,13 @@ function PropertiesCell(props: {
                 fontSize={".14rem"}
                 fontWeight={500}
                 color={"#ff8933"}
+                textAlign={"center"}
             >{props.title.toUpperCase()}</Typography>
             <Typography
                 fontSize={`.16rem`}
                 fontWeight={800}
                 color={`#000`}
+                textAlign={'center'}
             >{props.value}</Typography>
             <Typography
                 fontSize={`.14rem`}

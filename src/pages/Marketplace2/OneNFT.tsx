@@ -7,11 +7,12 @@ import NFTProperties from "./NFTProperties";
 import NFTActivities from "./NFTActivities";
 import NFTShare from "./NFTShare";
 import NFTPrice from "./NFTPrice";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import http from "../../utils/http";
 import {CollectionDetail} from "../../model/user";
 import {deserialize} from "class-transformer";
 import { useParams, useNavigate } from 'react-router-dom';
+import {Banner} from "./Market";
 
 function Label(props: {
     icon: string,
@@ -88,33 +89,39 @@ export default function OneNFT() {
     }, [params])
 
     return <Box
-        margin={"160px auto"}
-        width={"16rem"}
+        padding={"1.6rem"}
+        // width={"16rem"}
+        background={"transparent"}
+        position={"relative"}
     >
-        {/* nav */}
-        <Flex flexDirection={"row"} gap={".15rem"} alignItems={"start"}>
-            <Icon height={".36rem"} width={".36rem"} src={PopIcon} onClick={ () => navigate(`/marketPlace/collections/${detailData?.address}`) }/>
-            <Flex flexDirection={"column"} gap={".05rem"}>
-                <Typography fontSize={".16rem"} color={"#fff"} fontWeight={500}
-                            fontFamily={"Montserrat"}>{detailData?.collectionName}</Typography>
-                <Typography fontSize={".3rem"} color={"#fff"} fontWeight={800}
-                            fontFamily={"Montserrat"}>{`${detailData?.collectionName} #${detailData?.tokenId}`}</Typography>
-                <Flex flexDirection={"row"} gap={".15rem"}>
-                    <Label
-                        icon={imgurl.market.collect2}
-                        num={detailData?.rarityScore ?? 0}
-                    />
+        {/* Banner */}
+        <Banner url={detailData?.bannerImageUrl}/>
+        <Box position={"relative"} zIndex={1}>
+            {/* nav */}
+            <Flex flexDirection={"row"} gap={".15rem"} alignItems={"start"}>
+                <Icon height={".36rem"} width={".36rem"} src={PopIcon} onClick={ () => navigate(`/marketPlace/collections/${detailData?.address}`) }/>
+                <Flex flexDirection={"column"} gap={".05rem"}>
+                    <Typography fontSize={".16rem"} color={"#fff"} fontWeight={500}
+                                fontFamily={"Montserrat"}>{detailData?.collectionName}</Typography>
+                    <Typography fontSize={".3rem"} color={"#fff"} fontWeight={800}
+                                fontFamily={"Montserrat"}>{`${detailData?.collectionName} #${detailData?.tokenId}`}</Typography>
+                    <Flex flexDirection={"row"} gap={".15rem"}>
+                        <Label
+                            icon={imgurl.market.collect2}
+                            num={detailData?.rarityScore ?? 0}
+                        />
+                    </Flex>
                 </Flex>
             </Flex>
-        </Flex>
-        {/* main */}
-        <NFTMain>
-            <Grid gridArea={"cover"}><Cover src={detailData?.imageUrl}/></Grid>
-            <Grid gridArea={"price"}><NFTPrice item={detailData}/></Grid>
-            <Grid gridArea={"info"}><NFTInfo item={detailData}/></Grid>
-            <Grid gridArea={"props"}><NFTProperties item={detailData}/></Grid>
-            <Grid gridArea={"activities"}><NFTActivities/></Grid>
-            <Grid gridArea={"share"}><NFTShare/></Grid>
-        </NFTMain>
+            {/* main */}
+            <NFTMain>
+                <Grid gridArea={"cover"}><Cover src={detailData?.imageUrl}/></Grid>
+                <Grid gridArea={"price"}><NFTPrice item={detailData}/></Grid>
+                <Grid gridArea={"info"}><NFTInfo item={detailData}/></Grid>
+                <Grid gridArea={"props"}><NFTProperties item={detailData}/></Grid>
+                <Grid gridArea={"activities"}><NFTActivities item={detailData}/></Grid>
+                <Grid gridArea={"share"}><NFTShare item={detailData}/></Grid>
+            </NFTMain>
+        </Box>
     </Box>
 }

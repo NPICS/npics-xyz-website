@@ -22,8 +22,7 @@ const Value = styled(Title)`
 `;
 
 function AddressLink(props: {
-    address: string,
-    url?: string
+    address?: string
 }) {
     return <Flex
         alignItems={"center"}
@@ -33,10 +32,12 @@ function AddressLink(props: {
             "cursor": "pointer"
         }}
         onClick={() => {
-            window.open(props.url)
+            if (props.address) {
+                window.open(`https://etherscan.io/address/${props.address}`)
+            }
         }}
     >
-        <Value>{props.address}</Value>
+        <Value>{AddressAbbreviation(props.address) ?? "---"}</Value>
         <Icon width={".16rem"} src={addressLinkIcon}/>
     </Flex>
 }
@@ -86,9 +87,9 @@ export default function NFTInfo(props: {
         >
             <Title>Contract Address</Title>
             {/* TODO: link to etherscan nft */}
-            <AddressLink address={AddressAbbreviation(props.item?.address) ?? "---"}/>
+            <AddressLink address={props.item?.address}/>
             <Title>Owner</Title>
-            <AddressLink address={AddressAbbreviation(owner) ?? "---"}/>
+            <AddressLink address={owner}/>
             <Title>Token ID</Title>
             <Value>{props.item?.tokenId}</Value>
             <Title>Token Standard</Title>

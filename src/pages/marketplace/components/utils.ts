@@ -40,5 +40,5 @@ export function AddressAbbreviation(address: string | undefined | null): string 
 }
 
 export function percentageFormat(val: number): string {
-  return `${(val * 100).toFixed(2)}%`
+  return `${val > 0 ? '+' : ''}${(val * 100).toFixed(2)}%`
 }
