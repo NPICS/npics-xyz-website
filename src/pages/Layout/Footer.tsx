@@ -105,7 +105,7 @@ function Footer() {
     <FooterWrap>
       <div className='footer-left'>
         <a href="/">
-          <Icon width='1.4rem' height='.5rem' url={ isHome ? imgurl.logo : imgurl.lightLogo} />
+          <Icon width='1.4rem' height='.5rem' src={ isHome ? imgurl.logo : imgurl.lightLogo} />
         </a>
         <span>Copyright © 2022 Npics Foundation Singapore LTD. rights reserved</span>
       </div>
@@ -114,7 +114,7 @@ function Footer() {
           {
             terms.map((item) => {
               return <a key={item.name} href={item.link} target="_blank" rel="noreferrer">
-                <Icon width='.22rem' height='.22rem' url={isHome ? item.darkIcon : item.lightIcon} />
+                <Icon width='.22rem' height='.22rem' src={isHome ? item.darkIcon : item.lightIcon} />
               </a>
             })
           }

@@ -62,7 +62,7 @@ export default function MyRewards() {
         gap={".2rem"}
       >
         <Flex gap={".17rem"} alignItems={"center"}>
-          <Icon width=".4rem" height=".4rem" url={imgurl.dashboard.rewardBend}/>
+          <Icon width=".4rem" height=".4rem" src={imgurl.dashboard.rewardBend}/>
           <Typography fontSize={".18rem"} fontWeight={"500"} color={"#000"}>BEND</Typography>
         </Flex>
 

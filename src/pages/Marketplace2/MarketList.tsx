@@ -126,7 +126,7 @@ export default function MarketList() {
                     gap={".05rem"}
                     minWidth={"1.36rem"}>
                     <Flex alignItems={"center"} gap={".06rem"}>
-                        <Icon width={".12rem"} height={".16rem"} url={imgurl.market.blackPrice}/>
+                        <Icon width={".12rem"} height={".16rem"} src={imgurl.market.blackPrice}/>
                         <Typography fontSize={".2rem"} color={"#000"}>{
                             nft && numberFormat(nft.floorPrice.toNumber())
                         }</Typography>
@@ -142,7 +142,7 @@ export default function MarketList() {
                     gap={".05rem"}
                     minWidth={"1.36rem"}>
                     <Flex alignItems={"center"} gap={".06rem"}>
-                        <Icon width={".12rem"} height={".16rem"} url={imgurl.market.blackPrice}/>
+                        <Icon width={".12rem"} height={".16rem"} src={imgurl.market.blackPrice}/>
                         <Typography fontSize={".2rem"}
                                     color={"#000"}>{nft && numberFormat(nft.floorPrice.toNumber())}</Typography>
                     </Flex>
@@ -207,9 +207,9 @@ export default function MarketList() {
                 </Select>
                 <Flex flex={1}></Flex>
                 <Flex flexDirection={"row"} alignItems={"center"} gap={".2rem"}>
-                    <Icon height={".24rem"} width={".24rem"} url={compactMode ? LooseUnselectIcon : LooseSelectIcon}
+                    <Icon height={".24rem"} width={".24rem"} src={compactMode ? LooseUnselectIcon : LooseSelectIcon}
                           onClick={() => setCompactMode(false)}/>
-                    <Icon height={".24rem"} width={".24rem"} url={compactMode ? CompactSelectIcon : CompactUnselectIcon}
+                    <Icon height={".24rem"} width={".24rem"} src={compactMode ? CompactSelectIcon : CompactUnselectIcon}
                           onClick={() => setCompactMode(true)}/>
                 </Flex>
             </Flex>

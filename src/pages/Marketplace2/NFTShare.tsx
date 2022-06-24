@@ -16,7 +16,7 @@ function IconWithBorder(props: {
     >
         <Icon
             width={".24rem"}
-            url={props.icon}
+            src={props.icon}
         />
     </Flex>
 }

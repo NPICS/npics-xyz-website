@@ -32,7 +32,7 @@ function Label(props: {
             // TODO: to rank
         }}
     >
-        <Icon width={".2rem"} url={props.icon}/>
+        <Icon width={".2rem"} src={props.icon}/>
         <Typography
             fontSize={".14rem"}
             fontWeight={500}
@@ -93,7 +93,7 @@ export default function OneNFT() {
     >
         {/* nav */}
         <Flex flexDirection={"row"} gap={".15rem"} alignItems={"start"}>
-            <Icon height={".36rem"} width={".36rem"} url={PopIcon} onClick={ () => navigate(`/marketPlace/collections/${detailData?.address}`) }/>
+            <Icon height={".36rem"} width={".36rem"} src={PopIcon} onClick={ () => navigate(`/marketPlace/collections/${detailData?.address}`) }/>
             <Flex flexDirection={"column"} gap={".05rem"}>
                 <Typography fontSize={".16rem"} color={"#fff"} fontWeight={500}
                             fontFamily={"Montserrat"}>{detailData?.collectionName}</Typography>

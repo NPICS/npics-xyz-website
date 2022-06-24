@@ -37,7 +37,7 @@ function AddressLink(props: {
         }}
     >
         <Value>{props.address}</Value>
-        <Icon width={".16rem"} url={addressLinkIcon}/>
+        <Icon width={".16rem"} src={addressLinkIcon}/>
     </Flex>
 }
 
@@ -71,7 +71,7 @@ export default function NFTInfo(props: {
             borderBottom={"1px solid #0000001A"}
             padding={".14rem .25rem"}
         >
-            <Icon width={".24rem"} height={".24rem"} url={titlePrefixIcon}/>
+            <Icon width={".24rem"} height={".24rem"} src={titlePrefixIcon}/>
             <Typography
                 fontWeight={500}
                 fontSize={".16rem"}

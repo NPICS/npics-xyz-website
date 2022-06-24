@@ -166,9 +166,9 @@ export default function NFTPrice(props: {
         <Flex gap={".1rem"}>
             {/* Price */}
             <Shadow>
-                <TipsIcon width={".14rem"} url={tipsIcon}/>
+                <TipsIcon width={".14rem"} src={tipsIcon}/>
                 <Flex flexDirection={"row"} alignItems={"center"}>
-                    <Icon width={".12rem"} height={".1898rem"} url={ethIcon}/>
+                    <Icon width={".12rem"} height={".1898rem"} src={ethIcon}/>
                     <Typography
                         fontSize={".24rem"}
                         fontWeight={700}
@@ -195,7 +195,7 @@ export default function NFTPrice(props: {
                     </Typography>
                 </Flex>
                 <Flex alignItems={"center"} gap={".1rem"}>
-                    <Icon width={".18rem"} url={""}/>
+                    <Icon width={".22rem"} src={props.item?.marketIcon()}/>
                     <Typography
                         fontSize={".14rem"}
                         fontWeight={500}
@@ -205,7 +205,7 @@ export default function NFTPrice(props: {
             </Shadow>
             {/* Vault Apr */}
             <Shadow>
-                <TipsIcon width={".14rem"} url={tipsIcon}/>
+                <TipsIcon width={".14rem"} src={tipsIcon}/>
                 <Typography
                     color={"#FF490F"}
                     fontSize={".24rem"}
@@ -235,7 +235,7 @@ export default function NFTPrice(props: {
             flexDirection={"column"}
             alignItems={"start"}
         >
-            <TipsIcon width={".14rem"} url={tipsIcon}/>
+            <TipsIcon width={".14rem"} src={tipsIcon}/>
             <Typography
                 fontSize={".16rem"}
                 fontWeight={500}
@@ -243,7 +243,7 @@ export default function NFTPrice(props: {
             >Down Payment</Typography>
             <Flex alignItems={"end"} marginTop={".22rem"}>
                 <Flex gap={".14rem"} alignItems={"center"}>
-                    <Icon width={".2rem"} height={".34rem"} url={ethIcon}/>
+                    <Icon width={".2rem"} height={".34rem"} src={ethIcon}/>
                     <Typography
                         fontSize={".4rem"}
                         fontWeight={700}

@@ -59,7 +59,7 @@ export default function NFTPayWrong(props: {
                     fontWeight={500}
                     color={"rgba(0,0,0,.5)"}
                 >View on etherscan</Typography>
-                <Icon width={".14rem"} height={".14rem"} url={nftLinkIcon}/>
+                <Icon width={".14rem"} height={".14rem"} src={nftLinkIcon}/>
             </Flex>
         </Flex>
         <Flex alignItems={"center"} justifyContent={"center"} gap={".2rem"} marginTop={".3rem"}>

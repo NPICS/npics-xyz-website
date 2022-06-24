@@ -21,7 +21,7 @@ export default function NotFound(props:IProps) {
     alignItems={"center"}
     padding={".3rem 0"}
   >
-    <Icon width={"1rem"} height={"1rem"} url={imgurl.notData}></Icon>
+    <Icon width={"1rem"} height={"1rem"} src={imgurl.notData}></Icon>
     <Typography
       fontSize={".16rem"}
       fontWeight={"700"}
