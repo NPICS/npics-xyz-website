@@ -116,7 +116,7 @@ export default function Routers() {
     },
     {
       path: "/web3",
-      component: <OneNFT />,
+      component: <Market />,
       children: [
         {
           path: "collections/:address",

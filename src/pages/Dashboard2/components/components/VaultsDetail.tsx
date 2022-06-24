@@ -247,7 +247,7 @@ export default function VaultsDetail() {
         gap={".2rem"}
         alignItems={"center"}
       >
-        <Icon width='.36rem' height='.36rem' url={imgurl.dashboard.reback} />
+        <Icon width='.36rem' height='.36rem' src={imgurl.dashboard.reback} />
         <Typography fontSize={".3rem"} fontWeight={"800"} color={"#fff"}>Repay</Typography>
       </Flex>
 
@@ -278,7 +278,7 @@ export default function VaultsDetail() {
           gridTemplateColumns={"3.4rem auto"}
           gridGap={".3rem"}
         >
-          <Icon borderRadius={"10px"} width='3.4rem' height='3.4rem' url={activities?.imageUrl ?? "https://tva1.sinaimg.cn/large/e6c9d24egy1h3g0c8ugwqj20v50jhgrr.jpg"} />
+          <Icon borderRadius={"10px"} width='3.4rem' height='3.4rem' src={activities?.imageUrl ?? "https://tva1.sinaimg.cn/large/e6c9d24egy1h3g0c8ugwqj20v50jhgrr.jpg"} />
           <Grid
             gridTemplateAreas='"Minted Profit" "Numerical Numerical"'
             gridGap={".1rem"}
@@ -405,7 +405,7 @@ export default function VaultsDetail() {
           >
             <Flex alignItems={"center"}>
             {walletBalance && new BigNumber(walletBalance.toString()).div(10 ** 18).dp(4, 1).toFixed()}
-              <Icon width='.22rem' height='.22rem' url={imgurl.home.ethBlack22} />
+              <Icon width='.22rem' height='.22rem' src={imgurl.home.ethBlack22} />
             </Flex>
             <Typography>Wallet balance</Typography>
           </GridItem>
@@ -420,7 +420,7 @@ export default function VaultsDetail() {
               flex="auto"
             >
               <Typography fontSize={".3rem"} fontWeight={"800"} color={"#000"}>{payDebt && payDebt.div(10 ** 18).toFixed(4, 1) || 0}</Typography>
-              <Icon width='.4rem' height='.4rem' url={imgurl.home.ethBlack40} />
+              <Icon width='.4rem' height='.4rem' src={imgurl.home.ethBlack40} />
             </Flex>
 
             <Box marginTop=".36rem">

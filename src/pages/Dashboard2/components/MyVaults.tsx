@@ -54,7 +54,7 @@ export default function MyVaults() {
             fontSize={".14rem"}
             color={"rgba(0,0,0,.5)"}
           >Total Debt：</Typography>
-          <Icon width=".18rem" height=".18rem" url={imgurl.dashboard.ethGrey18} />
+          <Icon width=".18rem" height=".18rem" src={imgurl.dashboard.ethGrey18} />
           <Typography
             fontWeight={500}
             fontSize={".14rem"}

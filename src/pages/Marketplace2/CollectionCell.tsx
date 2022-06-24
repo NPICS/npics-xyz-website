@@ -3,6 +3,7 @@ import styled from "styled-components";
 import {imgurl} from "../../utils/globalimport";
 import {CollectionItems} from "../../model/user";
 import CellTagIcon from "../../assets/images/market_cell_tags.png"
+import ethIcon from "../../assets/images/market/eth_icon_20x34.png"
 
 const Cover = styled.img`
   display: block;
@@ -10,6 +11,13 @@ const Cover = styled.img`
   overflow: hidden;
   object-fit: cover;
   background: #e5e5e5;
+`
+
+const IconTest = styled.img`
+  display: block;
+  width: .22rem;
+  height: .22rem;
+  user-select: none;
 `
 
 const NoWarpTypography = styled(Typography)`
@@ -50,7 +58,7 @@ export default function CollectionCell(props: ICollectionCellProps) {
             top={".08rem"}
             left={".08rem"}
             zIndex={"1"}>
-            <Icon height={".2rem"} width={".2rem"} url={CellTagIcon}/>
+            <Icon height={".2rem"} width={".2rem"} src={CellTagIcon}/>
             <Typography
                 color={"#000"}
                 fontSize={".16rem"}
@@ -67,14 +75,19 @@ export default function CollectionCell(props: ICollectionCellProps) {
             <Flex
                 alignItems={"center"}
                 justifyContent={"space-between"}
-                gap={".06rem"}>
+                gap={".06rem"}
+                marginTop={".1rem"}
+            >
                 <NoWarpTypography display={props.compact ? `none` : `block`}>Down Payment</NoWarpTypography>
                 <Flex
                     alignItems={"center"}
                     gap={".06rem"}>
-                    <Icon height={"15px"} width={"15px"} url={imgurl.market.collect2}/>
+                    <Icon height={".15rem"} width={".1rem"} src={ethIcon}/>
                     <Typography>89.90</Typography>
                 </Flex>
+                <Flex flex={1}></Flex>
+                <IconTest src={props.item.marketIcon()}  alt=""/>
+                {/*<Icon width={".22rem"} height={".22rem"} url={props.item.marketIcon()} />*/}
             </Flex>
         </Box>
 

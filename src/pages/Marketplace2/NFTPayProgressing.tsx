@@ -21,7 +21,7 @@ function MarketLabel(props: {
             "cursor": "pointer"
         }}
     >
-        <Icon width={".28rem"} height={".28rem"} url={props.icon} />
+        <Icon width={".28rem"} height={".28rem"} src={props.icon} />
         <Typography
             fontWeight={500}
             fontSize={".2rem"}

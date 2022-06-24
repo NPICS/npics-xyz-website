@@ -66,7 +66,7 @@ function PayTypeButton(props: {
         <Icon
             width={".2rem"}
             height={".14rem"}
-            url={payTypeSelectedIcon}
+            src={payTypeSelectedIcon}
             style={{
                 "display": props.isSelected ? "block" : "none"
             }}
@@ -78,7 +78,7 @@ function PayTypeButton(props: {
             marginLeft={".1rem"}
         >{props.name}</Typography>
         <Flex flex={1}></Flex>
-        <Icon width={".12rem"} height={".19rem"} url={ethIcon}/>
+        <Icon width={".12rem"} height={".19rem"} src={ethIcon}/>
         <Typography
             fontSize={".2rem"}
             fontWeight={500}
@@ -337,7 +337,7 @@ export default function NFTPay(props: {
                 padding={".28rem"}
             >
                 <Flex flexDirection={"row"} alignItems={"center"}>
-                    <Icon width={".24rem"} height={".24rem"} url={downPayIcon}/>
+                    <Icon width={".24rem"} height={".24rem"} src={downPayIcon}/>
                     <Typography
                         marginLeft={".1rem"}
                         fontWeight={700}
@@ -345,7 +345,7 @@ export default function NFTPay(props: {
                         color={"#FF490F"}
                     >Down Payment</Typography>
                     <Flex flex={1}></Flex>
-                    <Icon width={".12rem"} height={".18rem"} url={ethIcon}/>
+                    <Icon width={".12rem"} height={".18rem"} src={ethIcon}/>
                     <Typography
                         fontWeight={700}
                         fontSize={".24rem"}
@@ -367,7 +367,7 @@ export default function NFTPay(props: {
                         fontWeight={500}
                     >Listed Price</Typography>
                     <Flex flex={1}></Flex>
-                    <Icon width={".10rem"} height={".15rem"} url={ethIcon}/>
+                    <Icon width={".10rem"} height={".15rem"} src={ethIcon}/>
                     <Typography
                         color={"#000"}
                         fontSize={".16rem"}
@@ -382,7 +382,7 @@ export default function NFTPay(props: {
                         fontWeight={500}
                     >Loan Amount</Typography>
                     <Flex flex={1}></Flex>
-                    <Icon width={".10rem"} height={".15rem"} url={ethIcon}/>
+                    <Icon width={".10rem"} height={".15rem"} src={ethIcon}/>
                     <Typography
                         color={"#000"}
                         fontSize={".16rem"}
