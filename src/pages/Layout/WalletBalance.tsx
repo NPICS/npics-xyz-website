@@ -35,6 +35,7 @@ const Wrap = styled.div`
       flex-direction: column;
       &>span:nth-child(1) {
         ${font01651}
+        text-align: right;
       }
       &>span:nth-child(2) {
         ${font01455}
@@ -47,9 +48,11 @@ export default function WalletBalance () {
   const { library, account } = useWeb3React()
   const [ETHBalance, setETHBalance] = useState<BigNumber>()
   const [WETHBalance, setWETHBalance] = useState<BigNumber>()
+  const [BDBalance, setBDBalance] = useState<BigNumber>()
   const [list, setList] = useState<wallet[]>()
   const ETHdollar =  useEthPrice(ETHBalance)
   const WETHdollar =  useEthPrice(WETHBalance)
+  const BDdollar =  useEthPrice(BDBalance)
   useEffect(() => {
     getBalance()
     // eslint-disable-next-line
@@ -66,10 +69,14 @@ export default function WalletBalance () {
     let weth = new Erc20(ContractAddresses.WETH, signer)
     const WETHBalance = await weth.balanceOf(account)
     setWETHBalance(WETHBalance)
+
+    let bendDao = new Erc20(ContractAddresses.BendDaoProxy, signer)
+    const bendDaoBalance = await bendDao.balanceOf(account)
+    setBDBalance(bendDaoBalance)
   }
 
   useEffect(() => {
-    if(!ETHBalance || !ETHdollar || !WETHBalance || !WETHdollar) return
+    if(!ETHBalance || !ETHdollar || !WETHBalance || !WETHdollar || !BDBalance || !BDdollar) return
     const data = [
       {
         icon: imgurl.home.ethBlack22,
@@ -82,10 +89,16 @@ export default function WalletBalance () {
         text: 'WETH',
         amount: WETHBalance,
         dollar: WETHdollar,
+      },
+      {
+        icon: imgurl.home.band22,
+        text: 'BEND',
+        amount: BDBalance,
+        dollar: BDdollar,
       }
     ]
     setList(data)
-  },[ETHBalance,ETHdollar,WETHBalance,WETHdollar])
+  },[ETHBalance,ETHdollar,WETHBalance,WETHdollar,BDBalance,BDdollar])
 
 
   return (<Wrap>
