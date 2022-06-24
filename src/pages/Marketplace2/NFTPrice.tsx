@@ -15,6 +15,7 @@ import {Npics} from "../../abi/Npics";
 import {ethers} from "ethers";
 import Modal from "../../component/Modal";
 import NFTPay from "./NFTPay";
+import {Popover} from "antd";
 import { globalVariable } from "utils/globalVariable";
 import { useNavigate } from 'react-router-dom';
 
@@ -118,7 +119,7 @@ export default function NFTPrice(props: {
 
     useEffect(() => {
         action(updateARP())
-    }, [])
+    }, [props.item])
 
     useEffect(() => {
         const inner = async () => {
@@ -172,7 +173,10 @@ export default function NFTPrice(props: {
         <Flex gap={".1rem"}>
             {/* Price */}
             <Shadow>
-                <TipsIcon width={".14rem"} src={tipsIcon}/>
+                <Popover content={"The Lowest Listing price in all markets."}>
+                    <TipsIcon width={".14rem"} src={tipsIcon}/>
+                </Popover>
+
                 <Flex flexDirection={"row"} alignItems={"center"}>
                     <Icon width={".12rem"} height={".1898rem"} src={ethIcon}/>
                     <Typography

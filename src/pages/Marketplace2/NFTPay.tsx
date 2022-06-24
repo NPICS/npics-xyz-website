@@ -8,7 +8,7 @@ import {tap} from "lodash";
 import {CollectionDetail} from "../../model/user";
 import BigNumber from "bignumber.js";
 import downPayIcon from "../../assets/images/market/down_pay_icon.png"
-import {numberFormat} from "../../utils/urls";
+import {numberFormat, urls} from "../../utils/urls";
 import {Erc20} from "../../abi/Erc20";
 import {ContractAddresses} from "../../utils/addresses";
 import {useWeb3React} from "@web3-react/core";
@@ -122,7 +122,7 @@ export default function NFTPay(props: {
     actualAmount: BigNumber
     dismiss?(): void
 }) {
-    const [payType, setPayType] = useState<PayType>(PayType.None)
+    const [payType, setPayType] = useState<PayType>(PayType.ETH)
     const [ethBalance, setETHBalance] = useState<BigNumber>()
     const [wethBalance, setWETHBalance] = useState<BigNumber>()
     const {library, account} = useWeb3React()
@@ -130,6 +130,7 @@ export default function NFTPay(props: {
     const [ethAndWETHAmount, setEthAndWETHAmount] = useState<[BigNumber, BigNumber]>([new BigNumber(0), new BigNumber(0)])
     const [canBuy, setCanBuy] = useState<boolean>(false)
     const [hash, setHash] = useState<string>()
+    const [didReadService, setDidReadService] = useState(false)
 
     // progressing popup
     const [progressingPopupOpen, setProgressingPopupOpen] = useState(false)
@@ -210,6 +211,10 @@ export default function NFTPay(props: {
             // check balance
             if (!canBuy) {
                 message.error("Insufficient account balance")
+                return
+            }
+            if (!didReadService) {
+                message.error(`Please agree to NPics's Terms of service`)
                 return
             }
             // show progressing
@@ -426,7 +431,11 @@ export default function NFTPay(props: {
         <Box marginTop={".24rem"}>
             <label>
                 <Flex alignItems={"center"} gap={".12rem"}>
-                    <input type="checkbox"/>
+                    <input
+                        type="checkbox"
+                        defaultChecked={didReadService}
+                        onChange={() => setDidReadService(!didReadService)}
+                    />
                     <Typography
                         color={"#000"}
                         fontSize={".14rem"}
@@ -434,7 +443,7 @@ export default function NFTPay(props: {
                         style={{
                             "userSelect": "none"
                         }}
-                    >Checking this box,I agree to NPics's <a href={""}>Terms of service</a></Typography>
+                    >Checking this box,I agree to NPics's <a href={urls.resource}>Terms of service</a></Typography>
                 </Flex>
             </label>
         </Box>

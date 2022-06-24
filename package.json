@@ -2,7 +2,6 @@
   "name": "untitled",
   "version": "0.1.0",
   "private": true,
-
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.1",
     "@testing-library/jest-dom": "^5.16.4",
@@ -25,6 +24,7 @@
     "@web3-react/metamask": "^8.0.0-beta.0",
     "@web3-react/walletconnect-connector": "^6.2.13",
     "@web3-react/walletlink-connector": "^6.2.14",
+    "@types/numeral": "^2.0.2",
     "antd": "^4.20.6",
     "axios": "^0.27.2",
     "bignumber.js": "^9.0.2",
@@ -36,6 +36,7 @@
     "lodash": "^4.17.21",
     "moment": "^2.29.3",
     "normalize.css": "^8.0.1",
+    "numeral": "^2.0.6",
     "react": "^18.1.0",
     "react-collapse": "^5.1.1",
     "react-dom": "^18.1.0",

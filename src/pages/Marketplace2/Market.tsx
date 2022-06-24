@@ -12,15 +12,17 @@ import {Portrait} from "./MarketList";
 import {prettyFormat} from "@testing-library/react";
 import {percentageFormat} from "../marketplace/components/utils";
 
-const Banner = () => {
+export const Banner = (props: {
+    url?: string
+}) => {
     return <Box
         position={"absolute"}
-        height={"4.6rem"}
+        height={"4.8rem"}
         top={0}
         left={0}
         right={0}
         zIndex={0}
-        backgroundImage={`url(${"https://tva1.sinaimg.cn/large/e6c9d24egy1h3g0c8ugwqj20v50jhgrr.jpg"})`}
+        backgroundImage={`url(${props.url})`}
         backgroundRepeat={"no-repeat"}
         backgroundSize={"cover"}
     ></Box>
@@ -88,7 +90,7 @@ export default function Market() {
         flexDirection={"column"}
         padding={"0 160px"}
         background={"transparent"}>
-        <Banner/>
+        <Banner url={nft?.bannerImageUrl}/>
         <Box zIndex={1}>
             <Box marginTop={"120px"}>
                 <Typography
@@ -185,12 +187,16 @@ export default function Market() {
                                 fontSize={".2rem"}
                                 color={"#000"}
                             >{
-                                nft && numberFormat(nft.floorPrice.div(10 ** 18).toFixed())
+                                nft && numberFormat(nft.dayVolume)
                             }</Typography>
                         </Flex>
                         <Flex alignItems={"center"} gap={".1rem"}>
                             <Typography fontSize={".14rem"} color={"#000"}>24h</Typography>
-                            <Typography>{
+                            <Typography
+                                color={
+                                    (nft?.dayChange.toNumber() ?? 0)  > 0 ? `#18CF15` : `#FF4949`
+                                }
+                            >{
                                 nft && percentageFormat(nft.dayChange.toNumber())
                             }</Typography>
                         </Flex>
@@ -204,7 +210,7 @@ export default function Market() {
                         gap={".05rem"}
                         minWidth={"1.36rem"}>
                         <Typography fontSize={".2rem"} color={"#000"} fontWeight={"500"}>{
-                            nft && numberFormat(nft.totalShelves)
+                            nft && nft.totalShelves
                         }</Typography>
                         <Typography>Total</Typography>
                     </Flex>
@@ -217,7 +223,7 @@ export default function Market() {
                         gap={".05rem"}
                         minWidth={"1.36rem"}>
                         <Typography fontSize={".2rem"} color={"#000"} fontWeight={500}>{
-                            nft && numberFormat(nft.activeCollaterals)
+                            nft && nft.activeCollaterals
                         }</Typography>
                         <Typography>Listed Items</Typography>
                     </Flex>

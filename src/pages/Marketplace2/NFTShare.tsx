@@ -1,8 +1,12 @@
 import {Box, Flex, Icon} from "../../component/Box";
 import ShareIcon from "../../assets/images/market/nft_share_line.png"
+import {CollectionDetail} from "../../model/user";
+import styled from "styled-components";
+import {message} from "antd";
 
 function IconWithBorder(props: {
-    icon: string
+    icon: string,
+    tap?(): void
 }) {
     return <Flex alignItems={"center"}
                  justifyContent={"center"}
@@ -11,8 +15,10 @@ function IconWithBorder(props: {
                  width={".4rem"}
                  height={".4rem"}
                  style={{
-                     "cursor": "pointer"
+                     "cursor": "pointer",
+                     "userSelect": "none"
                  }}
+                 onClick={props.tap}
     >
         <Icon
             width={".24rem"}
@@ -21,8 +27,14 @@ function IconWithBorder(props: {
     </Flex>
 }
 
-export default function NFTShare() {
+export default function NFTShare(props: {
+    item?: CollectionDetail
+}) {
     return <Flex justifyContent={"end"} alignItems={"start"}>
-        <IconWithBorder icon={ShareIcon}/>
+        <IconWithBorder icon={ShareIcon} tap={async () => {
+            navigator.clipboard.writeText(`${window.location.href}`).then(() => {
+              message.success("Copy Successfully")
+            })
+        }}/>
     </Flex>
 }
