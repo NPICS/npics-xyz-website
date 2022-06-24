@@ -1,4 +1,4 @@
-import {useLocation} from "react-router-dom";
+import {useLocation, useParams} from "react-router-dom";
 import React, {useEffect, useRef, useState} from "react";
 import {Box, Flex, Grid, Icon, Typography} from "../../component/Box";
 import styled from "styled-components";
@@ -8,7 +8,7 @@ import LooseSelectIcon from "../../assets/images/market/Frame 33.png"
 import CompactUnselectIcon from "../../assets/images/market/Frame 34.png"
 import LooseUnselectIcon from "../../assets/images/market/loose_unselect.png"
 import CompactSelectIcon from "../../assets/images/market/compact_select.png"
-import {CollectionItems, Collections} from "../../model/user";
+import {CollectionDetail, CollectionItems, Collections} from "../../model/user";
 import {deserializeArray, deserialize} from "class-transformer";
 import {imgurl} from "../../utils/globalimport";
 import http from "../../utils/http";
@@ -19,7 +19,7 @@ import NotFound from "component/NotFound";
 
 const {Option} = Select;
 
-const Portrait = styled.img`
+export const Portrait = styled.img`
   display: block;
   object-fit: cover;
   border-radius: .1rem;
@@ -30,8 +30,9 @@ const Portrait = styled.img`
 `
 
 export default function MarketList() {
-    let location = useLocation()
-    const [nft, setNft] = useState<Collections>()
+    // let location = useLocation()
+    const params = useParams()
+    const [nftAddress, setNftAddress] = useState<string>()
     const [compactMode, setCompactMode] = useState<boolean>(false)
     const [searchText, setSearchText] = useState<string | undefined>(undefined)
     const [total, setTotal] = useState<number>(0)
@@ -41,18 +42,17 @@ export default function MarketList() {
     const [currentSort, setCurrentSort] = useState<"asc" | "desc" | "rarityScore" | "rarityScoreDesc" | string>("asc")
 
     useEffect(() => {
-        let state: any = location.state
-        if(!state) return
-        let nft = deserialize(Collections, JSON.stringify(state.item))
-        setNft(nft)
-        setCurrentPage(1)
-    }, [location.state])
+        if (params.address) {
+            setNftAddress(params.address)
+            setCurrentPage(1)
+        }
+    }, [params])
 
     useEffect(() => {
-        if (nft?.address && !isLoading.current) {
+        if (nftAddress && !isLoading.current) {
             loadData().finally()
         }
-    }, [nft?.address, searchText, currentPage, currentSort])
+    }, [nftAddress, searchText, currentPage, currentSort])
 
     useEffect(() => {
         console.log(`currentPage => ${currentPage}`)
@@ -60,10 +60,10 @@ export default function MarketList() {
 
     async function loadData() {
         isLoading.current = true
-        console.log(`page => ${currentPage}, ${nft?.address}`)
+        console.log(`page => ${currentPage}, ${nftAddress}`)
         if (currentPage > 0) {
             let resp: any = await http.myPost(`/npics-nft/app-api/v2/nft/getCollectionItems`, {
-                address: nft?.address,
+                address: nftAddress,
                 direction: currentSort,
                 pageIndex: currentPage,
                 pageSize: 30,
@@ -80,105 +80,6 @@ export default function MarketList() {
     }
 
     return <Box>
-        <Box
-            borderRadius={".1rem"}
-            background={"#fff"}
-            padding={".4rem"}
-            boxShadow={"rgba(0,0,0,.5)"}>
-            <Flex>
-                <Portrait src={nft?.imageUrl}/>
-                <Flex
-                    marginLeft={".24rem"}
-                    flexDirection={"column"}
-                    gap={".08rem"}
-                    flex={1}
-                    justifyContent={"center"}
-                >
-                    <Typography
-                        fontWeight={800}
-                        fontSize={".46rem"}
-                        lineHeight={".56rem"}
-                        color={"#000"}
-                    >{nft?.name}</Typography>
-                    <Typography
-                        fontWeight={"500"}
-                        fontSize={".14rem"}
-                        lineHeight={"120%"}
-                        color={"rgba(0, 0, 0, .5)"}
-                        textAlign={"justify"}
-                    >
-                        {nft?.description}
-                    </Typography>
-                </Flex>
-            </Flex>
-            <Flex
-                marginTop={".16rem"}
-                flexDirection={"row"}
-                gap={".1rem"}
-                alignItems={"stretch"}
-            >
-                <Flex
-                    flexDirection={"column"}
-                    alignItems={"center"}
-                    boxShadow={"0 0 10px rgba(0,0,0,.1)"}
-                    borderRadius={".1rem"}
-                    padding={".12rem .2rem"}
-                    gap={".05rem"}
-                    minWidth={"1.36rem"}>
-                    <Flex alignItems={"center"} gap={".06rem"}>
-                        <Icon width={".12rem"} height={".16rem"} src={imgurl.market.blackPrice}/>
-                        <Typography fontSize={".2rem"} color={"#000"}>{
-                            nft && numberFormat(nft.floorPrice.toNumber())
-                        }</Typography>
-                    </Flex>
-                    <Typography fontSize={".14rem"} color={"#000"}>Floor</Typography>
-                </Flex>
-                <Flex
-                    flexDirection={"column"}
-                    alignItems={"center"}
-                    boxShadow={"0 0 10px rgba(0,0,0,.1)"}
-                    borderRadius={".1rem"}
-                    padding={".12rem .2rem"}
-                    gap={".05rem"}
-                    minWidth={"1.36rem"}>
-                    <Flex alignItems={"center"} gap={".06rem"}>
-                        <Icon width={".12rem"} height={".16rem"} src={imgurl.market.blackPrice}/>
-                        <Typography fontSize={".2rem"}
-                                    color={"#000"}>{nft && numberFormat(nft.floorPrice.toNumber())}</Typography>
-                    </Flex>
-                    <Flex alignItems={"center"} gap={".1rem"}>
-                        <Typography fontSize={".14rem"} color={"#000"}>24h</Typography>
-                        <Typography>{nft?.dayChange.toFixed()}</Typography>
-                    </Flex>
-                </Flex>
-                <Flex
-                    flexDirection={"column"}
-                    alignItems={"center"}
-                    boxShadow={"0 0 10px rgba(0,0,0,.1)"}
-                    borderRadius={".1rem"}
-                    padding={".12rem .2rem"}
-                    gap={".05rem"}
-                    minWidth={"1.36rem"}>
-                    <Typography fontSize={".2rem"} color={"#000"} fontWeight={"500"}>{
-                        nft && numberFormat(nft.totalShelves)
-                    }</Typography>
-                    <Typography>Total</Typography>
-                </Flex>
-                <Flex
-                    flexDirection={"column"}
-                    alignItems={"center"}
-                    boxShadow={"0 0 10px rgba(0,0,0,.1)"}
-                    borderRadius={".1rem"}
-                    padding={".12rem .2rem"}
-                    gap={".05rem"}
-                    minWidth={"1.36rem"}>
-                    <Typography fontSize={".2rem"} color={"#000"} fontWeight={500}>{
-                        nft && numberFormat(nft.activeCollaterals)
-                    }</Typography>
-                    <Typography>Listed Items</Typography>
-                </Flex>
-            </Flex>
-        </Box>
         <Box
             borderRadius={".1rem"}
             background={"#fff"}
@@ -215,34 +116,39 @@ export default function MarketList() {
             </Flex>
             {
                 listData.length ? <InfiniteScroll
-                    pageStart={1}
-                    loadMore={() => {
-                        if (!isLoading.current) {
-                            setCurrentPage(currentPage + 1)
-                        }
-                    }}
-                    hasMore={listData.length < total}
-                    loader={<div>Loading...</div>}
-                    initialLoad={false}>
-                    <Grid
-                        marginTop={".25rem"}
-                        gridTemplateColumns={`repeat(${compactMode ? 8 : 6}, 1fr)`}
-                        gridGap={".1rem"}
-                        justifyContent={"space-between"}
-                        alignItems={"start"}
-                        overflow={"auto"}>
-                        {
-                            listData.map((item, idx) => {
-                                return <CollectionCell
-                                    key={idx}
-                                    compact={compactMode}
-                                    item={item}
-                                />
-                            })
-                        }
-                    </Grid>
-                </InfiniteScroll> :
-                <NotFound />
+                        pageStart={1}
+                        loadMore={() => {
+                            if (!isLoading.current) {
+                                setCurrentPage(currentPage + 1)
+                            }
+                        }}
+                        hasMore={listData.length < total}
+                        loader={<div>Loading...</div>}
+                        initialLoad={false}>
+                        <Grid
+                            marginTop={".25rem"}
+                            gridTemplateColumns={`repeat(${compactMode ? 8 : 6}, 1fr)`}
+                            gridGap={".1rem"}
+                            justifyContent={"space-between"}
+                            alignItems={"start"}
+                            overflow={"auto"}>
+                            {
+                                listData.map((item, idx) => {
+                                    return <CollectionCell
+                                        key={idx}
+                                        compact={compactMode}
+                                        item={item}
+                                    />
+                                })
+                            }
+                        </Grid>
+                    </InfiniteScroll> :
+                    <Box padding={"1.6rem 0"}>
+                        <NotFound
+                            title={"No npics found"}
+                            text={"This collection doesn’t have any NFTs available to found."}
+                        />
+                    </Box>
             }
         </Box>
     </Box>

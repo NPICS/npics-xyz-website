@@ -1,11 +1,16 @@
-import {Box, Flex, Grid, Typography} from "../../component/Box";
+import {Box, Flex, Grid, Icon, Typography} from "../../component/Box";
 import styled from "styled-components";
 import {space, typography, layout, TypographyProps} from "styled-system";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import http from "../../utils/http";
 import {deserializeArray} from "class-transformer";
 import {Collections} from "../../model/user";
-import {Outlet, useNavigate} from "react-router-dom";
+import {Outlet, useLocation, useNavigate, useParams} from "react-router-dom";
+import {imgurl} from "../../utils/globalimport";
+import {numberFormat} from "../../utils/urls";
+import {Portrait} from "./MarketList";
+import {prettyFormat} from "@testing-library/react";
+import {percentageFormat} from "../marketplace/components/utils";
 
 const Banner = () => {
     return <Box
@@ -37,8 +42,10 @@ const CollectionItem = styled.div<{
 
 export default function Market() {
     const [listData, setListData] = useState<Collections[]>([])
-    const [selectedIndex, setSelectedIndex] = useState<number | undefined>(undefined)
-    let nav = useNavigate()
+    // const [selectAddress, setSelectAddress] = useState<string>()
+    const [nft, setNft] = useState<Collections>()
+    const nav = useNavigate()
+    const params = useParams()
 
     useEffect(() => {
         const inner = async () => {
@@ -54,21 +61,27 @@ export default function Market() {
     }, [])
 
     useEffect(() => {
-        if (listData.length > 0 && !selectedIndex) {
-            setSelectedIndex(0)
+        // if (params.address) {
+        //     setSelectAddress(params.address)
+        // } else if (listData.length > 0 && !selectAddress) {
+        //     setSelectAddress(listData[0].address)
+        // }
+        if (listData.length > 0) {
+            if (params.address) {
+                setNft(listData.find(it => it.address === params.address))
+            } else {
+                setNft(listData[0])
+            }
         }
-    }, [listData])
+    }, [params, listData])
 
     useEffect(() => {
-        if (selectedIndex != undefined && selectedIndex >= 0) {
-            let nft = listData[selectedIndex].address
-            nav(`collections/${nft}`, {
-                state: {
-                    item: listData[selectedIndex]
-                }
+        if (nft?.address) {
+            nav(`collections/${nft.address}`, {
+                replace: true
             })
         }
-    }, [selectedIndex])
+    }, [nft])
 
     return <Flex
         position={"relative"}
@@ -94,10 +107,10 @@ export default function Market() {
                     listData.map((item, idx) => {
                         return <CollectionItem
                             key={idx}
-                            isSelected={selectedIndex === idx}
+                            isSelected={nft?.address === item.address}
                             imgUrl={item.imageUrl}
                             onClick={() => {
-                                setSelectedIndex(idx)
+                                setNft(item)
                             }}
                         />
                     })
@@ -105,10 +118,120 @@ export default function Market() {
             </Flex>
             <Box
                 marginTop={".4rem"}
+                borderRadius={".1rem"}
+                background={"#fff"}
+                padding={".4rem"}
+                boxShadow={"rgba(0,0,0,.5)"}
+            >
+                <Flex>
+                    <Portrait src={nft?.imageUrl}/>
+                    <Flex
+                        marginLeft={".24rem"}
+                        flexDirection={"column"}
+                        gap={".08rem"}
+                        flex={1}
+                        justifyContent={"center"}
+                    >
+                        <Typography
+                            fontWeight={800}
+                            fontSize={".46rem"}
+                            lineHeight={".56rem"}
+                            color={"#000"}
+                        >{nft?.name}</Typography>
+                        <Typography
+                            fontWeight={"500"}
+                            fontSize={".14rem"}
+                            lineHeight={"120%"}
+                            color={"rgba(0, 0, 0, .5)"}
+                            textAlign={"justify"}
+                        >
+                            {nft?.description}
+                        </Typography>
+                    </Flex>
+                </Flex>
+                <Flex
+                    marginTop={".16rem"}
+                    flexDirection={"row"}
+                    gap={".1rem"}
+                    alignItems={"stretch"}
+                >
+                    <Flex
+                        flexDirection={"column"}
+                        alignItems={"center"}
+                        boxShadow={"0 0 10px rgba(0,0,0,.1)"}
+                        borderRadius={".1rem"}
+                        padding={".12rem .2rem"}
+                        gap={".05rem"}
+                        minWidth={"1.36rem"}>
+                        <Flex alignItems={"center"} gap={".06rem"}>
+                            <Icon width={".12rem"} height={".16rem"} src={imgurl.market.blackPrice}/>
+                            <Typography fontSize={".2rem"} color={"#000"}>{
+                                nft && numberFormat(nft.floorPrice.div(10 ** 18).toFixed())
+                            }</Typography>
+                        </Flex>
+                        <Typography fontSize={".14rem"} color={"#000"}>Floor</Typography>
+                    </Flex>
+                    <Flex
+                        flexDirection={"column"}
+                        alignItems={"center"}
+                        boxShadow={"0 0 10px rgba(0,0,0,.1)"}
+                        borderRadius={".1rem"}
+                        padding={".12rem .2rem"}
+                        gap={".05rem"}
+                        minWidth={"1.36rem"}>
+                        <Flex alignItems={"center"} gap={".06rem"}>
+                            <Icon width={".12rem"} height={".16rem"} src={imgurl.market.blackPrice}/>
+                            <Typography
+                                fontSize={".2rem"}
+                                color={"#000"}
+                            >{
+                                nft && numberFormat(nft.floorPrice.div(10 ** 18).toFixed())
+                            }</Typography>
+                        </Flex>
+                        <Flex alignItems={"center"} gap={".1rem"}>
+                            <Typography fontSize={".14rem"} color={"#000"}>24h</Typography>
+                            <Typography>{
+                                nft && percentageFormat(nft.dayChange.toNumber())
+                            }</Typography>
+                        </Flex>
+                    </Flex>
+                    <Flex
+                        flexDirection={"column"}
+                        alignItems={"center"}
+                        boxShadow={"0 0 10px rgba(0,0,0,.1)"}
+                        borderRadius={".1rem"}
+                        padding={".12rem .2rem"}
+                        gap={".05rem"}
+                        minWidth={"1.36rem"}>
+                        <Typography fontSize={".2rem"} color={"#000"} fontWeight={"500"}>{
+                            nft && numberFormat(nft.totalShelves)
+                        }</Typography>
+                        <Typography>Total</Typography>
+                    </Flex>
+                    <Flex
+                        flexDirection={"column"}
+                        alignItems={"center"}
+                        boxShadow={"0 0 10px rgba(0,0,0,.1)"}
+                        borderRadius={".1rem"}
+                        padding={".12rem .2rem"}
+                        gap={".05rem"}
+                        minWidth={"1.36rem"}>
+                        <Typography fontSize={".2rem"} color={"#000"} fontWeight={500}>{
+                            nft && numberFormat(nft.activeCollaterals)
+                        }</Typography>
+                        <Typography>Listed Items</Typography>
+                    </Flex>
+                </Flex>
+            </Box>
+            <Box
+                marginTop={".1rem"}
                 minHeight={"50vh"}
+                marginBottom={".6rem"}
             >
                 <Outlet/>
             </Box>
         </Box>
+
+
     </Flex>
 }

@@ -24,6 +24,7 @@ function PropertiesCell(props: {
             alignItems={"center"}
             justifyContent={"space-evenly"}
             padding={".12rem .18rem"}
+            height={"100%"}
             style={{
                 "userSelect": "none",
                 "cursor": "pointer"

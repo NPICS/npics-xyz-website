@@ -92,6 +92,7 @@ const Icon = styled.img<IconProps>`
   width: ${props => props.width};
   height: ${props => props.height ?? props.width};
   object-fit: contain;
+  -webkit-user-drag: none;
   
   // display: inline-block;
   // overflow: hidden;
