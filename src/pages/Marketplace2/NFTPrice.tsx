@@ -18,6 +18,8 @@ import NFTPay from "./NFTPay";
 import {Popover} from "antd";
 import { globalVariable } from "utils/globalVariable";
 import { useNavigate } from 'react-router-dom';
+import {useWeb3React} from "@web3-react/core";
+import {connectors} from "../../utils/connectors";
 
 const Shadow = styled(Flex)`
   background: #fff;
@@ -114,6 +116,7 @@ export default function NFTPrice(props: {
     const [availableBorrow, setAvailableBorrow] = useState<BigNumber | undefined>(undefined)
     const [actualAmount, setActualAmount] = useState<BigNumber | undefined>(undefined)
     const navigate = useNavigate()
+    const {account, activate} = useWeb3React()
 
     const [buyPopOpen, setBuyPopOpen] = useState<boolean>(false)
 
@@ -155,8 +158,15 @@ export default function NFTPrice(props: {
     }, [props.item, availableBorrow])
 
     async function buyClick() {
-        if (props.item && availableBorrow) {
-            setBuyPopOpen(true)
+        try {
+            if (!account) {
+                await activate(connectors.injected)
+            }
+            if (props.item && availableBorrow) {
+                setBuyPopOpen(true)
+            }
+        } catch (e) {
+
         }
     }
 
@@ -177,22 +187,23 @@ export default function NFTPrice(props: {
                     <TipsIcon width={".14rem"} src={tipsIcon}/>
                 </Popover>
 
-                <Flex flexDirection={"row"} alignItems={"center"}>
+                <Flex flexDirection={"row"} alignItems={"end"}>
                     <Icon width={".12rem"} height={".1898rem"} src={ethIcon}/>
                     <Typography
                         fontSize={".24rem"}
                         fontWeight={700}
                         color={"rgba(0,0,0,1)"}
-                        lineHeight={"normal"}
-                        verticalAlign={"middle"}
-                        height={"auto"}
+                        lineHeight={"100%"}
+                        // verticalAlign={"middle"}
+                        // height={"auto"}
                         marginLeft={".1rem"}
-                    >{props.item?.basePriceFormat()}</Typography>
+                    >{props.item?.basePriceFormat() ?? "---"}</Typography>
                     <Typography
                         fontSize={".14rem"}
                         fontWeight={500}
                         color={"rgba(0,0,0,.5)"}
                         marginLeft={".02rem"}
+                        lineHeight={"100%"}
                     >
                         {
                             `（$ ${

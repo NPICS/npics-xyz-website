@@ -139,7 +139,6 @@ export default function NFTPay(props: {
     // failed popup
     const [failedPopupOpen, setFailedPopupOpen] = useState(false)
 
-
     useEffect(() => {
         const inner = async () => {
             if (account && library) {
@@ -151,6 +150,7 @@ export default function NFTPay(props: {
                 let weth = new Erc20(ContractAddresses.WETH, signer)
                 const wethBalance = await weth.balanceOf(account)
                 setWETHBalance(new BigNumber(wethBalance.toString()))
+                console.log(`ETH => ${balance.toFixed()}, WEHT => ${wethBalance.toFixed()}`)
             }
         }
         inner().finally()
@@ -184,11 +184,7 @@ export default function NFTPay(props: {
         }
         setEthAndWETHAmount([eth, weth])
         console.log(`ETH: ${eth.div(10 ** 18).toFixed()}, WETH: ${weth.div(10 ** 18).toFixed()}`)
-    }, [
-        ethBalance,
-        wethBalance,
-        props.actualAmount
-    ])
+    }, [ethBalance, wethBalance, props.actualAmount])
 
     useEffect(() => {
         let [eth, weth] = ethAndWETHAmount;
