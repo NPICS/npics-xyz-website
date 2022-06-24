@@ -75,7 +75,7 @@ export default function Routers() {
       component: <Home />
     },
     {
-      path: 'marketPlace',
+      path: 'web3',
       component: <Marketplace />,
       children: [
         {
@@ -115,14 +115,18 @@ export default function Routers() {
       ]
     },
     {
-      path: "/web3",
-      component: <OneNFT />,
+      path: "/marketPlace",
+      component: <Market />,
       children: [
         {
           path: "collections/:address",
           component: <MarketList />
         }
       ]
+    },
+    {
+      path: "/nftDetail/:address/:tokenId",
+      component: <OneNFT />,
     },
     {
       path: "/dashboard",

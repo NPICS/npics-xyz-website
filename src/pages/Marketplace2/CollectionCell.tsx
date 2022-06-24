@@ -3,6 +3,7 @@ import styled from "styled-components";
 import {imgurl} from "../../utils/globalimport";
 import {CollectionItems} from "../../model/user";
 import CellTagIcon from "../../assets/images/market_cell_tags.png"
+import { useNavigate } from 'react-router-dom';
 
 const Cover = styled.img`
   display: block;
@@ -24,6 +25,8 @@ interface ICollectionCellProps {
 }
 
 export default function CollectionCell(props: ICollectionCellProps) {
+    const navigate = useNavigate()
+
     return <Flex
         borderRadius={'.1rem'}
         border={"1px solid rgba(0,0,0,.1)"}
@@ -34,7 +37,7 @@ export default function CollectionCell(props: ICollectionCellProps) {
             "cursor": "pointer"
         }}
         onClick={() => {
-
+            navigate(`/nftDetail/${props.item.address}/${props.item.tokenId}`)
         }}
     >
         <Cover src={props.item.imageUrl}/>

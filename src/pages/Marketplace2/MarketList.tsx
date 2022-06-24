@@ -15,6 +15,7 @@ import http from "../../utils/http";
 import {Input, Select} from "antd";
 import InfiniteScroll from 'react-infinite-scroller';
 import {numberFormat} from "../../utils/urls";
+import NotFound from "component/NotFound";
 
 const {Option} = Select;
 
@@ -41,6 +42,7 @@ export default function MarketList() {
 
     useEffect(() => {
         let state: any = location.state
+        if(!state) return
         let nft = deserialize(Collections, JSON.stringify(state.item))
         setNft(nft)
         setCurrentPage(1)
@@ -211,34 +213,37 @@ export default function MarketList() {
                           onClick={() => setCompactMode(true)}/>
                 </Flex>
             </Flex>
-            <InfiniteScroll
-                pageStart={1}
-                loadMore={() => {
-                    if (!isLoading.current) {
-                        setCurrentPage(currentPage + 1)
-                    }
-                }}
-                hasMore={listData.length < total}
-                loader={<div>Loading...</div>}
-                initialLoad={false}>
-                <Grid
-                    marginTop={".25rem"}
-                    gridTemplateColumns={`repeat(${compactMode ? 8 : 6}, 1fr)`}
-                    gridGap={".1rem"}
-                    justifyContent={"space-between"}
-                    alignItems={"start"}
-                    overflow={"auto"}>
-                    {
-                        listData.map((item, idx) => {
-                            return <CollectionCell
-                                key={idx}
-                                compact={compactMode}
-                                item={item}
-                            />
-                        })
-                    }
-                </Grid>
-            </InfiniteScroll>
+            {
+                listData.length ? <InfiniteScroll
+                    pageStart={1}
+                    loadMore={() => {
+                        if (!isLoading.current) {
+                            setCurrentPage(currentPage + 1)
+                        }
+                    }}
+                    hasMore={listData.length < total}
+                    loader={<div>Loading...</div>}
+                    initialLoad={false}>
+                    <Grid
+                        marginTop={".25rem"}
+                        gridTemplateColumns={`repeat(${compactMode ? 8 : 6}, 1fr)`}
+                        gridGap={".1rem"}
+                        justifyContent={"space-between"}
+                        alignItems={"start"}
+                        overflow={"auto"}>
+                        {
+                            listData.map((item, idx) => {
+                                return <CollectionCell
+                                    key={idx}
+                                    compact={compactMode}
+                                    item={item}
+                                />
+                            })
+                        }
+                    </Grid>
+                </InfiniteScroll> :
+                <NotFound />
+            }
         </Box>
     </Box>
 }

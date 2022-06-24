@@ -11,6 +11,7 @@ import {useEffect, useState} from "react";
 import http from "../../utils/http";
 import {CollectionDetail} from "../../model/user";
 import {deserialize} from "class-transformer";
+import { useParams, useNavigate } from 'react-router-dom';
 
 function Label(props: {
     icon: string,
@@ -66,21 +67,25 @@ const Cover = styled.img`
 
 export default function OneNFT() {
     const [detailData, setDetailData] = useState<CollectionDetail | undefined>(undefined)
+    const navigate = useNavigate()
+    let urlParams: any = useParams()
+    const params:{address:string, tokenId: string} = urlParams
 
     useEffect(() => {
         const inner = async () => {
             // prams from level up
             const resp: any = await http.myPost(`/npics-nft/app-api/v2/nft/getCollectionItemsDetail`, {
-                address: "0x49cf6f5d44e70224e2e23fdcdd2c053f30ada28b",
-                tokenId: "16876"
+                address: params.address,
+                tokenId: params.tokenId
             })
             if (resp.code === 200 && resp.data) {
+                console.log(resp.data);
                 setDetailData(deserialize(CollectionDetail, JSON.stringify(resp.data)))
             } else {
             }
         }
         inner().finally()
-    }, [])
+    }, [params])
 
     return <Box
         margin={"160px auto"}
@@ -88,7 +93,7 @@ export default function OneNFT() {
     >
         {/* nav */}
         <Flex flexDirection={"row"} gap={".15rem"} alignItems={"start"}>
-            <Icon height={".36rem"} width={".36rem"} url={PopIcon}/>
+            <Icon height={".36rem"} width={".36rem"} url={PopIcon} onClick={ () => navigate(`/marketPlace/collections/${detailData?.address}`) }/>
             <Flex flexDirection={"column"} gap={".05rem"}>
                 <Typography fontSize={".16rem"} color={"#fff"} fontWeight={500}
                             fontFamily={"Montserrat"}>{detailData?.collectionName}</Typography>
