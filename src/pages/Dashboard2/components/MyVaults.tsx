@@ -5,6 +5,8 @@ import { Select } from "antd";
 import NotFound from "component/NotFound"
 import styled from 'styled-components';
 import VaultsTable from "./components/VaultsTable";
+import BigNumber from "bignumber.js";
+import { useEthPrice } from "utils/hook";
 const {Option} = Select
 
 const AntdSelect = styled(Select)`
@@ -15,7 +17,8 @@ const AntdSelect = styled(Select)`
 
 export default function MyVaults() {
   const [sortedInfo, setSortedInfo] = useState<string>('')
-
+  const [totalDebts, setTotalDebts] = useState<BigNumber>(new BigNumber(0))
+  const DollarDebt = useEthPrice(totalDebts)
   useEffect(() => {
     console.log("sortedInfo",sortedInfo);
 
@@ -59,12 +62,12 @@ export default function MyVaults() {
             fontWeight={500}
             fontSize={".14rem"}
             color={"rgba(0,0,0,.5)"}
-          > 998.111</Typography>
+          >{totalDebts.div(10 ** 18).toFixed(3, 1)}</Typography>
           <Typography
             fontWeight={500}
             fontSize={".14rem"}
             color={"rgba(0,0,0,.5)"}
-          >($2,210)</Typography>
+          >{`($${DollarDebt?.dp(0).toFixed()})`}</Typography>
         </Flex>
       </Flex>
 
@@ -79,10 +82,10 @@ export default function MyVaults() {
           <Option value="In Risk">In Risk</Option>
           <Option value="Terminated">Terminated</Option>
         </AntdSelect>
-      </Typography>
+      </Typography >
     </Flex>
     
-    <VaultsTable />
+    <VaultsTable setTotalDebts={setTotalDebts} sortedInfo={sortedInfo} />
 
     {/* <NotFound /> */}
 

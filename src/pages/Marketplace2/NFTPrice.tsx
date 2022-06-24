@@ -16,6 +16,7 @@ import {ethers} from "ethers";
 import Modal from "../../component/Modal";
 import NFTPay from "./NFTPay";
 import {Popover} from "antd";
+import { globalVariable } from "utils/globalVariable";
 
 const Shadow = styled(Flex)`
   background: #fff;
@@ -124,7 +125,8 @@ export default function NFTPrice(props: {
                 direction: "asc",
                 pageIndex: 1,
                 pageSize: 6,
-                search: null
+                search: null,
+                showNftx: globalVariable.showNftx
             })
             if (resp.code === 200 && resp.data.records) {
                 setRecommendNFTs(deserializeArray(CollectionItems, JSON.stringify(resp.data.records)))
