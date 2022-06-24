@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {imgurl} from "../../utils/globalimport";
 import {CollectionItems} from "../../model/user";
 import CellTagIcon from "../../assets/images/market_cell_tags.png"
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import ethIcon from "../../assets/images/market/eth_icon_20x34.png"
 
 const Cover = styled.img`
@@ -66,7 +66,7 @@ export default function CollectionCell(props: ICollectionCellProps) {
                 color={"#000"}
                 fontSize={".16rem"}
                 fontWeight={"500"}
-            >256</Typography>
+            >{props.item.rarityScore}</Typography>
         </Flex>
         <Box padding={".07rem .15rem .18rem"}>
             <Flex alignItems={"center"} gap={".06rem"}>
@@ -86,10 +86,10 @@ export default function CollectionCell(props: ICollectionCellProps) {
                     alignItems={"center"}
                     gap={".06rem"}>
                     <Icon height={".15rem"} width={".1rem"} src={ethIcon}/>
-                    <Typography>89.90</Typography>
+                    <Typography>{props.item.basePrice()}</Typography>
                 </Flex>
                 <Flex flex={1}></Flex>
-                <IconTest src={props.item.marketIcon()}  alt=""/>
+                <IconTest src={props.item.marketIcon()} alt=""/>
                 {/*<Icon width={".22rem"} height={".22rem"} url={props.item.marketIcon()} />*/}
             </Flex>
         </Box>

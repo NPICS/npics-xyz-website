@@ -111,6 +111,11 @@ export class CollectionItems {
         return imgurl.market.seaport
     }
   }
+
+  @Expose()
+  basePrice() {
+    return numberFormat(this.currentBasePrice.div(10 ** 18).toFixed())
+  }
 }
 
 type Traits = {
