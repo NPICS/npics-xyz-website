@@ -1,11 +1,23 @@
 import {Box, Flex, Icon, Typography} from "../../component/Box";
 import {CancelButton, ConfirmButton, PopupTitle} from "./NFTPay";
 import nftLinkIcon from "../../assets/images/market/address_link.png";
+import failedGif from "../../assets/images/market/nft_pay_failed_status.gif"
+import styled from "styled-components";
 
-export default function NFTPayWrong() {
+export const StatusGif = styled.img`
+  display: block;
+  overflow: hidden;
+  background: transparent;
+  width: 2.8rem;
+  height: 2.8rem;
+  user-select: none;
+  border: 0;
+`
+
+export default function NFTPayWrong(props: {
+    back?(): void
+}) {
     return <Flex
-        // TODO: debug
-        marginTop={"120px"}
         width={"8.8rem"}
         background={"#fff"}
         borderRadius={".1rem"}
@@ -20,7 +32,9 @@ export default function NFTPayWrong() {
             borderRadius={".1rem"}
             padding={".4rem 1.4rem .2rem"}
         >
-            <Icon width={"2.2rem"} height={"2.2rem"} url={""}/>
+            <Flex alignSelf={"center"}>
+                <StatusGif src={failedGif}/>
+            </Flex>
             <Typography
                 marginTop={".32rem"}
                 fontWeight={700}
@@ -49,7 +63,9 @@ export default function NFTPayWrong() {
             </Flex>
         </Flex>
         <Flex alignItems={"center"} justifyContent={"center"} gap={".2rem"} marginTop={".3rem"}>
-            <CancelButton>Back</CancelButton>
+            <CancelButton
+                onClick={props.back}
+            >Back</CancelButton>
         </Flex>
     </Flex>
 }

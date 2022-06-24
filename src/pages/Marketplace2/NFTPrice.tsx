@@ -13,6 +13,8 @@ import http from "../../utils/http";
 import {deserializeArray} from "class-transformer";
 import {Npics} from "../../abi/Npics";
 import {ethers} from "ethers";
+import Modal from "../../component/Modal";
+import NFTPay from "./NFTPay";
 
 const Shadow = styled(Flex)`
   background: #fff;
@@ -107,6 +109,8 @@ export default function NFTPrice(props: {
     const [availableBorrow, setAvailableBorrow] = useState<BigNumber | undefined>(undefined)
     const [actualAmount, setActualAmount] = useState<BigNumber | undefined>(undefined)
 
+    const [buyPopOpen, setBuyPopOpen] = useState<boolean>(false)
+
     useEffect(() => {
         action(updateARP())
     }, [])
@@ -143,7 +147,22 @@ export default function NFTPrice(props: {
         }
     }, [props.item, availableBorrow])
 
+    async function buyClick() {
+        if (props.item && availableBorrow) {
+            setBuyPopOpen(true)
+        }
+    }
+
     return <Grid gridTemplateRows={"1.1rem 1rem auto"} gridRowGap={".12rem"}>
+        <Modal isOpen={buyPopOpen} onRequestClose={() => setBuyPopOpen(false)}>
+            <NFTPay
+                /// line 150: require value
+                nft={props.item!}
+                availableBorrow={availableBorrow!}
+                actualAmount={actualAmount!}
+                dismiss={() => setBuyPopOpen(false)}
+            />
+        </Modal>
         <Flex gap={".1rem"}>
             {/* Price */}
             <Shadow>
@@ -251,7 +270,7 @@ export default function NFTPrice(props: {
                     }
                 </Typography>
             </Flex>
-            <BuyButton>Buy Now</BuyButton>
+            <BuyButton onClick={buyClick}>Buy Now</BuyButton>
         </BuyBox>
     </Grid>
 }

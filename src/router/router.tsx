@@ -12,6 +12,7 @@ import NFTPayProgressing from "../pages/Marketplace2/NFTPayProgressing";
 import NFTPayCongratulations from "../pages/Marketplace2/NFTPayCongratulations";
 import NFTPayWrong from "../pages/Marketplace2/NFTPayWrong";
 import VaultsDetail from 'pages/Dashboard2/components/components/VaultsDetail';
+import OneNFT from "../pages/Marketplace2/OneNFT";
 interface RouterT {
   name?: string,
   path: string,
@@ -115,7 +116,7 @@ export default function Routers() {
     },
     {
       path: "/web3",
-      component: <NFTPayWrong />,
+      component: <OneNFT />,
       children: [
         {
           path: "collections/:address",

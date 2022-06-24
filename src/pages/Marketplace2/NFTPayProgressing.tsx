@@ -1,5 +1,10 @@
 import {Box, Flex, Icon, Typography} from "component/Box";
 import {PopupTitle} from "./NFTPay";
+import {CollectionDetail} from "../../model/user";
+import {imgurl} from "../../utils/globalimport";
+import {urls} from "../../utils/urls";
+import progressIcon from "../../assets/images/market/nft_pay_progressing.gif"
+import {StatusGif} from "./NFTPayWrong";
 
 function MarketLabel(props: {
     icon?: string,
@@ -27,10 +32,10 @@ function MarketLabel(props: {
     </Flex>
 }
 
-export default function NFTPayProgressing() {
+export default function NFTPayProgressing(props: {
+    nft: CollectionDetail
+}) {
     return <Flex
-        // TODO: debug
-        marginTop={"120px"}
         width={"8.8rem"}
         background={"#fff"}
         borderRadius={".1rem"}
@@ -38,8 +43,8 @@ export default function NFTPayProgressing() {
         flexDirection={"column"}
     >
         <PopupTitle title={"Progressing"} canClose={true}/>
-        <Flex height={"4.1rem"} alignItems={"center"} justifyContent={"center"}>
-            ...
+        <Flex alignSelf={"center"}>
+            <StatusGif src={progressIcon}/>
         </Flex>
         <Flex alignSelf={"center"} alignItems={"center"} gap={".06rem"}>
             <Typography
@@ -54,15 +59,22 @@ export default function NFTPayProgressing() {
             >30s</Typography>
         </Flex>
         <Flex alignItems={"center"} justifyContent={"center"} gap={".3rem"} marginTop={".3rem"}>
-            <MarketLabel name={"OpenSea"}/>
-            <MarketLabel name={"DYDX"}/>
-            <MarketLabel name={"BendDAO"}/>
+            <MarketLabel name={props.nft.market} icon={props.nft.marketIcon()}/>
+            <MarketLabel name={"DYDX"} icon={imgurl.market.DYDXBuy}/>
+            <MarketLabel name={"BendDAO"} icon={imgurl.market.BendDAOBuy}/>
         </Flex>
         <Flex marginTop={".7rem"} justifyContent={"center"}>
             <Typography
                 fontSize={".14rem"}
                 fontWeight={500}
                 color={"rgba(0,0,0,.5)"}
+                style={{
+                    "userSelect": "none",
+                    "cursor": "pointer"
+                }}
+                onClick={() => {
+                    window.open(urls.resource)
+                }}
             >How it works?</Typography>
         </Flex>
     </Flex>

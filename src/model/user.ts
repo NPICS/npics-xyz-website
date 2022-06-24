@@ -2,6 +2,8 @@ import BigNumber from "bignumber.js";
 import {Expose} from "class-transformer";
 import {TransformBigNumber} from "./transform";
 import {AddressAbbreviation} from "../pages/marketplace/components/utils";
+import {numberFormat} from "../utils/urls";
+import {imgurl} from "../utils/globalimport";
 
 export class User {
   id?: number
@@ -90,6 +92,24 @@ export class CollectionItems {
   paymentSymbol!: string;
   tokenId!: string;
   collectionName!: string;
+
+  @Expose()
+  marketIcon() {
+    switch (this.market) {
+      case "x2y2":
+        return imgurl.market.x2y2
+      case "opensea":
+        return imgurl.market.opensea
+      case "looksrare":
+        return imgurl.market.looksrare
+      case "nftx":
+        return imgurl.market.nftx
+      case "xMarket":
+        return imgurl.market.xMarket
+      case "seaport":
+        return imgurl.market.seaport
+    }
+  }
 }
 
 type Traits = {
@@ -122,7 +142,7 @@ export class CollectionDetail extends CollectionItems {
 
   @Expose()
   basePriceFormat(): string {
-    return this.currentBasePrice.div(10 ** 18).toFixed(4)
+    return numberFormat(this.currentBasePrice.div(10 ** 18).toFixed())
   }
 }
 

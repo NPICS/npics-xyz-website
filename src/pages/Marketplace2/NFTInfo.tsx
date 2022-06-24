@@ -8,6 +8,7 @@ import {Npics} from "../../abi/Npics";
 import {Erc721} from "../../abi/Erc721";
 import {ethers} from "ethers";
 import {urls} from "../../utils/urls";
+import titlePrefixIcon from "../../assets/images/market/info_block_title_prefix.png"
 
 const Title = styled.div`
   color: #000;
@@ -66,11 +67,11 @@ export default function NFTInfo(props: {
     >
         <Flex
             flexDirection={"row"}
-            gap={".12"}
+            gap={".12rem"}
             borderBottom={"1px solid #0000001A"}
-            padding={".14rem .6rem"}
+            padding={".14rem .25rem"}
         >
-            <Icon width={".16rem"} height={".2rem"}/>
+            <Icon width={".24rem"} height={".24rem"} url={titlePrefixIcon}/>
             <Typography
                 fontWeight={500}
                 fontSize={".16rem"}
