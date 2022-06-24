@@ -14,6 +14,8 @@ import { SessionStorageKey } from 'utils/enums';
 import { DataSource, DebtData, LiquidatePrice, BgTable, Record } from './Tableutils';
 import { useNavigate } from "react-router-dom";
 import NotFound from 'component/NotFound';
+import { useUpdateEffect } from 'utils/hook';
+import aa from 'abi/aa.json'
 interface Result {
   createTime: string,
   id: number,
@@ -25,7 +27,12 @@ interface Result {
   collectionName: string,
 }
 
-function MyAgreement() {
+interface IProps {
+  setTotalDebts: React.Dispatch<React.SetStateAction<BigNumber>>
+  sortedInfo: string
+}
+
+function MyAgreement(props:IProps) {
   const { activate, account, library } = useWeb3React()
   const [activities, setActivities] = useState<DataSource[]>([])
   const [loading, setLoading] = useState<boolean>(false)
@@ -117,13 +124,28 @@ function MyAgreement() {
     window.open(`https://etherscan.io/nft/${e.address}/${e.tokenId}`)
   }
 
-  useEffect(() => {
-    let token = sessionStorage.getItem("ACCESS_TOKEN")
-    if (!token) {
-      // login()
+  useUpdateEffect(() => {
+    if(!DebtPosition.current) return
+    if(props.sortedInfo === 'All') {
+      setActivities(DebtPosition.current)
+      return
     }
+    const result = DebtPosition.current.filter((item) => {
+      return item.statusSrt === props.sortedInfo
+    })
+    setActivities(result)
+  },[props.sortedInfo])
+
+  useEffect(() => {
+    if (!activities) return
+    let orgTotalDebt = new BigNumber(0)
+    const Debt = activities.reduce((previousValue,currentValue) => {
+      return previousValue.plus(new BigNumber(currentValue.debt))
+    },orgTotalDebt)
+
+    props.setTotalDebts(Debt)
     // eslint-disable-next-line
-  }, [account])
+  }, [activities])
 
   useEffect(() => {
     if (isLogin) {
@@ -193,6 +215,7 @@ function MyAgreement() {
     try {
       const result: any = await http.myPost(url, pageInside)
       let orgData: Result[] = result.data.records
+      orgData = aa.data.records
       if (result.code === 200 && orgData.length) {
         const signer = library.getSigner(account)
         let lendPool = new LendPool(signer)
@@ -250,6 +273,7 @@ function MyAgreement() {
       setLoading(false)
     }
   }
+
   return (<BgTable>
     {loading ? <div className='loading'><img src={imgurl.market.loading} alt="" /></div> : activities.length ? <Table
       columns={columns}

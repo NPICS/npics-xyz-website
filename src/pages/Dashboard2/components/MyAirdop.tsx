@@ -4,6 +4,6 @@ export default function MyAirdop() {
   return <Box
     padding={".48rem .6rem"}
   >
-    MyAirdop
+    <h2>Coming Soon</h2>
   </Box>
 }
