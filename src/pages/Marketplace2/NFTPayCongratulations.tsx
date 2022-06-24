@@ -18,7 +18,7 @@ const NFTCover = styled.img`
   overflow: hidden;
 `
 
-const AttrLink = styled.a`
+export const AttrLink = styled.a`
   text-decoration: none;
   color: #FF490F;
 
@@ -56,7 +56,7 @@ export default function NFTPayCongratulations(props: {
                 <Flex justifyContent={"center"} flexDirection={"column"} flex={1}>
                     <Box>You've deposited <AttrLink href={
                         urls.etherscanNft(props.nft.address, props.nft.tokenId)
-                    }>
+                    } target={"_blank"}>
                         {`${props.nft.collectionName} #${props.nft.tokenId}`}
                     </AttrLink> and minted</Box>
                     <Flex

@@ -17,7 +17,7 @@ import {message} from "antd";
 import {Npics} from "../../abi/Npics";
 import Modal from "../../component/Modal";
 import NFTPayProgressing from "./NFTPayProgressing";
-import NFTPayCongratulations from "./NFTPayCongratulations";
+import NFTPayCongratulations, {AttrLink} from "./NFTPayCongratulations";
 import NFTPayWrong from "./NFTPayWrong";
 
 export function PopupTitle(props: {
@@ -439,7 +439,7 @@ export default function NFTPay(props: {
                         style={{
                             "userSelect": "none"
                         }}
-                    >Checking this box,I agree to NPics's <a href={urls.resource}>Terms of service</a></Typography>
+                    >Checking this box, I agree to NPics's <AttrLink href={urls.resource} target={"_blank"}>Terms of service</AttrLink></Typography>
                 </Flex>
             </label>
         </Box>
