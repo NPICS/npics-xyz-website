@@ -13,7 +13,6 @@ import { connectors } from 'utils/connectors';
 import { SessionStorageKey } from 'utils/enums';
 import { DataSource, DebtData, LiquidatePrice, BgTable, Record } from './Tableutils';
 import { useNavigate } from "react-router-dom";
-import aa from 'abi/aa.json'
 import NotFound from 'component/NotFound';
 interface Result {
   createTime: string,
@@ -131,7 +130,7 @@ function MyAgreement() {
       getNftActivities()
     }
     // eslint-disable-next-line
-  }, [isLogin])
+  }, [isLogin,account])
 
   useEffect(() => {
     if (account && !isLogin) {
@@ -189,12 +188,11 @@ function MyAgreement() {
     const url = "/npics-nft/app-api/v1/neo/getRecord"
     const pageInside = {
       "pageIndex": 1,
-      "pageSize": 10
+      "pageSize": 30
     }
     try {
       const result: any = await http.myPost(url, pageInside)
       let orgData: Result[] = result.data.records
-      orgData = aa.data.records
       if (result.code === 200 && orgData.length) {
         const signer = library.getSigner(account)
         let lendPool = new LendPool(signer)

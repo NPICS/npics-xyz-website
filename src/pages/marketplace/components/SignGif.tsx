@@ -105,7 +105,7 @@ export default function SignGif(props: Iprops) {
         // balanceToken = "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
         payWithType = 'weth'
         if(WETHBalance?.gt(payAmount)) {
-          payWethAmt = WETHBalance
+          payWethAmt = payAmount
           payEthAmt = new BigNumber(0)
           // sell = ""
         } else {

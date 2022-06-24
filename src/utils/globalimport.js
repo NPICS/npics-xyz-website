@@ -56,6 +56,7 @@ import gearIcon from '../assets/images/home/gearIcon.png'
 import ethBlack22 from '../assets/images/home/ethBlack22.png'
 import ethOrange22 from '../assets/images/home/ethOrange22.png'
 import ethBlack40 from '../assets/images/home/ethBlack40.png'
+import band22 from '../assets/images/home/band22.png'
 
 import Union1 from '../assets/images/market/Union1.png'
 import Union2 from '../assets/images/market/Union2.png'
@@ -107,6 +108,9 @@ import navAirdop from '../assets/images/dashboard/navAirdop.png'
 import ethGrey18 from '../assets/images/dashboard/ethGrey18.png'
 import rewardBend from '../assets/images/dashboard/rewardBend.png'
 import reback from '../assets/images/dashboard/reback.png'
+import Cancel from '../assets/images/dashboard/Cancel.png'
+import export14 from '../assets/images/dashboard/export14.png'
+import success from '../assets/images/dashboard/success.gif'
 
 import ETH36 from '../assets/images/eth_icon.png'
 import WETH36 from '../assets/images/weth_icon.png'
@@ -185,6 +189,7 @@ export const imgurl = {
     ethBlack22,
     ethBlack40,
     ethOrange22,
+    band22,
   },
   market: {
     Union1,
@@ -240,6 +245,9 @@ export const imgurl = {
     greyPrice7,
     catalogue26,
     airdropIcon,
-    ethGrey18
+    ethGrey18,
+    Cancel,
+    export14,
+    success
   }
 }

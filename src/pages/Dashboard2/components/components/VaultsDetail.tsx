@@ -14,7 +14,11 @@ import http from 'utils/http';
 import { getSignMessage } from 'utils/sign';
 import { connectors } from 'utils/connectors';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Modal } from 'antd';
+import Payment from './Payment';
+import styled from 'styled-components';
+import PaySuccessful from './PaySuccessful';
 const Banner = () => {
   return <Box
     position={"absolute"}
@@ -27,6 +31,22 @@ const Banner = () => {
   ></Box>
 };
 
+const StyledModal = styled(Modal)`
+  .ant-modal-content {
+    border-radius: 10px;
+  }
+  .ant-modal-body {
+    padding: .24rem;
+    line-height: 1.2 !important;
+  }
+  .ant-modal-header {
+    display: none;
+  }
+  .ant-modal-close {
+    display: none;
+  }
+`
+
 interface Result {
   createTime: string,
   id: number,
@@ -38,6 +58,13 @@ interface Result {
   collectionName: string,
 }
 
+interface RepaymentInformation {
+  address: string,
+  tokenId: string,
+  progressVal: number,
+  payDebt: BigNumber
+}
+
 export default function VaultsDetail() {
   const [progressVal, setProgressVal] = useState<number>(0)
   const [checked, setChecked] = useState<boolean>(false)
@@ -47,9 +74,15 @@ export default function VaultsDetail() {
   const [aprData, setAprData] = useState<{ apr: number, rewardApr: number }>({ apr: 0, rewardApr: 0 })
   const [payDebt, setPayDebt] = useState<BigNumber>()
   const [remainingDebt, setRemainingDebt] = useState<BigNumber>()
+  const [showPayment, setShowPayment] = useState<boolean>(false)
+  const [payInfo, setPayInfo] = useState<RepaymentInformation>()
+  const [isPayingAllDebts,setIsPayingAllDebts] = useState<boolean>(false)
+  const [reload, setReload] = useState<boolean>(false)
+
   const action = useAppDispatch()
   const isLogin = useAppSelector(state => state.app.isLogin)
   let urlParams: any = useParams()
+  const navigate = useNavigate() 
   const params:{address:string, tokenId: string} = urlParams
 
   useEffect(() => {
@@ -70,7 +103,7 @@ export default function VaultsDetail() {
   }, [account])
 
   const getBalance = async () => {
-    if (!account) message.error('account is undefined')
+    if (!account) return
     const balance = await library.getBalance(account)
     setWalletBalance(balance)
   }
@@ -96,7 +129,7 @@ export default function VaultsDetail() {
     setRemainingDebt(rDebt)
 
     // eslint-disable-next-line
-  }, [progressVal])
+  }, [progressVal,activities])
 
   useEffect(() => {
     let token = sessionStorage.getItem("ACCESS_TOKEN")
@@ -108,10 +141,11 @@ export default function VaultsDetail() {
 
   useEffect(() => {
     if (isLogin) {
+      setProgressVal(0)
       getNftActivities()
     }
     // eslint-disable-next-line
-  }, [isLogin,params])
+  }, [isLogin,params,account,reload])
 
   useEffect(() => {
     if (account && !isLogin) {
@@ -130,11 +164,6 @@ export default function VaultsDetail() {
     }
     // eslint-disable-next-line
   }, [account, isLogin])
-
-  useEffect(() => {
-    console.log("activities", activities)
-    // eslint-disable-next-line
-  }, [activities])
 
   async function login2() {
     try {
@@ -215,7 +244,6 @@ export default function VaultsDetail() {
           floorPrice: newArray.floorPrice,
           collectionName: newArray.collectionName,
         }
-        console.log(dataSource);
         setActivities(dataSource)
       }
     } catch (e) {
@@ -228,6 +256,19 @@ export default function VaultsDetail() {
   }
   const onProgressBar = (e: any) => {
     setProgressVal(e)
+  }
+  const goBack = () => {
+    navigate("/dashboard/vaults")
+  }
+  const handleRepay = () => {
+    let object = {
+      address: activities?.address as string,
+      tokenId: activities?.tokenId as string,
+      progressVal: progressVal,
+      payDebt: payDebt as BigNumber
+    }
+    setPayInfo(object)
+    setShowPayment(true)
   }
 
   return <Flex
@@ -247,7 +288,7 @@ export default function VaultsDetail() {
         gap={".2rem"}
         alignItems={"center"}
       >
-        <Icon width='.36rem' height='.36rem' url={imgurl.dashboard.reback} />
+        <div style={{cursor: 'pointer'}}><Icon width='.36rem' height='.36rem' url={imgurl.dashboard.reback} onClick={goBack}/></div>
         <Typography fontSize={".3rem"} fontWeight={"800"} color={"#fff"}>Repay</Typography>
       </Flex>
 
@@ -261,9 +302,9 @@ export default function VaultsDetail() {
           <Flex flexDirection={"column"}>
             <Typography fontSize={".2rem"} fontWeight={"700"} color={"#000"}>Vault Detail</Typography>
             <Flex alignItems={"center"}>
-              <Typography fontSize={".16rem"} fontWeight={"500"} color={"rgba(0,0,0,.5)"}>Asset:</Typography>
+              <Typography fontSize={".16rem"} fontWeight={"500"} color={"rgba(0,0,0,.5)"} marginRight=".05rem">Asset:</Typography>
               <Typography fontSize={".16rem"} fontWeight={"500"} color={"rgba(0,0,0,.5)"}>
-                {"Bored Ape Yacht Club # 2532"}
+                {`${activities?.collectionName ?? '--'} # ${activities?.tokenId ?? '--'}`}
               </Typography>
             </Flex>
           </Flex>
@@ -447,12 +488,31 @@ export default function VaultsDetail() {
 
 
             <Typography marginTop=".3rem">
-              <ButtonDefault disabled={progressVal === 0 ? true : false} types='normal' color='#fff'>Repay</ButtonDefault>
+              <ButtonDefault disabled={payDebt?.eq(0) ? false : false} types='normal' color='#fff' onClick={handleRepay}>Repay</ButtonDefault>
             </Typography>
 
           </GridItem>
         </Grid>
       </Box>
     </Box>
+    
+    <StyledModal
+      visible={showPayment}
+      footer={null}
+      onCancel={() => {
+        setShowPayment(false);
+        setIsPayingAllDebts(false);
+        setReload(!reload)
+      }}
+      destroyOnClose={true}
+      width='7.48rem'
+    >
+      {
+        isPayingAllDebts ? 
+        <PaySuccessful setShowPayment={setShowPayment} setIsPayingAllDebts={setIsPayingAllDebts} setReload={setReload} reload={reload}/> :
+        <Payment setIsPayingAllDebts={setIsPayingAllDebts} setShowPayment={setShowPayment} payInfo={payInfo} setReload={setReload} reload={reload}/>
+      }
+    </StyledModal>
+
   </Flex>
 }
