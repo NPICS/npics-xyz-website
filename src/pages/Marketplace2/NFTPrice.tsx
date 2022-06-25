@@ -16,8 +16,8 @@ import {ethers} from "ethers";
 import Modal from "../../component/Modal";
 import NFTPay from "./NFTPay";
 import {Popover} from "antd";
-import { globalVariable } from "utils/globalVariable";
-import { useNavigate } from 'react-router-dom';
+import {globalVariable} from "utils/globalVariable";
+import {useNavigate} from 'react-router-dom';
 import {useWeb3React} from "@web3-react/core";
 import {connectors} from "../../utils/connectors";
 
@@ -60,6 +60,9 @@ const BuyButton = styled.button`
   height: .82rem;
   border-radius: .1rem;
   margin-top: .21rem;
+  &:disabled {
+    background: #C5C5C5;
+  }
 `
 
 const OtherNFT = styled.img`
@@ -114,7 +117,7 @@ export default function NFTPrice(props: {
     const [recommendNFTs, setRecommendNFTs] = useState<CollectionItems[]>([]) // max is 6
     const [recommendNFTTotal, setRecommendNFTTotal] = useState<number | undefined>(undefined)
     const [availableBorrow, setAvailableBorrow] = useState<BigNumber | undefined>(undefined)
-    const [actualAmount, setActualAmount] = useState<BigNumber | undefined>(undefined)
+    const [actualAmount, setActualAmount] = useState<BigNumber>()
     const navigate = useNavigate()
     const {account, activate} = useWeb3React()
 
@@ -244,11 +247,22 @@ export default function NFTPrice(props: {
             {
                 recommendNFTs.map((nft, idx) => {
                     if (recommendNFTs.length === idx + 1) {
-                        return <MoreNFT tap={() => {
-                            navigate(`/marketPlace/collections/${nft?.address}`)
-                        }} img={nft.imageUrl} total={recommendNFTTotal}/>
+                        return <MoreNFT
+                            tap={() => {
+                                navigate(`/marketPlace/collections/${nft?.address}`)
+                            }}
+                            img={nft.imageUrl}
+                            total={recommendNFTTotal}
+                            key={idx}
+                        />
                     } else {
-                        return <OtherNFT src={nft.imageUrl} onClick={() => {navigate(`/nftDetail/${nft.address}/${nft.tokenId}`,{replace:true})}}/>
+                        return <OtherNFT
+                            src={nft.imageUrl}
+                            onClick={() => {
+                                navigate(`/nftDetail/${nft.address}/${nft.tokenId}`, {replace: true})
+                            }}
+                            key={idx}
+                        />
                     }
                 })
             }
@@ -271,29 +285,35 @@ export default function NFTPrice(props: {
                         fontSize={".4rem"}
                         fontWeight={700}
                         color={"#000"}
-                        lineHeight={"normal"}
-                        verticalAlign={"middle"}
-                        height={"auto"}
+                        lineHeight={"100%"}
+                        // verticalAlign={"bottom"}
+                        style={{
+                            "whiteSpace": "nowrap"
+                        }}
                     >{
-                        actualAmount && numberFormat(actualAmount.div(10 ** 18).toNumber())
+                        (actualAmount && numberFormat(actualAmount.div(10 ** 18).toNumber())) ?? "---"
                     }</Typography>
                 </Flex>
                 <Typography
                     fontSize={".14rem"}
                     fontWeight={500}
                     lineHeight={"2"}
+                    padding={0}
                 >
                     {
-                        `（$ ${
+                        actualAmount && `（$ ${
                             actualAmount && numberFormat(actualAmount
                                 .times(ethRate)
                                 .div(10 ** 18)
-                                .toNumber())
-                        }）`
+                                .toNumber())}
+                            ）`
                     }
                 </Typography>
             </Flex>
-            <BuyButton onClick={buyClick}>Buy Now</BuyButton>
+            <BuyButton
+                disabled={actualAmount == null}
+                onClick={buyClick}
+            >Buy Now</BuyButton>
         </BuyBox>
     </Grid>
 }

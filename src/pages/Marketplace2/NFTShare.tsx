@@ -32,9 +32,13 @@ export default function NFTShare(props: {
 }) {
     return <Flex justifyContent={"end"} alignItems={"start"}>
         <IconWithBorder icon={ShareIcon} tap={async () => {
-            navigator.clipboard.writeText(`${window.location.href}`).then(() => {
-              message.success("Copy Successfully")
-            })
+            let link = window.location.href
+            if (navigator.clipboard) {
+                await navigator.clipboard.writeText(link)
+                message.success("Copy Successfully")
+            } else {
+                prompt("Please copy link", link)
+            }
         }}/>
     </Flex>
 }
