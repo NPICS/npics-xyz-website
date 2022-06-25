@@ -7,7 +7,7 @@ import { numberFormat } from './urls';
 import { useAppSelector } from 'store/hooks';
 
 const BorderBottom = styled.div`
-  height: .02rem;
+  height: .01rem;
   width: 100%;
   background-color: #999;
 `

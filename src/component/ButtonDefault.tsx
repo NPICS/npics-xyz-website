@@ -15,7 +15,10 @@ interface Iprops {
 
 const StyledButton = styled.button<Iprops>`
   &:hover {
-    background-color: #FF490F;
+    background-color: ${(props => props.types === 'normal'? "#FF490F" : '')};
+    background: ${(props => props.types === 'second'? "#FFFFFF" : '')};
+    box-shadow: ${(props => props.types === 'second'? "0px 0px 20px rgba(0, 0, 0, 0.1)" : '')};
+    border: ${(props => props.types === 'second'? "0" : '')};
   }
   &:disabled {
     background-color: #999;
@@ -34,6 +37,8 @@ const StyledButton = styled.button<Iprops>`
        return '#999';
       case 'normal':
        return '#000';
+      case 'second':
+       return '#fff';
       default:
         return null;
     }
@@ -52,6 +57,8 @@ const StyledButton = styled.button<Iprops>`
        return '0';
       case 'normal':
        return '0';
+      case 'second':
+       return '1px solid rgba(0,0,0,.2)';
       default:
         return null;
     }

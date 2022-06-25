@@ -99,7 +99,7 @@ export default function OneNFT() {
         <Box position={"relative"} zIndex={1}>
             {/* nav */}
             <Flex flexDirection={"row"} gap={".15rem"} alignItems={"start"}>
-                <Icon height={".36rem"} width={".36rem"} src={PopIcon} onClick={ () => navigate(`/marketPlace/collections/${detailData?.address}`) }/>
+                <Icon style={{cursor: 'pointer'}} height={".36rem"} width={".36rem"} src={PopIcon} onClick={ () => navigate(`/marketPlace/collections/${detailData?.address}`) }/>
                 <Flex flexDirection={"column"} gap={".05rem"}>
                     <Typography fontSize={".16rem"} color={"#fff"} fontWeight={500}
                                 fontFamily={"Montserrat"}>{detailData?.collectionName}</Typography>

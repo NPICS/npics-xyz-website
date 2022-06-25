@@ -142,14 +142,6 @@ export default function VaultsDetail() {
   }, [progressVal,activities])
 
   useEffect(() => {
-    let token = sessionStorage.getItem("ACCESS_TOKEN")
-    if (!token) {
-      // login()
-    }
-    // eslint-disable-next-line
-  }, [account])
-
-  useEffect(() => {
     if (isLogin) {
       setProgressVal(0)
       getNftActivities()

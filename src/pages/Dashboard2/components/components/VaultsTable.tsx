@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { Table, message, notification } from 'antd';
+import { Table, message, notification, Modal } from 'antd';
 import { imgurl } from 'utils/globalimport';
 import BigNumber from 'bignumber.js';
 import http from 'utils/http'
@@ -16,8 +16,10 @@ import { useNavigate } from "react-router-dom";
 import NotFound from 'component/NotFound';
 import { useUpdateEffect } from 'utils/hook';
 // import aa from 'abi/aa.json'
-import { Icon } from 'component/Box';
+import { Flex, Grid, Icon, Typography } from 'component/Box';
 import { globalConstant } from 'utils/globalConstant';
+import styled from 'styled-components';
+import ButtonDefault from 'component/ButtonDefault';
 interface Result {
   createTime: string,
   id: number,
@@ -31,19 +33,36 @@ interface Result {
   purchaseFloorPrice: BigNumber,
 }
 
+const StyledModal = styled(Modal)`
+  .ant-modal-content {
+    border-radius: 10px;
+  }
+  .ant-modal-body {
+    padding: .24rem;
+    line-height: 1.2 !important;
+  }
+  .ant-modal-header {
+    display: none;
+  }
+  .ant-modal-close {
+    display: none;
+  }
+`
+
 interface IProps {
   setTotalDebts: React.Dispatch<React.SetStateAction<BigNumber>>
   sortedInfo: string
 }
 
-function MyAgreement(props:IProps) {
+function MyAgreement(props: IProps) {
   const { activate, account, library } = useWeb3React()
   const [activities, setActivities] = useState<DataSource[]>([])
   const [loading, setLoading] = useState<boolean>(false)
+  const [showModal, setShowModal] = useState<boolean>(false)
   const action = useAppDispatch()
   const isLogin = useAppSelector(state => state.app.isLogin)
   const DebtPosition = useRef<DataSource[]>()
-  const navigate = useNavigate() 
+  const navigate = useNavigate()
   const columns: ColumnsType<DataSource> = [
     {
       title: 'Asset',
@@ -58,7 +77,7 @@ function MyAgreement(props:IProps) {
             <span>{`# ${row.tokenId}`}</span>
           </div>
           <div>
-            Floor: <span><img src={imgurl.dashboard.ethGrey18} alt="" />{row.floorPrice.div(10 ** globalConstant.bit).toFixed(2,1)}</span>
+            Floor: <span><img src={imgurl.dashboard.ethGrey18} alt="" />{row.floorPrice.div(10 ** globalConstant.bit).toFixed(2, 1)}</span>
           </div>
         </div>
       </div>
@@ -128,8 +147,8 @@ function MyAgreement(props:IProps) {
   }
 
   useUpdateEffect(() => {
-    if(!DebtPosition.current) return
-    if(props.sortedInfo === 'All') {
+    if (!DebtPosition.current) return
+    if (props.sortedInfo === 'All') {
       setActivities(DebtPosition.current)
       return
     }
@@ -137,14 +156,14 @@ function MyAgreement(props:IProps) {
       return item.statusSrt === props.sortedInfo
     })
     setActivities(result)
-  },[props.sortedInfo])
+  }, [props.sortedInfo])
 
   useEffect(() => {
     if (!activities) return
     let orgTotalDebt = new BigNumber(0)
-    const Debt = activities.reduce((previousValue,currentValue) => {
+    const Debt = activities.reduce((previousValue, currentValue) => {
       return previousValue.plus(new BigNumber(currentValue.debt))
-    },orgTotalDebt)
+    }, orgTotalDebt)
 
     props.setTotalDebts(Debt)
     // eslint-disable-next-line
@@ -152,28 +171,35 @@ function MyAgreement(props:IProps) {
 
   useEffect(() => {
     if (isLogin) {
+      setShowModal(false)
       getNftActivities()
+    } else {
+      setShowModal(true)
     }
     // eslint-disable-next-line
-  }, [isLogin,account])
+  }, [isLogin, account])
 
   useEffect(() => {
-    if (account && !isLogin) {
-      login2()
-      console.log(`😈 ${isLogin}`)
-    } else {
-      if (!account) {
-        activate(connectors.injected, (e) => {
-          if (e.name === "UnsupportedChainIdError") {
-            sessionStorage.removeItem(SessionStorageKey.WalletAuthorized)
-            action(fetchUser(`{}`))
-            notification.error({ message: "Prompt connection failed, please use the Ethereum network" })
-          }
-        })
-      }
-    }
-    // eslint-disable-next-line
-  }, [account, isLogin])
+    console.log('isLogin',isLogin);
+  },[isLogin])
+
+  // useEffect(() => {
+  //   if (account && !isLogin) {
+  //     login2()
+  //     console.log(`😈 ${isLogin}`)
+  //   } else {
+  //     if (!account) {
+  //       activate(connectors.injected, (e) => {
+  //         if (e.name === "UnsupportedChainIdError") {
+  //           sessionStorage.removeItem(SessionStorageKey.WalletAuthorized)
+  //           action(fetchUser(`{}`))
+  //           notification.error({ message: "Prompt connection failed, please use the Ethereum network" })
+  //         }
+  //       })
+  //     }
+  //   }
+  //   // eslint-disable-next-line
+  // }, [account, isLogin])
 
   async function login2() {
     try {
@@ -278,6 +304,40 @@ function MyAgreement(props:IProps) {
     }
   }
 
+  const ConfirmModal = (props: {
+    enter?(): void
+  }) => <Grid gridGap=".3rem">
+      <Flex alignItems="center" justifyContent="space-between" marginBottom=".3rem">
+        <Typography></Typography>
+        <Typography fontSize=".3rem" fontWeight="800" color="#000">Verify Address</Typography>
+        <div style={{ cursor: 'pointer' }}><Icon width=".24rem" height=".24rem" src={imgurl.dashboard.Cancel} onClick={() => {
+          setShowModal(false)
+        }} /></div>
+      </Flex>
+
+      <Typography>You will be asked to sign a message in your wallet to verify you as the owner of the address.</Typography>
+      <Flex justifyContent="space-evenly">
+        <ButtonDefault width='2rem' height='.52rem' types='second' color='#000' onClick={() => { setShowModal(false) }}>Cancel</ButtonDefault>
+        <ButtonDefault width='2rem' height='.52rem' types='normal' color='#fff' onClick={() => {
+          if (account && !isLogin) {
+            login2()
+            console.log(`😈 ${isLogin}`)
+          } else {
+            if (!account) {
+              activate(connectors.injected, (e) => {
+                if (e.name === "UnsupportedChainIdError") {
+                  sessionStorage.removeItem(SessionStorageKey.WalletAuthorized)
+                  action(fetchUser(`{}`))
+                  notification.error({ message: "Prompt connection failed, please use the Ethereum network" })
+                }
+              })
+            }
+          }
+          setShowModal(false)
+        }}>OK</ButtonDefault>
+      </Flex>
+    </Grid>
+
   return (<BgTable>
     {loading ? <div className='loading'><img src={imgurl.market.loading} alt="" /></div> : activities.length ? <Table
       columns={columns}
@@ -285,6 +345,16 @@ function MyAgreement(props:IProps) {
       pagination={false}
       className="ant-table-reset-white"
     ></Table> : <NotFound />}
+    <StyledModal
+      visible={showModal}
+      footer={null}
+      onCancel={() => { setShowModal(false) }}
+      destroyOnClose={true}
+      centered={true}
+      width='5.48rem'
+    >
+      <ConfirmModal />
+    </StyledModal>
   </BgTable>)
 
 }

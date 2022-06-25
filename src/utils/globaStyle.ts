@@ -60,15 +60,15 @@ export const GlobalStyle = createGlobalStyle`
   }
   .ant-input-reset {    
     &:hover {
-      border: 1px solid rgba(255,255,255,.5) !important;
+      border: 1px solid rgba(0,0,0,.2) !important;
       box-shadow:none !important;
     }  
     &:focus {
-      border: 1px solid rgba(255,255,255,.5) !important;
+      border: 1px solid rgba(0,0,0,.2) !important;
       box-shadow:none !important;
     }  
-    background: #1a1a1a;
-    border: 1px solid rgba(255,255,255,.5);
+    /* background: #1a1a1a; */
+    border: 1px solid rgba(0,0,0,.2);
     border-radius: 10px;
     color: #fff;
   }

@@ -10,9 +10,20 @@ import { useEthPrice } from "utils/hook";
 const {Option} = Select
 
 const AntdSelect = styled(Select)`
-  color: rgba(0,0,0,.5);
-  font-weight: 500;
-  font-size: .14rem;
+  .ant-select-selector {
+    color: rgba(0,0,0,.5);
+    font-weight: 500;
+    font-size: .14rem;
+    min-width: 2rem;
+    min-height: .5rem;
+    padding: 0 .23rem !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    box-shadow: none !important;
+    border-radius: 10px !important;
+    .ant-select-selection-item {
+      line-height: .5rem;
+    }
+  }
 `
 
 export default function MyVaults() {

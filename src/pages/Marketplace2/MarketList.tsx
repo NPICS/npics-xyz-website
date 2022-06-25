@@ -17,8 +17,15 @@ import InfiniteScroll from 'react-infinite-scroller';
 import {numberFormat} from "../../utils/urls";
 import NotFound from "component/NotFound";
 import { globalConstant } from "utils/globalConstant";
-
 const {Option} = Select;
+
+const InputStyled = styled(Input)`
+    background: #fff;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: 10px;
+    color: rgba(0,0,0,.5);
+    height: .5rem;
+`
 
 export const Portrait = styled.img`
   display: block;
@@ -28,6 +35,22 @@ export const Portrait = styled.img`
   overflow: hidden;
   width: 1.46rem;
   height: 1.46rem;
+`
+const AntdSelect = styled(Select)`
+  .ant-select-selector {
+    color: rgba(0,0,0,.5);
+    font-weight: 500;
+    font-size: .14rem;
+    min-width: 2rem;
+    min-height: .5rem;
+    padding: 0 .23rem !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    box-shadow: none !important;
+    border-radius: 10px !important;
+    .ant-select-selection-item {
+      line-height: .5rem;
+    }
+  }
 `
 
 export default function MarketList() {
@@ -90,7 +113,7 @@ export default function MarketList() {
             boxShadow={"rgba(0,0,0,.5)"}>
             <Flex height={".5rem"} gap={".12rem"} alignItems={"center"}>
                 <Box width={"6.85rem"}>
-                    <Input
+                    <InputStyled
                         type="text"
                         placeholder='Search'
                         onPressEnter={(e: any) => {
@@ -100,14 +123,14 @@ export default function MarketList() {
                         className="ant-input-reset"
                     />
                 </Box>
-                <Select onSelect={(value: string) => {
+                <AntdSelect onSelect={(value: any) => {
                     setCurrentSort(value)
-                }} defaultValue="asc" dropdownClassName="ant-selectDropDown-reset">
+                }} defaultValue="asc" dropdownClassName="ant-select-reset">
                     <Option value="asc">Price: Low to High</Option>
                     <Option value="desc">Price: high to low</Option>
                     <Option value="rarityScoreDesc">Rarity: Common to Rarest</Option>
                     <Option value="rarityScore">Rarity: Rarest to Common</Option>
-                </Select>
+                </AntdSelect>
                 <Flex flex={1}></Flex>
                 <Flex flexDirection={"row"} alignItems={"center"} gap={".2rem"}>
                     <Icon height={".24rem"} width={".24rem"} src={compactMode ? LooseUnselectIcon : LooseSelectIcon}
