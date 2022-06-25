@@ -8,6 +8,7 @@ import { Erc20 } from 'abi/Erc20';
 import { ContractAddresses } from 'utils/addresses';
 import { useEthPrice } from 'utils/hook';
 import { font01651, font01455 } from 'component/styled';
+import {numberFormat} from "../../utils/urls";
 
 interface wallet {
   icon: string,
@@ -34,11 +35,11 @@ const Wrap = styled.div`
       display: flex;
       flex-direction: column;
       &>span:nth-child(1) {
-        ${font01651}
+        ${font01651};
         text-align: right;
       }
       &>span:nth-child(2) {
-        ${font01455}
+        ${font01455};
         text-align: right;
       }
     }
@@ -64,15 +65,16 @@ export default function WalletBalance () {
       return
     }
     const balance = await library.getBalance(account)
-    setETHBalance(balance)
+    setETHBalance(new BigNumber(balance.toString()))
+
     let signer = library.getSigner(account)
     let weth = new Erc20(ContractAddresses.WETH, signer)
     const WETHBalance = await weth.balanceOf(account)
-    setWETHBalance(WETHBalance)
+    setWETHBalance(new BigNumber(WETHBalance.toString()))
 
     let bendDao = new Erc20(ContractAddresses.BendDaoProxy, signer)
     const bendDaoBalance = await bendDao.balanceOf(account)
-    setBDBalance(bendDaoBalance)
+    setBDBalance(new BigNumber(bendDaoBalance.toString()))
   }
 
   useEffect(() => {
@@ -109,8 +111,10 @@ export default function WalletBalance () {
           <span>{item.text}</span>
         </div>
         <div className='right'>
-            <span>{new BigNumber(item.amount.toString()).div(10 ** 18).dp(4).toFixed()}</span>
-            <span>${item.dollar.dp(0).toFixed()}</span>
+            {/*<span>{new BigNumber(item.amount.toString()).div(10 ** 18).dp(4).toFixed()}</span>*/}
+            {/*<span>${item.dollar.dp(0).toFixed()}</span>*/}
+          <span>{numberFormat(item.amount.div(10 ** 18).toFixed())}</span>
+          <span>{numberFormat(item.dollar.toFixed())}</span>
         </div>
       </div>)
     })}

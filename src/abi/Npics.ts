@@ -55,7 +55,7 @@ export class Npics {
         let contract = new ethers.Contract(ContractAddresses.NpicsProxy, NPICS_ABI, this.signer)
         return await contract.getRewardsBalance(nft)
     }
-    
+
     async claimRewards() {
         let contract = new ethers.Contract(ContractAddresses.NpicsProxy, NPICS_ABI, this.signer)
         return await contract.claimRewards()
@@ -67,5 +67,9 @@ export class Npics {
         let result = new BigNumber(price.toString()).minus(new BigNumber('0.0001').times(10 ** 18))
         return BigNumber.max(result, 0);
     }
-    
+
+    async getNbpFor(nft: string, tokenId: number): Promise<string> {
+      let contract = new ethers.Contract(ContractAddresses.NpicsProxy, NPICS_ABI, this.signer)
+      return await contract.getNbpFor(nft, tokenId)
+    }
 }

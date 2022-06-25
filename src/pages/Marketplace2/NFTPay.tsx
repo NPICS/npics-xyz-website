@@ -208,14 +208,14 @@ export default function NFTPay(props: {
     async function checkoutBtnClick() {
         try {
             // check balance
-            if (!canBuy) {
-                message.error("Insufficient account balance")
-                return
-            }
-            if (!didReadService) {
-                message.error(`Please agree to NPics's Terms of service`)
-                return
-            }
+            // if (!canBuy) {
+            //     message.error("Insufficient account balance")
+            //     return
+            // }
+            // if (!didReadService) {
+            //     message.error(`Please agree to NPics's Terms of service`)
+            //     return
+            // }
             // show progressing
             setProgressingPopupOpen(true)
             // get transaction data
@@ -254,18 +254,29 @@ export default function NFTPay(props: {
     }
 
     async function getTradeDetailData(): Promise<string | undefined> {
-        const resp: any = await http.myPost(`/npics-nft/app-api/v2/nft/route`, {
-            address: props.nft.address,
-            amount: 1,
-            balanceToken: "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
-            sender: account,
-            standard: props.nft.standard,
-            tokenId: props.nft.tokenId
-        })
-        if (resp.code === 200 && resp.data.transaction) {
-            return resp.data.transaction
+        const inner = async (accountOrNbp: string | undefined | null) => {
+            const resp: any = await http.myPost(`/npics-nft/app-api/v2/nft/route`, {
+                address: props.nft.address,
+                amount: 1,
+                balanceToken: "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+                sender: accountOrNbp,
+                standard: props.nft.standard,
+                tokenId: props.nft.tokenId
+            })
+            if (resp.code === 200 && resp.data.transaction) {
+                return resp.data.transaction
+            } else {
+                return undefined
+            }
+        }
+        if (props.nft.market === "nftx") {
+            /// nftx market special treatment, get nbp address
+            let c = new Npics(library.getSigner(account))
+            let nbp = await c.getNbpFor(props.nft.address, Number(props.nft.tokenId))
+            console.log(`NBP => ${nbp}`)
+            return inner(nbp)
         } else {
-            return undefined
+            return inner(account)
         }
     }
 
