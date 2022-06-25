@@ -13,8 +13,8 @@ import {numberFormat} from "../../utils/urls";
 interface wallet {
   icon: string,
   text: string,
-  amount: BigNumber,
-  dollar: BigNumber,
+  amount: BigNumber | string,
+  dollar: BigNumber | string,
 }
 const Wrap = styled.div`
   .item {
@@ -78,25 +78,25 @@ export default function WalletBalance () {
   }
 
   useEffect(() => {
-    if(!ETHBalance || !ETHdollar || !WETHBalance || !WETHdollar || !BDBalance || !BDdollar) return
+    // if(!ETHBalance || !ETHdollar || !WETHBalance || !WETHdollar || !BDBalance || !BDdollar) return
     const data = [
       {
         icon: imgurl.home.ethBlack22,
         text: 'ETH',
-        amount: ETHBalance,
-        dollar: ETHdollar,
+        amount: ETHBalance?? '---',
+        dollar: ETHdollar?? '---',
       },
       {
         icon: imgurl.home.ethOrange22,
         text: 'WETH',
-        amount: WETHBalance,
-        dollar: WETHdollar,
+        amount: WETHBalance?? '---',
+        dollar: WETHdollar?? '---',
       },
       {
         icon: imgurl.home.band22,
         text: 'BEND',
-        amount: BDBalance,
-        dollar: BDdollar,
+        amount: BDBalance?? '---',
+        dollar: BDdollar?? '---',
       }
     ]
     setList(data)
@@ -113,8 +113,8 @@ export default function WalletBalance () {
         <div className='right'>
             {/*<span>{new BigNumber(item.amount.toString()).div(10 ** 18).dp(4).toFixed()}</span>*/}
             {/*<span>${item.dollar.dp(0).toFixed()}</span>*/}
-          <span>{numberFormat(item.amount.div(10 ** 18).toFixed())}</span>
-          <span>{numberFormat(item.dollar.toFixed())}</span>
+          <span>{typeof item.amount === 'string' ? item.amount : numberFormat(item.amount.div(10 ** 18).toFixed())}</span>
+          <span>{typeof item.dollar === 'string' ? item.dollar : `$(${numberFormat(item.dollar.toFixed())})`}</span>
         </div>
       </div>)
     })}

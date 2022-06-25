@@ -180,7 +180,7 @@ function XHeader() {
     return (<div className='account-title'>
       <span>Account</span>
       <span style={{ cursor: 'pointer' }}>
-        <img src={imgurl.home.gearIcon} alt="" />
+        {/* <img src={imgurl.home.gearIcon} alt="" /> */}
       </span>
     </div>)
   }

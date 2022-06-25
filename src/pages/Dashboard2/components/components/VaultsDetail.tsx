@@ -6,7 +6,7 @@ import ButtonDefault from 'component/ButtonDefault'
 import { DataSource, DebtData, LiquidatePrice, Record } from './Tableutils';
 import { useWeb3React } from '@web3-react/core';
 import { LendPool } from 'abi/LendPool';
-import { notification, message } from 'antd';
+import { notification, message, Popover } from 'antd';
 import BigNumber from 'bignumber.js';
 import { fetchUser, setIsLogin } from 'store/app';
 import { SessionStorageKey } from 'utils/enums';
@@ -19,6 +19,8 @@ import { Modal } from 'antd';
 import Payment from './Payment';
 import styled from 'styled-components';
 import PaySuccessful from './PaySuccessful';
+import { MintedNFTPop, HealthFactorPop, DebtPop, VaultAprPop, EstimatProfitPop } from 'utils/popover';
+import { globalConstant } from 'utils/globalConstant';
 const Banner = () => {
   return <Box
     position={"absolute"}
@@ -47,6 +49,12 @@ const StyledModal = styled(Modal)`
   }
 `
 
+const TipsIcon = styled(Icon)`
+  position: absolute;
+  top: .14rem;
+  right: .14rem;
+`
+
 interface Result {
   createTime: string,
   id: number,
@@ -54,8 +62,10 @@ interface Result {
   tokenId: string,
   userAddress: string,
   imageUrl: string,
-  floorPrice: string,
+  floorPrice: BigNumber,
   collectionName: string,
+  ltv: BigNumber,
+  purchaseFloorPrice: BigNumber,
 }
 
 interface RepaymentInformation {
@@ -78,8 +88,8 @@ export default function VaultsDetail() {
   const [payInfo, setPayInfo] = useState<RepaymentInformation>()
   const [isPayingAllDebts,setIsPayingAllDebts] = useState<boolean>(false)
   const [reload, setReload] = useState<boolean>(false)
-
   const action = useAppDispatch()
+  const state = useAppSelector(state => state.app)
   const isLogin = useAppSelector(state => state.app.isLogin)
   let urlParams: any = useParams()
   const navigate = useNavigate() 
@@ -232,18 +242,25 @@ export default function VaultsDetail() {
           key: 'nft-detail',
           items: newArray.tokenId,
           contract: newArray.tokenId,
-          debtString: new BigNumber(newArray.debtData.totalDebt.toString()).div(10 ** 18).toFixed(4, 1) || `--`,
+          debtString: new BigNumber(newArray.debtData.totalDebt.toString()).div(10 ** 18).toFixed(4, 1) || `---`,
+          // debtString: '13.14' || `---`,
           debt: new BigNumber(newArray.debtData.totalDebt.toString()),
+          // debt: new BigNumber('13140000000000000000'),
           maxDebt: new BigNumber(newArray.debtData.totalDebt.toString()).plus(slippage(new BigNumber(newArray.debtData.totalDebt.toString()))),
-          liquidationPrice: new BigNumber(newArray.liquidatePrice.liquidatePrice.toString()).div(10 ** 18).toFixed(4, 1) || "--",
-          healthFactor: new BigNumber(newArray.debtData.healthFactor.toString()).div(10 ** 18).toFixed(4, 1) || "--",
-          status: new BigNumber(newArray.debtData.healthFactor.toString()).div(10 ** 18).toFixed(4, 1) || "--",
+          // maxDebt: new BigNumber("14440000000000000000"),
+          liquidationPrice: new BigNumber(newArray.liquidatePrice.liquidatePrice.toString()).div(10 ** 18).toFixed(4, 1) || "---",
+          // liquidationPrice: '5.82' || "---",
+          healthFactor: new BigNumber(newArray.debtData.healthFactor.toString()).div(10 ** 18).toFixed(4, 1) || "---",
+          status: new BigNumber(newArray.debtData.healthFactor.toString()).div(10 ** 18).toFixed(4, 1) || "---",
           statusSrt: turnStr(newArray.debtData.healthFactor),
           address: newArray.nftAddress,
           tokenId: newArray.tokenId,
           imageUrl: newArray.imageUrl,
-          floorPrice: newArray.floorPrice,
+          floorPrice: new BigNumber(newArray.floorPrice),
+          // floorPrice: new BigNumber(10800000000000000000),
           collectionName: newArray.collectionName,
+          purchaseFloorPrice: new BigNumber(newArray.purchaseFloorPrice),
+          ltv: new BigNumber(newArray.ltv),
         }
         setActivities(dataSource)
       }
@@ -335,9 +352,13 @@ export default function VaultsDetail() {
               flexDirection="column"
               alignItems="center"
               justifyContent={"center"}
+              position={"relative"}
             >
-              <Typography marginBottom={".14rem"}>{`NEO-${activities?.collectionName ?? '--'} # ${activities?.tokenId ?? '--'}`}</Typography>
-              <Typography>Minted-NFT</Typography>
+              <Popover content={MintedNFTPop}>
+                <TipsIcon width={".14rem"} src={imgurl.market.tipsIcon}/>
+              </Popover>
+              <Typography fontSize=".24rem" fontWeight='700' color="#000" marginBottom={".14rem"}>{`NEO-${activities?.collectionName ?? '--'} # ${activities?.tokenId ?? '--'}`}</Typography>
+              <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Minted-NFT</Typography>
             </GridItem>
             <GridItem
               background={"#fff"}
@@ -348,9 +369,20 @@ export default function VaultsDetail() {
               flexDirection="column"
               alignItems="center"
               justifyContent={"center"}
+              position="relative"
             >
-              <Typography marginBottom={".14rem"}>{activities?.liquidationPrice}</Typography>
-              <Typography>Estimat Profit</Typography>
+              <Popover content={EstimatProfitPop({
+                purchaseFloorPrice: activities?.purchaseFloorPrice,
+                ltv: activities?.ltv,
+                floorPrice: activities?.floorPrice
+              })}>
+                <TipsIcon width={".14rem"} src={imgurl.market.tipsIcon}/>
+              </Popover>
+              <Typography marginBottom={".14rem"} fontSize=".24rem" fontWeight='700' color="#000">
+                {activities?.purchaseFloorPrice && `${activities?.floorPrice.minus(activities?.purchaseFloorPrice).div(10 ** globalConstant.bit).toFixed(2,1)}`}
+                {activities?.purchaseFloorPrice && ` (${activities?.floorPrice.minus(activities?.purchaseFloorPrice).div(activities?.purchaseFloorPrice?.times(new BigNumber(1).minus(activities?.ltv?.div(10 ** 4) as BigNumber))).toFixed(2,1)})`}
+              </Typography>
+              <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Estimat Profit</Typography>
             </GridItem>
 
             <Grid
@@ -363,24 +395,43 @@ export default function VaultsDetail() {
               gridGap={".4rem 1.3rem"}
             >
               <Flex alignItems={"center"} justifyContent={"center"} flexDirection="column" gap='.12rem'>
-                <Typography>Health factor</Typography>
-                <Typography>{activities?.healthFactor}</Typography>
+                <Flex gap="10px">
+                  <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Health factor</Typography>
+                <Popover content={HealthFactorPop}>
+                  <Icon width={".14rem"} src={imgurl.market.tipsIcon}/>
+                </Popover>
+
+                </Flex>
+                <Typography fontSize=".2rem" fontWeight='500' color="#000">{activities?.healthFactor}</Typography>
               </Flex>
               <Flex alignItems={"center"} justifyContent={"center"} flexDirection="column" gap='.12rem'>
-                <Typography>Floor price</Typography>
-                <Typography>{activities?.healthFactor}</Typography>
+                <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Floor price</Typography>
+                <Typography fontSize=".2rem" fontWeight='500' color="#000">{activities?.floorPrice.div(10 ** globalConstant.bit).toFixed(2,1)}</Typography>
               </Flex>
               <Flex alignItems={"center"} justifyContent={"center"} flexDirection="column" gap='.12rem'>
-                <Typography>Debt</Typography>
-                <Typography>{activities?.debtString}</Typography>
+                <Flex gap="10px">
+                  <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Debt</Typography>
+                  <Popover content={DebtPop({Principal:activities?.debt,noInterest:'---'})}>
+                    <Icon width={".14rem"} src={imgurl.market.tipsIcon} />
+                  </Popover>
+
+                </Flex>
+                <Typography fontSize=".2rem" fontWeight='500' color="#000">{activities?.debtString}</Typography>
               </Flex>
               <Flex alignItems={"center"} justifyContent={"center"} flexDirection="column" gap='.12rem'>
-                <Typography>Vault APR</Typography>
-                <Typography>{`${(aprData.rewardApr*100 - aprData.apr).toFixed(2)}%`}</Typography>
+                <Flex gap="10px">
+                  <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Vault APR</Typography>
+                    
+                  <Popover content={VaultAprPop({rewardAPR:(aprData.rewardApr ?? 0),interestAPR:aprData.apr / 100 ?? 0})}>
+                    <Icon width={".14rem"} src={imgurl.market.tipsIcon} />
+                  </Popover>
+
+                </Flex>
+                <Typography fontSize=".2rem" fontWeight='500' color="#000">{`${(aprData.rewardApr*100 - aprData.apr).toFixed(2)}%`}</Typography>
               </Flex>
               <Flex alignItems={"center"} justifyContent={"center"} flexDirection="column" gap='.12rem'>
-                <Typography>Liquidation Price</Typography>
-                <Typography>{activities && new BigNumber(activities?.debt.toString()).div('0.9').div(10 ** 18).toFixed(2, 1)}</Typography>
+                <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Liquidation Price</Typography>
+                <Typography fontSize=".2rem" fontWeight='500' color="#000">{activities && new BigNumber(activities?.debt.toString()).div('0.9').div(10 ** 18).toFixed(2, 1)}</Typography>
               </Flex>
             </Grid>
           </Grid>
@@ -410,8 +461,8 @@ export default function VaultsDetail() {
             gap={".1rem"}
             padding={".32rem 0"}
           >
-            <Typography>{remainingDebt && remainingDebt.div(10 ** 18).toFixed(4, 1)}</Typography>
-            <Typography>Remaining debt</Typography>
+            <Typography fontSize=".24rem" fontWeight='700' color="#000">{remainingDebt && remainingDebt.div(10 ** 18).toFixed(4, 1)}</Typography>
+            <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Remaining debt</Typography>
           </GridItem>
           <GridItem
             boxShadow={"0px 0px 30px rgba(0, 0, 0, 0.05)"}
@@ -423,7 +474,7 @@ export default function VaultsDetail() {
             gap={".1rem"}
             padding={".32rem 0"}
           >
-            <Typography>
+            <Typography fontSize=".24rem" fontWeight='700' color="#000">
               {
                 activities &&
                 remainingDebt &&
@@ -434,7 +485,7 @@ export default function VaultsDetail() {
                     new BigNumber(activities?.floorPrice.toString()).times('0.9').div(remainingDebt?.div(10 ** 18)).toFixed(4, 1))
               }
             </Typography>
-            <Typography>New health factor</Typography>
+            <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">New health factor</Typography>
           </GridItem>
           <GridItem
             boxShadow={"0px 0px 30px rgba(0, 0, 0, 0.05)"}
@@ -447,10 +498,10 @@ export default function VaultsDetail() {
             padding={".32rem 0"}
           >
             <Flex alignItems={"center"}>
-            {walletBalance && new BigNumber(walletBalance.toString()).div(10 ** 18).dp(4, 1).toFixed()}
+              <Typography fontSize=".24rem" fontWeight='700' color="#000">{walletBalance && new BigNumber(walletBalance.toString()).div(10 ** 18).dp(4, 1).toFixed()}</Typography>
               <Icon width='.22rem' height='.22rem' src={imgurl.home.ethBlack22} />
             </Flex>
-            <Typography>Wallet balance</Typography>
+            <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Wallet balance</Typography>
           </GridItem>
           <GridItem gridArea={'pay'} flexDirection="column">
             <Flex
@@ -490,7 +541,7 @@ export default function VaultsDetail() {
 
 
             <Typography marginTop=".3rem">
-              <ButtonDefault disabled={payDebt?.eq(0) ? false : false} types='normal' color='#fff' onClick={handleRepay}>Repay</ButtonDefault>
+              <ButtonDefault disabled={payDebt?.eq(0) ? true : false} types='normal' color='#fff' onClick={handleRepay}>Repay</ButtonDefault>
             </Typography>
 
           </GridItem>

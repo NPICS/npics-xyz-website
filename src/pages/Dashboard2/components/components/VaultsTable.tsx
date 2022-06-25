@@ -17,6 +17,7 @@ import NotFound from 'component/NotFound';
 import { useUpdateEffect } from 'utils/hook';
 // import aa from 'abi/aa.json'
 import { Icon } from 'component/Box';
+import { globalConstant } from 'utils/globalConstant';
 interface Result {
   createTime: string,
   id: number,
@@ -24,8 +25,10 @@ interface Result {
   tokenId: string,
   userAddress: string,
   imageUrl: string,
-  floorPrice: string,
+  floorPrice: BigNumber,
   collectionName: string,
+  ltv: BigNumber,
+  purchaseFloorPrice: BigNumber,
 }
 
 interface IProps {
@@ -55,7 +58,7 @@ function MyAgreement(props:IProps) {
             <span>{`# ${row.tokenId}`}</span>
           </div>
           <div>
-            Floor: <span><img src={imgurl.dashboard.ethGrey18} alt="" />{row.floorPrice}</span>
+            Floor: <span><img src={imgurl.dashboard.ethGrey18} alt="" />{row.floorPrice.div(10 ** globalConstant.bit).toFixed(2,1)}</span>
           </div>
         </div>
       </div>
@@ -194,7 +197,6 @@ function MyAgreement(props:IProps) {
   }
   const turnStr = (val: BigNumber) => {
     let factor = +(new BigNumber(val.toString()).div(10 ** 18).dp(0).toString())
-    factor = Math.random() * 2
     if (factor >= 1.5) {
       return 'Inforce'
     } else if (factor >= 1 && factor < 1.5) {
@@ -258,8 +260,10 @@ function MyAgreement(props:IProps) {
             address: newArray[i].nftAddress,
             tokenId: newArray[i].tokenId,
             imageUrl: newArray[i].imageUrl,
-            floorPrice: newArray[i].floorPrice,
+            floorPrice: new BigNumber(newArray[i].floorPrice),
             collectionName: newArray[i].collectionName,
+            ltv: newArray[i].ltv,
+            purchaseFloorPrice: newArray[i].purchaseFloorPrice,
           })
         }
         DebtPosition.current = dataSource
