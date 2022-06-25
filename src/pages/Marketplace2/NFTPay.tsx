@@ -195,7 +195,7 @@ export default function NFTPay(props: {
     }, [userSelectedAmount, ethAndWETHAmount, props.actualAmount])
 
     useEffect(() => {
-        const inner = async () => await http.myPost(`/npics-nft/app-api/v1/neo/commitNeo`, {
+        const inner = async () => await http.myPost(`/npics-nft/app-api/v2/neo/commitNeo`, {
             hash: hash,
             nftAddress: props.nft.address,
             tokenId: props.nft.tokenId

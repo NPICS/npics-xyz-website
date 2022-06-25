@@ -76,7 +76,15 @@ export default function MarketList() {
         if (nftAddress && !isLoading.current) {
             loadData().finally()
         }
-    }, [nftAddress, searchText, currentPage, currentSort])
+    }, [nftAddress, searchText, currentPage])
+
+    useEffect(() => {
+        if (currentPage === 1) {
+            loadData()
+        } else {
+            setCurrentPage(1)
+        }
+    }, [currentSort])
 
     useEffect(() => {
         console.log(`currentPage => ${currentPage}`)
