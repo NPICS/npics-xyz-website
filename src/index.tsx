@@ -24,6 +24,7 @@ const root = ReactDOM.createRoot(
 
 const StyledThemeProvider = (props: any) => {
   // const isDark = useAppSelector(state => state.app.Theme.isDark)
+  // Temporary solution 😅
   const history = useLocation()
   const [isHome, setIsHome] = useState<boolean>(true)
   useEffect(() => {

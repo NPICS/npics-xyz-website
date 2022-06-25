@@ -30,14 +30,25 @@ function IconWithBorder(props: {
 export default function NFTShare(props: {
     item?: CollectionDetail
 }) {
+
+    const copyToClipboardWithCommand = (content: string) => {
+        const el = document.createElement("textarea");
+        el.value = content;
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand("copy");
+        document.body.removeChild(el);
+        message.success("Copy Successfully")
+    };
+
     return <Flex justifyContent={"end"} alignItems={"start"}>
         <IconWithBorder icon={ShareIcon} tap={async () => {
             let link = window.location.href
-            if (navigator.clipboard) {
+            if (navigator.clipboard && navigator.permissions) {
                 await navigator.clipboard.writeText(link)
                 message.success("Copy Successfully")
             } else {
-                prompt("Please copy link", link)
+                copyToClipboardWithCommand(link)
             }
         }}/>
     </Flex>

@@ -1,7 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 const wsSlice = createSlice({
-    name: "webSocket",
+    name: "ws",
     initialState: {},
     reducers: {}
 })

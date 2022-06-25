@@ -1,6 +1,7 @@
 {
   "name": "untitled",
   "version": "0.1.0",
+  "proxy": "http://192.168.1.61:10099/",
   "private": true,
   "proxy": "http://192.168.1.61:10099/",
   "dependencies": {
@@ -12,6 +13,7 @@
     "@types/jest": "^27.5.1",
     "@types/lodash": "^4.14.182",
     "@types/node": "^17.0.32",
+    "@types/numeral": "^2.0.2",
     "@types/react": "^18.0.9",
     "@types/react-dom": "^18.0.4",
     "@types/react-infinite-scroller": "^1.2.3",
@@ -25,7 +27,6 @@
     "@web3-react/metamask": "^8.0.0-beta.0",
     "@web3-react/walletconnect-connector": "^6.2.13",
     "@web3-react/walletlink-connector": "^6.2.14",
-    "@types/numeral": "^2.0.2",
     "antd": "^4.20.6",
     "axios": "^0.27.2",
     "bignumber.js": "^9.0.2",
@@ -47,6 +48,7 @@
     "react-redux": "^8.0.1",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
+    "react-use": "^17.4.0",
     "redux": "^4.2.0",
     "redux-thunk": "^2.4.1",
     "reflect-metadata": "^0.1.13",
