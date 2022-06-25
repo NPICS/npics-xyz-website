@@ -26,7 +26,7 @@ interface IAppState {
   interestAPR?: number
   rewardsAPR?: number,
   // eth -> usdt rate
-  usdtExchangeRate?: BigNumber
+  usdtExchangeRate?: string
 }
 
 const initialState: IAppState = {
@@ -67,8 +67,7 @@ export const updateUSDTExchangeRate = createAsyncThunk("app/updateUSDTExchangeRa
   try {
     let resp: any = await http.myPost(`/npics-nft/app-api/v2/currencyPrice/getEthPrice`)
     if (resp.code === 200 && resp.data) {
-      let num = new BigNumber(resp.data as string)
-      return num.isNaN() ? undefined : num
+      return resp.data as string
     } else {
       return undefined
     }
@@ -128,11 +127,13 @@ const appSlice = createSlice({
           state.interestAPR = parseFloat(data.apr)
         }
       })
-      // .addCase(updateUSDTExchangeRate.fulfilled, (state, action) => {
-      //   if (action.payload) {
-      //      state.usdtExchangeRate = action.payload
-      //   }
-      // })
+      .addCase(updateUSDTExchangeRate.fulfilled, (state, action) => {
+        if (action.payload) {
+          state.usdtExchangeRate = action.payload
+          // temporary compatibility
+          state.data.EthPrice = action.payload
+        }
+      })
   }
 })
 export const {
