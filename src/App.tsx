@@ -8,8 +8,8 @@ function App() {
     const action = useAppDispatch()
 
     useAsync(async () => {
-        updateUSDTExchangeRate()
-        updateARP()
+        action(updateUSDTExchangeRate())
+        action(updateARP)
     }, [])
 
     // update at 30 seconds of exchange rate
