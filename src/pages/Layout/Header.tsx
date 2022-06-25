@@ -180,7 +180,7 @@ function XHeader() {
     return (<div className='account-title'>
       <span>Account</span>
       <span style={{ cursor: 'pointer' }}>
-        <img src={imgurl.home.gearIcon} alt="" />
+        {/* <img src={imgurl.home.gearIcon} alt="" /> */}
       </span>
     </div>)
   }
@@ -211,9 +211,9 @@ function XHeader() {
         {/*<BtnLink to={"/docs"}>*/}
         {/*  Rewards*/}
         {/*</BtnLink>*/}
-        <BtnLink to={"/web3"}>
+        {/* <BtnLink to={"/web3"}>
           Resources
-        </BtnLink>
+        </BtnLink> */}
         <a style={{
           "fontSize": ".16rem",
           "fontWeight": "600",

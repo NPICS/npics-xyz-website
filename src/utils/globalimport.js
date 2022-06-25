@@ -124,6 +124,8 @@ import price14 from '../assets/images/market/price14.png'
 import checked from '../assets/images/market/checked.png'
 import blackPrice from '../assets/images/market/blackPrice.png'
 import redPrice24 from '../assets/images/market/redPrice24.png'
+import tipsIcon from '../assets/images/market/exclamation_point.png'
+
 import metamaskLogo from '../assets/images/home/metamask_logo.png'
 
 export const imgurl = {
@@ -194,6 +196,7 @@ export const imgurl = {
     band22,
   },
   market: {
+    tipsIcon,
     Union1,
     Union2,
     search,

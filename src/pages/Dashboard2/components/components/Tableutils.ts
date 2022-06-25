@@ -146,7 +146,9 @@ export interface Result {
   tokenId: string,
   userAddress: string,
   imageUrl: string
-  floorPrice: string;
+  floorPrice: BigNumber
+  ltv: BigNumber
+  purchaseFloorPrice: BigNumber
 }
 
 export interface Record extends Result {
@@ -182,6 +184,8 @@ export interface DataSource {
   address: string;
   tokenId: string;
   imageUrl: string;
-  floorPrice: string;
+  floorPrice: BigNumber;
   collectionName: string;
+  ltv: BigNumber;
+  purchaseFloorPrice: BigNumber;
 }

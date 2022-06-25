@@ -16,11 +16,12 @@ import {ethers} from "ethers";
 import Modal from "../../component/Modal";
 import NFTPay from "./NFTPay";
 import {Popover} from "antd";
-import {globalVariable} from "utils/globalVariable";
+import {globalConstant} from "utils/globalConstant";
 import {useNavigate} from 'react-router-dom';
 import {useWeb3React} from "@web3-react/core";
 import {connectors} from "../../utils/connectors";
 import {getNFTStatusInOpensea} from "../../utils/opensea";
+import {listedPricePop, VaultAprPop, DownPaymentPop} from "utils/popover";
 
 const Shadow = styled(Flex)`
   background: #fff;
@@ -116,6 +117,9 @@ export default function NFTPrice(props: {
     const action = useAppDispatch()
     const ethRate = useAppSelector(state => new BigNumber(state.app.data.EthPrice))
     const vaultAPR = useAppSelector(state => (state.app.rewardsAPR ?? 0) - (state.app.interestAPR ?? 0) / 100)
+    // const state = useAppSelector(state => state.app)
+    const rewardsAPR = useAppSelector(state => state.app.rewardsAPR)
+    const interestAPR = useAppSelector(state => state.app.interestAPR)
     const [recommendNFTs, setRecommendNFTs] = useState<CollectionItems[]>([]) // max is 6
     const [recommendNFTTotal, setRecommendNFTTotal] = useState<number | undefined>(undefined)
     const [availableBorrow, setAvailableBorrow] = useState<BigNumber | undefined>(undefined)
@@ -138,7 +142,7 @@ export default function NFTPrice(props: {
                 pageIndex: 1,
                 pageSize: 10,
                 search: null,
-                showNftx: globalVariable.showNftx
+                showNftx: globalConstant.showNftx
             })
             if (resp.code === 200 && resp.data.records) {
                 let listData = deserializeArray(CollectionItems, JSON.stringify(resp.data.records))
@@ -196,7 +200,7 @@ export default function NFTPrice(props: {
             {/*>Click</button>*/}
             {/* Price */}
             <Shadow>
-                <Popover content={"The Lowest Listing price in all markets."}>
+                <Popover content={listedPricePop}>
                     <TipsIcon width={".14rem"} src={tipsIcon}/>
                 </Popover>
 
@@ -239,7 +243,10 @@ export default function NFTPrice(props: {
             </Shadow>
             {/* Vault Apr */}
             <Shadow>
-                <TipsIcon width={".14rem"} src={tipsIcon}/>
+                {/* <Popover content={vaultApr({rewardAPR:123,interestAPR:321})}>     */}
+                <Popover content={VaultAprPop({rewardAPR: (rewardsAPR ?? 0), interestAPR: ((interestAPR ?? 0) / 100)})}>
+                    <TipsIcon width={".14rem"} src={tipsIcon}/>
+                </Popover>
                 <Typography
                     color={"#FF490F"}
                     fontSize={".24rem"}
@@ -287,7 +294,9 @@ export default function NFTPrice(props: {
             flexDirection={"column"}
             alignItems={"start"}
         >
-            <TipsIcon width={".14rem"} src={tipsIcon}/>
+            <Popover content={DownPaymentPop({listedPrice: props.item?.currentBasePrice, loanAmount: availableBorrow})}>
+                <TipsIcon width={".14rem"} src={tipsIcon}/>
+            </Popover>
             <Typography
                 fontSize={".16rem"}
                 fontWeight={500}
@@ -320,8 +329,8 @@ export default function NFTPrice(props: {
                             actualAmount && numberFormat(actualAmount
                                 .times(ethRate)
                                 .div(10 ** 18)
-                                .toNumber())}
-                            ）`
+                                .toFixed())
+                        }）`
                     }
                 </Typography>
             </Flex>
