@@ -20,6 +20,7 @@ import {globalVariable} from "utils/globalVariable";
 import {useNavigate} from 'react-router-dom';
 import {useWeb3React} from "@web3-react/core";
 import {connectors} from "../../utils/connectors";
+import {getNFTStatusInOpensea} from "../../utils/opensea";
 
 const Shadow = styled(Flex)`
   background: #fff;
@@ -188,6 +189,11 @@ export default function NFTPrice(props: {
             />
         </Modal>
         <Flex gap={".1rem"}>
+            {/*<button*/}
+            {/*    onClick={() => {*/}
+            {/*        getPrice()*/}
+            {/*    }}*/}
+            {/*>Click</button>*/}
             {/* Price */}
             <Shadow>
                 <Popover content={"The Lowest Listing price in all markets."}>

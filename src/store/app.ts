@@ -4,6 +4,7 @@ import {Collections} from "../model/user";
 // import {deserialize} from "class-transformer";
 import http from "../utils/http";
 import {SessionStorageKey} from "../utils/enums";
+import BigNumber from "bignumber.js";
 
 class Theme {
   isDark!: Boolean;
@@ -23,7 +24,9 @@ interface IAppState {
   data: data,
   isLogin: boolean,
   interestAPR?: number
-  rewardsAPR?: number
+  rewardsAPR?: number,
+  // eth -> usdt rate
+  usdtExchangeRate?: BigNumber
 }
 
 const initialState: IAppState = {
@@ -32,7 +35,6 @@ const initialState: IAppState = {
     isDark: true
   },
   data: {
-    // eslint-disable-next-line
     collections: <Collections>{},
     isShowConnect: false,
     isShowLoading: false,
@@ -56,6 +58,20 @@ export const updateARP = createAsyncThunk("app/updateARP", async (args, thunkAPI
   try {
     let resp: any = await http.myPost("/npics-nft/app-api/v2/nfthome/getAprInfo", {})
     return resp.code === 200 ? resp.data : undefined
+  } catch (e) {
+    return undefined
+  }
+})
+
+export const updateUSDTExchangeRate = createAsyncThunk("app/updateUSDTExchangeRate", async (args, thunkAPI) => {
+  try {
+    let resp: any = await http.myPost(`/npics-nft/app-api/v2/currencyPrice/getEthPrice`)
+    if (resp.code === 200 && resp.data) {
+      let num = new BigNumber(resp.data as string)
+      return num.isNaN() ? undefined : num
+    } else {
+      return undefined
+    }
   } catch (e) {
     return undefined
   }
@@ -112,6 +128,11 @@ const appSlice = createSlice({
           state.interestAPR = parseFloat(data.apr)
         }
       })
+      // .addCase(updateUSDTExchangeRate.fulfilled, (state, action) => {
+      //   if (action.payload) {
+      //      state.usdtExchangeRate = action.payload
+      //   }
+      // })
   }
 })
 export const {

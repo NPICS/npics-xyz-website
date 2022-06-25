@@ -11,8 +11,12 @@ import React, {useEffect, useState} from "react";
 import http from "../../utils/http";
 import {CollectionDetail} from "../../model/user";
 import {deserialize} from "class-transformer";
-import { useParams, useNavigate } from 'react-router-dom';
+import {useParams, useNavigate} from 'react-router-dom';
 import {Banner} from "./Market";
+import nftWarningIcon from "../../assets/images/market/nft_warning_tips.png"
+import {getNFTStatusInOpensea} from "../../utils/opensea";
+import {useAsync} from "react-use";
+import {Popover} from "antd";
 
 function Label(props: {
     icon: string,
@@ -70,23 +74,27 @@ export default function OneNFT() {
     const [detailData, setDetailData] = useState<CollectionDetail | undefined>(undefined)
     const navigate = useNavigate()
     let urlParams: any = useParams()
-    const params:{address:string, tokenId: string} = urlParams
+    const params: { address: string, tokenId: string } = urlParams
+    const [openSeaIsNormalization, setOpenSeaIsNormalization] = useState<boolean>(true)
 
-    useEffect(() => {
-        const inner = async () => {
-            // prams from level up
-            const resp: any = await http.myPost(`/npics-nft/app-api/v2/nft/getCollectionItemsDetail`, {
-                address: params.address,
-                tokenId: params.tokenId
-            })
-            if (resp.code === 200 && resp.data) {
-                console.log(resp.data);
-                setDetailData(deserialize(CollectionDetail, JSON.stringify(resp.data)))
-            } else {
-            }
-        }
-        inner().finally()
+    useAsync(async () => {
+        const resp: any = await http.myPost(`/npics-nft/app-api/v2/nft/getCollectionItemsDetail`, {
+            address: params.address,
+            tokenId: params.tokenId
+        })
+        if (resp.code === 200 && resp.data) {
+            console.log(resp.data);
+            setDetailData(deserialize(CollectionDetail, JSON.stringify(resp.data)))
+        } else {}
     }, [params])
+
+    useAsync(async () => {
+        if (detailData) {
+            let flag = await getNFTStatusInOpensea(detailData.address, Number(detailData.tokenId))
+            console.log(`flag => ${flag}`)
+            setOpenSeaIsNormalization(flag as boolean)
+        }
+    }, [detailData])
 
     return <Box
         padding={"1.6rem"}
@@ -99,12 +107,26 @@ export default function OneNFT() {
         <Box position={"relative"} zIndex={1}>
             {/* nav */}
             <Flex flexDirection={"row"} gap={".15rem"} alignItems={"start"}>
-                <Icon height={".36rem"} width={".36rem"} src={PopIcon} onClick={ () => navigate(`/marketPlace/collections/${detailData?.address}`) }/>
+                <Icon height={".36rem"} width={".36rem"} src={PopIcon}
+                      onClick={() => navigate(`/marketPlace/collections/${detailData?.address}`)}/>
                 <Flex flexDirection={"column"} gap={".05rem"}>
                     <Typography fontSize={".16rem"} color={"#fff"} fontWeight={500}
                                 fontFamily={"Montserrat"}>{detailData?.collectionName}</Typography>
-                    <Typography fontSize={".3rem"} color={"#fff"} fontWeight={800}
-                                fontFamily={"Montserrat"}>{`${detailData?.collectionName} #${detailData?.tokenId}`}</Typography>
+                    <Flex alignItems={"center"} gap={".12rem"}>
+                        <Typography
+                            fontSize={".3rem"}
+                            color={"#fff"}
+                            fontWeight={800}
+                        >{`${detailData?.collectionName} #${detailData?.tokenId}`}</Typography>
+                        <Popover content={"Reported for Suspicious Activity on OpenSea"}>
+                            <Icon
+                                width={".24rem"}
+                                height={".24rem"}
+                                src={nftWarningIcon}
+                                hidden={openSeaIsNormalization} />
+                        </Popover>
+                    </Flex>
+
                     <Flex flexDirection={"row"} gap={".15rem"}>
                         <Label
                             icon={imgurl.market.collect2}

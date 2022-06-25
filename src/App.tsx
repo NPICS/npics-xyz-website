@@ -1,17 +1,19 @@
 import React, { useEffect } from 'react';
-import {setEthPrice, updateARP} from 'store/app';
+import {setEthPrice, updateARP, updateUSDTExchangeRate} from 'store/app';
 import { useAppDispatch } from 'store/hooks';
 import http from 'utils/http';
 import Layout from './pages/Layout/index'
+import {useAsync, useHarmonicIntervalFn, useIntersection, useInterval} from "react-use";
 
 function App() {
   
   const action = useAppDispatch()
+
   useEffect(() => {
     getEthPrice()
     const timer = setInterval(() => {
       getEthPrice()
-    }, 30000);
+    }, 1000 * 30);
     return () => clearInterval(timer);
     // eslint-disable-next-line
   }, []);
@@ -23,6 +25,16 @@ function App() {
       action(setEthPrice(exchangeRate.data))
     }
   }
+
+  // useEffect(() => {
+  //
+  // }, [])
+  //
+  // useInterval(() => {
+  //   action(updateUSDTExchangeRate())
+  // }, 1000 * 10)
+
+
 
   return (
     <div>
