@@ -60,6 +60,7 @@ const BuyButton = styled.button`
   height: .82rem;
   border-radius: .1rem;
   margin-top: .21rem;
+
   &:disabled {
     background: #C5C5C5;
   }
@@ -134,12 +135,15 @@ export default function NFTPrice(props: {
                 address: props.item?.address,
                 direction: "asc",
                 pageIndex: 1,
-                pageSize: 6,
+                pageSize: 10,
                 search: null,
                 showNftx: globalVariable.showNftx
             })
             if (resp.code === 200 && resp.data.records) {
-                setRecommendNFTs(deserializeArray(CollectionItems, JSON.stringify(resp.data.records)))
+                let listData = deserializeArray(CollectionItems, JSON.stringify(resp.data.records))
+                    .filter(it => it.tokenId != props.item?.tokenId)
+                listData.splice(0, listData.length - 6) ///< max 6
+                setRecommendNFTs(listData)
                 setRecommendNFTTotal(resp.data.total)
             } else {
             }
@@ -243,7 +247,12 @@ export default function NFTPrice(props: {
             </Shadow>
         </Flex>
         {/* Other NFTs */}
-        <Flex gap={".1rem"} overflow={"hidden"}>
+        <Grid
+            gridTemplateColumns={"repeat(6, auto)"}
+            gridGap={".1rem"}
+            overflow={"hidden"}
+            justifyContent={"start"}
+        >
             {
                 recommendNFTs.map((nft, idx) => {
                     if (recommendNFTs.length === idx + 1) {
@@ -266,7 +275,7 @@ export default function NFTPrice(props: {
                     }
                 })
             }
-        </Flex>
+        </Grid>
         {/* Buy handler */}
         <BuyBox
             flexDirection={"column"}
