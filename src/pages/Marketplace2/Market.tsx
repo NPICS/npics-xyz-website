@@ -11,6 +11,7 @@ import {numberFormat} from "../../utils/urls";
 import {Portrait} from "./MarketList";
 import {prettyFormat} from "@testing-library/react";
 import {percentageFormat} from "../marketplace/components/utils";
+import ethIcon from "../../assets/images/market/eth_icon_20x34.png"
 
 export const Banner = (props: {
     url?: string
@@ -166,8 +167,12 @@ export default function Market() {
                         gap={".05rem"}
                         minWidth={"1.36rem"}>
                         <Flex alignItems={"center"} gap={".06rem"}>
-                            <Icon width={".12rem"} height={".16rem"} src={imgurl.market.blackPrice}/>
-                            <Typography fontSize={".2rem"} color={"#000"}>{
+                            <Icon width={".10rem"} height={".15rem"} src={ethIcon}/>
+                            <Typography
+                                fontSize={".2rem"}
+                                color={"#000"}
+                                fontWeight={700}
+                            >{
                                 nft && numberFormat(nft.floorPrice.div(10 ** 18).toFixed())
                             }</Typography>
                         </Flex>
@@ -182,10 +187,11 @@ export default function Market() {
                         gap={".05rem"}
                         minWidth={"1.36rem"}>
                         <Flex alignItems={"center"} gap={".06rem"}>
-                            <Icon width={".12rem"} height={".16rem"} src={imgurl.market.blackPrice}/>
+                            <Icon width={".10rem"} height={".15rem"} src={ethIcon}/>
                             <Typography
                                 fontSize={".2rem"}
                                 color={"#000"}
+                                fontWeight={700}
                             >{
                                 nft && numberFormat(nft.dayVolume)
                             }</Typography>
@@ -209,7 +215,7 @@ export default function Market() {
                         padding={".12rem .2rem"}
                         gap={".05rem"}
                         minWidth={"1.36rem"}>
-                        <Typography fontSize={".2rem"} color={"#000"} fontWeight={"500"}>{
+                        <Typography fontSize={".2rem"} color={"#000"} fontWeight={700}>{
                             nft && nft.totalShelves
                         }</Typography>
                         <Typography>Total</Typography>
@@ -222,7 +228,7 @@ export default function Market() {
                         padding={".12rem .2rem"}
                         gap={".05rem"}
                         minWidth={"1.36rem"}>
-                        <Typography fontSize={".2rem"} color={"#000"} fontWeight={500}>{
+                        <Typography fontSize={".2rem"} color={"#000"} fontWeight={700}>{
                             nft && nft.activeCollaterals
                         }</Typography>
                         <Typography>Listed Items</Typography>

@@ -159,7 +159,7 @@ export class Activities {
   fromAccount!: string
   toAccount!: string
   @TransformBigNumber()
-  amount!: BigNumber
+  amount?: BigNumber
   @TransformBigNumber()
   startAmount!: BigNumber
   imageUrl!: string
@@ -190,8 +190,12 @@ export class Activities {
   }
 
   @Expose()
-  amountFormat(): string {
+  amountFormat(): string | undefined {
     // return this.amount.div(10 ** this.decimals).toFixed(2).toString()
-    return numberFormat(this.amount.div(10 ** this.decimals).toNumber())
+    if (this.amount) {
+      return numberFormat(this.amount.div(10 ** this.decimals).toFixed())
+    } else {
+      return undefined
+    }
   }
 }

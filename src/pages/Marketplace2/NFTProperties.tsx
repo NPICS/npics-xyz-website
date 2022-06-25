@@ -75,10 +75,11 @@ export default function NFTProperties(props: {
             >Properties</Typography>
         </Flex>
         <Grid
-            gridTemplateColumns={"repeat(2, auto)"}
+            gridTemplateColumns={"repeat(2, 1fr)"}
             gridGap={".1rem"}
             padding={".2rem"}
             alignItems={"stretch"}
+            justifyContent={"stretch"}
         >
             {
                 props.item?.traits.map((it, idx) => {

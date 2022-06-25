@@ -48,14 +48,14 @@ const Symbol = styled.img`
 `
 
 function PriceWithSymbol(props: {
-    displayAmount: string,
+    displayAmount?: string,
     iconOrUrl: string
 }) {
     return <Flex flexDirection={"row"} alignItems={"center"} gap={".06rem"}>
         <Symbol src={props.iconOrUrl}/>
         <Typography
             lineHeight={"normal"}
-        >{props.displayAmount}</Typography>
+        >{props.displayAmount ?? `0`}</Typography>
     </Flex>
 }
 
@@ -111,7 +111,7 @@ export default function NFTActivities(props: {
                     <thead>
                     <tr>
                         <th align={"left"}>Event</th>
-                        <th>Price</th>
+                        <th align={"left"}>Price</th>
                         <th>From</th>
                         <th>To</th>
                         <th>Datetime</th>

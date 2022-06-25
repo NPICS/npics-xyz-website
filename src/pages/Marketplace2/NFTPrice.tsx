@@ -61,6 +61,10 @@ const BuyButton = styled.button`
   height: .82rem;
   border-radius: .1rem;
   margin-top: .21rem;
+
+  &:disabled {
+    background: #C5C5C5;
+  }
 `
 
 const OtherNFT = styled.img`
@@ -117,7 +121,7 @@ export default function NFTPrice(props: {
     const [recommendNFTs, setRecommendNFTs] = useState<CollectionItems[]>([]) // max is 6
     const [recommendNFTTotal, setRecommendNFTTotal] = useState<number | undefined>(undefined)
     const [availableBorrow, setAvailableBorrow] = useState<BigNumber | undefined>(undefined)
-    const [actualAmount, setActualAmount] = useState<BigNumber | undefined>(undefined)
+    const [actualAmount, setActualAmount] = useState<BigNumber>()
     const navigate = useNavigate()
     const {account, activate} = useWeb3React()
 
@@ -134,12 +138,15 @@ export default function NFTPrice(props: {
                 address: props.item?.address,
                 direction: "asc",
                 pageIndex: 1,
-                pageSize: 6,
+                pageSize: 10,
                 search: null,
                 showNftx: globalConstant.showNftx
             })
             if (resp.code === 200 && resp.data.records) {
-                setRecommendNFTs(deserializeArray(CollectionItems, JSON.stringify(resp.data.records)))
+                let listData = deserializeArray(CollectionItems, JSON.stringify(resp.data.records))
+                    .filter(it => it.tokenId != props.item?.tokenId)
+                listData.splice(0, listData.length - 6) ///< max 6
+                setRecommendNFTs(listData)
                 setRecommendNFTTotal(resp.data.total)
             } else {
             }
@@ -246,19 +253,35 @@ export default function NFTPrice(props: {
             </Shadow>
         </Flex>
         {/* Other NFTs */}
-        <Flex gap={".1rem"} overflow={"hidden"}>
+        <Grid
+            gridTemplateColumns={"repeat(6, auto)"}
+            gridGap={".1rem"}
+            overflow={"hidden"}
+            justifyContent={"start"}
+        >
             {
                 recommendNFTs.map((nft, idx) => {
                     if (recommendNFTs.length === idx + 1) {
-                        return <MoreNFT tap={() => {
-                            navigate(`/marketPlace/collections/${nft?.address}`)
-                        }} img={nft.imageUrl} total={recommendNFTTotal}/>
+                        return <MoreNFT
+                            tap={() => {
+                                navigate(`/marketPlace/collections/${nft?.address}`)
+                            }}
+                            img={nft.imageUrl}
+                            total={recommendNFTTotal}
+                            key={idx}
+                        />
                     } else {
-                        return <OtherNFT src={nft.imageUrl} onClick={() => {navigate(`/nftDetail/${nft.address}/${nft.tokenId}`,{replace:true})}}/>
+                        return <OtherNFT
+                            src={nft.imageUrl}
+                            onClick={() => {
+                                navigate(`/nftDetail/${nft.address}/${nft.tokenId}`, {replace: true})
+                            }}
+                            key={idx}
+                        />
                     }
                 })
             }
-        </Flex>
+        </Grid>
         {/* Buy handler */}
         <BuyBox
             flexDirection={"column"}
@@ -279,20 +302,23 @@ export default function NFTPrice(props: {
                         fontSize={".4rem"}
                         fontWeight={700}
                         color={"#000"}
-                        lineHeight={"normal"}
-                        verticalAlign={"middle"}
-                        height={"auto"}
+                        lineHeight={"100%"}
+                        // verticalAlign={"bottom"}
+                        style={{
+                            "whiteSpace": "nowrap"
+                        }}
                     >{
-                        actualAmount && numberFormat(actualAmount.div(10 ** 18).toNumber())
+                        (actualAmount && numberFormat(actualAmount.div(10 ** 18).toNumber())) ?? "---"
                     }</Typography>
                 </Flex>
                 <Typography
                     fontSize={".14rem"}
                     fontWeight={500}
                     lineHeight={"2"}
+                    padding={0}
                 >
                     {
-                        `（$ ${
+                        actualAmount && `（$ ${
                             actualAmount && numberFormat(actualAmount
                                 .times(ethRate)
                                 .div(10 ** 18)
@@ -301,7 +327,10 @@ export default function NFTPrice(props: {
                     }
                 </Typography>
             </Flex>
-            <BuyButton onClick={buyClick}>Buy Now</BuyButton>
+            <BuyButton
+                disabled={actualAmount == null}
+                onClick={buyClick}
+            >Buy Now</BuyButton>
         </BuyBox>
     </Grid>
 }

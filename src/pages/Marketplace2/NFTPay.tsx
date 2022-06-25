@@ -112,7 +112,7 @@ export const ConfirmButton = styled(CancelButton)`
   color: #fff;
 
   &:disabled {
-    background: rgba(0, 0, 0, .8);
+    background: #c5c5c5;
   }
 `
 
@@ -122,7 +122,7 @@ export default function NFTPay(props: {
     actualAmount: BigNumber
     dismiss?(): void
 }) {
-    const [payType, setPayType] = useState<PayType>(PayType.ETH)
+    const [payType, setPayType] = useState<PayType>(PayType.ETH) //< default selected eth
     const [ethBalance, setETHBalance] = useState<BigNumber>()
     const [wethBalance, setWETHBalance] = useState<BigNumber>()
     const {library, account} = useWeb3React()
@@ -131,7 +131,6 @@ export default function NFTPay(props: {
     const [canBuy, setCanBuy] = useState<boolean>(false)
     const [hash, setHash] = useState<string>()
     const [didReadService, setDidReadService] = useState(false)
-
     // progressing popup
     const [progressingPopupOpen, setProgressingPopupOpen] = useState(false)
     // success popup
@@ -188,8 +187,12 @@ export default function NFTPay(props: {
 
     useEffect(() => {
         let [eth, weth] = ethAndWETHAmount;
-        setCanBuy(userSelectedAmount.isGreaterThanOrEqualTo(eth.plus(weth)))
-    }, [userSelectedAmount, ethAndWETHAmount])
+        setCanBuy(
+            userSelectedAmount.isGreaterThanOrEqualTo(eth.plus(weth)) &&
+            userSelectedAmount.isGreaterThanOrEqualTo(props.actualAmount)
+        )
+        console.log(`${userSelectedAmount.toFixed()}`)
+    }, [userSelectedAmount, ethAndWETHAmount, props.actualAmount])
 
     useEffect(() => {
         const inner = async () => await http.myPost(`/npics-nft/app-api/v1/neo/commitNeo`, {
@@ -205,14 +208,14 @@ export default function NFTPay(props: {
     async function checkoutBtnClick() {
         try {
             // check balance
-            if (!canBuy) {
-                message.error("Insufficient account balance")
-                return
-            }
-            if (!didReadService) {
-                message.error(`Please agree to NPics's Terms of service`)
-                return
-            }
+            // if (!canBuy) {
+            //     message.error("Insufficient account balance")
+            //     return
+            // }
+            // if (!didReadService) {
+            //     message.error(`Please agree to NPics's Terms of service`)
+            //     return
+            // }
             // show progressing
             setProgressingPopupOpen(true)
             // get transaction data
@@ -251,18 +254,29 @@ export default function NFTPay(props: {
     }
 
     async function getTradeDetailData(): Promise<string | undefined> {
-        const resp: any = await http.myPost(`/npics-nft/app-api/v2/nft/route`, {
-            address: props.nft.address,
-            amount: 1,
-            balanceToken: "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
-            sender: account,
-            standard: props.nft.standard,
-            tokenId: props.nft.tokenId
-        })
-        if (resp.code === 200 && resp.data.transaction) {
-            return resp.data.transaction
+        const inner = async (accountOrNbp: string | undefined | null) => {
+            const resp: any = await http.myPost(`/npics-nft/app-api/v2/nft/route`, {
+                address: props.nft.address,
+                amount: 1,
+                balanceToken: "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+                sender: accountOrNbp,
+                standard: props.nft.standard,
+                tokenId: props.nft.tokenId
+            })
+            if (resp.code === 200 && resp.data.transaction) {
+                return resp.data.transaction
+            } else {
+                return undefined
+            }
+        }
+        if (props.nft.market === "nftx") {
+            /// nftx market special treatment, get nbp address
+            let c = new Npics(library.getSigner(account))
+            let nbp = await c.getNbpFor(props.nft.address, Number(props.nft.tokenId))
+            console.log(`NBP => ${nbp}`)
+            return inner(nbp)
         } else {
-            return undefined
+            return inner(account)
         }
     }
 
@@ -335,7 +349,7 @@ export default function NFTPay(props: {
                 gridArea={"payment"}
                 border={"1px solid #e5e5e5"}
                 borderRadius={".1rem"}
-                padding={".28rem"}
+                padding={".2rem .28rem"}
             >
                 <Flex flexDirection={"row"} alignItems={"center"}>
                     <Icon width={".24rem"} height={".24rem"} src={downPayIcon}/>
@@ -358,7 +372,7 @@ export default function NFTPay(props: {
                 gridArea={"loan"}
                 border={"1px solid #e5e5e5"}
                 borderRadius={".1rem"}
-                padding={".28rem"}
+                padding={".2rem .28rem"}
                 gridGap={".22rem"}
             >
                 <Flex alignItems={"center"}>
@@ -439,13 +453,17 @@ export default function NFTPay(props: {
                         style={{
                             "userSelect": "none"
                         }}
-                    >Checking this box, I agree to NPics's <AttrLink href={urls.resource} target={"_blank"}>Terms of service</AttrLink></Typography>
+                    >Checking this box, I agree to NPics's <AttrLink href={urls.resource} target={"_blank"}>Terms of
+                        service</AttrLink></Typography>
                 </Flex>
             </label>
         </Box>
         <Flex alignItems={"center"} justifyContent={"center"} gap={".2rem"} marginTop={".4rem"}>
             <CancelButton type={"button"} onClick={() => props.dismiss?.()}>Cancel</CancelButton>
-            <ConfirmButton type={"button"} onClick={checkoutBtnClick}>Checkout</ConfirmButton>
+            <ConfirmButton
+                type={"button"}
+                onClick={checkoutBtnClick}
+            >Checkout</ConfirmButton>
         </Flex>
     </Flex>
 }

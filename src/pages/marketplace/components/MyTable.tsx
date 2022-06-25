@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import { imgurl } from 'utils/globalimport';
 import { ColumnsType } from 'antd/lib/table';
 import moment from 'moment';
+import BigNumber from "bignumber.js";
 
 
 
@@ -159,7 +160,7 @@ export default function MyTable(props: IProps) {
             relData.push({
               key: `${i}`,
               eventType: changeData[i].eventTypeExplain() || '--',
-              amount: (changeData[i] && (+changeData[i].amount.div(10 ** 18).toFixed(2).toString())),
+              amount: (changeData[i] && (+(changeData[i].amount ?? new BigNumber(0)).div(10 ** 18).toFixed(2).toString())),
               fromAccount: changeData[i].fromAccount,
               toAccount: changeData[i].toAccount,
               createdTime: moment(changeData[i].createdTime).endOf('hour').fromNow() || '--',
