@@ -202,7 +202,8 @@ export default function VaultsDetail() {
     if(!params) return
     const url = "/npics-nft/app-api/v1/neo/getRecordById"
     const parameter = {
-      neoId: params.tokenId
+      tokenId: params.tokenId,
+      nftAddress: params.address,
     }
     try {
       const result: any = await http.myPost(url,parameter)

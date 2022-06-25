@@ -15,7 +15,7 @@ import { DataSource, DebtData, LiquidatePrice, BgTable, Record } from './Tableut
 import { useNavigate } from "react-router-dom";
 import NotFound from 'component/NotFound';
 import { useUpdateEffect } from 'utils/hook';
-import aa from 'abi/aa.json'
+// import aa from 'abi/aa.json'
 import { Icon } from 'component/Box';
 interface Result {
   createTime: string,
@@ -215,7 +215,7 @@ function MyAgreement(props:IProps) {
     try {
       const result: any = await http.myPost(url, pageInside)
       let orgData: Result[] = result.data.records
-      orgData = aa.data.records
+      // orgData = aa.data.records
       if (result.code === 200 && orgData.length) {
         const signer = library.getSigner(account)
         let lendPool = new LendPool(signer)

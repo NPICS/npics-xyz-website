@@ -16,6 +16,7 @@ import {Input, Select} from "antd";
 import InfiniteScroll from 'react-infinite-scroller';
 import {numberFormat} from "../../utils/urls";
 import NotFound from "component/NotFound";
+import { globalConstant } from "utils/globalConstant";
 
 const {Option} = Select;
 
@@ -67,7 +68,8 @@ export default function MarketList() {
                 direction: currentSort,
                 pageIndex: currentPage,
                 pageSize: 30,
-                search: searchText
+                search: searchText,
+                showNftx: globalConstant.showNftx
             })
             if (resp.code === 200 && resp.data.records) {
                 let newListData = deserializeArray(CollectionItems, JSON.stringify(resp.data.records))
