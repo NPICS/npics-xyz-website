@@ -1,12 +1,11 @@
-import { font1455, font1651, font2071 } from 'component/styled';
 import styled, { css } from 'styled-components';
-
+import HomeBg from "../../assets/images/home/head_bg.png"
 export const title = css`
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 800;
   font-size: .36rem;
-  color: #fff;
+  color: #FFFFFF;
 `
 
 export const HomeWrap = styled.div`
@@ -20,6 +19,55 @@ export const HomeWrap = styled.div`
     ${title};
   }
 `
+export const Background = styled.div`
+  width: 100%;
+  min-height: 100vh;
+  background-image: url(${HomeBg});
+  background-size: 100% 100%;
+`
+
+export const HomeBox = styled.div`
+    position: relative;
+    width: 16rem;
+    height: 100vh;
+    margin: 0 auto;
+    padding: 1rem 0 .2rem;
+`
+
+export const HomeLeft = styled.div`
+  position: absolute;
+  top: 32%;
+  left: 0;
+`
+export const HomeNFT = styled.div`
+  position: absolute;
+  width: 26%;
+  top: 26%;
+  right: 10%;
+  .nfts_img{
+    width: 100%;
+  }
+  @media (min-width: 1024px) {
+        top: 25% !important;
+        right: 12% !important;
+        width: 28%;
+            // height: 22%;
+  }
+
+    @media (min-width: 1280px) {
+        top: 25% !important;
+        right: 12% !important;
+        width: 28%;
+    }
+
+    @media (min-width: 1536px) {
+        top: 28% !important;
+        right: 12% !important;
+        width: 28%;
+            // height: 22%;
+    }
+`
+
 export const FirstDiv = styled.div`
   position: relative;
   min-height: 9.8rem;
@@ -27,32 +75,9 @@ export const FirstDiv = styled.div`
   padding-bottom: .9rem;
   box-sizing: border-box;
 `
-export const Background = styled.div`
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  background: linear-gradient(284.6deg, #712EFF 0%, rgba(255, 191, 145, 0) 48.96%, #FF2626 100%);
-  &>img:nth-child(1) {
-    position: absolute;
-    bottom: 0rem;
-    left: -.49rem;
-    width: 5.44rem;
-    height: 4.53rem;
-    object-fit: cover;
-  }
-  &>img:nth-child(2) {
-    position: absolute;
-    right: .64rem;
-    top: -3.41rem;
-    width: 5.44rem;
-    height: 5.44rem;
-    object-fit: cover;
-  }
-`
 export const Projection = styled.div`
   height: 100%;
+  position: relative;
   &>img {
     position: absolute;
     left: 10rem;
@@ -64,41 +89,44 @@ export const Projection = styled.div`
 export const Glass = styled.div`
   height: 100%;
   position: relative;
-  background: rgba(255, 255, 255, .1);
+  background: rgba(255, 255, 255, 0.1);
   overflow: hidden;
   &::before {
     content: '';
     position: absolute;
     top: 0; right: 0; bottom: 0; left: 0;
-    filter: blur(13px);
-    backdrop-filter: blur(13px);
+    /* filter: blur(13px); */
+    /* backdrop-filter: blur(13px); */
     margin: -30px;
   }
   .text {
     position: absolute;
-    padding-top: .9rem;
-    padding-bottom: .9rem;
+    padding-top: 0.9rem;
+    padding-bottom: 0.9rem;
     box-sizing: border-box;
     margin-left: 1.83rem;
     margin-top: 2.5rem;
-    .borrowing-rate {
+    &>div:nth-child(1) {
       font-family: 'Montserrat';
       font-style: italic;
       font-weight: 900;
       font-size: .4rem;
       line-height: .49rem;
       text-transform: uppercase;
-      color: #fff;
+      color: #FFFFFF;
       width: 5.83rem;
       margin-bottom: .1rem;
     }
-    .loan-description {
-      ${font1651}
+    &>div:nth-child(2) {
       font-family: 'Montserrat';
+      font-style: normal;
+      font-weight: 300;
+      font-size: .16rem;
       line-height: .32rem;
-      letter-spacing: .05em;
+      letter-spacing: 0.05em;
+      color: rgba(255, 255, 255, 0.5);
       width: 5.41rem;
-      margin-bottom: 1rem;
+      margin-bottom: .47rem;
     }
     .jumpBtn {
       display: flex;
@@ -113,8 +141,8 @@ export const Glass = styled.div`
     position: absolute;
     width: 4.24rem;
     height: 4.2rem;
-    /* padding-top: .9rem;
-    padding-bottom: .9rem; */
+    /* padding-top: 0.9rem;
+    padding-bottom: 0.9rem; */
     box-sizing: border-box;
     margin-left: 11rem;
     margin-top: 2.5rem;
@@ -175,6 +203,47 @@ export const SwiperBox = styled.div`
     ${title};
   }
 `
+
+export const DetailBox = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 16rem;
+    height: 100vh;
+    margin: 0 auto;
+    padding: 1rem 0 .2rem;
+    color: #fff;
+    .detail_info{
+      flex: 1;
+      .info_item_title{
+        ${title};
+      }
+      .info_item_text{
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 300;
+        font-size: .16rem;
+        line-height: .32rem;
+        -webkit-letter-spacing: 0.05em;
+        -moz-letter-spacing: 0.05em;
+        -ms-letter-spacing: 0.05em;
+        letter-spacing: 0.05em;
+        color: rgba(255,255,255,0.5);
+        width: 90%;
+        margin-bottom: .47rem;
+      }
+    }
+    .detail_img_box{
+      flex: 1;
+      width: 50%;
+      .detail_img{
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+`
+
 export const Partners = styled.div`
   margin: 0 auto;
   padding-bottom: 2.21rem;
@@ -187,55 +256,79 @@ export const Partners = styled.div`
   .partnerGroup {
     width: 14.4rem;
     margin: 0 auto;
-    &>:nth-child(3n) {
-      margin-right: 0 !important;
-    }
     display: grid;
-    grid-template-columns: repeat(3,1fr);
-    grid-gap: 0.3rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: repeat(3, minmax(0, 1fr));
+    gap: .3rem;
   }
 `
 export const PartnerBox = styled.div`
-  position: relative;
+display: flex;
+justify-content: center;
+align-items: center;
+color: #fff;
+border: 1px solid rgba(255,255,255,0.2);
+border-radius: 6px;
+padding: 20px;
+transition: all 0.3s ease-in-out;
+cursor: pointer;
+&:hover{
+  transform: scale(1.06);
+}
+img{
+  width: .6rem;
+}
+span{
+      width: .8rem;
+  margin-left: 10px;
+  font-family: 'PingFang HK';
+    font-style: normal;
+    font-weight: 600;
+    white-space: nowrap;
+    font-size: .2rem;
+}
+  /* display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  gap: 2rem; */
+  /* position: relative;
   width: 4.6rem;
-  /* height: 2.1rem; */
+  height: 2.1rem;
   border: .01rem solid rgba(255,255,255,.2);
   border-radius: .1rem;
-  padding: .4rem 0;
-  /* padding-left: .4rem; */
+  padding: .2rem .3rem .32rem .3rem;
+  margin-right: .3rem;
+  margin-bottom: .3rem;
   box-sizing: border-box;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: .24rem;
-  .marketIcon {
+  &>:nth-child(1) {
+    width: .8rem;
+    height: .8rem;
+    background-color: #000;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
     display: flex;
-    justify-content: end;
+    justify-content: center;
     align-items: center;
   }
-  .marketInfo {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    &>span:nth-child(1) {
-      font-family: 'PingFang HK';
-      font-style: normal;
-      font-weight: 700;
-      font-size: .2rem;
-      color: #fff;
-      /* margin: .2rem 0 .1rem ; */
-    }
-    &>span:nth-child(2) {
-      font-family: 'PingFang HK';
-      max-width: 2.8rem;
-      white-space: pre-wrap;
-      font-weight: 500;
-      font-size: .14rem;
-      color: rgba(255, 255, 255, .6);
-    }
+  &>:nth-child(2) {
+    font-family: 'PingFang HK';
+    font-style: normal;
+    font-weight: 600;
+    font-size: .22rem;
+    color: #FFFFFF;
+    margin: .2rem 0 .1rem ;
+  }
+  &>:nth-child(3) {
+    font-family: 'PingFang HK';
+    font-style: normal;
+    font-weight: 600;
+    white-space: nowrap;
+    font-size: .14rem;
+    color: rgba(255, 255, 255, 0.6);
   }
   &::before {
-    content:  '${(props:{content:string}) => props.content}';
-    color: #fff;
+    content:  '${(props: { content: string }) => props.content}';
+    color: #FFFFFF;
     font-weight: 600;
     font-size: .16rem;;
     position: absolute;
@@ -248,11 +341,11 @@ export const PartnerBox = styled.div`
     background: rgba(255,255,255,.1);
     top: 0;
     right: 0;
-  }
+  } */
 `
 export const Introduces = styled.div`
   margin: 0 auto;
-  margin-bottom: 1.6rem;
+  /* margin-bottom: 1.6rem; */
   .title {
     display: flex;
     flex-direction: column;
@@ -282,12 +375,18 @@ export const Introduces = styled.div`
       margin-right: 0 !important;
     }
   }
+  .Introduces_swiper{
+    width: 16rem;
+    height: 100vh;
+    margin: 0 auto;
+    /* padding: 1rem 0 .2rem; */
+  }
 `
 export const IntroduceBox = styled.div`
   position: relative;
   width: 4.5rem;
   height: 5rem;
-  border: .01rem solid rgba(255, 255, 255, .2);
+  border: .01rem solid rgba(255, 255, 255, 0.2);
   border-radius: .1rem;
   margin-right: 1.03rem;
   box-sizing: border-box;
@@ -296,10 +395,12 @@ export const IntroduceBox = styled.div`
   flex-direction: column;
   justify-content:end ;
   align-items: center;
-  &>img {
-    width: 2.2rem;
-    height: 2.2rem;
-    margin-bottom: .6rem;
+  &>:nth-child(1) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4.5rem;
+    height: 5rem;
   }
   &>:nth-child(2) {
     font-family: 'Montserrat';
@@ -309,7 +410,7 @@ export const IntroduceBox = styled.div`
     line-height: .37rem;
     width: 2.76rem;
     text-align: center;
-    color: #fff;
+    color: #FFFFFF;
   }
   &>:nth-child(3) {
     font-family: 'PingFang HK';
@@ -319,7 +420,7 @@ export const IntroduceBox = styled.div`
     line-height: .24rem;
     width: 3.28rem;
     text-align: center;
-    color: rgba(255, 255, 255, .6);
+    color: rgba(255, 255, 255, 0.6);
   }
 `
 
@@ -343,14 +444,14 @@ export const BorrowBox = styled.div`
     object-fit: cover;
   }
 
-` 
+`
 export const BorrowGlass = styled.div`
   width: 14.7rem;
-  min-height: 8.62rem;
+  height: 6.8rem;
   margin: 0 auto;
   margin-top: 1.44rem;
   position: relative;
-  background: rgba(255, 255, 255, .1);
+  background: rgba(255, 255, 255, 0.1);
   border-radius: .2rem;
   overflow: hidden;
   &::before {
@@ -367,10 +468,10 @@ export const BorrowContent = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
-  padding: .8rem 0 .6rem;
+  padding: 0.84rem 0 1.12rem;
   box-sizing: border-box;
   .title {
-    width: 7.82rem;
+    width: 9.82rem;
     margin: 0 auto;
     margin-bottom: .6rem;
     text-align: center;
@@ -378,17 +479,17 @@ export const BorrowContent = styled.div`
     ${title};
   }
   .sliderBox {
-    width: 10rem;
+    width: 12rem;
     margin: 0 auto;
     .sliderItem {
       display: flex;
-      width: 10rem;
+      width: 12rem;
       flex-direction: row;
-      /* justify-content: center; */
+      justify-content: center;
       align-items: center;
       span {
         display: inline-block;
-        width: 2.5rem;
+        width: 3rem;
         text-align: center;
         font-family: 'PingFang HK';
         font-style: normal;
@@ -400,9 +501,9 @@ export const BorrowContent = styled.div`
       }
     }
     .slider {
-      /* width: 8rem; */
+      width: 8rem;
       height: .1rem;
-      background: #fff;
+      background: #FFFFFF;
       border-radius: .3rem;
       position: relative;
       margin: .18rem auto .24rem;
@@ -412,7 +513,7 @@ export const BorrowContent = styled.div`
         top: 0;
         left: 0;
         display: inline-block;
-        width: ${(props:{left:string}) => props.left};
+        width: ${(props: { left: string }) => props.left};
         height: .1rem;
         background: #FF490F;
         border-radius: .3rem;
@@ -420,90 +521,67 @@ export const BorrowContent = styled.div`
       }
     }
     .text {
-      /* text-align: center; */
-      /* max-width: 6.94rem; */
-      /* height: .3rem; */
+      text-align: center;
+      max-width: 6.94rem;
+      height: .3rem;
       margin: 0 auto;
       font-family: 'PingFang HK';
       font-style: normal;
-      font-weight: 500;
+      font-weight: 300;
       font-size: .16rem;
-      color: #fff;
+      color: #FFFFFF;
     }
   }
   .BorrowChannel {
     display: flex;
     flex-direction: row;
-    align-items: center;
-    width: 11rem;
-    margin: 0 auto;
-    margin-top: .78rem;
+    width: 13rem;
+    padding-top: .6rem;
     box-sizing: border-box;
-    background: rgba(255, 255, 255, .1);
-    border-radius: 20px;
-    .left {
-      display: flex;
-      flex-direction: column;
-      padding: .77rem .81rem .77rem .91rem;
-      border-right: 2px dashed rgba(255, 255, 255, .1);
-      &>span:nth-child(1) {
-        ${font2071}
-      }
-      &>span:nth-child(2) {
-        display: inline-block;
-        font-family: 'Montserrat';
-        font-style: italic;
-        font-weight: 800;
-        font-size: .6rem;
-        background: linear-gradient(268.82deg, #FF0000 0.48%, #FEB240 96.5%);
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        text-fill-color: transparent;
-      }
+    margin: 0 auto;
+    &>:first-child {
+      margin-right: 1rem;
     }
-    .right {
+    .content {
       display: flex;
-      flex-direction: column;
-      padding: .45rem 0 .45rem 1rem;
-      gap: .6rem;
-      .content {
+      align-items: center;
+      .text {
         display: flex;
-        align-items: center;
-        .text {
+        flex-direction: column;
+        justify-content: space-between;
+        margin-left: .3rem;
+        &>div {
           display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          margin-left: .3rem;
-          &>div {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            &>span:nth-child(1) {
-              ${font1651}
-              font-family: 'Montserrat';
-              font-style: normal;
-              margin-right: .3rem;
-            }
-            &>span:nth-child(2) {
-              display: inline-block;
-              font-family: 'Montserrat';
-              font-style: italic;
-              font-weight: 700;
-              font-size: .3rem;
-              background: linear-gradient(268.82deg, #FF0000 0.48%, #FEB240 96.5%); 
-              background-clip: text;
-              -webkit-background-clip: text;
-              -webkit-text-fill-color: transparent;
-              text-fill-color: transparent;
-            }
-          }
-          &>span {
-            ${font1455}
-            font-family: 'PingFang HK';
+          flex-direction: row;
+          align-items: center;
+          &>span:nth-child(1) {
+            font-family: 'Montserrat';
             font-style: normal;
-            line-height: .17rem;
+            font-weight: 700;
+            font-size: .38rem;
+            margin-right: .3rem;
+            color: #FFFFFF;
           }
+          &>span:nth-child(2) {
+            display: inline-block;
+            font-family: 'Montserrat';
+            font-style: italic;
+            font-weight: 800;
+            font-size: .5rem;
+            background: linear-gradient(265.23deg, #FF0F0F 0%, #FF820F 97.96%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-fill-color: transparent;
+          }
+        }
+        &>span {
+          font-family: 'PingFang HK';
+          font-style: normal;
+          font-weight: 400;
+          font-size: .16rem;
+          line-height: .22rem;
+          color: #FFFFFF;
         }
       }
     }

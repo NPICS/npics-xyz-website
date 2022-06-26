@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Swiper from './components/Swiper'
 import {
-  HomeWrap, FirstDiv, SwiperBox, Partners, Background,
+  HomeWrap, FirstDiv, SwiperBox, DetailBox, Partners, Background,
   Projection, Glass, PartnerBox, Introduces, IntroduceBox,
-  BorrowBox, BorrowGlass, BorrowContent, BorrowBtn
+  BorrowBox, BorrowGlass, BorrowContent, BorrowBtn, HomeBox, HomeLeft, HomeNFT
 } from './HomeStyled';
 import { imgurl } from 'utils/globalimport';
 import ButtonDefault from 'component/ButtonDefault';
@@ -13,6 +13,8 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { urls } from "../../utils/urls";
 import http from "../../utils/http";
+import Npics from './components/Npics';
+import Title from './components/Title';
 const MyTable: any = styled(Table)`
   width: 16rem;
   height: 7.47rem;
@@ -74,24 +76,7 @@ function Home() {
       content: "Makerplace"
     },
   ]
-  const IntroduceData = [
-    {
-      url: imgurl.home.MaskGroup1,
-      title: "NFT Financialize",
-      text: "A new debt mechanism to help financialize NFT",
-    },
-    {
-      url: imgurl.home.MaskGroup2,
-      title: "Multiple Incentive",
-      text: "Multi-market ecology, multiple incentive design, liquidity contribution",
-    },
-    {
-      url: imgurl.home.MaskGroup3,
-      title: "Atomicity and Transactivity",
-      text: "Full-scenario Bundle transactions,Ensuring security-first atomicity and transactivity",
-    },
-  ]
-  const StepsList = ['Chose', 'Checkout', 'Payment', 'Issued']
+  const StepsList = ['Choose', 'Checkout', 'Payment']
 
   const checkProgress = (e: any) => {
     setCheckText(e + 1)
@@ -100,15 +85,11 @@ function Home() {
   useEffect(() => {
     switch (checkText) {
       case 1:
-        return setTextContent('Choose the items or collections that you Like in NPics marketplace');
+        return setTextContent('Without tedious comparisons, Npics delivers all vaild listings among NFT markets and executes each transaction at the best price and optimal financing.');
       case 2:
-        return setTextContent('Checkout and sign the corresponding generated position based on the selected item.');
+        return setTextContent('Pay part of funds, get and deposite your NFT to generate a vault outright. A NEO-NFT will be minted as synthetic version of the purchased NFT. All claimable airdrops and rewards will be fully reserved for you. ');
       case 3:
-        return setTextContent('Confirm and pay advance.');
-      case 4:
-        return setTextContent('After execution of NFT-backed Postion(NBP) contract on-chain, you will receive the position voucher NPics Everlasting Option NFT(NEO-NFT) issued by contract.');
-      case 5:
-        return setTextContent('');
+        return setTextContent('The collateralized NFT can be redeemed upon repayment at anytime you want, which means your relevant vault will be closed out.');
       default:
         break;
     }
@@ -130,60 +111,22 @@ function Home() {
 
   return (
     <HomeWrap>
-      <FirstDiv>
-        <Background>
-          <img src={imgurl.home.Rectangle134} alt="" />
-          <img src={imgurl.home.Rectangle149} alt="" />
-          <Projection>
-            <img src={imgurl.home.map} alt="" />
-            <Glass>
-              <div className='text'>
-                <div className='borrowing-rate'>
-                  Pay as Low as 60% to own your favorite NFT
-                </div>
-                <div className='loan-description'>
-                  The First NFT Leveraged Trading Platform
-                </div>
-                <div className='jumpBtn'>
-                  <Link to={'/marketPlace'}><Button types='one' text="Marketplace"></Button></Link>
-                  <Link to={'/dashboard/rewards'}><Button types='two' text="Rewards"></Button></Link>
-                </div>
-              </div>
-              <div className='imgUrl'>
-                <div className='col1'>
-                  <img src={imgurl.home.HomeImg1} alt="" />
-                  <img src={imgurl.home.HomeImg2} alt="" />
-                </div>
-                <div className='col2'>
-                  <img src={imgurl.home.HomeImg6} alt="" />
-                  <img src={imgurl.home.HomeImg7} alt="" />
-                </div>
-                <div className='col3'>
-                  <img src={imgurl.home.HomeImg4} alt="" />
-                  <img src={imgurl.home.HomeImg5} alt="" />
-                  <img src={imgurl.home.HomeImg3} alt="" />
-                </div>
-              </div>
-
-              <div className='socialityIcon'>
-                <a href={urls.twitter} target="_blank" rel="noreferrer"><img src={imgurl.home.twitterIcon} alt="" /></a>
-                {/* <a href={urls.medium} target="_blank" rel="noreferrer"><img src={imgurl.home.gameIcon} alt="" /></a> */}
-                <a href={urls.telegram} target="_blank" rel="noreferrer"><img src={imgurl.home.telegramIcon} alt="" /></a>
-                <a href={urls.github} target="_blank" rel="noreferrer"><img src={imgurl.home.gitHubIcon} alt="" /></a>
-              </div>
-
-            </Glass>
-          </Projection>
-        </Background>
-      </FirstDiv>
-
-      {/* <SwiperBox>
+      <Background>
+        <HomeBox>
+          <HomeLeft>
+            <Title />
+          </HomeLeft>
+          <HomeNFT>
+            <img className='nfts_img' src={imgurl.home.NftsIcon} alt="" />
+          </HomeNFT>
+        </HomeBox>
+      </Background>
+      <SwiperBox>
         <div className='title'>
           NPicser Sweeps
         </div>
         <Swiper />
-      </SwiperBox> */}
-
+      </SwiperBox>
       <div>
         <div className='collections-title'>
           Collections
@@ -191,12 +134,32 @@ function Home() {
         <MyTable></MyTable>
       </div>
 
+      <DetailBox>
+        <div className='detail_info'>
+          <div className='detail_info_item'>
+            <div className='info_item_title'>Advanced mortgage to buy NFTs</div>
+            <div className='info_item_text'>One-click down payment to purchase a Blue-chip with optimal financing, which achieved through NBP Protocol, stands for NFT-backed Position. </div>
+          </div>
+          <div className='detail_info_item'>
+            <div className='info_item_title'>Flexible Repayment to redeem NFTs</div>
+            <div className='info_item_text'>Repay at your own pace as long as vault is generated.</div>
+          </div>
+          <div className='detail_info_item'>
+            <div className='info_item_title'>Sell NFT outright to settle profits</div>
+            <div className='info_item_text'>Sell it outright to close the vault, including ownership transfer and profits settlement. </div>
+          </div>
+        </div>
+        <div className='detail_img_box'>
+          <img className='detail_img' src={imgurl.home.Deail} alt="" />
+        </div>
+      </DetailBox>
+
       <BorrowBox>
         <img src={imgurl.home.RectangleLeft} alt="" />
         <img src={imgurl.home.RectangleRight} alt="" />
         <div>
           <BorrowGlass>
-            <BorrowContent left={`${checkText * 2.5}rem`}>
+            <BorrowContent left={`${checkText * 2.67}rem`}>
               <div className='title'>
                 Using Npics Leverage to borrow money to buy will get an unexpected earnings.
               </div>
@@ -212,31 +175,25 @@ function Home() {
               </div>
 
               <div className='BorrowChannel'>
-                <div className='left'>
-                  <span>Vaults APR</span>
-                  <span>{`${(aprData.rewardApr * 100 - aprData.apr).toFixed(2)}%`}</span>
-                </div>
-                <div className='right'>
-                  <div className='content'>
-                    {/* <img src={imgurl.home.Borrow2} alt="" /> */}
-                    <div className='text'>
-                      <div>
-                        <span>Interest APR</span>
-                        <span>{`-${aprData.apr.toFixed(2)}%`}</span>
-                      </div>
-                      <span>The real-time annual percentage rate of interest to be paid to the lending pool.</span>
+                <div className='content'>
+                  {/* <img src={imgurl.home.Borrow2} alt="" /> */}
+                  <div className='text'>
+                    <div>
+                      <span>Interest APR</span>
+                      <span>{`-${aprData.apr.toFixed(2)}%`}</span>
                     </div>
+                    <span>The real-time annual percentage rate of interest to be paid to the lending pool.</span>
                   </div>
+                </div>
 
-                  <div className='content'>
-                    {/* <img src={imgurl.home.Borrow1} alt="" /> */}
-                    <div className='text'>
-                      <div>
-                        <span>Rewards APR</span>
-                        <span>{`${(aprData.rewardApr * 100).toFixed(2)}%`}</span>
-                      </div>
-                      <span>The rewards APR is real-time annual rate of Agreement subsidy</span>
+                <div className='content'>
+                  {/* <img src={imgurl.home.Borrow1} alt="" /> */}
+                  <div className='text'>
+                    <div>
+                      <span>Rewards APR</span>
+                      <span>{`${(aprData.rewardApr * 100).toFixed(2)}%`}</span>
                     </div>
+                    <span>The rewards APR is real-time annual rate of Agreement subsidy</span>
                   </div>
                 </div>
               </div>
@@ -253,21 +210,21 @@ function Home() {
                   </ButtonDefault>
                 </Link>
               </BorrowBtn>
+
             </BorrowContent>
           </BorrowGlass>
         </div>
-
 
       </BorrowBox>
 
       <Introduces>
         <div className='title'>
           <span>Why NPics？</span>
-          <span>
-            With Decentralized Finance as a lever and NFTs as the fulcrum, we will leverage Web3.0
-          </span>
         </div>
-        <div className='IntroduceGroup'>
+        <div className='Introduces_swiper'>
+          <Npics />
+        </div>
+        {/* <div className='IntroduceGroup'>
           {IntroduceData.map((item) => {
             return (
               <IntroduceBox key={item.title}>
@@ -277,7 +234,7 @@ function Home() {
               </IntroduceBox>
             )
           })}
-        </div>
+        </div> */}
       </Introduces>
 
       <Partners>
@@ -289,13 +246,8 @@ function Home() {
           {PartnerData.map((item) => {
             return (
               <PartnerBox key={item.title} content={item.content}>
-                <div className='marketIcon'>
                   <img src={item.url} alt="" />
-                </div>
-                <div className='marketInfo'>
                   <span>{item.title}</span>
-                  {/* <span>{item.text}</span> */}
-                </div>
               </PartnerBox>)
           })}
         </div>
