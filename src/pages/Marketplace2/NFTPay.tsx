@@ -215,6 +215,12 @@ export default function NFTPay(props: {
 
     async function checkoutBtnClick() {
         try {
+            // check pay type
+            if (payType === PayType.None) {
+                message.error("Choose your payment")
+                return
+            }
+
             // check balance
             if (!canBuy) {
                 message.error("Insufficient account balance")
