@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
-
+import Montserrat from "../assets/font/Montserrat-Medium.otf";
 export const GlobalStyle = createGlobalStyle`
   /* img {
     user-select: none !important;
@@ -70,7 +70,7 @@ export const GlobalStyle = createGlobalStyle`
     /* background: #1a1a1a; */
     border: 1px solid rgba(0,0,0,.2);
     border-radius: 10px;
-    color: #fff;
+    color: rgba(0, 0, 0, .5);
   }
   .ant-modal-reset {
     .ant-modal-content {
@@ -219,7 +219,6 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
   }
-
   .ant-table-reset-white {
     .ant-table {
     background: transparent;
@@ -335,7 +334,6 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
   }
-
   .ant-table-reset-typeTwo {
     .ant-table {
     background: transparent;
@@ -446,10 +444,27 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
   }
+  .ant-popover-collectionPopver {
+    padding-top: .1rem;
+    .ant-popover-arrow {
+      display: none;
+    }
+    .ant-popover-inner {
+      background-color: rgba(255,255,255,.2);
+      backdrop-filter: blur(30px);
+      border-radius: 20px;
+      .ant-popover-inner-content {
+        padding: .05rem .1rem;
+        font-size: .14rem;
+        color: #fff;
+        font-weight: 500;
+      }
+    }
+  }
 
   @font-face {
     font-family: 'Montserrat';
-    src: url('./font/Montserrat-Medium.otf');
+    src: url('${Montserrat}');
     font-weight: normal;
     font-style: normal;
   }

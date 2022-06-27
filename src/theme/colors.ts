@@ -3,10 +3,9 @@ export const baseColors = {
 
 }
 export const lightColors:Colors = {
-  headerBg: 'rgba(255,255,255,.1)',
+  headerBg: 'rgba(0,0,0,.8)',
   footerBg: '#fff',
   textColor: 'rgba(0,0,0,.5)',
-
   background: "#fff",
   btnBackground: "#fff",
   iconBackground: "#F1EFEF",

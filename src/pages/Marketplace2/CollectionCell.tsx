@@ -60,7 +60,8 @@ export default function CollectionCell(props: ICollectionCellProps) {
             position={"absolute"}
             top={".08rem"}
             left={".08rem"}
-            zIndex={"1"}>
+            zIndex={"1"}
+            hidden={props.item.rarityScore <= 0}>
             <Icon height={".2rem"} width={".2rem"} src={CellTagIcon}/>
             <Typography
                 color={"#000"}
