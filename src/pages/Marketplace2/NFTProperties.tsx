@@ -45,7 +45,7 @@ function PropertiesCell(props: {
             <Typography
                 fontSize={`.14rem`}
                 fontWeight={500}
-                color={`rgba(0,0,0,.5)`}
+                color={`rgba(0, 0, 0, .5)`}
                 textAlign={"center"}
             >{props.description}</Typography>
         </Flex>

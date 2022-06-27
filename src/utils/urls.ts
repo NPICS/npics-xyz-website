@@ -40,3 +40,14 @@ export function thousandFormat(
 ): string {
   return numeral(num).format('$0.0a')
 }
+  // let format = Intl.NumberFormat(`en-US`, {
+  //   style: "currency",
+  //   currency: "USD",
+  //   useGrouping: true,
+  //   maximumFractionDigits: maxFractionDigits
+  // })
+  // if (typeof(num) === "string") {
+  //   return format.format(Number(num))
+  // } else {
+  //   return format.format(num)
+  // }

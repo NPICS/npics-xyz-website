@@ -55,7 +55,7 @@ function PriceWithSymbol(props: {
         <Symbol src={props.iconOrUrl}/>
         <Typography
             lineHeight={"normal"}
-        >{props.displayAmount ?? `0`}</Typography>
+        >{props.displayAmount ?? ``}</Typography>
     </Flex>
 }
 
@@ -121,12 +121,12 @@ export default function NFTActivities(props: {
                     {
                         listData.map((item, idx) => {
                             return <tr key={idx}>
-                                <td align={"left"}>{item.eventTypeExplain() ?? "---"}</td>
+                                <td align={"left"}>{item.eventTypeExplain() ?? ``}</td>
                                 <td align={"center"}><PriceWithSymbol displayAmount={item.amountFormat()} iconOrUrl={item.imageUrl}/></td>
                                 <td align={"center"}>{AddressAbbreviation(item.fromAccount) ?? "---"}</td>
                                 <td align={"center"}>{AddressAbbreviation(item.toAccount) ?? "---"}</td>
                                 <td align={"center"}>{
-                                    moment(item.createdTime).endOf('hour').fromNow() ?? '---'
+                                    moment(item.createdTime).parseZone().endOf('m').fromNow() ?? '---'
                                 }</td>
                             </tr>
                         })

@@ -128,10 +128,7 @@ export default function OneNFT() {
                     </Flex>
 
                     <Flex flexDirection={"row"} gap={".15rem"}>
-                        <Label
-                            icon={imgurl.market.collect2}
-                            num={detailData?.rarityScore ?? 0}
-                        />
+                        <Label icon={imgurl.market.collect2}  num={detailData?.rarityScore ?? 0}/>
                     </Flex>
                 </Flex>
             </Flex>
