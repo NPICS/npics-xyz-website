@@ -57,6 +57,11 @@ import ethBlack22 from '../assets/images/home/ethBlack22.png'
 import ethOrange22 from '../assets/images/home/ethOrange22.png'
 import ethBlack40 from '../assets/images/home/ethBlack40.png'
 import band22 from '../assets/images/home/band22.png'
+import Deail from "../assets/images/home/detail.png"
+import NpicsSwiper1 from "../assets/images/home/npics_swiper1.png"
+import NpicsSwiper2 from "../assets/images/home/npics_swiper2.png"
+import NpicsSwiper3 from "../assets/images/home/npics_swiper3.png"
+import NftsIcon from "../assets/images/home/nfts.png"
 
 import Union1 from '../assets/images/market/Union1.png'
 import Union2 from '../assets/images/market/Union2.png'
@@ -194,6 +199,12 @@ export const imgurl = {
     ethBlack40,
     ethOrange22,
     band22,
+    gitHubIcon,
+    Deail,
+    NpicsSwiper1,
+    NpicsSwiper2,
+    NpicsSwiper3,
+    NftsIcon
   },
   market: {
     tipsIcon,
