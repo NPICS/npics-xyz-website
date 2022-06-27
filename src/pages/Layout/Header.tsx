@@ -202,7 +202,7 @@ function XHeader() {
           <img src={imgurl.logoBeta} alt="" />
         </LogoLink>
         <BtnLink to={"marketPlace"}>
-          <div className='prime'>Prime</div>
+          {/* <div className='prime'>Prime</div> */}
           Marketplace
         </BtnLink>
         <BtnLink to={"/dashboard/vaults"}>
@@ -222,11 +222,11 @@ function XHeader() {
       </FlexDiv>
 
       <FlexDiv>
-        <ThemeImg src={imgurl.worldwide} />
+        <ThemeImg src={imgurl.worldwideIcon} />
         {/* <ThemeImg src={imgurl.gas_icon}/> */}
-        <ThemeImg src={imgurl.notification} />
+        <ThemeImg src={imgurl.notificationIcon} />
         <div id="baseAccount" style={{ position: 'relative' }}>
-          <ThemeImg src={userInfo?.avatar || imgurl.Ellipse} onClick={walletPop} />
+          <ThemeImg src={userInfo?.avatar || imgurl.EllipseIcon} onClick={walletPop} />
         </div>
         <Popover
           content={AccountHTML}
