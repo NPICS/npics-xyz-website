@@ -465,7 +465,7 @@ export const GlobalStyle = createGlobalStyle`
   @font-face {
     font-family: 'Montserrat';
     src: url('${Montserrat}');
-    font-weight: normal;
+    //font-weight: normal;
     font-style: normal;
   }
 
