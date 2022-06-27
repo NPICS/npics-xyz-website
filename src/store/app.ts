@@ -55,12 +55,8 @@ export const fetchUser2 = createAsyncThunk("app/fetchUser2", async (args, ThunkA
 })
 
 export const updateARP = createAsyncThunk("app/updateARP", async (args, thunkAPI) => {
-  try {
-    let resp: any = await http.myPost("/npics-nft/app-api/v2/nfthome/getAprInfo", {})
-    return resp.code === 200 ? resp.data : undefined
-  } catch (e) {
-    return undefined
-  }
+  let resp: any = await http.myPost("/npics-nft/app-api/v2/nfthome/getAprInfo")
+  return resp.code === 200 ? resp.data : undefined
 })
 
 export const updateUSDTExchangeRate = createAsyncThunk("app/updateUSDTExchangeRate", async (args, thunkAPI) => {
@@ -105,7 +101,6 @@ const appSlice = createSlice({
       state.isLogin = action.payload
     }
   },
-
   extraReducers: (builder) => {
     builder
       .addCase(fetchUser2.fulfilled, (state, action) => {

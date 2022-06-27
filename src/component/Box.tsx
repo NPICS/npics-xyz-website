@@ -83,7 +83,6 @@ interface IconProps extends BoxProps {
     // borderRadius?: string
 }
 
-// TODO: set styled.img
 const Icon = styled.img<IconProps>`
   display: inline-block;
   overflow: hidden;

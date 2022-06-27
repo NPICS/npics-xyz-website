@@ -17,7 +17,7 @@ function App() {
         action(updateUSDTExchangeRate())
     }, 1000 * 30)
 
-    return <Layout></Layout>;
+    return <Layout />;
 }
 
 export default App;

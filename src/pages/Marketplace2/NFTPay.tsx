@@ -19,6 +19,7 @@ import Modal from "../../component/Modal";
 import NFTPayProgressing from "./NFTPayProgressing";
 import NFTPayCongratulations, {AttrLink} from "./NFTPayCongratulations";
 import NFTPayWrong from "./NFTPayWrong";
+import {useAsync} from "react-use";
 
 export function PopupTitle(props: {
     title: string,
@@ -194,28 +195,28 @@ export default function NFTPay(props: {
         console.log(`${userSelectedAmount.toFixed()}`)
     }, [userSelectedAmount, ethAndWETHAmount, props.actualAmount])
 
-    useEffect(() => {
-        const inner = async () => await http.myPost(`/npics-nft/app-api/v1/neo/commitNeo`, {
-            hash: hash,
-            nftAddress: props.nft.address,
-            tokenId: props.nft.tokenId
-        })
+    useAsync(async () => {
         if (hash && props.nft) {
-            inner().finally()
+            await http.myPost(`/npics-nft/app-api/v1/neo/commitNeo`, {
+                hash: hash,
+                nftAddress: props.nft.address,
+                tokenId: props.nft.tokenId,
+                userAddress: account
+            })
         }
     }, [hash])
 
     async function checkoutBtnClick() {
         try {
             // check balance
-            // if (!canBuy) {
-            //     message.error("Insufficient account balance")
-            //     return
-            // }
-            // if (!didReadService) {
-            //     message.error(`Please agree to NPics's Terms of service`)
-            //     return
-            // }
+            if (!canBuy) {
+                message.error("Insufficient account balance")
+                return
+            }
+            if (!didReadService) {
+                message.error(`Please agree to NPics's Terms of service`)
+                return
+            }
             // show progressing
             setProgressingPopupOpen(true)
             // get transaction data
