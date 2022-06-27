@@ -1,6 +1,17 @@
 @font-face {
   font-family: 'Montserrat';
-  src: url('/Montserrat-Medium.otf');
-  font-weight: normal;
   font-style: normal;
+  src: url('/Montserrat-Medium.otf');
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  font-style: italic;
+  src: url('/Montserrat-BlackItalic.otf');
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  font-weight: bold;
+  src: url('/Montserrat-Bold.otf');
 }
