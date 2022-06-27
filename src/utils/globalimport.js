@@ -1,13 +1,17 @@
 import Vector from '../assets/images/Vector.png'
 import images11 from '../assets/images/image11.png'
-import worldwide from '../assets/images/worldwide.png'
-import notification from '../assets/images/notification.png'
-import Ellipse from '../assets/images/Ellipse.png'
+// import worldwide from '../assets/images/worldwide.png'
+// import notification from '../assets/images/notification.png'
+// import Ellipse from '../assets/images/Ellipse.png'
 import logo from '../assets/images/logo.png'
+import logoBeta from '../assets/images/logo_beta.png'
 import lightLogo from '../assets/images/lightLogo.png'
 import copy from '../assets/images/copyBlack.png'
 import address from '../assets/images/addressBlack.png'
 import notData from '../assets/images/notData.png'
+import worldwideIcon from '../assets/images/worldwide.svg'
+import notificationIcon from '../assets/images/notification.svg'
+import EllipseIcon from '../assets/images/Ellipse.svg'
 
 import darkTG from '../assets/images/footer/darkTG.png'
 import darkT from '../assets/images/footer/darkT.png'
@@ -135,12 +139,13 @@ import metamaskLogo from '../assets/images/home/metamask_logo.png'
 
 export const imgurl = {
   logo,
+  logoBeta,
   lightLogo,
   Vector,
   images11,
-  notification,
-  worldwide,
-  Ellipse,
+  // notification,
+  // worldwide,
+  // Ellipse,
   gas_icon,
   address,
   copy,
@@ -150,6 +155,9 @@ export const imgurl = {
   redPrice,
   metamaskLogo,
   notData,
+  notificationIcon,
+  worldwideIcon,
+  EllipseIcon,
   footer: {
     darkTG,
     darkG,

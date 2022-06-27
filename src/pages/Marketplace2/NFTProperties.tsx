@@ -45,7 +45,7 @@ function PropertiesCell(props: {
             <Typography
                 fontSize={`.14rem`}
                 fontWeight={500}
-                color={`rgba(0,0,0,.5)`}
+                color={`rgba(0, 0, 0, .5)`}
                 textAlign={"center"}
             >{props.description}</Typography>
         </Flex>
@@ -88,7 +88,7 @@ export default function NFTProperties(props: {
                         title={it.trait_type}
                         value={it.value ?? "---"}
                         description={
-                            `${it.trait_count}(${(it.trait_count / 100)})% have this trait`
+                            `${it.trait_count}(${(it.trait_count / 100).toFixed(2)}%) have this trait`
                         }
                     />
                 })

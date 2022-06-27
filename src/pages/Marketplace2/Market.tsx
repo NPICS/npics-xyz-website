@@ -13,22 +13,33 @@ import {prettyFormat} from "@testing-library/react";
 import {percentageFormat} from "../marketplace/components/utils";
 import ethIcon from "../../assets/images/market/eth_icon_20x34.png"
 import numeral from "numeral";
+import {globalConstant} from 'utils/globalConstant';
+import BigNumber from "bignumber.js";
+import {Popover} from "antd";
 
-export const Banner = (props: {
-    url?: string
-}) => {
-    return <Box
-        position={"absolute"}
-        height={"4.8rem"}
-        top={0}
-        left={0}
-        right={0}
-        zIndex={0}
-        backgroundImage={`url(${props.url})`}
-        backgroundRepeat={"no-repeat"}
-        backgroundSize={"cover"}
-    ></Box>
-}
+
+export const Banner = styled(Box)<{ url?: string }>`
+  position: absolute;
+  height: 4.8rem;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 0;
+  background-image: url(${((props) => props.url)});
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    background: rgba(0, 0, 0, .5);
+  }
+`
 
 const CollectionItem = styled.div<{
     isSelected?: boolean,
@@ -65,11 +76,6 @@ export default function Market() {
     }, [])
 
     useEffect(() => {
-        // if (params.address) {
-        //     setSelectAddress(params.address)
-        // } else if (listData.length > 0 && !selectAddress) {
-        //     setSelectAddress(listData[0].address)
-        // }
         if (listData.length > 0) {
             if (params.address) {
                 setNft(listData.find(it => it.address === params.address))
@@ -109,14 +115,20 @@ export default function Market() {
                 marginTop={".35rem"}>
                 {
                     listData.map((item, idx) => {
-                        return <CollectionItem
+                        return <Popover
                             key={idx}
-                            isSelected={nft?.address === item.address}
-                            imgUrl={item.imageUrl}
-                            onClick={() => {
-                                setNft(item)
-                            }}
-                        />
+                            content={item.name}
+                            placement='bottom'
+                            overlayClassName="ant-popover-collectionPopver"
+                        >
+                            <CollectionItem
+                                key={idx}
+                                isSelected={nft?.address === item.address}
+                                imgUrl={item.imageUrl}
+                                onClick={() => {
+                                    setNft(item)
+                                }}
+                            /></Popover>
                     })
                 }
             </Flex>
@@ -196,13 +208,14 @@ export default function Market() {
                                 fontWeight={700}
                             >{
                                 nft && numeral(nft.dayVolume).format("0,0.[00]")
+                                // nft && numberFormat(new BigNumber(nft.dayVolume).toFixed(2,1))
                             }</Typography>
                         </Flex>
                         <Flex alignItems={"center"} gap={".1rem"}>
                             <Typography fontSize={".14rem"} color={"#000"}>24h</Typography>
                             <Typography
                                 color={
-                                    (nft?.dayChange.toNumber() ?? 0)  > 0 ? `#18CF15` : `#FF4949`
+                                    (nft?.dayChange.toNumber() ?? 0) > 0 ? `#18CF15` : `#FF4949`
                                 }
                             >{
                                 nft && percentageFormat(nft.dayChange.toNumber())

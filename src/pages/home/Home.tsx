@@ -175,25 +175,31 @@ function Home() {
               </div>
 
               <div className='BorrowChannel'>
-                <div className='content'>
-                  {/* <img src={imgurl.home.Borrow2} alt="" /> */}
-                  <div className='text'>
-                    <div>
-                      <span>Interest APR</span>
-                      <span>{`-${aprData.apr.toFixed(2)}%`}</span>
-                    </div>
-                    <span>The real-time annual percentage rate of interest to be paid to the lending pool.</span>
-                  </div>
+                <div className='brrow_left'>
+                  <span>Vaults APR</span>
+                  <span>{`${(aprData.rewardApr * 100 - aprData.apr).toFixed(2)}%`}</span>
                 </div>
-
-                <div className='content'>
-                  {/* <img src={imgurl.home.Borrow1} alt="" /> */}
-                  <div className='text'>
-                    <div>
-                      <span>Rewards APR</span>
-                      <span>{`${(aprData.rewardApr * 100).toFixed(2)}%`}</span>
+                <div className='brrow_right'>
+                  <div className='content'>
+                    {/* <img src={imgurl.home.Borrow2} alt="" /> */}
+                    <div className='text'>
+                      <div>
+                        <span>Interest APR</span>
+                        <span>{`-${aprData.apr.toFixed(2)}%`}</span>
+                      </div>
+                      <span>The real-time annual percentage rate of interest to be paid to the lending pool.</span>
                     </div>
-                    <span>The rewards APR is real-time annual rate of Agreement subsidy</span>
+                  </div>
+
+                  <div className='content'>
+                    {/* <img src={imgurl.home.Borrow1} alt="" /> */}
+                    <div className='text'>
+                      <div>
+                        <span>Rewards APR</span>
+                        <span>{`${(aprData.rewardApr * 100).toFixed(2)}%`}</span>
+                      </div>
+                      <span>The rewards APR is real-time annual rate of Agreement subsidy</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -246,8 +252,8 @@ function Home() {
           {PartnerData.map((item) => {
             return (
               <PartnerBox key={item.title} content={item.content}>
-                  <img src={item.url} alt="" />
-                  <span>{item.title}</span>
+                <img src={item.url} alt="" />
+                <span>{item.title}</span>
               </PartnerBox>)
           })}
         </div>

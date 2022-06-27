@@ -232,7 +232,7 @@ export default function NFTPrice(props: {
                         }
                     </Typography>
                 </Flex>
-                <Flex alignItems={"center"} gap={".1rem"}>
+                <Flex style={{cursor: 'pointer'}} alignItems={"center"} gap={".1rem"} onClick={() => window.open(`${props.item?.marketUrl}`)}>
                     <Icon width={".22rem"} src={props.item?.marketIcon()}/>
                     <Typography
                         fontSize={".14rem"}
