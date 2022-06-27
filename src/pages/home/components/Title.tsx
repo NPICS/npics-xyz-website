@@ -11,18 +11,18 @@ import Button from "../../../component/Button"
 
 import Montserrat from "../../../assets/font/Montserrat-BlackItalic.otf";
 const TitleBox = styled.div`
-  width: 5.83rem;
+  width: 7.03rem;
   .mySwiper{
     width: 100%;
   }
   .title_item{
     color: #fff;
       font-weight: 900;
-      font-size: .44rem;
+      font-size: .38rem;
       line-height: .49rem;
       text-transform: uppercase;
       color: #FFFFFF;
-      width: 5.83rem;
+      width: 7.03rem;
       margin-bottom: .1rem;
       font-family: 'MontserratItalic';
       @font-face{
@@ -40,7 +40,7 @@ const TitleBox = styled.div`
     color: rgba(255, 255, 255, 0.5);
     width: 5.41rem;
     margin-top:.2rem;
-    margin-bottom: .47rem;
+    margin-bottom: .72rem;
   }
   .title_point{
     height: 10px;
@@ -104,10 +104,10 @@ export default function Title() {
         </SwiperProvider>
       </div>
       <div className='title_text'>The First NFT Leveraged Trading Platform for Web3</div>
-      <div className='title_point'>
+      {/* <div className='title_point'>
         <div className='title_point_item' onClick={() => changePoint(3)} style={{ background: selected === 3 || selected === 1 ? '#fff' : 'rgba(255, 255, 255, 0.4)' }}></div>
         <div className='title_point_item' onClick={() => changePoint(2)} style={{ background: selected === 2 || selected === 0 ? '#fff' : 'rgba(255, 255, 255, 0.4)' }}></div>
-      </div>
+      </div> */}
       <div className='title_btn'>
         <Link to={'/marketPlace'}><Button types='one' text="Marketplace"></Button></Link>
         <Link to={'/dashboard/rewards'}><Button types='two' text="Rewards"></Button></Link>
