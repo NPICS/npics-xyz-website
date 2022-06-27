@@ -1,11 +1,13 @@
 import { createGlobalStyle } from 'styled-components'
-import Montserrat from "../assets/font/Montserrat-Medium.otf";
+
 export const GlobalStyle = createGlobalStyle`
   /* img {
     user-select: none !important;
     -webkit-user-drag: none !important;
     object-fit: cover;
   } */
+  
+
   img:not([src]) {
     opacity: 0;
   }
@@ -460,13 +462,6 @@ export const GlobalStyle = createGlobalStyle`
         font-weight: 500;
       }
     }
-  }
-
-  @font-face {
-    font-family: 'Montserrat';
-    src: url('${Montserrat}');
-    font-weight: normal;
-    font-style: normal;
   }
 
 `
