@@ -36,7 +36,7 @@ export const HomeBox = styled.div`
 
 export const HomeLeft = styled.div`
   position: absolute;
-  top: 32%;
+  top: 36%;
   left: 0;
 `
 export const HomeNFT = styled.div`
@@ -61,7 +61,7 @@ export const HomeNFT = styled.div`
     }
 
     @media (min-width: 1536px) {
-        top: 28% !important;
+        top: 25% !important;
         right: 12% !important;
         width: 28%;
             // height: 22%;
