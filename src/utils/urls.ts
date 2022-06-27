@@ -34,3 +34,9 @@ export function numberFormat(
 ): string {
   return numeral(num).format("0,0.[0000]")
 }
+
+export function thousandFormat(
+  num: number | string
+): string {
+  return numeral(num).format('$0.0a')
+}

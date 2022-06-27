@@ -5,7 +5,7 @@ import ethIcon from "../../assets/images/market/eth_icon_20x34.png"
 import {CollectionDetail, CollectionItems} from "../../model/user";
 import {useAppDispatch, useAppSelector} from "../../store/hooks";
 import BigNumber from "bignumber.js";
-import {numberFormat} from "../../utils/urls";
+import {numberFormat,thousandFormat} from "../../utils/urls";
 import {useEffect, useState} from "react";
 import {updateARP} from "../../store/app";
 import {percentageFormat} from "../marketplace/components/utils";
@@ -223,8 +223,8 @@ export default function NFTPrice(props: {
                         lineHeight={"100%"}
                     >
                         {
-                            `（$ ${
-                                props.item && numberFormat(props.item.currentBasePrice
+                            `（${
+                                props.item && thousandFormat(props.item.currentBasePrice
                                     .times(ethRate)
                                     .div(10 ** 18)
                                     .toNumber())

@@ -18,10 +18,6 @@ const Banner = () => {
 
 export default function Market() {
   const [active, setActive] = useState<number>(0)
-  // const history = useLocation()
-  // useEffect(() => {
-  //   setActive(history.pathname.substring(11))
-  // },[history.pathname])
 
   return <Flex
       position={"relative"}
@@ -45,8 +41,8 @@ export default function Market() {
               <Flex 
                 padding={".16rem .4rem"}
                 borderRadius={".1rem"}
-                border={active === idx ? "2px solid rgba(255,255,255)" : "2px solid rgba(255,255,255,.5)"}
-                background = {active === idx ? "#fff" : ""}
+                // border={active === idx ? "2px solid rgba(255,255,255)" : "2px solid rgba(255,255,255,.5)"}
+                background = {active === idx ? "#fff" : "rgba(255,255,255,.1)"}
                 alignItems= {"center"}
                 gap={".25rem"}
                 onClick={() => setActive(idx)}

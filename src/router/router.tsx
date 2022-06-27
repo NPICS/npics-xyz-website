@@ -1,5 +1,5 @@
-import React, { ReactNode } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import React, { ReactNode,useEffect } from 'react';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import loadable from 'react-loadable'
 import Market from "../pages/Marketplace2/Market";
 import MarketList from "../pages/Marketplace2/MarketList";
@@ -69,6 +69,19 @@ const Claim = loadable({
 })
 
 export default function Routers() {
+  const location = useLocation()
+
+const checkAuth = (routers:any, path:String)=>{
+  for (const data of routers) {
+    if (data.path==path) return data
+    if (data.children) {
+      const res:any = checkAuth(data.children, path)
+      if (res) return res
+    }
+  }
+  return null
+}
+
   const routesD: RouterT[] = [
     {
       path: '/',
@@ -157,6 +170,15 @@ export default function Routers() {
     </main>
     },
   ];
+
+  useEffect(() => {
+    console.log('1')
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+    window.scrollTo(0, 0)
+
+  },[location.pathname])
+
 
   const RouteMap = (route:RouterT[]):ReactNode => {
       return route.map((item:RouterT) => {

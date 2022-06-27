@@ -22,7 +22,7 @@ const FooterBox = styled.div`
 const ContentBox = styled.div`
   color: #000;
   /* min-height: 8rem; */
-  background-color: #E5E5E5;
+  background-color: #F1F1F1;
   flex: 1;
 `
 const Flex = styled.div`

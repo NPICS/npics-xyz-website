@@ -101,7 +101,9 @@ export default function MyTable() {
       key: 'dayVolume',
       align: 'center',
       defaultSortOrder: 'descend',
-      sorter: (a, b) => a.floorPrice - b.floorPrice,
+      sorter: (a, b) => {
+        return +a.dayVolume.toNumber() - +b.dayVolume.toNumber()
+      },
       render: (text,row) => { 
       return <div className='descend'>
         <div><img src={imgurl.whitePrice} alt=""/></div>
