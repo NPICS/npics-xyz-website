@@ -66,7 +66,7 @@ export class Collections {
 
   @Expose()
   get sPrimePrice() {
-    return this.floorPrice.div(10 ** 18).multipliedBy(this.ltv.div(10 ** 4)).toFixed(2)
+    return this.floorPrice.div(10 ** 18).multipliedBy(new BigNumber('100').minus((this.ltv.div(10 ** 2))).div(10 ** 2)).toFixed(2)
   }
 
   @Expose()
