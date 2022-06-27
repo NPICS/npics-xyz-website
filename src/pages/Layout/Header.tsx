@@ -199,7 +199,7 @@ function XHeader() {
     <Nav>
       <FlexDiv>
         <LogoLink to={"/"}>
-          <img src={imgurl.logo} alt="" />
+          <img src={imgurl.logoBeta} alt="" />
         </LogoLink>
         <BtnLink to={"marketPlace"}>
           <div className='prime'>Prime</div>

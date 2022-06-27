@@ -4,6 +4,7 @@ import worldwide from '../assets/images/worldwide.png'
 import notification from '../assets/images/notification.png'
 import Ellipse from '../assets/images/Ellipse.png'
 import logo from '../assets/images/logo.png'
+import logoBeta from '../assets/images/logo_beta.png'
 import lightLogo from '../assets/images/lightLogo.png'
 import copy from '../assets/images/copyBlack.png'
 import address from '../assets/images/addressBlack.png'
@@ -135,6 +136,7 @@ import metamaskLogo from '../assets/images/home/metamask_logo.png'
 
 export const imgurl = {
   logo,
+  logoBeta,
   lightLogo,
   Vector,
   images11,

@@ -447,7 +447,7 @@ export const BorrowBox = styled.div`
 `
 export const BorrowGlass = styled.div`
   width: 14.7rem;
-  height: 6.8rem;
+  min-height: 8.62rem;
   margin: 0 auto;
   margin-top: 1.44rem;
   position: relative;
@@ -535,53 +535,83 @@ export const BorrowContent = styled.div`
   .BorrowChannel {
     display: flex;
     flex-direction: row;
-    width: 13rem;
-    padding-top: .6rem;
+    width: 11rem;
     box-sizing: border-box;
-    margin: 0 auto;
-    &>:first-child {
-      margin-right: 1rem;
-    }
-    .content {
+    margin: 0.78rem auto 0px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    .brrow_left{
       display: flex;
-      align-items: center;
-      .text {
+      flex-direction: column;
+      padding: 0.77rem 0.81rem 0.77rem 0.91rem;
+      border-right: 2px dashed rgba(255, 255, 255, 0.1);
+      &>span:first-child {
+        font-weight: 700;
+        font-size: 0.2rem;
+        color: rgb(255, 255, 255);
+      }
+      &>span:last-child{
+        display: inline-block;
+        font-family: 'Montserrat';
+        font-style: italic;
+        font-weight: 800;
+        font-size: .6rem;
+        background: linear-gradient(268.82deg, #FF0000 0.48%, #FEB240 96.5%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-fill-color: transparent;
+      }
+    }
+    .brrow_right{
+      display: flex;
+      flex-direction: column;
+      padding: 0.45rem 0px 0.45rem 1rem;
+      gap: 0.6rem;
+      .content{
         display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        margin-left: .3rem;
-        &>div {
+        -webkit-box-align: center;
+        align-items: center;
+        .text{
           display: flex;
-          flex-direction: row;
-          align-items: center;
-          &>span:nth-child(1) {
-            font-family: 'Montserrat';
+          flex-direction: column;
+          -webkit-box-pack: justify;
+          justify-content: space-between;
+          margin-left: 0.3rem;
+          &>div{
+            display: flex;
+            flex-direction: row;
+            -webkit-box-align: center;
+            align-items: center;
+            &>span:nth-child(1){
+              font-weight: 500;
+              font-size: 0.16rem;
+              color: rgb(255, 255, 255);
+              font-family: Montserrat;
+              font-style: normal;
+              margin-right: 0.3rem;
+            }
+            &>span:nth-child(2) {
+              display: inline-block;
+              font-family: 'Montserrat';
+              font-style: italic;
+              font-weight: 800;
+              font-size: .3rem;
+              background: linear-gradient(265.23deg, #FF0F0F 0%, #FF820F 97.96%);
+              background-clip: text;
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+              text-fill-color: transparent;
+            }
+          }
+          &>span{
+            font-weight: 500;
+            font-size: 0.14rem;
+            color: rgba(255, 255, 255, 0.5);
+            font-family: "PingFang HK";
             font-style: normal;
-            font-weight: 700;
-            font-size: .38rem;
-            margin-right: .3rem;
-            color: #FFFFFF;
+            line-height: 0.17rem;
           }
-          &>span:nth-child(2) {
-            display: inline-block;
-            font-family: 'Montserrat';
-            font-style: italic;
-            font-weight: 800;
-            font-size: .5rem;
-            background: linear-gradient(265.23deg, #FF0F0F 0%, #FF820F 97.96%);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-fill-color: transparent;
-          }
-        }
-        &>span {
-          font-family: 'PingFang HK';
-          font-style: normal;
-          font-weight: 400;
-          font-size: .16rem;
-          line-height: .22rem;
-          color: #FFFFFF;
         }
       }
     }
