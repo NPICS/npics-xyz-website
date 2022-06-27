@@ -9,7 +9,6 @@ import { Autoplay } from "swiper";
 import { Link } from 'react-router-dom';
 import Button from "../../../component/Button"
 
-import Montserrat from "../../../assets/font/Montserrat-BlackItalic.otf";
 const TitleBox = styled.div`
   width: 7.03rem;
   .mySwiper{
@@ -24,11 +23,7 @@ const TitleBox = styled.div`
       color: #FFFFFF;
       width: 7.03rem;
       margin-bottom: .1rem;
-      font-family: 'MontserratItalic';
-      @font-face{
-            font-family:'MontserratItalic';
-            src:url('${Montserrat}');
-      }
+      font-family: 'Montserrat';
   }
   .title_text{
     font-family: 'Montserrat';
