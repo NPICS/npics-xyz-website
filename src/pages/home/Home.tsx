@@ -121,7 +121,7 @@ function Home() {
           </HomeNFT>
         </HomeBox>
       </Background>
-      <SwiperBox>
+      <SwiperBox hidden={true}>
         <div className='title'>
           NPicser Sweeps
         </div>
