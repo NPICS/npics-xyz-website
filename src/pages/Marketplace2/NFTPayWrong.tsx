@@ -24,7 +24,7 @@ export default function NFTPayWrong(props: {
         padding={".4rem"}
         flexDirection={"column"}
     >
-        <PopupTitle title={"Congratulations!"} canClose={true}/>
+        <PopupTitle title={"Something went wrongSomething went wrong!"} canClose={true}/>
         <Flex
             marginTop={".3rem"}
             flexDirection={"column"}

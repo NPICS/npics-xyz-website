@@ -164,7 +164,7 @@ export default function MyTable(props: IProps) {
               fromAccount: changeData[i].fromAccount,
               toAccount: changeData[i].toAccount,
               createdTime: moment(changeData[i].createdTime).endOf('hour').fromNow() || '--',
-              startAmount: (changeData[i] && (+changeData[i].startAmount.div(10 ** 18).toFixed(2).toString())) || '--',
+              startAmount: (changeData[i] && (changeData[i].startAmount?.div(10 ** 18).toFixed(2).toString())) || '--',
               imageUrl: changeData[i].imageUrl
             })
           }

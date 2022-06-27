@@ -12,6 +12,7 @@ import {Portrait} from "./MarketList";
 import {prettyFormat} from "@testing-library/react";
 import {percentageFormat} from "../marketplace/components/utils";
 import ethIcon from "../../assets/images/market/eth_icon_20x34.png"
+import numeral from "numeral";
 
 export const Banner = (props: {
     url?: string
@@ -173,7 +174,8 @@ export default function Market() {
                                 color={"#000"}
                                 fontWeight={700}
                             >{
-                                nft && numberFormat(nft.floorPrice.div(10 ** 18).toFixed())
+                                // nft && numberFormat(nft.floorPrice.div(10 ** 18).toFixed())
+                                nft && numeral(nft.floorPrice.div(10 ** 18).toFixed()).format("0,0.[00]")
                             }</Typography>
                         </Flex>
                         <Typography fontSize={".14rem"} color={"#000"}>Floor</Typography>
@@ -193,7 +195,7 @@ export default function Market() {
                                 color={"#000"}
                                 fontWeight={700}
                             >{
-                                nft && numberFormat(nft.dayVolume)
+                                nft && numeral(nft.dayVolume).format("0,0.[00]")
                             }</Typography>
                         </Flex>
                         <Flex alignItems={"center"} gap={".1rem"}>
@@ -216,7 +218,7 @@ export default function Market() {
                         gap={".05rem"}
                         minWidth={"1.36rem"}>
                         <Typography fontSize={".2rem"} color={"#000"} fontWeight={700}>{
-                            nft && nft.totalShelves
+                            nft && numberFormat(nft.realTotalSupply)
                         }</Typography>
                         <Typography>Total</Typography>
                     </Flex>
@@ -229,7 +231,7 @@ export default function Market() {
                         gap={".05rem"}
                         minWidth={"1.36rem"}>
                         <Typography fontSize={".2rem"} color={"#000"} fontWeight={700}>{
-                            nft && nft.activeCollaterals
+                            nft && numberFormat(nft.totalShelves)
                         }</Typography>
                         <Typography>Listed Items</Typography>
                     </Flex>

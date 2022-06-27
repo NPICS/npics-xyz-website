@@ -17,7 +17,9 @@ import InfiniteScroll from 'react-infinite-scroller';
 import {numberFormat} from "../../utils/urls";
 import NotFound from "component/NotFound";
 import { globalConstant } from "utils/globalConstant";
+import ContentLoader from "react-content-loader"
 const {Option} = Select;
+
 
 const InputStyled = styled(Input)`
     background: #fff;
@@ -54,6 +56,8 @@ const AntdSelect = styled(Select)`
 `
 
 export default function MarketList() {
+
+
     // let location = useLocation()
     const params = useParams()
     const [nftAddress, setNftAddress] = useState<string>()
@@ -156,7 +160,7 @@ export default function MarketList() {
                             }
                         }}
                         hasMore={listData.length < total}
-                        loader={<div>Loading...</div>}
+                        loader={<div></div>}
                         initialLoad={false}>
                         <Grid
                             marginTop={".25rem"}

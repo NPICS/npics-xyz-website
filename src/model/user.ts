@@ -161,7 +161,9 @@ export class Activities {
   @TransformBigNumber()
   amount?: BigNumber
   @TransformBigNumber()
-  startAmount!: BigNumber
+  startAmount?: BigNumber
+  @TransformBigNumber()
+  totalAmount?: BigNumber
   imageUrl!: string
   decimals: number = 18
 
@@ -175,14 +177,14 @@ export class Activities {
       return "Offer"
     } else if (this.eventType === "created") {
       return "List"
+    } else if (this.eventType === "cancelled") {
+      return "Cancelled"
+    } else if (this.eventType === "successful") {
+      return "Sale"
     } else {
-      /// if eventType is null, compase from address and to address
+      /// if eventType is null, compare from address and to address
       if (this.fromAccount && this.toAccount) {
-        if (this.fromAccount === this.toAccount) {
-          return "List"
-        } else {
-          return "Offer"
-        }
+        return this.fromAccount === this.toAccount ? "List" : "Offer"
       } else {
         return undefined
       }
@@ -191,11 +193,12 @@ export class Activities {
 
   @Expose()
   amountFormat(): string | undefined {
-    // return this.amount.div(10 ** this.decimals).toFixed(2).toString()
-    if (this.amount) {
-      return numberFormat(this.amount.div(10 ** this.decimals).toFixed())
+    if (this.eventTypeExplain() === "List" || this.eventTypeExplain() === "Cancelled") {
+      return this.startAmount ? numberFormat(this.startAmount.div(10 ** this.decimals).toFixed()) : undefined
+    } else if (this.eventTypeExplain() === "Sale") {
+      return this.totalAmount? numberFormat(this.totalAmount.div(10 ** this.decimals).toFixed()) : undefined
     } else {
-      return undefined
+      return this.amount ? numberFormat(this.amount.div(10 ** this.decimals).toFixed()) : undefined
     }
   }
 }

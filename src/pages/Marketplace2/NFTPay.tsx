@@ -1,10 +1,8 @@
 import {Box, Flex, Grid, Icon, Typography} from "../../component/Box";
 import styled from "styled-components";
-import paymentPrefixIcon from "../../assets/images/market/nft_pay_payment_prefix.png"
 import ethIcon from "../../assets/images/market/eth_icon_20x34.png"
 import payTypeSelectedIcon from "../../assets/images/market/nft_pay_type_selected.png"
 import {useEffect, useState} from "react";
-import {tap} from "lodash";
 import {CollectionDetail} from "../../model/user";
 import BigNumber from "bignumber.js";
 import downPayIcon from "../../assets/images/market/down_pay_icon.png"
@@ -174,17 +172,26 @@ export default function NFTPay(props: {
         let eth = new BigNumber(0)
         if (wethBalance && ethBalance) {
             // only weth can pay
-            if (wethBalance.isGreaterThanOrEqualTo(props.actualAmount)) {
-                weth = props.actualAmount
-                eth = new BigNumber(0)
+            if (payType & PayType.WETH) {
+                if (wethBalance.isGreaterThanOrEqualTo(props.actualAmount)) {
+                    weth = props.actualAmount
+                    eth = new BigNumber(0)
+                } else {
+                    weth = wethBalance
+                    eth = props.actualAmount.minus(wethBalance)
+                }
             } else {
-                weth = wethBalance
-                eth = props.actualAmount.minus(wethBalance)
+                weth = new BigNumber(0)
+                if (ethBalance.isGreaterThanOrEqualTo(props.actualAmount)) {
+                    eth = props.actualAmount
+                } else {
+                    eth = props.actualAmount.minus(ethBalance)
+                }
             }
         }
         setEthAndWETHAmount([eth, weth])
         console.log(`ETH: ${eth.div(10 ** 18).toFixed()}, WETH: ${weth.div(10 ** 18).toFixed()}`)
-    }, [ethBalance, wethBalance, props.actualAmount])
+    }, [ethBalance, wethBalance, props.actualAmount, payType])
 
     useEffect(() => {
         let [eth, weth] = ethAndWETHAmount;
@@ -223,6 +230,8 @@ export default function NFTPay(props: {
             let data = await getTradeDetailData()
             if (!data) {
                 message.error("item has been sold")
+                setProgressingPopupOpen(false)
+                props.dismiss?.()
                 return
             }
             /// call contract
@@ -237,6 +246,7 @@ export default function NFTPay(props: {
                 market: ContractAddresses.getMarketAddressByName(props.nft.market) ?? "",
                 wethAmt: weth,
             }
+            console.log(contractParams)
             const signer = library.getSigner(account)
             const c = new Npics(signer)
             let tx: any;

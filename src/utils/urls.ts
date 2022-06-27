@@ -33,4 +33,15 @@ export function numberFormat(
   maxFractionDigits: number = 4
 ): string {
   return numeral(num).format("0,0.[0000]")
+  // let format = Intl.NumberFormat(`en-US`, {
+  //   style: "currency",
+  //   currency: "USD",
+  //   useGrouping: true,
+  //   maximumFractionDigits: maxFractionDigits
+  // })
+  // if (typeof(num) === "string") {
+  //   return format.format(Number(num))
+  // } else {
+  //   return format.format(num)
+  // }
 }
