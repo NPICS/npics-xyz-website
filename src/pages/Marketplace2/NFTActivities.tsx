@@ -9,6 +9,7 @@ import {AddressAbbreviation} from "../marketplace/components/utils";
 import moment from "moment";
 import titlePrefixIcon from "../../assets/images/market/nft_activities_icon.png"
 import {urls} from "../../utils/urls";
+import {useAsync} from "react-use";
 
 const _Table = styled.table`
   thead {
@@ -63,18 +64,29 @@ export default function NFTActivities(props: {
 }) {
     const [listData, setListData] = useState<Activities[]>([])
 
-    useEffect(() => {
-        const inner = async () => {
-            let resp: any = await http.myPost(`/npics-nft/app-api/v2/nft/getNftActivities`, {
-                address: props.item?.address,
-                tokenId: props.item?.tokenId
-            })
-            if (resp.code === 200) {
-                let items = deserializeArray(Activities, JSON.stringify(resp.data))
-                setListData(items)
-            }
+    // useEffect(() => {
+    //     const inner = async () => {
+    //         let resp: any = await http.myPost(`/npics-nft/app-api/v2/nft/getNftActivities`, {
+    //             address: props.item?.address,
+    //             tokenId: props.item?.tokenId
+    //         })
+    //         if (resp.code === 200) {
+    //             let items = deserializeArray(Activities, JSON.stringify(resp.data))
+    //             setListData(items)
+    //         }
+    //     }
+    //     inner().catch((e) => console.error(`Activities Request Error => ${e}`))
+    // }, [props.item])
+    useAsync(async () => {
+        if (!props.item) return
+        let resp: any = await http.myPost(`/npics-nft/app-api/v2/nft/getNftActivities`, {
+            address: props.item.address,
+            tokenId: props.item.tokenId
+        })
+        if (resp.code === 200) {
+            let items = deserializeArray(Activities, JSON.stringify(resp.data))
+            setListData(items)
         }
-        inner().catch((e) => console.error(`Activities Request Error => ${e}`))
     }, [props.item])
 
     return <Flex
