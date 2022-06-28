@@ -11,6 +11,7 @@ import address from '../assets/images/addressBlack.png'
 import notData from '../assets/images/notData.png'
 import worldwideIcon from '../assets/images/worldwide.svg'
 import notificationIcon from '../assets/images/notification.svg'
+import withoutNoticeIcon from '../assets/images/withoutNoticeIcon.svg'
 import EllipseIcon from '../assets/images/Ellipse.svg'
 
 import darkTG from '../assets/images/footer/darkTG.png'
@@ -69,7 +70,7 @@ import NftsIcon from "../assets/images/home/nfts.png"
 
 import Union1 from '../assets/images/market/Union1.png'
 import Union2 from '../assets/images/market/Union2.png'
-import search from '../assets/images/market/search.png'
+import Search from '../assets/images/market/Search.svg'
 import collect from '../assets/images/market/collect.png'
 import collect2 from '../assets/images/market/collect2.png'
 import seaport from '../assets/images/market/opensea.png'
@@ -157,6 +158,7 @@ export const imgurl = {
   metamaskLogo,
   notData,
   notificationIcon,
+  withoutNoticeIcon,
   worldwideIcon,
   EllipseIcon,
   footer: {
@@ -216,11 +218,11 @@ export const imgurl = {
     NftsIcon
   },
   market: {
+    Search,
     progressIcon,
     tipsIcon,
     Union1,
     Union2,
-    search,
     collect,
     collect2,
     seaport,

@@ -44,9 +44,9 @@ export default function MyRewards() {
 
 
   return <Box
-  padding={".48rem 1rem"}
+  padding={".6rem .4rem"}
   >
-    <Typography fontSize={".3rem"} fontWeight={800} color={'#000'}>MyRewards</Typography>
+    <Typography fontSize={".3rem"} fontWeight={800} color={'#000'}>Npics Rewards</Typography>
     <Typography fontSize={".16rem"} fontWeight={500} color={'rgba(0,0,0,.5)'} marginBottom={".3rem"}>Participate in the down payment loan to buy NFT and earn double rewards</Typography>
     <Typography fontSize={".16rem"} fontWeight={500} color={'rgba(0,0,0,.5)'} marginBottom={".4rem"}>Rates shown are estimates, and fluctuate based on many different factors, including collection floor price, trading volume, pool liquidity, token price, etc.</Typography>
     <Typography fontSize={".2rem"} fontWeight={700} color={'#000'} marginBottom={".2rem"}>Your rewards</Typography>

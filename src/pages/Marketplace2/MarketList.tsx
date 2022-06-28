@@ -8,6 +8,7 @@ import LooseSelectIcon from "../../assets/images/market/Frame 33.png"
 import CompactUnselectIcon from "../../assets/images/market/Frame 34.png"
 import LooseUnselectIcon from "../../assets/images/market/loose_unselect.png"
 import CompactSelectIcon from "../../assets/images/market/compact_select.png"
+import search from "../../assets/images/market/searchInt.svg"
 import {CollectionDetail, CollectionItems, Collections} from "../../model/user";
 import {deserializeArray, deserialize} from "class-transformer";
 import {imgurl} from "../../utils/globalimport";
@@ -27,6 +28,16 @@ const InputStyled = styled(Input)`
     border-radius: 10px;
     color: rgba(0,0,0,.5);
     height: .5rem;
+    padding: .04rem .6rem;
+`
+const BoxBefore = styled(Icon)`
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    left: .2rem;
+    transform: translateY(-50%);
+    z-index: 1;
 `
 
 export const Portrait = styled.img`
@@ -124,7 +135,7 @@ export default function MarketList() {
             marginTop={".1rem"}
             boxShadow={"rgba(0,0,0,.5)"}>
             <Flex height={".5rem"} gap={".12rem"} alignItems={"center"}>
-                <Box width={"6.85rem"}>
+                <Box width={"6.85rem"} position="relative">
                     <InputStyled
                         type="text"
                         placeholder='Search'
@@ -134,6 +145,7 @@ export default function MarketList() {
                         }}
                         className="ant-input-reset"
                     />
+                    <BoxBefore  width=".2rem" height=".2rem" src={search}/>
                 </Box>
                 <AntdSelect onSelect={(value: any) => setCurrentSort(value)} defaultValue="asc" dropdownClassName="ant-select-reset">
                     <Option value="asc">Price: Low to High</Option>
@@ -151,6 +163,7 @@ export default function MarketList() {
             </Flex>
             {
                 listData.length ? <InfiniteScroll
+
                         pageStart={1}
                         loadMore={() => {
                             if (!isLoading.current) {

@@ -55,7 +55,7 @@ export default function MyTable() {
             imageUrl: changeData[i].imageUrl,
             collection: changeData[i].name,
             realTotalSupply: changeData[i].realTotalSupply,
-            floorPrice: +changeData[i].sFloorPrice,
+            floorPrice: +changeData[i].sFloorPrice(),
             ownerNum: changeData[i].ownerNum,
             advanceRate: +changeData[i].sAdvanceRate,
             activeCollaterals: changeData[i].activeCollaterals,

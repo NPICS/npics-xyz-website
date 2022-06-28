@@ -40,7 +40,7 @@ export default function MyVaults() {
   }
 
   return <Box
-    padding={".6rem .6rem"}
+    padding={".6rem .4rem"}
   >
     <Flex
       alignItems={"center"}

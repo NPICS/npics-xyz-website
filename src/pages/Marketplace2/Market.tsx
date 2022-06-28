@@ -53,6 +53,7 @@ const CollectionItem = styled.div<{
   overflow: hidden;
   border-radius: 8px;
   box-shadow: 0 0 0 ${(props) => props.isSelected ? `3px` : `0`} #fff;
+  transform: ${(props) => props.isSelected ? "scale(1.15)" : "scale(1)"};
 `
 
 export default function Market() {
@@ -100,7 +101,7 @@ export default function Market() {
         background={"transparent"}>
         <Banner url={nft?.bannerImageUrl}/>
         <Box zIndex={1}>
-            <Box marginTop={"120px"}>
+            <Box marginTop={"210px"}>
                 <Typography
                     color={"#fff"}
                     fontSize={"30px"}
