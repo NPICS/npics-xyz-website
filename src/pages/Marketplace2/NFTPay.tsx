@@ -137,21 +137,19 @@ export default function NFTPay(props: {
     // failed popup
     const [failedPopupOpen, setFailedPopupOpen] = useState(false)
 
-    useEffect(() => {
-        const inner = async () => {
-            if (account && library) {
-                // get eth balance
-                const balance = await library.getBalance(account)
-                setETHBalance(new BigNumber(balance.toString()))
-                // get weth balance
-                let signer = library.getSigner(account)
-                let weth = new Erc20(ContractAddresses.WETH, signer)
-                const wethBalance = await weth.balanceOf(account)
-                setWETHBalance(new BigNumber(wethBalance.toString()))
-                console.log(`ETH => ${balance.toFixed()}, WEHT => ${wethBalance.toFixed()}`)
-            }
+    useAsync(async () => {
+        if (account && library) {
+            let signer = library.getSigner(account)
+            let weth = new Erc20(ContractAddresses.WETH, signer)
+
+            const [balance, wethBalance] = await Promise.all([
+                library.getBalance(account),
+                weth.balanceOf(account)
+            ])
+            setETHBalance(new BigNumber(balance.toString()))
+            setWETHBalance(new BigNumber(wethBalance.toString()))
+            console.log(`ETH => ${balance.toFixed()}, WEHT => ${wethBalance.toFixed()}`)
         }
-        inner().finally()
     }, [props.nft, account, library])
 
     useEffect(() => {
@@ -286,7 +284,7 @@ export default function NFTPay(props: {
                 return undefined
             }
         }
-        if (props.nft.market === "nftx") {
+        if (props.nft.market.toLowerCase() === "nftx") {
             /// nftx market special treatment, get nbp address
             let c = new Npics(library.getSigner(account))
             let nbp = await c.getNbpFor(props.nft.address, Number(props.nft.tokenId))

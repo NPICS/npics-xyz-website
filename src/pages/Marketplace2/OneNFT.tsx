@@ -33,7 +33,6 @@ function Label(props: {
         border={"1px solid #FFFFFF4D"}
         background={"#FFFFFF33"}
         style={{
-
             "cursor": "pointer"
         }}
     >
@@ -42,7 +41,6 @@ function Label(props: {
             fontSize={".14rem"}
             fontWeight={500}
             color={"#fff"}
-            lineHeight={"100%"}
         >{`${props.icon ? '' : '# '}${props.num}`}</Typography>
     </Flex>
 }
@@ -155,10 +153,8 @@ export default function OneNFT() {
                     <Flex flexDirection={"row"} gap={".15rem"} alignItems={"stretch"}>
                         {
                             rarityData && Object.entries(rarityData).map(([key, val]) => {
-                                return <Popover content={key}>
-                                    <Box
-                                        onClick={() => window.open(val.url)}
-                                    >
+                                return val && val.rank && <Popover content={key}>
+                                    <Box onClick={() => window.open(val.url)}>
                                         <Label
                                             key={key}
                                             icon={getRarityIconByName(key)}
