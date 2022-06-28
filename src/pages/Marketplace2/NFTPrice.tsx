@@ -1,4 +1,4 @@
-import {Box, Flex, Grid, Icon, Typography} from "../../component/Box";
+import {Box, Button2, Flex, Grid, Icon, Typography} from "../../component/Box";
 import styled from "styled-components";
 import tipsIcon from "../../assets/images/market/exclamation_point.png"
 import {CollectionDetail, CollectionItems} from "../../model/user";
@@ -51,21 +51,13 @@ const BuyBox = styled(Flex)`
   position: relative;
 `
 
-const BuyButton = styled.button`
-  border: 0;
+const BuyButton = styled(Button2)`
   cursor: pointer;
-  background: #000;
-  color: #fff;
   font-weight: 700;
   font-size: .2rem;
   min-width: 3.9rem;
   height: .82rem;
-  border-radius: .1rem;
   margin-top: .21rem;
-
-  &:disabled {
-    background: #C5C5C5;
-  }
 `
 
 const OtherNFT = styled.img`
@@ -76,6 +68,7 @@ const OtherNFT = styled.img`
   border-radius: .1rem;
   border: 1px solid #eee;
   position: relative;
+  background: transparent;
 `
 
 function MoreNFT(props: {

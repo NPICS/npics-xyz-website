@@ -101,11 +101,10 @@ export default function OneNFT() {
     }, [params])
 
     useAsync(async () => {
-        if (detailData) {
-            let flag = await getNFTStatusInOpensea(detailData.address, Number(detailData.tokenId))
-            console.log(`flag => ${flag}`)
-            setOpenSeaIsNormalization(flag as boolean)
-        }
+        if (!detailData) return
+        let flag = await getNFTStatusInOpensea(detailData.address, Number(detailData.tokenId))
+        console.log(`flag => ${flag}`)
+        setOpenSeaIsNormalization(flag as boolean)
     }, [detailData])
 
     function getRarityIconByName(name: string): string | undefined {

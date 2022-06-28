@@ -1,4 +1,4 @@
-import {Box, Flex, Grid, Icon, Typography} from "../../component/Box";
+import {Box, Button2, Flex, Grid, Icon, Typography} from "../../component/Box";
 import styled from "styled-components";
 import ethIcon from "../../assets/images/market/eth_icon_20x34.png"
 import payTypeSelectedIcon from "../../assets/images/market/nft_pay_type_selected.png"
@@ -94,6 +94,7 @@ enum PayType {
 }
 
 export const CancelButton = styled.button`
+  variance: "secondary";
   border: 1px solid #00000033;
   background: #fff;
   color: #000;
@@ -105,14 +106,12 @@ export const CancelButton = styled.button`
   cursor: pointer;
 `
 
-export const ConfirmButton = styled(CancelButton)`
-  border: none;
-  background: #000;
-  color: #fff;
-
-  &:disabled {
-    background: #c5c5c5;
-  }
+export const ConfirmButton = styled(Button2)`
+  cursor: pointer;
+  height: .52rem;
+  min-width: 2rem;
+  font-size: .16rem;
+  font-weight: 700;
 `
 
 export default function NFTPay(props: {

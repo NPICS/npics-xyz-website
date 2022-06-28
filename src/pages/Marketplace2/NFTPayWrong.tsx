@@ -63,9 +63,7 @@ export default function NFTPayWrong(props: {
             </Flex>
         </Flex>
         <Flex alignItems={"center"} justifyContent={"center"} gap={".2rem"} marginTop={".3rem"}>
-            <CancelButton
-                onClick={props.back}
-            >Back</CancelButton>
+            <CancelButton onClick={props.back}>Back</CancelButton>
         </Flex>
     </Flex>
 }

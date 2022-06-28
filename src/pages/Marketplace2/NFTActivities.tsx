@@ -8,6 +8,7 @@ import {log} from "util";
 import {AddressAbbreviation} from "../marketplace/components/utils";
 import moment from "moment";
 import titlePrefixIcon from "../../assets/images/market/nft_activities_icon.png"
+import {urls} from "../../utils/urls";
 
 const _Table = styled.table`
   thead {
@@ -52,10 +53,8 @@ function PriceWithSymbol(props: {
     iconOrUrl: string
 }) {
     return <Flex hidden={props.displayAmount == null} flexDirection={"row"} alignItems={"center"} gap={".06rem"}>
-        <Symbol src={props.iconOrUrl}/>
-        <Typography
-            lineHeight={"normal"}
-        >{props.displayAmount ?? ``}</Typography>
+        <Symbol src={props.iconOrUrl} hidden={props.displayAmount == `0`}/>
+        <Typography lineHeight={"normal"}>{props.displayAmount ?? ``}</Typography>
     </Flex>
 }
 
@@ -121,9 +120,24 @@ export default function NFTActivities(props: {
                         listData.map((item, idx) => {
                             return <tr key={idx}>
                                 <td align={"left"}>{item.eventTypeExplain() ?? ``}</td>
-                                <td align={"center"}><PriceWithSymbol displayAmount={item.amountFormat()} iconOrUrl={item.imageUrl}/></td>
-                                <td align={"center"}>{AddressAbbreviation(item.fromAccount) ?? "---"}</td>
-                                <td align={"center"}>{AddressAbbreviation(item.toAccount) ?? "---"}</td>
+                                <td align={"center"}><PriceWithSymbol displayAmount={item.amountFormat()}
+                                                                      iconOrUrl={item.imageUrl}/></td>
+                                <td align={"center"}
+                                    style={{
+                                        "cursor": item.fromAccount ? "pointer" : "auto"
+                                    }}
+                                    onClick={() => {
+                                        window.open(`https://etherscan.io/address/${item.fromAccount}`)
+                                    }}
+                                >{AddressAbbreviation(item.fromAccount) ?? "---"}</td>
+                                <td align={"center"}
+                                    style={{
+                                        "cursor": item.toAccount ? "pointer" : "auto"
+                                    }}
+                                    onClick={() => {
+                                        window.open(`https://etherscan.io/address/${item.toAccount}`)
+                                    }}
+                                >{AddressAbbreviation(item.toAccount) ?? "---"}</td>
                                 <td align={"center"}>{
                                     moment(item.createdTime).parseZone().endOf('m').fromNow() ?? '---'
                                 }</td>

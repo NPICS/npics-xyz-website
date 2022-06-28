@@ -1,21 +1,17 @@
-import {Box, Flex, Grid, Icon, Typography} from "../../component/Box";
+import {Box, Flex, Icon, Typography} from "../../component/Box";
 import styled from "styled-components";
-import {space, typography, layout, TypographyProps} from "styled-system";
 import React, {useEffect, useState} from "react";
 import http from "../../utils/http";
 import {deserializeArray} from "class-transformer";
 import {Collections} from "../../model/user";
-import {Outlet, useLocation, useNavigate, useParams} from "react-router-dom";
-import {imgurl} from "../../utils/globalimport";
+import {Outlet, useNavigate, useParams} from "react-router-dom";
 import {numberFormat} from "../../utils/urls";
 import {Portrait} from "./MarketList";
-import {prettyFormat} from "@testing-library/react";
 import {percentageFormat} from "../marketplace/components/utils";
 import ethIcon from "../../assets/images/market/eth_icon_10x15.svg"
 import numeral from "numeral";
-import {globalConstant} from 'utils/globalConstant';
-import BigNumber from "bignumber.js";
 import {Popover} from "antd";
+import openseaValidIcon from "../../assets/images/market/nfts_opensea_valid.svg"
 
 
 export const Banner = styled(Box)<{ url?: string }>`
@@ -149,12 +145,20 @@ export default function Market() {
                         flex={1}
                         justifyContent={"center"}
                     >
-                        <Typography
-                            fontWeight={800}
-                            fontSize={".46rem"}
-                            lineHeight={".56rem"}
-                            color={"#000"}
-                        >{nft?.name}</Typography>
+                        <Flex alignItems={"center"} gap={".06rem"}>
+                            <Typography
+                                fontWeight={800}
+                                fontSize={".46rem"}
+                                lineHeight={".56rem"}
+                                color={"#000"}
+                            >{nft?.name}</Typography>
+                            <Popover content={"Verified On OpenSea"}>
+                                <Icon
+                                    src={openseaValidIcon}
+                                    width={".24rem"}
+                                    height={".24rem"} />
+                            </Popover>
+                        </Flex>
                         <Typography
                             fontWeight={"500"}
                             fontSize={".14rem"}
