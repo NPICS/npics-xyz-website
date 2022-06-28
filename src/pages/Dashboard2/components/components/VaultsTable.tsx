@@ -24,6 +24,7 @@ interface Result {
   createTime: string,
   id: number,
   nftAddress: string,
+  neoAddress: string,
   tokenId: string,
   userAddress: string,
   imageUrl: string,
@@ -87,7 +88,7 @@ function MyAgreement(props: IProps) {
       dataIndex: 'contract',
       key: 'contract',
       align: 'center',
-      render: (text, row) => <div className='contract' onClick={() => jumpToEthscan(row)}>
+      render: (text, row) => <div className='contract' onClick={() => jumpToNEOEthscan(row)}>
         <span title={row.collectionName}>NEO-{row.collectionName}</span>
         #{text}
         <Icon width=".16rem" height=".16rem" src={imgurl.dashboard.exportBlack18} alt="" />
@@ -141,9 +142,14 @@ function MyAgreement(props: IProps) {
       </div>,
     },
   ]
-
+  
   const jumpToEthscan = (e: DataSource) => {
-    window.open(`https://cn.etherscan.com/nft/${e.address}/${e.tokenId}`)
+    if(e.statusSrt === 'Terminated') return
+    navigate(`/vaultsDetail/${e.address}/${e.tokenId}`)
+  }
+  const jumpToNEOEthscan = (e: DataSource) => {
+    if(e.statusSrt === 'Terminated') return
+    window.open(`https://cn.etherscan.com/nft/${e.neoAddress}/${e.tokenId}`)
   }
 
   useUpdateEffect(() => {
@@ -268,6 +274,7 @@ function MyAgreement(props: IProps) {
             status: new BigNumber(newArray[i].debtData.healthFactor.toString()).div(10 ** 18).toFixed(4, 1) || "--",
             statusSrt: turnStr(newArray[i].debtData.healthFactor),
             address: newArray[i].nftAddress,
+            neoAddress: newArray[i].neoAddress,
             tokenId: newArray[i].tokenId,
             imageUrl: newArray[i].imageUrl,
             floorPrice: new BigNumber(newArray[i].floorPrice),

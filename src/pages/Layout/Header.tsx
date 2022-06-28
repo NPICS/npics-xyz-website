@@ -98,25 +98,12 @@ function XHeader() {
   }
 
   const walletPop = () => {
-    // let token = sessionStorage.getItem("ACCESS_TOKEN")
-
     if (userInfo.address) {
       setAccountPop(true)
     } else {
       action(setIsShowConnect(true))
     }
   }
-
-  useEffect(() => {
-
-
-    // eslint-disable-next-line
-  }, [account])
-
-
-  // const onCancel = () => {
-  //   setAccountPop(false)
-  // }
 
   const onQuit = () => {
     setAccountPop(false)
@@ -160,15 +147,6 @@ function XHeader() {
         </div>
         <img className='copy-icon' src={imgurl.copy} alt="" onClick={onCopy} />
       </div>
-      {/* <div className='account-item'>
-        {accountNav.map((item) => {
-          return <Link to={item.path} key={item.text} onClick={() => setAccountPop(false)} ><div className="account-nav">
-            <img src={item.icon} alt=""/>
-            <span>{item.text}</span>
-          </div></Link>
-        })}
-      </div> */}
-
       <div className='account-wallet'>
         <div className='wallet-title'>Wallet Balance</div>
         <WalletBalance></WalletBalance>
