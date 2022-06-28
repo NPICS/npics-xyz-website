@@ -82,12 +82,12 @@ export default function CollectionCell(props: ICollectionCellProps) {
                 gap={".06rem"}
                 marginTop={".1rem"}
             >
-                <NoWarpTypography display={props.compact ? `none` : `block`}>Down Payment</NoWarpTypography>
+                <NoWarpTypography hidden={props.compact}>Down Payment</NoWarpTypography>
                 <Flex
                     alignItems={"center"}
                     gap={".06rem"}>
                     <Icon height={".15rem"} width={".1rem"} src={ethIcon}/>
-                    <Typography>{props.item.basePrice()}</Typography>
+                    <Typography>{props.item.downPaymentPriceDisplay()}</Typography>
                 </Flex>
                 <Flex flex={1}></Flex>
                 <IconTest src={props.item.marketIcon()} alt=""/>

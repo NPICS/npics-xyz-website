@@ -135,9 +135,7 @@ export default function MarketList() {
                         className="ant-input-reset"
                     />
                 </Box>
-                <AntdSelect onSelect={(value: any) => {
-                    setCurrentSort(value)
-                }} defaultValue="asc" dropdownClassName="ant-select-reset">
+                <AntdSelect onSelect={(value: any) => setCurrentSort(value)} defaultValue="asc" dropdownClassName="ant-select-reset">
                     <Option value="asc">Price: Low to High</Option>
                     <Option value="desc">Price: high to low</Option>
                     <Option value="rarityScoreDesc">Rarity: Common to Rarest</Option>

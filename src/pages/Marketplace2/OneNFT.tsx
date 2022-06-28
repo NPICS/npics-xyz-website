@@ -17,33 +17,33 @@ import nftWarningIcon from "../../assets/images/market/nft_warning_tips.png"
 import {getNFTStatusInOpensea} from "../../utils/opensea";
 import {useAsync} from "react-use";
 import {Popover} from "antd";
+import rarity_1_icon from "../../assets/images/market/rarity_1.svg"
+import rarity_2_icon from "../../assets/images/market/rarity_2.svg"
 
 function Label(props: {
-    icon: string,
+    icon?: string,
     num: number
 }) {
     return <Flex
         gap={".06rem"}
         alignItems={"center"}
-        padding={"0 .1rem"}
-        height={".24rem"}
+        padding={".04rem .09rem"}
+        minHeight={".3rem"}
         borderRadius={".14rem"}
-        border={"1px sold #FFFFFF4D"}
+        border={"1px solid #FFFFFF4D"}
         background={"#FFFFFF33"}
         style={{
+
             "cursor": "pointer"
         }}
-        onClick={() => {
-            // TODO: to rank
-        }}
     >
-        <Icon width={".2rem"} src={props.icon}/>
+        {props.icon && <Icon width={".2rem"} src={props.icon}/>}
         <Typography
             fontSize={".14rem"}
             fontWeight={500}
             color={"#fff"}
             lineHeight={"100%"}
-        >{props.num}</Typography>
+        >{`${props.icon ? '' : '# '}${props.num}`}</Typography>
     </Flex>
 }
 
@@ -76,16 +76,30 @@ export default function OneNFT() {
     let urlParams: any = useParams()
     const params: { address: string, tokenId: string } = urlParams
     const [openSeaIsNormalization, setOpenSeaIsNormalization] = useState<boolean>(true)
+    const [rarityData, setRarityData] = useState<{ [key: string]: any }>()
 
     useAsync(async () => {
-        const resp: any = await http.myPost(`/npics-nft/app-api/v2/nft/getCollectionItemsDetail`, {
-            address: params.address,
-            tokenId: params.tokenId
-        })
-        if (resp.code === 200 && resp.data) {
-            console.log(resp.data);
-            setDetailData(deserialize(CollectionDetail, JSON.stringify(resp.data)))
-        } else {}
+        if (!params) return;
+        {
+            /// nft detail data
+            const resp: any = await http.myPost(`/npics-nft/app-api/v2/nft/getCollectionItemsDetail`, {
+                address: params.address,
+                tokenId: params.tokenId
+            })
+            if (resp.code === 200 && resp.data) {
+                setDetailData(deserialize(CollectionDetail, JSON.stringify(resp.data)))
+            }
+        }
+        {
+            /// rarity
+            const resp: any = await http.myPost(`/npics-nft/app-api/v2/nft/getRarity`, {
+                address: params.address,
+                tokenId: params.tokenId
+            })
+            if (resp.code === 200 && resp.data) {
+                setRarityData(resp.data)
+            }
+        }
     }, [params])
 
     useAsync(async () => {
@@ -95,6 +109,17 @@ export default function OneNFT() {
             setOpenSeaIsNormalization(flag as boolean)
         }
     }, [detailData])
+
+    function getRarityIconByName(name: string): string | undefined {
+        switch (name) {
+            case "rarity_sniper":
+                return rarity_1_icon
+            case "trait_sniper":
+                return rarity_2_icon
+            default:
+                return undefined
+        }
+    }
 
     return <Box
         padding={"1.6rem"}
@@ -123,12 +148,26 @@ export default function OneNFT() {
                                 width={".24rem"}
                                 height={".24rem"}
                                 src={nftWarningIcon}
-                                hidden={openSeaIsNormalization} />
+                                hidden={openSeaIsNormalization}/>
                         </Popover>
                     </Flex>
 
-                    <Flex flexDirection={"row"} gap={".15rem"}>
-                        <Label icon={imgurl.market.collect2}  num={detailData?.rarityScore ?? 0}/>
+                    <Flex flexDirection={"row"} gap={".15rem"} alignItems={"stretch"}>
+                        {
+                            rarityData && Object.entries(rarityData).map(([key, val]) => {
+                                return <Popover content={key}>
+                                    <Box
+                                        onClick={() => window.open(val.url)}
+                                    >
+                                        <Label
+                                            key={key}
+                                            icon={getRarityIconByName(key)}
+                                            num={Number(val.rank) ?? 0}
+                                        />
+                                    </Box>
+                                </Popover>
+                            })
+                        }
                     </Flex>
                 </Flex>
             </Flex>

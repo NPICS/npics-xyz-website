@@ -180,7 +180,7 @@ export default function Market() {
                         gap={".05rem"}
                         minWidth={"1.36rem"}>
                         <Flex alignItems={"center"} gap={".06rem"}>
-                            <Icon width={".10rem"} height={".15rem"} src={ethIcon}/>
+                            <Icon width={".18rem"} height={".18rem"} src={ethIcon}/>
                             <Typography
                                 fontSize={".2rem"}
                                 color={"#000"}
@@ -201,7 +201,7 @@ export default function Market() {
                         gap={".05rem"}
                         minWidth={"1.36rem"}>
                         <Flex alignItems={"center"} gap={".06rem"}>
-                            <Icon width={".10rem"} height={".15rem"} src={ethIcon}/>
+                            <Icon width={".18rem"} height={".18rem"} src={ethIcon}/>
                             <Typography
                                 fontSize={".2rem"}
                                 color={"#000"}
