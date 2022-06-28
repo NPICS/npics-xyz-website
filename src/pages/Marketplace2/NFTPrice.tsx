@@ -204,7 +204,7 @@ export default function NFTPrice(props: {
                     <TipsIcon width={".14rem"} src={tipsIcon}/>
                 </Popover>
 
-                <Flex flexDirection={"row"} alignItems={"end"}>
+                <Flex flexDirection={"row"} alignItems={"center"}>
                     <Icon width={".12rem"} height={".1898rem"} src={ethIcon}/>
                     <Typography
                         fontSize={".24rem"}
@@ -221,6 +221,7 @@ export default function NFTPrice(props: {
                         color={"rgba(0,0,0,.5)"}
                         marginLeft={".02rem"}
                         lineHeight={"100%"}
+                        style={{alignSelf:'end'}}
                     >
                         {
                             `（${

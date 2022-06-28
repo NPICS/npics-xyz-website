@@ -69,7 +69,7 @@ export default function MyRewards() {
         <Flex gap={"1.6rem"} alignItems={"center"}>
           <Flex alignItems={"center"} gap={".12rem"}>
             <Typography fontSize={".14rem"} fontWeight={"500"} color={"rgba(0,0,0,.5)"}>Reward to be received : </Typography>
-            <Typography fontSize={".24rem"} fontWeight={"700"} color={"#000"}>{balance && new BigNumber(balance?.toString()).dp(3,1).div(10 ** 18).toFixed()}</Typography>
+            <Typography fontSize={".24rem"} fontWeight={"700"} color={"#000"}>{balance && new BigNumber(balance?.toString()).dp(3,1).div(10 ** 18).toFixed(4,1)}</Typography>
           </Flex>
 
           <ButtonDefault disabled={balance?.toString() === '0'} types={`${balance?.toString() === '0' ? 'disabled' : 'three' }`} onClick={onRewards}>

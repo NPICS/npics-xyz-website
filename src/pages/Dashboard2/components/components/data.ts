@@ -4,19 +4,19 @@ import { imgurl } from "utils/globalimport";
 export const NavList = [
   {
     icon: imgurl.dashboard.navVaults,
-    iconActive: imgurl.dashboard.agreementActive,
+    iconActive: '',
     text:"My Vaults",
     key: 'vaults'
   },
   {
     icon: imgurl.dashboard.navRewards,
-    iconActive: imgurl.dashboard.rewardsActive,
+    iconActive: '',
     text:"My Rewards",
     key: 'rewards'
   },
   {
     icon: imgurl.dashboard.navAirdop,
-    iconActive: imgurl.dashboard.airdropActive,
+    iconActive: '',
     text:"My Airdrop",
     key: 'airdrop'
   }

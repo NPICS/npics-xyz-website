@@ -27,6 +27,8 @@ interface IAppState {
   rewardsAPR?: number,
   // eth -> usdt rate
   usdtExchangeRate?: string
+  // bend -> usdt rate
+  bendExchangeRate: string
 }
 
 const initialState: IAppState = {
@@ -41,6 +43,7 @@ const initialState: IAppState = {
     EthPrice: ''
   },
   isLogin: false,
+  bendExchangeRate:''
 }
 
 export const fetchUser2 = createAsyncThunk("app/fetchUser2", async (args, ThunkAPI) => {
@@ -62,6 +65,18 @@ export const updateARP = createAsyncThunk("app/updateARP", async (args, thunkAPI
 export const updateUSDTExchangeRate = createAsyncThunk("app/updateUSDTExchangeRate", async (args, thunkAPI) => {
   try {
     let resp: any = await http.myPost(`/npics-nft/app-api/v2/currencyPrice/getEthPrice`)
+    if (resp.code === 200 && resp.data) {
+      return resp.data as string
+    } else {
+      return undefined
+    }
+  } catch (e) {
+    return undefined
+  }
+})
+export const updateBENDExchangeRate = createAsyncThunk("app/updateBENDExchangeRate", async (args, thunkAPI) => {
+  try {
+    let resp: any = await http.myPost(`/npics-nft/app-api/v2/currencyPrice/getBendPrice`)
     if (resp.code === 200 && resp.data) {
       return resp.data as string
     } else {
@@ -127,6 +142,11 @@ const appSlice = createSlice({
           state.usdtExchangeRate = action.payload
           // temporary compatibility
           state.data.EthPrice = action.payload
+        }
+      })
+      .addCase(updateBENDExchangeRate.fulfilled, (state, action) => {
+        if (action.payload) {
+          state.bendExchangeRate = action.payload
         }
       })
   }

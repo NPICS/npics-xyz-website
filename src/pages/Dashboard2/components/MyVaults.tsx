@@ -2,7 +2,6 @@ import React, { useState,useEffect } from "react"
 import { Box, Flex, Icon, Typography } from "component/Box";
 import { imgurl } from "utils/globalimport";
 import { Select } from "antd";
-import NotFound from "component/NotFound"
 import styled from 'styled-components';
 import VaultsTable from "./components/VaultsTable";
 import BigNumber from "bignumber.js";

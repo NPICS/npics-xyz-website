@@ -55,10 +55,20 @@ export const useEthPrice = (value: BigNumber | undefined) => {
   useEffect(() => {
     if(!value) return
     const OrgPrice = new BigNumber(value.toString()).multipliedBy(EthPrice).div(10 ** 18)
-    
-    // console.log(numberFormat(OrgPrice.toNumber()))
     setPrice(OrgPrice)
     // eslint-disable-next-line
   },[EthPrice,value])
+  return price
+}
+
+export const useBendPrice = (value: BigNumber | undefined) => {
+  const [price, setPrice] = useState<BigNumber | undefined>()
+  const BENDPrice = useAppSelector((state) => state.app.bendExchangeRate)
+  useEffect(() => {
+    if(!value) return
+    const OrgPrice = new BigNumber(value.toString()).multipliedBy(BENDPrice).div(10 ** 18)
+    setPrice(OrgPrice)
+    // eslint-disable-next-line
+  },[BENDPrice,value])
   return price
 }

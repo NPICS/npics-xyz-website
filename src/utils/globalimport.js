@@ -102,7 +102,7 @@ import airdrop from '../assets/images/dashboard/airdrop.png'
 import airdropActive from '../assets/images/dashboard/airdrop_active.png'
 import price_icon from '../assets/images/dashboard/price_icon.png'
 import NPT from '../assets/images/dashboard/NPT.png'
-import BEND from '../assets/images/dashboard/BEND.png'
+import BEND from '../assets/images/dashboard/BEND.svg'
 import ARP from '../assets/images/dashboard/ARP.png'
 import href from '../assets/images/dashboard/href.png'
 import notify from '../assets/images/dashboard/notify.png'
@@ -111,9 +111,9 @@ import redPrice14 from '../assets/images/dashboard/redPrice14.png'
 import greyPrice7 from '../assets/images/dashboard/greyPrice7.png'
 import catalogue26 from '../assets/images/dashboard/catalogue26.png'
 import airdropIcon from '../assets/images/dashboard/airdropIcon.png'
-import navVaults from '../assets/images/dashboard/navVaults.png'
-import navRewards from '../assets/images/dashboard/navRewards.png'
-import navAirdop from '../assets/images/dashboard/navAirdop.png'
+import navVaults from '../assets/images/dashboard/navVaults.svg'
+import navRewards from '../assets/images/dashboard/navRewards.svg'
+import navAirdop from '../assets/images/dashboard/navAirdop.svg'
 import ethGrey18 from '../assets/images/dashboard/ethGrey18.png'
 import rewardBend from '../assets/images/dashboard/rewardBend.png'
 import reback from '../assets/images/dashboard/reback.png'
@@ -134,6 +134,7 @@ import checked from '../assets/images/market/checked.png'
 import blackPrice from '../assets/images/market/blackPrice.png'
 import redPrice24 from '../assets/images/market/redPrice24.png'
 import tipsIcon from '../assets/images/market/exclamation_point.png'
+import progressIcon from '../assets/images/market/nft_pay_progressing.gif'
 
 import metamaskLogo from '../assets/images/home/metamask_logo.png'
 
@@ -215,6 +216,7 @@ export const imgurl = {
     NftsIcon
   },
   market: {
+    progressIcon,
     tipsIcon,
     Union1,
     Union2,

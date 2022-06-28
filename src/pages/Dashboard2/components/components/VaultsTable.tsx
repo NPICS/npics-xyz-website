@@ -143,7 +143,7 @@ function MyAgreement(props: IProps) {
   ]
 
   const jumpToEthscan = (e: DataSource) => {
-    window.open(`https://etherscan.io/nft/${e.address}/${e.tokenId}`)
+    window.open(`https://cn.etherscan.com/nft/${e.address}/${e.tokenId}`)
   }
 
   useUpdateEffect(() => {
@@ -183,23 +183,6 @@ function MyAgreement(props: IProps) {
     console.log('isLogin',isLogin);
   },[isLogin])
 
-  // useEffect(() => {
-  //   if (account && !isLogin) {
-  //     login2()
-  //     console.log(`😈 ${isLogin}`)
-  //   } else {
-  //     if (!account) {
-  //       activate(connectors.injected, (e) => {
-  //         if (e.name === "UnsupportedChainIdError") {
-  //           sessionStorage.removeItem(SessionStorageKey.WalletAuthorized)
-  //           action(fetchUser(`{}`))
-  //           notification.error({ message: "Prompt connection failed, please use the Ethereum network" })
-  //         }
-  //       })
-  //     }
-  //   }
-  //   // eslint-disable-next-line
-  // }, [account, isLogin])
 
   async function login2() {
     try {
@@ -223,6 +206,7 @@ function MyAgreement(props: IProps) {
   }
   const turnStr = (val: BigNumber) => {
     let factor = +(new BigNumber(val.toString()).div(10 ** 18).dp(0).toString())
+    // factor = Math.random()*2
     if (factor >= 1.5) {
       return 'Inforce'
     } else if (factor >= 1 && factor < 1.5) {
@@ -339,7 +323,7 @@ function MyAgreement(props: IProps) {
     </Grid>
 
   return (<BgTable>
-    {loading ? <div className='loading'><img src={imgurl.market.loading} alt="" /></div> : activities.length ? <Table
+    {loading ? <div className='loading'><img src={imgurl.market.progressIcon} alt="" /></div> : activities.length ? <Table
       columns={columns}
       dataSource={activities}
       pagination={false}
