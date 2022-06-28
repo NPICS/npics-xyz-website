@@ -24,6 +24,7 @@ const TitleBox = styled.div`
       width: 7.03rem;
       margin-bottom: .1rem;
       font-family: 'Montserrat';
+      font-style: italic;
   }
   .title_text{
     font-family: 'Montserrat';
