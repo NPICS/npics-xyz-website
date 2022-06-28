@@ -89,7 +89,6 @@ export default function VaultsDetail() {
   const [isPayingAllDebts,setIsPayingAllDebts] = useState<boolean>(false)
   const [reload, setReload] = useState<boolean>(false)
   const action = useAppDispatch()
-  const state = useAppSelector(state => state.app)
   const isLogin = useAppSelector(state => state.app.isLogin)
   let urlParams: any = useParams()
   const navigate = useNavigate() 
@@ -210,8 +209,6 @@ export default function VaultsDetail() {
     try {
       const result: any = await http.myPost(url,parameter)
       let orgData: Result = result.data
-      // let address = "0x8a90cab2b38dba80c64b7734e58ee1db38b8992e"
-      // let neoId = '2595'
       if (result.code === 200 && orgData) {
         const signer = library.getSigner(account)
         let lendPool = new LendPool(signer)
@@ -474,7 +471,7 @@ export default function VaultsDetail() {
                   '--' :
                   payDebt?.eq(0) ?
                     activities?.healthFactor :
-                    new BigNumber(activities?.floorPrice.toString()).times('0.9').div(remainingDebt?.div(10 ** 18)).toFixed(4, 1))
+                    new BigNumber(activities?.floorPrice.div(10 ** 18).toString()).times('0.9').div(remainingDebt?.div(10 ** 18)).toFixed(4, 1))
               }
             </Typography>
             <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">New health factor</Typography>

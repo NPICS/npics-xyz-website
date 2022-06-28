@@ -28,9 +28,9 @@ function Label(props: {
         gap={".06rem"}
         alignItems={"center"}
         padding={".04rem .09rem"}
-        minHeight={".28rem"}
+        minHeight={".3rem"}
         borderRadius={".14rem"}
-        border={"1px sold #FFFFFF4D"}
+        border={"1px solid #FFFFFF4D"}
         background={"#FFFFFF33"}
         style={{
 
@@ -152,7 +152,7 @@ export default function OneNFT() {
                         </Popover>
                     </Flex>
 
-                    <Flex flexDirection={"row"} gap={".15rem"}>
+                    <Flex flexDirection={"row"} gap={".15rem"} alignItems={"stretch"}>
                         {
                             rarityData && Object.entries(rarityData).map(([key, val]) => {
                                 return <Popover content={key}>

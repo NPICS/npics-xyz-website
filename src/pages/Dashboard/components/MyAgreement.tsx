@@ -16,7 +16,6 @@ import { fetchUser, setIsLogin } from 'store/app';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { connectors } from 'utils/connectors';
 import { SessionStorageKey } from 'utils/enums';
-import aa from 'abi/aa.json'
 const { Option } = Select
 interface Result {
   createTime: string,
@@ -301,7 +300,6 @@ function MyAgreement() {
       const result: any = await http.myPost(url, pageInside)
 
       let orgData: Result[] = result.data.records
-      orgData = aa.data.records
       if (result.code === 200 && orgData.length) {
         const signer = library.getSigner(account)
         let lendPool = new LendPool(signer)

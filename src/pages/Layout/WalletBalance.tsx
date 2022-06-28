@@ -6,7 +6,7 @@ import { imgurl } from 'utils/globalimport';
 import styled from 'styled-components';
 import { Erc20 } from 'abi/Erc20';
 import { ContractAddresses } from 'utils/addresses';
-import { useEthPrice } from 'utils/hook';
+import { useBendPrice, useEthPrice } from 'utils/hook';
 import { font01651, font01455 } from 'component/styled';
 import {numberFormat} from "../../utils/urls";
 
@@ -53,32 +53,34 @@ export default function WalletBalance () {
   const [list, setList] = useState<wallet[]>()
   const ETHdollar =  useEthPrice(ETHBalance)
   const WETHdollar =  useEthPrice(WETHBalance)
-  const BDdollar =  useEthPrice(BDBalance)
+  const BDdollar =  useBendPrice(BDBalance)
   useEffect(() => {
     getBalance()
     // eslint-disable-next-line
   },[account])
 
-  const getBalance = async() => {
-    if(!account) {
+  const getBalance = async () => {
+    if (!account) {
       message.error('account is undefined')
       return
     }
-    const balance = await library.getBalance(account)
-    setETHBalance(new BigNumber(balance.toString()))
+    const balance = library.getBalance(account)
 
     let signer = library.getSigner(account)
     let weth = new Erc20(ContractAddresses.WETH, signer)
-    const WETHBalance = await weth.balanceOf(account)
-    setWETHBalance(new BigNumber(WETHBalance.toString()))
+    const WETHBalance = weth.balanceOf(account)
 
     let bendDao = new Erc20(ContractAddresses.BendDaoProxy, signer)
-    const bendDaoBalance = await bendDao.balanceOf(account)
-    setBDBalance(new BigNumber(bendDaoBalance.toString()))
+    const bendDaoBalance = bendDao.balanceOf(account)
+
+    Promise.all([balance, WETHBalance, bendDaoBalance]).then((values) => {
+      setETHBalance(new BigNumber(values[0].toString()))
+      setWETHBalance(new BigNumber(values[1].toString()))
+      setBDBalance(new BigNumber(values[2].toString()))
+    });
   }
 
   useEffect(() => {
-    // if(!ETHBalance || !ETHdollar || !WETHBalance || !WETHdollar || !BDBalance || !BDdollar) return
     const data = [
       {
         icon: imgurl.home.ethBlack22,

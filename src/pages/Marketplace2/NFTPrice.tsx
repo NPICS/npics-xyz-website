@@ -216,6 +216,7 @@ export default function NFTPrice(props: {
                         color={"rgba(0,0,0,.5)"}
                         marginLeft={".02rem"}
                         lineHeight={"100%"}
+                        style={{alignSelf:'end'}}
                     >
                         {
                             `（${

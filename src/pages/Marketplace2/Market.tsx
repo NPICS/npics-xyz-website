@@ -11,7 +11,7 @@ import {numberFormat} from "../../utils/urls";
 import {Portrait} from "./MarketList";
 import {prettyFormat} from "@testing-library/react";
 import {percentageFormat} from "../marketplace/components/utils";
-import ethIcon from "../../assets/images/market/eth_icon.svg"
+import ethIcon from "../../assets/images/market/eth_icon_10x15.svg"
 import numeral from "numeral";
 import {globalConstant} from 'utils/globalConstant';
 import BigNumber from "bignumber.js";

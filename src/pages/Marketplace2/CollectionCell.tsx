@@ -2,10 +2,10 @@ import {Box, Flex, Icon, Typography} from "../../component/Box";
 import styled from "styled-components";
 import {imgurl} from "../../utils/globalimport";
 import {CollectionItems} from "../../model/user";
-import CellTagIcon from "../../assets/images/market_cell_tags.png"
+import CellTagIcon from "../../assets/images/market_cell_tags.svg"
 import {useNavigate} from 'react-router-dom';
-import ethIcon from "../../assets/images/market/eth_icon_20x34.png"
 import BigNumber from "bignumber.js";
+import ethIcon from "../../assets/images/market/eth_icon_10x15.svg"
 
 const Cover = styled.img`
   display: block;
