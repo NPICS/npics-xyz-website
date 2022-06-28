@@ -51,7 +51,7 @@ function PriceWithSymbol(props: {
     displayAmount?: string,
     iconOrUrl: string
 }) {
-    return <Flex flexDirection={"row"} alignItems={"center"} gap={".06rem"}>
+    return <Flex hidden={props.displayAmount == null} flexDirection={"row"} alignItems={"center"} gap={".06rem"}>
         <Symbol src={props.iconOrUrl}/>
         <Typography
             lineHeight={"normal"}
@@ -72,7 +72,6 @@ export default function NFTActivities(props: {
             })
             if (resp.code === 200) {
                 let items = deserializeArray(Activities, JSON.stringify(resp.data))
-                console.log(items)
                 setListData(items)
             }
         }

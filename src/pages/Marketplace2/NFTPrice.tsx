@@ -1,7 +1,6 @@
 import {Box, Flex, Grid, Icon, Typography} from "../../component/Box";
 import styled from "styled-components";
 import tipsIcon from "../../assets/images/market/exclamation_point.png"
-import ethIcon from "../../assets/images/market/eth_icon_20x34.png"
 import {CollectionDetail, CollectionItems} from "../../model/user";
 import {useAppDispatch, useAppSelector} from "../../store/hooks";
 import BigNumber from "bignumber.js";
@@ -15,13 +14,14 @@ import {Npics} from "../../abi/Npics";
 import {ethers} from "ethers";
 import Modal from "../../component/Modal";
 import NFTPay from "./NFTPay";
-import {Popover} from "antd";
+import {message, Popover} from "antd";
 import {globalConstant} from "utils/globalConstant";
 import {useNavigate} from 'react-router-dom';
 import {useWeb3React} from "@web3-react/core";
 import {connectors} from "../../utils/connectors";
 import {getNFTStatusInOpensea} from "../../utils/opensea";
 import {listedPricePop, VaultAprPop, DownPaymentPop} from "utils/popover";
+import ethIcon from "../../assets/images/market/eth_icon.svg"
 
 const Shadow = styled(Flex)`
   background: #fff;
@@ -178,7 +178,7 @@ export default function NFTPrice(props: {
                 setBuyPopOpen(true)
             }
         } catch (e) {
-
+            message.error(`${e}`)
         }
     }
 
@@ -193,19 +193,13 @@ export default function NFTPrice(props: {
             />
         </Modal>
         <Flex gap={".1rem"}>
-            {/*<button*/}
-            {/*    onClick={() => {*/}
-            {/*        getPrice()*/}
-            {/*    }}*/}
-            {/*>Click</button>*/}
-            {/* Price */}
             <Shadow>
                 <Popover content={listedPricePop}>
                     <TipsIcon width={".14rem"} src={tipsIcon}/>
                 </Popover>
 
                 <Flex flexDirection={"row"} alignItems={"end"}>
-                    <Icon width={".12rem"} height={".1898rem"} src={ethIcon}/>
+                    <Icon width={".22rem"} height={".22rem"} src={ethIcon}/>
                     <Typography
                         fontSize={".24rem"}
                         fontWeight={700}
@@ -233,7 +227,7 @@ export default function NFTPrice(props: {
                     </Typography>
                 </Flex>
                 <Flex style={{cursor: 'pointer'}} alignItems={"center"} gap={".1rem"} onClick={() => window.open(`${props.item?.marketUrl}`)}>
-                    <Icon width={".22rem"} src={props.item?.marketIcon()}/>
+                    <Icon width={".22rem"} height={".22rem"} src={props.item?.marketIcon()}/>
                     <Typography
                         fontSize={".14rem"}
                         fontWeight={500}
@@ -304,7 +298,7 @@ export default function NFTPrice(props: {
             >Down Payment</Typography>
             <Flex alignItems={"end"} marginTop={".22rem"}>
                 <Flex gap={".14rem"} alignItems={"center"}>
-                    <Icon width={".2rem"} height={".34rem"} src={ethIcon}/>
+                    <Icon width={".4rem"} height={".4rem"} src={ethIcon}/>
                     <Typography
                         fontSize={".4rem"}
                         fontWeight={700}

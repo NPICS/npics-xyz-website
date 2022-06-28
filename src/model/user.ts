@@ -85,7 +85,7 @@ export class CollectionItems {
   address!: string;
   @TransformBigNumber()
   currentBasePrice!: BigNumber
-  decimals!: string;
+  decimals!: number;
   id!: string;
   imageUrl!: string;
   market!: 'opensea' | 'x2y2' | 'looksrare' | 'nftx' | 'xMarket' | 'seaport';
@@ -93,6 +93,7 @@ export class CollectionItems {
   paymentSymbol!: string;
   tokenId!: string;
   collectionName!: string;
+  ltv!: number
 
   @Expose()
   marketIcon() {
@@ -115,6 +116,14 @@ export class CollectionItems {
   @Expose()
   basePrice() {
     return numberFormat(this.currentBasePrice.div(10 ** 18).toFixed())
+  }
+
+  @Expose()
+  downPaymentPriceDisplay() {
+    let loadRate = new BigNumber(this.ltv).div(100).div(100)
+    let downPayRate = new BigNumber(1).minus(loadRate)
+    let result = this.currentBasePrice.times(downPayRate).div(10 ** this.decimals).minus(0.0001)
+    return numberFormat(result.toFixed())
   }
 }
 
