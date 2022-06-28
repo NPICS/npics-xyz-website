@@ -112,14 +112,14 @@ export const BgTable = styled.div`
   .ant-table-thead {
     tr {
       th {
-        width: 2.1rem !important;
+        width: 2.15rem !important;
       }
     }
   }
   .ant-table-tbody {
     tr {  
       td {
-        width: 2.1rem !important;
+        width: 2.15rem !important;
         /* height: 0 !important; */
       }
     }
@@ -147,6 +147,7 @@ export interface Result {
   createTime: string,
   id: number,
   nftAddress: string,
+  neoAddress: string,
   tokenId: string,
   userAddress: string,
   imageUrl: string
@@ -156,6 +157,7 @@ export interface Result {
 }
 
 export interface Record extends Result {
+  neoAddress: string;
   collectionName: string;
   debtData: DebtData,
   liquidatePrice: LiquidatePrice
@@ -186,6 +188,7 @@ export interface DataSource {
   status: string;
   statusSrt: string;
   address: string;
+  neoAddress: string;
   tokenId: string;
   imageUrl: string;
   floorPrice: BigNumber;

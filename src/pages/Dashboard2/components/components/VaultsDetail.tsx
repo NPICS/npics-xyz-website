@@ -6,7 +6,7 @@ import ButtonDefault from 'component/ButtonDefault'
 import { DataSource, DebtData, LiquidatePrice, Record } from './Tableutils';
 import { useWeb3React } from '@web3-react/core';
 import { LendPool } from 'abi/LendPool';
-import { notification, message, Popover } from 'antd';
+import { notification, message, Popover, InputNumber } from 'antd';
 import BigNumber from 'bignumber.js';
 import { fetchUser, setIsLogin } from 'store/app';
 import { SessionStorageKey } from 'utils/enums';
@@ -55,10 +55,24 @@ const TipsIcon = styled(Icon)`
   right: .14rem;
 `
 
+const InputNumberStyled = styled(InputNumber)`
+  .ant-input-number-input-wrap {
+    .ant-input-number-input {
+      font-family: Montserrat;
+      user-select: auto;
+      font-size: .3rem;
+      font-weight: 800;
+      color: #000;
+      width: inherit;
+    }
+  }
+`
+
 interface Result {
   createTime: string,
   id: number,
   nftAddress: string,
+  neoAddress: string,
   tokenId: string,
   userAddress: string,
   imageUrl: string,
@@ -83,6 +97,7 @@ export default function VaultsDetail() {
   const [activities, setActivities] = useState<DataSource>()
   const [aprData, setAprData] = useState<{ apr: number, rewardApr: number }>({ apr: 0, rewardApr: 0 })
   const [payDebt, setPayDebt] = useState<BigNumber>()
+  const [inputPayDebt, setInputPayDebt] = useState<number>(0)
   const [remainingDebt, setRemainingDebt] = useState<BigNumber>()
   const [showPayment, setShowPayment] = useState<boolean>(false)
   const [payInfo, setPayInfo] = useState<RepaymentInformation>()
@@ -106,6 +121,9 @@ export default function VaultsDetail() {
       }
     })
   }, [])
+
+
+
   useEffect(() => {
     getBalance()
     // eslint-disable-next-line
@@ -125,6 +143,7 @@ export default function VaultsDetail() {
     }
     // eslint-disable-next-line
   }, [checked])
+
   useEffect(() => {
     if (!activities) return
     if (progressVal === 1) {
@@ -134,11 +153,49 @@ export default function VaultsDetail() {
     }
     const pDebt = progressVal === 1 ? activities.maxDebt : activities?.debt.times(progressVal)
     const rDebt = progressVal === 1 ? new BigNumber(0) : activities?.debt.times(1 - progressVal)
+    const showDebt = +pDebt.div(10 ** 18).toFixed(4, 1)
     setPayDebt(pDebt)
     setRemainingDebt(rDebt)
+    setInputPayDebt(showDebt)
+    console.log('pDebt',pDebt.toFixed());
 
     // eslint-disable-next-line
-  }, [progressVal,activities])
+  }, [progressVal, activities])
+  let timeout: NodeJS.Timeout | null
+  const onProgressBar = (e: any) => {
+    if (!timeout) {
+      timeout = setTimeout(function () {
+        setProgressVal(e)
+        timeout = null;
+      }, 35);
+    }
+  }
+  useEffect(() => {
+    if (!activities) return
+    if (inputPayDebt === +activities?.maxDebt.div(10 ** 18).toFixed(4, 1)) {
+      setProgressVal(1)
+      return
+    } else if (inputPayDebt === 0) {
+      setProgressVal(0)
+      return
+    }
+    const Proportion = inputPayDebt / +activities.debt.div(10 ** 18).toFixed(4, 1)
+    setProgressVal(Proportion)
+    console.log('inputPayDebt',inputPayDebt);
+  }, [inputPayDebt])
+
+  const handleIptDebt = (e: string | number) => {
+    if(!activities) return
+    let maxDebtNum = +activities?.maxDebt.div(10 ** 18).toFixed(4,1)
+    if(e >= maxDebtNum) {
+      setInputPayDebt(maxDebtNum)
+    } else {
+      setInputPayDebt(e as number)
+    }
+    if(e === null) {
+      setInputPayDebt(0.000)
+    }
+  }
 
   useEffect(() => {
     if (isLogin) {
@@ -243,6 +300,7 @@ export default function VaultsDetail() {
           status: new BigNumber(newArray.debtData.healthFactor.toString()).div(10 ** 18).toFixed(4, 1) || "---",
           statusSrt: turnStr(newArray.debtData.healthFactor),
           address: newArray.nftAddress,
+          neoAddress: newArray.neoAddress,
           tokenId: newArray.tokenId,
           imageUrl: newArray.imageUrl,
           floorPrice: new BigNumber(newArray.floorPrice),
@@ -261,9 +319,7 @@ export default function VaultsDetail() {
   const handleCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(e.target.checked)
   }
-  const onProgressBar = (e: any) => {
-    setProgressVal(e)
-  }
+
   const goBack = () => {
     navigate("/dashboard/vaults")
   }
@@ -309,11 +365,14 @@ export default function VaultsDetail() {
         <Flex alignItems={"center"} justifyContent={"space-between"}>
           <Flex flexDirection={"column"}>
             <Typography fontSize={".2rem"} fontWeight={"700"} color={"#000"}>Vault Detail</Typography>
-            <Flex alignItems={"center"}>
-              <Typography fontSize={".16rem"} fontWeight={"500"} color={"rgba(0,0,0,.5)"} marginRight=".05rem">Asset:</Typography>
-              <Typography fontSize={".16rem"} fontWeight={"500"} color={"rgba(0,0,0,.5)"}>
-                {`${activities?.collectionName ?? '--'} # ${activities?.tokenId ?? '--'}`}
-              </Typography>
+            <Flex alignItems={"center"} marginRight=".05rem">
+              <Typography fontSize={".16rem"} fontWeight={"500"} color={"rgba(0,0,0,.5)"}>Asset:</Typography>
+              <Flex alignItems={'center'}>
+                <Typography marginRight={'.1rem'} fontSize={".16rem"} fontWeight={"500"} color={"rgba(0,0,0,.5)"}>
+                  {`${activities?.collectionName ?? '--'} # ${activities?.tokenId ?? '--'}`}
+                </Typography>
+                <Icon style={{cursor:"pointer"}} width=".16rem" height=".16rem" src={imgurl.dashboard.exportBlack18} alt="" onClick={() => window.open(`https://etherscan.io/nft/${activities?.address}/${activities?.tokenId}`)}/>
+              </Flex>
             </Flex>
           </Flex>
           <Flex alignItems={"center"} background={"#fff"} boxShadow={"0 0 20px rgba(0,0,0,.1)"} borderRadius={"10px"} gap={".12rem"} padding={".11rem"}>
@@ -327,14 +386,14 @@ export default function VaultsDetail() {
           gridTemplateColumns={"3.4rem auto"}
           gridGap={".3rem"}
         >
-          <Icon borderRadius={"10px"} width='3.4rem' height='3.4rem' src={activities?.imageUrl ?? "https://tva1.sinaimg.cn/large/e6c9d24egy1h3g0c8ugwqj20v50jhgrr.jpg"} />
+          <Icon style={{borderRadius:'10px'}} width='3.4rem' height='3.4rem' src={activities?.imageUrl ?? "https://tva1.sinaimg.cn/large/e6c9d24egy1h3g0c8ugwqj20v50jhgrr.jpg"} />
           <Grid
             gridTemplateAreas='"Minted Profit" "Numerical Numerical"'
             gridGap={".1rem"}
           >
             <GridItem
               background={"#fff"}
-              boxShadow={"0 0 0 3px rgba(0,0,0,.05)"}
+              boxShadow={"0 0 20px rgba(0,0,0,.1)"}
               borderRadius={"10px"}
               gridArea={'Minted'}
               padding={".3rem 0"}
@@ -346,12 +405,17 @@ export default function VaultsDetail() {
               <Popover content={MintedNFTPop}>
                 <TipsIcon width={".14rem"} src={imgurl.market.tipsIcon}/>
               </Popover>
-              <Typography fontSize=".24rem" fontWeight='700' color="#000" marginBottom={".14rem"}>{`NEO-${activities?.collectionName ?? '--'} # ${activities?.tokenId ?? '--'}`}</Typography>
+              <Flex alignItems={'center'} marginBottom={".14rem"}>
+                <Typography marginRight={'.1rem'} fontSize=".24rem" fontWeight='700' color="#000" >
+                  {`NEO-${activities?.collectionName ?? '--'} # ${activities?.tokenId ?? '--'}`}
+                </Typography>
+                <Icon style={{cursor:"pointer"}} width=".16rem" height=".16rem" src={imgurl.dashboard.exportBlack18} alt="" onClick={() => window.open(`https://etherscan.io/nft/${activities?.address}/${activities?.tokenId}`)}/>
+              </Flex>
               <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Minted-NFT</Typography>
             </GridItem>
             <GridItem
               background={"#fff"}
-              boxShadow={"0 0 0 3px rgba(0,0,0,.05)"}
+              boxShadow={"0 0 20px rgba(0,0,0,.1)"}
               borderRadius={"10px"}
               gridArea={'Profit'}
               padding={".3rem 0"}
@@ -369,7 +433,7 @@ export default function VaultsDetail() {
               </Popover>
               <Typography marginBottom={".14rem"} fontSize=".24rem" fontWeight='700' color="#000">
                 {activities?.purchaseFloorPrice && `${activities?.floorPrice.minus(activities?.purchaseFloorPrice).div(10 ** globalConstant.bit).toFixed(2,1)}`}
-                {activities?.purchaseFloorPrice && ` (${activities?.floorPrice.minus(activities?.purchaseFloorPrice).div(activities?.purchaseFloorPrice?.times(new BigNumber(1).minus(activities?.ltv?.div(10 ** 4) as BigNumber))).toFixed(2,1)})`}
+                {activities?.purchaseFloorPrice && ` (${activities?.floorPrice.minus(activities?.purchaseFloorPrice).div(activities?.purchaseFloorPrice?.times(new BigNumber(1).minus(activities?.ltv?.div(10 ** 4) as BigNumber))).times(10 ** 2).toFixed(2,1)}%)`}
               </Typography>
               <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Estimat Profit</Typography>
             </GridItem>
@@ -395,7 +459,10 @@ export default function VaultsDetail() {
               </Flex>
               <Flex alignItems={"center"} justifyContent={"center"} flexDirection="column" gap='.12rem'>
                 <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Floor price</Typography>
-                <Typography fontSize=".2rem" fontWeight='500' color="#000">{activities?.floorPrice.div(10 ** globalConstant.bit).toFixed(2,1)}</Typography>
+                <Flex alignItems={'center'}>
+                  <Icon width='.22rem' height='.22rem' src={imgurl.home.ethBlack22} />
+                  <Typography fontSize=".2rem" fontWeight='500' color="#000">{activities?.floorPrice.div(10 ** globalConstant.bit).toFixed(2,1)}</Typography>
+                </Flex>
               </Flex>
               <Flex alignItems={"center"} justifyContent={"center"} flexDirection="column" gap='.12rem'>
                 <Flex gap="10px">
@@ -405,7 +472,10 @@ export default function VaultsDetail() {
                   </Popover>
 
                 </Flex>
-                <Typography fontSize=".2rem" fontWeight='500' color="#000">{activities?.debtString}</Typography>
+                <Flex alignItems={'center'}>
+                  <Icon width='.22rem' height='.22rem' src={imgurl.home.ethBlack22} />
+                  <Typography fontSize=".2rem" fontWeight='500' color="#000">  {activities?.debtString}</Typography>
+                </Flex>
               </Flex>
               <Flex alignItems={"center"} justifyContent={"center"} flexDirection="column" gap='.12rem'>
                 <Flex gap="10px">
@@ -420,7 +490,10 @@ export default function VaultsDetail() {
               </Flex>
               <Flex alignItems={"center"} justifyContent={"center"} flexDirection="column" gap='.12rem'>
                 <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Liquidation Price</Typography>
-                <Typography fontSize=".2rem" fontWeight='500' color="#000">{activities && new BigNumber(activities?.debt.toString()).div('0.9').div(10 ** 18).toFixed(2, 1)}</Typography>
+                <Flex alignItems={'center'}>
+                  <Icon width='.22rem' height='.22rem' src={imgurl.home.ethBlack22} />
+                  <Typography fontSize=".2rem" fontWeight='500' color="#000">{activities && new BigNumber(activities?.debt.toString()).div('0.9').div(10 ** 18).toFixed(2, 1)}</Typography>
+                </Flex>
               </Flex>
             </Grid>
           </Grid>
@@ -502,7 +575,8 @@ export default function VaultsDetail() {
               justifyContent="space-between"
               flex="auto"
             >
-              <Typography fontSize={".3rem"} fontWeight={"800"} color={"#000"}>{payDebt && payDebt.div(10 ** 18).toFixed(4, 1) || 0}</Typography>
+              {/* max={activities?.maxDebt.div(10 ** 18).toFixed(4,1) ?? 0} */}
+              <InputNumberStyled controls={false} min={0} defaultValue={0} value={inputPayDebt} onChange={(e) => handleIptDebt(e)} bordered={false} precision={4}/>
               <Icon width='.4rem' height='.4rem' src={imgurl.home.ethBlack40} />
             </Flex>
 

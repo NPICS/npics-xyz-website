@@ -178,7 +178,7 @@ export default function MarketList() {
                         initialLoad={false}>
                         <Grid
                             marginTop={".25rem"}
-                            gridTemplateColumns={`repeat(${compactMode ? 8 : 6}, 1fr)`}
+                            gridTemplateColumns={`repeat(${compactMode ? 8 : 5}, 1fr)`}
                             gridGap={".1rem"}
                             justifyContent={"space-between"}
                             alignItems={"start"}

@@ -1,10 +1,7 @@
 import Vector from '../assets/images/Vector.png'
 import images11 from '../assets/images/image11.png'
-// import worldwide from '../assets/images/worldwide.png'
-// import notification from '../assets/images/notification.png'
-// import Ellipse from '../assets/images/Ellipse.png'
 import logo from '../assets/images/logo.png'
-import logoBeta from '../assets/images/logo_beta.png'
+import logoBeta from '../assets/images/logo_beta.svg'
 import lightLogo from '../assets/images/lightLogo.png'
 import copy from '../assets/images/copyBlack.png'
 import address from '../assets/images/addressBlack.png'
@@ -67,6 +64,7 @@ import NpicsSwiper1 from "../assets/images/home/npics_swiper1.png"
 import NpicsSwiper2 from "../assets/images/home/npics_swiper2.png"
 import NpicsSwiper3 from "../assets/images/home/npics_swiper3.png"
 import NftsIcon from "../assets/images/home/nfts.png"
+import Aave from "../assets/images/home/aave.png"
 
 import Union1 from '../assets/images/market/Union1.png'
 import Union2 from '../assets/images/market/Union2.png'
@@ -145,9 +143,6 @@ export const imgurl = {
   lightLogo,
   Vector,
   images11,
-  // notification,
-  // worldwide,
-  // Ellipse,
   gas_icon,
   address,
   copy,
@@ -215,7 +210,8 @@ export const imgurl = {
     NpicsSwiper1,
     NpicsSwiper2,
     NpicsSwiper3,
-    NftsIcon
+    NftsIcon,
+    Aave
   },
   market: {
     Search,

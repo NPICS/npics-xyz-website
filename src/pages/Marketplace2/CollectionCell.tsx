@@ -83,14 +83,14 @@ export default function CollectionCell(props: {
                 gap={".06rem"}
                 marginTop={".1rem"}
             >
-                <NoWarpTypography hidden={props.compact}>Down Payment</NoWarpTypography>
+                <NoWarpTypography fontWeight={'500'} hidden={props.compact}>Down Payment</NoWarpTypography>
                 <Flex
                     alignItems={"center"}
                     gap={".06rem"}>
                     <Icon height={".15rem"} width={".1rem"} src={ethIcon}/>
-                    <Typography>{props.item.downPaymentPriceFormat()}</Typography>
+                    <Typography fontWeight={'700'}>{props.item.downPaymentPriceFormat()}</Typography>
                 </Flex>
-                <Flex flex={1}></Flex>
+                {/* <Flex flex={1}></Flex> */}
                 <IconTest src={props.item.marketIcon()} alt=""/>
                 {/*<Icon width={".22rem"} height={".22rem"} url={props.item.marketIcon()} />*/}
             </Flex>

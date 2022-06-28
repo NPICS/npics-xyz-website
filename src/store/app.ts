@@ -63,29 +63,21 @@ export const updateARP = createAsyncThunk("app/updateARP", async (args, thunkAPI
 })
 
 export const updateUSDTExchangeRate = createAsyncThunk("app/updateUSDTExchangeRate", async (args, thunkAPI) => {
-  try {
     let resp: any = await http.myPost(`/npics-nft/app-api/v2/currencyPrice/getEthPrice`)
     if (resp.code === 200 && resp.data) {
       return resp.data as string
     } else {
       return undefined
     }
-  } catch (e) {
-    return undefined
-  }
 })
 
 export const updateBENDExchangeRate = createAsyncThunk("app/updateBENDExchangeRate", async (args, thunkAPI) => {
-  try {
     let resp: any = await http.myPost(`/npics-nft/app-api/v2/currencyPrice/getBendPrice`)
     if (resp.code === 200 && resp.data) {
       return resp.data as string
     } else {
       return undefined
     }
-  } catch (e) {
-    return undefined
-  }
 })
 
 const appSlice = createSlice({

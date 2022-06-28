@@ -44,6 +44,7 @@ export default function Payment(props:IProps) {
       } else {
         setShowPayment(false)
       }
+      setReload(!reload)
       console.log(payInfo);
     } catch (e: any) {
       message.error(JSON.parse(JSON.stringify(e)).reason || JSON.parse(JSON.stringify(e)).message)
@@ -70,6 +71,6 @@ export default function Payment(props:IProps) {
       <Typography textAlign="center" fontSize=".14rem" fontWeight="500" color="rgba(0,0,0,.5)">Estimated waiting time is <Typography display={"inline-block"} fontSize=".16rem" fontWeight="500" color="#000"  >30s</Typography></Typography>
     </Flex>
 
-    <Typography marginTop=".21rem" textAlign="center" fontSize=".14rem" fontWeight="500" color="rgba(0,0,0,.5)" onClick={() => setIsPayingAllDebts(true)}>How it works?</Typography>
+    <Typography marginTop=".21rem" textAlign="center" fontSize=".14rem" fontWeight="500" color="rgba(0,0,0,.5)">How it works?</Typography>
   </Flex>
 }
