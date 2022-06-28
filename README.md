@@ -8,7 +8,7 @@
 This is the repository for the [npics.xyz](https://npics.xyz) website, a resource for the NPICS community. The purpose of the site is _" To be the best portal for our global community to learn about NPICS"_  -Read more about what that means [here](https://non-pics.gitbook.io/npics-v1.0/).
 
 
-## NPics - NFT-backed Positions in Collateral Securities.
+## 📖 NPics - NFT-backed Positions in Collateral Securities.
 
 Npics aims to build a bottom-up NFT infrastructure driven by algorithms and protocols with batch protocols, Utilizing leverage as a liquidity engine, unlocking the epi-value of NFT, delivering revolutionary NFT financial dapps with passive yields and flexible hedging tools.
 
