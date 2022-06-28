@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import {updateARP, updateUSDTExchangeRate, updateBENDExchangeRate} from 'store/app';
 import {useAppDispatch} from 'store/hooks';
 import Layout from './pages/Layout/index'
@@ -22,7 +22,7 @@ function App() {
     }, 1000 * 30)
 
     // moment config
-    useEffect(() => {}, [
+    useEffect(() => {
         moment.updateLocale('en', {
             relativeTime: {
                 d: '1 day',
@@ -32,9 +32,9 @@ function App() {
                 y: '1 year'
             }
         })
-    ])
+    }, [])
 
-    return <Layout />;
+    return <Layout/>;
 }
 
 export default App;

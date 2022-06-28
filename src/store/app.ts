@@ -74,6 +74,7 @@ export const updateUSDTExchangeRate = createAsyncThunk("app/updateUSDTExchangeRa
     return undefined
   }
 })
+
 export const updateBENDExchangeRate = createAsyncThunk("app/updateBENDExchangeRate", async (args, thunkAPI) => {
   try {
     let resp: any = await http.myPost(`/npics-nft/app-api/v2/currencyPrice/getBendPrice`)
