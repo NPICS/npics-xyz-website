@@ -55,7 +55,7 @@ export class Collections {
   bannerImageUrl?: string
 
   @Expose()
-  get sFloorPrice() {
+  sFloorPrice() {
     return (this.floorPrice.div(10 ** 18).toFixed(2))
   }
 
