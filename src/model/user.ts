@@ -95,6 +95,9 @@ export class CollectionItems {
   collectionName!: string;
   ltv!: number
 
+  @TransformBigNumber()
+  floorPrice!: BigNumber
+
   @Expose()
   marketIcon() {
     switch (this.market) {
@@ -115,15 +118,15 @@ export class CollectionItems {
 
   @Expose()
   basePrice() {
-    return numberFormat(this.currentBasePrice.div(10 ** 18).toFixed())
+    return numberFormat(this.currentBasePrice.div(10 ** this.decimals).toFixed())
   }
 
   @Expose()
-  downPaymentPriceDisplay() {
+  downPaymentPriceFormat() {
+    // ltv: 3000 => 30%
     let loadRate = new BigNumber(this.ltv).div(100).div(100)
-    let downPayRate = new BigNumber(1).minus(loadRate)
-    let result = this.currentBasePrice.times(downPayRate).div(10 ** this.decimals).minus(0.0001)
-    return numberFormat(result.toFixed())
+    let downPayment = this.currentBasePrice.minus(this.floorPrice.times(loadRate)).div(10 ** this.decimals).minus(0.0001)
+    return numberFormat(downPayment.toFixed())
   }
 }
 
@@ -146,7 +149,9 @@ export class CollectionDetail extends CollectionItems {
   floorPrice!: BigNumber
   @TransformBigNumber()
   apr!: BigNumber
+  @TransformBigNumber()
   availableBorrow!: BigNumber
+  @TransformBigNumber()
   totalAmount!: BigNumber
   totalSupply!: number;
   bannerImageUrl?: string
