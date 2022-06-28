@@ -16,17 +16,20 @@ import {Input, Select} from "antd";
 import InfiniteScroll from 'react-infinite-scroller';
 import {numberFormat} from "../../utils/urls";
 import NotFound from "component/NotFound";
-import { globalConstant } from "utils/globalConstant";
+import {globalConstant} from "utils/globalConstant";
 import ContentLoader from "react-content-loader"
+import {useAsync} from "react-use";
+import BigNumber from "bignumber.js";
+
 const {Option} = Select;
 
 
 const InputStyled = styled(Input)`
-    background: #fff;
-    border: 1px solid rgba(0,0,0,.2);
-    border-radius: 10px;
-    color: rgba(0,0,0,.5);
-    height: .5rem;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, .2);
+  border-radius: 10px;
+  color: rgba(0, 0, 0, .5);
+  height: .5rem;
 `
 
 export const Portrait = styled.img`
@@ -40,7 +43,7 @@ export const Portrait = styled.img`
 `
 const AntdSelect = styled(Select)`
   .ant-select-selector {
-    color: rgba(0,0,0,.5);
+    color: rgba(0, 0, 0, .5);
     font-weight: 500;
     font-size: .14rem;
     min-width: 2rem;
@@ -49,6 +52,7 @@ const AntdSelect = styled(Select)`
     border: 1px solid rgba(0, 0, 0, 0.1) !important;
     box-shadow: none !important;
     border-radius: 10px !important;
+
     .ant-select-selection-item {
       line-height: .5rem;
     }
@@ -57,8 +61,6 @@ const AntdSelect = styled(Select)`
 
 export default function MarketList() {
 
-
-    // let location = useLocation()
     const params = useParams()
     const [nftAddress, setNftAddress] = useState<string>()
     const [compactMode, setCompactMode] = useState<boolean>(false)
@@ -82,9 +84,9 @@ export default function MarketList() {
         }
     }, [nftAddress, searchText, currentPage])
 
-    useEffect(() => {
+    useAsync(async () => {
         if (currentPage === 1) {
-            loadData()
+            await loadData()
         } else {
             setCurrentPage(1)
         }
@@ -110,7 +112,6 @@ export default function MarketList() {
                 let newListData = deserializeArray(CollectionItems, JSON.stringify(resp.data.records))
                 setListData(currentPage === 1 ? newListData : listData.concat(newListData))
                 setTotal(resp.data.total)
-            } else {
             }
         }
         isLoading.current = false
@@ -135,7 +136,9 @@ export default function MarketList() {
                         className="ant-input-reset"
                     />
                 </Box>
-                <AntdSelect onSelect={(value: any) => setCurrentSort(value)} defaultValue="asc" dropdownClassName="ant-select-reset">
+                <AntdSelect onSelect={(value: any) => setCurrentSort(value)}
+                            defaultValue="asc"
+                            dropdownClassName="ant-select-reset">
                     <Option value="asc">Price: Low to High</Option>
                     <Option value="desc">Price: high to low</Option>
                     <Option value="rarityScoreDesc">Rarity: Common to Rarest</Option>
@@ -172,8 +175,7 @@ export default function MarketList() {
                                     return <CollectionCell
                                         key={idx}
                                         compact={compactMode}
-                                        item={item}
-                                    />
+                                        item={item}/>
                                 })
                             }
                         </Grid>

@@ -193,6 +193,7 @@ export default function NFTPrice(props: {
             />
         </Modal>
         <Flex gap={".1rem"}>
+            {/* origin price */}
             <Shadow>
                 <Popover content={listedPricePop}>
                     <TipsIcon width={".14rem"} src={tipsIcon}/>

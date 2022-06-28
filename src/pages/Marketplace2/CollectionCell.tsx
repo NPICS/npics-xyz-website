@@ -5,6 +5,7 @@ import {CollectionItems} from "../../model/user";
 import CellTagIcon from "../../assets/images/market_cell_tags.png"
 import {useNavigate} from 'react-router-dom';
 import ethIcon from "../../assets/images/market/eth_icon_20x34.png"
+import BigNumber from "bignumber.js";
 
 const Cover = styled.img`
   display: block;
@@ -27,12 +28,10 @@ const NoWarpTypography = styled(Typography)`
   text-overflow: ellipsis;
 `
 
-interface ICollectionCellProps {
+export default function CollectionCell(props: {
     compact: boolean,
     item: CollectionItems
-}
-
-export default function CollectionCell(props: ICollectionCellProps) {
+}) {
     const navigate = useNavigate()
 
     return <Flex
@@ -73,8 +72,10 @@ export default function CollectionCell(props: ICollectionCellProps) {
             <Flex alignItems={"center"} gap={".06rem"}>
                 <NoWarpTypography fontWeight={500} fontSize={".14rem"}
                                   color={"rgba(0,0,0,.5)"}>{props.item.collectionName}</NoWarpTypography>
-                <Typography fontWeight={500} fontSize={".14rem"}
-                            color={"rgba(0,0,0,.5)"}>{`#${props.item.tokenId}`}</Typography>
+                <Typography fontWeight={500}
+                            fontSize={".14rem"}
+                            color={"rgba(0,0,0,.5)"}>
+                    {`#${props.item.tokenId}`}</Typography>
             </Flex>
             <Flex
                 alignItems={"center"}
@@ -87,7 +88,7 @@ export default function CollectionCell(props: ICollectionCellProps) {
                     alignItems={"center"}
                     gap={".06rem"}>
                     <Icon height={".15rem"} width={".1rem"} src={ethIcon}/>
-                    <Typography>{props.item.downPaymentPriceDisplay()}</Typography>
+                    <Typography>{props.item.downPaymentPriceFormat()}</Typography>
                 </Flex>
                 <Flex flex={1}></Flex>
                 <IconTest src={props.item.marketIcon()} alt=""/>
