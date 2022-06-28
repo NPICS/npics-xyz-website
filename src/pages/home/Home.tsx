@@ -70,6 +70,12 @@ function Home() {
       content: "Protocol"
     },
     {
+      url: imgurl.home.Aave,
+      title: "AAVE",
+      text: "Best Cryptocurrency Wallet",
+      content: "Makerplace"
+    },
+    {
       url: imgurl.home.Trustwallet,
       title: "Trustwallet",
       text: "Best Cryptocurrency Wallet",
