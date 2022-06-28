@@ -83,9 +83,8 @@ export default function NFTActivities(props: {
             address: props.item.address,
             tokenId: props.item.tokenId
         })
-        if (resp.code === 200) {
-            let items = deserializeArray(Activities, JSON.stringify(resp.data))
-            setListData(items)
+        if (resp.code === 200 && resp.data) {
+            setListData(deserializeArray(Activities, JSON.stringify(resp.data)))
         }
     }, [props.item])
 
@@ -139,7 +138,7 @@ export default function NFTActivities(props: {
                                         "cursor": item.fromAccount ? "pointer" : "auto"
                                     }}
                                     onClick={() => {
-                                        window.open(`https://etherscan.io/address/${item.fromAccount}`)
+                                        item.fromAccount && window.open(`https://etherscan.io/address/${item.fromAccount}`)
                                     }}
                                 >{AddressAbbreviation(item.fromAccount) ?? "---"}</td>
                                 <td align={"center"}
@@ -147,7 +146,7 @@ export default function NFTActivities(props: {
                                         "cursor": item.toAccount ? "pointer" : "auto"
                                     }}
                                     onClick={() => {
-                                        window.open(`https://etherscan.io/address/${item.toAccount}`)
+                                        item.toAccount && window.open(`https://etherscan.io/address/${item.toAccount}`)
                                     }}
                                 >{AddressAbbreviation(item.toAccount) ?? "---"}</td>
                                 <td align={"center"}>{

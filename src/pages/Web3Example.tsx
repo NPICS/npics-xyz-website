@@ -24,9 +24,10 @@ import {fetchUser2} from "../store/app";
 import { useLocation } from "react-router-dom";
 // import {usePrevious} from "../hooks/previous";
 import { useParams } from 'react-router-dom';
+import {connectors} from "../utils/connectors";
 
 export default function Web3Example() {
-  const {account, active, error, library} = useWeb3React()
+  const {account, active, error, library, activate} = useWeb3React()
   const [token, setToken] = useState<string | null>(null)
   const action = useAppDispatch()
   const [count, setCount] = useState(0)
@@ -114,7 +115,7 @@ export default function Web3Example() {
     // if (authorize_address) {
     //
     // }
-    // await activate(connectors.injected)
+    await activate(connectors.injected)
     // sessionStorage.setItem("WALLET_AUTHORIZED", account!)
   }
 
@@ -267,8 +268,11 @@ export default function Web3Example() {
   }
 
   const getProvider = async () => {
-    let c = new ethers.Contract(ContractAddresses.NpicsProxy, NPICS_ABI, library)
-    console.log(`${await c.availableBorrowsInETH("0xc5aC64B5649509c87a1e7F9F0544521548381934")}`)
+    // let c = new ethers.Contract(ContractAddresses.NpicsProxy, NPICS_ABI, library)
+    // console.log(`${await c.availableBorrowsInETH("0xc5aC64B5649509c87a1e7F9F0544521548381934")}`)
+    let c = new Npics(library)
+    let neo = await c.neoFor("0xED5AF388653567Af2F388E6224dC7C4b3241C544")
+    console.log(`neo => ${neo}`)
   }
 
   return <div>

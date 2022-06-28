@@ -7,6 +7,10 @@ import {CollectionDetail} from "../../model/user";
 import {urls} from "../../utils/urls";
 import {useNavigate} from "react-router-dom";
 import {StatusGif} from "./NFTPayWrong";
+import {useState} from "react";
+import {useAsync} from "react-use";
+import {Npics} from "../../abi/Npics";
+import {useWeb3React} from "@web3-react/core";
 
 const NFTCover = styled.img`
   display: block;
@@ -32,6 +36,15 @@ export default function NFTPayCongratulations(props: {
     hash: string
 }) {
     const navigate = useNavigate()
+    const [neoAddress, setNeoAddress] = useState<string>()
+    const {library} = useWeb3React()
+
+    useAsync(async () => {
+        if (!library) return
+        let c = new Npics(library)
+        let address = await c.neoFor(props.nft.address)
+        setNeoAddress(address)
+    }, [library, props.nft])
 
     return <Flex
         width={"8.8rem"}
@@ -49,7 +62,7 @@ export default function NFTPayCongratulations(props: {
             padding={".4rem 1.4rem .2rem"}
         >
             <Flex alignSelf={"center"}>
-                <StatusGif src={successIcon} />
+                <StatusGif src={successIcon}/>
             </Flex>
             <Flex gap={".18rem"} alignItems={"center"}>
                 <NFTCover src={props.nft.imageUrl}/>
@@ -68,14 +81,14 @@ export default function NFTPayCongratulations(props: {
                             "cursor": "pointer"
                         }}
                         onClick={() => {
-                            window.open(urls.etherscanNft(props.nft.address, props.nft.tokenId))
+                            neoAddress && window.open(urls.etherscanNft(neoAddress, props.nft.tokenId))
                         }}
                     >
                         <Typography
                             fontSize={".16rem"}
                             fontWeight={500}
                             color={"rgba(0,0,0,.5)"}
-                        >{`NEO-Bored Ape Yacht Club #${props.nft.tokenId}`}</Typography>
+                        >{`NEO-${props.nft.collectionName} #${props.nft.tokenId}`}</Typography>
                         <Icon width={".14rem"} height={".14rem"} src={nftLinkIcon}/>
                     </Flex>
                 </Flex>

@@ -13,6 +13,7 @@ import NFTPayCongratulations from "../pages/Marketplace2/NFTPayCongratulations";
 import NFTPayWrong from "../pages/Marketplace2/NFTPayWrong";
 import VaultsDetail from 'pages/Dashboard2/components/components/VaultsDetail';
 import OneNFT from "../pages/Marketplace2/OneNFT";
+import Web3Example from "../pages/Web3Example";
 interface RouterT {
   name?: string,
   path: string,
@@ -87,16 +88,16 @@ const checkAuth = (routers:any, path:String)=>{
       path: '/',
       component: <Home />
     },
-    {
-      path: 'web3',
-      component: <Marketplace />,
-      children: [
-        {
-          path: 'collections/:address',
-          component: <MarketCollection />
-        }
-      ]
-    },
+    // {
+    //   path: '/web3',
+    //   component: <Web3Example />,
+    //   children: [
+    //     {
+    //       path: 'collections/:address',
+    //       component: <MarketCollection />
+    //     }
+    //   ]
+    // },
     {
       path: 'marketPlaceRedirect',
       component: <Navigate to="/marketPlace/collections/0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D" replace />,
@@ -166,7 +167,7 @@ const checkAuth = (routers:any, path:String)=>{
     {
       path: "*",
       component:  <main style={{ padding: "1rem" }}>
-      <p>There's nothing here!</p>
+      <h1>404</h1>
     </main>
     },
   ];
