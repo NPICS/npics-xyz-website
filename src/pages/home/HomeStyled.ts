@@ -487,18 +487,6 @@ export const BorrowContent = styled.div`
       flex-direction: row;
       justify-content: center;
       align-items: center;
-      span {
-        display: inline-block;
-        width: 3rem;
-        text-align: center;
-        font-family: 'PingFang HK';
-        font-style: normal;
-        font-weight: 600;
-        font-size: .16rem;
-        text-align: center;
-        color: rgba(255,255,255,.6);
-        cursor: pointer;
-      }
     }
     .slider {
       width: 8rem;
@@ -525,11 +513,11 @@ export const BorrowContent = styled.div`
       max-width: 6.94rem;
       height: .3rem;
       margin: 0 auto;
-      font-family: 'PingFang HK';
+      font-family: 'Montserrat';
       font-style: normal;
       font-weight: 300;
       font-size: .16rem;
-      color: #FFFFFF;
+      color: rgba(255,255,255,.6);
     }
   }
   .BorrowChannel {
@@ -617,6 +605,22 @@ export const BorrowContent = styled.div`
     }
   }
 
+`
+
+export const SliderChoose = styled.span`
+    display: inline-block;
+    width: 3rem;
+    text-align: center;
+    font-family: 'PingFang HK';
+    font-style: normal;
+    font-weight: 600;
+    font-size: .16rem;
+    text-align: center;
+    color: ${(props: { color: string }) => props.color};;
+    cursor: pointer;
+    &:hover{
+      color: #fff;
+}
 `
 
 export const BorrowBtn = styled.div`

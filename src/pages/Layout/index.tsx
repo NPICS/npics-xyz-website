@@ -15,7 +15,7 @@ const Nav = styled.div`
   z-index: 2;
 `
 const FooterBox = styled.div`
-  height: 2.26rem;
+  /* height: 2.26rem; */
   text-align: center;
   /* background-color: #1A1A1A; */
   `

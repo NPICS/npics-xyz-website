@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Swiper from './components/Swiper'
 import {
   HomeWrap, FirstDiv, SwiperBox, DetailBox, Partners, Background,
-  Projection, Glass, PartnerBox, Introduces, IntroduceBox,
+  Projection, Glass, PartnerBox, Introduces, IntroduceBox, SliderChoose,
   BorrowBox, BorrowGlass, BorrowContent, BorrowBtn, HomeBox, HomeLeft, HomeNFT
 } from './HomeStyled';
 import { imgurl } from 'utils/globalimport';
@@ -15,6 +15,7 @@ import { urls } from "../../utils/urls";
 import http from "../../utils/http";
 import Npics from './components/Npics';
 import Title from './components/Title';
+import { Progress } from 'antd';
 const MyTable: any = styled(Table)`
   width: 16rem;
   height: 7.47rem;
@@ -112,8 +113,7 @@ function Home() {
         })
       }
     })
-  }, [])
-
+  }, []);
 
   return (
     <HomeWrap>
@@ -160,20 +160,19 @@ function Home() {
         </div>
       </DetailBox>
 
-      <BorrowBox>
+      <BorrowBox className='borrow_box'>
         <img src={imgurl.home.RectangleLeft} alt="" />
         <img src={imgurl.home.RectangleRight} alt="" />
         <div>
           <BorrowGlass>
-            <BorrowContent left={`${checkText * 2.67}rem`}>
+            <BorrowContent left={`${checkText* 2.67}rem`}>
               <div className='title'>
                 Using Npics Leverage to borrow money to buy will get an unexpected earnings.
               </div>
-
               <div className='sliderBox'>
                 <div className='sliderItem'>
                   {StepsList.map((item, idx) => {
-                    return <span key={item} onClick={() => checkProgress(idx)} >{item}</span>
+                    return <SliderChoose color={idx + 1 === checkText ? '#fff' : 'rgba(255,255,255,.6)'} key={item} onClick={() => checkProgress(idx)} >{item}</SliderChoose>
                   })}
                 </div>
                 <div className='slider'></div>
