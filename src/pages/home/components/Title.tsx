@@ -7,7 +7,7 @@ import "swiper/css/navigation";
 import Swiper from "swiper/types/swiper-class"
 import { Autoplay } from "swiper";
 import { Link } from 'react-router-dom';
-import Button from "../../../component/Button"
+import ButtonDefault from 'component/ButtonDefault';
 
 const TitleBox = styled.div`
   width: 7.03rem;
@@ -105,8 +105,8 @@ export default function Title() {
         <div className='title_point_item' onClick={() => changePoint(2)} style={{ background: selected === 2 || selected === 0 ? '#fff' : 'rgba(255, 255, 255, 0.4)' }}></div>
       </div> */}
       <div className='title_btn'>
-        <Link to={'/marketPlace'}><Button types='one' text="Marketplace"></Button></Link>
-        <Link to={'/dashboard/rewards'}><Button types='two' text="Rewards"></Button></Link>
+        <Link to={'/marketPlace'}><ButtonDefault types='three'>Marketplace</ButtonDefault></Link>
+        <Link to={'/dashboard/rewards'}><ButtonDefault types='second' color={'#000'}>Rewards</ButtonDefault></Link>
       </div>
     </TitleBox>
   )

@@ -97,7 +97,7 @@ export default function VaultsDetail() {
   const [walletBalance, setWalletBalance] = useState<BigNumber>()
   const [activities, setActivities] = useState<DataSource>()
   const [aprData, setAprData] = useState<{ apr: number, rewardApr: number }>({ apr: 0, rewardApr: 0 })
-  const [payDebt, setPayDebt] = useState<BigNumber>()
+  const [payDebt, setPayDebt] = useState<BigNumber>(new BigNumber(0))
   const [inputPayDebt, setInputPayDebt] = useState<number>(0)
   const [remainingDebt, setRemainingDebt] = useState<BigNumber>()
   const [showPayment, setShowPayment] = useState<boolean>(false)
@@ -368,7 +368,7 @@ export default function VaultsDetail() {
           <Flex flexDirection={"column"}>
             <Typography fontSize={".2rem"} fontWeight={"700"} color={"#000"}>Vault Detail</Typography>
             <Flex alignItems={"center"} marginRight=".05rem">
-              <Typography fontSize={".16rem"} fontWeight={"500"} color={"rgba(0,0,0,.5)"}>Asset:</Typography>
+              <Typography marginRight=".07rem" fontSize={".16rem"} fontWeight={"500"} color={"rgba(0,0,0,.5)"}>Asset:</Typography>
               <Flex alignItems={'center'}>
                 <Typography marginRight={'.1rem'} fontSize={".16rem"} fontWeight={"500"} color={"rgba(0,0,0,.5)"}>
                   {`${activities?.collectionName ?? '--'} #${activities?.tokenId ?? '--'}`}
@@ -416,7 +416,7 @@ export default function VaultsDetail() {
                   window.open(`https://cn.etherscan.com/nft/${activities.neoAddress}/${activities.tokenId}`)
                 }}/>
               </Flex>
-              <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Minted-NFT</Typography>
+              <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">NEO-NFT</Typography>
             </GridItem>
             <GridItem
               background={"#fff"}
@@ -436,11 +436,14 @@ export default function VaultsDetail() {
               })}>
                 <TipsIcon width={".14rem"} src={imgurl.market.tipsIcon}/>
               </Popover>
-              <Typography marginBottom={".14rem"} fontSize=".24rem" fontWeight='700' color="#000">
-                {activities?.purchaseFloorPrice && `${activities?.floorPrice.minus(activities?.purchaseFloorPrice).div(10 ** globalConstant.bit).toFixed(2,1)}`}
-                {activities?.purchaseFloorPrice && ` (${activities?.floorPrice.minus(activities?.purchaseFloorPrice).div(activities?.purchaseFloorPrice?.times(new BigNumber(1).minus(activities?.ltv?.div(10 ** 4) as BigNumber))).times(10 ** 2).toFixed(2,1)}%)`}
-              </Typography>
-              <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Estimat Profit</Typography>
+              <Flex alignItems="center" marginBottom={".14rem"}>
+                <Icon width='.22rem' height='.22rem' src={imgurl.home.ethBlack22}/>
+                <Typography fontSize=".24rem" fontWeight='700' color="#000">
+                  {activities?.purchaseFloorPrice && `${activities?.floorPrice.minus(activities?.purchaseFloorPrice).div(10 ** globalConstant.bit).toFixed(2,1)}`}
+                  {activities?.purchaseFloorPrice && ` (${activities?.floorPrice.minus(activities?.purchaseFloorPrice).div(activities?.purchaseFloorPrice?.times(new BigNumber(1).minus(activities?.ltv?.div(10 ** 4) as BigNumber))).times(10 ** 2).toFixed(2,1)}%)`}
+                </Typography>
+              </Flex>
+              <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Estimated Profit</Typography>
             </GridItem>
 
             <Grid
@@ -454,7 +457,7 @@ export default function VaultsDetail() {
             >
               <Flex alignItems={"center"} justifyContent={"center"} flexDirection="column" gap='.12rem'>
                 <Flex gap="10px">
-                  <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Health factor</Typography>
+                  <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Factor</Typography>
                 <Popover content={HealthFactorPop}>
                   <Icon width={".14rem"} src={imgurl.market.tipsIcon}/>
                 </Popover>
@@ -463,7 +466,7 @@ export default function VaultsDetail() {
                 <Typography fontSize=".2rem" fontWeight='500' color="#000">{activities?.healthFactor}</Typography>
               </Flex>
               <Flex alignItems={"center"} justifyContent={"center"} flexDirection="column" gap='.12rem'>
-                <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Floor price</Typography>
+                <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Price</Typography>
                 <Flex alignItems={'center'}>
                   <Icon width='.22rem' height='.22rem' src={imgurl.home.ethBlack22} />
                   <Typography fontSize=".2rem" fontWeight='500' color="#000">{activities?.floorPrice.div(10 ** globalConstant.bit).toFixed(2,1)}</Typography>
@@ -534,7 +537,7 @@ export default function VaultsDetail() {
                 {remainingDebt && remainingDebt.div(10 ** 18).toFixed(4, 1)}
               </Typography>
             </Flex>
-            <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Remaining debt</Typography>
+            <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Remaining Debt</Typography>
           </GridItem>
           <GridItem
             boxShadow={"0px 0px 30px rgba(0, 0, 0, 0.05)"}
@@ -557,7 +560,7 @@ export default function VaultsDetail() {
                     new BigNumber(activities?.floorPrice.div(10 ** 18).toString()).times('0.9').div(remainingDebt?.div(10 ** 18)).toFixed(4, 1))
               }
             </Typography>
-            <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">New health factor</Typography>
+            <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">New Health Factor</Typography>
           </GridItem>
           <GridItem
             boxShadow={"0px 0px 30px rgba(0, 0, 0, 0.05)"}
@@ -573,7 +576,7 @@ export default function VaultsDetail() {
               <Icon width='.22rem' height='.22rem' src={imgurl.home.ethBlack22} />
               <Typography fontSize=".24rem" fontWeight='700' color="#000">{walletBalance && new BigNumber(walletBalance.toString()).div(10 ** 18).dp(4, 1).toFixed()}</Typography>
             </Flex>
-            <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Wallet balance</Typography>
+            <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Wallet Balance</Typography>
           </GridItem>
           <GridItem gridArea={'pay'} flexDirection="column">
             <Flex

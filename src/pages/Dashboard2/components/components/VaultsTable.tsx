@@ -85,7 +85,7 @@ function VaultsTable(props: IProps) {
       </div>
     },
     {
-      title: 'Minted NFT',
+      title: 'NEO-NFT',
       dataIndex: 'contract',
       key: 'contract',
       align: 'center',
@@ -116,7 +116,7 @@ function VaultsTable(props: IProps) {
       </div>
     },
     {
-      title: 'Health factor',
+      title: 'Factor',
       dataIndex: 'healthFactor',
       align: 'center',
       key: 'healthFactor',

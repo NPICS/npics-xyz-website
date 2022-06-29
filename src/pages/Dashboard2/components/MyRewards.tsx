@@ -72,7 +72,7 @@ export default function MyRewards() {
             <Typography fontSize={".24rem"} fontWeight={"700"} color={"#000"}>{balance && new BigNumber(balance?.toString()).dp(3,1).div(10 ** 18).toFixed(4,1)}</Typography>
           </Flex>
          
-          <ButtonDefault scale={true} disabled={balance?.toString() === '0'} types={`${balance?.toString() === '0' ? 'disabled' : 'three' }`} onClick={onRewards}>
+          <ButtonDefault scale={true} disabled={balance?.toString() === '0'} types={`${balance?.toString() === '0' ? 'disabled' : 'second' }`} onClick={onRewards}>
             Claim
           </ButtonDefault>
 

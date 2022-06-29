@@ -201,7 +201,7 @@ export default function NFTPay(props: {
 
     useAsync(async () => {
         if (hash && props.nft) {
-            await http.myPost(`/npics-nft/app-api/v1/neo/commitNeo`, {
+            await http.myPost(`/npics-nft/app-api/v2/neo/commitNeo`, {
                 hash: hash,
                 nftAddress: props.nft.address,
                 tokenId: props.nft.tokenId,

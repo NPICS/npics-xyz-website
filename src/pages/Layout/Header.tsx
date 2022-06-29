@@ -190,6 +190,22 @@ function XHeader() {
     textDecoration: 'none',
     marginRight: '1.3rem',
   };
+  const history = useLocation()
+  const [activiRoute, setActiviRoute] = useState<string>('')
+  useEffect(() => {
+    console.log(history.pathname.substring(1,4));
+    console.log(history.pathname.substring(1,13));
+    if(history.pathname.substring(1,4) === 'nft') {
+      setActiviRoute('nft')
+      return
+    } else if(history.pathname.substring(1,13) === 'vaultsDetail'){
+      setActiviRoute('vaultsDetail')
+      return
+    }
+    setActiviRoute('')
+    // eslint-disable-next-line
+  }, [history.pathname])
+
   return (
     <Nav>
       <FlexDiv>
@@ -199,17 +215,15 @@ function XHeader() {
         <NavLink 
           to={"marketPlace"}
           style={({ isActive }) =>
-          isActive ? active : normal
-          }
+          isActive ? active : normal}
         >
-          Marketplace
+          <span style={{color: `${activiRoute === 'nft' ? '#fff' : ''}`}}>Marketplace</span>
         </NavLink>
         <NavLink to={"/dashboard"}
          style={({ isActive }) =>
-         isActive ? active : normal
-         }
+         isActive ? active : normal}
         >
-          Dashboard
+          <span style={{color: `${activiRoute === 'vaultsDetail' ? '#fff' : ''}`}}>Dashboard</span>
         </NavLink>
         <a style={{
           "fontSize": ".16rem",

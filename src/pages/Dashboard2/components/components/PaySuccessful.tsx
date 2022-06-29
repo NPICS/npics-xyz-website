@@ -2,6 +2,7 @@ import React from "react"
 import { Box, Flex, Icon, Typography } from "component/Box";
 import { imgurl } from 'utils/globalimport';
 import { DataSource } from './Tableutils';
+import { copyToClipboard } from 'utils/clipboard-utils'
 interface IProps {
   setShowPayment: React.Dispatch<React.SetStateAction<boolean>>
   setIsPayingAllDebts: React.Dispatch<React.SetStateAction<boolean>>
@@ -66,7 +67,10 @@ export default function PaySuccessful(props:IProps) {
     </Flex>
     <Flex display="inline-block" marginTop=".21rem" justifyContent='center' alignItems="center" >
       <div style={{ padding: ".16rem .24rem", border: "1px solid rgba(0, 0, 0, 0.2)", borderRadius: "10px", cursor: "pointer" }}>
-        <Typography fontSize=".16rem" fontWeight="700" color="#000" onClick={()=> onClose()}>ADD to MetaMask</Typography>
+        <Typography fontSize=".16rem" fontWeight="700" color="#000" onClick={async()=> {
+          activities && await copyToClipboard(activities?.address);
+          onClose()
+        }}>ADD to MetaMask</Typography>
       </div>
     </Flex>
   </Flex>

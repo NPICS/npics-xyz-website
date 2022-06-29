@@ -16,14 +16,15 @@ interface Iprops {
 
 const StyledButton = styled.button<Iprops>`
   &:hover {
-    background-color: ${(props => props.types === 'normal'? "#FF490F" : '')};
+    background-color: ${(props => props.types === 'normal'? "#333333" : '')};
     background: ${(props => props.types === 'second'? "#FFFFFF" : '')};
     box-shadow: ${(props => props.types === 'second'? "0px 0px 20px rgba(0, 0, 0, 0.1)" : '')};
     border: ${(props => props.types === 'second'? "0" : '')};
     transform: ${(props => props.disabled ? '' : props.scale ? 'scale(1.06)' : '')};
   }
   &:disabled {
-    background-color: #999;
+    box-shadow: ${(props => props.types === 'second'? "none" : '')};
+    background-color: ${(props => props.types === 'normal'? "rgba(204,204,204)" : '#fff')};
   }
   background: ${(props => {
      switch (props.types) {
@@ -46,32 +47,43 @@ const StyledButton = styled.button<Iprops>`
     }
   })};
    border: ${(props => {
-     switch (props.types) {
+    switch (props.types) {
       case 'one':
-       return '0';
+        return '0';
       case 'two':
-       return '.02rem solid rgba(255,255,255,.2)';
+        return '.02rem solid rgba(255,255,255,.2)';
       case 'three':
-       return '0';
+        return '0';
       case 'four':
-       return '.01rem solid rgba(255, 255, 255, 3)';
+        return '.01rem solid rgba(255, 255, 255, 3)';
       case 'disabled':
-       return '0';
+        return '0';
       case 'normal':
-       return '0';
+        return '0';
       case 'second':
-       return '1px solid rgba(0,0,0,.2)';
+        return '1px solid rgba(0,0,0,.2)';
       default:
         return null;
     }
   })};
-  background: ${(props => props.disabled ? '#999' : '')};
+   color: ${(props => {
+    switch (props.types) {
+      case 'normal':
+        return '#fff';
+      case 'second':
+        return '#000';
+      default:
+        return null;
+    }
+  })};
   color: ${(props => props.color)};
+  background: ${(props => props.disabled ?  props.types === 'normal'? 'rgba(204,204,204)' : "#fff" : '')};
+  color: ${(props => props.disabled ?  props.types === 'normal'? '#fff' : "rgba(0,0,0,.5)" : '')};
   width: ${(props => props.width)};
   height: ${(props => props.height)};
   font-size: ${(props => props.fontSize)};
   border-radius: 10px;
-  font-family: 'PingFang HK';
+  font-family: 'Montserrat';
   font-style: normal;
   font-weight: 600;
   font-size: .2rem;
