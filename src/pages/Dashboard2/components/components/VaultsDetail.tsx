@@ -80,6 +80,7 @@ interface Result {
   collectionName: string,
   ltv: BigNumber,
   purchaseFloorPrice: BigNumber,
+  status: number
 }
 
 interface RepaymentInformation {
@@ -103,6 +104,8 @@ export default function VaultsDetail() {
   const [payInfo, setPayInfo] = useState<RepaymentInformation>()
   const [isPayingAllDebts,setIsPayingAllDebts] = useState<boolean>(false)
   const [reload, setReload] = useState<boolean>(false)
+  const [tradeTx,setTradeTx] = useState<string>('')
+  const [isProcessing, setIsProcessing] = useState<boolean>(false)
   const action = useAppDispatch()
   const isLogin = useAppSelector(state => state.app.isLogin)
   let urlParams: any = useParams()
@@ -297,7 +300,7 @@ export default function VaultsDetail() {
           liquidationPrice: new BigNumber(newArray.liquidatePrice.liquidatePrice.toString()).div(10 ** 18).toFixed(4, 1) || "---",
           // liquidationPrice: '5.82' || "---",
           healthFactor: new BigNumber(newArray.debtData.healthFactor.toString()).div(10 ** 18).toFixed(4, 1) || "---",
-          status: new BigNumber(newArray.debtData.healthFactor.toString()).div(10 ** 18).toFixed(4, 1) || "---",
+          status: newArray.status,
           statusSrt: turnStr(newArray.debtData.healthFactor),
           address: newArray.nftAddress,
           neoAddress: newArray.neoAddress,
@@ -369,14 +372,14 @@ export default function VaultsDetail() {
               <Typography fontSize={".16rem"} fontWeight={"500"} color={"rgba(0,0,0,.5)"}>Asset:</Typography>
               <Flex alignItems={'center'}>
                 <Typography marginRight={'.1rem'} fontSize={".16rem"} fontWeight={"500"} color={"rgba(0,0,0,.5)"}>
-                  {`${activities?.collectionName ?? '--'} # ${activities?.tokenId ?? '--'}`}
+                  {`${activities?.collectionName ?? '--'} #${activities?.tokenId ?? '--'}`}
                 </Typography>
-                <Icon style={{cursor:"pointer"}} width=".16rem" height=".16rem" src={imgurl.dashboard.exportBlack18} alt="" onClick={() => window.open(`https://etherscan.io/nft/${activities?.address}/${activities?.tokenId}`)}/>
+                <Icon style={{cursor:"pointer"}} width=".16rem" height=".16rem" src={imgurl.dashboard.export14} alt="" onClick={() => window.open(`https://etherscan.io/nft/${activities?.address}/${activities?.tokenId}`)}/>
               </Flex>
             </Flex>
           </Flex>
           <Flex alignItems={"center"} background={"#fff"} boxShadow={"0 0 20px rgba(0,0,0,.1)"} borderRadius={"10px"} gap={".12rem"} padding={".11rem"}>
-            <Typography fontSize={".14rem"} fontWeight={"500"} color={"#000"}>Status</Typography>
+            {/* <Typography fontSize={".14rem"} fontWeight={"500"} color={"#000"}>Status</Typography> */}
             <Typography fontSize={".16rem"} fontWeight={"700"} color={activities?.statusSrt === "Inforce"? "#7BD742" :"#FF4949"}>{activities?.statusSrt}</Typography>
           </Flex>
         </Flex>
@@ -386,7 +389,7 @@ export default function VaultsDetail() {
           gridTemplateColumns={"3.4rem auto"}
           gridGap={".3rem"}
         >
-          <Icon style={{borderRadius:'10px'}} width='3.4rem' height='3.4rem' src={activities?.imageUrl ?? "https://tva1.sinaimg.cn/large/e6c9d24egy1h3g0c8ugwqj20v50jhgrr.jpg"} />
+          <Icon style={{borderRadius:'10px', background:"#e5e5e5"}} width='3.4rem' height='3.4rem' src={activities?.imageUrl ?? ""} />
           <Grid
             gridTemplateAreas='"Minted Profit" "Numerical Numerical"'
             gridGap={".1rem"}
@@ -407,9 +410,12 @@ export default function VaultsDetail() {
               </Popover>
               <Flex alignItems={'center'} marginBottom={".14rem"}>
                 <Typography marginRight={'.1rem'} fontSize=".24rem" fontWeight='700' color="#000" >
-                  {`NEO-${activities?.collectionName ?? '--'} # ${activities?.tokenId ?? '--'}`}
+                  {`NEO-${activities?.collectionName ?? '--'} #${activities?.tokenId ?? '--'}`}
                 </Typography>
-                <Icon style={{cursor:"pointer"}} width=".16rem" height=".16rem" src={imgurl.dashboard.exportBlack18} alt="" onClick={() => window.open(`https://etherscan.io/nft/${activities?.address}/${activities?.tokenId}`)}/>
+                <Icon style={{cursor:"pointer"}} width=".16rem" height=".16rem" src={imgurl.dashboard.export14} alt="" onClick={() => {
+                  if(!activities) return
+                  window.open(`https://cn.etherscan.com/nft/${activities.neoAddress}/${activities.tokenId}`)
+                }}/>
               </Flex>
               <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Minted-NFT</Typography>
             </GridItem>
@@ -523,7 +529,12 @@ export default function VaultsDetail() {
             gap={".1rem"}
             padding={".32rem 0"}
           >
-            <Typography fontSize=".24rem" fontWeight='700' color="#000">{remainingDebt && remainingDebt.div(10 ** 18).toFixed(4, 1)}</Typography>
+            <Flex alignItems="center">
+              { remainingDebt && <Icon width='.22rem' height='.22rem' src={imgurl.home.ethBlack22}/>}
+              <Typography fontSize=".24rem" fontWeight='700' color="#000">
+                {remainingDebt && remainingDebt.div(10 ** 18).toFixed(4, 1)}
+              </Typography>
+            </Flex>
             <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Remaining debt</Typography>
           </GridItem>
           <GridItem
@@ -560,8 +571,8 @@ export default function VaultsDetail() {
             padding={".32rem 0"}
           >
             <Flex alignItems={"center"}>
-              <Typography fontSize=".24rem" fontWeight='700' color="#000">{walletBalance && new BigNumber(walletBalance.toString()).div(10 ** 18).dp(4, 1).toFixed()}</Typography>
               <Icon width='.22rem' height='.22rem' src={imgurl.home.ethBlack22} />
+              <Typography fontSize=".24rem" fontWeight='700' color="#000">{walletBalance && new BigNumber(walletBalance.toString()).div(10 ** 18).dp(4, 1).toFixed()}</Typography>
             </Flex>
             <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Wallet balance</Typography>
           </GridItem>
@@ -620,13 +631,23 @@ export default function VaultsDetail() {
         setIsPayingAllDebts(false);
         setReload(!reload)
       }}
+      maskClosable={!isProcessing}
       destroyOnClose={true}
       width='7.48rem'
     >
       {
         isPayingAllDebts ? 
-        <PaySuccessful setShowPayment={setShowPayment} setIsPayingAllDebts={setIsPayingAllDebts} setReload={setReload} reload={reload}/> :
-        <Payment setIsPayingAllDebts={setIsPayingAllDebts} setShowPayment={setShowPayment} payInfo={payInfo} setReload={setReload} reload={reload}/>
+        <PaySuccessful tradeTx={tradeTx} activities={activities} setShowPayment={setShowPayment} setIsPayingAllDebts={setIsPayingAllDebts} setReload={setReload} reload={reload}/> :
+        <Payment 
+          isProcessing={isProcessing}
+          setIsProcessing={setIsProcessing} 
+          setTradeTx={setTradeTx} 
+          setIsPayingAllDebts={setIsPayingAllDebts} 
+          setShowPayment={setShowPayment} 
+          payInfo={payInfo} 
+          setReload={setReload} 
+          reload={reload}
+        />
       }
     </StyledModal>
 

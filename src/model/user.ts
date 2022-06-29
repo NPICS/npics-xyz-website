@@ -125,7 +125,7 @@ export class CollectionItems {
   downPaymentPriceFormat() {
     // ltv: 3000 => 30%
     let loadRate = new BigNumber(this.ltv).div(100).div(100)
-    let downPayment = this.currentBasePrice.minus(this.floorPrice.times(loadRate)).div(10 ** this.decimals).minus(0.0001)
+    let downPayment = this.currentBasePrice.minus(this.floorPrice.times(loadRate)).div(10 ** this.decimals).plus(0.0001)
     return numberFormat(downPayment.toFixed(2,1))
   }
 }

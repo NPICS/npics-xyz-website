@@ -12,7 +12,7 @@ const Cover = styled.img`
   width: 100%;
   overflow: hidden;
   object-fit: cover;
-  background: #e5e5e5;
+  /* background: #e5e5e5; */
 `
 
 const IconTest = styled.img`

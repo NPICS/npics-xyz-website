@@ -11,7 +11,6 @@ export const BgTable = styled.div`
     } */
   .items {
     display: flex;
-    cursor: pointer;
     .avatar {
       width: .48rem;
       height: .48rem;
@@ -57,7 +56,6 @@ export const BgTable = styled.div`
     font-weight: 500;
     font-size: .16rem;
     color: #000;
-    cursor: pointer;
     &>span {
       width: 1.1rem;
       margin-right: .03rem;
@@ -154,6 +152,7 @@ export interface Result {
   floorPrice: BigNumber
   ltv: BigNumber
   purchaseFloorPrice: BigNumber
+  status: number
 }
 
 export interface Record extends Result {
@@ -185,7 +184,7 @@ export interface DataSource {
   debtString: string;
   liquidationPrice: string;
   healthFactor: string;
-  status: string;
+  status: number;
   statusSrt: string;
   address: string;
   neoAddress: string;
