@@ -11,6 +11,7 @@ import { deserialize } from "class-transformer";
 import { User } from "../../model/user";
 import { SessionStorageKey } from "../../utils/enums";
 import { urls } from "../../utils/urls";
+import { NavLink, useLocation } from 'react-router-dom';
 
 function XHeader() {
   const { activate, account, error } = useWeb3React()
@@ -19,6 +20,7 @@ function XHeader() {
   const action = useAppDispatch()
   const userInfo = useAppSelector(state => deserialize(User, state.app.currentUser))
   const showConnect = useAppSelector(state => state.app.data.isShowConnect)
+
   useEffect(() => {
     console.log(`Account Change => New: ${account}, Old: ${oldAccount.current}`)
     // changed account
@@ -173,37 +175,53 @@ function XHeader() {
     }
   });
 
+  let normal = {
+    color: 'rgba(255,255,255,.5)',
+    fontWeight: '700',
+    fontSize: '.16rem',
+    textDecoration: 'none',
+    marginRight: '1.3rem',
+  };
+  let active = {
+    color: '#fff',
+    fontWeight: '700',
+    fontSize: '.16rem',
+    textDecoration: 'none',
+    marginRight: '1.3rem',
+  };
   return (
     <Nav>
       <FlexDiv>
         <LogoLink to={"/"}>
           <img src={imgurl.logoBeta} alt="" />
         </LogoLink>
-        <BtnLink to={"marketPlace"}>
-          {/* <div className='prime'>Prime</div> */}
+        <NavLink 
+          to={"marketPlace"}
+          style={({ isActive }) =>
+          isActive ? active : normal
+          }
+        >
           Marketplace
-        </BtnLink>
-        <BtnLink to={"/dashboard/vaults"}>
+        </NavLink>
+        <NavLink to={"/dashboard"}
+         style={({ isActive }) =>
+         isActive ? active : normal
+         }
+        >
           Dashboard
-        </BtnLink>
-        {/*<BtnLink to={"/docs"}>*/}
-        {/*  Rewards*/}
-        {/*</BtnLink>*/}
-        {/* <BtnLink to={"/web3"}>
-          Resources
-        </BtnLink> */}
+        </NavLink>
         <a style={{
           "fontSize": ".16rem",
           "fontWeight": "600",
-          "color": "#fff"
+          "color": "rgba(255,255,255,.5)"
         }} target="_blank" rel="noreferrer" href={urls.resource}>Resources</a>
       </FlexDiv>
 
       <FlexDiv>
-        <ThemeImg src={imgurl.worldwideIcon} />
+        {/* <ThemeImg src={imgurl.worldwideIcon} /> */}
         {/* <ThemeImg src={imgurl.gas_icon}/> */}
         {/* <ThemeImg src={imgurl.notificationIcon} /> */}
-        <ThemeImg src={imgurl.withoutNoticeIcon} />
+        {/* <ThemeImg src={imgurl.withoutNoticeIcon} /> */}
         <div id="baseAccount" style={{ position: 'relative' }}>
           <ThemeImg src={userInfo?.avatar || imgurl.EllipseIcon} onClick={walletPop} />
         </div>

@@ -1,11 +1,16 @@
 import React, {useEffect} from 'react';
-import {updateARP, updateUSDTExchangeRate, updateBENDExchangeRate} from 'store/app';
+import {updateARP, updateUSDTExchangeRate, updateBENDExchangeRate, fetchUser} from 'store/app';
 import {useAppDispatch} from 'store/hooks';
 import Layout from './pages/Layout/index'
 import {useAsync, useInterval} from "react-use";
 import moment from "moment";
+import { useWeb3React } from '@web3-react/core';
+import { useUpdateEffect } from 'utils/hook';
+import { SessionStorageKey } from 'utils/enums';
+import { notification } from 'antd';
 
 function App() {
+    const { error } = useWeb3React()
     const action = useAppDispatch()
 
     // generate data

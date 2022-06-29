@@ -6,7 +6,6 @@ export const GlobalStyle = createGlobalStyle`
     -webkit-user-drag: none !important;
     object-fit: cover;
   } */
-  
 
   img:not([src]) {
     opacity: 0;
@@ -131,6 +130,12 @@ export const GlobalStyle = createGlobalStyle`
         .ant-table-column-has-sorters:hover {
           background: #000;
         }
+        th:first-child {
+          width: 1.7rem;
+        }
+        th:nth-child(2) {
+          width: 3.6rem;
+        }
         th {
           color: #fff;
           border-bottom: none;
@@ -152,9 +157,13 @@ export const GlobalStyle = createGlobalStyle`
       border-radius: 10px;
       display: grid;
       &>tr td:first-child {
+        width: 1.7rem;
         border-top-left-radius: 10px;
         border-bottom-left-radius: 10px;
         border-left: 1px solid rgba(255,255,255,.2);
+      }
+      &>tr td:nth-child(2) {
+        width: 3.6rem;
       }
       &>tr td:last-child {
         border-right: 1px solid rgba(255,255,255,.2);

@@ -1,5 +1,5 @@
 import { imgurl } from "utils/globalimport";
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import styled from "styled-components";
 import { font1251, font01671 } from "component/styled";
 export const accountNav = [
@@ -152,27 +152,18 @@ export const Nav = styled.div`
     }
   }
 `
-export const BtnLink = styled(Link)`
+export const BtnLink = styled(NavLink)`
   position: relative;
   color: #fff;
   font-weight: 700;
   font-size: .16rem;
   text-decoration: none;
   margin-right: 1.3rem;
-  .prime {
-    position: absolute;
-    top: -.15rem;
-    left: .5rem;
-    ${font1251}
-    padding: 0 .05rem;
-    background: #FF490F;
-    border-radius: 10px;
-  }
   &:hover {
     color: #fff;
   }
 `
-export const LogoLink = styled(Link)`
+export const LogoLink = styled(NavLink)`
   display: flex;
   align-items: center;
   margin-right: 1.2rem;

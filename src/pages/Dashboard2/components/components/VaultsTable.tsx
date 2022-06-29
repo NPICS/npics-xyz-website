@@ -57,7 +57,7 @@ interface IProps {
 }
 
 function VaultsTable(props: IProps) {
-  const { activate, account, library } = useWeb3React()
+  const { activate, account, library, error } = useWeb3React()
   const [activities, setActivities] = useState<DataSource[]>([])
   const [loading, setLoading] = useState<boolean>(false)
   const [showModal, setShowModal] = useState<boolean>(false)
@@ -321,13 +321,24 @@ function VaultsTable(props: IProps) {
             console.log(`😈 ${isLogin}`)
           } else {
             if (!account) {
-              activate(connectors.injected, (e) => {
-                if (e.name === "UnsupportedChainIdError") {
-                  sessionStorage.removeItem(SessionStorageKey.WalletAuthorized)
-                  action(fetchUser(`{}`))
-                  notification.error({ message: "Prompt connection failed, please use the Ethereum network" })
+                if (error) {
+                  const _error = JSON.parse(JSON.stringify(error))
+                  if (_error.name === "UnsupportedChainIdError") {
+                    sessionStorage.removeItem(SessionStorageKey.WalletAuthorized)
+                    action(fetchUser(`{}`))
+                    notification.error({ message: "Prompt connection failed, please use the Ethereum network" })
+                  } else {
+                    notification.error({ message: "Please authorize to access your account" })
+                  }
+                  return
                 }
-              })
+                activate(connectors.injected, (e) => {
+                  if (e.name === "UnsupportedChainIdError") {
+                    sessionStorage.removeItem(SessionStorageKey.WalletAuthorized)
+                    action(fetchUser(`{}`))
+                    notification.error({ message: "Prompt connection failed, please use the Ethereum network" })
+                  }
+                })
             }
           }
           setShowModal(false)

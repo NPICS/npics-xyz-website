@@ -9,6 +9,7 @@ interface Iprops {
   border?: string,
   types?: string,
   disabled?: boolean,
+  scale?: boolean,
   children: string | any,
   onClick?: Function | any
 }
@@ -19,6 +20,7 @@ const StyledButton = styled.button<Iprops>`
     background: ${(props => props.types === 'second'? "#FFFFFF" : '')};
     box-shadow: ${(props => props.types === 'second'? "0px 0px 20px rgba(0, 0, 0, 0.1)" : '')};
     border: ${(props => props.types === 'second'? "0" : '')};
+    transform: ${(props => props.disabled ? '' : props.scale ? 'scale(1.06)' : '')};
   }
   &:disabled {
     background-color: #999;

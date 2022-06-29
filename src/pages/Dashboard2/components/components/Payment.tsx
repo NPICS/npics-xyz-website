@@ -19,16 +19,14 @@ interface IProps {
   setShowPayment: React.Dispatch<React.SetStateAction<boolean>>
   setIsPayingAllDebts: React.Dispatch<React.SetStateAction<boolean>>
   setReload: React.Dispatch<React.SetStateAction<boolean>>
-  setIsProcessing: React.Dispatch<React.SetStateAction<boolean>>
   setTradeTx: React.Dispatch<React.SetStateAction<string>>
   reload: boolean
-  isProcessing: boolean
   payInfo: RepaymentInformation | undefined
 }
 
 export default function Payment(props:IProps) {
   const { account, library } = useWeb3React()
-  const {setIsPayingAllDebts, setShowPayment, payInfo, setReload, reload, setIsProcessing, isProcessing} = props
+  const {setIsPayingAllDebts, setShowPayment, payInfo, setReload, reload } = props
   useEffect(() => {
     onRepay()
   },[])
@@ -41,7 +39,6 @@ export default function Payment(props:IProps) {
       const nft = payInfo.address
       const tokenId = payInfo.tokenId
       const tx = await npics.repayETH(nft, tokenId, payInfo.payDebt)
-      setIsProcessing(true)
       await tx.wait()
       console.log(tx);
       props.setTradeTx(tx.hash)
@@ -51,13 +48,11 @@ export default function Payment(props:IProps) {
         setShowPayment(false)
       }
       setReload(!reload)
-      setIsProcessing(false)
       console.log(payInfo);
     } catch (e: any) {
       message.error(JSON.parse(JSON.stringify(e)).reason || JSON.parse(JSON.stringify(e)).message)
       setShowPayment(false)
       setIsPayingAllDebts(false);
-      setIsProcessing(false)
     }
   }
 
@@ -66,14 +61,12 @@ export default function Payment(props:IProps) {
   return <Flex
     flexDirection={"column"}
   >
-    <Flex alignItems="center" justifyContent="space-between" marginBottom=".3rem">
-      <Typography></Typography>
+    <Flex alignItems="center" justifyContent="center" marginBottom=".3rem">
       <Typography  fontSize=".3rem" fontWeight="800" color="#000">Payment</Typography>
-      <div style={{cursor: 'pointer'}}><Icon width=".24rem" height=".24rem" src={imgurl.dashboard.Cancel} onClick={() => {
-        if(isProcessing) return
+      {/* <div style={{cursor: 'pointer'}}><Icon width=".24rem" height=".24rem" src={imgurl.dashboard.Cancel} onClick={() => {
         setShowPayment(false)
         setReload(!reload)
-      }}/></div>
+      }}/></div> */}
     </Flex>
 
     <Flex width="7rem" height="4rem" border="1px solid rgba(0,0,0,.1)" borderRadius="10px" flexDirection='column'>

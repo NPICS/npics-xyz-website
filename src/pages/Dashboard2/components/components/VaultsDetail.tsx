@@ -105,7 +105,6 @@ export default function VaultsDetail() {
   const [isPayingAllDebts,setIsPayingAllDebts] = useState<boolean>(false)
   const [reload, setReload] = useState<boolean>(false)
   const [tradeTx,setTradeTx] = useState<string>('')
-  const [isProcessing, setIsProcessing] = useState<boolean>(false)
   const action = useAppDispatch()
   const isLogin = useAppSelector(state => state.app.isLogin)
   let urlParams: any = useParams()
@@ -631,7 +630,7 @@ export default function VaultsDetail() {
         setIsPayingAllDebts(false);
         setReload(!reload)
       }}
-      maskClosable={!isProcessing}
+      maskClosable={false}
       destroyOnClose={true}
       width='7.48rem'
     >
@@ -639,8 +638,6 @@ export default function VaultsDetail() {
         isPayingAllDebts ? 
         <PaySuccessful tradeTx={tradeTx} activities={activities} setShowPayment={setShowPayment} setIsPayingAllDebts={setIsPayingAllDebts} setReload={setReload} reload={reload}/> :
         <Payment 
-          isProcessing={isProcessing}
-          setIsProcessing={setIsProcessing} 
           setTradeTx={setTradeTx} 
           setIsPayingAllDebts={setIsPayingAllDebts} 
           setShowPayment={setShowPayment} 

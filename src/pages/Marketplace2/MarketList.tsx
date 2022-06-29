@@ -27,7 +27,7 @@ const {Option} = Select;
 
 const InputStyled = styled(Input)`
     background: #fff;
-    border: 1px solid rgba(0,0,0,.2);
+    border: 1px solid rgba(0,0,0,.1);
     border-radius: 10px;
     color: rgba(0,0,0,.5);
     height: .5rem;
@@ -57,7 +57,7 @@ const AntdSelect = styled(Select)`
     color: rgba(0, 0, 0, .5);
     font-weight: 500;
     font-size: .14rem;
-    min-width: 2rem;
+    min-width: 2.2rem;
     min-height: .5rem;
     padding: 0 .23rem !important;
     border: 1px solid rgba(0, 0, 0, 0.1) !important;

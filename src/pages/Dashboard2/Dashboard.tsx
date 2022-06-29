@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
 import { Box, Flex, Icon, Typography } from "../../component/Box";
 import { NavList } from "./components/components/data";
@@ -19,15 +19,21 @@ const Banner = () => {
 export default function Market() {
   const [active, setActive] = useState<number>(0)
   const history = useLocation()
+  const navigate = useNavigate()
   useEffect(() => {
+    const name:string = history.pathname.substring(11)
+    if(history.pathname === '/dashboard') {
+      console.log('jump');
+      navigate("/dashboard/vaults")
+    }
     const pathNameIndex:any = {
       vaults: 0,
       rewards: 1,
       airdrop: 2
     }
-    const name:string = history.pathname.substring(11)
     const index = pathNameIndex[name]
     setActive(index)
+    
   },[history.pathname])
 
   return <Flex

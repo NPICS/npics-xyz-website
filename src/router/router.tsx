@@ -88,46 +88,6 @@ const checkAuth = (routers:any, path:String)=>{
       path: '/',
       component: <Home />
     },
-    // {
-    //   path: '/web3',
-    //   component: <Web3Example />,
-    //   children: [
-    //     {
-    //       path: 'collections/:address',
-    //       component: <MarketCollection />
-    //     }
-    //   ]
-    // },
-    {
-      path: 'marketPlaceRedirect',
-      component: <Navigate to="/marketPlace/collections/0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D" replace />,
-    },
-    {
-      path: '/marketPlace/nft/:address/:tokenId',
-      component: <MarketItem />
-    },
-    {
-      path: '/dash',
-      component: <Dashboard />,
-      children: [
-        {
-          path: 'agreement',
-          component: <MyAgreement />
-        },
-        {
-          path: 'rewards',
-          component: <MyRewards />
-        },
-        {
-          path: 'airdrop',
-          component: <MyAirdrop />,
-        },
-        {
-          path: 'airdrop/claim',
-          component: <Claim />,
-        }
-      ]
-    },
     {
       path: "/marketPlace",
       component: <Market />,
@@ -139,7 +99,7 @@ const checkAuth = (routers:any, path:String)=>{
       ]
     },
     {
-      path: "/nftDetail/:address/:tokenId",
+      path: "/nft/:address/:tokenId",
       component: <OneNFT />,
     },
     {
@@ -171,15 +131,6 @@ const checkAuth = (routers:any, path:String)=>{
     </main>
     },
   ];
-
-  useEffect(() => {
-    console.log('1')
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-    window.scrollTo(0, 0)
-
-  },[location.pathname])
-
 
   const RouteMap = (route:RouterT[]):ReactNode => {
       return route.map((item:RouterT) => {

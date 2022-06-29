@@ -6,7 +6,7 @@ import {useAppDispatch, useAppSelector} from "../../store/hooks";
 import BigNumber from "bignumber.js";
 import {numberFormat,thousandFormat} from "../../utils/urls";
 import {useEffect, useState} from "react";
-import {updateARP} from "../../store/app";
+import {fetchUser, updateARP} from "../../store/app";
 import {percentageFormat} from "../marketplace/components/utils";
 import http from "../../utils/http";
 import {deserializeArray} from "class-transformer";
@@ -14,7 +14,7 @@ import {Npics} from "../../abi/Npics";
 import {ethers} from "ethers";
 import Modal from "../../component/Modal";
 import NFTPay from "./NFTPay";
-import {message, Popover} from "antd";
+import {message, notification, Popover} from "antd";
 import {globalConstant} from "utils/globalConstant";
 import {useNavigate} from 'react-router-dom';
 import {useWeb3React} from "@web3-react/core";
@@ -22,6 +22,7 @@ import {connectors} from "../../utils/connectors";
 import {getNFTStatusInOpensea} from "../../utils/opensea";
 import {listedPricePop, VaultAprPop, DownPaymentPop} from "utils/popover";
 import ethIcon from "../../assets/images/market/eth_icon.svg"
+import { SessionStorageKey } from "utils/enums";
 
 const Shadow = styled(Flex)`
   background: #fff;
@@ -118,7 +119,7 @@ export default function NFTPrice(props: {
     const [availableBorrow, setAvailableBorrow] = useState<BigNumber | undefined>(undefined)
     const [actualAmount, setActualAmount] = useState<BigNumber>()
     const navigate = useNavigate()
-    const {account, activate} = useWeb3React()
+    const { account, activate, error } = useWeb3React()
 
     const [buyPopOpen, setBuyPopOpen] = useState<boolean>(false)
 
@@ -164,6 +165,17 @@ export default function NFTPrice(props: {
 
     async function buyClick() {
         try {
+            if (error) {
+                const _error = JSON.parse(JSON.stringify(error))
+                if (_error.name === "UnsupportedChainIdError") {
+                    sessionStorage.removeItem(SessionStorageKey.WalletAuthorized)
+                    action(fetchUser(`{}`))
+                    notification.error({ message: "Prompt connection failed, please use the Ethereum network" })
+                } else {
+                    notification.error({ message: "Please authorize to access your account" })
+                }
+                return
+            }
             if (!account) {
                 await activate(connectors.injected)
             }
@@ -270,7 +282,7 @@ export default function NFTPrice(props: {
                         return <OtherNFT
                             src={nft.imageUrl}
                             onClick={() => {
-                                navigate(`/nftDetail/${nft.address}/${nft.tokenId}`, {replace: true})
+                                navigate(`/nft/${nft.address}/${nft.tokenId}`, {replace: true})
                             }}
                             key={idx}
                         />

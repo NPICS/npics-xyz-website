@@ -18,7 +18,7 @@ const FooterWrap = styled.div`
   .footer-left {
     display: flex;
     flex-direction: column;
-    font-size: .16rem;
+    font-size: .14rem;
     font-family: 'PingFang HK';
     font-style: normal;
     font-weight: 500;
@@ -34,7 +34,7 @@ const FooterWrap = styled.div`
   .footer-right {
     display: flex;
     flex-direction: column;
-    font-size: .16rem;
+    font-size: .14rem;
     font-family: 'PingFang HK';
     font-style: normal;
     font-weight: 500;

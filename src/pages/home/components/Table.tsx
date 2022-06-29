@@ -8,6 +8,8 @@ import styled from 'styled-components';
 import { imgurl } from 'utils/globalimport';
 import BigNumber from 'bignumber.js';
 import { Link } from 'react-router-dom';
+import { Icon } from 'component/Box'
+import openseaValidIcon from "assets/images/market/nfts_opensea_valid.svg"
 interface DataType {
   index: string,
   key: React.Key,
@@ -40,7 +42,13 @@ export default function MyTable() {
     // eslint-disable-next-line
   }, [])
 
-  const url = '/npics-nft/app-api/v2/nft/getCollections'
+  function ScrollTop():void {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+    window.scrollTo(0, 0)
+  }
+
+  const url = '/npics-nft/app-api/v2/nft/getCollections2'
   const getData = async () => {
     let result: any = await http.myPost(url, {})
     if (result.code === 200 && result.data.length) {
@@ -88,10 +96,16 @@ export default function MyTable() {
       dataIndex: 'collection',
       key: 'collection',
       align: 'left',
-      render: (text, row) => <Link to={`/marketPlace/collections/${row.address}`}>
+      render: (text, row) => <Link to={`/marketPlace/collections/${row.address}`} onClick={() => ScrollTop()}>
         <div style={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center'}}>
           <img src={row.imageUrl} alt="" style={{ width: ".6rem", height: ".6rem", marginRight: ".1rem", borderRadius: '30px'}} />
-          <span style={{color: '#fff', fontWeight: '700'}}>{text}</span>
+          <span style={{ color: '#fff', fontWeight: '700', marginRight: '.05rem' }}>{text}</span>
+          <Icon
+           
+            src={openseaValidIcon}
+            width={".16rem"}
+            height={".16rem"} 
+          />
         </div>
       </Link>,
     },

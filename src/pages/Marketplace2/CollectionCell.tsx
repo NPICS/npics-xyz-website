@@ -34,6 +34,12 @@ export default function CollectionCell(props: {
 }) {
     const navigate = useNavigate()
 
+    function ScrollTop():void {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+        window.scrollTo(0, 0)
+    }
+
     return <Flex
         borderRadius={'.1rem'}
         border={"1px solid rgba(0,0,0,.1)"}
@@ -44,7 +50,8 @@ export default function CollectionCell(props: {
             "cursor": "pointer"
         }}
         onClick={() => {
-            navigate(`/nftDetail/${props.item.address}/${props.item.tokenId}`)
+            navigate(`/nft/${props.item.address}/${props.item.tokenId}`)
+            ScrollTop()
         }}
     >
         <Cover src={props.item.imageUrl}/>
