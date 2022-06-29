@@ -119,7 +119,7 @@ export default function NFTPrice(props: {
     const [availableBorrow, setAvailableBorrow] = useState<BigNumber | undefined>(undefined)
     const [actualAmount, setActualAmount] = useState<BigNumber>()
     const navigate = useNavigate()
-    const { account, activate, error } = useWeb3React()
+    const {account, activate, error, active} = useWeb3React()
 
     const [buyPopOpen, setBuyPopOpen] = useState<boolean>(false)
 
@@ -176,7 +176,7 @@ export default function NFTPrice(props: {
                 }
                 return
             }
-            if (!account) {
+            if (!account || !active) {
                 await activate(connectors.injected)
             }
             if (props.item && availableBorrow) {
