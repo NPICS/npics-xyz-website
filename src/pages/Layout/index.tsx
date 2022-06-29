@@ -28,10 +28,8 @@ const ContentBox = styled.div`
 const Flex = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
 `
-
-
 
 function Index() {
   const isShowLoading = useAppSelector(state => state.app.data.isShowLoading)

@@ -180,6 +180,7 @@ export class Activities {
   totalAmount?: BigNumber
   imageUrl!: string
   decimals: number = 18
+  symbol?: string
 
   @Expose()
   eventTypeExplain(): string | undefined {
@@ -197,11 +198,12 @@ export class Activities {
       return "Sale"
     } else {
       /// if eventType is null, compare from address and to address
-      if (this.fromAccount && this.toAccount) {
-        return this.fromAccount === this.toAccount ? "List" : "Offer"
-      } else {
-        return undefined
-      }
+      // if (this.fromAccount && this.toAccount) {
+      //   return this.fromAccount === this.toAccount ? "List" : "Offer"
+      // } else {
+      //   return undefined
+      // }
+      return this.symbol?.toUpperCase() === "ETH" ? "List" : "Offer"
     }
   }
 
