@@ -141,7 +141,7 @@ function Home() {
         </div>
         <MyTable></MyTable>
       </div>
-      {/*<Jazzicon address={""} />*/}
+      {/*<Jazzicon address={"0xd0D4701A235BFdA9eE63ed68778962D5059ee2E5"} />*/}
       {/*Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque et fuga illo itaque nisi odio officia omnis placeat possimus, provident quae quos repudiandae, saepe voluptate? Culpa quam temporibus tenetur!*/}
       <DetailBox>
         <div className='detail_info'>
