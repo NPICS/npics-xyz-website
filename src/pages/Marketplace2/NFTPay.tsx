@@ -223,6 +223,12 @@ export default function NFTPay(props: {
                 message.error("Insufficient account balance")
                 return
             }
+
+            if ((payType & PayType.WETH) > 0 && wethBalance?.lte(0)) {
+                message.error("Insufficient WETH balance")
+                return
+            }
+
             if (!didReadService) {
                 message.error(`Please agree to NPics's Terms of service`)
                 return
