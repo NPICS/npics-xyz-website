@@ -24,6 +24,8 @@ import lightGH from '../assets/images/footer/lightGH.png'
 
 
 
+import login from '../assets/images/home/login.svg'
+import defaultAvatar from '../assets/images/home/defaultAvatar.svg'
 import MaskGroup1 from '../assets/images/home/MaskGroup1.png'
 import MaskGroup2 from '../assets/images/home/MaskGroup2.png'
 import MaskGroup3 from '../assets/images/home/MaskGroup3.png'
@@ -169,6 +171,8 @@ export const imgurl = {
     lightT,
   },
   home: {
+    defaultAvatar,
+    login,
     MaskGroup1,
     MaskGroup2,
     MaskGroup3,

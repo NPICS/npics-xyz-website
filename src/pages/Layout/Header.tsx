@@ -12,6 +12,7 @@ import { User } from "../../model/user";
 import { SessionStorageKey } from "../../utils/enums";
 import { urls } from "../../utils/urls";
 import { NavLink, useLocation } from 'react-router-dom';
+import { Icon } from 'component/Box';
 
 function XHeader() {
   const { activate, account, error } = useWeb3React()
@@ -223,7 +224,9 @@ function XHeader() {
         {/* <ThemeImg src={imgurl.notificationIcon} /> */}
         {/* <ThemeImg src={imgurl.withoutNoticeIcon} /> */}
         <div id="baseAccount" style={{ position: 'relative' }}>
-          <ThemeImg src={userInfo?.avatar || imgurl.EllipseIcon} onClick={walletPop} />
+          {userInfo.address ?
+            <Icon style={{ cursor: 'pointer' }} width='.34rem' height='.34rem' src={imgurl.home.defaultAvatar} onClick={walletPop} /> :
+            <Icon style={{cursor: 'pointer'}} width='.2rem' height='.2rem' src={imgurl.home.login} onClick={walletPop} />}
         </div>
         <Popover
           content={AccountHTML}
