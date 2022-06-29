@@ -310,7 +310,10 @@ export default function NFTPay(props: {
             setSuccessPopupOpen(false)
             props.dismiss?.() // success dismiss all popup
         }}>
-            {props.nft && hash ? <NFTPayCongratulations hash={hash} nft={props.nft!}/> : null}
+            {props.nft && hash ? <NFTPayCongratulations hash={hash} nft={props.nft!} dismiss={() => {
+                setSuccessPopupOpen(false)
+                props.dismiss?.()
+            }}/> : null}
         </Modal>
         {/* popup failed ❌ */}
         <Modal isOpen={failedPopupOpen}>

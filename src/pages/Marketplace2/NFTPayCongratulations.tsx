@@ -11,6 +11,7 @@ import {useState} from "react";
 import {useAsync} from "react-use";
 import {Npics} from "../../abi/Npics";
 import {useWeb3React} from "@web3-react/core";
+import {copyToClipboard} from "../../utils/clipboard-utils";
 
 const NFTCover = styled.img`
   display: block;
@@ -33,7 +34,8 @@ export const AttrLink = styled.a`
 
 export default function NFTPayCongratulations(props: {
     nft: CollectionDetail,
-    hash: string
+    hash: string,
+    dismiss?(): void
 }) {
     const navigate = useNavigate()
     const [neoAddress, setNeoAddress] = useState<string>()
@@ -116,9 +118,9 @@ export default function NFTPayCongratulations(props: {
         </Flex>
         <Flex alignItems={"center"} justifyContent={"center"} gap={".2rem"} marginTop={".3rem"}>
             <CancelButton
-                onClick={() => {
-                    // TODO: add nft to metamask
-                    alert("Coming soon")
+                onClick={async () => {
+                    props.dismiss?.()
+                    await copyToClipboard(props.nft.address)
                 }}>ADD to MetaMask</CancelButton>
             <ConfirmButton
                 onClick={() => {

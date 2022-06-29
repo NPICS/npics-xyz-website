@@ -3,6 +3,7 @@ import ShareIcon from "../../assets/images/market/nft_share_line.png"
 import {CollectionDetail} from "../../model/user";
 import styled from "styled-components";
 import {message} from "antd";
+import {copyToClipboard} from "../../utils/clipboard-utils";
 
 function IconWithBorder(props: {
     icon: string,
@@ -44,12 +45,13 @@ export default function NFTShare(props: {
     return <Flex justifyContent={"end"} alignItems={"start"}>
         <IconWithBorder icon={ShareIcon} tap={async () => {
             let link = window.location.href
-            if (navigator.clipboard && navigator.permissions) {
-                await navigator.clipboard.writeText(link)
-                message.success("Copy Successfully")
-            } else {
-                copyToClipboardWithCommand(link)
-            }
+            await copyToClipboard(link)
+            // if (navigator.clipboard && navigator.permissions) {
+            //     await navigator.clipboard.writeText(link)
+            //     message.success("Copy Successfully")
+            // } else {
+            //     copyToClipboardWithCommand(link)
+            // }
         }}/>
     </Flex>
 }
