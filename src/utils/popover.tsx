@@ -88,27 +88,8 @@ export function DebtPop(props: { Principal?: BigNumber, Interest?: BigNumber, no
   const Interest = numberFormat(props.Interest?.times(ethRate).div(10 ** globalConstant.bit).toFixed() ?? '---')
 
   return <Grid width={'6rem'} gridGap=".1rem" borderRadius="20px">
-    <Flex alignItems='center' justifyContent="space-between">
-      <Typography fontSize=".16rem" fontWeight="500" color="#000">Principal(real-time)</Typography>
-      <Typography fontSize=".16rem" fontWeight="500" color="#000">{`${props.Principal?.div(10 ** globalConstant.bit).toFixed(2, 1)}ETH ` ?? '---'}{` ($${Principal})`}</Typography>
-    </Flex>
-    <Flex alignItems='center' justifyContent="space-between">
-      <Typography fontSize=".16rem" fontWeight="500" color="#000">Interest(total)</Typography>
-      {/* <Typography fontSize=".16rem" fontWeight="500" color="#000">{props.Interest?.div(10 ** globalConstant.bit).toFixed(2, 1) ?? "---"}{`$(${Interest})`}</Typography> */}
-      <Typography fontSize=".16rem" fontWeight="500" color="#000">{props.noInterest}</Typography>
-    </Flex>
-
-    
-
-
-
-    <BorderBottom />
-
-    <Typography fontSize=".16rem" fontWeight="500" color="#000">Debt = Principal + Interest</Typography>
-
     <Typography fontSize=".14rem" fontWeight="500" color="rgba(0,0,0,.5)">Debt is the total of the principal and interest of the loan. The principal of the loan decreases with each repayment, and the interest per period is based on the principal balance plus any outstanding interest already accrued.</Typography>
     <Typography fontSize=".14rem" fontWeight="500" color="rgba(0,0,0,.5)">Please note that the interest will be settled before the principal for each repayment by default.</Typography>
-
   </Grid>
 }
 

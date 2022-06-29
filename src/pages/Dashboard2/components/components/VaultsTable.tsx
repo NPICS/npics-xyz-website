@@ -32,6 +32,7 @@ interface Result {
   collectionName: string,
   ltv: BigNumber,
   purchaseFloorPrice: BigNumber,
+  status: number
 }
 
 const StyledModal = styled(Modal)`
@@ -55,7 +56,7 @@ interface IProps {
   sortedInfo: string
 }
 
-function MyAgreement(props: IProps) {
+function VaultsTable(props: IProps) {
   const { activate, account, library } = useWeb3React()
   const [activities, setActivities] = useState<DataSource[]>([])
   const [loading, setLoading] = useState<boolean>(false)
@@ -70,12 +71,12 @@ function MyAgreement(props: IProps) {
       dataIndex: 'items',
       key: 'items',
       align: 'center',
-      render: (text, row) => <div className='items' onClick={() => jumpToEthscan(row)}>
+      render: (text, row) => <div className='items' style={{cursor: `${row.statusSrt === 'Terminated' ? '' :'pointer'}`}} onClick={() => jumpToEthscan(row)}>
         <img className='avatar' src={row.imageUrl} alt="" />
         <div className='text'>
           <div>
             <span title={row.collectionName}>{row.collectionName}</span>
-            <span>{`# ${row.tokenId}`}</span>
+            <span>{`#${row.tokenId}`}</span>
           </div>
           <div>
             Floor: <span><img src={imgurl.dashboard.ethGrey18} alt="" />{row.floorPrice.div(10 ** globalConstant.bit).toFixed(2, 1)}</span>
@@ -88,7 +89,7 @@ function MyAgreement(props: IProps) {
       dataIndex: 'contract',
       key: 'contract',
       align: 'center',
-      render: (text, row) => <div className='contract' onClick={() => jumpToNEOEthscan(row)}>
+      render: (text, row) => <div className='contract' style={{cursor: `${row.statusSrt === 'Terminated' ? '' :'pointer'}`}} onClick={() => jumpToNEOEthscan(row)}>
         <span title={row.collectionName}>NEO-{row.collectionName}</span>
         #{text}
         <Icon width=".16rem" height=".16rem" src={imgurl.dashboard.exportBlack18} alt="" />
@@ -262,17 +263,20 @@ function MyAgreement(props: IProps) {
 
         const dataSource: DataSource[] = []
         for (let i = 0; i < len; i++) {
+          const healthFactor = newArray[i].status ? new BigNumber(0) : newArray[i].debtData.healthFactor
+          const liquidatePrice = newArray[i].status ? new BigNumber(0) : newArray[i].liquidatePrice.liquidatePrice
+          const totalDebt = newArray[i].status ? new BigNumber(0) : newArray[i].debtData.totalDebt
           dataSource.push({
             key: `${i}`,
             items: newArray[i].tokenId,
             contract: newArray[i].tokenId,
-            debtString: new BigNumber(newArray[i].debtData.totalDebt.toString()).div(10 ** 18).toFixed(4, 1) || `${i}`,
-            debt: new BigNumber(newArray[i].debtData.totalDebt.toString()),
-            maxDebt: new BigNumber(newArray[i].debtData.totalDebt.toString()).plus(slippage(new BigNumber(newArray[i].debtData.totalDebt.toString()))),
-            liquidationPrice: new BigNumber(newArray[i].liquidatePrice.liquidatePrice.toString()).div(10 ** 18).toFixed(4, 1) || "--",
-            healthFactor: new BigNumber(newArray[i].debtData.healthFactor.toString()).div(10 ** 18).toFixed(4, 1) || "--",
-            status: new BigNumber(newArray[i].debtData.healthFactor.toString()).div(10 ** 18).toFixed(4, 1) || "--",
-            statusSrt: turnStr(newArray[i].debtData.healthFactor),
+            debtString: new BigNumber(totalDebt.toString()).div(10 ** 18).toFixed(4, 1) || `${i}`,
+            debt: new BigNumber(totalDebt.toString()),
+            maxDebt: new BigNumber(totalDebt.toString()).plus(slippage(new BigNumber(totalDebt.toString()))),
+            liquidationPrice: new BigNumber(liquidatePrice.toString()).div(10 ** 18).toFixed(4, 1) || "--",
+            healthFactor: new BigNumber(healthFactor.toString()).div(10 ** 18).toFixed(4, 1) || "--",
+            status: newArray[i].status,
+            statusSrt: turnStr(healthFactor),
             address: newArray[i].nftAddress,
             neoAddress: newArray[i].neoAddress,
             tokenId: newArray[i].tokenId,
@@ -283,7 +287,9 @@ function MyAgreement(props: IProps) {
             purchaseFloorPrice: newArray[i].purchaseFloorPrice,
           })
         }
+
         DebtPosition.current = dataSource
+
         setActivities(dataSource)
       } else {
         setActivities([])
@@ -350,4 +356,4 @@ function MyAgreement(props: IProps) {
 
 }
 
-export default MyAgreement
+export default VaultsTable

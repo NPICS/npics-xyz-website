@@ -47,7 +47,7 @@ export const Portrait = styled.img`
   display: block;
   object-fit: cover;
   border-radius: .1rem;
-  background: #e5e5e5;
+  /* background: #e5e5e5; */
   overflow: hidden;
   width: 1.46rem;
   height: 1.46rem;

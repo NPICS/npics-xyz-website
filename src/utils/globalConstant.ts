@@ -5,5 +5,5 @@ interface GlobalConstant {
 
 export const globalConstant:GlobalConstant = {
   bit: 18,
-  showNftx: false,
+  showNftx: true,
 }

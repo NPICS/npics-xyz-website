@@ -39,7 +39,7 @@ axios.interceptors.response.use((res: any) => {
     } else if (err.code === 403) {
         console.log(`error ${err.message}`)
     } else {
-        console.log("unknown error")
+        console.log(`err: ${err}`)
     }
     return Promise.reject(err);
 });
