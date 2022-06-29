@@ -6,7 +6,7 @@ import {useAppDispatch, useAppSelector} from "../../store/hooks";
 import BigNumber from "bignumber.js";
 import {numberFormat,thousandFormat} from "../../utils/urls";
 import {useEffect, useState} from "react";
-import {updateARP} from "../../store/app";
+import {fetchUser, updateARP} from "../../store/app";
 import {percentageFormat} from "../marketplace/components/utils";
 import http from "../../utils/http";
 import {deserializeArray} from "class-transformer";
@@ -22,6 +22,8 @@ import {connectors} from "../../utils/connectors";
 import {getNFTStatusInOpensea} from "../../utils/opensea";
 import {listedPricePop, VaultAprPop, DownPaymentPop} from "utils/popover";
 import ethIcon from "../../assets/images/market/eth_icon.svg"
+import {notification} from "antd";
+import {SessionStorageKey} from "../../utils/enums";
 
 const Shadow = styled(Flex)`
   background: #fff;
@@ -118,7 +120,7 @@ export default function NFTPrice(props: {
     const [availableBorrow, setAvailableBorrow] = useState<BigNumber | undefined>(undefined)
     const [actualAmount, setActualAmount] = useState<BigNumber>()
     const navigate = useNavigate()
-    const {account, activate} = useWeb3React()
+    const {account, activate, error, active} = useWeb3React()
 
     const [buyPopOpen, setBuyPopOpen] = useState<boolean>(false)
 
@@ -164,7 +166,16 @@ export default function NFTPrice(props: {
 
     async function buyClick() {
         try {
-            if (!account) {
+            if (error) {
+                const _error = JSON.parse(JSON.stringify(error))
+                if (_error.name === "UnsupportedChainIdError") {
+                    notification.error({ message: "Prompt connection failed, please use the Ethereum network" })
+                } else {
+                    notification.error({ message: "Please authorize to access your account" })
+                }
+                return
+            }
+            if (!account || !active) {
                 await activate(connectors.injected)
             }
             if (props.item && availableBorrow) {

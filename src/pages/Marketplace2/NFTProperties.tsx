@@ -66,6 +66,7 @@ export default function NFTProperties(props: {
             gap={".12rem"}
             borderBottom={"1px solid #0000001A"}
             padding={".14rem .25rem"}
+            alignItems={"center"}
         >
             <Icon width={".24rem"} height={".24rem"} src={titlePrefixIcon}/>
             <Typography
