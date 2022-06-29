@@ -4,6 +4,7 @@
   "proxy": "http://192.168.1.61:10099/",
   "private": true,
   "dependencies": {
+    "@metamask/jazzicon": "^2.0.0",
     "@reduxjs/toolkit": "^1.8.1",
     "@web3-react/core": "^6.1.9",
     "@web3-react/injected-connector": "^6.0.7",
@@ -18,6 +19,7 @@
     "dayjs": "^1.11.3",
     "ethers": "^5.6.7",
     "gem-sdk": "^0.0.6-rc.9",
+    "jazzicon": "^1.5.0",
     "lodash": "^4.17.21",
     "moment": "^2.29.3",
     "normalize.css": "^8.0.1",

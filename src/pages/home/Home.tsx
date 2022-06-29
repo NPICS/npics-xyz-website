@@ -16,6 +16,7 @@ import http from "../../utils/http";
 import Npics from './components/Npics';
 import Title from './components/Title';
 import { Progress } from 'antd';
+import Jazzicon from "../../component/Jazzicon";
 const MyTable: any = styled(Table)`
   width: 16rem;
   height: 7.47rem;
@@ -117,6 +118,7 @@ function Home() {
 
   return (
     <HomeWrap>
+
       <Background>
         <HomeBox>
           <HomeLeft>
@@ -139,7 +141,8 @@ function Home() {
         </div>
         <MyTable></MyTable>
       </div>
-
+      {/*<Jazzicon address={""} />*/}
+      {/*Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque et fuga illo itaque nisi odio officia omnis placeat possimus, provident quae quos repudiandae, saepe voluptate? Culpa quam temporibus tenetur!*/}
       <DetailBox>
         <div className='detail_info'>
           <div className='detail_info_item'>
