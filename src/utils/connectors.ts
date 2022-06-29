@@ -10,14 +10,14 @@ export const connectors = {
   injected: new InjectedConnector({
     supportedChainIds: [1]
   }),
-  coinbase: new WalletLinkConnector({
-    url: "",
-    appName: "Npics",
-    supportedChainIds: [1]
-  }),
-  walletConnect: new WalletConnectConnector({
-    rpc: "",
-    bridge: "https://bridge.walletconnect.org",
-    qrcode: true
-  })
+  // coinbase: new WalletLinkConnector({
+  //   url: "",
+  //   appName: "Npics",
+  //   supportedChainIds: [1]
+  // }),
+  // walletConnect: new WalletConnectConnector({
+  //   rpc: "",
+  //   bridge: "https://bridge.walletconnect.org",
+  //   qrcode: true
+  // })
 }
