@@ -107,7 +107,7 @@ const columns:ColumnsType<activities> = [
       if(!text) return
       window.open(`https://etherscan.io/address/${text}`)
     }}>
-    { text ? text.replace(text.substr(7, 31), '...') : '--'}
+    { text ? text.replace(text.substring(7, 31), '...') : '--'}
  </div>
   },
   {
@@ -119,7 +119,7 @@ const columns:ColumnsType<activities> = [
         if(!text) return
         window.open(`https://etherscan.io/address/${text}`)
       }}>
-        { text ? text.replace(text.substr(7, 31), '...') : '--'}
+        { text ? text.replace(text.substring(7, 31), '...') : '--'}
     </div>
   },
   {

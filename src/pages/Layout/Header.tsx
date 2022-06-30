@@ -143,7 +143,7 @@ function XHeader() {
       <div className='account-address'>
         <img className='address-icon' src={imgurl.address} alt="" />
         <div className='address-text'>
-          <span>{userInfo?.address && userInfo?.address.replace(userInfo?.address.substr(11, 15), '...')}</span>
+          <span>{userInfo?.address && userInfo?.address.replace(userInfo?.address.substring(11, 30), '...')}</span>
           <div className='connected'>
             Connected with MetaMask
           </div>

@@ -27,7 +27,6 @@ export const BgTable = styled.div`
         font-size: .16rem;
         &>span:nth-child(1) {
           width: .67rem;
-          margin-right: .03rem;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
@@ -58,7 +57,6 @@ export const BgTable = styled.div`
     color: #000;
     &>span {
       width: 1.11rem;
-      margin-right: .03rem;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;

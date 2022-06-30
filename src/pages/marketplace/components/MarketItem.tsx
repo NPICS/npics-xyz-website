@@ -141,7 +141,7 @@ function MarketItem() {
               <li>
                 <span>Contract Address</span>
                 <div onClick={jumpToContract}>
-                  <span className='address'>{collectionItemsDetail?.address.replace(collectionItemsDetail?.address.substr(6, 30), '...')}</span>
+                  <span className='address'>{collectionItemsDetail?.address.replace(collectionItemsDetail?.address.substring(6, 30), '...')}</span>
                   <img src={imgurl.market.exportIcon} alt="" />
                 </div>
               </li>
@@ -212,7 +212,7 @@ function MarketItem() {
               <img src={imgurl.home.SwiperIcon} alt="" />
               <span>Owner</span>
               <div className='address'>
-                <span>{owner.replace(owner.substr(7, 31), '...')}</span>
+                <span>{owner.replace(owner.substring(7, 31), '...')}</span>
                 <img src={imgurl.market.exportIcon} alt="" />
               </div>
             </div>

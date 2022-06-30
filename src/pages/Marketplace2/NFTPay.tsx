@@ -225,7 +225,7 @@ export default function NFTPay(props: {
             }
 
             if ((payType & PayType.WETH) > 0 && wethBalance?.lte(0)) {
-                message.error("Insufficient WETH balance")
+                message.error("WETH balance is insufficient.")
                 return
             }
 

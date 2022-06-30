@@ -11,7 +11,7 @@ import { fetchUser, setIsLogin } from 'store/app';
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 import { connectors } from 'utils/connectors';
 import { SessionStorageKey } from 'utils/enums';
-import { DataSource, DebtData, LiquidatePrice, BgTable, Record } from './Tableutils';
+import { DataSource, DebtData, LiquidatePrice, BgTable, Record } from './StyledInterface';
 import { useNavigate } from "react-router-dom";
 import NotFound from 'component/NotFound';
 import { useUpdateEffect } from 'utils/hook';

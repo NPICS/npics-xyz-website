@@ -1,7 +1,7 @@
 import React from "react"
 import { Box, Flex, Icon, Typography } from "component/Box";
 import { imgurl } from 'utils/globalimport';
-import { DataSource } from './Tableutils';
+import { DataSource } from './StyledInterface';
 import { copyToClipboard } from 'utils/clipboard-utils'
 interface IProps {
   setShowPayment: React.Dispatch<React.SetStateAction<boolean>>

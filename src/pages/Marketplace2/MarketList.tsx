@@ -78,6 +78,7 @@ export default function MarketList() {
     const [searchText, setSearchText] = useState<string | undefined>(undefined)
     const [total, setTotal] = useState<number>(0)
     const [listData, setListData] = useState<CollectionItems[]>([])
+    const [loading, setLoading] = useState<boolean>(false)
     const [currentPage, setCurrentPage] = useState<number>(0)
     const isLoading = useRef(false)
     const [currentSort, setCurrentSort] = useState<"asc" | "desc" | "rarityScore" | "rarityScoreDesc" | string>("asc")
@@ -109,8 +110,8 @@ export default function MarketList() {
 
     async function loadData() {
         isLoading.current = true
-        console.log(`page => ${currentPage}, ${nftAddress}`)
         if (currentPage > 0) {
+            setLoading(true)
             let resp: any = await http.myPost(`/npics-nft/app-api/v2/nft/getCollectionItems`, {
                 address: nftAddress,
                 direction: currentSort,
@@ -124,6 +125,7 @@ export default function MarketList() {
                 setListData(currentPage === 1 ? newListData : listData.concat(newListData))
                 setTotal(resp.data.total)
             }
+            setLoading(false)
         }
         isLoading.current = false
     }
@@ -165,7 +167,7 @@ export default function MarketList() {
                 </Flex>
             </Flex>
             {
-                listData.length ? <InfiniteScroll
+                loading ? <Flex alignItems="center" justifyContent="center"><Icon src={imgurl.market.progressIcon} alt="" /></Flex> : listData.length ? <InfiniteScroll
 
                         pageStart={1}
                         loadMore={() => {

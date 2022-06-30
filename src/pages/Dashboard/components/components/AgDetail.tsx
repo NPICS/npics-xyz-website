@@ -144,12 +144,12 @@ export default function AgDetail(props: Iprops) {
             Minted NFT
           </div>
           <div onClick={jumpToMarket} style={{ cursor: 'pointer' }}>
-            <span>{`${detailInfo?.address.replace(detailInfo?.address.substr(7, 31), '...')} #${detailInfo?.tokenId}`}</span>
+            <span>{`${detailInfo?.address.replace(detailInfo?.address.substring(7, 31), '...')} #${detailInfo?.tokenId}`}</span>
             <img src={imgurl.market.exportIcon} alt="" />
           </div>
         </div>
 
-        <div>
+        <div>substring
           <div>
             Estimated Profit
           </div>
