@@ -89,6 +89,10 @@ const checkAuth = (routers:any, path:String)=>{
       component: <Home />
     },
     {
+      path: "/web3",
+      component: <Web3Example />
+    },
+    {
       path: "/marketPlace",
       component: <Market />,
       children: [

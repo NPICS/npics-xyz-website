@@ -179,7 +179,7 @@ export default function NFTPrice(props: {
             if (!account || !active) {
                 await activate(connectors.injected)
             }
-            if (props.item && availableBorrow) {
+            if (props.item && availableBorrow && account) {
                 setBuyPopOpen(true)
             }
         } catch (e) {
