@@ -1,18 +1,35 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { imgurl } from 'utils/globalimport';
-import { Modal, notification, Popover, message } from 'antd';
+import { notification, Popover, message } from 'antd';
 import { useWeb3React } from '@web3-react/core';
 import { connectors } from "utils/connectors";
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { clearUserData, fetchUser, fetchUser2, setIsLogin, setIsShowConnect } from 'store/app';
-import { BtnLink, FlexDiv, LogoLink, Nav, ThemeImg } from './headerStyled';
+import { FlexDiv, LogoLink, Nav } from './headerStyled';
 import WalletBalance from './WalletBalance';
 import { deserialize } from "class-transformer";
 import { User } from "../../model/user";
 import { SessionStorageKey } from "../../utils/enums";
 import { urls } from "../../utils/urls";
 import { NavLink, useLocation } from 'react-router-dom';
-import { Icon } from 'component/Box';
+import { Flex, Icon, Typography } from 'component/Box';
+import styled from 'styled-components';
+
+const StyledtWallet = styled(Flex)`
+  cursor: pointer;
+  box-sizing: border-box;
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: .1rem 0 .1rem .25rem;
+  min-width: 2.6rem;
+  min-height: .6rem;
+  &:hover {
+    background: #FFFFFF;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    border: 1px solid #fff;
+  }
+`
 
 function XHeader() {
   const { activate, account, error } = useWeb3React()
@@ -165,6 +182,12 @@ function XHeader() {
       </span>
     </div>)
   }
+  const ConnectWallet = () => {
+    return (<StyledtWallet onClick={connect} alignItems="center">
+      <Typography marginRight='.2rem'><Icon width='.4rem' height='.4rem' src={imgurl.metamaskLogo} alt="" /></Typography>
+      <Typography fontSize='.16rem' fontWeight='700' color='#000'>MetaMask</Typography>
+    </StyledtWallet>)
+  }
 
   document.addEventListener("click", event => {
     if (!accountPop) return
@@ -173,6 +196,7 @@ function XHeader() {
     if (cDom === tDom || cDom.contains(tDom)) {
     } else {
       setAccountPop(false)
+      action(setIsShowConnect(false))
     }
   });
 
@@ -193,12 +217,12 @@ function XHeader() {
   const history = useLocation()
   const [activiRoute, setActiviRoute] = useState<string>('')
   useEffect(() => {
-    console.log(history.pathname.substring(1,4));
-    console.log(history.pathname.substring(1,13));
-    if(history.pathname.substring(1,4) === 'nft') {
+    console.log(history.pathname.substring(1, 4));
+    console.log(history.pathname.substring(1, 13));
+    if (history.pathname.substring(1, 4) === 'nft') {
       setActiviRoute('nft')
       return
-    } else if(history.pathname.substring(1,13) === 'vaultsDetail'){
+    } else if (history.pathname.substring(1, 13) === 'vaultsDetail') {
       setActiviRoute('vaultsDetail')
       return
     }
@@ -212,18 +236,18 @@ function XHeader() {
         <LogoLink to={"/"}>
           <img src={imgurl.logoBeta} alt="" />
         </LogoLink>
-        <NavLink 
+        <NavLink
           to={"marketPlace"}
           style={({ isActive }) =>
-          isActive ? active : normal}
+            isActive ? active : normal}
         >
-          <span style={{color: `${activiRoute === 'nft' ? '#fff' : ''}`}}>Marketplace</span>
+          <span style={{ color: `${activiRoute === 'nft' ? '#fff' : ''}` }}>Marketplace</span>
         </NavLink>
         <NavLink to={"/dashboard"}
-         style={({ isActive }) =>
-         isActive ? active : normal}
+          style={({ isActive }) =>
+            isActive ? active : normal}
         >
-          <span style={{color: `${activiRoute === 'vaultsDetail' ? '#fff' : ''}`}}>Dashboard</span>
+          <span style={{ color: `${activiRoute === 'vaultsDetail' ? '#fff' : ''}` }}>Dashboard</span>
         </NavLink>
         <a style={{
           "fontSize": ".16rem",
@@ -240,7 +264,7 @@ function XHeader() {
         <div id="baseAccount" style={{ position: 'relative' }}>
           {userInfo.address ?
             <Icon style={{ cursor: 'pointer' }} width='.34rem' height='.34rem' src={imgurl.home.defaultAvatar} onClick={walletPop} /> :
-            <Icon style={{cursor: 'pointer'}} width='.2rem' height='.2rem' src={imgurl.home.login} onClick={walletPop} />}
+            <Icon style={{ cursor: 'pointer' }} width='.2rem' height='.2rem' src={imgurl.home.login} onClick={walletPop} />}
         </div>
         <Popover
           content={AccountHTML}
@@ -249,10 +273,26 @@ function XHeader() {
           visible={accountPop}
           getPopupContainer={(triggerNode: any) => document.getElementById("baseAccount") || document.body}
           placement={'bottomRight'}
+          overlayClassName="accountPopover"
+        >
+        </Popover>
+
+        <Popover
+          content={ConnectWallet}
+          title={<Typography
+            fontSize=".16rem"
+            fontWeight="700"
+            color="#000"
+          >Connect a wallet</Typography>}
+          trigger="click"
+          visible={showConnect}
+          getPopupContainer={(triggerNode: any) => document.getElementById("baseAccount") || document.body}
+          placement={'bottomRight'}
+          overlayClassName="walletPopover"
         >
         </Popover>
       </FlexDiv>
-      <Modal
+      {/* <Modal
         footer={false}
         title='Connect a wallet'
         onCancel={() => action(setIsShowConnect(false))}
@@ -260,7 +300,7 @@ function XHeader() {
         className="ant-modal-reset"
       >
         <div onClick={connect}><img src={imgurl.metamaskLogo} alt=""></img>MetaMask</div>
-      </Modal>
+      </Modal> */}
     </Nav>
   );
 }
