@@ -225,7 +225,8 @@ function XHeader() {
   return (
     <Nav>
       <Flex
-        width="19rem"
+        position="absolute"
+        width="16.06rem"
         justifyContent="space-between"
       >
       <FlexDiv>

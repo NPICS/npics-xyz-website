@@ -92,8 +92,12 @@ const checkAuth = (routers:any, path:String)=>{
       path: '/',
       component: <Home />
     },
+    // {
+    //   path: "/web3",
+    //   component: <Web3Example />
+    // },
     {
-      path: "/marketplace",
+      path: "/marketPlace",
       component: <Market />,
       children: [
         {
