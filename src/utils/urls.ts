@@ -12,6 +12,7 @@ export const urls = {
   contactUs: "https://docs.google.com/forms/d/e/1FAIpQLSdZVptvuauolOiMSIYb5F3wn2foiKnm7Z0IclOHxvObY_lJrw/viewform?usp=pp_url",
   Resources: "https://npics.gitbook.io/npics-v1.0/about/introduce-npics",
   termsOfService: "https://npics.gitbook.io/npics-v1.0/resources/terms-of-service",
+  gitBookRewards: "https://npics.gitbook.io/npics-v1.0/about-npics/nft-backed-position-nbp/rewards",
 
   etherscanTxDetail(tx: string) {
     return `https://etherscan.io/tx/${tx}`

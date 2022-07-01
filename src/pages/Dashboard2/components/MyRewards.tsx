@@ -11,6 +11,7 @@ import {User} from "../../../model/user";
 import {deserialize} from "class-transformer";
 import Dashboard from '../../Dashboard/Dashboard';
 import { imgurl } from "utils/globalimport";
+import { urls } from '../../../utils/urls';
 
 export default function MyRewards() {
   const { account, library } = useWeb3React()
@@ -72,8 +73,12 @@ export default function MyRewards() {
             <Typography fontSize={".24rem"} fontWeight={"700"} color={"#000"}>{balance && new BigNumber(balance?.toString()).dp(3,1).div(10 ** 18).toFixed(4,1)}</Typography>
           </Flex>
          
-          <ButtonDefault scale={true} disabled={balance?.toString() === '0'} types={`${balance?.toString() === '0' ? 'disabled' : 'second' }`} onClick={onRewards}>
+          <ButtonDefault scale={true} disabled={balance?.toString() === '0'} types={"normal"} onClick={onRewards}>
             Claim
+          </ButtonDefault>
+
+          <ButtonDefault scale={true} types={'normal'} onClick={() => {window.open(urls.gitBookRewards)}}>
+            NBP
           </ButtonDefault>
 
         </Flex>
