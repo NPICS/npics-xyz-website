@@ -19,7 +19,7 @@ export const connectors = {
   walletConnect: new WalletConnectConnector({
     rpc: { [1]: "https://mainnet.infura.io/v3/c9a7c383d1c24d30b899a72282f4e436" },
     qrcode: true,
-    supportedChainIds: [1],
-    qrcodeModalOptions: QRCodeModal.open
+    supportedChainIds: [1]
+    // qrcodeModalOptions: QRCodeModal.open
   })
 }
