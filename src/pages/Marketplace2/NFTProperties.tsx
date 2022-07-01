@@ -89,7 +89,7 @@ export default function NFTProperties(props: {
                         title={it.trait_type}
                         value={it.value ?? "---"}
                         description={
-                            `${it.trait_count}(${(it.trait_count / 100).toFixed(2)}%) have this trait`
+                            `${it.trait_count}(${(it.trait_count / 100).toFixed(2)}%) have this`
                         }
                     />
                 })

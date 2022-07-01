@@ -78,10 +78,10 @@ export default function CollectionCell(props: {
         <Box padding={".07rem .15rem .18rem"}>
             <Flex alignItems={"center"} gap={".06rem"}>
                 <NoWarpTypography fontWeight={500} fontSize={".14rem"}
-                                  color={"rgba(0,0,0,.5)"}>{props.item.collectionName.replace(props.item.collectionName.substring(10), '...')}</NoWarpTypography>
+                    color={"rgba(0,0,0,.5)"}>{props.item.collectionName.length > 10 ? props.item.collectionName.replace(props.item.collectionName.substring(10), '...') : props.item.collectionName}</NoWarpTypography>
                 <Typography fontWeight={500}
-                            fontSize={".14rem"}
-                            color={"rgba(0,0,0,.5)"}>
+                    fontSize={".14rem"}
+                    color={"rgba(0,0,0,.5)"}>
                     {`#${props.item.tokenId}`}</Typography>
             </Flex>
             <Flex
