@@ -141,7 +141,7 @@ export default function MarketList() {
                 <Box width={"6.85rem"} position="relative">
                     <InputStyled
                         type="text"
-                        placeholder='Search'
+                        placeholder='Search number'
                         onPressEnter={(e: any) => {
                             setCurrentPage(1)
                             setSearchText(e.target.value)

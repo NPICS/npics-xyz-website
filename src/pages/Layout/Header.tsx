@@ -12,7 +12,7 @@ import { User } from "../../model/user";
 import { SessionStorageKey } from "../../utils/enums";
 import { urls } from "../../utils/urls";
 import { NavLink, useLocation } from 'react-router-dom';
-import { Flex, Icon, Typography } from 'component/Box';
+import { Flex, Icon, Typography, Box } from 'component/Box';
 import styled from 'styled-components';
 
 const StyledtWallet = styled(Flex)`
@@ -190,13 +190,13 @@ function XHeader() {
   }
 
   document.addEventListener("click", event => {
-    if (!accountPop) return
+    // if (!accountPop) return
     var cDom = document.getElementById("baseAccount") || document.body;
     var tDom: any = event.target;
     if (cDom === tDom || cDom.contains(tDom)) {
     } else {
-      setAccountPop(false)
       action(setIsShowConnect(false))
+      setAccountPop(false)
     }
   });
 
@@ -261,11 +261,21 @@ function XHeader() {
         {/* <ThemeImg src={imgurl.gas_icon}/> */}
         {/* <ThemeImg src={imgurl.notificationIcon} /> */}
         {/* <ThemeImg src={imgurl.withoutNoticeIcon} /> */}
-        <div id="baseAccount" style={{ position: 'relative' }}>
+        <Flex 
+          alignItems='center'
+          justifyContent='center'
+          background={`${showConnect ? "rgba(255,255,255,.1)" : "rgba(255,255,255,.2)"}`}
+          borderRadius="10px"
+          width='.34rem'
+          height='.34rem'
+          id="baseAccount"
+          style={{ position: 'relative',cursor: 'pointer' }}
+          onClick={walletPop}
+        >
           {userInfo.address ?
-            <Icon style={{ cursor: 'pointer' }} width='.34rem' height='.34rem' src={imgurl.home.defaultAvatar} onClick={walletPop} /> :
-            <Icon style={{ cursor: 'pointer' }} width='.2rem' height='.2rem' src={imgurl.home.login} onClick={walletPop} />}
-        </div>
+            <Icon width='.34rem' height='.34rem' src={imgurl.home.defaultAvatar}  /> :
+            <Icon width='.14rem' height='.16rem' src={imgurl.home.login} />}
+        </Flex>
         <Popover
           content={AccountHTML}
           title={AccountTitle}

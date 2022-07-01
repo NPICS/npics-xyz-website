@@ -102,7 +102,7 @@ export default function Market() {
                     color={"#fff"}
                     fontSize={"30px"}
                     fontWeight={"800"}>
-                    Collection
+                    Collections
                 </Typography>
             </Box>
             <Flex

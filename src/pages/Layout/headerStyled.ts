@@ -31,7 +31,7 @@ export const accountNav = [
 ]
 
 export const Nav = styled.div`
-  width: 100%;
+  width: 19.03rem;
   height: .9rem;
   display: flex;
   justify-content: space-between;
@@ -139,11 +139,13 @@ export const Nav = styled.div`
         box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.1);
         border-radius: 20px;
         margin-top: .2rem;
-        padding: .2rem;
+        padding: .2rem .2rem .3rem .2rem;
         .ant-popover-title{
+          min-height: 0;
           font-weight: 700;
           font-size: .16rem;
           color: #000;
+          margin-left: .1rem;
           margin-bottom: .1rem;
           border-bottom: 0;
           padding: 0;

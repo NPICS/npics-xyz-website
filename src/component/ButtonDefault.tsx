@@ -11,7 +11,8 @@ interface Iprops {
   disabled?: boolean,
   scale?: boolean,
   children: string | any,
-  onClick?: Function | any
+  onClick?: Function | any,
+  color?: string
 }
 
 const StyledButton = styled.button<Iprops>`
@@ -24,6 +25,7 @@ const StyledButton = styled.button<Iprops>`
   }
   &:disabled {
     box-shadow: ${(props => props.types === 'second'? "none" : '')};
+    border: ${(props => props.types === 'second'? "0" : '')};
     background-color: ${(props => props.types === 'normal'? "rgba(204,204,204)" : '#fff')};
   }
   background: ${(props => {
@@ -66,17 +68,19 @@ const StyledButton = styled.button<Iprops>`
         return null;
     }
   })};
+  color: ${(props => props.color)};
    color: ${(props => {
     switch (props.types) {
       case 'normal':
         return '#fff';
       case 'second':
         return '#000';
+      case 'three':
+        return '#fff';
       default:
         return null;
     }
   })};
-  color: ${(props => props.color)};
   background: ${(props => props.disabled ?  props.types === 'normal'? 'rgba(204,204,204)' : "#fff" : '')};
   color: ${(props => props.disabled ?  props.types === 'normal'? '#fff' : "rgba(0,0,0,.5)" : '')};
   width: ${(props => props.width)};
@@ -114,7 +118,7 @@ ButtonDefault.defaultProps = {
   text: 'button',
   fontSize: '16px',
   types: 'one',
-  color: '#fff',
+  // color: '#fff',
   disabled: false,
 }
  
