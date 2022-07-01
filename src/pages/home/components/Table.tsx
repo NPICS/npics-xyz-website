@@ -96,7 +96,7 @@ export default function MyTable() {
       dataIndex: 'collection',
       key: 'collection',
       align: 'left',
-      render: (text, row) => <Link to={`/marketPlace/collections/${row.address}`} onClick={() => ScrollTop()}>
+      render: (text, row) => <Link to={`/marketplace/collections/${row.address}`} onClick={() => ScrollTop()}>
         <div style={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center'}}>
           <img src={row.imageUrl} alt="" style={{ width: ".6rem", height: ".6rem", marginRight: ".1rem", borderRadius: '30px'}} />
           <span style={{ color: '#fff', fontWeight: '700', marginRight: '.05rem' }}>{text}</span>

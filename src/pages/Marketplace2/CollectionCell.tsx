@@ -19,6 +19,7 @@ const IconTest = styled.img`
   display: block;
   width: .22rem;
   height: .22rem;
+  border-radius: .11rem;
   user-select: none;
 `
 
@@ -26,6 +27,11 @@ const NoWarpTypography = styled(Typography)`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+`
+const FlexHover = styled(Flex)`
+    &:hover {
+        box-shadow:0px 0px 20px rgba(0, 0, 0, 0.2);
+    }
 `
 
 export default function CollectionCell(props: {
@@ -40,9 +46,10 @@ export default function CollectionCell(props: {
         window.scrollTo(0, 0)
     }
 
-    return <Flex
+    return <FlexHover
         borderRadius={'.1rem'}
-        border={"1px solid rgba(0,0,0,.1)"}
+        // border={"1px solid rgba(0,0,0,.1)"}
+        boxShadow="0px 0px 20px rgba(0, 0, 0, 0.1)"
         overflow={"hidden"}
         flexDirection={"column"}
         position={"relative"}
@@ -59,8 +66,9 @@ export default function CollectionCell(props: {
         <Flex
             flexDirection={"row"}
             padding={".01rem .05rem"}
-            borderRadius={".04rem"}
-            background={"#fff"}
+            borderRadius={"10px"}
+            boxShadow="0px 0px 10px rgba(0, 0, 0, 0.1)"
+            background={"rgba(255,255,255,.5)"}
             alignItems={"center"}
             gap={".04rem"}
             position={"absolute"}
@@ -70,8 +78,8 @@ export default function CollectionCell(props: {
             hidden={props.item.rarityScore <= 0}>
             <Icon height={".2rem"} width={".2rem"} src={CellTagIcon}/>
             <Typography
-                color={"#000"}
-                fontSize={".16rem"}
+                color={"rgba(0,0,0,.6)"}
+                fontSize={props.compact ? ".14rem" : ".16rem"}
                 fontWeight={"500"}
             >{props.item.rarityScore}</Typography>
         </Flex>
@@ -103,5 +111,5 @@ export default function CollectionCell(props: {
             </Flex>
         </Box>
 
-    </Flex>
+    </FlexHover>
 }

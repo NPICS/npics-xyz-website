@@ -1,4 +1,6 @@
+import { Skeleton } from 'antd'
 import { css } from 'styled-components'
+import { Flex } from './Box'
 
 export const flex = css`
 display: flex;

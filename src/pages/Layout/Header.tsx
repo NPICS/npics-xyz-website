@@ -91,7 +91,7 @@ function XHeader() {
 
   const connect = async () => {
     try {
-      if (error) {
+      await activate(connectors.injected, (error) => {
         const Error = JSON.parse(JSON.stringify(error))
         if (Error.name === "UnsupportedChainIdError") {
           sessionStorage.removeItem(SessionStorageKey.WalletAuthorized)
@@ -99,14 +99,6 @@ function XHeader() {
           notification.error({ message: "Prompt connection failed, please use the Ethereum network" })
         } else {
           notification.error({ message: "Please authorize to access your account" })
-        }
-        return
-      }
-      await activate(connectors.injected, (e) => {
-        if (e.name === "UnsupportedChainIdError") {
-          sessionStorage.removeItem(SessionStorageKey.WalletAuthorized)
-          action(fetchUser(`{}`))
-          notification.error({ message: "Prompt connection failed, please use the Ethereum network" })
         }
       })
       action(fetchUser2())
@@ -190,7 +182,7 @@ function XHeader() {
   }
 
   document.addEventListener("click", event => {
-    // if (!accountPop) return
+    if (!accountPop && !showConnect) return
     var cDom = document.getElementById("baseAccount") || document.body;
     var tDom: any = event.target;
     if (cDom === tDom || cDom.contains(tDom)) {
@@ -232,6 +224,10 @@ function XHeader() {
 
   return (
     <Nav>
+      <Flex
+        width="19rem"
+        justifyContent="space-between"
+      >
       <FlexDiv>
         <LogoLink to={"/"}>
           <img src={imgurl.logoBeta} alt="" />
@@ -311,6 +307,7 @@ function XHeader() {
       >
         <div onClick={connect}><img src={imgurl.metamaskLogo} alt=""></img>MetaMask</div>
       </Modal> */}
+      </Flex>
     </Nav>
   );
 }

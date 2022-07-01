@@ -77,9 +77,9 @@ export default function MyRewards() {
             Claim
           </ButtonDefault>
 
-          <ButtonDefault scale={true} types={'normal'} onClick={() => {window.open(urls.gitBookRewards)}}>
+          {/* <ButtonDefault scale={true} types={'normal'} onClick={() => {window.open(urls.gitBookRewards)}}>
             NBP
-          </ButtonDefault>
+          </ButtonDefault> */}
 
         </Flex>
       </Flex>

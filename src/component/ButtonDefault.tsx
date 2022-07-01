@@ -17,15 +17,15 @@ interface Iprops {
 
 const StyledButton = styled.button<Iprops>`
   &:hover {
-    background-color: ${(props => props.types === 'normal'? "#333333" : '')};
+    background: ${(props => props.types === 'normal'? "#333333" : '')};
     background: ${(props => props.types === 'second'? "#FFFFFF" : '')};
     box-shadow: ${(props => props.types === 'second'? "0px 0px 20px rgba(0, 0, 0, 0.1)" : '')};
     border: ${(props => props.types === 'second'? "0" : '')};
     transform: ${(props => props.disabled ? '' : props.scale ? 'scale(1.06)' : '')};
   }
   &:disabled {
-    box-shadow: ${(props => props.types === 'second'? "none" : '')};
     border: ${(props => props.types === 'second'? "0" : '')};
+    box-shadow: ${(props => props.types === 'second'? "none" : '')};
     background-color: ${(props => props.types === 'normal'? "rgba(204,204,204)" : '#fff')};
   }
   background: ${(props => {

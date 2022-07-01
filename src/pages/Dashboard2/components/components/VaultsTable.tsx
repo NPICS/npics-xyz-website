@@ -218,7 +218,9 @@ function VaultsTable(props: IProps) {
       return 'Inforce'
     } else if (factor >= 1 && factor < 1.5) {
       return 'In Risk'
-    } else if (factor < 1) {
+    } else if ( 0 < factor  && factor < 1) {
+      return 'In Liquidation'
+    } else if ( factor <= 0 ) {
       return 'Terminated'
     }
     return ''
@@ -321,7 +323,7 @@ function VaultsTable(props: IProps) {
             console.log(`😈 ${isLogin}`)
           } else {
             if (!account) {
-                if (error) {
+                activate(connectors.injected, (error) => {
                   const _error = JSON.parse(JSON.stringify(error))
                   if (_error.name === "UnsupportedChainIdError") {
                     sessionStorage.removeItem(SessionStorageKey.WalletAuthorized)
@@ -329,14 +331,6 @@ function VaultsTable(props: IProps) {
                     notification.error({ message: "Prompt connection failed, please use the Ethereum network" })
                   } else {
                     notification.error({ message: "Please authorize to access your account" })
-                  }
-                  return
-                }
-                activate(connectors.injected, (e) => {
-                  if (e.name === "UnsupportedChainIdError") {
-                    sessionStorage.removeItem(SessionStorageKey.WalletAuthorized)
-                    action(fetchUser(`{}`))
-                    notification.error({ message: "Prompt connection failed, please use the Ethereum network" })
                   }
                 })
             }

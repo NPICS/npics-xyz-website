@@ -21,6 +21,7 @@ import {globalConstant} from "utils/globalConstant";
 import ContentLoader from "react-content-loader"
 import {useAsync} from "react-use";
 import BigNumber from "bignumber.js";
+import SkeletonTemplate from "component/SkeletonTemplate";
 
 const {Option} = Select;
 
@@ -78,7 +79,7 @@ export default function MarketList() {
     const [searchText, setSearchText] = useState<string | undefined>(undefined)
     const [total, setTotal] = useState<number>(0)
     const [listData, setListData] = useState<CollectionItems[]>([])
-    const [loading, setLoading] = useState<boolean>(false)
+    const [loading, setLoading] = useState<boolean>(true)
     const [currentPage, setCurrentPage] = useState<number>(0)
     const isLoading = useRef(false)
     const [currentSort, setCurrentSort] = useState<"asc" | "desc" | "rarityScore" | "rarityScoreDesc" | string>("asc")
@@ -111,7 +112,10 @@ export default function MarketList() {
     async function loadData() {
         isLoading.current = true
         if (currentPage > 0) {
-            setLoading(true)
+            // Prevent more list loading from loading
+            if(currentPage === 1) {
+                setLoading(true)
+            }
             let resp: any = await http.myPost(`/npics-nft/app-api/v2/nft/getCollectionItems`, {
                 address: nftAddress,
                 direction: currentSort,
@@ -125,7 +129,9 @@ export default function MarketList() {
                 setListData(currentPage === 1 ? newListData : listData.concat(newListData))
                 setTotal(resp.data.total)
             }
-            setLoading(false)
+            if(currentPage === 1) {
+                setLoading(false)
+            }
         }
         isLoading.current = false
     }
@@ -167,7 +173,17 @@ export default function MarketList() {
                 </Flex>
             </Flex>
             {
-                loading ? <Flex alignItems="center" justifyContent="center"><Icon src={imgurl.market.progressIcon} alt="" /></Flex> : listData.length ? <InfiniteScroll
+                loading ? <Grid
+                    marginTop={".25rem"}
+                    gridTemplateColumns={`repeat(${compactMode ? 8 : 5}, 1fr)`}
+                    gridGap={".1rem"}
+                    justifyContent={"space-between"}
+                    alignItems={"start"}
+                    overflow={"auto"}
+                >
+                    {new Array(30).fill('').map(() => <SkeletonTemplate widthWrap={`${compactMode ? '1.79rem' : '2.9rem'}`} />)}
+                </Grid>
+                    : listData.length ?  <InfiniteScroll
 
                         pageStart={1}
                         loadMore={() => {
@@ -181,7 +197,7 @@ export default function MarketList() {
                         <Grid
                             marginTop={".25rem"}
                             gridTemplateColumns={`repeat(${compactMode ? 8 : 5}, 1fr)`}
-                            gridGap={".1rem"}
+                            gridGap={".25rem"}
                             justifyContent={"space-between"}
                             alignItems={"start"}
                             overflow={"auto"}>

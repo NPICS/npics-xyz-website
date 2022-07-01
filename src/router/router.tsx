@@ -84,12 +84,16 @@ const checkAuth = (routers:any, path:String)=>{
 }
 
   const routesD: RouterT[] = [
+    // {
+    //   path: 'web3',
+    //   component: <Web3 />
+    // },
     {
       path: '/',
       component: <Home />
     },
     {
-      path: "/marketPlace",
+      path: "/marketplace",
       component: <Market />,
       children: [
         {

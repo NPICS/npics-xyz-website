@@ -31,7 +31,7 @@ export const accountNav = [
 ]
 
 export const Nav = styled.div`
-  width: 19.03rem;
+  width: 100%;
   height: .9rem;
   display: flex;
   justify-content: space-between;

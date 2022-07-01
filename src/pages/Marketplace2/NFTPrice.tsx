@@ -119,7 +119,7 @@ export default function NFTPrice(props: {
     const [availableBorrow, setAvailableBorrow] = useState<BigNumber | undefined>(undefined)
     const [actualAmount, setActualAmount] = useState<BigNumber>()
     const navigate = useNavigate()
-    const {account, activate, error, active} = useWeb3React()
+    const {account, activate, active} = useWeb3React()
 
     const [buyPopOpen, setBuyPopOpen] = useState<boolean>(false)
 
@@ -165,21 +165,31 @@ export default function NFTPrice(props: {
 
     async function buyClick() {
         try {
-            if (error) {
-                const _error = JSON.parse(JSON.stringify(error))
-                if (_error.name === "UnsupportedChainIdError") {
-                    sessionStorage.removeItem(SessionStorageKey.WalletAuthorized)
-                    action(fetchUser(`{}`))
-                    notification.error({ message: "Prompt connection failed, please use the Ethereum network" })
-                } else {
-                    notification.error({ message: "Please authorize to access your account" })
-                }
-                return
-            }
+            // if (error) {
+            //     console.log('error',error)
+            //     const _error = JSON.parse(JSON.stringify(error))
+            //     if (_error.name === "UnsupportedChainIdError") {
+            //         sessionStorage.removeItem(SessionStorageKey.WalletAuthorized)
+            //         action(fetchUser(`{}`))
+            //         notification.error({ message: "Prompt connection failed, please use the Ethereum network" })
+            //     } else {
+            //         notification.error({ message: "Please authorize to access your account" })
+            //     }
+            //     return
+            // }
             if (!account || !active) {
-                await activate(connectors.injected)
+                await activate(connectors.injected, (error) => {
+                    const _error = JSON.parse(JSON.stringify(error))
+                    if (_error.name === "UnsupportedChainIdError") {
+                        sessionStorage.removeItem(SessionStorageKey.WalletAuthorized)
+                        action(fetchUser(`{}`))
+                        notification.error({ message: "Prompt connection failed, please use the Ethereum network" })
+                    } else {
+                        notification.error({ message: "Please authorize to access your account" })
+                    }
+                })
             }
-            if (props.item && availableBorrow) {
+            if (props.item && availableBorrow && account) {
                 setBuyPopOpen(true)
             }
         } catch (e) {
@@ -272,7 +282,7 @@ export default function NFTPrice(props: {
                     if (recommendNFTs.length === idx + 1) {
                         return <MoreNFT
                             tap={() => {
-                                navigate(`/marketPlace/collections/${nft?.address}`)
+                                navigate(`/marketplace/collections/${nft?.address}`)
                             }}
                             img={nft.imageUrl}
                             total={recommendNFTTotal}

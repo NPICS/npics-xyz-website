@@ -213,13 +213,13 @@ function Home() {
               </div>
 
               <BorrowBtn>
-                <ButtonDefault types={"one"} onClick={() => {
+                <ButtonDefault types={"second"} onClick={() => {
                   window.open(urls.resource, "_blank")
                 }}>
                   Learn More
                 </ButtonDefault>
                 <Link to={'/dashboard/rewards'}>
-                  <ButtonDefault types={"two"}>
+                  <ButtonDefault color="#fff" types={"two"}>
                     Claim Rewards
                   </ButtonDefault>
                 </Link>
