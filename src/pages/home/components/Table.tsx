@@ -92,7 +92,7 @@ export default function MyTable() {
       </div>}
     },
     {
-      title: 'collection',
+      title: 'Collection',
       dataIndex: 'collection',
       key: 'collection',
       align: 'left',
@@ -101,7 +101,6 @@ export default function MyTable() {
           <img src={row.imageUrl} alt="" style={{ width: ".6rem", height: ".6rem", marginRight: ".1rem", borderRadius: '30px'}} />
           <span style={{ color: '#fff', fontWeight: '700', marginRight: '.05rem' }}>{text}</span>
           <Icon
-           
             src={openseaValidIcon}
             width={".16rem"}
             height={".16rem"} 

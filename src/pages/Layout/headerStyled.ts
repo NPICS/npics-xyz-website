@@ -172,11 +172,29 @@ export const LogoLink = styled(NavLink)`
   display: flex;
   align-items: center;
   margin-right: 1.2rem;
+  img{
+    width: 1.8rem;
+  }
 `
 export const FlexDiv = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  .tools{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .tools_bg{
+    /* display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 0.28rem;
+    height: 0.28rem;
+    background: rgba(255,255,255,0.5);
+    margin-right: 0.2rem;
+    border-radius: 7px; */
+  }
 `
 export const ThemeImg = styled.img`
   width: .34rem;

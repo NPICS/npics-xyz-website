@@ -39,6 +39,27 @@ function XHeader() {
   const userInfo = useAppSelector(state => deserialize(User, state.app.currentUser))
   const showConnect = useAppSelector(state => state.app.data.isShowConnect)
 
+  const terms = [
+    {
+      darkIcon: imgurl.footer.darkT,
+      lightIcon: imgurl.footer.lightT,
+      link: urls.twitter,
+      name: "Twitter"
+    },
+    {
+      darkIcon: imgurl.footer.darkG,
+      lightIcon: imgurl.footer.lightG,
+      link: "/",
+      name: "Game"
+    },
+    {
+      darkIcon: imgurl.footer.darkM,
+      lightIcon: imgurl.footer.lightM,
+      link: urls.medium,
+      name: "Medium"
+    }
+  ]
+
   useEffect(() => {
     console.log(`Account Change => New: ${account}, Old: ${oldAccount.current}`)
     // changed account
@@ -229,77 +250,90 @@ function XHeader() {
         width="16.06rem"
         justifyContent="space-between"
       >
-      <FlexDiv>
-        <LogoLink to={"/"}>
-          <img src={imgurl.logoBeta} alt="" />
-        </LogoLink>
-        <NavLink
-          to={"marketPlace"}
-          style={({ isActive }) =>
-            isActive ? active : normal}
-        >
-          <span style={{ color: `${activiRoute === 'nft' ? '#fff' : ''}` }}>Marketplace</span>
-        </NavLink>
-        <NavLink to={"/dashboard"}
-          style={({ isActive }) =>
-            isActive ? active : normal}
-        >
-          <span style={{ color: `${activiRoute === 'vaultsDetail' ? '#fff' : ''}` }}>Dashboard</span>
-        </NavLink>
-        <a style={{
-          "fontSize": ".16rem",
-          "fontWeight": "600",
-          "color": "rgba(255,255,255,.5)"
-        }} target="_blank" rel="noreferrer" href={urls.resource}>Resources</a>
-      </FlexDiv>
+        <FlexDiv>
+          <LogoLink to={"/"}>
+            <img src={imgurl.logoBeta} alt="" />
+          </LogoLink>
+          <NavLink
+            to={"marketPlace"}
+            style={({ isActive }) =>
+              isActive ? active : normal}
+          >
+            <span style={{ color: `${activiRoute === 'nft' ? '#fff' : ''}` }}>Marketplace</span>
+          </NavLink>
+          <NavLink to={"/dashboard"}
+            style={({ isActive }) =>
+              isActive ? active : normal}
+          >
+            <span style={{ color: `${activiRoute === 'vaultsDetail' ? '#fff' : ''}` }}>Dashboard</span>
+          </NavLink>
+          <a style={{
+            "fontSize": ".16rem",
+            "fontWeight": "600",
+            "color": "rgba(255,255,255,.5)"
+          }} target="_blank" rel="noreferrer" href={urls.resource}>Resources</a>
+        </FlexDiv>
 
-      <FlexDiv>
-        {/* <ThemeImg src={imgurl.worldwideIcon} /> */}
-        {/* <ThemeImg src={imgurl.gas_icon}/> */}
-        {/* <ThemeImg src={imgurl.notificationIcon} /> */}
-        {/* <ThemeImg src={imgurl.withoutNoticeIcon} /> */}
-        <Flex 
-          alignItems='center'
-          justifyContent='center'
-          background={`${showConnect ? "rgba(255,255,255,.1)" : "rgba(255,255,255,.2)"}`}
-          borderRadius="10px"
-          width='.34rem'
-          height='.34rem'
-          id="baseAccount"
-          style={{ position: 'relative',cursor: 'pointer' }}
-          onClick={walletPop}
-        >
-          {userInfo.address ?
-            <Icon width='.34rem' height='.34rem' src={imgurl.home.defaultAvatar}  /> :
-            <Icon width='.14rem' height='.16rem' src={imgurl.home.login} />}
-        </Flex>
-        <Popover
-          content={AccountHTML}
-          title={AccountTitle}
-          trigger="click"
-          visible={accountPop}
-          getPopupContainer={(triggerNode: any) => document.getElementById("baseAccount") || document.body}
-          placement={'bottomRight'}
-          overlayClassName="accountPopover"
-        >
-        </Popover>
+        <FlexDiv>
+          <div className='tools'>
+            {
+              terms.map((item) => {
+                return (
+                  <a href={item.link} key={item.name} >
+                    <div className='tools_bg'>
+                      <Icon style={{ cursor: 'pointer', marginRight: '0.22rem' }} width='.22rem' height='.22rem' src={item.darkIcon} />
+                    </div>
+                  </a>
+                )
+              })
+            }
+          </div>
+          {/* <ThemeImg src={imgurl.worldwideIcon} /> */}
+          {/* <ThemeImg src={imgurl.gas_icon}/> */}
+          {/* <ThemeImg src={imgurl.notificationIcon} /> */}
+          {/* <ThemeImg src={imgurl.withoutNoticeIcon} /> */}
+          <Flex
+            alignItems='center'
+            justifyContent='center'
+            background={`${showConnect ? "rgba(255,255,255,.1)" : "rgba(255,255,255,.2)"}`}
+            borderRadius="10px"
+            width='.34rem'
+            height='.34rem'
+            id="baseAccount"
+            style={{ position: 'relative', cursor: 'pointer' }}
+            onClick={walletPop}
+          >
+            {userInfo.address ?
+              <Icon width='.34rem' height='.34rem' src={imgurl.home.defaultAvatar} /> :
+              <Icon width='.14rem' height='.16rem' src={imgurl.home.login} />}
+          </Flex>
+          <Popover
+            content={AccountHTML}
+            title={AccountTitle}
+            trigger="click"
+            visible={accountPop}
+            getPopupContainer={(triggerNode: any) => document.getElementById("baseAccount") || document.body}
+            placement={'bottomRight'}
+            overlayClassName="accountPopover"
+          >
+          </Popover>
 
-        <Popover
-          content={ConnectWallet}
-          title={<Typography
-            fontSize=".16rem"
-            fontWeight="700"
-            color="#000"
-          >Connect a wallet</Typography>}
-          trigger="click"
-          visible={showConnect}
-          getPopupContainer={(triggerNode: any) => document.getElementById("baseAccount") || document.body}
-          placement={'bottomRight'}
-          overlayClassName="walletPopover"
-        >
-        </Popover>
-      </FlexDiv>
-      {/* <Modal
+          <Popover
+            content={ConnectWallet}
+            title={<Typography
+              fontSize=".16rem"
+              fontWeight="700"
+              color="#000"
+            >Connect a wallet</Typography>}
+            trigger="click"
+            visible={showConnect}
+            getPopupContainer={(triggerNode: any) => document.getElementById("baseAccount") || document.body}
+            placement={'bottomRight'}
+            overlayClassName="walletPopover"
+          >
+          </Popover>
+        </FlexDiv>
+        {/* <Modal
         footer={false}
         title='Connect a wallet'
         onCancel={() => action(setIsShowConnect(false))}

@@ -17,6 +17,7 @@ import Npics from './components/Npics';
 import Title from './components/Title';
 import { Progress } from 'antd';
 import Jazzicon from "../../component/Jazzicon";
+import Detail from './components/Detail';
 const MyTable: any = styled(Table)`
   width: 16rem;
   height: 7.47rem;
@@ -31,57 +32,30 @@ function Home() {
   const PartnerData = [
     {
       url: imgurl.home.MetaMask,
-      title: "MetaMask",
-      text: "The most trusted & secure crypto wallet",
-      content: "Wallet"
+    },
+    {
+      url: imgurl.home.Ethereum,
     },
     {
       url: imgurl.home.BendDAO,
-      title: "BendDAO",
-      text: "The first NFTs collateral to borrow ETH app.",
-      content: "Dapp"
     },
     {
-      url: imgurl.home.gem,
-      title: "gem",
-      text: "The NFTs best aggregate marketplace",
-      content: "Makerplace"
+      url: imgurl.home.Opensea,
     },
     {
       url: imgurl.home.X2Y2,
-      title: "X2Y2",
-      text: "The community NFTs marketplace",
-      content: "Makerplace"
-    },
-    {
-      url: imgurl.home.Opensea2,
-      title: "OpenSea",
-      text: "The largest NFTs marketplace",
-      content: "Makerplace"
     },
     {
       url: imgurl.home.Looksrare,
-      title: "Looksrare",
-      text: "The people NFTs marketplace",
-      content: "Makerplace"
     },
     {
       url: imgurl.home.DYDX,
-      title: "DYDX",
-      text: "An open platform for advanced cryptofinancial products",
-      content: "Protocol"
     },
     {
       url: imgurl.home.Aave,
-      title: "AAVE",
-      text: "Best Cryptocurrency Wallet",
-      content: "Makerplace"
     },
     {
-      url: imgurl.home.Trustwallet,
-      title: "Trustwallet",
-      text: "Best Cryptocurrency Wallet",
-      content: "Makerplace"
+      url: imgurl.home.Uniswap,
     },
   ]
   const StepsList = ['Choose', 'Checkout', 'Payment']
@@ -145,18 +119,7 @@ function Home() {
       {/*Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque et fuga illo itaque nisi odio officia omnis placeat possimus, provident quae quos repudiandae, saepe voluptate? Culpa quam temporibus tenetur!*/}
       <DetailBox>
         <div className='detail_info'>
-          <div className='detail_info_item'>
-            <div className='info_item_title'>Advanced mortgage to buy NFTs</div>
-            <div className='info_item_text'>One-click down payment to purchase a Blue-chip with optimal financing, which achieved through NBP Protocol, stands for NFT-backed Position. </div>
-          </div>
-          <div className='detail_info_item'>
-            <div className='info_item_title'>Flexible Repayment to redeem NFTs</div>
-            <div className='info_item_text'>Repay at your own pace as long as vault is generated.</div>
-          </div>
-          <div className='detail_info_item'>
-            <div className='info_item_title'>Sell NFT outright to settle profits</div>
-            <div className='info_item_text'>Sell it outright to close the vault, including ownership transfer and profits settlement. </div>
-          </div>
+          <Detail />
         </div>
         <div className='detail_img_box'>
           <img className='detail_img' src={imgurl.home.Deail} alt="" />
@@ -257,11 +220,10 @@ function Home() {
         </div>
 
         <div className='partnerGroup'>
-          {PartnerData.map((item) => {
+          {PartnerData.map((item,index) => {
             return (
-              <PartnerBox key={item.title} content={item.content}>
+              <PartnerBox key={index}>
                 <img src={item.url} alt="" />
-                <span>{item.title}</span>
               </PartnerBox>)
           })}
         </div>

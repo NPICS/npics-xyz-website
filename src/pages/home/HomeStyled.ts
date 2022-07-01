@@ -214,6 +214,7 @@ export const DetailBox = styled.div`
     padding: 1rem 0 .2rem;
     color: #fff;
     .detail_info{
+      width: 50%;
       flex: 1;
       .info_item_title{
         ${title};
@@ -243,10 +244,9 @@ export const DetailBox = styled.div`
     }
 
 `
-
 export const Partners = styled.div`
   margin: 0 auto;
-  padding-bottom: 2.21rem;
+  padding-bottom: 2rem;
   .title {
     width: 5.3rem;
     margin: 0 auto;
@@ -276,7 +276,7 @@ cursor: pointer;
   transform: scale(1.06);
 }
 img{
-  width: .6rem;
+  width: 1.9rem;
 }
 span{
       width: .8rem;
@@ -287,61 +287,6 @@ span{
     white-space: nowrap;
     font-size: .2rem;
 }
-  /* display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  grid-template-rows: repeat(3, minmax(0, 1fr));
-  gap: 2rem; */
-  /* position: relative;
-  width: 4.6rem;
-  height: 2.1rem;
-  border: .01rem solid rgba(255,255,255,.2);
-  border-radius: .1rem;
-  padding: .2rem .3rem .32rem .3rem;
-  margin-right: .3rem;
-  margin-bottom: .3rem;
-  box-sizing: border-box;
-  &>:nth-child(1) {
-    width: .8rem;
-    height: .8rem;
-    background-color: #000;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  &>:nth-child(2) {
-    font-family: 'PingFang HK';
-    font-style: normal;
-    font-weight: 600;
-    font-size: .22rem;
-    color: #FFFFFF;
-    margin: .2rem 0 .1rem ;
-  }
-  &>:nth-child(3) {
-    font-family: 'PingFang HK';
-    font-style: normal;
-    font-weight: 600;
-    white-space: nowrap;
-    font-size: .14rem;
-    color: rgba(255, 255, 255, 0.6);
-  }
-  &::before {
-    content:  '${(props: { content: string }) => props.content}';
-    color: #FFFFFF;
-    font-weight: 600;
-    font-size: .16rem;;
-    position: absolute;
-    border-bottom-left-radius: 10px;
-    border-top-right-radius: 10px;
-    width: 1.1rem;
-    height: .44rem;
-    line-height: .44rem;
-    text-align: center;
-    background: rgba(255,255,255,.1);
-    top: 0;
-    right: 0;
-  } */
 `
 export const Introduces = styled.div`
   margin: 0 auto;
@@ -377,7 +322,7 @@ export const Introduces = styled.div`
   }
   .Introduces_swiper{
     width: 16rem;
-    height: 100vh;
+    height: 86vh;
     margin: 0 auto;
     /* padding: 1rem 0 .2rem; */
   }
