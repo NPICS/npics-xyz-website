@@ -1,25 +1,26 @@
-import React, { useEffect, useState, useRef } from 'react'
-import { Table, message, notification, Modal } from 'antd';
-import { imgurl } from 'utils/globalimport';
+import React, {useEffect, useRef, useState} from 'react'
+import {message, Modal, notification, Table} from 'antd';
+import {imgurl} from 'utils/globalimport';
 import BigNumber from 'bignumber.js';
 import http from 'utils/http'
-import { ColumnsType } from 'antd/lib/table';
-import { LendPool } from 'abi/LendPool'
-import { useWeb3React } from '@web3-react/core';
-import { getSignMessage } from 'utils/sign';
-import { fetchUser, setIsLogin } from 'store/app';
-import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
-import { connectors } from 'utils/connectors';
-import { SessionStorageKey } from 'utils/enums';
-import { DataSource, DebtData, LiquidatePrice, BgTable, Record } from './StyledInterface';
-import { useNavigate } from "react-router-dom";
+import {ColumnsType} from 'antd/lib/table';
+import {LendPool} from 'abi/LendPool'
+import {useWeb3React} from '@web3-react/core';
+import {getSignMessage} from 'utils/sign';
+import {fetchUser, setIsLogin} from 'store/app';
+import {useAppDispatch, useAppSelector} from '../../../../store/hooks';
+import {connectors} from 'utils/connectors';
+import {SessionStorageKey} from 'utils/enums';
+import {BgTable, DataSource, DebtData, LiquidatePrice, Record} from './StyledInterface';
+import {useNavigate} from "react-router-dom";
 import NotFound from 'component/NotFound';
-import { useUpdateEffect } from 'utils/hook';
-// import aa from 'abi/aa.json'
-import { Flex, Grid, Icon, Typography } from 'component/Box';
-import { globalConstant } from 'utils/globalConstant';
+import {useUpdateEffect} from 'utils/hook';
+import {aa} from './data'
+import {Flex, Grid, Icon, Typography} from 'component/Box';
+import {globalConstant} from 'utils/globalConstant';
 import styled from 'styled-components';
 import ButtonDefault from 'component/ButtonDefault';
+
 interface Result {
   createTime: string,
   id: number,
@@ -100,6 +101,7 @@ function VaultsTable(props: IProps) {
       dataIndex: 'debtString',
       key: 'debtString',
       align: 'center',
+      width: '1.8rem',
       render: (text) => <div className='imgPrice'>
         <Icon width=".18rem" height=".18rem" src={imgurl.dashboard.ethBlack18} alt="" />
         {text}
@@ -120,6 +122,7 @@ function VaultsTable(props: IProps) {
       dataIndex: 'healthFactor',
       align: 'center',
       key: 'healthFactor',
+      width: '1.8rem',
       render: (text) => <div className='healthFactor'>
         {text}
       </div>
@@ -129,6 +132,7 @@ function VaultsTable(props: IProps) {
       dataIndex: 'statusSrt',
       key: 'statusSrt',
       align: 'center',
+      width: '1.8rem',
       render: (text) => <div className='status'>
         {text}
       </div>
@@ -138,6 +142,7 @@ function VaultsTable(props: IProps) {
       dataIndex: 'actions',
       key: 'actions',
       align: 'center',
+      width: '1.8rem',
       render: (t, row: any) => row.statusSrt === "Terminated" ? <div /> : <div className='actionBtn' onClick={() => navigate(`/vaultsDetail/${row.address}/${row.tokenId}`)}>
         Repay
       </div>,
@@ -235,8 +240,8 @@ function VaultsTable(props: IProps) {
     }
     try {
       const result: any = await http.myPost(url, pageInside)
-      let orgData: Result[] = result.data.records
-      // orgData = aa.data.records
+      let orgData: any[] = result.data.records
+      orgData = aa.data.records
       if (result.code === 200 && orgData.length) {
         const signer = library.getSigner(account)
         let lendPool = new LendPool(signer)
@@ -259,8 +264,7 @@ function VaultsTable(props: IProps) {
         }
 
         const slippage = (data: BigNumber) => {
-          let val = BigNumber.minimum(data.multipliedBy(new BigNumber('0.001')), new BigNumber('0.01').multipliedBy(10 ** 18))
-          return val
+          return BigNumber.minimum(data.multipliedBy(new BigNumber('0.001')), new BigNumber('0.01').multipliedBy(10 ** 18))
         }
 
         const dataSource: DataSource[] = []

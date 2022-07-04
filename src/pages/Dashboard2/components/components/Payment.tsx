@@ -45,6 +45,7 @@ export default function Payment(props:IProps) {
       if(payInfo.progressVal === 1) {
         setIsPayingAllDebts(true)
       } else {
+        message.success("Successful repayment!")
         setShowPayment(false)
       }
       setReload(!reload)

@@ -131,7 +131,7 @@ export default function MyTable() {
       dataIndex: 'floorPrice',
       key: 'floorPrice',
       align: 'center',
-      defaultSortOrder: 'descend',
+      // defaultSortOrder: 'descend',
       sorter: (a, b) => a.floorPrice - b.floorPrice,
       render: (text) => <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
         <img src={imgurl.whitePrice} alt=""  style={{marginRight: ".1rem"}}/>
@@ -143,7 +143,7 @@ export default function MyTable() {
       dataIndex: 'advanceRate',
       align: 'center',
       key: 'advanceRate',
-      defaultSortOrder: 'descend',
+      // defaultSortOrder: 'descend',
       sorter: (a, b) => a.advanceRate - b.advanceRate,
       render: (text) => <div>{`${text}%`}</div>
     },
@@ -152,7 +152,7 @@ export default function MyTable() {
       dataIndex: 'primePrice',
       key: 'primePrice',
       align: 'center',
-      defaultSortOrder: 'descend',
+      // defaultSortOrder: 'descend',
       sorter: (a, b) => a.floorPrice - b.floorPrice,
       render: (text) => <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
         <img src={imgurl.redPrice} alt="" style={{marginRight: ".1rem"}}/>

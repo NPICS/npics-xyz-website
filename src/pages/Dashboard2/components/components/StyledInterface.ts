@@ -26,11 +26,11 @@ export const BgTable = styled.div`
         color: #000;
         font-size: .16rem;
         &>span:nth-child(1) {
-          width: .67rem;
+          max-width: .67rem;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
-          text-align: right;
+          text-align: left;
         }
         &>span:nth-child(2) {
           white-space: nowrap;
@@ -60,7 +60,7 @@ export const BgTable = styled.div`
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      text-align: right;
+      text-align: left;
     }
     &>img {
       width: .16rem;

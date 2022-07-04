@@ -156,7 +156,7 @@ function Home() {
                     <div className='text'>
                       <div>
                         <span>Interest APR</span>
-                        <span>{`-${aprData.apr.toFixed(2)}%`}</span>
+                        <span>{`${-aprData.apr.toFixed(2)}%`}</span>
                       </div>
                       <span>The real-time annual percentage rate of interest to be paid to the lending pool.</span>
                     </div>
