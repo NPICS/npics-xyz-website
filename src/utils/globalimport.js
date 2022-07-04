@@ -203,7 +203,6 @@ export const imgurl = {
     twitterIcon,
     telegramIcon,
     gameIcon,
-    gitHubIcon,
     gearIcon,
     ethBlack22,
     ethBlack40,

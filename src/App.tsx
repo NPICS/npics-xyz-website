@@ -10,9 +10,7 @@ import { SessionStorageKey } from 'utils/enums';
 import { notification } from 'antd';
 
 function App() {
-    const { error } = useWeb3React()
     const action = useAppDispatch()
-
     // generate data
     useAsync(async () => {
         action(updateUSDTExchangeRate())

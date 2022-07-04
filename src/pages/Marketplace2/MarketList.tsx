@@ -147,7 +147,7 @@ export default function MarketList() {
                 <Box width={"6.85rem"} position="relative">
                     <InputStyled
                         type="text"
-                        placeholder='Search number'
+                        placeholder='Search NFTs by name or token ID'
                         onPressEnter={(e: any) => {
                             setCurrentPage(1)
                             setSearchText(e.target.value)
