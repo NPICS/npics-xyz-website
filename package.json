@@ -1,7 +1,7 @@
 {
   "name": "untitled",
   "version": "0.1.0",
-  "proxy": "http://192.168.1.61:10099/",
+  "proxy": "http://16.162.44.108:18094/",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.1",

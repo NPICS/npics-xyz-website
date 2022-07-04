@@ -27,11 +27,13 @@ const NoWarpTypography = styled(Typography)`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  transition: all .2s;
 `
 const FlexHover = styled(Flex)`
-    &:hover {
-        box-shadow:0px 0px 20px rgba(0, 0, 0, 0.2);
-    }
+  &:hover {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    transition: all .2s;
+  }
 `
 
 export default function CollectionCell(props: {

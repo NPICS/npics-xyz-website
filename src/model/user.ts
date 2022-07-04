@@ -1,6 +1,6 @@
 import BigNumber from "bignumber.js";
 import {Expose} from "class-transformer";
-import {TransformBigNumber} from "./transform";
+import TransformBigNumber from "./transform/bigNumber";
 import {AddressAbbreviation} from "../pages/marketplace/components/utils";
 import {numberFormat} from "../utils/urls";
 import {imgurl} from "../utils/globalimport";
@@ -197,12 +197,6 @@ export class Activities {
     } else if (this.eventType === "successful") {
       return "Sale"
     } else {
-      /// if eventType is null, compare from address and to address
-      // if (this.fromAccount && this.toAccount) {
-      //   return this.fromAccount === this.toAccount ? "List" : "Offer"
-      // } else {
-      //   return undefined
-      // }
       return this.symbol?.toUpperCase() === "ETH" ? "List" : "Offer"
     }
   }

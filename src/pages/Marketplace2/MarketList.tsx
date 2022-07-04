@@ -128,6 +128,8 @@ export default function MarketList() {
                 let newListData = deserializeArray(CollectionItems, JSON.stringify(resp.data.records))
                 setListData(currentPage === 1 ? newListData : listData.concat(newListData))
                 setTotal(resp.data.total)
+            } else {
+                setListData(currentPage === 1 ? [] : listData)
             }
             if(currentPage === 1) {
                 setLoading(false)
@@ -140,10 +142,10 @@ export default function MarketList() {
         <Box
             borderRadius={".1rem"}
             background={"#fff"}
-            padding={".4rem"}
+            padding={".4rem 0"}
             marginTop={".1rem"}
             boxShadow={"rgba(0,0,0,.5)"}>
-            <Flex height={".5rem"} gap={".12rem"} alignItems={"center"}>
+            <Flex height={".5rem"} gap={".12rem"} alignItems={"center"} padding={"0 .4rem"}>
                 <Box width={"6.85rem"} position="relative">
                     <InputStyled
                         type="text"
@@ -174,14 +176,15 @@ export default function MarketList() {
             </Flex>
             {
                 loading ? <Grid
-                    marginTop={".25rem"}
+                    padding={".25rem .4rem"}
+                    // marginTop={".25rem"}
                     gridTemplateColumns={`repeat(${compactMode ? 8 : 5}, 1fr)`}
                     gridGap={".1rem"}
                     justifyContent={"space-between"}
                     alignItems={"start"}
                     overflow={"auto"}
                 >
-                    {new Array(30).fill('').map(() => <SkeletonTemplate widthWrap={`${compactMode ? '1.79rem' : '2.9rem'}`} />)}
+                    {new Array(30).fill(0).map(() => <SkeletonTemplate widthWrap={`${compactMode ? '1.79rem' : '2.9rem'}`} />)}
                 </Grid>
                     : listData.length ?  <InfiniteScroll
 
@@ -195,7 +198,8 @@ export default function MarketList() {
                         loader={<div></div>}
                         initialLoad={false}>
                         <Grid
-                            marginTop={".25rem"}
+                            padding={".25rem .4rem"}
+                            // marginTop={".25rem"}
                             gridTemplateColumns={`repeat(${compactMode ? 8 : 5}, 1fr)`}
                             gridGap={".25rem"}
                             justifyContent={"space-between"}

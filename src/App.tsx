@@ -11,6 +11,7 @@ import { notification } from 'antd';
 
 function App() {
     const action = useAppDispatch()
+
     // generate data
     useAsync(async () => {
         action(updateUSDTExchangeRate())

@@ -4,7 +4,7 @@ import tipsIcon from "../../assets/images/market/exclamation_point.png"
 import {CollectionDetail, CollectionItems} from "../../model/user";
 import {useAppDispatch, useAppSelector} from "../../store/hooks";
 import BigNumber from "bignumber.js";
-import {numberFormat,thousandFormat} from "../../utils/urls";
+import {numberFormat, thousandFormat} from "../../utils/urls";
 import {useEffect, useState} from "react";
 import {fetchUser, updateARP} from "../../store/app";
 import {percentageFormat} from "../marketplace/components/utils";
@@ -12,7 +12,7 @@ import http from "../../utils/http";
 import {deserializeArray} from "class-transformer";
 import {Npics} from "../../abi/Npics";
 import {ethers} from "ethers";
-import Modal from "../../component/Modal";
+import Modal from "../../component/Modal/Modal";
 import NFTPay from "./NFTPay";
 import {message, notification, Popover} from "antd";
 import {globalConstant} from "utils/globalConstant";
@@ -22,7 +22,9 @@ import {connectors} from "../../utils/connectors";
 import {getNFTStatusInOpensea} from "../../utils/opensea";
 import {listedPricePop, VaultAprPop, DownPaymentPop} from "utils/popover";
 import ethIcon from "../../assets/images/market/eth_icon.svg"
-import { SessionStorageKey } from "utils/enums";
+import {SessionStorageKey} from "utils/enums";
+import useActiveWeb3React from "../../hooks/useActiveWeb3React";
+import {simpleRpcProvider} from "../../utils/rpcUrl";
 
 const Shadow = styled(Flex)`
   background: #fff;
@@ -119,7 +121,7 @@ export default function NFTPrice(props: {
     const [availableBorrow, setAvailableBorrow] = useState<BigNumber | undefined>(undefined)
     const [actualAmount, setActualAmount] = useState<BigNumber>()
     const navigate = useNavigate()
-    const {account, activate, active} = useWeb3React()
+    const {account, activate, active, library} = useActiveWeb3React()
 
     const [buyPopOpen, setBuyPopOpen] = useState<boolean>(false)
 
@@ -147,7 +149,7 @@ export default function NFTPrice(props: {
             } else {
             }
             // get availableBorrow
-            let contract = new Npics(ethers.getDefaultProvider())
+            let contract = new Npics(library)
             const availableBorrow = await contract.getAvailableBorrowsln(props.item?.address ?? "")
             setAvailableBorrow(availableBorrow)
         }
@@ -183,9 +185,9 @@ export default function NFTPrice(props: {
                     if (_error.name === "UnsupportedChainIdError") {
                         sessionStorage.removeItem(SessionStorageKey.WalletAuthorized)
                         action(fetchUser(`{}`))
-                        notification.error({ message: "Prompt connection failed, please use the Ethereum network" })
+                        notification.error({message: "Prompt connection failed, please use the Ethereum network"})
                     } else {
-                        notification.error({ message: "Please authorize to access your account" })
+                        notification.error({message: "Please authorize to access your account"})
                     }
                 })
             }
@@ -231,7 +233,7 @@ export default function NFTPrice(props: {
                         color={"rgba(0,0,0,.5)"}
                         marginLeft={".02rem"}
                         lineHeight={"100%"}
-                        style={{alignSelf:'end'}}
+                        style={{alignSelf: 'end'}}
                     >
                         {
                             `（${
@@ -243,7 +245,8 @@ export default function NFTPrice(props: {
                         }
                     </Typography>
                 </Flex>
-                <Flex style={{cursor: 'pointer'}} alignItems={"center"} gap={".1rem"} onClick={() => window.open(`${props.item?.marketUrl}`)}>
+                <Flex style={{cursor: 'pointer'}} alignItems={"center"} gap={".1rem"}
+                      onClick={() => window.open(`${props.item?.marketUrl}`)}>
                     <Icon width={".22rem"} height={".22rem"} src={props.item?.marketIcon()}/>
                     <Typography
                         fontSize={".14rem"}

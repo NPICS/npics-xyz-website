@@ -77,10 +77,6 @@ const Typography = styled.div<_TypographyProps>`
 `;
 
 interface IconProps extends BoxProps {
-    // width: string
-    // height?: string
-    // src?: string
-    // borderRadius?: string
 }
 
 const Icon = styled.img<IconProps>`
@@ -92,14 +88,6 @@ const Icon = styled.img<IconProps>`
   height: ${props => props.height ?? "auto"};
   object-fit: contain;
   -webkit-user-drag: none;
-
-  // display: inline-block;
-  // overflow: hidden;
-    // background: transparent url(${(props) => props.src}) no-repeat center;
-    // background-size: ${props => props.width} ${props => props.height ?? props.width};
-    // width: ${props => props.width};
-    // height: ${props => props.height ?? props.width};
-    // border-radius: ${props => props.width};
 `
 const GridItem = styled(Box)<GridProps>`
   display: flex;
