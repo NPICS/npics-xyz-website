@@ -26,9 +26,6 @@ import lightGH from '../assets/images/footer/lightGH.png'
 
 import login from '../assets/images/home/login.svg'
 import defaultAvatar from '../assets/images/home/defaultAvatar.svg'
-import MaskGroup1 from '../assets/images/home/MaskGroup1.png'
-import MaskGroup2 from '../assets/images/home/MaskGroup2.png'
-import MaskGroup3 from '../assets/images/home/MaskGroup3.png'
 import RectangleLeft from '../assets/images/home/Rectangle_left.png'
 import RectangleRight from '../assets/images/home/Rectangle_right.png'
 import Borrow1 from '../assets/images/home/Borrow1.png'
@@ -48,14 +45,17 @@ import twitterIcon from '../assets/images/home/twitterIcon.png'
 import gitHubIcon from '../assets/images/home/gitHubIcon.png'
 import telegramIcon from '../assets/images/home/telegramIcon.png'
 import gameIcon from '../assets/images/home/gameIcon.png'
-import MetaMask from '../assets/images/home/MetaMask.png'
-import BendDAO from '../assets/images/home/BendDAO.png'
-import gem from '../assets/images/home/gem.png'
-import X2Y2 from '../assets/images/home/X2Y2.png'
-import Opensea2 from '../assets/images/home/OpenSea2.png'
-import Looksrare from '../assets/images/home/Looksrare.png'
-import DYDX from '../assets/images/home/DYDX.png'
-import Trustwallet from '../assets/images/home/Trustwallet.png'
+
+import MetaMask from '../assets/images/home/metamask.png'
+import BendDAO from '../assets/images/home/bendDao.png'
+import X2Y2 from '../assets/images/home/x2y2.png'
+import Opensea from '../assets/images/home/opensea.png'
+import Looksrare from '../assets/images/home/looks.png'
+import DYDX from '../assets/images/home/dydx.png'
+import Aave from "../assets/images/home/aave.png"
+import Ethereum from "../assets/images/home/ethereum.png"
+import Uniswap from "../assets/images/home/uniswap.png"
+
 import gearIcon from '../assets/images/home/gearIcon.png'
 import ethBlack22 from '../assets/images/home/ethBlack22.png'
 import ethOrange22 from '../assets/images/home/ethOrange22.png'
@@ -66,7 +66,6 @@ import NpicsSwiper1 from "../assets/images/home/npics_swiper1.png"
 import NpicsSwiper2 from "../assets/images/home/npics_swiper2.png"
 import NpicsSwiper3 from "../assets/images/home/npics_swiper3.png"
 import NftsIcon from "../assets/images/home/nfts.png"
-import Aave from "../assets/images/home/aave.png"
 
 import Union1 from '../assets/images/market/Union1.png'
 import Union2 from '../assets/images/market/Union2.png'
@@ -173,9 +172,6 @@ export const imgurl = {
   home: {
     defaultAvatar,
     login,
-    MaskGroup1,
-    MaskGroup2,
-    MaskGroup3,
     RectangleLeft,
     RectangleRight,
     Borrow1,
@@ -191,14 +187,17 @@ export const imgurl = {
     HomeImg5,
     HomeImg6,
     HomeImg7,
+
     MetaMask,
     BendDAO,
-    gem,
     X2Y2,
-    Opensea2,
+    Opensea,
     Looksrare,
     DYDX,
-    Trustwallet,
+    Aave,
+    Ethereum,
+    Uniswap,
+
     map,
     twitterIcon,
     telegramIcon,
@@ -214,7 +213,6 @@ export const imgurl = {
     NpicsSwiper2,
     NpicsSwiper3,
     NftsIcon,
-    Aave
   },
   market: {
     Search,

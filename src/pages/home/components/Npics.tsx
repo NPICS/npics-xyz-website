@@ -4,7 +4,7 @@ import { imgurl } from 'utils/globalimport';
 import styled, { css } from 'styled-components';
 import "swiper/css";
 import "swiper/css/navigation";
-import { Navigation } from "swiper";
+import { Autoplay, Navigation } from "swiper";
 import Swiper from "swiper/types/swiper-class"
 
 const PointBox = styled.div`
@@ -31,7 +31,7 @@ const Npics = memo(
     const changSwiper = (e: any) => {
       setSelected(e.activeIndex);
     }
-    const changePoint = (index:number) => {
+    const changePoint = (index: number) => {
       if (swiper) {
         setSelected(index);
         swiper.slideTo(index);
@@ -40,15 +40,27 @@ const Npics = memo(
     const getSwiper = (swiper: Swiper) => {
       setSwiper(swiper);
     }
+    const mouseEnterSwiper = (e: any) => {
+      swiper?.autoplay.stop();
+    }
+    const mouseLeaveSwiper = (e: any) => {
+      swiper?.autoplay.start();
+    }
     return (
       <div className='npics_box'>
-        <div className='swiper_box'>
+        <div className='swiper_box' onMouseEnter={mouseEnterSwiper} onMouseLeave={mouseLeaveSwiper}>
           <SwiperProvide
             grabCursor={true}
             className="mySwiper"
             navigation={false}
             onSlideChange={changSwiper}
             onSwiper={getSwiper}
+            loop={true}
+            autoplay={{
+              delay: 6000,
+              disableOnInteraction: true,
+            }}
+            modules={[Autoplay]}
           >
             <SwiperSlide className='swiper_item'>
               <img className='swiper_item_img' style={{ width: '100%' }} src={imgurl.home.NpicsSwiper1} alt="" />
@@ -62,13 +74,11 @@ const Npics = memo(
           </SwiperProvide>
         </div >
         <PointBox>
-          <PointItem style={{width: selected === 0 ? '30px' : '8px' }} onClick={()=>changePoint(0)}></PointItem>
-          <PointItem style={{width: selected === 1 ? '30px' : '8px' }} onClick={()=>changePoint(1)}></PointItem>
-          <PointItem style={{width: selected === 2 ? '30px' : '8px' }} onClick={()=>changePoint(2)}></PointItem>
+          <PointItem style={{ width: selected === 1 || selected === 4 ? '30px' : '8px' }} onClick={() => changePoint(1)}></PointItem>
+          <PointItem style={{ width: selected === 2 ? '30px' : '8px' }} onClick={() => changePoint(2)}></PointItem>
+          <PointItem style={{ width: selected === 3 ? '30px' : '8px' }} onClick={() => changePoint(3)}></PointItem>
         </PointBox>
       </div>
-
-
     )
   }
 

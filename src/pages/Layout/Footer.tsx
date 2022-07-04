@@ -122,7 +122,7 @@ function Footer() {
         <div className="resources">
           <a href={urls.contactUs}  target="_blank" rel="noreferrer">Contact Us</a>
           <a href={urls.Resources} target="_blank" rel="noreferrer">Resources</a>
-          <a href="/" target="_blank" rel="noreferrer">Audit Report</a>
+          {/* <a href="/" target="_blank" rel="noreferrer">Audit Report</a> */}
           <a href={urls.termsOfService} target="_blank" rel="noreferrer">Terms of service</a>
         </div>
       </div>
