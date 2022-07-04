@@ -46,12 +46,12 @@ import gitHubIcon from '../assets/images/home/gitHubIcon.png'
 import telegramIcon from '../assets/images/home/telegramIcon.png'
 import gameIcon from '../assets/images/home/gameIcon.png'
 
-import MetaMask from '../assets/images/home/metamask.png'
-import BendDAO from '../assets/images/home/bendDao.png'
-import X2Y2 from '../assets/images/home/x2y2.png'
+import MetaMask from '../assets/images/home/MetaMask.png'
+import BendDAO from '../assets/images/home/BendDAO.png'
+import X2Y2 from '../assets/images/home/X2Y2.png'
 import Opensea from '../assets/images/home/opensea.png'
 import Looksrare from '../assets/images/home/looks.png'
-import DYDX from '../assets/images/home/dydx.png'
+import DYDX from '../assets/images/home/DYDX.png'
 import Aave from "../assets/images/home/aave.png"
 import Ethereum from "../assets/images/home/ethereum.png"
 import Uniswap from "../assets/images/home/uniswap.png"
