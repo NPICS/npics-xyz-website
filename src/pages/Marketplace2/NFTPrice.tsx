@@ -223,7 +223,8 @@ export default function NFTPrice(props: {
     <Flex gap={".1rem"}>
       {/* origin price */}
       <Shadow>
-        <Popover content={listedPricePop}>
+        <Popover 
+          content={listedPricePop}>
           <TipsIcon width={".14rem"} src={tipsIcon}/>
         </Popover>
 
@@ -269,7 +270,7 @@ export default function NFTPrice(props: {
       {/* Vault Apr */}
       <Shadow>
         {/* <Popover content={vaultApr({rewardAPR:123,interestAPR:321})}>     */}
-        <Popover content={VaultAprPop({rewardAPR: (rewardsAPR ?? 0), interestAPR: ((interestAPR ?? 0) / 100)})}>
+        <Popover overlayClassName="ant-popover-reset" content={VaultAprPop({rewardAPR: (rewardsAPR ?? 0), interestAPR: ((interestAPR ?? 0) / 100)})}>
           <TipsIcon width={".14rem"} src={tipsIcon}/>
         </Popover>
         <Typography
@@ -319,7 +320,9 @@ export default function NFTPrice(props: {
       flexDirection={"column"}
       alignItems={"start"}
     >
-      <Popover content={DownPaymentPop({listedPrice: props.item?.currentBasePrice, loanAmount: availableBorrow})}>
+      <Popover 
+        overlayClassName="ant-popover-reset"
+        content={DownPaymentPop({listedPrice: props.item?.currentBasePrice, loanAmount: availableBorrow})}>
         <TipsIcon width={".14rem"} src={tipsIcon}/>
       </Popover>
       <Typography
@@ -350,8 +353,8 @@ export default function NFTPrice(props: {
           padding={0}
         >
           {
-            actualAmount && `（$ ${
-              actualAmount && numberFormat(actualAmount
+            actualAmount && `（${
+              actualAmount && thousandFormat(actualAmount
                 .times(ethRate)
                 .div(10 ** 18)
                 .toFixed())

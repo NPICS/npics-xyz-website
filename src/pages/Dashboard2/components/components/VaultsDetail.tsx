@@ -421,7 +421,9 @@ export default function VaultsDetail() {
               justifyContent={"center"}
               position={"relative"}
             >
-              <Popover content={MintedNFTPop}>
+              <Popover 
+                overlayClassName="ant-popover-reset"
+                content={MintedNFTPop}>
                 <TipsIcon width={".14rem"} src={imgurl.market.tipsIcon}/>
               </Popover>
               <Flex alignItems={'center'} marginBottom={".14rem"}>
@@ -447,11 +449,13 @@ export default function VaultsDetail() {
               justifyContent={"center"}
               position="relative"
             >
-              <Popover content={EstimatProfitPop({
-                purchaseFloorPrice: activities?.purchaseFloorPrice,
-                ltv: activities?.ltv,
-                floorPrice: activities?.floorPrice
-              })}>
+              <Popover 
+                overlayClassName="ant-popover-reset"
+                content={EstimatProfitPop({
+                  purchaseFloorPrice: activities?.purchaseFloorPrice,
+                  ltv: activities?.ltv,
+                  floorPrice: activities?.floorPrice
+                })}>
                 <TipsIcon width={".14rem"} src={imgurl.market.tipsIcon}/>
               </Popover>
               <Flex alignItems="center" marginBottom={".14rem"}>
@@ -476,7 +480,9 @@ export default function VaultsDetail() {
               <Flex alignItems={"center"} justifyContent={"center"} flexDirection="column" gap='.12rem'>
                 <Flex gap="10px">
                   <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Factor</Typography>
-                  <Popover content={HealthFactorPop}>
+                  <Popover 
+                    overlayClassName="ant-popover-reset"
+                    content={HealthFactorPop}>
                     <Icon width={".14rem"} src={imgurl.market.tipsIcon}/>
                   </Popover>
 
@@ -494,7 +500,9 @@ export default function VaultsDetail() {
               <Flex alignItems={"center"} justifyContent={"center"} flexDirection="column" gap='.12rem'>
                 <Flex gap="10px">
                   <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Debt</Typography>
-                  <Popover content={DebtPop({Principal: activities?.debt, noInterest: '---'})}>
+                  <Popover 
+                    overlayClassName="ant-popover-reset"
+                    content={DebtPop({Principal: activities?.debt, noInterest: '---'})}>
                     <Icon width={".14rem"} src={imgurl.market.tipsIcon}/>
                   </Popover>
 
@@ -509,6 +517,7 @@ export default function VaultsDetail() {
                   <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Vault APR</Typography>
 
                   <Popover
+                    overlayClassName="ant-popover-reset"
                     content={VaultAprPop({rewardAPR: (aprData.rewardApr ?? 0), interestAPR: aprData.apr / 100 ?? 0})}>
                     <Icon width={".14rem"} src={imgurl.market.tipsIcon}/>
                   </Popover>

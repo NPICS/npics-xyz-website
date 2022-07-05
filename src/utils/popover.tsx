@@ -7,9 +7,9 @@ import {numberFormat} from './urls';
 import {useAppSelector} from 'store/hooks';
 
 const BorderBottom = styled.div`
-  height: .01rem;
+  height: 1px;
   width: 100%;
-  background-color: #0000001A;
+  background-color: rgba(0,0,0,.1);
 `
 
 export const listedPricePop = <Typography>
@@ -68,7 +68,7 @@ export function DownPaymentPop(props: { listedPrice?: BigNumber, loanAmount?: Bi
   </Grid>
 }
 
-export const MintedNFTPop = <Grid gridGap=".1rem" width="4.5rem">
+export const MintedNFTPop = <Grid gridGap=".2rem" width="4.5rem">
   <Typography fontSize=".16rem" fontWeight="500" color="#000">NEO-NFT NPics Everlasting Option NFT</Typography>
   <Typography fontSize=".14rem" fontWeight="500" color="rgba(0,0,0,.5)">NEO is NBPs voucher issued by the NPics on
     Ethereum,which is also a voucher held by the user to purchase NFT.
@@ -89,7 +89,7 @@ export function DebtPop(props: { Principal?: BigNumber, Interest?: BigNumber, no
   const Principal = numberFormat(props.Principal?.times(ethRate).div(10 ** globalConstant.bit).toFixed() ?? '---')
   const Interest = numberFormat(props.Interest?.times(ethRate).div(10 ** globalConstant.bit).toFixed() ?? '---')
 
-  return <Grid width={'6rem'} gridGap=".1rem" borderRadius="20px">
+  return <Grid width={'6rem'} gridGap=".2rem" borderRadius="20px">
     <Typography fontSize=".14rem" fontWeight="500" color="rgba(0,0,0,.5)">Debt is the total of the principal and
       interest of the loan. The principal of the loan decreases with each repayment, and the interest per period is
       based on the principal balance plus any outstanding interest already accrued.</Typography>
@@ -112,7 +112,7 @@ export function EstimatProfitPop(props: { purchaseFloorPrice?: BigNumber, ltv?: 
   const floorPriceDollar = numberFormat(floorPrice?.times(ethRate).div(10 ** globalConstant.bit).toFixed() ?? '---')
   const paymentHistoryDollar = numberFormat(paymentHistory?.times(ethRate).div(10 ** globalConstant.bit).toFixed() ?? '---')
 
-  return <Grid width={'6rem'} gridGap=".1rem" borderRadius="20px">
+  return <Grid width={'6rem'} gridGap=".2rem" borderRadius="20px">
     <Flex alignItems='center' justifyContent="space-between">
       <Typography fontSize=".16rem" fontWeight="500" color="#000">PFP (Purchase floor price history)</Typography>
       <Typography fontSize=".16rem" fontWeight="500"
