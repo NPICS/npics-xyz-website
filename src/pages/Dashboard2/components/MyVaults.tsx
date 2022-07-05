@@ -30,10 +30,6 @@ export default function MyVaults() {
   const [sortedInfo, setSortedInfo] = useState<string>('')
   const [totalDebts, setTotalDebts] = useState<BigNumber>(new BigNumber(0))
   const DollarDebt = useEthPrice(totalDebts)
-  useEffect(() => {
-    console.log("sortedInfo",sortedInfo);
-
-  },[sortedInfo])
 
   const onSelect = (val: any) => {
     console.log(val);
@@ -41,7 +37,7 @@ export default function MyVaults() {
   }
 
   return <Box
-    padding={".6rem .4rem"}
+    padding={".4rem .6rem"}
   >
     <Flex
       alignItems={"center"}
@@ -61,7 +57,6 @@ export default function MyVaults() {
         </Typography>
         <Flex
           alignItems={"center"}
-
         >
           <Typography 
             fontWeight={500}
@@ -72,11 +67,13 @@ export default function MyVaults() {
           <Typography
             fontWeight={500}
             fontSize={".14rem"}
+            marginLeft={".05rem"}
             color={"rgba(0,0,0,.5)"}
           >{totalDebts.div(10 ** 18).toFixed(3, 1)}</Typography>
           <Typography
             fontWeight={500}
             fontSize={".14rem"}
+            marginLeft={".1rem"}
             color={"rgba(0,0,0,.5)"}
           >{`($${DollarDebt && numberFormat(DollarDebt?.dp(0).toFixed())})`}</Typography>
         </Flex>
@@ -91,6 +88,7 @@ export default function MyVaults() {
           <Option value="All">All</Option>
           <Option value="Inforce">Inforce</Option>
           <Option value="In Risk">In Risk</Option>
+          <Option value="In Liquidation">In Liquidation</Option>
           <Option value="Terminated">Terminated</Option>
         </AntdSelect>
       </Typography >

@@ -235,7 +235,7 @@ export default function SignGif(props: Iprops) {
       <div className='bottomBtn'>
         {list.map((item) => {
           return (
-            <ButtonDefault types='two' width='1.8rem' height='.52rem' key={item.text}>
+            <ButtonDefault types='two' minWidth='1.8rem' height='.52rem' key={item.text}>
               <div className='logo'>
                 <img src={item.imgurl} alt="" />
                 <span>{item.text}</span>

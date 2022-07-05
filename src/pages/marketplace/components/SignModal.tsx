@@ -202,7 +202,7 @@ export default function SignModal(props: Iprops) {
               </div>
             </div>
 
-            <ButtonDefault onClick={onMetaMask} types={"four"} width="2.2rem" height=".46rem" fontSize='.16rem'>
+            <ButtonDefault onClick={onMetaMask} types={"four"} minWidth="2.2rem" height=".46rem" fontSize='.16rem'>
               Add to MetaMask
             </ButtonDefault>
 
@@ -240,17 +240,17 @@ export default function SignModal(props: Iprops) {
 
     <div className='footer'>
       {signState === 'failure' ?
-        <ButtonDefault onClick={onBack} types={"two"} width="2rem" height=".52rem" fontSize='.2rem'>
+        <ButtonDefault onClick={onBack} types={"two"} minWidth="2rem" height=".52rem" fontSize='.2rem'>
           Back
         </ButtonDefault>
         : signState === 'success' ?
           <div>Konw more about N-NFT?</div>
           : <div className='footerBtn'>
             <div>
-              <ButtonDefault onClick={onCancel} types={"two"} width="2rem" height=".52rem" fontSize='.2rem'>Cancel</ButtonDefault>
+              <ButtonDefault onClick={onCancel} types={"two"} minWidth="2rem" height=".52rem" fontSize='.2rem'>Cancel</ButtonDefault>
             </div>
             <div>
-              <ButtonDefault onClick={onSign} types={"three"} width="2rem" height=".52rem" fontSize='.2rem'>Checkout</ButtonDefault>
+              <ButtonDefault onClick={onSign} types={"three"} minWidth="2rem" height=".52rem" fontSize='.2rem'>Checkout</ButtonDefault>
             </div>
           </div>}
     </div>

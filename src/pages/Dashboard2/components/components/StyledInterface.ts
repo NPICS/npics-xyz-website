@@ -1,14 +1,11 @@
 import BigNumber from 'bignumber.js';
+import { Expose } from 'class-transformer';
 import { flex } from 'component/styled';
+import TransformBigNumber from 'model/transform/bigNumber';
 import styled from 'styled-components';
 
 
 export const BgTable = styled.div`
-  /* overflow: auto;
-  height: 4.7rem;
-  &::-webkit-scrollbar{
-      display:none;
-    } */
   .items {
     display: flex;
     .avatar {
@@ -51,12 +48,15 @@ export const BgTable = styled.div`
     }
   }
   .contract {
-    ${flex}
+    display: flex;
+    justify-content: left;
+    align-items: center;
     font-weight: 500;
     font-size: .16rem;
     color: #000;
+    margin-left: .25rem;
     &>span {
-      width: 1.11rem;
+      max-width: 1.11rem;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -107,16 +107,53 @@ export const BgTable = styled.div`
   }
   .ant-table-thead {
     tr {
+      th:nth-child(2) {
+        width: 2.3rem !important;
+      } 
+      th:nth-child(3) {
+        width: 1.7rem !important;
+      } 
+      th:nth-child(4) {
+        width: 1.9rem !important;
+      } 
+      th:nth-child(5) {
+        width: 1.6rem !important;
+      }
+      th:nth-child(6) {
+        width: 1.8rem !important;
+      }
+      th:nth-child(7) {
+        width: 1.9rem !important;
+      }
       th {
-        width: 2.15rem !important;
+        width: 3.5rem !important;
+        padding: .16rem !important;
       }
     }
   }
   .ant-table-tbody {
-    tr {  
+    tr {
+      td:nth-child(2) {
+        width: 2.3rem !important;
+      }
+      td:nth-child(3) {
+        width: 1.7rem !important;
+      }
+      td:nth-child(4) {
+        width: 1.9rem !important;
+      }
+      td:nth-child(5) {
+        width: 1.6rem !important;
+      }  
+      td:nth-child(6) {
+        width: 1.8rem !important;
+      }
+      td:nth-child(7) {
+        width: 1.9rem !important;
+      }
       td {
-        width: 2.15rem !important;
-        /* height: 0 !important; */
+        width: 3.5rem !important;
+        padding: .16rem !important;
       }
     }
     .ant-table-placeholder {
@@ -193,3 +230,72 @@ export interface DataSource {
   ltv: BigNumber;
   purchaseFloorPrice: BigNumber;
 }
+
+export class DataSource2 {
+  key!: string
+  
+  id!: string
+
+  createTime!: string
+
+  nftAddress!: string
+  
+  neoAddress!: string
+
+  tokenId!: number
+
+  userAddress!: string
+
+  imageUrl!: string
+
+  @TransformBigNumber()
+  floorPrice!: BigNumber
+  
+  @TransformBigNumber()
+  ltv!: BigNumber
+  
+  @TransformBigNumber()
+  purchaseFloorPrice!: BigNumber
+
+  status!: number
+
+  collectionName!: string
+  
+  @TransformBigNumber()
+  liquidatePrice!: BigNumber
+
+  @TransformBigNumber()
+  paybackAmount!: BigNumber
+
+  loanId!: number
+
+  reserveAsset!: string
+  
+  factorStatus!: string
+
+  @TransformBigNumber()
+  totalCollateral!: BigNumber
+
+  @TransformBigNumber()
+  totalDebt!: BigNumber
+
+  @TransformBigNumber()
+  availableBorrows!: BigNumber
+
+  @TransformBigNumber()
+  healthFactor!: BigNumber
+
+  @Expose()
+  maxTotalDebt() {
+    return BigNumber.minimum(this.totalDebt.multipliedBy(new BigNumber('0.001')), new BigNumber('0.01').multipliedBy(10 ** 18))
+  }
+  @Expose()
+  liquidationPrice() {
+    return this.totalDebt.div('0.9')
+  }
+  @Expose()
+  debtString() {
+    return this.totalDebt.div(10 ** 18).toFixed(4, 1)
+  }
+}
+

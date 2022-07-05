@@ -6,12 +6,10 @@ import { Wrap, Properties, MyModal } from './ItemStyled'
 import http from 'utils/http';
 import { CollectionDetail } from '../../../model/user'
 import { deserialize } from 'class-transformer';
-import MyTable from './MyTable';
+// import MyTable from './MyTable';
 import SignModal from './SignModal'
 import { Modal } from 'antd';
 import { useRef } from 'react';
-import { compute } from './utils';
-import { useWeb3React } from '@web3-react/core';
 import { useAppDispatch } from 'store/hooks';
 import { setIsShowConnect } from 'store/app';
 import { useEthPrice } from 'utils/hook';
@@ -24,6 +22,8 @@ import BigNumber from 'bignumber.js';
 import { Erc721 } from '../../../abi/Erc721';
 import { Npics } from 'abi/Npics';
 import { urls } from 'utils/urls';
+import { useWeb3React } from '@web3-react/core';
+import { compute } from './utils';
 
 function MarketItem() {
   const { active } = useWeb3React()
@@ -279,10 +279,10 @@ function MarketItem() {
             // titleSelect={ActivitiesSelect}
           >
             <div>
-              <MyTable
+              {/* <MyTable
                 itemDetails={params}
                 // filterValue={filterValue}
-              />
+              /> */}
             </div>
           </Flexible>
         </div>

@@ -132,8 +132,7 @@ export default function NFTActivities(props: {
                         listData.map((item, idx) => {
                             return <tr key={idx}>
                                 <td align={"left"}>{item.eventTypeExplain() ?? ``}</td>
-                                <td align={"center"}><PriceWithSymbol displayAmount={item.amountFormat()}
-                                                                      iconOrUrl={item.imageUrl}/></td>
+                                <td align={"center"}><PriceWithSymbol displayAmount={item.amountFormat()} iconOrUrl={item.imageUrl}/></td>
                                 <td align={"center"}
                                     style={{
                                         "cursor": item.fromAccount ? "pointer" : "auto"

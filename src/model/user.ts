@@ -1,7 +1,6 @@
 import BigNumber from "bignumber.js";
 import {Expose} from "class-transformer";
 import TransformBigNumber from "./transform/bigNumber";
-import {AddressAbbreviation} from "../pages/marketplace/components/utils";
 import {numberFormat} from "../utils/urls";
 import {imgurl} from "../utils/globalimport";
 

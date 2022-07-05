@@ -1,6 +1,5 @@
 import {Flex, Grid, Icon, Typography} from "../../component/Box";
 import {CollectionDetail} from "../../model/user";
-import {percentageFormat} from "../marketplace/components/utils";
 import styled from "styled-components";
 import titlePrefixIcon from "../../assets/images/market/nft_properties_icon.png"
 

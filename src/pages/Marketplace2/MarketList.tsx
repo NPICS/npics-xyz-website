@@ -184,7 +184,7 @@ export default function MarketList() {
                     alignItems={"start"}
                     overflow={"auto"}
                 >
-                    {new Array(30).fill(0).map(() => <SkeletonTemplate widthWrap={`${compactMode ? '1.79rem' : '2.9rem'}`} />)}
+                    {new Array(30).fill(0).map(() => <SkeletonTemplate widthWrap={'100%'} />)}
                 </Grid>
                     : listData.length ?  <InfiniteScroll
 

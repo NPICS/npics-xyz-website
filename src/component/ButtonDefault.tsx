@@ -2,7 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { flex } from './styled'
 interface Iprops {
-  width?: string,
+  // width?: string,
+  minWidth?: string,
+  padding?: string,
   height?: string,
   fontSize?: string,
   text?: string,
@@ -23,6 +25,7 @@ const StyledButton = styled.button<Iprops>`
     border: ${(props => props.types === 'second'? "0" : '')};
     transform: ${(props => props.disabled ? '' : props.scale ? 'scale(1.06)' : '')};
   }
+  transition: all .2s;
   &:disabled {
     border: ${(props => props.types === 'second'? "0" : '')};
     box-shadow: ${(props => props.types === 'second'? "none" : '')};
@@ -69,7 +72,7 @@ const StyledButton = styled.button<Iprops>`
     }
   })};
   color: ${(props => props.color)};
-   color: ${(props => {
+  color: ${(props => {
     switch (props.types) {
       case 'normal':
         return '#fff';
@@ -83,14 +86,15 @@ const StyledButton = styled.button<Iprops>`
   })};
   background: ${(props => props.disabled ?  props.types === 'normal'? 'rgba(204,204,204)' : "#fff" : '')};
   color: ${(props => props.disabled ?  props.types === 'normal'? '#fff' : "rgba(0,0,0,.5)" : '')};
-  width: ${(props => props.width)};
+  min-width: ${(props => props.minWidth)};
   height: ${(props => props.height)};
   font-size: ${(props => props.fontSize)};
+  padding: ${(props => props.padding)};
   border-radius: 10px;
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 600;
-  font-size: .2rem;
+  /* font-size: .2rem; */
   cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
   ${flex}
 `
@@ -113,10 +117,10 @@ function ButtonDefault(props:Iprops) {
 }
 ButtonDefault.defaultProps = {
   border: 0,
-  width: '3rem',
+  minWidth: '2rem',
   height: '.66rem',
   text: 'button',
-  fontSize: '16px',
+  fontSize: '.16rem',
   types: 'one',
   // color: '#fff',
   disabled: false,
