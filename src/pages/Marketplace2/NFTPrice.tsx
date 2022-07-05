@@ -25,6 +25,8 @@ import ethIcon from "../../assets/images/market/eth_icon.svg"
 import {SessionStorageKey} from "utils/enums";
 import useActiveWeb3React from "../../hooks/useActiveWeb3React";
 import {simpleRpcProvider} from "../../utils/rpcUrl";
+import {useAsync} from "react-use";
+import {injected} from "../../connectors/hooks";
 
 const Shadow = styled(Flex)`
   background: #fff;
@@ -75,283 +77,292 @@ const OtherNFT = styled.img`
 `
 
 function MoreNFT(props: {
-    img: string,
-    total?: number,
-    tap?(): void
+  img: string,
+  total?: number,
+  tap?(): void
 }) {
-    return <Box position={"relative"}
-                borderRadius={".1rem"}
-                overflow={"hidden"}
-                width={"1rem"}
-                style={{
-                    "cursor": "pointer"
-                }}
-                onClick={props.tap}
+  return <Box position={"relative"}
+              borderRadius={".1rem"}
+              overflow={"hidden"}
+              width={"1rem"}
+              style={{
+                "cursor": "pointer"
+              }}
+              onClick={props.tap}
+  >
+    <OtherNFT src={props.img}/>
+    <Flex
+      background={"#000000CC"}
+      position={"absolute"} top={0} left={0} bottom={0} right={0}
+      alignItems={"center"}
+      justifyContent={"center"}
     >
-        <OtherNFT src={props.img}/>
-        <Flex
-            background={"#000000CC"}
-            position={"absolute"} top={0} left={0} bottom={0} right={0}
-            alignItems={"center"}
-            justifyContent={"center"}
-        >
-            <Typography
-                lineHeight={"1.5"}
-                color={"#fff"}
-                fontWeight={500}
-                fontSize={".16rem"}
-            >
-                {props.total}<br/>Items
-            </Typography>
-        </Flex>
-    </Box>
+      <Typography
+        lineHeight={"1.5"}
+        color={"#fff"}
+        fontWeight={500}
+        fontSize={".16rem"}
+      >
+        {props.total}<br/>Items
+      </Typography>
+    </Flex>
+  </Box>
 }
 
 export default function NFTPrice(props: {
-    item?: CollectionDetail
+  item?: CollectionDetail
 }) {
-    const action = useAppDispatch()
-    const ethRate = useAppSelector(state => new BigNumber(state.app.data.EthPrice))
-    const vaultAPR = useAppSelector(state => (state.app.rewardsAPR ?? 0) - (state.app.interestAPR ?? 0) / 100)
-    // const state = useAppSelector(state => state.app)
-    const rewardsAPR = useAppSelector(state => state.app.rewardsAPR)
-    const interestAPR = useAppSelector(state => state.app.interestAPR)
-    const [recommendNFTs, setRecommendNFTs] = useState<CollectionItems[]>([]) // max is 6
-    const [recommendNFTTotal, setRecommendNFTTotal] = useState<number | undefined>(undefined)
-    const [availableBorrow, setAvailableBorrow] = useState<BigNumber | undefined>(undefined)
-    const [actualAmount, setActualAmount] = useState<BigNumber>()
-    const navigate = useNavigate()
-    const {account, activate, active, library} = useActiveWeb3React()
+  const action = useAppDispatch()
+  const ethRate = useAppSelector(state => new BigNumber(state.app.data.EthPrice))
+  const vaultAPR = useAppSelector(state => (state.app.rewardsAPR ?? 0) - (state.app.interestAPR ?? 0) / 100)
+  // const state = useAppSelector(state => state.app)
+  const rewardsAPR = useAppSelector(state => state.app.rewardsAPR)
+  const interestAPR = useAppSelector(state => state.app.interestAPR)
+  const [recommendNFTs, setRecommendNFTs] = useState<CollectionItems[]>([]) // max is 6
+  const [recommendNFTTotal, setRecommendNFTTotal] = useState<number | undefined>(undefined)
+  const [availableBorrow, setAvailableBorrow] = useState<BigNumber | undefined>(undefined)
+  const [actualAmount, setActualAmount] = useState<BigNumber>()
+  const navigate = useNavigate()
+  const {account, provider, connector} = useWeb3React()
 
-    const [buyPopOpen, setBuyPopOpen] = useState<boolean>(false)
+  const [buyPopOpen, setBuyPopOpen] = useState<boolean>(false)
 
-    useEffect(() => {
-        action(updateARP())
-    }, [props.item])
+  useEffect(() => {
+    action(updateARP())
+  }, [props.item])
 
-    useEffect(() => {
-        const inner = async () => {
-            // get recommends
-            let resp: any = await http.myPost(`/npics-nft/app-api/v2/nft/getCollectionItems`, {
-                address: props.item?.address,
-                direction: "asc",
-                pageIndex: 1,
-                pageSize: 10,
-                search: null,
-                showNftx: globalConstant.showNftx
-            })
-            if (resp.code === 200 && resp.data.records) {
-                let listData = deserializeArray(CollectionItems, JSON.stringify(resp.data.records))
-                    .filter(it => it.tokenId != props.item?.tokenId)
-                listData.splice(0, listData.length - 6) ///< max 6
-                setRecommendNFTs(listData)
-                setRecommendNFTTotal(resp.data.total)
-            } else {
-            }
-            // get availableBorrow
-            let contract = new Npics(library)
-            const availableBorrow = await contract.getAvailableBorrowsln(props.item?.address ?? "")
-            setAvailableBorrow(availableBorrow)
-        }
-        if (props.item) {
-            inner().finally()
-        }
-    }, [props.item])
-
-    useEffect(() => {
-        let _item = props.item
-        if (_item && availableBorrow) {
-            setActualAmount(_item.currentBasePrice.minus(availableBorrow))
-        }
-    }, [props.item, availableBorrow])
-
-    async function buyClick() {
-        try {
-            // if (error) {
-            //     console.log('error',error)
-            //     const _error = JSON.parse(JSON.stringify(error))
-            //     if (_error.name === "UnsupportedChainIdError") {
-            //         sessionStorage.removeItem(SessionStorageKey.WalletAuthorized)
-            //         action(fetchUser(`{}`))
-            //         notification.error({ message: "Prompt connection failed, please use the Ethereum network" })
-            //     } else {
-            //         notification.error({ message: "Please authorize to access your account" })
-            //     }
-            //     return
-            // }
-            if (!account || !active) {
-                await activate(connectors.injected, (error) => {
-                    const _error = JSON.parse(JSON.stringify(error))
-                    if (_error.name === "UnsupportedChainIdError") {
-                        sessionStorage.removeItem(SessionStorageKey.WalletAuthorized)
-                        action(fetchUser(`{}`))
-                        notification.error({message: "Prompt connection failed, please use the Ethereum network"})
-                    } else {
-                        notification.error({message: "Please authorize to access your account"})
-                    }
-                })
-            }
-            if (props.item && availableBorrow && account) {
-                setBuyPopOpen(true)
-            }
-        } catch (e) {
-            message.error(`${e}`)
-        }
+  useEffect(() => {
+    const inner = async () => {
+      // get recommends
+      let resp: any = await http.myPost(`/npics-nft/app-api/v2/nft/getCollectionItems`, {
+        address: props.item?.address,
+        direction: "asc",
+        pageIndex: 1,
+        pageSize: 10,
+        search: null,
+        showNftx: globalConstant.showNftx
+      })
+      if (resp.code === 200 && resp.data.records) {
+        let listData = deserializeArray(CollectionItems, JSON.stringify(resp.data.records))
+          .filter(it => it.tokenId != props.item?.tokenId)
+        listData.splice(0, listData.length - 6) ///< max 6
+        setRecommendNFTs(listData)
+        setRecommendNFTTotal(resp.data.total)
+      } else {
+      }
     }
+    if (props.item) {
+      inner().finally()
+    }
+  }, [props.item])
 
-    return <Grid gridTemplateRows={"1.1rem 1rem auto"} gridRowGap={".12rem"}>
-        <Modal isOpen={buyPopOpen} onRequestClose={() => setBuyPopOpen(false)}>
-            <NFTPay
-                /// line 150: require value
-                nft={props.item!}
-                availableBorrow={availableBorrow!}
-                actualAmount={actualAmount!}
-                dismiss={() => setBuyPopOpen(false)}
-            />
-        </Modal>
-        <Flex gap={".1rem"}>
-            {/* origin price */}
-            <Shadow>
-                <Popover content={listedPricePop}>
-                    <TipsIcon width={".14rem"} src={tipsIcon}/>
-                </Popover>
+  useAsync(async () => {
+    if (props.item?.address && provider) {
+      let contract = new Npics(provider)
+      const availableBorrow = await contract.getAvailableBorrowsln(props.item.address)
+      setAvailableBorrow(availableBorrow)
+    }
+  }, [props.item, provider])
 
-                <Flex flexDirection={"row"} alignItems={"end"}>
-                    <Icon width={".22rem"} height={".22rem"} src={ethIcon}/>
-                    <Typography
-                        fontSize={".24rem"}
-                        fontWeight={700}
-                        color={"rgba(0,0,0,1)"}
-                        lineHeight={"100%"}
-                        // verticalAlign={"middle"}
-                        // height={"auto"}
-                        marginLeft={".1rem"}
-                    >{props.item?.basePriceFormat() ?? "---"}</Typography>
-                    <Typography
-                        fontSize={".14rem"}
-                        fontWeight={500}
-                        color={"rgba(0,0,0,.5)"}
-                        marginLeft={".02rem"}
-                        lineHeight={"100%"}
-                        style={{alignSelf: 'end'}}
-                    >
-                        {
-                            `（${
-                                props.item && thousandFormat(props.item.currentBasePrice
-                                    .times(ethRate)
-                                    .div(10 ** 18)
-                                    .toNumber())
-                            }）`
-                        }
-                    </Typography>
-                </Flex>
-                <Flex style={{cursor: 'pointer'}} alignItems={"center"} gap={".1rem"}
-                      onClick={() => window.open(`${props.item?.marketUrl}`)}>
-                    <Icon width={".22rem"} height={".22rem"} src={props.item?.marketIcon()}/>
-                    <Typography
-                        fontSize={".14rem"}
-                        fontWeight={500}
-                        color={"rgba(0,0,0,.5)"}
-                    >Listed price</Typography>
-                </Flex>
-            </Shadow>
-            {/* Vault Apr */}
-            <Shadow>
-                {/* <Popover content={vaultApr({rewardAPR:123,interestAPR:321})}>     */}
-                <Popover content={VaultAprPop({rewardAPR: (rewardsAPR ?? 0), interestAPR: ((interestAPR ?? 0) / 100)})}>
-                    <TipsIcon width={".14rem"} src={tipsIcon}/>
-                </Popover>
-                <Typography
-                    color={"#FF490F"}
-                    fontSize={".24rem"}
-                    fontWeight={700}
-                >{percentageFormat(vaultAPR)}</Typography>
-                <Typography
-                    fontSize={".14rem"}
-                    fontWeight={500}
-                    color={"rgba(0,0,0,.5)"}
-                >Vault ARP</Typography>
-            </Shadow>
-        </Flex>
-        {/* Other NFTs */}
-        <Grid
-            gridTemplateColumns={"repeat(6, auto)"}
-            gridGap={".1rem"}
-            overflow={"hidden"}
-            justifyContent={"start"}
-        >
+  useEffect(() => {
+    let _item = props.item
+    if (_item && availableBorrow) {
+      setActualAmount(_item.currentBasePrice.minus(availableBorrow))
+    }
+  }, [props.item, availableBorrow])
+
+  async function buyClick() {
+    try {
+      // TODO: Error Toast
+      // if (error) {
+      //     console.log('error',error)
+      //     const _error = JSON.parse(JSON.stringify(error))
+      //     if (_error.name === "UnsupportedChainIdError") {
+      //         sessionStorage.removeItem(SessionStorageKey.WalletAuthorized)
+      //         action(fetchUser(`{}`))
+      //         notification.error({ message: "Prompt connection failed, please use the Ethereum network" })
+      //     } else {
+      //         notification.error({ message: "Please authorize to access your account" })
+      //     }
+      //     return
+      // }
+
+      if (!account) {
+        // TODO: connect wallet
+        // await activate(connectors.injected, (error) => {
+        //     const _error = JSON.parse(JSON.stringify(error))
+        //     if (_error.name === "UnsupportedChainIdError") {
+        //         sessionStorage.removeItem(SessionStorageKey.WalletAuthorized)
+        //         action(fetchUser(`{}`))
+        //         notification.error({message: "Prompt connection failed, please use the Ethereum network"})
+        //     } else {
+        //         notification.error({message: "Please authorize to access your account"})
+        //     }
+        // })
+        // await connector.activate()
+        await injected.activate()
+      }
+      if (props.item && availableBorrow && account) {
+        setBuyPopOpen(true)
+      }
+    } catch (e) {
+      message.error(`${e}`)
+    }
+  }
+
+  return <Grid gridTemplateRows={"1.1rem 1rem auto"} gridRowGap={".12rem"}>
+    <Modal isOpen={buyPopOpen} onRequestClose={() => setBuyPopOpen(false)}>
+      <NFTPay
+        /// line 150: require value
+        nft={props.item!}
+        availableBorrow={availableBorrow!}
+        actualAmount={actualAmount!}
+        dismiss={() => setBuyPopOpen(false)}
+      />
+    </Modal>
+    <Flex gap={".1rem"}>
+      {/* origin price */}
+      <Shadow>
+        <Popover content={listedPricePop}>
+          <TipsIcon width={".14rem"} src={tipsIcon}/>
+        </Popover>
+
+        <Flex flexDirection={"row"} alignItems={"end"}>
+          <Icon width={".22rem"} height={".22rem"} src={ethIcon}/>
+          <Typography
+            fontSize={".24rem"}
+            fontWeight={700}
+            color={"rgba(0,0,0,1)"}
+            lineHeight={"100%"}
+            // verticalAlign={"middle"}
+            // height={"auto"}
+            marginLeft={".1rem"}
+          >{props.item?.basePriceFormat() ?? "---"}</Typography>
+          <Typography
+            fontSize={".14rem"}
+            fontWeight={500}
+            color={"rgba(0,0,0,.5)"}
+            marginLeft={".02rem"}
+            lineHeight={"100%"}
+            style={{alignSelf: 'end'}}
+          >
             {
-                recommendNFTs.map((nft, idx) => {
-                    if (recommendNFTs.length === idx + 1) {
-                        return <MoreNFT
-                            tap={() => {
-                                navigate(`/marketplace/collections/${nft?.address}`)
-                            }}
-                            img={nft.imageUrl}
-                            total={recommendNFTTotal}
-                            key={idx}
-                        />
-                    } else {
-                        return <OtherNFT
-                            src={nft.imageUrl}
-                            onClick={() => {
-                                navigate(`/nft/${nft.address}/${nft.tokenId}`, {replace: true})
-                            }}
-                            key={idx}
-                        />
-                    }
-                })
+              `（${
+                props.item && thousandFormat(props.item.currentBasePrice
+                  .times(ethRate)
+                  .div(10 ** 18)
+                  .toNumber())
+              }）`
             }
-        </Grid>
-        {/* Buy handler */}
-        <BuyBox
-            flexDirection={"column"}
-            alignItems={"start"}
-        >
-            <Popover content={DownPaymentPop({listedPrice: props.item?.currentBasePrice, loanAmount: availableBorrow})}>
-                <TipsIcon width={".14rem"} src={tipsIcon}/>
-            </Popover>
-            <Typography
-                fontSize={".16rem"}
-                fontWeight={500}
-                color={"#000"}
-            >Down Payment</Typography>
-            <Flex alignItems={"end"} marginTop={".22rem"}>
-                <Flex gap={".14rem"} alignItems={"center"}>
-                    <Icon width={".4rem"} height={".4rem"} src={ethIcon}/>
-                    <Typography
-                        fontSize={".4rem"}
-                        fontWeight={700}
-                        color={"#000"}
-                        lineHeight={"100%"}
-                        // verticalAlign={"bottom"}
-                        style={{
-                            "whiteSpace": "nowrap"
-                        }}
-                    >{
-                        (actualAmount && numberFormat(actualAmount.div(10 ** 18).toNumber())) ?? "---"
-                    }</Typography>
-                </Flex>
-                <Typography
-                    fontSize={".14rem"}
-                    fontWeight={500}
-                    lineHeight={"2"}
-                    padding={0}
-                >
-                    {
-                        actualAmount && `（$ ${
-                            actualAmount && numberFormat(actualAmount
-                                .times(ethRate)
-                                .div(10 ** 18)
-                                .toFixed())
-                        }）`
-                    }
-                </Typography>
-            </Flex>
-            <BuyButton
-                disabled={actualAmount == null}
-                onClick={buyClick}
-            >Buy Now</BuyButton>
-        </BuyBox>
+          </Typography>
+        </Flex>
+        <Flex style={{cursor: 'pointer'}} alignItems={"center"} gap={".1rem"}
+              onClick={() => window.open(`${props.item?.marketUrl}`)}>
+          <Icon width={".22rem"} height={".22rem"} src={props.item?.marketIcon()}/>
+          <Typography
+            fontSize={".14rem"}
+            fontWeight={500}
+            color={"rgba(0,0,0,.5)"}
+          >Listed price</Typography>
+        </Flex>
+      </Shadow>
+      {/* Vault Apr */}
+      <Shadow>
+        {/* <Popover content={vaultApr({rewardAPR:123,interestAPR:321})}>     */}
+        <Popover content={VaultAprPop({rewardAPR: (rewardsAPR ?? 0), interestAPR: ((interestAPR ?? 0) / 100)})}>
+          <TipsIcon width={".14rem"} src={tipsIcon}/>
+        </Popover>
+        <Typography
+          color={"#FF490F"}
+          fontSize={".24rem"}
+          fontWeight={700}
+        >{percentageFormat(vaultAPR)}</Typography>
+        <Typography
+          fontSize={".14rem"}
+          fontWeight={500}
+          color={"rgba(0,0,0,.5)"}
+        >Vault ARP</Typography>
+      </Shadow>
+    </Flex>
+    {/* Other NFTs */}
+    <Grid
+      gridTemplateColumns={"repeat(6, auto)"}
+      gridGap={".1rem"}
+      overflow={"hidden"}
+      justifyContent={"start"}
+    >
+      {
+        recommendNFTs.map((nft, idx) => {
+          if (recommendNFTs.length === idx + 1) {
+            return <MoreNFT
+              tap={() => {
+                navigate(`/marketplace/collections/${nft?.address}`)
+              }}
+              img={nft.imageUrl}
+              total={recommendNFTTotal}
+              key={idx}
+            />
+          } else {
+            return <OtherNFT
+              src={nft.imageUrl}
+              onClick={() => {
+                navigate(`/nft/${nft.address}/${nft.tokenId}`, {replace: true})
+              }}
+              key={idx}
+            />
+          }
+        })
+      }
     </Grid>
+    {/* Buy handler */}
+    <BuyBox
+      flexDirection={"column"}
+      alignItems={"start"}
+    >
+      <Popover content={DownPaymentPop({listedPrice: props.item?.currentBasePrice, loanAmount: availableBorrow})}>
+        <TipsIcon width={".14rem"} src={tipsIcon}/>
+      </Popover>
+      <Typography
+        fontSize={".16rem"}
+        fontWeight={500}
+        color={"#000"}
+      >Down Payment</Typography>
+      <Flex alignItems={"end"} marginTop={".22rem"}>
+        <Flex gap={".14rem"} alignItems={"center"}>
+          <Icon width={".4rem"} height={".4rem"} src={ethIcon}/>
+          <Typography
+            fontSize={".4rem"}
+            fontWeight={700}
+            color={"#000"}
+            lineHeight={"100%"}
+            // verticalAlign={"bottom"}
+            style={{
+              "whiteSpace": "nowrap"
+            }}
+          >{
+            (actualAmount && numberFormat(actualAmount.div(10 ** 18).toNumber())) ?? "---"
+          }</Typography>
+        </Flex>
+        <Typography
+          fontSize={".14rem"}
+          fontWeight={500}
+          lineHeight={"2"}
+          padding={0}
+        >
+          {
+            actualAmount && `（$ ${
+              actualAmount && numberFormat(actualAmount
+                .times(ethRate)
+                .div(10 ** 18)
+                .toFixed())
+            }）`
+          }
+        </Typography>
+      </Flex>
+      <BuyButton
+        disabled={actualAmount == null}
+        onClick={buyClick}
+      >Buy Now</BuyButton>
+    </BuyBox>
+  </Grid>
 }

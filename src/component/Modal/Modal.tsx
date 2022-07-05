@@ -18,6 +18,7 @@ const ModalMask = styled.div<{
   align-items: center;
   justify-content: center;
   opacity: ${props => props.isOpen ? 1 : 0};
+  padding: 0 32px;
 `
 
 export default function Modal(props: {

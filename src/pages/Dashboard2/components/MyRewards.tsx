@@ -14,7 +14,7 @@ import { imgurl } from "utils/globalimport";
 import { urls } from '../../../utils/urls';
 
 export default function MyRewards() {
-  const { account, library } = useWeb3React()
+  const { account, provider } = useWeb3React()
   const [balance, setBalance] = useState<BigNumber>(new BigNumber(0))
   const action = useAppDispatch()
   const userInfo = useAppSelector(state => deserialize(User, state.app.currentUser))
@@ -23,15 +23,17 @@ export default function MyRewards() {
     // eslint-disable-next-line
   }, [])
   const getBalance = async () => {
-    const signer = library.getSigner(account)
-    let npics = new Npics(signer)
-    const Balance: BigNumber = await npics.getRewardsBalance(userInfo?.address || '')
-    setBalance(Balance)
+    // TODO: library => provider @quan
+    // const signer = provider.getSigner(account)
+    // let npics = new Npics(signer)
+    // const Balance: BigNumber = await npics.getRewardsBalance(userInfo?.address || '')
+    // setBalance(Balance)
   }
 
   const onRewards = async () => {
+    if (!provider) return
     try {
-      const signer = library.getSigner(account)
+      const signer = provider.getSigner(account)
       let npics = new Npics(signer)
       action(setIsLoading(true))
       await npics.claimRewards()

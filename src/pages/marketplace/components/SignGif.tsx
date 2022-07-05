@@ -79,7 +79,7 @@ interface Iprops {
 }
 // let interval: NodeJS.Timeout
 export default function SignGif(props: Iprops) {
-  const { account, library } = useWeb3React()
+  const { account, provider } = useWeb3React()
   const [percent, setPercent] = useState<number>(30)
   const { setAgreementSign, setSignState, collectionItemsDetail, payWith, WETHBalance, setNeoNftUrl } = props
   const action = useAppDispatch()
@@ -91,7 +91,7 @@ export default function SignGif(props: Iprops) {
 
   const pushAgreement = async() => {
     try {
-      const signer = library.getSigner(account)
+      const signer = provider!.getSigner(account)
       const npics = new Npics(signer)
       let balanceToken:string = "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
       // let sell: any[] | string = ''

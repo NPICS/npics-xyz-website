@@ -46,7 +46,7 @@ const Wrap = styled.div`
   }
 `
 export default function WalletBalance () {
-  const { library, account } = useWeb3React()
+  const { provider, account } = useWeb3React()
   const [ETHBalance, setETHBalance] = useState<BigNumber>()
   const [WETHBalance, setWETHBalance] = useState<BigNumber>()
   const [BDBalance, setBDBalance] = useState<BigNumber>()
@@ -60,13 +60,13 @@ export default function WalletBalance () {
   },[account])
 
   const getBalance = async () => {
-    if (!account) {
+    if (!account || !provider) {
       message.error('account is undefined')
       return
     }
-    const balance = library.getBalance(account)
+    const balance = provider.getBalance(account)
 
-    let signer = library.getSigner(account)
+    let signer = provider.getSigner(account)
     let weth = new Erc20(ContractAddresses.WETH, signer)
     const WETHBalance = weth.balanceOf(account)
 

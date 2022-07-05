@@ -39,14 +39,14 @@ export default function NFTPayCongratulations(props: {
 }) {
     const navigate = useNavigate()
     const [neoAddress, setNeoAddress] = useState<string>()
-    const {library} = useWeb3React()
+    const {provider} = useWeb3React()
 
     useAsync(async () => {
-        if (!library) return
-        let c = new Npics(library)
+        if (!provider) return
+        let c = new Npics(provider)
         let address = await c.neoFor(props.nft.address)
         setNeoAddress(address)
-    }, [library, props.nft])
+    }, [provider, props.nft])
 
     return <Flex
         width={"8.8rem"}

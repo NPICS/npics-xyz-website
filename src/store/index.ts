@@ -1,13 +1,15 @@
 import {combineReducers, configureStore} from "@reduxjs/toolkit";
 import appSlice from "./app";
 import wsSlice from "./ws";
+import userSlice from "./user";
 
 
 const store = configureStore({
-    reducer: combineReducers({
-        app: appSlice.reducer,
-        ws: wsSlice.reducer
-    }),
+  reducer: combineReducers({
+    app: appSlice.reducer,
+    ws: wsSlice.reducer,
+    user: userSlice.reducer
+  }),
 })
 
 

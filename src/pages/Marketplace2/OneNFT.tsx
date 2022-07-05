@@ -117,7 +117,8 @@ export default function OneNFT() {
                 return undefined
         }
     }
-    function getRarityPopoverText(name: string,status: string): string {
+
+    function getRarityPopoverText(name: string, status: string): string {
         switch (name) {
             case "rarity_sniper":
                 return `Rarity Sniper Ranking ${status ? `(${status})` : ''}`
@@ -164,7 +165,7 @@ export default function OneNFT() {
                     <Flex flexDirection={"row"} gap={".15rem"} alignItems={"stretch"}>
                         {
                             rarityData && Object.entries(rarityData).map(([key, val]) => {
-                                return val && val.rank && <Popover content={getRarityPopoverText(key,val.status)}>
+                                return val && val.rank && <Popover content={getRarityPopoverText(key, val.status)}>
                                     <Box onClick={() => window.open(val.url)}>
                                         <Label
                                             key={key}
