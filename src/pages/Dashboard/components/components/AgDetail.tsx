@@ -22,7 +22,7 @@ interface Iprops {
 
 export default function AgDetail(props: Iprops) {
   const { detailInfo, setIsShowDetail } = props
-  const { account, library } = useWeb3React()
+  const { account } = useWeb3React()
   const [progressVal, setProgressVal] = useState<number>(1)
   const [showContent, setShowContent] = useState<string>('repay')
   const [walletBalance, setWalletBalance] = useState<BigNumber>()
@@ -72,9 +72,9 @@ export default function AgDetail(props: Iprops) {
 
 
   const getBalance = async () => {
-    if (!account) message.error('account is undefined')
-    const balance = await library.getBalance(account)
-    setWalletBalance(balance)
+    // if (!account) message.error('account is undefined')
+    // const balance = await library.getBalance(account)
+    // setWalletBalance(balance)
   }
 
   const goBack = () => {
@@ -86,17 +86,17 @@ export default function AgDetail(props: Iprops) {
   const onRepay = async () => {
     if (!detailInfo || !payDebt) return
     try {
-      const signer = library.getSigner(account)
-      const npics = new Npics(signer)
-      const nft = detailInfo?.address
-      const tokenId = detailInfo?.tokenId
-      action(setIsLoading(true))
-      const tx = await npics.repayETH(nft, tokenId, payDebt)
-      action(setIsLoading(false))
-      if (tx && tx.hash) {
-        message.success('successful repayment')
-        goBack()
-      }
+      // const signer = library.getSigner(account)
+      // const npics = new Npics(signer)
+      // const nft = detailInfo?.address
+      // const tokenId = detailInfo?.tokenId
+      // action(setIsLoading(true))
+      // const tx = await npics.repayETH(nft, tokenId, payDebt)
+      // action(setIsLoading(false))
+      // if (tx && tx.hash) {
+      //   message.success('successful repayment')
+      //   goBack()
+      // }
     } catch (e: any) {
       action(setIsLoading(false))
       message.error(JSON.parse(JSON.stringify(e)).reason || JSON.parse(JSON.stringify(e)).message)

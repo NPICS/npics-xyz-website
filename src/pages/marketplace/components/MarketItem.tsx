@@ -26,7 +26,7 @@ import { useWeb3React } from '@web3-react/core';
 import { compute } from './utils';
 
 function MarketItem() {
-  const { active } = useWeb3React()
+  // const { active } = useWeb3React()
   const action = useAppDispatch()
   const [collectionItemsDetail, setCollectionItemsDetail] = useState<CollectionDetail>()
   const [isShowModal, setIsShowModal] = useState<boolean>(false)
@@ -105,11 +105,11 @@ function MarketItem() {
   }
 
   const showModal = () => {
-    if (active) {
-      setIsShowModal(true)
-    } else {
-      action(setIsShowConnect(true))
-    }
+    // if (active) {
+    //   setIsShowModal(true)
+    // } else {
+    //   action(setIsShowConnect(true))
+    // }
   }
 
   const onCancel = () => {

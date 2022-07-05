@@ -66,7 +66,7 @@ interface IProps {
 }
 
 function VaultsTable(props: IProps) {
-  const { activate, account, library, error } = useWeb3React()
+  const { account, provider} = useWeb3React()
   const [activities, setActivities] = useState<DataSource2[]>([])
   const [loading, setLoading] = useState<boolean>(false)
   const [showModal, setShowModal] = useState<boolean>(false)
@@ -222,24 +222,25 @@ function VaultsTable(props: IProps) {
 
 
   async function login2() {
-    try {
-      let address = account!
-      let msg = getSignMessage(address);
-      let signatureMsg = await library.getSigner(account).signMessage(msg)
-      const loginRep: any = await http.myPost("/npics-auth/app-api/v2/auth/token", {
-        "address": address,
-        "original": msg,
-        "signature": signatureMsg
-      })
-      if (loginRep.code === 200) {
-        sessionStorage.setItem("ACCESS_TOKEN", loginRep.data)
-        action(setIsLogin(true))
-      } else {
-        message.warning('Signing failed')
-      }
-    } catch (e) {
-      console.log(`Login Erro => ${e}`)
-    }
+    // TODO: library -> provider
+    // try {
+    //   let address = account!
+    //   let msg = getSignMessage(address);
+    //   let signatureMsg = await library.getSigner(account).signMessage(msg)
+    //   const loginRep: any = await http.myPost("/npics-auth/app-api/v2/auth/token", {
+    //     "address": address,
+    //     "original": msg,
+    //     "signature": signatureMsg
+    //   })
+    //   if (loginRep.code === 200) {
+    //     sessionStorage.setItem("ACCESS_TOKEN", loginRep.data)
+    //     action(setIsLogin(true))
+    //   } else {
+    //     message.warning('Signing failed')
+    //   }
+    // } catch (e) {
+    //   console.log(`Login Erro => ${e}`)
+    // }
   }
 
   const numberToString = (val: BigNumber) => {
@@ -268,7 +269,7 @@ function VaultsTable(props: IProps) {
       const result: any = await http.myPost(url, pageInside)
       let orgData: any[] = result.data.records
       if (result.code === 200 && orgData.length) {
-        const signer = library.getSigner(account)
+        const signer = provider!.getSigner(account)
         let lendPool = new LendPool(signer)
         const len = orgData.length
         const promiseArray = []
@@ -359,16 +360,17 @@ function VaultsTable(props: IProps) {
             login2()
           } else {
             if (!account) {
-              activate(connectors.injected, (error) => {
-                const _error = JSON.parse(JSON.stringify(error))
-                if (_error.name === "UnsupportedChainIdError") {
-                  sessionStorage.removeItem(SessionStorageKey.WalletAuthorized)
-                  action(fetchUser(`{}`))
-                  notification.error({ message: "Prompt connection failed, please use the Ethereum network" })
-                } else {
-                  notification.error({ message: "Please authorize to access your account" })
-                }
-              })
+              /// TODO: wallet connect @quan
+              //   activate(connectors.injected, (error) => {
+              //     const _error = JSON.parse(JSON.stringify(error))
+              //     if (_error.name === "UnsupportedChainIdError") {
+              //       sessionStorage.removeItem(SessionStorageKey.WalletAuthorized)
+              //       action(fetchUser(`{}`))
+              //       notification.error({ message: "Prompt connection failed, please use the Ethereum network" })
+              //     } else {
+              //       notification.error({ message: "Please authorize to access your account" })
+              //     }
+              //   })
             }
           }
           setShowModal(false)

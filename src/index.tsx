@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import './App.css'
@@ -7,19 +7,20 @@ import "utils/rem"
 import "normalize.css"
 import 'antd/dist/antd'
 // import 'antd/dist/antd.css'
-import { Provider } from "react-redux";
+import {Provider} from "react-redux";
 import store from "./store";
-import { BrowserRouter as Router, useLocation } from 'react-router-dom';
-import { ThemeProvider } from 'styled-components'
-import { lightColors, darkColors } from './theme/colors';
+import {BrowserRouter as Router, useLocation} from 'react-router-dom';
+import {ThemeProvider} from 'styled-components'
+import {lightColors, darkColors} from './theme/colors';
 // import { useAppSelector } from './store/hooks';
-import { ethers } from "ethers"
-import { Web3ReactProvider } from "@web3-react/core"
-import { GlobalStyle } from 'utils/globaStyle'
+import {ethers} from "ethers"
+import {Web3ReactProvider} from "@web3-react/core"
+import {GlobalStyle} from 'utils/globaStyle'
+import Web3Provider from "./connectors/Web3Provider";
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
-
 
 
 const StyledThemeProvider = (props: any) => {
@@ -49,10 +50,12 @@ root.render(
   <Provider store={store}>
     <Router>
       <StyledThemeProvider>
-        <Web3ReactProvider getLibrary={web3GetLibrary}>
-          <GlobalStyle />
-          <App />
-        </Web3ReactProvider>
+        {/*<Web3ReactProvider getLibrary={web3GetLibrary}>*/}
+        <Web3Provider>
+          <GlobalStyle/>
+          <App/>
+        </Web3Provider>
+        {/*</Web3ReactProvider>*/}
       </StyledThemeProvider>
     </Router>
   </Provider>

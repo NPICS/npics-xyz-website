@@ -25,16 +25,16 @@ interface IProps {
 }
 
 export default function Payment(props:IProps) {
-  const { account, library } = useWeb3React()
+  const { account, provider } = useWeb3React()
   const {setIsPayingAllDebts, setShowPayment, payInfo, setReload, reload } = props
   useEffect(() => {
     onRepay()
   },[])
   
   const onRepay = async () => {
-    if (!payInfo) return
+    if (!payInfo || !provider) return
     try {
-      const signer = library.getSigner(account)
+      const signer = provider.getSigner(account)
       const npics = new Npics(signer)
       const nft = payInfo.address
       const tokenId = payInfo.tokenId

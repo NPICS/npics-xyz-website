@@ -32,7 +32,7 @@ const StyledtWallet = styled(Flex)`
 `
 
 function XHeader() {
-  const { activate, account, error } = useWeb3React()
+  const { account } = useWeb3React()
   const oldAccount = useRef<string | undefined | null>()
   const [accountPop, setAccountPop] = useState<boolean>(false)
   const action = useAppDispatch()
@@ -100,9 +100,9 @@ function XHeader() {
   useEffect(() => {
     // check account, auto connect wallet
     let account = sessionStorage.getItem(SessionStorageKey.WalletAuthorized)
-    if (account) {
-      activate(connectors.injected).then(() => { })
-    }
+    // if (account) {
+    //   activate(connectors.injected).then(() => { })
+    // }
     // check token
     let token = sessionStorage.getItem(SessionStorageKey.AccessToken)
     action(setIsLogin(token != null))
@@ -112,16 +112,17 @@ function XHeader() {
 
   const connect = async () => {
     try {
-      await activate(connectors.injected, (error) => {
-        const Error = JSON.parse(JSON.stringify(error))
-        if (Error.name === "UnsupportedChainIdError") {
-          sessionStorage.removeItem(SessionStorageKey.WalletAuthorized)
-          action(fetchUser(`{}`))
-          notification.error({ message: "Prompt connection failed, please use the Ethereum network" })
-        } else {
-          notification.error({ message: "Please authorize to access your account" })
-        }
-      })
+      // TODO: wallet connect
+      // await activate(connectors.injected, (error) => {
+      //   const Error = JSON.parse(JSON.stringify(error))
+      //   if (Error.name === "UnsupportedChainIdError") {
+      //     sessionStorage.removeItem(SessionStorageKey.WalletAuthorized)
+      //     action(fetchUser(`{}`))
+      //     notification.error({ message: "Prompt connection failed, please use the Ethereum network" })
+      //   } else {
+      //     notification.error({ message: "Please authorize to access your account" })
+      //   }
+      // })
       action(fetchUser2())
     } catch (e) {
       console.error('error:', e)

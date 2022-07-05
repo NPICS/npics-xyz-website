@@ -20,7 +20,7 @@ interface Iprops {
 }
 
 export default function SignModal(props: Iprops) {
-  const { library, account } = useWeb3React()
+  const { provider, account } = useWeb3React()
   const { collectionItemsDetail, setIsShowModal } = props
   const [payEthBtn, setPayEthBtn] = useState<boolean>(false)
   const [payWethBtn, setPayWethBtn] = useState<boolean>(false)
@@ -46,7 +46,7 @@ export default function SignModal(props: Iprops) {
       message.error('account is undefined')
       return
     }
-    const balance = await library.getBalance(account)
+    const balance = await provider!.getBalance(account)
     setWalletBalance(new BigNumber(balance.toString()))
   }
   const getWETHBalance = async () => {
@@ -54,7 +54,7 @@ export default function SignModal(props: Iprops) {
       message.error('account is undefined')
       return
     }
-    let signer = library.getSigner(account)
+    let signer = provider!.getSigner(account)
     let weth = new Erc20(ContractAddresses.WETH, signer)
     const WETHBalance = await weth.balanceOf(account)
     setWETHBalance(WETHBalance)

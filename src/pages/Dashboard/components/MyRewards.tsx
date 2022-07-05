@@ -134,7 +134,7 @@ const Rewards = styled.div`
 `
 
 function MyRewards() {
-  const { account, library } = useWeb3React()
+  const { account, provider } = useWeb3React()
   const action = useAppDispatch()
   const userInfo = useAppSelector(state => deserialize(User, state.app.currentUser))
   const [option, setOption] = useState<string | number>("Npics Compounder")
@@ -144,7 +144,7 @@ function MyRewards() {
     // eslint-disable-next-line
   }, [])
   const getBalance = async () => {
-    const signer = library.getSigner(account)
+    const signer = provider!.getSigner(account)
     let npics = new Npics(signer)
     const Balance: BigNumber = await npics.getRewardsBalance(userInfo?.address || '')
     console.log(Balance.toString())
@@ -153,7 +153,7 @@ function MyRewards() {
 
   const onRewards = async () => {
     try {
-      const signer = library.getSigner(account)
+      const signer = provider!.getSigner(account)
       let npics = new Npics(signer)
       action(setIsLoading(true))
       await npics.claimRewards()
