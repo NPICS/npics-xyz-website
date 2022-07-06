@@ -11,7 +11,7 @@ import {Erc20} from "../../abi/Erc20";
 import {ContractAddresses} from "../../utils/addresses";
 import {useWeb3React} from "@web3-react/core";
 import http from "../../utils/http";
-import {message} from "antd";
+import {message, notification} from "antd";
 import {Npics} from "../../abi/Npics";
 import Modal from "../../component/Modal";
 import NFTPayProgressing from "./NFTPayProgressing";
@@ -274,7 +274,8 @@ export default function NFTPay(props: {
       setHash(tx.hash)
       setProgressingPopupOpen(false)
       setSuccessPopupOpen(true)
-    } catch (e) {
+    } catch (e: any) {
+      notification.error({message: e.message})
       setProgressingPopupOpen(false)
       setFailedPopupOpen(true)
     }
@@ -486,8 +487,7 @@ export default function NFTPay(props: {
             style={{
               "userSelect": "none"
             }}
-          >Checking this box, I agree to NPics <AttrLink href={urls.resource} target={"_blank"}>Terms of
-            Service</AttrLink></Typography>
+          >Checking this box, I agree to NPics <AttrLink href={urls.resource} target={"_blank"}>Terms of Service</AttrLink></Typography>
         </Flex>
       </label>
     </Box>

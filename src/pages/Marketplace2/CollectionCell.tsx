@@ -6,6 +6,7 @@ import CellTagIcon from "../../assets/images/market_cell_tags.svg"
 import {useNavigate} from 'react-router-dom';
 import BigNumber from "bignumber.js";
 import ethIcon from "../../assets/images/market/eth_icon_10x15.svg"
+import unselectedEthIcon from "../../assets/images/market/unselect_eth.svg"
 
 const Cover = styled.img`
   display: block;
@@ -24,13 +25,21 @@ const IconTest = styled.img`
   user-select: none;
 `
 
+const SVGIcon = styled(Icon)`
+  svg {
+    path {
+      fill: red;  
+    }
+  }
+`
+
 const NoWarpTypography = styled(Typography)`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   transition: all .2s;
 `
-const FlexHover = styled(Flex)`
+const ShadowBox = styled(Flex)`
   &:hover {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
     transition: all .2s;
@@ -49,12 +58,13 @@ export default function CollectionCell(props: {
         window.scrollTo(0, 0)
     }
 
-    return <FlexHover
+    return <ShadowBox
         borderRadius={'.1rem'}
         // border={"1px solid rgba(0,0,0,.1)"}
-        boxShadow="0px 0px 20px rgba(0, 0, 0, 0.1)"
+        boxShadow="0 0 20px rgba(0, 0, 0, 0.1)"
         overflow={"hidden"}
         flexDirection={"column"}
+        alignItems={"stretch"}
         position={"relative"}
         style={{
             "cursor": "pointer"
@@ -108,11 +118,31 @@ export default function CollectionCell(props: {
                     <Icon height={".15rem"} width={".1rem"} src={ethIcon}/>
                     <Typography fontWeight={'700'}>{props.item.downPaymentPriceFormat()}</Typography>
                 </Flex>
-                {/* <Flex flex={1}></Flex> */}
-                <IconTest src={props.item.marketIcon()} alt=""/>
-                {/*<Icon width={".22rem"} height={".22rem"} url={props.item.marketIcon()} />*/}
+
             </Flex>
+          <Box
+            height={"1px"}
+            background={"#0000001a"}
+            margin={".12rem 0"}
+          ></Box>
+          <Flex alignItems={"center"} gap={".1rem"}>
+            <IconTest src={props.item.marketIcon()} alt=""/>
+            <Typography
+              color={"#00000080"}
+              fontSize={".14rem"}
+              fontWeight={500}
+            >{props.item.marketDisplay()}</Typography>
+            <Flex flex={1}></Flex>
+            <Icon style={{
+              "flexShrink": 0
+            }} src={unselectedEthIcon} width={".1rem"} height={".15rem"}></Icon>
+            <Typography
+              color={"#00000080"}
+              fontSize={".14rem"}
+              fontWeight={500}
+            >{props.item.basePrice()}</Typography>
+          </Flex>
         </Box>
 
-    </FlexHover>
+    </ShadowBox>
 }

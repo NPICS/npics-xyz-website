@@ -50,7 +50,7 @@ export default function NFTShare(props: {
       window.location.reload()
     }}/>
     <IconWithBorder icon={homePageIcon} tap={async () => {
-      window.open(`#`)
+      props.item?.externalUrl && window.open(props.item.externalUrl)
     }} />
     <IconWithBorder icon={ShareIcon} tap={async () => {
       let link = window.location.href

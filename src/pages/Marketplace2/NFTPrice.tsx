@@ -260,7 +260,7 @@ export default function NFTPrice(props: {
         </Flex>
         <Flex style={{cursor: 'pointer'}} alignItems={"center"} gap={".1rem"}
               onClick={() => window.open(`${props.item?.marketUrl}`)}>
-          <Icon width={".22rem"} height={".22rem"} src={props.item?.marketIcon()}/>
+          <Icon width={".22rem"} height={".22rem"} borderRadius={".11rem"} src={props.item?.marketIcon()}/>
           <Typography
             fontSize={".14rem"}
             fontWeight={500}

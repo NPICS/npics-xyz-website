@@ -202,7 +202,7 @@ export default function MarketList() {
                 padding={".25rem .4rem"}
                 // marginTop={".25rem"}
                 gridTemplateColumns={`repeat(${compactMode ? 8 : 5}, 1fr)`}
-                gridGap={".25rem"}
+                gridGap={compactMode ? `.16rem` : `.25rem`}
                 justifyContent={"space-between"}
                 alignItems={"start"}
                 overflow={"auto"}>
