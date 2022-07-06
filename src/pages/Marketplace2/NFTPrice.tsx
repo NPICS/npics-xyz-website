@@ -206,8 +206,8 @@ export default function NFTPrice(props: {
       if (props.item && availableBorrow) {
         setBuyPopOpen(true)
       }
-    } catch (e) {
-      message.error(`${e}`)
+    } catch (e:any) {
+      message.error(`${e.message}`)
     }
   }
 

@@ -236,7 +236,7 @@ export default function NFTPay(props: {
       }
 
       if (!didReadService) {
-        message.error(`Please agree to NPics's Terms of service`)
+        message.error(`Please agree to NPics Terms of Service`)
         return
       }
       // show progressing
