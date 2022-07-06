@@ -202,7 +202,7 @@ export default function NFTPrice(props: {
         // await connector.activate()
         await injected.activate()
       }
-      if (props.item && availableBorrow && account) {
+      if (props.item && availableBorrow) {
         setBuyPopOpen(true)
       }
     } catch (e) {
@@ -224,6 +224,7 @@ export default function NFTPrice(props: {
       {/* origin price */}
       <Shadow>
         <Popover 
+          overlayClassName="ant-popover-reset"
           content={listedPricePop}>
           <TipsIcon width={".14rem"} src={tipsIcon}/>
         </Popover>

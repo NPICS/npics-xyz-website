@@ -20,8 +20,10 @@ const AntdSelect = styled(Select)`
     border: 1px solid rgba(0, 0, 0, 0.1) !important;
     box-shadow: none !important;
     border-radius: 10px !important;
+    transition: all 0s !important;
     .ant-select-selection-item {
       line-height: .5rem;
+      transition: all 0s !important;
     }
   }
 `

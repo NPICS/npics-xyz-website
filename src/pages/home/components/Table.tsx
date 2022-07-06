@@ -135,7 +135,7 @@ export default function MyTable() {
       </div>
     },
     {
-      title: 'Down Payment(%)',
+      title: 'Down Payment ( % )',
       dataIndex: 'advanceRate',
       align: 'center',
       key: 'advanceRate',

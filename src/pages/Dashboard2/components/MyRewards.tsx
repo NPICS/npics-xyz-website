@@ -23,11 +23,12 @@ export default function MyRewards() {
     // eslint-disable-next-line
   }, [])
   const getBalance = async () => {
+    if(!provider) return
     // TODO: library => provider @quan
-    // const signer = provider.getSigner(account)
-    // let npics = new Npics(signer)
-    // const Balance: BigNumber = await npics.getRewardsBalance(userInfo?.address || '')
-    // setBalance(Balance)
+    const signer = provider.getSigner(account)
+    let npics = new Npics(signer)
+    const Balance: BigNumber = await npics.getRewardsBalance(userInfo?.address || '')
+    setBalance(new BigNumber(Balance.toString()))
   }
 
   const onRewards = async () => {

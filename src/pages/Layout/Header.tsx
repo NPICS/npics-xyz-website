@@ -14,6 +14,7 @@ import { urls } from "../../utils/urls";
 import { NavLink, useLocation } from 'react-router-dom';
 import { Flex, Icon, Typography, Box } from 'component/Box';
 import styled from 'styled-components';
+import { injected } from 'connectors/hooks';
 
 const StyledtWallet = styled(Flex)`
   cursor: pointer;
@@ -61,7 +62,6 @@ function XHeader() {
   ]
 
   useEffect(() => {
-    console.log(`Account Change => New: ${account}, Old: ${oldAccount.current}`)
     // changed account
     if (account && oldAccount.current) {
       // remove old account data
@@ -123,6 +123,7 @@ function XHeader() {
       //     notification.error({ message: "Please authorize to access your account" })
       //   }
       // })
+      await injected.activate(1)
       action(fetchUser2())
     } catch (e) {
       console.error('error:', e)
@@ -231,8 +232,6 @@ function XHeader() {
   const history = useLocation()
   const [activiRoute, setActiviRoute] = useState<string>('')
   useEffect(() => {
-    console.log(history.pathname.substring(1, 4));
-    console.log(history.pathname.substring(1, 13));
     if (history.pathname.substring(1, 4) === 'nft') {
       setActiviRoute('nft')
       return
@@ -246,11 +245,6 @@ function XHeader() {
 
   return (
     <Nav>
-      <Flex
-        position="absolute"
-        width="16.06rem"
-        justifyContent="space-between"
-      >
         <FlexDiv>
           <LogoLink to={"/"}>
             <img src={imgurl.logoBeta} alt="" />
@@ -343,7 +337,6 @@ function XHeader() {
       >
         <div onClick={connect}><img src={imgurl.metamaskLogo} alt=""></img>MetaMask</div>
       </Modal> */}
-      </Flex>
     </Nav>
   );
 }
