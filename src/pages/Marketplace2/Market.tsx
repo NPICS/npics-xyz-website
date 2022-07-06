@@ -39,6 +39,14 @@ export const Banner = styled(Box)<{ url?: string }>`
   }
 `
 
+export const ExpandBtn = styled(Box)`
+  color: #FF490F;
+  font-size: .14rem;
+  font-weight: 500;
+  user-select: none;
+  cursor: pointer;
+`
+
 const CollectionItem = styled.div<{
   isSelected?: boolean,
   imgUrl?: string
@@ -51,24 +59,32 @@ const CollectionItem = styled.div<{
   overflow: hidden;
   border-radius: .16rem;
   //box-sizing: content-box;
-  //box-shadow: 0 0 0 ${(props) => props.isSelected ? `3px` : `0`} #fff;
+    //box-shadow: 0 0 0 ${(props) => props.isSelected ? `3px` : `0`} #fff;
   border: ${(props) => props.isSelected ? `3px` : 0} solid #fff;
   transform: ${(props) => props.isSelected ? "scale(1.15)" : "scale(1)"};
 `
 
-const MarkdownContainer = styled.div`
-  color: rgba(0,0,0,.5);
+const MarkdownContainer = styled.div<{
+  expand: boolean
+}>`
+  color: rgba(0, 0, 0, .5);
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: ${(props) => props.expand ? `none` : 2};
   overflow: hidden;
   word-break: break-all;
   word-wrap: break-word;
   -webkit-box-orient: vertical;
+  //
+  //p {
+  //  margin: .06rem 0;
+  //}
 `
 
 export default function Market() {
   const [listData, setListData] = useState<Collections[]>([])
   // const [selectAddress, setSelectAddress] = useState<string>()
+  const [descriptionExpand, setDescriptionExpand] = useState(false)
+  const [expandBtnHidden, setExpandBtnHidden] = useState(true)
   const [nft, setNft] = useState<Collections>()
   const nav = useNavigate()
   const params = useParams()
@@ -173,9 +189,26 @@ export default function Market() {
                   height={".24rem"}/>
               </Popover>
             </Flex>
-            <MarkdownContainer>
+            <MarkdownContainer ref={(e) => {
+              if (!e) return
+              if (e.offsetHeight < e.scrollHeight || e.offsetWidth < e.scrollWidth) {
+                setExpandBtnHidden(false)
+              } else {
+                if (descriptionExpand) {
+                  setExpandBtnHidden(false)
+                } else {
+                  setExpandBtnHidden(true)
+                }
+              }
+            }} expand={descriptionExpand}>
               <ReactMarkdown className={``} children={nft?.description ?? ``}></ReactMarkdown>
             </MarkdownContainer>
+            <ExpandBtn
+              hidden={expandBtnHidden}
+              onClick={() => {
+                setDescriptionExpand(!descriptionExpand)
+              }}>{descriptionExpand ? `less` : `more`}</ExpandBtn>
+
             {/*<Typography*/}
             {/*    fontWeight={"500"}*/}
             {/*    fontSize={".14rem"}*/}
