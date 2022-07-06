@@ -10,7 +10,7 @@ interface IProps {
 
 NotFound.defaultProps = {
   title: "No  data found",
-  text:"You  doesn’t  have any vaults available to found. Buy any NFTs on the NPics 'Marketplace' to obtain the vaults.",
+  text:"You don't have any vaults available to found. Buy any NFTs on the NPics 'Marketplace' to obtain the vaults.",
   padding: ".3rem 0"
 }
 

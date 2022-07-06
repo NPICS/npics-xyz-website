@@ -23,6 +23,8 @@ import {MintedNFTPop, HealthFactorPop, DebtPop, VaultAprPop, EstimatProfitPop} f
 import {globalConstant} from 'utils/globalConstant';
 import { injected } from 'connectors/hooks';
 import { useAsync } from 'react-use';
+import Checkbox from 'component/Input/Checkbox';
+import { TextPlaceholder } from 'component/styled';
 
 
 const Banner = () => {
@@ -156,6 +158,7 @@ export default function VaultsDetail() {
   useEffect(() => {
     if (!activities) return
     if (progressVal === 1) {
+      console.log('checked',checked);
       setChecked(true)
     } else {
       setChecked(false)
@@ -305,15 +308,15 @@ export default function VaultsDetail() {
           key: 'nft-detail',
           items: newArray.tokenId,
           contract: newArray.tokenId,
-          debtString: new BigNumber(newArray.debtData.totalDebt.toString()).div(10 ** 18).toFixed(4, 1) || `---`,
-          // debtString: '13.14' || `---`,
+          debtString: new BigNumber(newArray.debtData.totalDebt.toString()).div(10 ** 18).toFixed(4, 1) || TextPlaceholder,
+          // debtString: '13.14' || TextPlaceholder,
           debt: new BigNumber(newArray.debtData.totalDebt.toString()),
           // debt: new BigNumber('13140000000000000000'),
           maxDebt: new BigNumber(newArray.debtData.totalDebt.toString()).plus(slippage(new BigNumber(newArray.debtData.totalDebt.toString()))),
           // maxDebt: new BigNumber("14440000000000000000"),
-          liquidationPrice: new BigNumber(newArray.liquidatePrice.liquidatePrice.toString()).div(10 ** 18).toFixed(4, 1) || "---",
-          // liquidationPrice: '5.82' || "---",
-          healthFactor: new BigNumber(newArray.debtData.healthFactor.toString()).div(10 ** 18).toFixed(4, 1) || "---",
+          liquidationPrice: new BigNumber(newArray.liquidatePrice.liquidatePrice.toString()).div(10 ** 18).toFixed(4, 1) || TextPlaceholder,
+          // liquidationPrice: '5.82' || TextPlaceholder,
+          healthFactor: new BigNumber(newArray.debtData.healthFactor.toString()).div(10 ** 18).toFixed(4, 1) || TextPlaceholder,
           status: newArray.status,
           statusSrt: turnStr(newArray.debtData.healthFactor),
           address: newArray.nftAddress,
@@ -388,7 +391,7 @@ export default function VaultsDetail() {
                           color={"rgba(0,0,0,.5)"}>Asset:</Typography>
               <Flex alignItems={'center'}>
                 <Typography marginRight={'.1rem'} fontSize={".16rem"} fontWeight={"500"} color={"rgba(0,0,0,.5)"}>
-                  {`${activities?.collectionName ?? '--'} #${activities?.tokenId ?? '--'}`}
+                  {`${activities?.collectionName ?? TextPlaceholder} #${activities?.tokenId ?? TextPlaceholder}`}
                 </Typography>
                 <Icon style={{cursor: "pointer"}} width=".16rem" height=".16rem" src={imgurl.dashboard.export14} alt=""
                       onClick={() => window.open(`https://etherscan.io/nft/${activities?.address}/${activities?.tokenId}`)}/>
@@ -432,7 +435,7 @@ export default function VaultsDetail() {
               </Popover>
               <Flex alignItems={'center'} marginBottom={".14rem"}>
                 <Typography marginRight={'.1rem'} fontSize=".24rem" fontWeight='700' color="#000">
-                  {`NEO-${activities?.collectionName ?? '--'} #${activities?.tokenId ?? '--'}`}
+                  {`NEO ${activities?.collectionName ?? TextPlaceholder} #${activities?.tokenId ?? TextPlaceholder}`}
                 </Typography>
                 <Icon style={{cursor: "pointer"}} width=".16rem" height=".16rem" src={imgurl.dashboard.export14} alt=""
                       onClick={() => {
@@ -440,7 +443,7 @@ export default function VaultsDetail() {
                         window.open(`https://cn.etherscan.com/nft/${activities.neoAddress}/${activities.tokenId}`)
                       }}/>
               </Flex>
-              <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">NEO-NFT</Typography>
+              <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">NEO NFT</Typography>
             </GridItem>
             <GridItem
               background={"#fff"}
@@ -483,7 +486,7 @@ export default function VaultsDetail() {
             >
               <Flex alignItems={"center"} justifyContent={"center"} flexDirection="column" gap='.12rem'>
                 <Flex gap="10px">
-                  <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Factor</Typography>
+                  <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Health factor</Typography>
                   <Popover 
                     overlayClassName="ant-popover-reset"
                     content={HealthFactorPop}>
@@ -494,7 +497,7 @@ export default function VaultsDetail() {
                 <Typography fontSize=".2rem" fontWeight='500' color="#000">{activities?.healthFactor}</Typography>
               </Flex>
               <Flex alignItems={"center"} justifyContent={"center"} flexDirection="column" gap='.12rem'>
-                <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Price</Typography>
+                <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Floor price</Typography>
                 <Flex alignItems={'center'}>
                   <Icon width='.22rem' height='.22rem' src={imgurl.home.ethBlack22}/>
                   <Typography fontSize=".2rem" fontWeight='500'
@@ -506,7 +509,7 @@ export default function VaultsDetail() {
                   <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Debt</Typography>
                   <Popover 
                     overlayClassName="ant-popover-reset"
-                    content={DebtPop({Principal: activities?.debt, noInterest: '---'})}>
+                    content={DebtPop({Principal: activities?.debt, noInterest: TextPlaceholder})}>
                     <Icon width={".14rem"} src={imgurl.market.tipsIcon}/>
                   </Popover>
 
@@ -589,7 +592,7 @@ export default function VaultsDetail() {
                 activities &&
                 remainingDebt &&
                 (remainingDebt.eq(0) ?
-                  '--' :
+                  TextPlaceholder :
                   payDebt?.eq(0) ?
                     activities?.healthFactor :
                     new BigNumber(activities?.floorPrice.div(10 ** 18).toString()).times('0.9').div(remainingDebt?.div(10 ** 18)).toFixed(4, 1))
@@ -616,7 +619,7 @@ export default function VaultsDetail() {
           </GridItem>
           <GridItem gridArea={'pay'} flexDirection="column">
             <Flex
-              background="rgba(0, 0, 0, 0.03)"
+              background={progressVal === 1 ? "rgba(0, 0, 0, 0.03)" : "#fff"}
               border="1px solid rgba(0, 0, 0, 0.1)"
               borderRadius="10px"
               padding=".31rem .5rem"
@@ -625,8 +628,15 @@ export default function VaultsDetail() {
               flex="auto"
             >
               {/* max={activities?.maxDebt.div(10 ** 18).toFixed(4,1) ?? 0} */}
-              <InputNumberStyled controls={false} min={0} defaultValue={0} value={inputPayDebt}
-                                 onChange={(e) => handleIptDebt(e)} bordered={false} precision={4}/>
+              <InputNumberStyled 
+                controls={false} 
+                min={0} 
+                defaultValue={0} 
+                value={inputPayDebt}              
+                onChange={(e) => handleIptDebt(e)} 
+                bordered={false} precision={4}
+                disabled={progressVal === 1 ? true : false }           
+              />
               <Icon width='.4rem' height='.4rem' src={imgurl.home.ethBlack40}/>
             </Flex>
 
@@ -639,9 +649,19 @@ export default function VaultsDetail() {
 
             <Box minHeight={'1rem'} marginTop=".3rem">
               <Flex alignItems="center" marginBottom=".3rem" gap='.1rem'>
-                <input style={{width: ".24rem", height: ".24rem", cursor: "pointer"}} type={'checkbox'}
+                <label style={{display:'flex',alignItems:'center'}}>
+                  <Checkbox 
+                    style={{width: ".24rem", height: ".24rem", cursor: "pointer"}}
+                    onChange={(e:any) => handleCheck(e)}
+                    // _checked={checked}
+                    _checked={checked}
+                    // value={checked}
+                  />
+                  <Typography marginLeft=".12rem">Repay all</Typography>
+                </label>
+                {/* <input style={{width: ".24rem", height: ".24rem", cursor: "pointer"}} type={'checkbox'}
                        onChange={(e) => handleCheck(e)} checked={checked} id="payAll"/>
-                <label style={{cursor: "pointer"}} htmlFor="payAll">Repay all</label>
+                <label style={{cursor: "pointer"}} htmlFor="payAll">Repay all</label> */}
                 <Typography fontSize={".16rem"} fontWeight={"500"} color="rgba(0,0,0,.5)">(Repay the whole loan to
                   regain NFT ownership)</Typography>
               </Flex>
@@ -658,7 +678,7 @@ export default function VaultsDetail() {
 
             <Typography marginTop=".3rem">
               <ButtonDefault disabled={payDebt?.eq(0) ? true : false} types='normal' color='#fff'
-                             onClick={handleRepay}>Repay</ButtonDefault>
+                             onClick={handleRepay}>{progressVal === 1 ? 'Repay all' :`Repay`}</ButtonDefault>
             </Typography>
 
           </GridItem>

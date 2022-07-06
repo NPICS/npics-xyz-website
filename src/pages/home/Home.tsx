@@ -69,7 +69,7 @@ function Home() {
       case 1:
         return setTextContent('Without tedious comparisons, Npics delivers all vaild listings among NFT markets and executes each transaction at the best price and optimal financing.');
       case 2:
-        return setTextContent('Pay part of funds, get and deposite your NFT to generate a vault outright. A NEO-NFT will be minted as synthetic version of the purchased NFT. All claimable airdrops and rewards will be fully reserved for you. ');
+        return setTextContent('Pay part of funds, get and deposite your NFT to generate a vault outright. A NEO NFT will be minted as synthetic version of the purchased NFT. All claimable airdrops and rewards will be fully reserved for you. ');
       case 3:
         return setTextContent('The collateralized NFT can be redeemed upon repayment at anytime you want, which means your relevant vault will be closed out.');
       default:

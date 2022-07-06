@@ -22,6 +22,8 @@ import ButtonDefault from 'component/ButtonDefault';
 import { thousandFormat } from "../../../../utils/urls";
 import { deserializeArray, plainToClass } from 'class-transformer';
 import { injected } from 'connectors/hooks';
+// import { aa } from './data'
+import { TextPlaceholder } from 'component/styled';
 
 interface Result {
   createTime: string,
@@ -40,8 +42,8 @@ interface Result {
 
 enum Color {
   'Inforce' = "#7BD742",
-  'In Risk' = "#FF4949",
-  'In Liquidation' = "#7F7F7F",
+  'In Risk' = "#FFD43B",
+  'In Liquidation' = "#FF4949",
   'Terminated' = "#7F7F7F"
 }
 
@@ -83,7 +85,7 @@ function VaultsTable(props: IProps) {
       key: 'items',
       align: 'center',
       render: (text, row) => {
-      return <div className='items' style={{ cursor: `${row.factorStatus === 'Terminated' ? '' : 'pointer'}` }} onClick={() => jumpToEthscan(row)}>
+      return <div className='items' style={{ cursor: `${row.terminated() ? '' : 'pointer'}` }} onClick={() => jumpToEthscan(row)}>
         <img className='avatar' src={row.imageUrl} alt="" />
         <div className='text'>
           <div>
@@ -103,14 +105,14 @@ function VaultsTable(props: IProps) {
       </div>}
     },
     {
-      title: 'NEO-NFT',
+      title: 'NEO NFT',
       dataIndex: 'contract',
       key: 'contract',
       align: 'center',
-      render: (text, row) => <div className='contract' style={{ cursor: `${row.factorStatus === 'Terminated' ? '' : 'pointer'}` }} onClick={() => jumpToNEOEthscan(row)}>
-        <span title={row.collectionName}>NEO-{row.collectionName}</span>
-        #{text}
-        <Icon width=".16rem" height=".16rem" src={imgurl.dashboard.exportBlack18} alt="" />
+      render: (text, row) => <div className='contract' style={{ cursor: `${row.terminated() ? '' : 'pointer'}` }} onClick={() => jumpToNEOEthscan(row)}>
+        <span title={row.collectionName}>NEO {row.collectionName}</span>
+        #{row.tokenId}
+        {row.terminated() ? null : <Icon width=".16rem" height=".16rem" src={imgurl.dashboard.exportBlack18} alt="" />}
       </div>
     },
     {
@@ -119,9 +121,8 @@ function VaultsTable(props: IProps) {
       key: 'debtString',
       align: 'center',
       width: '1.8rem',
-      render: (text, row) => <Flex className='imgPrice' flexDirection='column'>
-        <Flex alignItems='center'>
-
+      render: (text, row) => row.terminated() ? TextPlaceholder : <Flex className='imgPrice' flexDirection='column'>
+        <Flex alignItems='center' marginBottom=".04rem">
           <Icon width=".18rem" height=".18rem" src={imgurl.dashboard.ethBlack18} alt="" />
           {row.debtString()}
         </Flex>
@@ -137,8 +138,8 @@ function VaultsTable(props: IProps) {
       dataIndex: 'liquidationPrice',
       align: 'center',
       key: 'liquidationPrice',
-      render: (text, row) => <Flex className='imgPrice' flexDirection='column'>
-        <Flex alignItems='center'>
+      render: (text, row) => row.terminated() ? TextPlaceholder : <Flex className='imgPrice' flexDirection='column'>
+        <Flex alignItems='center' marginBottom=".04rem">
           <Icon width=".18rem" height=".18rem" src={imgurl.dashboard.ethBlack18} alt="" />
           {row.liquidationPrice().div(10 ** 18).toFixed(4, 1)}
         </Flex>
@@ -148,12 +149,12 @@ function VaultsTable(props: IProps) {
       </Flex>
     },
     {
-      title: 'Factor',
+      title: 'Health factor',
       dataIndex: 'healthFactor',
       align: 'center',
       key: 'healthFactor',
       width: '1.8rem',
-      render: (text,row) => <div className='healthFactor'>
+      render: (text,row) => row.terminated() ? TextPlaceholder : <div className='healthFactor'>
         {row.healthFactor.div(10 ** 18).toFixed(4, 1)}
       </div>
     },
@@ -173,18 +174,20 @@ function VaultsTable(props: IProps) {
       key: 'actions',
       align: 'center',
       width: '1.8rem',
-      render: (t, row: any) => row.factorStatus === "Terminated" ? <div /> : <div className='actionBtn' onClick={() => navigate(`/vaultsDetail/${row.address}/${row.tokenId}`)}>
-        Repay
-      </div>,
+      render: (t, row: any) => row.terminated() ? <div /> : <Flex alignItems='center' justifyContent='center'>
+        <ButtonDefault height='.48rem' minWidth='1.2rem' types='normal' onClick={() => navigate(`/vaultsDetail/${row.address}/${row.tokenId}`)}>
+          Repay
+        </ButtonDefault>
+      </Flex>,
     },
   ]
 
   const jumpToEthscan = (e: DataSource2) => {
-    if (e.factorStatus === 'Terminated') return
+    if (e.terminated()) return
     navigate(`/vaultsDetail/${e.nftAddress}/${e.tokenId}`)
   }
   const jumpToNEOEthscan = (e: DataSource2) => {
-    if (e.factorStatus === 'Terminated') return
+    if (e.terminated()) return
     window.open(`https://cn.etherscan.com/nft/${e.neoAddress}/${e.tokenId}`)
   }
 
@@ -212,7 +215,6 @@ function VaultsTable(props: IProps) {
   }, [activities])
 
   useEffect(() => {
-    console.log(isLogin, account);
     if (isLogin) {
       setShowModal(false)
       getNftActivities()
@@ -220,18 +222,16 @@ function VaultsTable(props: IProps) {
       setShowModal(true)
     }
     // eslint-disable-next-line
-  }, [isLogin, account])
+  }, [isLogin, account,provider])
 
   useEffect(() => {
     if(account && !isLogin) {
       setShowModal(true)
     }
-    console.log('account',account,isLogin)
   },[account,isLogin])
 
 
   async function login2() {
-    console.log(isLogin,account);
     if(!provider) return
     // TODO: library -> provider
     try {
@@ -251,13 +251,13 @@ function VaultsTable(props: IProps) {
       }
     } catch (e) {
       setShowModal(false)
-      console.log(`Login Erro => ${e}`)
     }
   }
 
   const numberToString = (val: BigNumber) => {
     if(!val) return
     let factor = +(new BigNumber(val.toString()).div(10 ** 18).dp(0).toString())
+    // factor = Math.random() * 2
     if (factor >= 1.5) {
       return 'Inforce'
     } else if (factor >= 1 && factor < 1.5) {
@@ -280,8 +280,12 @@ function VaultsTable(props: IProps) {
     try {
       const result: any = await http.myPost(url, pageInside)
       let orgData: any[] = result.data.records
+      // let orgData: any = aa.data.records
+      if(!provider) return
       if (result.code === 200 && orgData.length) {
-        const signer = provider!.getSigner(account)
+        console.log('provider',provider)
+      // if (result.code === 200 && orgData.length) {
+        const signer = provider.getSigner(account)
         let lendPool = new LendPool(signer)
         const len = orgData.length
         const promiseArray = []
@@ -333,11 +337,13 @@ function VaultsTable(props: IProps) {
             loanId: listData[i].loanId,
             reserveAsset: listData[i].reserveAsset,
             totalCollateral: listData[i].totalCollateral,
+            // totalDebt: new BigNumber("6000000000000000000"),
             totalDebt: totalDebt,
             maxTotalDebt: listData[i].maxTotalDebt,
             debtString: listData[i].debtString,
             availableBorrows: listData[i].availableBorrows,
             liquidationPrice: listData[i].liquidationPrice,
+            terminated: listData[i].terminated
           })
         }
 
@@ -369,13 +375,10 @@ function VaultsTable(props: IProps) {
       <Flex gap=".2rem" justifyContent='center' marginTop=".3rem" >
         <ButtonDefault minWidth='2rem' height='.52rem' types='second' color='#000' onClick={() => { setShowModal(false) }}>Cancel</ButtonDefault>
         <ButtonDefault minWidth='2rem' height='.52rem' types='normal' color='#fff' onClick={async () => {
-          console.log(account,provider)
           if (account) {
             login2()
           } else {
             if (!account) {
-              /// TODO: wallet connect @quan
-                // activate(connectors.injected)
                 setShowModal(false)
                 try{
                   await injected.activate(1)

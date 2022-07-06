@@ -9,6 +9,7 @@ import { ContractAddresses } from 'utils/addresses';
 import { useBendPrice, useEthPrice } from 'utils/hook';
 import { font01651, font01455 } from 'component/styled';
 import {numberFormat} from "../../utils/urls";
+import { TextPlaceholder } from '../../component/styled';
 
 interface wallet {
   icon: string,
@@ -85,20 +86,20 @@ export default function WalletBalance () {
       {
         icon: imgurl.home.ethBlack22,
         text: 'ETH',
-        amount: ETHBalance?? '---',
-        dollar: ETHdollar?? '---',
+        amount: ETHBalance?? TextPlaceholder,
+        dollar: ETHdollar?? TextPlaceholder,
       },
       {
         icon: imgurl.home.ethOrange22,
         text: 'WETH',
-        amount: WETHBalance?? '---',
-        dollar: WETHdollar?? '---',
+        amount: WETHBalance?? TextPlaceholder,
+        dollar: WETHdollar?? TextPlaceholder,
       },
       {
         icon: imgurl.home.band22,
         text: 'BEND',
-        amount: BDBalance?? '---',
-        dollar: BDdollar?? '---',
+        amount: BDBalance?? TextPlaceholder,
+        dollar: BDdollar?? TextPlaceholder,
       }
     ]
     setList(data)
@@ -116,7 +117,7 @@ export default function WalletBalance () {
             {/*<span>{new BigNumber(item.amount.toString()).div(10 ** 18).dp(4).toFixed()}</span>*/}
             {/*<span>${item.dollar.dp(0).toFixed()}</span>*/}
           <span>{typeof item.amount === 'string' ? item.amount : numberFormat(item.amount.div(10 ** 18).toFixed())}</span>
-          <span>{typeof item.dollar === 'string' ? item.dollar : `$(${numberFormat(item.dollar.toFixed())})`}</span>
+          <span>{typeof item.dollar === 'string' ? item.dollar : `$${numberFormat(item.dollar.toFixed())}`}</span>
         </div>
       </div>)
     })}

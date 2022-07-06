@@ -248,6 +248,7 @@ export const GlobalStyle = createGlobalStyle`
   .ant-table-reset-white {
     .ant-table {
     background: transparent;
+    line-height: normal;
     table {
       display: flex;
       flex-direction: column;

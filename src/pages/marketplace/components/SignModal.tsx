@@ -71,7 +71,7 @@ export default function SignModal(props: Iprops) {
       return
     }
     if (!checkbox) {
-      message.warning("please agree to NPics's Terms of service");
+      message.warning("please agree to NPics Terms of Service");
       return
     }
     let downPayment = compute(collectionItemsDetail)?.agreementPrice
@@ -235,7 +235,7 @@ export default function SignModal(props: Iprops) {
     </div>
 
     {signState === 'pending' ? <div className='confirm'>
-      <Checkbox onChange={onCheckbox} checked={checkbox}><span className='checkText'>checking this box,I agree to NPics's <span ><a href={urls.resource} target="_blank" rel="noreferrer">Terms of service</a></span></span></Checkbox>
+      <Checkbox onChange={onCheckbox} checked={checkbox}><span className='checkText'>checking this box,I agree to NPics <span ><a href={urls.resource} target="_blank" rel="noreferrer">Terms of Service</a></span></span></Checkbox>
     </div> : null}
 
     <div className='footer'>

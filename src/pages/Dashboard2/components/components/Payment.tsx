@@ -63,7 +63,7 @@ export default function Payment(props:IProps) {
     flexDirection={"column"}
   >
     <Flex alignItems="center" justifyContent="center" marginBottom=".3rem">
-      <Typography  fontSize=".3rem" fontWeight="800" color="#000">Payment</Typography>
+      <Typography  fontSize=".3rem" fontWeight="800" color="#000">Repayment</Typography>
       {/* <div style={{cursor: 'pointer'}}><Icon width=".24rem" height=".24rem" src={imgurl.dashboard.Cancel} onClick={() => {
         setShowPayment(false)
         setReload(!reload)

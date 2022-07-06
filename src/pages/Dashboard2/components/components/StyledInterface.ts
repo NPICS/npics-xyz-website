@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 
 export const BgTable = styled.div`
+  line-height: normal;
   .items {
     display: flex;
     .avatar {
@@ -16,14 +17,16 @@ export const BgTable = styled.div`
     .text {
       display: flex;
       flex-direction: column;
+      justify-content: space-evenly;
       margin-left: .1rem;
       &>div:nth-child(1) {
         display: flex;
+        align-items: center;
         flex-wrap: nowrap;
         color: #000;
         font-size: .16rem;
         &>span:nth-child(1) {
-          max-width: .67rem;
+          max-width: .7rem;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
@@ -40,7 +43,7 @@ export const BgTable = styled.div`
         &>span {
           ${flex}
           &>img {
-            margin: 0 .04rem 0 .08rem;
+            margin-left: .08rem;
             height: .14rem;
           }
         }
@@ -96,25 +99,21 @@ export const BgTable = styled.div`
     border-radius: 10px;
     line-height: .48rem;
     text-align: center;
-    border: 1px solid rgba(255, 255, 255, .2);
     font-weight: 600;
     font-size: .14rem;
     color: #fff;
     cursor: pointer;
-    &:hover {
-      color: #FF490F;
-    }
   }
   .ant-table-thead {
     tr {
       th:nth-child(2) {
-        width: 2.3rem !important;
+        width: 2.55rem !important;
       } 
       th:nth-child(3) {
-        width: 1.7rem !important;
+        width: 1.6rem !important;
       } 
       th:nth-child(4) {
-        width: 1.9rem !important;
+        width: 1.8rem !important;
       } 
       th:nth-child(5) {
         width: 1.6rem !important;
@@ -134,13 +133,13 @@ export const BgTable = styled.div`
   .ant-table-tbody {
     tr {
       td:nth-child(2) {
-        width: 2.3rem !important;
+        width: 2.55rem !important;
       }
       td:nth-child(3) {
-        width: 1.7rem !important;
+        width: 1.6rem !important;
       }
       td:nth-child(4) {
-        width: 1.9rem !important;
+        width: 1.8rem !important;
       }
       td:nth-child(5) {
         width: 1.6rem !important;
@@ -289,13 +288,20 @@ export class DataSource2 {
   maxTotalDebt() {
     return BigNumber.minimum(this.totalDebt.multipliedBy(new BigNumber('0.001')), new BigNumber('0.01').multipliedBy(10 ** 18))
   }
+
   @Expose()
   liquidationPrice() {
     return this.totalDebt.div('0.9')
   }
+
   @Expose()
   debtString() {
     return this.totalDebt.div(10 ** 18).toFixed(4, 1)
+  }
+  
+  @Expose()
+  terminated(): boolean {
+    return this.status === 1 ? true : false
   }
 }
 

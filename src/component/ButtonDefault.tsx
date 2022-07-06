@@ -118,6 +118,7 @@ function ButtonDefault(props:Iprops) {
 ButtonDefault.defaultProps = {
   border: 0,
   minWidth: '2rem',
+  Width: '2rem',
   height: '.66rem',
   text: 'button',
   fontSize: '.16rem',

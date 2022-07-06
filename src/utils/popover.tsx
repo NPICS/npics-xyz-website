@@ -68,7 +68,7 @@ export function DownPaymentPop(props: { listedPrice?: BigNumber, loanAmount?: Bi
 }
 
 export const MintedNFTPop = <Grid gridGap=".2rem" width="4.5rem">
-  <Typography fontSize=".16rem" fontWeight="500" color="#000">NEO-NFT NPics Everlasting Option NFT</Typography>
+  <Typography fontSize=".16rem" fontWeight="500" color="#000">NEO NFT NPics Everlasting Option NFT</Typography>
   <Typography fontSize=".14rem" fontWeight="500" color="rgba(0,0,0,.5)">NEO is NBPs voucher issued by the NPics on
     Ethereum,which is also a voucher held by the user to purchase NFT.
   </Typography>

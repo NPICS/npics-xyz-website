@@ -1,20 +1,27 @@
 import { imgurl } from "utils/globalimport";
+import navAirdopIcon from 'assets/images/dashboard/navAirdopIcon.png'
+import navVaultsIcon from 'assets/images/dashboard/navVaultsIcon.png'
+import navRewardsIcon from 'assets/images/dashboard/navRewardsIcon.png'
+import navActiveAirdopIcon from 'assets/images/dashboard/navActiveAirdopIcon.png'
+import navActiveVaultsIcon from 'assets/images/dashboard/navActiveVaultsIcon.png'
+import navActiveRewardsIcon from 'assets/images/dashboard/navActiveRewardsIcon.png'
+
 export const NavList = [
   {
-    icon: imgurl.dashboard.navVaults,
-    iconActive: '',
+    icon: navVaultsIcon,
+    iconActive: navActiveVaultsIcon,
     text:"My Vaults",
     key: 'vaults'
   },
   {
-    icon: imgurl.dashboard.navRewards,
-    iconActive: '',
+    icon: navRewardsIcon,
+    iconActive: navActiveRewardsIcon,
     text:"My Rewards",
     key: 'rewards'
   },
   {
-    icon: imgurl.dashboard.navAirdop,
-    iconActive: '',
+    icon: navAirdopIcon,
+    iconActive: navActiveAirdopIcon,
     text:"My Airdrop",
     key: 'airdrop'
   }
@@ -31,7 +38,8 @@ export const aa = {
       "createTime": "2022-06-16 15:52:56",
       "imageUrl": "https://img.seadn.io/files/fd988b6dda7aeac051fce3e3d4b2fb7e.png?h=1024&w=1024&auto=format",
       "floorPrice": "10800000000000000000",
-      "collectionName": "Doodles"
+      "collectionName": "Doodles",
+      "status": 1
     },
       {
         "id": 2,
@@ -41,7 +49,8 @@ export const aa = {
         "createTime": "2022-06-16 15:52:56",
         "imageUrl": "https://img.seadn.io/files/fd988b6dda7aeac051fce3e3d4b2fb7e.png?h=1024&w=1024&auto=format",
         "floorPrice": "10800000000000000000",
-        "collectionName": "Doodles"
+        "collectionName": "Doodles",
+        "status": 1
       },
       {
         "id": 3,
@@ -51,7 +60,8 @@ export const aa = {
         "createTime": "2022-06-16 15:52:56",
         "imageUrl": "https://img.seadn.io/files/fd988b6dda7aeac051fce3e3d4b2fb7e.png?h=1024&w=1024&auto=format",
         "floorPrice": "10800000000000000000",
-        "collectionName": "Azuki"
+        "collectionName": "Azuki",
+        "status": 0
       },
       {
         "id": 4,
@@ -61,7 +71,8 @@ export const aa = {
         "createTime": "2022-06-16 15:52:56",
         "imageUrl": "https://img.seadn.io/files/fd988b6dda7aeac051fce3e3d4b2fb7e.png?h=1024&w=1024&auto=format",
         "floorPrice": "10800000000000000000",
-        "collectionName": "Mutant Ape Yacht Club"
+        "collectionName": "Mutant Ape Yacht Club",
+        "status": 0
       },
       {
         "id": 1,
@@ -71,7 +82,8 @@ export const aa = {
         "createTime": "2022-06-16 15:52:56",
         "imageUrl": "https://img.seadn.io/files/fd988b6dda7aeac051fce3e3d4b2fb7e.png?h=1024&w=1024&auto=format",
         "floorPrice": "10800000000000000000",
-        "collectionName": "Bored Ape Yacht Club"
+        "collectionName": "Bored Ape Yacht Club",
+        "status": 0
       },
       {
         "id": 2,
@@ -81,7 +93,8 @@ export const aa = {
         "createTime": "2022-06-16 15:52:56",
         "imageUrl": "https://img.seadn.io/files/fd988b6dda7aeac051fce3e3d4b2fb7e.png?h=1024&w=1024&auto=format",
         "floorPrice": "10800000000000000000",
-        "collectionName": "Doodles"
+        "collectionName": "Doodles",
+        "status": 0
       },
       {
         "id": 3,
@@ -91,7 +104,8 @@ export const aa = {
         "createTime": "2022-06-16 15:52:56",
         "imageUrl": "https://img.seadn.io/files/fd988b6dda7aeac051fce3e3d4b2fb7e.png?h=1024&w=1024&auto=format",
         "floorPrice": "10800000000000000000",
-        "collectionName": "Azuki"
+        "collectionName": "Azuki",
+        "status": 0
       },
       {
         "id": 4,
@@ -101,7 +115,8 @@ export const aa = {
         "createTime": "2022-06-16 15:52:56",
         "imageUrl": "https://img.seadn.io/files/fd988b6dda7aeac051fce3e3d4b2fb7e.png?h=1024&w=1024&auto=format",
         "floorPrice": "10800000000000000000",
-        "collectionName": "Mutant Ape Yacht Club"
+        "collectionName": "Mutant Ape Yacht Club",
+        "status": 0
       },
       {
         "id": 1,
@@ -111,7 +126,8 @@ export const aa = {
         "createTime": "2022-06-16 15:52:56",
         "imageUrl": "https://img.seadn.io/files/fd988b6dda7aeac051fce3e3d4b2fb7e.png?h=1024&w=1024&auto=format",
         "floorPrice": "10800000000000000000",
-        "collectionName": "Bored Ape Yacht Club"
+        "collectionName": "Bored Ape Yacht Club",
+        "status": 1
       },
     ]
   }

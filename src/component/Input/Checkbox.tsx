@@ -19,10 +19,11 @@ const Input = styled.input.attrs({
 `
 
 export interface CheckBoxProps extends React.HTMLAttributes<HTMLInputElement> {
+  _checked?: boolean
 }
 
 const CheckBox: React.FC<CheckBoxProps> = (props) => {
-  return <Input type={"checkbox"} {...props}></Input>
+  return <Input checked={props._checked} type={"checkbox"} {...props}></Input>
 }
 
 export default CheckBox;

@@ -63,7 +63,7 @@ export default function Market() {
                 gap={".25rem"}
                 onClick={() => setActive(idx)}
               >
-                <Icon height={".4rem"} width={".4rem"} src={item.icon}/>
+                <Icon height={".4rem"} width={".4rem"} src={ active === idx ? item.iconActive :item.icon}/>
                 <Typography textAlign={"center"} color={active === idx ? "#000" : "#fff"} fontSize={".16rem"} fontWeight={"500"}>{item.text}</Typography>
               </Flex>
             </Link>

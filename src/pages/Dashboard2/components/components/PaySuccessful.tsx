@@ -53,7 +53,7 @@ export default function PaySuccessful(props:IProps) {
           </Flex>
           <Flex alignItems="center" gap=".1rem" onClick={() => jumpToNeoEtherscan()}>
             <Typography style={{cursor: 'pointer'}} fontSize=".16rem" fontWeight="500" color="rgba(0,0,0,.5)">
-              {`NEO-${activities?.collectionName} ${activities?.tokenId}`} 
+              {`NEO ${activities?.collectionName} ${activities?.tokenId}`} 
             </Typography>
             <Icon marginLeft=".1rem" width=".14rem" height=".14rem" src={imgurl.dashboard.export14}/>
           </Flex>
@@ -70,7 +70,7 @@ export default function PaySuccessful(props:IProps) {
         <Typography fontSize=".16rem" fontWeight="700" color="#000" onClick={async()=> {
           activities && await copyToClipboard(activities?.address);
           onClose()
-        }}>ADD to MetaMask</Typography>
+        }}>Add to wallet</Typography>
       </div>
     </Flex>
   </Flex>

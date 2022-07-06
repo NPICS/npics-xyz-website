@@ -50,15 +50,15 @@ export default function MyRewards() {
   return <Box
   padding={".4rem .6rem"}
   >
-    <Typography fontSize={".3rem"} fontWeight={800} color={'#000'} marginBottom=".08rem">Npics Rewards</Typography>
-    <Typography fontSize={".16rem"} fontWeight={500} color={'rgba(0,0,0,.5)'} marginBottom={".3rem"}>Participate in the down payment loan to buy NFT and earn double rewards</Typography>
-    <Typography fontSize={".16rem"} fontWeight={500} color={'rgba(0,0,0,.5)'} marginBottom={".4rem"}>Rates shown are estimates, and fluctuate based on many different factors, including collection floor price, trading volume, pool liquidity, token price, etc.</Typography>
-    <Typography fontSize={".2rem"} fontWeight={700} color={'#000'} marginBottom={".2rem"}>Your rewards</Typography>
+    <Typography fontSize={".3rem"} fontWeight={800} color={'#000'} marginBottom=".3rem">NPics Rewards</Typography>
+    {/* <Typography fontSize={".16rem"} fontWeight={500} color={'rgba(0,0,0,.5)'} marginBottom={".3rem"}>Participate in the down payment loan to buy NFT and earn double rewards</Typography> */}
+    <Typography fontSize={".16rem"} fontWeight={500} color={'rgba(0,0,0,.5)'} marginBottom={".5rem"}>Rates shown are estimates, and fluctuate based on many different factors, including collection floor price, trading volume, pool liquidity, token price, etc.</Typography>
+    <Typography fontSize={".2rem"} fontWeight={700} color={'#000'} marginBottom={".2rem"}>Your Rewards</Typography>
     <Box
       background={"rgba(0,0,0,.03)"}
       border={"1px solid rgba(0,0,0,.1)"}
       borderRadius={"10px"}
-      padding={".4rem"}
+      padding={".4rem .4rem .46rem .4rem"}
       display={"inline-block"}
     >
       <Flex

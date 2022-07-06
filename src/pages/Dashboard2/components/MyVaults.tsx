@@ -6,7 +6,8 @@ import styled from 'styled-components';
 import VaultsTable from "./components/VaultsTable";
 import BigNumber from "bignumber.js";
 import { useEthPrice } from "utils/hook";
-import { numberFormat } from "utils/urls";
+import { numberFormat, thousandFormat } from "utils/urls";
+import { useAppSelector } from "store/hooks";
 const {Option} = Select
 
 const AntdSelect = styled(Select)`
@@ -31,7 +32,8 @@ const AntdSelect = styled(Select)`
 export default function MyVaults() {
   const [sortedInfo, setSortedInfo] = useState<string>('')
   const [totalDebts, setTotalDebts] = useState<BigNumber>(new BigNumber(0))
-  const DollarDebt = useEthPrice(totalDebts)
+  // const DollarDebt = useEthPrice(totalDebts)
+  const ethRate = useAppSelector(state => new BigNumber(state.app.data.EthPrice))
 
   const onSelect = (val: any) => {
     console.log(val);
@@ -69,7 +71,6 @@ export default function MyVaults() {
           <Typography
             fontWeight={500}
             fontSize={".14rem"}
-            marginLeft={".05rem"}
             color={"rgba(0,0,0,.5)"}
           >{totalDebts.div(10 ** 18).toFixed(3, 1)}</Typography>
           <Typography
@@ -77,7 +78,9 @@ export default function MyVaults() {
             fontSize={".14rem"}
             marginLeft={".1rem"}
             color={"rgba(0,0,0,.5)"}
-          >{`($${DollarDebt && numberFormat(DollarDebt?.dp(0).toFixed())})`}</Typography>
+          >{`(${totalDebts && thousandFormat(totalDebts.times(ethRate)
+            .div(10 ** 18)
+            .toNumber())})`}</Typography>
         </Flex>
       </Flex>
 
