@@ -12,7 +12,8 @@ const Cover = styled.img`
   width: 100%;
   overflow: hidden;
   object-fit: cover;
-  /* background: #e5e5e5; */
+  min-height: 2rem;
+  background: #e5e5e5;
 `
 
 const IconTest = styled.img`
@@ -67,7 +68,7 @@ export default function CollectionCell(props: {
         {/* tag */}
         <Flex
             flexDirection={"row"}
-            padding={".01rem .05rem"}
+            padding={".01rem .06rem"}
             borderRadius={"10px"}
             boxShadow="0px 0px 10px rgba(0, 0, 0, 0.1)"
             background={"rgba(255,255,255,.5)"}
@@ -78,12 +79,12 @@ export default function CollectionCell(props: {
             left={".08rem"}
             zIndex={"1"}
             hidden={props.item.rarityScore <= 0}>
-            <Icon height={".2rem"} width={".2rem"} src={CellTagIcon}/>
+            {/*<Icon height={".2rem"} width={".2rem"} src={CellTagIcon}/>*/}
             <Typography
                 color={"rgba(0,0,0,.6)"}
                 fontSize={props.compact ? ".14rem" : ".16rem"}
                 fontWeight={"500"}
-            >{props.item.rarityScore}</Typography>
+            >{`#${props.item.rarityScore}`}</Typography>
         </Flex>
         <Box padding={".07rem .15rem .18rem"}>
             <Flex alignItems={"center"} gap={".06rem"}>

@@ -9,6 +9,8 @@ import {Erc721} from "../../abi/Erc721";
 import {ethers} from "ethers";
 import {urls} from "../../utils/urls";
 import titlePrefixIcon from "../../assets/images/market/info_block_title_prefix.png"
+import {TextPlaceholder} from "../../component/styled";
+import {Popover} from "antd";
 
 const Title = styled.div`
   color: #000;
@@ -21,25 +23,25 @@ const Value = styled(Title)`
   text-align: right;
 `;
 
-function AddressLink(props: {
+export function AddressLink(props: {
     address?: string
 }) {
-    return <Flex
-        alignItems={"center"}
-        justifyContent={"end"}
-        gap={".06rem"}
-        style={{
-            "cursor": "pointer"
-        }}
-        onClick={() => {
-            if (props.address) {
-                window.open(`https://etherscan.io/address/${props.address}`)
-            }
-        }}
+    return <Popover content={"View on Etherscan"}><Flex
+      alignItems={"center"}
+      justifyContent={"end"}
+      gap={".06rem"}
+      style={{
+        "cursor": "pointer"
+      }}
+      onClick={() => {
+        if (props.address) {
+          window.open(`https://etherscan.io/address/${props.address}`)
+        }
+      }}
     >
-        <Value>{AddressAbbreviation(props.address) ?? "---"}</Value>
-        <Icon width={".16rem"} src={addressLinkIcon}/>
-    </Flex>
+      <Value>{AddressAbbreviation(props.address) ?? TextPlaceholder}</Value>
+      <Icon width={".16rem"} src={addressLinkIcon}/>
+    </Flex></Popover>
 }
 
 export default function NFTInfo(props: {
@@ -97,8 +99,8 @@ export default function NFTInfo(props: {
             <Value>{props.item?.standard}</Value>
             <Title>Blockchain</Title>
             <Value>Ethereum</Value>
-            <Title>Creator Fees</Title>
-            <Value>no set</Value>
+            {/*<Title>Creator Fees</Title>*/}
+            {/*<Value>no set</Value>*/}
         </Grid>
     </Flex>
 }

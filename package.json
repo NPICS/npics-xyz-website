@@ -4,14 +4,15 @@
   "proxy": "http://16.162.44.108:18094/",
   "private": true,
   "dependencies": {
+    "@popperjs/core": "^2.11.5",
     "@reduxjs/toolkit": "^1.8.1",
     "@web3-react/coinbase-wallet": "^8.0.33-beta.0",
     "@web3-react/core": "^8.0.33-beta.0",
-    "@web3-react/metamask": "^8.0.26-beta.0",
-    "@web3-react/walletconnect": "^8.0.34-beta.0",
-    "@web3-react/types": "^8.0.19-beta.0",
     "@web3-react/gnosis-safe": "^8.0.5-beta.0",
+    "@web3-react/metamask": "^8.0.26-beta.0",
     "@web3-react/network": "^8.0.26-beta.0",
+    "@web3-react/types": "^8.0.19-beta.0",
+    "@web3-react/walletconnect": "^8.0.34-beta.0",
     "antd": "^4.20.6",
     "axios": "^0.27.2",
     "bignumber.js": "^9.0.2",
@@ -31,6 +32,7 @@
     "react-infinite-scroller": "^1.2.6",
     "react-loadable": "^5.5.0",
     "react-modal": "^3.15.1",
+    "react-popper": "^2.3.0",
     "react-redux": "^8.0.1",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
@@ -43,7 +45,8 @@
     "swiper": "^8.1.5",
     "typescript": "^4.6.4",
     "util": "^0.12.4",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "react-markdown": "^8.0.3"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -12,7 +12,7 @@ import http from "../../utils/http";
 import {deserializeArray} from "class-transformer";
 import {Npics} from "../../abi/Npics";
 import {ethers} from "ethers";
-import Modal from "../../component/Modal/Modal";
+import Modal from "../../component/Modal";
 import NFTPay from "./NFTPay";
 import {message, notification, Popover} from "antd";
 import {globalConstant} from "utils/globalConstant";
@@ -27,6 +27,7 @@ import useActiveWeb3React from "../../hooks/useActiveWeb3React";
 import {simpleRpcProvider} from "../../utils/rpcUrl";
 import {useAsync} from "react-use";
 import {injected} from "../../connectors/hooks";
+import {TextPlaceholder} from "../../component/styled";
 
 const Shadow = styled(Flex)`
   background: #fff;
@@ -110,7 +111,8 @@ function MoreNFT(props: {
 }
 
 export default function NFTPrice(props: {
-  item?: CollectionDetail
+  item?: CollectionDetail,
+  refreshBlock?(): void
 }) {
   const action = useAppDispatch()
   const ethRate = useAppSelector(state => new BigNumber(state.app.data.EthPrice))
@@ -131,11 +133,11 @@ export default function NFTPrice(props: {
     action(updateARP())
   }, [props.item])
 
-  useEffect(() => {
-    const inner = async () => {
+  useAsync(async () => {
+    if (props.item) {
       // get recommends
       let resp: any = await http.myPost(`/npics-nft/app-api/v2/nft/getCollectionItems`, {
-        address: props.item?.address,
+        address: props.item.address,
         direction: "asc",
         pageIndex: 1,
         pageSize: 10,
@@ -148,11 +150,7 @@ export default function NFTPrice(props: {
         listData.splice(0, listData.length - 6) ///< max 6
         setRecommendNFTs(listData)
         setRecommendNFTTotal(resp.data.total)
-      } else {
-      }
-    }
-    if (props.item) {
-      inner().finally()
+      } else {}
     }
   }, [props.item])
 
@@ -200,8 +198,11 @@ export default function NFTPrice(props: {
         //     }
         // })
         // await connector.activate()
-        await injected.activate()
+        await injected.activate(1)
       }
+      // refresh detail data
+      props.refreshBlock?.()
+
       if (props.item && availableBorrow) {
         setBuyPopOpen(true)
       }
@@ -239,7 +240,7 @@ export default function NFTPrice(props: {
             // verticalAlign={"middle"}
             // height={"auto"}
             marginLeft={".1rem"}
-          >{props.item?.basePriceFormat() ?? "---"}</Typography>
+          >{props.item?.basePriceFormat() ?? TextPlaceholder}</Typography>
           <Typography
             fontSize={".14rem"}
             fontWeight={500}
@@ -283,7 +284,7 @@ export default function NFTPrice(props: {
           fontSize={".14rem"}
           fontWeight={500}
           color={"rgba(0,0,0,.5)"}
-        >Vault ARP</Typography>
+        >Vault APR</Typography>
       </Shadow>
     </Flex>
     {/* Other NFTs */}
@@ -344,7 +345,7 @@ export default function NFTPrice(props: {
               "whiteSpace": "nowrap"
             }}
           >{
-            (actualAmount && numberFormat(actualAmount.div(10 ** 18).toNumber())) ?? "---"
+            (actualAmount && numberFormat(actualAmount.div(10 ** 18).toNumber())) ?? TextPlaceholder
           }</Typography>
         </Flex>
         <Typography

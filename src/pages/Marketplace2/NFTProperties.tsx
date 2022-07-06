@@ -2,6 +2,7 @@ import {Flex, Grid, Icon, Typography} from "../../component/Box";
 import {CollectionDetail} from "../../model/user";
 import styled from "styled-components";
 import titlePrefixIcon from "../../assets/images/market/nft_properties_icon.png"
+import {TextPlaceholder} from "../../component/styled";
 
 const CellBackground = styled.div`
   background: linear-gradient(#F2BE58, #E84866);
@@ -25,8 +26,8 @@ function PropertiesCell(props: {
             padding={".12rem .18rem"}
             height={"100%"}
             style={{
-                "userSelect": "none",
-                "cursor": "pointer"
+                // "userSelect": "none",
+                // "cursor": "pointer"
             }}
         >
             <Typography
@@ -86,9 +87,9 @@ export default function NFTProperties(props: {
                     return <PropertiesCell
                         key={idx}
                         title={it.trait_type}
-                        value={it.value ?? "---"}
+                        value={it.value ?? TextPlaceholder}
                         description={
-                            `${it.trait_count}(${(it.trait_count / 100).toFixed(2)}%) have this`
+                            `${it.trait_count} (${(it.trait_count / 100).toFixed(2)}%) have this`
                         }
                     />
                 })
