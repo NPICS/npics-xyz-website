@@ -19,6 +19,9 @@ import NFTPayCongratulations, {AttrLink} from "./NFTPayCongratulations";
 import NFTPayWrong from "./NFTPayWrong";
 import {useAsync} from "react-use";
 import useActiveWeb3React from "../../hooks/useActiveWeb3React";
+import { TextPlaceholder } from "component/styled";
+import wethIcon from "../../assets/images/market/weth_icon.svg"
+import Checkbox from "../../component/Input/Checkbox";
 
 export function PopupTitle(props: {
   title: string,
@@ -47,6 +50,7 @@ const Cover = styled.img`
 
 function PayTypeButton(props: {
   isSelected: boolean,
+  isEth: boolean,
   name: string,
   balance: string
   tap(): void
@@ -78,7 +82,7 @@ function PayTypeButton(props: {
       marginLeft={".1rem"}
     >{props.name}</Typography>
     <Flex flex={1}></Flex>
-    <Icon width={".12rem"} height={".19rem"} src={ethIcon}/>
+    <Icon width={".12rem"} height={".19rem"} src={props.isEth ? ethIcon : wethIcon}/>
     <Typography
       fontSize={".2rem"}
       fontWeight={500}
@@ -237,6 +241,7 @@ export default function NFTPay(props: {
       }
       // show progressing
       setProgressingPopupOpen(true)
+      props.dismiss?.()
       // get transaction data
       let data = await getTradeDetailData()
       if (!data) {
@@ -447,27 +452,30 @@ export default function NFTPay(props: {
         <PayTypeButton
           isSelected={(payType & PayType.ETH) > 0}
           name={"ETH"}
-          balance={ethBalance ? numberFormat(ethBalance.div(10 ** 18).toFixed()) : "---"}
+          balance={ethBalance ? numberFormat(ethBalance.div(10 ** 18).toFixed()) : TextPlaceholder}
           tap={() => {
             let oldPayType = payType
             setPayType(payType & PayType.ETH ? oldPayType & ~PayType.ETH : oldPayType |= PayType.ETH)
-          }}/>
+          }}
+          isEth={true}
+        />
         <PayTypeButton
           isSelected={(payType & PayType.WETH) > 0}
           name={"WETH"}
-          balance={wethBalance ? numberFormat(wethBalance.div(10 ** 18).toFixed()) : "---"}
+          balance={wethBalance ? numberFormat(wethBalance.div(10 ** 18).toFixed()) : TextPlaceholder}
           tap={() => {
             let oldPayType = payType
             setPayType(payType & PayType.WETH ? oldPayType & ~PayType.WETH : oldPayType |= PayType.WETH)
-          }}/>
+          }}
+          isEth={false}
+        />
       </Grid>
     </Grid>
     {/*  terms of service  */}
     <Box marginTop={".24rem"}>
       <label>
         <Flex alignItems={"center"} gap={".12rem"}>
-          <input
-            type="checkbox"
+          <Checkbox
             defaultChecked={didReadService}
             onChange={() => setDidReadService(!didReadService)}
           />
@@ -478,8 +486,8 @@ export default function NFTPay(props: {
             style={{
               "userSelect": "none"
             }}
-          >Checking this box, I agree to NPics's <AttrLink href={urls.resource} target={"_blank"}>Terms of
-            service</AttrLink></Typography>
+          >Checking this box, I agree to NPics <AttrLink href={urls.resource} target={"_blank"}>Terms of
+            Service</AttrLink></Typography>
         </Flex>
       </label>
     </Box>

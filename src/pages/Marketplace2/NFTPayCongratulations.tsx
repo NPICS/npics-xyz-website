@@ -121,7 +121,7 @@ export default function NFTPayCongratulations(props: {
                 onClick={async () => {
                     props.dismiss?.()
                     await copyToClipboard(props.nft.address)
-                }}>ADD to MetaMask</CancelButton>
+                }}>Add to Wallet</CancelButton>
             <ConfirmButton
                 onClick={() => {
                     navigate(`/vaultsDetail/${props.nft.address}/${props.nft.tokenId}`, {})

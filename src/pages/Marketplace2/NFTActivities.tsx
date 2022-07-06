@@ -10,6 +10,8 @@ import moment from "moment";
 import titlePrefixIcon from "../../assets/images/market/nft_activities_icon.png"
 import {urls} from "../../utils/urls";
 import {useAsync} from "react-use";
+import {TextPlaceholder} from "../../component/styled";
+import {AddressLink} from "./NFTInfo";
 
 const _Table = styled.table`
   thead {
@@ -137,20 +139,18 @@ export default function NFTActivities(props: {
                                     style={{
                                         "cursor": item.fromAccount ? "pointer" : "auto"
                                     }}
-                                    onClick={() => {
-                                        item.fromAccount && window.open(`https://etherscan.io/address/${item.fromAccount}`)
-                                    }}
-                                >{AddressAbbreviation(item.fromAccount) ?? "---"}</td>
+                                >{
+                                  item.fromAccount ? <AddressLink address={item.fromAccount} /> : TextPlaceholder
+                                }</td>
                                 <td align={"center"}
                                     style={{
                                         "cursor": item.toAccount ? "pointer" : "auto"
                                     }}
-                                    onClick={() => {
-                                        item.toAccount && window.open(`https://etherscan.io/address/${item.toAccount}`)
-                                    }}
-                                >{AddressAbbreviation(item.toAccount) ?? "---"}</td>
+                                >{
+                                  item.toAccount ? <AddressLink address={item.toAccount}/> : TextPlaceholder
+                                }</td>
                                 <td align={"center"}>{
-                                    moment(item.createdTime).parseZone().endOf('m').fromNow() ?? '---'
+                                    moment(item.createdTime).parseZone().endOf('m').fromNow() ?? TextPlaceholder
                                 }</td>
                             </tr>
                         })

@@ -78,16 +78,7 @@ export default function OneNFT() {
 
     useAsync(async () => {
         if (!params) return;
-        {
-            /// nft detail data
-            const resp: any = await http.myPost(`/npics-nft/app-api/v2/nft/getCollectionItemsDetail`, {
-                address: params.address,
-                tokenId: params.tokenId
-            })
-            if (resp.code === 200 && resp.data) {
-                setDetailData(deserialize(CollectionDetail, JSON.stringify(resp.data)))
-            }
-        }
+        await loadDetailData()
         {
             /// rarity
             const resp: any = await http.myPost(`/npics-nft/app-api/v2/nft/getRarity`, {
@@ -125,10 +116,22 @@ export default function OneNFT() {
             case "trait_sniper":
                 return `Trait Sniper Ranking ${status ? `(${status})` : ''}`
             case "gem":
-                return `Gem Sniper Ranking ${status ? `(${status})` : ''}`
+                return `Gem Ranking ${status ? `(${status})` : ''}`
             default:
                 return ''
         }
+    }
+
+    async function loadDetailData() {
+      if (!params) return;
+      /// nft detail data
+      const resp: any = await http.myPost(`/npics-nft/app-api/v2/nft/getCollectionItemsDetail`, {
+        address: params.address,
+        tokenId: params.tokenId
+      })
+      if (resp.code === 200 && resp.data) {
+        setDetailData(deserialize(CollectionDetail, JSON.stringify(resp.data)))
+      }
     }
 
     return <Box
@@ -182,7 +185,7 @@ export default function OneNFT() {
             {/* main */}
             <NFTMain>
                 <Grid gridArea={"cover"}><Cover src={detailData?.imageUrl}/></Grid>
-                <Grid gridArea={"price"}><NFTPrice item={detailData}/></Grid>
+                <Grid gridArea={"price"}><NFTPrice item={detailData} refreshBlock={loadDetailData}/></Grid>
                 <Grid gridArea={"info"}><NFTInfo item={detailData}/></Grid>
                 <Grid gridArea={"props"}><NFTProperties item={detailData}/></Grid>
                 <Grid gridArea={"activities"}><NFTActivities item={detailData}/></Grid>
