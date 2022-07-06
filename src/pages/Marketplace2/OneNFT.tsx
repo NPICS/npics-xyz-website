@@ -155,7 +155,7 @@ export default function OneNFT() {
                             fontSize={".3rem"}
                             color={"#fff"}
                             fontWeight={800}
-                        >{`${detailData?.collectionName} #${detailData?.tokenId}`}</Typography>
+                        >{`${detailData?.singularForName()} #${detailData?.tokenId}`}</Typography>
                         <Popover content={"Reported for Suspicious Activity on OpenSea"}>
                             <Icon
                                 width={".24rem"}

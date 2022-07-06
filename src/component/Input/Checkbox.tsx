@@ -18,9 +18,11 @@ const Input = styled.input.attrs({
   }
 `
 
-interface Props extends React.HTMLAttributes<HTMLInputElement> {
+export interface CheckBoxProps extends React.HTMLAttributes<HTMLInputElement> {
 }
 
-export default function Checkbox(props: Props) {
-  return <Input type={"checkbox"} {...props}/>
+const CheckBox: React.FC<CheckBoxProps> = (props) => {
+  return <Input type={"checkbox"} {...props}></Input>
 }
+
+export default CheckBox;

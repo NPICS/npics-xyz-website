@@ -13,6 +13,7 @@ import {useAsync} from "react-use";
 import {TextPlaceholder} from "../../component/styled";
 import {AddressLink} from "./NFTInfo";
 
+
 const _Table = styled.table`
   thead {
     width: 100%;
@@ -133,7 +134,14 @@ export default function NFTActivities(props: {
                     {
                         listData.map((item, idx) => {
                             return <tr key={idx}>
-                                <td align={"left"}>{item.eventTypeExplain() ?? ``}</td>
+                                <td align={"left"}>
+                                  <Flex alignItems={"center"} gap={".12rem"} hidden={item.eventTypeExplain() == undefined}>
+                                    <Icon src={item.eventTypeIcon()} width={".2rem"} height={".2rem"}/>
+                                    <Typography>
+                                      {item.eventTypeExplain() ?? ``}
+                                    </Typography>
+                                  </Flex>
+                                </td>
                                 <td align={"center"}><PriceWithSymbol displayAmount={item.amountFormat()} iconOrUrl={item.imageUrl}/></td>
                                 <td align={"center"}
                                     style={{

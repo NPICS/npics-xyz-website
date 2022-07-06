@@ -49,7 +49,7 @@ const CollectionItem = styled.div<{
   background: transparent url(${(props) => props.imgUrl}) no-repeat center;
   background-size: cover;
   overflow: hidden;
-  border-radius: 10px;
+  border-radius: .16rem;
   //box-sizing: content-box;
   //box-shadow: 0 0 0 ${(props) => props.isSelected ? `3px` : `0`} #fff;
   border: ${(props) => props.isSelected ? `3px` : 0} solid #fff;
@@ -58,6 +58,12 @@ const CollectionItem = styled.div<{
 
 const MarkdownContainer = styled.div`
   color: rgba(0,0,0,.5);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  word-break: break-all;
+  word-wrap: break-word;
+  -webkit-box-orient: vertical;
 `
 
 export default function Market() {

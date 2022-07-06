@@ -3,6 +3,10 @@ import {Expose} from "class-transformer";
 import TransformBigNumber from "./transform/bigNumber";
 import {numberFormat} from "../utils/urls";
 import {imgurl} from "../utils/globalimport";
+import listIcon from "../assets/images/market/nft_active_list.svg"
+import offerIcon from "../assets/images/market/nft_active_offer.svg"
+import saleIcon from "../assets/images/market/nft_active_Sale.svg"
+import transferIcon from "../assets/images/market/nft_active_Transfer.svg"
 
 export class User {
   id?: number
@@ -116,6 +120,24 @@ export class CollectionItems {
   }
 
   @Expose()
+  marketDisplay() {
+    switch (this.market) {
+      case "x2y2":
+        return "X2Y2"
+      case "opensea":
+        return "OpenSea"
+      case "looksrare":
+        return "LooksRare"
+      case "nftx":
+        return "NFTX"
+      case "xMarket":
+        return "xMarket"
+      case "seaport":
+        return "Seaport"
+    }
+  }
+
+  @Expose()
   basePrice() {
     return numberFormat(this.currentBasePrice.div(10 ** this.decimals).toFixed())
   }
@@ -125,7 +147,23 @@ export class CollectionItems {
     // ltv: 3000 => 30%
     let loadRate = new BigNumber(this.ltv).div(100).div(100)
     let downPayment = this.currentBasePrice.minus(this.floorPrice.times(loadRate)).div(10 ** this.decimals).plus(0.0001)
-    return numberFormat(downPayment.toFixed(2,1))
+    return numberFormat(downPayment.toFixed(2, 1))
+  }
+
+  @Expose()
+  singularForName() {
+    switch (this.collectionName) {
+      case "Doodles":
+        return "Doodle"
+      case "Space Doodles":
+        return "Space Doodle"
+      case "CryptoPunks":
+        return "CryptoPunk"
+      case "CLONE X - X TAKASHI MURAKAMI":
+        return "Clone X"
+      default:
+        return this.collectionName
+    }
   }
 }
 
@@ -154,6 +192,7 @@ export class CollectionDetail extends CollectionItems {
   totalAmount!: BigNumber
   totalSupply!: number;
   bannerImageUrl?: string
+  externalUrl?: string
 
   @Expose()
   get agreementPrice() {
@@ -201,11 +240,27 @@ export class Activities {
   }
 
   @Expose()
+  eventTypeIcon(): string | undefined {
+    switch (this.eventTypeExplain()) {
+      case "Transfer":
+        return transferIcon
+      case "Offer":
+        return offerIcon
+      case "List":
+        return listIcon
+      case "Sale":
+        return saleIcon
+      default:
+        return undefined
+    }
+  }
+
+  @Expose()
   amountFormat(): string | undefined {
     if (this.eventTypeExplain() === "List" || this.eventTypeExplain() === "Cancelled") {
       return this.startAmount ? numberFormat(this.startAmount.div(10 ** this.decimals).toFixed()) : undefined
     } else if (this.eventTypeExplain() === "Sale") {
-      return this.totalAmount? numberFormat(this.totalAmount.div(10 ** this.decimals).toFixed()) : undefined
+      return this.totalAmount ? numberFormat(this.totalAmount.div(10 ** this.decimals).toFixed()) : undefined
     } else {
       return this.amount ? numberFormat(this.amount.div(10 ** this.decimals).toFixed()) : undefined
     }

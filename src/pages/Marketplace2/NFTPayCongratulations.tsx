@@ -72,7 +72,7 @@ export default function NFTPayCongratulations(props: {
                     <Box>You've deposited <AttrLink href={
                         urls.etherscanNft(props.nft.address, props.nft.tokenId)
                     } target={"_blank"}>
-                        {`${props.nft.collectionName} #${props.nft.tokenId}`}
+                        {`${props.nft.singularForName()} #${props.nft.tokenId}`}
                     </AttrLink> and minted</Box>
                     <Flex
                         alignItems={"center"}
