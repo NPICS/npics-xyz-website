@@ -13,7 +13,7 @@ import {useWeb3React} from "@web3-react/core";
 import http from "../../utils/http";
 import {message} from "antd";
 import {Npics} from "../../abi/Npics";
-import Modal from "../../component/Modal/Modal";
+import Modal from "../../component/Modal";
 import NFTPayProgressing from "./NFTPayProgressing";
 import NFTPayCongratulations, {AttrLink} from "./NFTPayCongratulations";
 import NFTPayWrong from "./NFTPayWrong";

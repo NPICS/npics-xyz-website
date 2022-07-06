@@ -12,6 +12,7 @@ import ethIcon from "../../assets/images/market/eth_icon_10x15.svg"
 import numeral from "numeral";
 import {Popover} from "antd";
 import openseaValidIcon from "../../assets/images/market/nfts_opensea_valid.svg"
+import NPopover from "../../component/Popover";
 
 
 export const Banner = styled(Box)<{ url?: string }>`

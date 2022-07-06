@@ -4,6 +4,7 @@ import {CollectionDetail} from "../../model/user";
 import styled from "styled-components";
 import {message} from "antd";
 import {copyToClipboard} from "../../utils/clipboard-utils";
+import Checkbox from "../../component/Input/Checkbox";
 
 function IconWithBorder(props: {
     icon: string,
@@ -43,6 +44,7 @@ export default function NFTShare(props: {
     };
 
     return <Flex justifyContent={"end"} alignItems={"start"}>
+      {/*<Checkbox />*/}
         <IconWithBorder icon={ShareIcon} tap={async () => {
             let link = window.location.href
             await copyToClipboard(link)

@@ -74,38 +74,38 @@ export function myGet(url: any, param: any) {
             })
     })
 }
-
-export function getWithJSON(uri: string, params?: {}) {
-    return new Promise((resolve, reject) => {
-        axios.get(uri, {
-            params: params ?? {},
-            headers: {
-                "Authorization": sessionStorage.getItem(SessionStorageKey.AccessToken) ?? ""
-            }
-        }).then(resp => {
-            // http request success
-            if (resp.status === 200) {
-                /// service return success
-                switch (resp.data.code) {
-                    case 200:
-                        resolve(resp.data)
-                        break
-                    case 4003:
-                        /// token invalid
-                        sessionStorage.removeItem(SessionStorageKey.AccessToken)
-                        break
-                }
-            } else {
-                /// http request failed
-
-            }
-        }).catch((error) => {
-          console.error(`HTTP => ${error}`)
-        }).finally(() => {
-
-        })
-    })
-}
+//
+// export function getWithJSON(uri: string, params?: {}) {
+//     return new Promise((resolve, reject) => {
+//         axios.get(uri, {
+//             params: params ?? {},
+//             headers: {
+//                 "Authorization": sessionStorage.getItem(SessionStorageKey.AccessToken) ?? ""
+//             }
+//         }).then(resp => {
+//             // http request success
+//             if (resp.status === 200) {
+//                 /// service return success
+//                 switch (resp.data.code) {
+//                     case 200:
+//                         resolve(resp.data)
+//                         break
+//                     case 4003:
+//                         /// token invalid, clear app state
+//                         sessionStorage.removeItem(SessionStorageKey.AccessToken)
+//                         break
+//                 }
+//             } else {
+//                 /// http request failed
+//
+//             }
+//         }).catch((error) => {
+//           console.error(`HTTP => ${error}`)
+//         }).finally(() => {
+//
+//         })
+//     })
+// }
 
 const http = {
     myPost,

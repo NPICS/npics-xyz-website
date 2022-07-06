@@ -12,7 +12,7 @@ import http from "../../utils/http";
 import {deserializeArray} from "class-transformer";
 import {Npics} from "../../abi/Npics";
 import {ethers} from "ethers";
-import Modal from "../../component/Modal/Modal";
+import Modal from "../../component/Modal";
 import NFTPay from "./NFTPay";
 import {message, notification, Popover} from "antd";
 import {globalConstant} from "utils/globalConstant";
@@ -200,9 +200,9 @@ export default function NFTPrice(props: {
         //     }
         // })
         // await connector.activate()
-        await injected.activate()
+        await injected.activate(1)
       }
-      if (props.item && availableBorrow && account) {
+      if (props.item && availableBorrow) {
         setBuyPopOpen(true)
       }
     } catch (e) {

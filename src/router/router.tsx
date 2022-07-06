@@ -13,7 +13,6 @@ import NFTPayCongratulations from "../pages/Marketplace2/NFTPayCongratulations";
 import NFTPayWrong from "../pages/Marketplace2/NFTPayWrong";
 import VaultsDetail from 'pages/Dashboard2/components/components/VaultsDetail';
 import OneNFT from "../pages/Marketplace2/OneNFT";
-import Web3Example from "../pages/Web3Example";
 interface RouterT {
   name?: string,
   path: string,
@@ -41,11 +40,6 @@ const MarketCollection = loadable({
 const Dashboard = loadable({
   loader: () => import('../pages/Dashboard/Dashboard'), 
   loading: LoadingTip 
-})
-
-const Web3 = loadable({
-  loader: () => import("../pages/Web3Example"),
-  loading: LoadingTip
 })
 
 const MarketItem = loadable({
