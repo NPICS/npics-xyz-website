@@ -461,8 +461,9 @@ export const GlobalStyle = createGlobalStyle`
       display: none;
     }
     .ant-popover-inner {
-      background-color: rgba(255,255,255,.2);
-      backdrop-filter: blur(30px);
+      transition: all 0s;
+      background-color: #333;
+      /* backdrop-filter: blur(30px); */
       border-radius: 20px;
       .ant-popover-inner-content {
         padding: .05rem .1rem;
@@ -472,4 +473,16 @@ export const GlobalStyle = createGlobalStyle`
       }
     }
   }
+  .ant-popover-reset {
+    .ant-popover-arrow {
+    }
+    .ant-popover-inner {
+      border-radius: 20px;
+      .ant-popover-inner-content {
+        padding: .2rem .3rem .3rem;
+      }
+    }
+  }
+
+
 `
