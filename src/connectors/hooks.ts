@@ -10,6 +10,7 @@ import {Network} from "@web3-react/network";
 import {Connector} from "@web3-react/types";
 
 function onError(error: Error) {
+  console.log('asdasdasdsad')
   console.debug(`web-react error => ${error}`)
 }
 
@@ -36,7 +37,8 @@ export const [coinbase, coinbaseHooks] = initializeConnector<CoinbaseWallet>((ac
       url: nodeUrl(),
       appName: "Npics",
       appLogoUrl: NpicsLogo
-    }
+    },
+    onError
   })
 })
 

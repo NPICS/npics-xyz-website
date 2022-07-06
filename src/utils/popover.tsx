@@ -37,7 +37,6 @@ export function VaultAprPop(props: { rewardAPR: number, interestAPR: number }) {
       including collection floor price, trading volume, pool liquidity, token price, etc.</Typography>
     <Typography fontSize=".14rem" fontWeight="500" color="rgba(0,0,0,.5)">Funding fees collected by NPics are
       distributed to our users as rewards. Eco-partner rewards are double-incentives during the execution of agreements.</Typography>
-
   </Grid>
 }
 

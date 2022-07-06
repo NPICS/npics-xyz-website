@@ -225,6 +225,7 @@ export default function NFTPrice(props: {
       {/* origin price */}
       <Shadow>
         <Popover 
+          overlayClassName="ant-popover-reset"
           content={listedPricePop}>
           <TipsIcon width={".14rem"} src={tipsIcon}/>
         </Popover>

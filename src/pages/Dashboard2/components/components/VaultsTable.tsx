@@ -21,6 +21,7 @@ import styled from 'styled-components';
 import ButtonDefault from 'component/ButtonDefault';
 import { thousandFormat } from "../../../../utils/urls";
 import { deserializeArray, plainToClass } from 'class-transformer';
+import { injected } from 'connectors/hooks';
 
 interface Result {
   createTime: string,
@@ -211,6 +212,7 @@ function VaultsTable(props: IProps) {
   }, [activities])
 
   useEffect(() => {
+    console.log(isLogin, account);
     if (isLogin) {
       setShowModal(false)
       getNftActivities()
@@ -220,27 +222,37 @@ function VaultsTable(props: IProps) {
     // eslint-disable-next-line
   }, [isLogin, account])
 
+  useEffect(() => {
+    if(account && !isLogin) {
+      setShowModal(true)
+    }
+    console.log('account',account,isLogin)
+  },[account,isLogin])
+
 
   async function login2() {
+    console.log(isLogin,account);
+    if(!provider) return
     // TODO: library -> provider
-    // try {
-    //   let address = account!
-    //   let msg = getSignMessage(address);
-    //   let signatureMsg = await library.getSigner(account).signMessage(msg)
-    //   const loginRep: any = await http.myPost("/npics-auth/app-api/v2/auth/token", {
-    //     "address": address,
-    //     "original": msg,
-    //     "signature": signatureMsg
-    //   })
-    //   if (loginRep.code === 200) {
-    //     sessionStorage.setItem("ACCESS_TOKEN", loginRep.data)
-    //     action(setIsLogin(true))
-    //   } else {
-    //     message.warning('Signing failed')
-    //   }
-    // } catch (e) {
-    //   console.log(`Login Erro => ${e}`)
-    // }
+    try {
+      let address = account!
+      let msg = getSignMessage(address);
+      let signatureMsg = await provider.getSigner(account).signMessage(msg)
+      const loginRep: any = await http.myPost("/npics-auth/app-api/v2/auth/token", {
+        "address": address,
+        "original": msg,
+        "signature": signatureMsg
+      })
+      if (loginRep.code === 200) {
+        sessionStorage.setItem("ACCESS_TOKEN", loginRep.data)
+        action(setIsLogin(true))
+      } else {
+        message.warning('Signing failed')
+      }
+    } catch (e) {
+      setShowModal(false)
+      console.log(`Login Erro => ${e}`)
+    }
   }
 
   const numberToString = (val: BigNumber) => {
@@ -347,33 +359,31 @@ function VaultsTable(props: IProps) {
       <Flex alignItems="center" justifyContent="space-between" >
         <Typography></Typography>
         <Typography fontSize=".3rem" fontWeight="800" color="#000">Verify Address</Typography>
-        <div style={{ cursor: 'pointer' }}><Icon width=".24rem" height=".24rem" src={imgurl.dashboard.Cancel} onClick={() => {
+        <Typography></Typography>
+        {/* <div style={{ cursor: 'pointer' }}><Icon width=".24rem" height=".24rem" src={imgurl.dashboard.Cancel} onClick={() => {
           setShowModal(false)
-        }} /></div>
+        }} /></div> */}
       </Flex>
 
       <Typography >You will be asked to sign a message in your wallet to verify you as the owner of the address.</Typography>
       <Flex gap=".2rem" justifyContent='center' marginTop=".3rem" >
         <ButtonDefault minWidth='2rem' height='.52rem' types='second' color='#000' onClick={() => { setShowModal(false) }}>Cancel</ButtonDefault>
-        <ButtonDefault minWidth='2rem' height='.52rem' types='normal' color='#fff' onClick={() => {
-          if (account && !isLogin) {
+        <ButtonDefault minWidth='2rem' height='.52rem' types='normal' color='#fff' onClick={async () => {
+          console.log(account,provider)
+          if (account) {
             login2()
           } else {
             if (!account) {
               /// TODO: wallet connect @quan
-              //   activate(connectors.injected, (error) => {
-              //     const _error = JSON.parse(JSON.stringify(error))
-              //     if (_error.name === "UnsupportedChainIdError") {
-              //       sessionStorage.removeItem(SessionStorageKey.WalletAuthorized)
-              //       action(fetchUser(`{}`))
-              //       notification.error({ message: "Prompt connection failed, please use the Ethereum network" })
-              //     } else {
-              //       notification.error({ message: "Please authorize to access your account" })
-              //     }
-              //   })
+                // activate(connectors.injected)
+                setShowModal(false)
+                try{
+                  await injected.activate(1)
+                }catch(e:any){
+                  notification.error({ message: e.message})
+                }
             }
           }
-          setShowModal(false)
         }}>OK</ButtonDefault>
       </Flex>
     </Grid>
@@ -384,12 +394,13 @@ function VaultsTable(props: IProps) {
       dataSource={activities}
       pagination={false}
       className="ant-table-reset-white"
-    ></Table> : <NotFound />}
+    ></Table> : <NotFound padding={"1rem 0"}/>}
     <StyledModal
       visible={showModal}
       footer={null}
       onCancel={() => { setShowModal(false) }}
       destroyOnClose={true}
+      maskClosable={false}
       centered={true}
       width='5.48rem'
     >

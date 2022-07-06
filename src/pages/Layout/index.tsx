@@ -8,7 +8,6 @@ import { useAppSelector } from '../../store/hooks';
 import { useLocation } from 'react-router-dom';
 
 const Nav = styled.div`
-  position: absolute;
   left: 0;
   right: 0;
   text-align: center;
@@ -24,6 +23,7 @@ const ContentBox = styled.div`
   /* min-height: 8rem; */
   background-color: #F1F1F1;
   flex: 1;
+  margin-top: -.9rem;
 `
 const Flex = styled.div`
   display: flex;

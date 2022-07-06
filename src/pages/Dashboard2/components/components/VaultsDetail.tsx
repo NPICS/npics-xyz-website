@@ -21,6 +21,9 @@ import styled from 'styled-components';
 import PaySuccessful from './PaySuccessful';
 import {MintedNFTPop, HealthFactorPop, DebtPop, VaultAprPop, EstimatProfitPop} from 'utils/popover';
 import {globalConstant} from 'utils/globalConstant';
+import { injected } from 'connectors/hooks';
+import { useAsync } from 'react-use';
+
 
 const Banner = () => {
   return <Box
@@ -137,7 +140,7 @@ export default function VaultsDetail() {
   const getBalance = async () => {
     if (!account || !provider) return
     const balance = await provider.getBalance(account)
-    // setWalletBalance(balance)
+    setWalletBalance(new BigNumber(balance.toString()))
     // TODO: bignumber is not the bignumber
   }
 
@@ -211,7 +214,7 @@ export default function VaultsDetail() {
     // eslint-disable-next-line
   }, [isLogin, params, account, reload])
 
-  useEffect(() => {
+  useAsync(async () => {
     if (account && !isLogin) {
       login2()
       console.log(`😈 ${isLogin}`)
@@ -228,6 +231,7 @@ export default function VaultsDetail() {
         //     notification.error({ message: "Please authorize to access your account" })
         //   }
         // })
+        await injected.activate(1)
       }
     }
     // eslint-disable-next-line

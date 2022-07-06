@@ -27,12 +27,15 @@ const {Option} = Select;
 
 
 const InputStyled = styled(Input)`
-  background: #fff;
-  border: 1px solid rgba(0, 0, 0, .1);
-  border-radius: 10px;
-  color: rgba(0, 0, 0, .5);
-  height: .5rem;
-  padding: .04rem .6rem;
+    background: #fff;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: 10px;
+    color: rgba(0,0,0,.5);
+    height: .5rem;
+    padding: .04rem .6rem;
+    .ant-select-selection-item {
+        transition: all 0s !important;
+    }
 `
 const BoxBefore = styled(Icon)`
   content: '';
@@ -58,15 +61,16 @@ const AntdSelect = styled(Select)`
     color: rgba(0, 0, 0, .5);
     font-weight: 500;
     font-size: .14rem;
+    transition: all 0s !important;
     min-width: 2.2rem;
     min-height: .5rem;
     padding: 0 .23rem !important;
-    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    border: 1px solid rgba(0, 0, 0, 0.2) !important;
     box-shadow: none !important;
     border-radius: 10px !important;
-
     .ant-select-selection-item {
       line-height: .5rem;
+      transition: all 0s !important;
     }
   }
 `

@@ -5,11 +5,13 @@ import { Flex,Icon,Typography } from './Box'
 interface IProps {
   title: string
   text: string
+  padding?: string
 }
 
 NotFound.defaultProps = {
   title: "No  data found",
-  text:"You  doesn’t  have any vaults available to found. Buy any NFTs on the NPics 'Marketplace' to obtain the vaults."
+  text:"You  doesn’t  have any vaults available to found. Buy any NFTs on the NPics 'Marketplace' to obtain the vaults.",
+  padding: ".3rem 0"
 }
 
 export default function NotFound(props:IProps) {
@@ -19,7 +21,7 @@ export default function NotFound(props:IProps) {
     flexDirection={"column"}
     justifyContent={"center"}
     alignItems={"center"}
-    padding={".3rem 0"}
+    padding={props.padding}
   >
     <Icon width={"1rem"} height={"1rem"} src={imgurl.notData}></Icon>
     <Typography
