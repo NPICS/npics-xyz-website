@@ -7,6 +7,7 @@ import listIcon from "../assets/images/market/nft_active_list.svg"
 import offerIcon from "../assets/images/market/nft_active_offer.svg"
 import saleIcon from "../assets/images/market/nft_active_Sale.svg"
 import transferIcon from "../assets/images/market/nft_active_Transfer.svg"
+import cancelIcon from "../assets/images/market/nft_active_cancel.svg"
 
 export class User {
   id?: number
@@ -250,6 +251,8 @@ export class Activities {
         return listIcon
       case "Sale":
         return saleIcon
+      case "Cancelled":
+        return cancelIcon
       default:
         return undefined
     }
