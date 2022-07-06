@@ -1,4 +1,4 @@
-import styled, {css} from 'styled-components';
+import styled, { css } from 'styled-components';
 import HomeBg from "../../assets/images/home/head_bg.png"
 
 export const title = css`
@@ -17,7 +17,7 @@ export const HomeWrap = styled.div`
   .collections-title {
     width: 16rem;
     margin: 0 auto;
-    padding: 1rem 0 .2rem;
+    padding: 1.3rem 0 .2rem;
     ${title};
   }
 `
@@ -230,36 +230,28 @@ export const SwiperBox = styled.div`
 
 export const DetailBox = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
   width: 16rem;
-  height: 100vh;
+  height: 88vh;
   margin: 0 auto;
-  padding: 1rem 0 .2rem;
+  padding: 1.3rem 0 .2rem;
   color: #fff;
+  .title{
+    ${title};
+    margin-bottom: 1rem;
+  }
+  .detail_div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
 
   .detail_info {
     width: 50%;
     flex: 1;
-
-    .info_item_title {
-      ${title};
-    }
-
-    .info_item_text {
-      font-family: 'Montserrat';
-      font-style: normal;
-      font-weight: 300;
-      font-size: .16rem;
-      line-height: .32rem;
-      -webkit-letter-spacing: 0.05em;
-      -moz-letter-spacing: 0.05em;
-      -ms-letter-spacing: 0.05em;
-      letter-spacing: 0.05em;
-      color: rgba(255, 255, 255, 0.5);
-      width: 90%;
-      margin-bottom: .47rem;
-    }
   }
 
   .detail_img_box {
@@ -281,6 +273,7 @@ export const Partners = styled.div`
     width: 5.3rem;
     margin: 0 auto;
     margin-bottom: .6rem;
+    padding: 1.3rem 0 .2rem;
     ${title};
   }
 
@@ -309,7 +302,7 @@ export const PartnerBox = styled.div`
   }
 
   img {
-    width: 1.9rem;
+    width:${(props:{width:string})=>props.width};
   }
 
   span {
@@ -333,6 +326,7 @@ export const Introduces = styled.div`
 
     & > span:nth-child(1) {
       ${title}
+      padding: 1.3rem 0 .2rem;
       text-align: center;
       margin-bottom: .27rem;
     }
@@ -362,7 +356,6 @@ export const Introduces = styled.div`
 
   .Introduces_swiper {
     width: 16rem;
-    height: 86vh;
     margin: 0 auto;
     /* padding: 1rem 0 .2rem; */
   }
@@ -413,220 +406,157 @@ export const IntroduceBox = styled.div`
 `
 
 export const BorrowBox = styled.div`
-  position: relative;
-  height: 10.5rem;
-
-  & > img:nth-child(1) {
-    position: absolute;
-    top: -1.44rem;
-    left: 0;
-    width: 5.44rem;
-    height: 5.44rem;
-    object-fit: cover;
-  }
-
-  & > img:nth-child(2) {
-    position: absolute;
-    right: 0;
-    bottom: 1.44rem;
-    width: 5.44rem;
-    height: 5.44rem;
-    object-fit: cover;
-  }
-
-`
-export const BorrowGlass = styled.div`
-  width: 14.7rem;
-  min-height: 8.62rem;
+  width: 16rem;
+  /* height: 6rem; */
   margin: 0 auto;
-  margin-top: 1.44rem;
-  position: relative;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: .2rem;
-  overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    filter: blur(30px);
-    backdrop-filter: blur(30px);
-    margin: -30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  padding-top: 1.88rem;
+  .borrow_left{
+    width: 6.5rem;
+    .borrow_title{
+    font-size: 0.25rem;
+    width: 5.9rem;
+    margin-bottom: 0.83rem;
   }
-`
-
-export const BorrowContent = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  padding: 0.84rem 0 1.12rem;
-  box-sizing: border-box;
-
-  .title {
-    width: 9.82rem;
-    margin: 0 auto;
-    margin-bottom: .6rem;
-    text-align: center;
-    white-space: pre-wrap;
-    ${title};
-  }
-
-  .sliderBox {
-    width: 12rem;
-    margin: 0 auto;
-
-    .sliderItem {
+  .borrow_step{
+    .step_list{
       display: flex;
-      width: 12rem;
-      flex-direction: row;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-    }
-
-    .slider {
-      width: 8rem;
-      height: .1rem;
-      background: #FFFFFF;
-      border-radius: .3rem;
-      position: relative;
-      margin: .18rem auto .24rem;
-
-      &::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        display: inline-block;
-        width: ${(props: { left: string }) => props.left};
-        height: .1rem;
-        background: #FF490F;
-        border-radius: .3rem;
-        transition: width 500ms;
+      .step_item{
+        font-size: 0.2rem;
       }
     }
-
-    .text {
-      text-align: center;
-      max-width: 6.94rem;
-      height: .3rem;
-      margin: 0 auto;
-      font-family: 'Montserrat';
-      font-style: normal;
-      font-weight: 300;
-      font-size: .16rem;
-      color: rgba(255, 255, 255, .6);
+    .step_text{
+      display: block;
+      height: 0.76rem;
+      font-size: 0.12rem;
+      line-height: 0.18rem;
+      color: rgba(255,255,255,0.5);
     }
   }
-
-  .BorrowChannel {
+  .borrow_more{
+    width: 4.1rem;
     display: flex;
-    flex-direction: row;
-    width: 11rem;
-    box-sizing: border-box;
-    margin: 0.78rem auto 0px;
-    background: rgba(255, 255, 255, 0.1);
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.2rem;
+  }
+  }
+  .borrow_right{
+    width: 9.5rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    .borrow_channel{
+    width: 8.5rem;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
     border-radius: 20px;
-
-    .brrow_left {
-      display: flex;
-      flex-direction: column;
-      padding: 0.77rem 0.81rem 0.77rem 0.91rem;
-      border-right: 2px dashed rgba(255, 255, 255, 0.1);
-
-      & > span:first-child {
-        font-weight: 700;
-        font-size: 0.2rem;
-        color: rgb(255, 255, 255);
-      }
-
-      & > span:last-child {
-        display: inline-block;
-        font-family: 'Montserrat';
-        font-style: italic;
-        font-weight: 800;
-        font-size: .6rem;
-        background: linear-gradient(268.82deg, #FF0000 0.48%, #FEB240 96.5%);
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        text-fill-color: transparent;
-      }
-    }
-
-    .brrow_right {
-      display: flex;
-      flex-direction: column;
-      padding: 0.45rem 0px 0.45rem 1rem;
-      gap: 0.6rem;
-
-      .content {
+    .channel_left{
+      width: 35%;
+      height: 100%;
+      border-right: 2px dashed #191919;
+      .left_content{
+        width: 100%;
+        height: 100%;
         display: flex;
-        -webkit-box-align: center;
+        justify-content: center;
         align-items: center;
-
-        .text {
+        .left_content_apr{
           display: flex;
+          justify-content: center;
+          align-items: flex-start;
           flex-direction: column;
-          -webkit-box-pack: justify;
-          justify-content: space-between;
-          margin-left: 0.3rem;
-
-          & > div {
-            display: flex;
-            flex-direction: row;
-            -webkit-box-align: center;
-            align-items: center;
-
-            & > span:nth-child(1) {
-              font-weight: 500;
-              font-size: 0.16rem;
-              color: rgb(255, 255, 255);
-              font-family: Montserrat;
-              font-style: normal;
-              margin-right: 0.3rem;
-            }
-
-            & > span:nth-child(2) {
-              display: inline-block;
-              font-family: 'Montserrat';
-              font-style: italic;
-              font-weight: 800;
-              font-size: .3rem;
-              background: linear-gradient(265.23deg, #FF0F0F 0%, #FF820F 97.96%);
-              background-clip: text;
-              -webkit-background-clip: text;
-              -webkit-text-fill-color: transparent;
-              text-fill-color: transparent;
-            }
+          & > span:nth-child(1){
+          font-size: 0.22rem;
+          line-height:0.2rem;
           }
-
-          & > span {
-            font-weight: 500;
-            font-size: 0.14rem;
-            color: rgba(255, 255, 255, 0.5);
-            font-family: "PingFang HK";
+          & > span:nth-child(2){
+            font-size: 0.5rem;
+            font-family: 'Montserrat';
             font-style: normal;
-            line-height: 0.17rem;
+            font-weight: 800;
+            line-height: 1rem;
+            background: linear-gradient(268.82deg, #FF0000 0.48%, #FEB240 96.5%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
           }
         }
       }
     }
+    .channel_right{
+      width: 65%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      .content{
+        width: 4.5rem;
+        height: 1.1rem;
+        margin: 0 auto;
+        .content_apr{
+          margin-bottom: 0.1rem;
+          & > span:nth-child(1){
+            font-size: 0.2rem;
+            margin-bottom: 0.18rem;
+          }
+          & > span:nth-child(2){
+            font-size: 0.32rem;
+            font-family: 'Montserrat';
+            font-style: normal;
+            font-weight: 800;
+            margin-left: 0.2rem;
+            background: linear-gradient(268.82deg, #FF0000 0.48%, #FEB240 96.5%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+          }
+        }
+        & > span{
+          width: 3rem;
+          color: rgba(255,255,255,0.5);
+          font-size: 0.12rem;
+        }
+      }
+    }
+  }
   }
 
 `
+export const StepProgress = styled.div`
+      position: relative;
+      height: 2px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 0.4rem;
+      z-index: 2;
+      margin:0.28rem auto;
+      &::before{
+        content: "";
+        position: absolute;
+        top: 0;
+        left: ${(props: { left: string }) => props.left};
+        width: 33.33%;
+        border-radius: 0.4rem;
+        height: 100%;
+        background: #FF490F;
+        z-index: 1;
+        transition: all 0.3s ease-in-out;
+      }
+`
 
 export const SliderChoose = styled.span`
-  display: inline-block;
-  width: 3rem;
-  text-align: center;
-  font-family: 'PingFang HK';
-  font-style: normal;
-  font-weight: 600;
-  font-size: .16rem;
-  text-align: center;
+  font-size: .18rem;
   color: ${(props: { color: string }) => props.color};;
   cursor: pointer;
 
