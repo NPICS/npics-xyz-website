@@ -18,6 +18,9 @@ interface wallet {
   dollar: BigNumber | string,
 }
 const Wrap = styled.div`
+  display: grid;
+  grid-gap: .2rem;
+
   .item {
     display: flex;
     justify-content: space-between;
