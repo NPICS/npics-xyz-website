@@ -477,6 +477,7 @@ export default function NFTPay(props: {
       <label>
         <Flex alignItems={"center"} gap={".12rem"}>
           <Checkbox
+
             defaultChecked={didReadService}
             onChange={() => setDidReadService(!didReadService)}
           />
