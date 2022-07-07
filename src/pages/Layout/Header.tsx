@@ -49,7 +49,7 @@ function XHeader() {
     {
       darkIcon: imgurl.footer.darkG,
       lightIcon: imgurl.footer.lightG,
-      link: "/",
+      link: urls.discord,
       name: "Game"
     }
   ]
