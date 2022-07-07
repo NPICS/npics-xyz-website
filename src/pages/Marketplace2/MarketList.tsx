@@ -92,13 +92,14 @@ export default function MarketList() {
   const [listData, setListData] = useState<CollectionItems[]>([])
   const [loading, setLoading] = useState<boolean>(true)
   const [currentPage, setCurrentPage] = useState<number>(0)
+  const [pressEnter, setPressEnter] = useState<boolean>(false)
   const isLoading = useRef(false)
   const [currentSort, setCurrentSort] = useState<"asc" | "desc" | "rarityScore" | "rarityScoreDesc" | string>("asc")
 
   useEffect(() => {
     if (params.address) {
       setNftAddress(params.address)
-      setSearchText(undefined)
+      setSearchText('')
       setCurrentPage(1)
     }
   }, [params])
@@ -107,7 +108,7 @@ export default function MarketList() {
     if (nftAddress && !isLoading.current) {
       await loadData()
     }
-  }, [nftAddress, searchText, currentPage])
+  }, [nftAddress, pressEnter, currentPage])
 
   useAsync(async () => {
     if (currentPage === 1) {
@@ -162,9 +163,11 @@ export default function MarketList() {
           <InputStyled
             type="text"
             placeholder='Search NFTs by name or token ID'
+            value={searchText}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>  setSearchText(e.target.value)}
             onPressEnter={(e: any) => {
               setCurrentPage(1)
-              setSearchText(e.target.value)
+              setPressEnter(!pressEnter)
             }}
             className="ant-input-reset"
           />
