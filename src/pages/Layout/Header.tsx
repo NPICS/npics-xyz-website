@@ -33,7 +33,7 @@ const StyledtWallet = styled(Flex)`
 `
 
 function XHeader() {
-  const { account } = useWeb3React()
+  const { account, connector } = useWeb3React()
   const oldAccount = useRef<string | undefined | null>()
   const [accountPop, setAccountPop] = useState<boolean>(false)
   const action = useAppDispatch()
@@ -128,7 +128,7 @@ function XHeader() {
   }
 
   const walletPop = () => {
-    if (userInfo.address) {
+    if (account) {
       setAccountPop(true)
     } else {
       action(setIsShowConnect(true))
@@ -137,14 +137,20 @@ function XHeader() {
 
   const onQuit = () => {
     setAccountPop(false)
-    // sessionStorage.removeItem("ACCESS_TOKEN")
+    sessionStorage.removeItem(SessionStorageKey.WalletAuthorized)
+    // connector.deActivate()
+    console.log(injected)
+    injected.resetState()
+    // deactivate.destroy()
+    // console.log();
+    console.log(account);
     action(fetchUser(`{}`))
     console.log('quit');
   }
 
   const onCopy = () => {
-    if (!userInfo?.address) return
-    const text = `${userInfo?.address}`;
+    if (!account) return
+    const text = `${account}`;
     if (navigator.clipboard) {
       navigator.clipboard.writeText(text);
     } else {
@@ -170,7 +176,7 @@ function XHeader() {
       <div className='account-address'>
         <img className='address-icon' src={imgurl.address} alt="" />
         <div className='address-text'>
-          <span>{userInfo?.address && userInfo?.address.replace(userInfo?.address.substring(11, 30), '...')}</span>
+          <span>{account && account.replace(account.substring(11, 30), '...')}</span>
           <div className='connected'>
             Connected with MetaMask
           </div>
@@ -304,7 +310,7 @@ function XHeader() {
             style={{ position: 'relative', cursor: 'pointer' }}
             onClick={walletPop}
           >
-            {userInfo.address ?
+            {account ?
               <Icon width='.34rem' height='.34rem' src={imgurl.home.defaultAvatar} /> :
               <Icon width='.14rem' height='.16rem' src={imgurl.home.login} />}
           </Flex>
