@@ -21,28 +21,28 @@ import rarity_1_icon from "../../assets/images/market/rarity_1.svg"
 import rarity_2_icon from "../../assets/images/market/rarity_2.svg"
 
 function Label(props: {
-    icon?: string,
-    num: number
+  icon?: string,
+  num: number
 }) {
-    return <Flex
-        gap={".06rem"}
-        alignItems={"center"}
-        padding={".04rem .09rem"}
-        minHeight={".3rem"}
-        borderRadius={".14rem"}
-        border={"1px solid #FFFFFF4D"}
-        background={"#FFFFFF33"}
-        style={{
-            "cursor": "pointer"
-        }}
-    >
-        {props.icon && <Icon width={".2rem"} src={props.icon}/>}
-        <Typography
-            fontSize={".14rem"}
-            fontWeight={500}
-            color={"#fff"}
-        >{`${props.icon ? '' : '# '}${props.num}`}</Typography>
-    </Flex>
+  return <Flex
+    gap={".06rem"}
+    alignItems={"center"}
+    padding={".04rem .09rem"}
+    minHeight={".3rem"}
+    borderRadius={".14rem"}
+    border={"1px solid #FFFFFF4D"}
+    background={"#FFFFFF33"}
+    style={{
+      "cursor": "pointer"
+    }}
+  >
+    {props.icon && <Icon width={".2rem"} src={props.icon}/>}
+    <Typography
+      fontSize={".14rem"}
+      fontWeight={500}
+      color={"#fff"}
+    >{`${props.icon ? '' : '# '}${props.num}`}</Typography>
+  </Flex>
 }
 
 const NFTMain = styled.div`
@@ -69,128 +69,135 @@ const Cover = styled.img`
 `
 
 export default function OneNFT() {
-    const [detailData, setDetailData] = useState<CollectionDetail | undefined>(undefined)
-    const navigate = useNavigate()
-    let urlParams: any = useParams()
-    const params: { address: string, tokenId: string } = urlParams
-    const [openSeaIsNormalization, setOpenSeaIsNormalization] = useState<boolean>(true)
-    const [rarityData, setRarityData] = useState<{ [key: string]: any }>()
+  const [detailData, setDetailData] = useState<CollectionDetail | undefined>(undefined)
+  const navigate = useNavigate()
+  let urlParams: any = useParams()
+  const params: { address: string, tokenId: string } = urlParams
+  const [openSeaIsNormalization, setOpenSeaIsNormalization] = useState<boolean>(true)
+  const [rarityData, setRarityData] = useState<{ [key: string]: any }>()
 
-    useAsync(async () => {
-        if (!params) return;
-        await loadDetailData()
-        {
-            /// rarity
-            const resp: any = await http.myPost(`/npics-nft/app-api/v2/nft/getRarity`, {
-                address: params.address,
-                tokenId: params.tokenId
-            })
-            if (resp.code === 200 && resp.data) {
-                setRarityData(resp.data)
-            }
-        }
-    }, [params])
-
-    useAsync(async () => {
-        if (!detailData) return
-        let flag = await getNFTStatusInOpensea(detailData.address, Number(detailData.tokenId))
-        console.log(`flag => ${flag}`)
-        setOpenSeaIsNormalization(flag as boolean)
-    }, [detailData])
-
-    function getRarityIconByName(name: string): string | undefined {
-        switch (name) {
-            case "rarity_sniper":
-                return rarity_1_icon
-            case "trait_sniper":
-                return rarity_2_icon
-            default:
-                return undefined
-        }
-    }
-
-    function getRarityPopoverText(name: string, status: string): string {
-        switch (name) {
-            case "rarity_sniper":
-                return `Rarity Sniper Ranking ${status ? `(${status})` : ''}`
-            case "trait_sniper":
-                return `Trait Sniper Ranking ${status ? `(${status})` : ''}`
-            case "gem":
-                return `Gem Ranking ${status ? `(${status})` : ''}`
-            default:
-                return ''
-        }
-    }
-
-    async function loadDetailData() {
-      if (!params) return;
-      /// nft detail data
-      const resp: any = await http.myPost(`/npics-nft/app-api/v2/nft/getCollectionItemsDetail`, {
+  useAsync(async () => {
+    if (!params) return;
+    await loadDetailData()
+    {
+      /// rarity
+      const resp: any = await http.myPost(`/npics-nft/app-api/v2/nft/getRarity`, {
         address: params.address,
         tokenId: params.tokenId
       })
       if (resp.code === 200 && resp.data) {
-        setDetailData(deserialize(CollectionDetail, JSON.stringify(resp.data)))
+        setRarityData(resp.data)
       }
     }
+  }, [params])
 
-    return <Box
-        padding={"1.6rem"}
-        // width={"16rem"}
-        background={"transparent"}
-        position={"relative"}
-    >
-        {/* Banner */}
-        <Banner url={detailData?.bannerImageUrl}/>
-        <Box position={"relative"} zIndex={1}>
-            {/* nav */}
-            <Flex flexDirection={"row"} gap={".15rem"} alignItems={"start"}>
-                <Icon style={{cursor: 'pointer'}} height={".36rem"} width={".36rem"} src={PopIcon}
-                      onClick={() => navigate(`/marketplace/collections/${detailData?.address}`)}/>
-                <Flex flexDirection={"column"} gap={".05rem"}>
-                    <Typography fontSize={".16rem"} color={"#fff"} fontWeight={500}
-                                fontFamily={"Montserrat"}>{detailData?.collectionName}</Typography>
-                    <Flex alignItems={"center"} gap={".12rem"}>
-                        <Typography
-                            fontSize={".3rem"}
-                            color={"#fff"}
-                            fontWeight={800}
-                        >{`${detailData?.singularForName()} #${detailData?.tokenId}`}</Typography>
-                        <Popover content={"Reported for Suspicious Activity on OpenSea"}>
-                            <Icon
-                                width={".24rem"}
-                                height={".24rem"}
-                                src={nftWarningIcon}
-                                hidden={openSeaIsNormalization}/>
-                        </Popover>
-                    </Flex>
+  useAsync(async () => {
+    if (!detailData) return
+    // let flag = await getNFTStatusInOpensea(detailData.address, Number(detailData.tokenId))
+    // console.log(`flag => ${flag}`)
+    // setOpenSeaIsNormalization(flag as boolean)
+    let resp: any = await http.myPost(`/npics-nft/app-api/v2/nft/getNftApprove`, {
+      address: detailData.address,
+      tokenId: detailData.tokenId
+    })
+    if (resp.code === 200 && resp.data) {
+      setOpenSeaIsNormalization(resp.data.supports_wyvern === true)
+    }
+  }, [detailData])
 
-                    <Flex flexDirection={"row"} gap={".15rem"} alignItems={"stretch"}>
-                        {
-                            rarityData && Object.entries(rarityData).map(([key, val]) => {
-                                return val && val.rank && <Popover content={getRarityPopoverText(key, val.status)}>
-                                    <Box onClick={() => window.open(val.url)}>
-                                        <Label
-                                            key={key}
-                                            icon={getRarityIconByName(key)}
-                                            num={Number(val.rank) ?? 0}
-                                        />
-                                    </Box>
-                                </Popover>
-                            })
-                        }
-                    </Flex>
-                </Flex>
-            </Flex>
-            {/* main */}
-            <NFTMain>
-                <Grid gridArea={"cover"}><Cover src={detailData?.imageUrl}/></Grid>
-                <Grid gridArea={"price"}><NFTPrice item={detailData} refreshBlock={loadDetailData}/></Grid>
-                <Grid gridArea={"info"}><NFTInfo item={detailData}/></Grid>
-                <Grid gridArea={"props"}><NFTProperties item={detailData}/></Grid>
-                <Grid gridArea={"activities"}><NFTActivities item={detailData}/></Grid>
-                <Grid gridArea={"share"}><NFTShare item={detailData}/></Grid>
-            </NFTMain>
-        </Box>
+  function getRarityIconByName(name: string): string | undefined {
+    switch (name) {
+      case "rarity_sniper":
+        return rarity_1_icon
+      case "trait_sniper":
+        return rarity_2_icon
+      default:
+        return undefined
+    }
+  }
+
+  function getRarityPopoverText(name: string, status: string): string {
+    switch (name) {
+      case "rarity_sniper":
+        return `Rarity Sniper Ranking ${status ? `(${status})` : ''}`
+      case "trait_sniper":
+        return `Trait Sniper Ranking ${status ? `(${status})` : ''}`
+      case "gem":
+        return `Gem Ranking ${status ? `(${status})` : ''}`
+      default:
+        return ''
+    }
+  }
+
+  async function loadDetailData() {
+    if (!params) return;
+    /// nft detail data
+    const resp: any = await http.myPost(`/npics-nft/app-api/v2/nft/getCollectionItemsDetail`, {
+      address: params.address,
+      tokenId: params.tokenId
+    })
+    if (resp.code === 200 && resp.data) {
+      setDetailData(deserialize(CollectionDetail, JSON.stringify(resp.data)))
+    }
+  }
+
+  return <Box
+    padding={"1.6rem"}
+    // width={"16rem"}
+    background={"transparent"}
+    position={"relative"}
+  >
+    {/* Banner */}
+    <Banner url={detailData?.bannerImageUrl}/>
+    <Box position={"relative"} zIndex={1}>
+      {/* nav */}
+      <Flex flexDirection={"row"} gap={".15rem"} alignItems={"start"}>
+        <Icon style={{cursor: 'pointer'}} height={".36rem"} width={".36rem"} src={PopIcon}
+              onClick={() => navigate(`/marketplace/collections/${detailData?.address}`)}/>
+        <Flex flexDirection={"column"} gap={".05rem"}>
+          <Typography fontSize={".16rem"} color={"#fff"} fontWeight={500}
+                      fontFamily={"Montserrat"}>{detailData?.collectionName}</Typography>
+          <Flex alignItems={"center"} gap={".12rem"}>
+            <Typography
+              fontSize={".3rem"}
+              color={"#fff"}
+              fontWeight={800}
+            >{`${detailData?.singularForName()} #${detailData?.tokenId}`}</Typography>
+            <Popover content={"Reported for Suspicious Activity on OpenSea"}>
+              <Icon
+                width={".24rem"}
+                height={".24rem"}
+                src={nftWarningIcon}
+                hidden={openSeaIsNormalization}/>
+            </Popover>
+          </Flex>
+
+          <Flex flexDirection={"row"} gap={".15rem"} alignItems={"stretch"}>
+            {
+              rarityData && Object.entries(rarityData).map(([key, val]) => {
+                return val && val.rank && <Popover content={getRarityPopoverText(key, val.status)}>
+                  <Box onClick={() => window.open(val.url)}>
+                    <Label
+                      key={key}
+                      icon={getRarityIconByName(key)}
+                      num={Number(val.rank) ?? 0}
+                    />
+                  </Box>
+                </Popover>
+              })
+            }
+          </Flex>
+        </Flex>
+      </Flex>
+      {/* main */}
+      <NFTMain>
+        <Grid gridArea={"cover"}><Cover src={detailData?.imageUrl}/></Grid>
+        <Grid gridArea={"price"}><NFTPrice item={detailData} refreshBlock={loadDetailData}/></Grid>
+        <Grid gridArea={"info"}><NFTInfo item={detailData}/></Grid>
+        <Grid gridArea={"props"}><NFTProperties item={detailData}/></Grid>
+        <Grid gridArea={"activities"}><NFTActivities item={detailData}/></Grid>
+        <Grid gridArea={"share"}><NFTShare item={detailData}/></Grid>
+      </NFTMain>
     </Box>
+  </Box>
 }
