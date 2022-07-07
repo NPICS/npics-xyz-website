@@ -1,20 +1,58 @@
 import React,{useState} from "react"
 import { Box, Flex, Grid, Icon, Typography } from "component/Box";
 import NotFound from "component/NotFound";
-import { airdropProject } from "./components/data";
+import { airdropProject, Projection } from "./components/data";
 import ButtonDefault from "component/ButtonDefault";
-import { message } from 'antd';
+import { message, notification } from 'antd';
 import { useAsync } from "react-use";
-
+import { useWeb3React } from "@web3-react/core";
+import {Erc20} from "abi/Erc20";
+import { injected } from "connectors/hooks";
+import { deserializeArray } from "class-transformer";
 export default function MyAirdop() {
   // whether to allow clicks
   const [allowed, setAllowed] = useState<boolean>(false)
+  const [project, setProject] = useState<Projection[]>()
+  const {provider,account} = useWeb3React()
+
+  useAsync(async()=> {
+    if (!account) {
+      try{
+        await injected.activate(1)
+      }catch(e:any){
+        notification.error({ message: e.message})
+      }
+  }
+  },[])
 
   useAsync(async() => {
-    // todo: Determine whether there is neo
-    // Receiver Contract Missing
-    setAllowed(false)
-  },[])
+    console.log(provider,account);
+    if(provider && account) {
+      const neoAdress = [
+        '0xcd13D923D7428b0A2726d30ac5350d9991060ff1',
+        '0x0c7251c2AB025739b142272F51796a10DC150f21',
+        '0xE65ffd60CB4Bb6Fd185c0CF4041e14D9D1caD6dC'
+      ]
+      const promiseArray: any[] = []
+      neoAdress.forEach((item) => {
+        let erc20 = new Erc20(item, provider)
+        promiseArray.push((erc20.balanceOf(account)))
+      })
+      const result = await Promise.all(promiseArray)
+      const _projection: any[] = []
+      airdropProject.forEach((item)=> {
+        _projection.push({
+          ...item,
+          NEOBAYC: result[0],
+          NEOMAYC: result[1],
+          NEODoole: result[2]
+        })
+      })
+      let _result = deserializeArray(Projection, JSON.stringify(_projection))
+      setProject(_result)
+      setAllowed(false)
+    }
+  },[account])
 
 
   return <Box
@@ -55,7 +93,7 @@ export default function MyAirdop() {
           <Flex alignItems="center" justifyContent="center"><Typography fontSize={".14rem"} fontWeight={500} color={'#000'} textAlign={"center"}>Actions</Typography></Flex>
         </Grid>
 
-        {airdropProject.map((item,idx) => (
+        {project && project.map((item,idx) => (
           <Grid
             key={idx}
             gridTemplateColumns={"1fr auto 4fr auto 1fr"}
@@ -86,7 +124,7 @@ export default function MyAirdop() {
             <Flex alignItems="center" justifyContent="center"><Typography textAlign={"center"}></Typography></Flex>
             <Flex alignItems="center" justifyContent="center">
               <ButtonDefault 
-                disabled={!allowed}
+                disabled={!item.isAllowed()}
                 height='.48rem' 
                 minWidth='1.2rem' 
                 types='normal' 

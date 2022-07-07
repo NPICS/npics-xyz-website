@@ -10,6 +10,9 @@ import airdropCoin from 'assets/images/dashboard/airdropCoin.png'
 import airdropMAWS from 'assets/images/dashboard/airdropMAWS.png'
 import airdropDooles from 'assets/images/dashboard/airdropDooles.jpg'
 import exportIcon from "assets/images/dashboard/export14.png"
+import BigNumber from "bignumber.js";
+import TransformBigNumber from "model/transform/bigNumber";
+import { Expose } from "class-transformer";
 export const NavList = [
   {
     icon: navVaultsIcon,
@@ -137,33 +140,77 @@ export const aa = {
   }
 }
 
+export class Projection {
+  actions!: string
+
+  address!: string
+
+  project!: string
+
+  icon!: string
+
+  exportIcon!: string
+
+  allowed!: boolean
+  
+  @TransformBigNumber()
+  NEOBAYC!: BigNumber
+
+  @TransformBigNumber()
+  NEOMAYC!: BigNumber
+
+  @TransformBigNumber()
+  NEODoole!: BigNumber
+
+  @Expose()
+  isAllowed() {
+    if(this.project === "Yuga Otherdeeds"){
+      return (!this.NEOBAYC.eq(0) || !this.NEOMAYC.eq(0))
+    }
+    if(this.project === "Ape Coin"){
+      return (!this.NEOBAYC.eq(0) || !this.NEOMAYC.eq(0))
+    }
+    if(this.project === "Mutant Ape With Serum"){
+      return (!this.NEOBAYC.eq(0))
+    }
+    if(this.project === "Doodles Dooplicator"){
+      return (!this.NEODoole.eq(0))
+    }
+  }
+
+}
+
 export const airdropProject = [
   {
     actions: "Claim",
     address: "0x34d85c9CDeB23FA97cb08333b511ac86E1C4E258",
     project: "Yuga Otherdeeds",
     icon: airdropBAYC,
-    exportIcon
+    exportIcon,
+    allowed: false
   },
   {
     actions: "Claim",
     address: "0x025C6da5BD0e6A5dd1350fda9e3B6a614B205a1F",
     project: "Ape Coin",
     icon: airdropCoin,
-    exportIcon
+    exportIcon,
+    allowed: false
   },
   {
     actions: "Claim",
     address: "0x60E4d786628Fea6478F785A6d7e704777c86a7c6",
     project: "Mutant Ape With Serum",
     icon: airdropMAWS,
-    exportIcon
+    exportIcon,
+    allowed: false
   },
   {
     actions: "Claim",
     address: "0x466CFcD0525189b573E794F554b8A751279213Ac",
     project: "Doodles Dooplicator",
     icon: airdropDooles,
-    exportIcon
+    exportIcon,
+    allowed: false
   }
 ]

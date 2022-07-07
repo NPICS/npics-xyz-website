@@ -99,7 +99,7 @@ export default function MyTable() {
       render: (text, row) => <Link to={`/marketplace/collections/${row.address}`} onClick={() => ScrollTop()}>
         <div style={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center'}}>
           <img src={row.imageUrl} alt="" style={{ width: ".6rem", height: ".6rem", marginRight: ".1rem", borderRadius: '30px'}} />
-          <span style={{ wordBreak: 'break-all', color: '#fff', fontWeight: '700', marginRight: '.05rem' }}>{text}</span>
+          <span style={{ wordBreak: 'break-all', color: '#fff', fontWeight: '700', marginRight: '.1rem' }}>{text}</span>
           <Icon style={{flexShrink: '0'}} src={openseaValidIcon} width={".16rem"} height={".16rem"}/>
         </div>
       </Link>,
@@ -151,7 +151,7 @@ export default function MyTable() {
       // defaultSortOrder: 'descend',
       sorter: (a, b) => a.floorPrice - b.floorPrice,
       render: (text) => <div style={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center'}}>
-        <img src={imgurl.redPrice} alt="" style={{marginRight: ".1rem"}}/>
+        <img src={imgurl.whitePrice} alt="" style={{marginRight: ".1rem"}}/>
         <span>{text}</span>
       </div>
     },

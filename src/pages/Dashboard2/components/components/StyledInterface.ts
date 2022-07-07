@@ -303,5 +303,21 @@ export class DataSource2 {
   terminated(): boolean {
     return this.status === 1 ? true : false
   }
+
+  @Expose()
+  singularForName() {
+    switch (this.collectionName) {
+      case "Doodles":
+        return "Doodle"
+      case "Space Doodles":
+        return "Space Doodle"
+      case "CryptoPunks":
+        return "CryptoPunk"
+      case "CLONE X - X TAKASHI MURAKAMI":
+        return "Clone X"
+      default:
+        return this.collectionName
+    }
+  }
 }
 

@@ -64,7 +64,6 @@ function Home() {
   }
 
   useEffect(() => {
-    console.log(checkText);
     let timer;
     const startSwiper = () => {
       timer = setTimeout(() => {

@@ -28,6 +28,20 @@ export default function PaySuccessful(props:IProps) {
     props.setIsPayingAllDebts(false)
     props.setReload(!props.reload)
   }
+  const _toString = (collectionName: string):string => {
+    switch (collectionName) {
+      case "Doodles":
+        return "Doodle"
+      case "Space Doodles":
+        return "Space Doodle"
+      case "CryptoPunks":
+        return "CryptoPunk"
+      case "CLONE X - X TAKASHI MURAKAMI":
+        return "Clone X"
+      default:
+        return collectionName
+    }
+  }
 
   return <Flex
     flexDirection={"column"}
@@ -47,13 +61,13 @@ export default function PaySuccessful(props:IProps) {
           <Flex maxWidth="3.4rem" flexWrap="wrap" marginBottom=".12rem">
               <Typography fontSize=".16rem" fontWeight="700" color="#FF490F">
                 <Typography marginRight={".05rem"} display="inline-block" fontSize=".16rem" fontWeight="700" color="#000">You've deposited</Typography>
-                {`${activities?.collectionName} ${activities?.tokenId}`} 
+                {`${activities && _toString(activities?.collectionName)} ${activities?.tokenId}`} 
                 <Typography marginLeft={".05rem"} display="inline-block" fontSize=".16rem" fontWeight="700" color="#000">and minted</Typography>
               </Typography>
           </Flex>
           <Flex alignItems="center" gap=".1rem" onClick={() => jumpToNeoEtherscan()}>
             <Typography style={{cursor: 'pointer'}} fontSize=".16rem" fontWeight="500" color="rgba(0,0,0,.5)">
-              {`NEO ${activities?.collectionName} ${activities?.tokenId}`} 
+              {`NEO ${activities &&  _toString(activities?.collectionName)} ${activities?.tokenId}`} 
             </Typography>
             <Icon marginLeft=".1rem" width=".14rem" height=".14rem" src={imgurl.dashboard.export14}/>
           </Flex>

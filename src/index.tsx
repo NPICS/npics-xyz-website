@@ -22,7 +22,6 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-
 const StyledThemeProvider = (props: any) => {
   // const isDark = useAppSelector(state => state.app.Theme.isDark)
   // Temporary solution 😅

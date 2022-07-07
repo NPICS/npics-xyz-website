@@ -14,6 +14,7 @@ import { urls } from "../../utils/urls";
 import { NavLink, useLocation } from 'react-router-dom';
 import { Flex, Icon, Typography, Box } from 'component/Box';
 import styled from 'styled-components';
+import { injected } from 'connectors/hooks';
 
 const StyledtWallet = styled(Flex)`
   cursor: pointer;
@@ -54,52 +55,52 @@ function XHeader() {
     }
   ]
 
-  useEffect(() => {
-    console.log(`Account Change => New: ${account}, Old: ${oldAccount.current}`)
-    // changed account
-    if (account && oldAccount.current) {
-      // remove old account data
-      sessionStorage.clear()
-      // save new account
-      sessionStorage.setItem(SessionStorageKey.WalletAuthorized, account)
-      // fetch new account data
-      action(clearUserData())
-      action(fetchUser2())
-      // make islogin false
-      action(setIsLogin(false))
-    }
+  // useEffect(() => {
+  //   console.log(`Account Change => New: ${account}, Old: ${oldAccount.current}`)
+  //   // changed account
+  //   if (account && oldAccount.current) {
+  //     // remove old account data
+  //     sessionStorage.clear()
+  //     // save new account
+  //     sessionStorage.setItem(SessionStorageKey.WalletAuthorized, account)
+  //     // fetch new account data
+  //     action(clearUserData())
+  //     action(fetchUser2())
+  //     // make islogin false
+  //     action(setIsLogin(false))
+  //   }
 
-    /// disconnect
-    else if (oldAccount.current && !account) {
-      console.log(`?????, ${oldAccount.current}, ${account}`)
-      // remove all data
-      sessionStorage.clear()
-      // make unlogin
-      action(clearUserData())
-      action(setIsLogin(false))
-    }
+  //   /// disconnect
+  //   else if (oldAccount.current && !account) {
+  //     console.log(`?????, ${oldAccount.current}, ${account}`)
+  //     // remove all data
+  //     sessionStorage.clear()
+  //     // make unlogin
+  //     action(clearUserData())
+  //     action(setIsLogin(false))
+  //   }
 
-    /// first connect
-    else if (!oldAccount.current && account) {
-      sessionStorage.setItem(SessionStorageKey.WalletAuthorized, account)
-      action(fetchUser2())
-    }
+  //   /// first connect
+  //   else if (!oldAccount.current && account) {
+  //     sessionStorage.setItem(SessionStorageKey.WalletAuthorized, account)
+  //     action(fetchUser2())
+  //   }
 
-    // store old account
-    oldAccount.current = account
-    // eslint-disable-next-line
-  }, [account])
+  //   // store old account
+  //   oldAccount.current = account
+  //   // eslint-disable-next-line
+  // }, [account])
 
   // active wallet connect
   useEffect(() => {
     // check account, auto connect wallet
-    let account = sessionStorage.getItem(SessionStorageKey.WalletAuthorized)
+    // let account = sessionStorage.getItem(SessionStorageKey.WalletAuthorized)
     // if (account) {
     //   activate(connectors.injected).then(() => { })
     // }
     // check token
-    let token = sessionStorage.getItem(SessionStorageKey.AccessToken)
-    action(setIsLogin(token != null))
+    // let token = sessionStorage.getItem(SessionStorageKey.AccessToken)
+    // action(setIsLogin(token != null))
     // eslint-disable-next-line
   }, [])
 
@@ -107,6 +108,7 @@ function XHeader() {
   const connect = async () => {
     try {
       // TODO: wallet connect
+      await injected.activate(1)
       // await activate(connectors.injected, (error) => {
       //   const Error = JSON.parse(JSON.stringify(error))
       //   if (Error.name === "UnsupportedChainIdError") {
@@ -118,8 +120,8 @@ function XHeader() {
       //   }
       // })
       action(fetchUser2())
-    } catch (e) {
-      console.error('error:', e)
+    } catch (e:any) {
+      notification.error({ message: e.message })
     } finally {
       action(setIsShowConnect(false))
     }
@@ -278,7 +280,7 @@ function XHeader() {
             {
               terms.map((item) => {
                 return (
-                  <a href={item.link} key={item.name} >
+                  <a href={item.link} key={item.name} target="_blank" >
                     <div className='tools_bg'>
                       <Icon style={{ cursor: 'pointer', marginRight: '0.22rem' }} width='.22rem' height='.22rem' src={item.darkIcon} />
                     </div>

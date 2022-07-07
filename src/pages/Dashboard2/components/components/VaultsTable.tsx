@@ -24,6 +24,7 @@ import { deserializeArray, plainToClass } from 'class-transformer';
 import { injected } from 'connectors/hooks';
 // import { aa } from './data'
 import { TextPlaceholder } from 'component/styled';
+import { useAsync } from 'react-use';
 
 interface Result {
   createTime: string,
@@ -84,13 +85,14 @@ function VaultsTable(props: IProps) {
       dataIndex: 'items',
       key: 'items',
       align: 'center',
+      onCell: (row) => ({style: {backgroundColor: row.terminated() ? 'rgba(0, 0, 0, 0.03)' : ''}}),
       render: (text, row) => {
       return <div className='items' style={{ cursor: `${row.terminated() ? '' : 'pointer'}` }} onClick={() => jumpToEthscan(row)}>
         <img className='avatar' src={row.imageUrl} alt="" />
         <div className='text'>
           <div>
-            <span title={row.collectionName}>{row.collectionName}</span>
-            <span>{`#${row.tokenId}`}</span>
+            <span title={row.singularForName()}>{row.singularForName()}</span>
+            <span>&nbsp;{`#${row.tokenId}`}</span>
           </div>
           <div>
             Floor: <span>
@@ -109,9 +111,10 @@ function VaultsTable(props: IProps) {
       dataIndex: 'contract',
       key: 'contract',
       align: 'center',
+      onCell: (row) => ({style: {backgroundColor: row.terminated() ? 'rgba(0, 0, 0, 0.03)' : ''}}),
       render: (text, row) => <div className='contract' style={{ cursor: `${row.terminated() ? '' : 'pointer'}` }} onClick={() => jumpToNEOEthscan(row)}>
-        <span title={row.collectionName}>NEO {row.collectionName}</span>
-        #{row.tokenId}
+        <span title={row.singularForName()}>NEO {row.singularForName()}</span>
+        &nbsp;{`#${row.tokenId}`}
         {row.terminated() ? null : <Icon width=".16rem" height=".16rem" src={imgurl.dashboard.exportBlack18} alt="" />}
       </div>
     },
@@ -121,6 +124,7 @@ function VaultsTable(props: IProps) {
       key: 'debtString',
       align: 'center',
       width: '1.8rem',
+      onCell: (row) => ({style: {backgroundColor: row.terminated() ? 'rgba(0, 0, 0, 0.03)' : ''}}),
       render: (text, row) => row.terminated() ? TextPlaceholder : <Flex className='imgPrice' flexDirection='column'>
         <Flex alignItems='center' marginBottom=".04rem">
           <Icon width=".18rem" height=".18rem" src={imgurl.dashboard.ethBlack18} alt="" />
@@ -138,6 +142,7 @@ function VaultsTable(props: IProps) {
       dataIndex: 'liquidationPrice',
       align: 'center',
       key: 'liquidationPrice',
+      onCell: (row) => ({style: {backgroundColor: row.terminated() ? 'rgba(0, 0, 0, 0.03)' : ''}}),
       render: (text, row) => row.terminated() ? TextPlaceholder : <Flex className='imgPrice' flexDirection='column'>
         <Flex alignItems='center' marginBottom=".04rem">
           <Icon width=".18rem" height=".18rem" src={imgurl.dashboard.ethBlack18} alt="" />
@@ -154,6 +159,7 @@ function VaultsTable(props: IProps) {
       align: 'center',
       key: 'healthFactor',
       width: '1.8rem',
+      onCell: (row) => ({style: {backgroundColor: row.terminated() ? 'rgba(0, 0, 0, 0.03)' : ''}}),
       render: (text,row) => row.terminated() ? TextPlaceholder : <div className='healthFactor'>
         {row.healthFactor.div(10 ** 18).toFixed(4, 1)}
       </div>
@@ -164,6 +170,7 @@ function VaultsTable(props: IProps) {
       key: 'factorStatus',
       align: 'center',
       width: '1.8rem',
+      onCell: (row) => ({style: {backgroundColor: row.terminated() ? 'rgba(0, 0, 0, 0.03)' : ''}}),
       render: (text,row) => <div className='status' style={{ color: `${Color[text as 'Inforce' | 'In Risk' | 'In Liquidation' | 'Terminated']}` }}>
         {row.factorStatus}
       </div>
@@ -174,6 +181,7 @@ function VaultsTable(props: IProps) {
       key: 'actions',
       align: 'center',
       width: '1.8rem',
+      onCell: (row) => ({style: {backgroundColor: row.terminated() ? 'rgba(0, 0, 0, 0.03)' : ''}}),
       render: (t, row: any) => row.terminated() ? <div /> : <Flex alignItems='center' justifyContent='center'>
         <ButtonDefault height='.48rem' minWidth='1.2rem' types='normal' onClick={() => navigate(`/vaultsDetail/${row.address}/${row.tokenId}`)}>
           Repay
@@ -230,6 +238,16 @@ function VaultsTable(props: IProps) {
     }
   },[account,isLogin])
 
+  useAsync(async() => {
+    if(!account) {
+      try{
+        await injected.activate(1)
+      }catch(e:any){
+        notification.error({ message: e.message})
+      }
+    }
+  },[])
+
 
   async function login2() {
     if(!provider) return
@@ -280,11 +298,10 @@ function VaultsTable(props: IProps) {
     try {
       const result: any = await http.myPost(url, pageInside)
       let orgData: any[] = result.data.records
+      console.log(account,provider)
       // let orgData: any = aa.data.records
-      if(!provider) return
+      if(!provider || !account) return
       if (result.code === 200 && orgData.length) {
-        console.log('provider',provider)
-      // if (result.code === 200 && orgData.length) {
         const signer = provider.getSigner(account)
         let lendPool = new LendPool(signer)
         const len = orgData.length
@@ -337,13 +354,13 @@ function VaultsTable(props: IProps) {
             loanId: listData[i].loanId,
             reserveAsset: listData[i].reserveAsset,
             totalCollateral: listData[i].totalCollateral,
-            // totalDebt: new BigNumber("6000000000000000000"),
             totalDebt: totalDebt,
             maxTotalDebt: listData[i].maxTotalDebt,
             debtString: listData[i].debtString,
             availableBorrows: listData[i].availableBorrows,
             liquidationPrice: listData[i].liquidationPrice,
-            terminated: listData[i].terminated
+            terminated: listData[i].terminated,
+            singularForName: listData[i].singularForName
           })
         }
 
