@@ -113,7 +113,7 @@ function Footer() {
         <div>
           {
             terms.map((item) => {
-              return <a key={item.name} href={item.link} target="_blank" rel="noreferrer">
+              return <a key={item.name} href={item.link} style={{opacity:0.5}} target="_blank" rel="noreferrer">
                 <Icon width='.22rem' height='.22rem' src={isHome ? item.darkIcon : item.lightIcon} />
               </a>
             })
@@ -123,7 +123,7 @@ function Footer() {
           <a href={urls.contactUs}  target="_blank" rel="noreferrer">Contact Us</a>
           <a href={urls.Resources} target="_blank" rel="noreferrer">Resources</a>
           {/* <a href="/" target="_blank" rel="noreferrer">Audit Report</a> */}
-          <a href={urls.termsOfService} target="_blank" rel="noreferrer">Terms of Service</a>
+          <a href={urls.termsOfService} target="_blank" rel="noreferrer">Terms of service</a>
         </div>
       </div>
     </FooterWrap>

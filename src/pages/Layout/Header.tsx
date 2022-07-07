@@ -14,7 +14,6 @@ import { urls } from "../../utils/urls";
 import { NavLink, useLocation } from 'react-router-dom';
 import { Flex, Icon, Typography, Box } from 'component/Box';
 import styled from 'styled-components';
-import { injected } from 'connectors/hooks';
 
 const StyledtWallet = styled(Flex)`
   cursor: pointer;
@@ -50,18 +49,13 @@ function XHeader() {
     {
       darkIcon: imgurl.footer.darkG,
       lightIcon: imgurl.footer.lightG,
-      link: "/",
+      link: urls.discord,
       name: "Game"
-    },
-    {
-      darkIcon: imgurl.footer.darkM,
-      lightIcon: imgurl.footer.lightM,
-      link: urls.medium,
-      name: "Medium"
     }
   ]
 
   useEffect(() => {
+    console.log(`Account Change => New: ${account}, Old: ${oldAccount.current}`)
     // changed account
     if (account && oldAccount.current) {
       // remove old account data
@@ -123,7 +117,6 @@ function XHeader() {
       //     notification.error({ message: "Please authorize to access your account" })
       //   }
       // })
-      await injected.activate(1)
       action(fetchUser2())
     } catch (e) {
       console.error('error:', e)
@@ -232,7 +225,12 @@ function XHeader() {
   const history = useLocation()
   const [activiRoute, setActiviRoute] = useState<string>('')
   useEffect(() => {
-    if (history.pathname.substring(1, 4) === 'nft') {
+    console.log(history.pathname.substring(1, 4));
+    console.log(history.pathname.substring(1, 13));
+    if(history.pathname === '/'){
+      console.log("home");
+      setActiviRoute('home')
+    }else if (history.pathname.substring(1, 4) === 'nft') {
       setActiviRoute('nft')
       return
     } else if (history.pathname.substring(1, 13) === 'vaultsDetail') {
@@ -245,6 +243,11 @@ function XHeader() {
 
   return (
     <Nav>
+      <Flex
+        position="absolute"
+        width="16.06rem"
+        justifyContent="space-between"
+      >
         <FlexDiv>
           <LogoLink to={"/"}>
             <img src={imgurl.logoBeta} alt="" />
@@ -254,18 +257,19 @@ function XHeader() {
             style={({ isActive }) =>
               isActive ? active : normal}
           >
-            <span style={{ color: `${activiRoute === 'nft' ? '#fff' : ''}` }}>Marketplace</span>
+            <span style={{ color: `${activiRoute === 'nft' || activiRoute === 'home' ? '#fff' : ''}` }}>Marketplace</span>
           </NavLink>
           <NavLink to={"/dashboard"}
             style={({ isActive }) =>
               isActive ? active : normal}
           >
-            <span style={{ color: `${activiRoute === 'vaultsDetail' ? '#fff' : ''}` }}>Dashboard</span>
+            <span style={{ color: `${activiRoute === 'vaultsDetail' || activiRoute === 'home' ? '#fff' : ''}` }}>Dashboard</span>
           </NavLink>
+
           <a style={{
-            "fontSize": ".16rem",
-            "fontWeight": "600",
-            "color": "rgba(255,255,255,.5)"
+            fontSize: ".16rem",
+            fontWeight: "600",
+            color: activiRoute === 'home' ? '#fff' : 'rgba(255,255,255,.5)'
           }} target="_blank" rel="noreferrer" href={urls.resource}>Resources</a>
         </FlexDiv>
 
@@ -337,6 +341,7 @@ function XHeader() {
       >
         <div onClick={connect}><img src={imgurl.metamaskLogo} alt=""></img>MetaMask</div>
       </Modal> */}
+      </Flex>
     </Nav>
   );
 }

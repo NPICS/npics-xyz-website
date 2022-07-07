@@ -59,7 +59,7 @@ export default function NFTPayProgressing(props: {
             >30s</Typography>
         </Flex>
         <Flex alignItems={"center"} justifyContent={"center"} gap={".3rem"} marginTop={".3rem"}>
-            <MarketLabel name={props.nft.market} icon={props.nft.marketIcon()}/>
+            <MarketLabel name={props.nft.marketDisplay()} icon={props.nft.marketIcon()}/>
             <MarketLabel name={"DYDX"} icon={imgurl.market.DYDXBuy}/>
             <MarketLabel name={"BendDAO"} icon={imgurl.market.BendDAOBuy}/>
         </Flex>

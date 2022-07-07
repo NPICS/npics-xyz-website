@@ -13,8 +13,17 @@ const Cover = styled.img`
   width: 100%;
   overflow: hidden;
   object-fit: cover;
-  min-height: 2rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
   background: #e5e5e5;
+`
+
+const ImageContainer = styled.div`
+  padding: 50% 0;
+  position: relative;
 `
 
 const IconTest = styled.img`
@@ -37,7 +46,6 @@ const NoWarpTypography = styled(Typography)`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  transition: all .2s;
 `
 const ShadowBox = styled(Flex)`
   &:hover {
@@ -74,7 +82,10 @@ export default function CollectionCell(props: {
             ScrollTop()
         }}
     >
+        {/*<Cover src={props.item.imageUrl}/>*/}
+      <ImageContainer>
         <Cover src={props.item.imageUrl}/>
+      </ImageContainer>
         {/* tag */}
         <Flex
             flexDirection={"row"}
@@ -125,13 +136,13 @@ export default function CollectionCell(props: {
             background={"#0000001a"}
             margin={".12rem 0"}
           ></Box>
-          <Flex alignItems={"center"} gap={".1rem"}>
+          <Flex alignItems={"center"} gap={".06rem"}>
             <IconTest src={props.item.marketIcon()} alt=""/>
-            <Typography
+            <NoWarpTypography
               color={"#00000080"}
               fontSize={".14rem"}
               fontWeight={500}
-            >{props.item.marketDisplay()}</Typography>
+            >{props.item.marketDisplay()}</NoWarpTypography>
             <Flex flex={1}></Flex>
             <Icon style={{
               "flexShrink": 0

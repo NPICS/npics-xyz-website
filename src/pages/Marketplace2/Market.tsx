@@ -14,6 +14,7 @@ import {Popover} from "antd";
 import openseaValidIcon from "../../assets/images/market/nfts_opensea_valid.svg"
 import NPopover from "../../component/Popover";
 import ReactMarkdown from "react-markdown";
+import {TextPlaceholder} from "../../component/styled";
 
 
 export const Banner = styled(Box)<{ url?: string }>`
@@ -47,21 +48,24 @@ export const ExpandBtn = styled(Box)`
   cursor: pointer;
 `
 
-const CollectionItem = styled.div<{
+const CollectionItem = styled.img<{
   isSelected?: boolean,
   imgUrl?: string
 }>`
   display: block;
   width: .5rem;
   height: .5rem;
-  background: transparent url(${(props) => props.imgUrl}) no-repeat center;
-  background-size: cover;
+  //background: transparent url(${(props) => props.imgUrl}) no-repeat center;
+  //background-size: cover;
+  background: #fff;
+  border: 0;
   overflow: hidden;
-  border-radius: .16rem;
-  //box-sizing: content-box;
-    //box-shadow: 0 0 0 ${(props) => props.isSelected ? `3px` : `0`} #fff;
-  border: ${(props) => props.isSelected ? `3px` : 0} solid #fff;
+  border-radius: .1rem;
+  object-fit: cover;
+  // border: ${(props) => props.isSelected ? `3px` : 0} solid #fff;
+  box-shadow: 0 0 0 ${(props) => props.isSelected ? `3px` : 0} #fff;
   transform: ${(props) => props.isSelected ? "scale(1.15)" : "scale(1)"};
+  transition: all .1s;
 `
 
 const MarkdownContainer = styled.div<{
@@ -152,6 +156,7 @@ export default function Market() {
                 key={idx}
                 isSelected={nft?.address === item.address}
                 imgUrl={item.imageUrl}
+                src={item.imageUrl}
                 onClick={() => {
                   setNft(item)
                 }}
@@ -184,6 +189,7 @@ export default function Market() {
               >{nft?.name}</Typography>
               <Popover content={"Verified On OpenSea"}>
                 <Icon
+                  hidden={params.address == undefined}
                   src={openseaValidIcon}
                   width={".24rem"}
                   height={".24rem"}/>
@@ -286,7 +292,7 @@ export default function Market() {
             gap={".05rem"}
             minWidth={"1.36rem"}>
             <Typography fontSize={".2rem"} color={"#000"} fontWeight={700}>{
-              nft && numberFormat(nft.realTotalSupply)
+              nft ? numberFormat(nft.realTotalSupply) : TextPlaceholder
             }</Typography>
             <Typography>Total</Typography>
           </Flex>
@@ -299,7 +305,7 @@ export default function Market() {
             gap={".05rem"}
             minWidth={"1.36rem"}>
             <Typography fontSize={".2rem"} color={"#000"} fontWeight={700}>{
-              nft && numberFormat(nft.totalShelves)
+              nft ? numberFormat(nft.totalShelves) : TextPlaceholder
             }</Typography>
             <Typography>Listed Items</Typography>
           </Flex>
