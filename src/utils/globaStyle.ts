@@ -39,6 +39,7 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
   .ant-select-reset {
+    font-size: .14rem;
     background-color: #fff;
     color: rgba(0, 0, 0, .5);
     border: 1px solid rgba(0, 0, 0, .2);
@@ -59,6 +60,9 @@ export const GlobalStyle = createGlobalStyle`
     .ant-select-item {
       text-align: left;
       color: rgba(0, 0, 0, .5);
+      font-size: .14rem;
+      padding: .05rem .12rem;
+      transition: all 0s;
     }
   }
   .ant-input-reset {    
@@ -132,7 +136,7 @@ export const GlobalStyle = createGlobalStyle`
         border-bottom-left-radius: 10px;
       }
       .ant-table-column-sorters {
-        justify-content: center;
+        justify-content: left;
         .ant-table-column-title {
           flex: none;
         }
@@ -148,17 +152,17 @@ export const GlobalStyle = createGlobalStyle`
           background: #000;
         }
         th:first-child {
-          width: 1.7rem;
+          width: 1.8rem;
         }
         th:nth-child(2) {
-          width: 3.6rem;
+          width: 4rem;
         }
         th {
           color: #fff;
           border-bottom: none;
           background-color: #000;
           height: .68rem;
-          width: 2.666rem;
+          width: 2.566rem;
           padding: .16rem;
         }
         th:last-child {
@@ -174,13 +178,13 @@ export const GlobalStyle = createGlobalStyle`
       border-radius: 10px;
       display: grid;
       &>tr td:first-child {
-        width: 1.7rem;
+        width: 1.8rem;
         border-top-left-radius: 10px;
         border-bottom-left-radius: 10px;
         /* border-left: 1px solid rgba(255,255,255,.2); */
       }
       &>tr td:nth-child(2) {
-        width: 3.6rem;
+        width: 4rem;
       }
       &>tr td:last-child {
         /* border-right: 1px solid rgba(255,255,255,.2); */
@@ -203,13 +207,13 @@ export const GlobalStyle = createGlobalStyle`
           transition: all 0s;
           /* border-top: 1px solid rgba(255,255,255,.2); */
           height: 1rem;
-          width: 2.666rem;
+          width: 2.566rem;
         }
         &>.ant-table-cell {
           background: rgba(255, 255, 255, .03);
           .descend {
             display: flex;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
             &>div:nth-child(1) {
               align-self: start;

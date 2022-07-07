@@ -5,7 +5,11 @@ import navRewardsIcon from 'assets/images/dashboard/navRewardsIcon.png'
 import navActiveAirdopIcon from 'assets/images/dashboard/navActiveAirdopIcon.png'
 import navActiveVaultsIcon from 'assets/images/dashboard/navActiveVaultsIcon.png'
 import navActiveRewardsIcon from 'assets/images/dashboard/navActiveRewardsIcon.png'
-
+import airdropBAYC from 'assets/images/dashboard/airdropBAYC.png'
+import airdropCoin from 'assets/images/dashboard/airdropCoin.png'
+import airdropMAWS from 'assets/images/dashboard/airdropMAWS.png'
+import airdropDooles from 'assets/images/dashboard/airdropDooles.jpg'
+import exportIcon from "assets/images/dashboard/export14.png"
 export const NavList = [
   {
     icon: navVaultsIcon,
@@ -132,3 +136,34 @@ export const aa = {
     ]
   }
 }
+
+export const airdropProject = [
+  {
+    actions: "Claim",
+    address: "0x34d85c9CDeB23FA97cb08333b511ac86E1C4E258",
+    project: "Yuga Otherdeeds",
+    icon: airdropBAYC,
+    exportIcon
+  },
+  {
+    actions: "Claim",
+    address: "0x025C6da5BD0e6A5dd1350fda9e3B6a614B205a1F",
+    project: "Ape Coin",
+    icon: airdropCoin,
+    exportIcon
+  },
+  {
+    actions: "Claim",
+    address: "0x60E4d786628Fea6478F785A6d7e704777c86a7c6",
+    project: "Mutant Ape With Serum",
+    icon: airdropMAWS,
+    exportIcon
+  },
+  {
+    actions: "Claim",
+    address: "0x466CFcD0525189b573E794F554b8A751279213Ac",
+    project: "Doodles Dooplicator",
+    icon: airdropDooles,
+    exportIcon
+  }
+]

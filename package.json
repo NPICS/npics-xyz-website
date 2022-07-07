@@ -1,7 +1,7 @@
 {
   "name": "untitled",
   "version": "0.1.0",
-  "proxy": "http://16.162.44.108:18094/",
+  "proxy": "http://16.162.44.108:19094/",
   "private": true,
   "dependencies": {
     "@popperjs/core": "^2.11.5",

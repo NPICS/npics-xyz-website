@@ -62,7 +62,7 @@ const AntdSelect = styled(Select)`
     font-weight: 500;
     font-size: .14rem;
     transition: all 0s !important;
-    min-width: 2.2rem;
+    min-width: 2.4rem;
     min-height: .5rem;
     padding: 0 .23rem !important;
     border: 1px solid rgba(0, 0, 0, 0.2) !important;

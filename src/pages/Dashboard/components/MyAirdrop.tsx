@@ -161,7 +161,7 @@ function MyAirdrop () {
     setIsContract(!isContract)
   }
 
-  return true ? <h2 style={{ "color": "#fff", "margin": ".16rem 0 0 .08rem" }}>Coming soon</h2> : <>
+  return <>
     <MyAidrop>
       My Airdrop
     </MyAidrop>

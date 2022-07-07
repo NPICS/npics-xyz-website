@@ -108,7 +108,7 @@ export default function MyTable() {
       title: '24H Vol',
       dataIndex: 'dayVolume',
       key: 'dayVolume',
-      align: 'center',
+      align: 'left',
       defaultSortOrder: 'descend',
       sorter: (a, b) => {
         return +a.dayVolume.toNumber() - +b.dayVolume.toNumber()
@@ -126,10 +126,10 @@ export default function MyTable() {
       title: 'Floor Price',
       dataIndex: 'floorPrice',
       key: 'floorPrice',
-      align: 'center',
+      align: 'left',
       // defaultSortOrder: 'descend',
       sorter: (a, b) => a.floorPrice - b.floorPrice,
-      render: (text) => <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+      render: (text) => <div style={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center'}}>
         <img src={imgurl.whitePrice} alt=""  style={{marginRight: ".1rem"}}/>
         <span>{text}</span>
       </div>
@@ -137,7 +137,7 @@ export default function MyTable() {
     {
       title: 'Down Payment ( % )',
       dataIndex: 'advanceRate',
-      align: 'center',
+      align: 'left',
       key: 'advanceRate',
       // defaultSortOrder: 'descend',
       sorter: (a, b) => a.advanceRate - b.advanceRate,
@@ -147,10 +147,10 @@ export default function MyTable() {
       title: 'Down Payment',
       dataIndex: 'primePrice',
       key: 'primePrice',
-      align: 'center',
+      align: 'left',
       // defaultSortOrder: 'descend',
       sorter: (a, b) => a.floorPrice - b.floorPrice,
-      render: (text) => <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+      render: (text) => <div style={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center'}}>
         <img src={imgurl.redPrice} alt="" style={{marginRight: ".1rem"}}/>
         <span>{text}</span>
       </div>
