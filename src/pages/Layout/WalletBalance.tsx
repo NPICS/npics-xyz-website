@@ -65,7 +65,7 @@ export default function WalletBalance () {
 
   const getBalance = async () => {
     if (!account || !provider) {
-      message.error('account is undefined')
+      // message.error('account is undefined')
       return
     }
     const balance = provider.getBalance(account)

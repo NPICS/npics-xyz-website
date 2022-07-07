@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
+import defaultAvatar from 'assets/images/home/defaultAvatar.svg'
+import login from 'assets/images/home/login.svg'
 import { imgurl } from 'utils/globalimport';
 import { notification, Popover, message } from 'antd';
 import { useWeb3React } from '@web3-react/core';
@@ -15,6 +17,8 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { Flex, Icon, Typography, Box } from 'component/Box';
 import styled from 'styled-components';
 import { injected } from 'connectors/hooks';
+
+
 
 const StyledtWallet = styled(Flex)`
   cursor: pointer;
@@ -307,12 +311,24 @@ function XHeader() {
             width='.34rem'
             height='.34rem'
             id="baseAccount"
-            style={{ position: 'relative', cursor: 'pointer' }}
+            style={{ cursor: 'pointer' }}
             onClick={walletPop}
           >
-            {account ?
-              <Icon width='.34rem' height='.34rem' src={imgurl.home.defaultAvatar} /> :
-              <Icon width='.14rem' height='.16rem' src={imgurl.home.login} />}
+            {/* <Icon width={`${account ? '.34rem' : '.14rem' } `} height={`${account ? '.34rem' : '.16rem' } `} src={account ? defaultAvatar : login} /> */}
+            {
+              account ?
+              <Icon width='.34rem' height='.34rem' src={defaultAvatar} /> :
+              <Flex 
+                alignItems='center'
+                justifyContent='center'
+                width='.34rem'
+                height='.34rem'
+                borderRadius="10px"
+              >
+                <Icon width='.14rem' height='.16rem' src={login} />
+              </Flex>
+            }
+
           </Flex>
           <Popover
             content={AccountHTML}
