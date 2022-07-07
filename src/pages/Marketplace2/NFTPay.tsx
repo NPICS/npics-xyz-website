@@ -123,7 +123,10 @@ export default function NFTPay(props: {
   nft: CollectionDetail
   availableBorrow: BigNumber
   actualAmount: BigNumber
-  dismiss?(): void
+  progressBlock?(): void
+  resultBlock?(result: boolean, hash?: string): void
+  cancelBlock?(): void
+  // dismiss?(): void
 }) {
   const [payType, setPayType] = useState<PayType>(PayType.ETH) //< default selected eth
   const [ethBalance, setETHBalance] = useState<BigNumber>()
@@ -132,14 +135,8 @@ export default function NFTPay(props: {
   const [userSelectedAmount, setUserSelectedAmount] = useState<BigNumber>(new BigNumber(0))
   const [ethAndWETHAmount, setEthAndWETHAmount] = useState<[BigNumber, BigNumber]>([new BigNumber(0), new BigNumber(0)])
   const [canBuy, setCanBuy] = useState<boolean>(false)
-  const [hash, setHash] = useState<string>()
+
   const [didReadService, setDidReadService] = useState(false)
-  // progressing popup
-  const [progressingPopupOpen, setProgressingPopupOpen] = useState(false)
-  // success popup
-  const [successPopupOpen, setSuccessPopupOpen] = useState(false)
-  // failed popup
-  const [failedPopupOpen, setFailedPopupOpen] = useState(false)
 
   useAsync(async () => {
     if (account && provider) {
@@ -204,16 +201,7 @@ export default function NFTPay(props: {
     console.log(`${userSelectedAmount.toFixed()}`)
   }, [userSelectedAmount, ethAndWETHAmount, props.actualAmount])
 
-  useAsync(async () => {
-    if (hash && props.nft) {
-      await http.myPost(`/npics-nft/app-api/v2/neo/commitNeo`, {
-        hash: hash,
-        nftAddress: props.nft.address,
-        tokenId: props.nft.tokenId,
-        userAddress: account
-      })
-    }
-  }, [hash])
+
 
   async function checkoutBtnClick() {
     if (!provider) return
@@ -240,14 +228,16 @@ export default function NFTPay(props: {
         return
       }
       // show progressing
-      setProgressingPopupOpen(true)
-      props.dismiss?.()
+      // setProgressingPopupOpen(true)
+      // props.dismiss?.()
       // get transaction data
+      props.progressBlock?.()
       let data = await getTradeDetailData()
       if (!data) {
         message.error("item has been sold")
-        setProgressingPopupOpen(false)
-        props.dismiss?.()
+        // setProgressingPopupOpen(false)
+        // props.dismiss?.()
+        props.resultBlock?.(false)
         return
       }
       /// call contract
@@ -271,13 +261,16 @@ export default function NFTPay(props: {
       } else {
         tx = await c.downPayWithETH(contractParams)
       }
-      setHash(tx.hash)
-      setProgressingPopupOpen(false)
-      setSuccessPopupOpen(true)
+      // setHash(tx.hash)
+      // props.resultBlock?.(true)
+      props.resultBlock?.(true, tx.hash)
+      // setProgressingPopupOpen(false)
+      // setSuccessPopupOpen(true)
     } catch (e: any) {
+      props.resultBlock?.(false)
       notification.error({message: e.message})
-      setProgressingPopupOpen(false)
-      setFailedPopupOpen(true)
+      // setProgressingPopupOpen(false)
+      // setFailedPopupOpen(true)
     }
   }
 
@@ -315,26 +308,7 @@ export default function NFTPay(props: {
     padding={".4rem"}
     flexDirection={"column"}
   >
-    {/* popup loading */}
-    <Modal isOpen={progressingPopupOpen}>
-      {props.nft && <NFTPayProgressing nft={props.nft}/>}
-    </Modal>
-    {/* popup success ✅ */}
-    <Modal isOpen={successPopupOpen} onRequestClose={() => {
-      setSuccessPopupOpen(false)
-      props.dismiss?.() // success dismiss all popup
-    }}>
-      {props.nft && hash ? <NFTPayCongratulations hash={hash} nft={props.nft!} dismiss={() => {
-        setSuccessPopupOpen(false)
-        props.dismiss?.()
-      }}/> : null}
-    </Modal>
-    {/* popup failed ❌ */}
-    <Modal isOpen={failedPopupOpen}>
-      <NFTPayWrong back={() => {
-        setFailedPopupOpen(false)
-      }}/>
-    </Modal>
+
 
     {/* title */}
     <PopupTitle title={"Complete Checkout"} canClose={true}></PopupTitle>
@@ -493,7 +467,7 @@ export default function NFTPay(props: {
       </label>
     </Box>
     <Flex alignItems={"center"} justifyContent={"center"} gap={".2rem"} marginTop={".4rem"}>
-      <CancelButton type={"button"} onClick={() => props.dismiss?.()}>Cancel</CancelButton>
+      <CancelButton type={"button"} onClick={() => props.cancelBlock?.()}>Cancel</CancelButton>
       <ConfirmButton
         type={"button"}
         onClick={checkoutBtnClick}

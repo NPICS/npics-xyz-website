@@ -83,7 +83,6 @@ const Icon = styled.img<IconProps>`
   display: inline-block;
   overflow: hidden;
   user-select: none;
-  //pointer-events: none;
   width: ${props => props.width};
   height: ${props => props.height ?? "auto"};
   object-fit: contain;

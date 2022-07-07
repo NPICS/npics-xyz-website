@@ -28,6 +28,9 @@ import {simpleRpcProvider} from "../../utils/rpcUrl";
 import {useAsync} from "react-use";
 import {injected} from "../../connectors/hooks";
 import {TextPlaceholder} from "../../component/styled";
+import NFTPayProgressing from "./NFTPayProgressing";
+import NFTPayCongratulations from "./NFTPayCongratulations";
+import NFTPayWrong from "./NFTPayWrong";
 
 const Shadow = styled(Flex)`
   background: #fff;
@@ -126,6 +129,13 @@ export default function NFTPrice(props: {
   const [actualAmount, setActualAmount] = useState<BigNumber>()
   const navigate = useNavigate()
   const {account, provider, connector} = useWeb3React()
+  // progressing popup
+  const [progressingPopupOpen, setProgressingPopupOpen] = useState(false)
+  // success popup
+  const [successPopupOpen, setSuccessPopupOpen] = useState(false)
+  // failed popup
+  const [failedPopupOpen, setFailedPopupOpen] = useState(false)
+  const [hash, setHash] = useState<string>()
 
   const [buyPopOpen, setBuyPopOpen] = useState<boolean>(false)
 
@@ -150,7 +160,8 @@ export default function NFTPrice(props: {
         listData.splice(0, listData.length - 6) ///< max 6
         setRecommendNFTs(listData)
         setRecommendNFTTotal(resp.data.total)
-      } else {}
+      } else {
+      }
     }
   }, [props.item])
 
@@ -169,35 +180,20 @@ export default function NFTPrice(props: {
     }
   }, [props.item, availableBorrow])
 
+  useAsync(async () => {
+    if (hash && props.item && account) {
+      await http.myPost(`/npics-nft/app-api/v2/neo/commitNeo`, {
+        hash: hash,
+        nftAddress: props.item.address,
+        tokenId: props.item.tokenId,
+        userAddress: account
+      })
+    }
+  }, [hash])
+
   async function buyClick() {
     try {
-      // TODO: Error Toast
-      // if (error) {
-      //     console.log('error',error)
-      //     const _error = JSON.parse(JSON.stringify(error))
-      //     if (_error.name === "UnsupportedChainIdError") {
-      //         sessionStorage.removeItem(SessionStorageKey.WalletAuthorized)
-      //         action(fetchUser(`{}`))
-      //         notification.error({ message: "Prompt connection failed, please use the Ethereum network" })
-      //     } else {
-      //         notification.error({ message: "Please authorize to access your account" })
-      //     }
-      //     return
-      // }
-
       if (!account) {
-        // TODO: connect wallet
-        // await activate(connectors.injected, (error) => {
-        //     const _error = JSON.parse(JSON.stringify(error))
-        //     if (_error.name === "UnsupportedChainIdError") {
-        //         sessionStorage.removeItem(SessionStorageKey.WalletAuthorized)
-        //         action(fetchUser(`{}`))
-        //         notification.error({message: "Prompt connection failed, please use the Ethereum network"})
-        //     } else {
-        //         notification.error({message: "Please authorize to access your account"})
-        //     }
-        // })
-        // await connector.activate()
         await injected.activate(1)
       }
       // refresh detail data
@@ -206,7 +202,7 @@ export default function NFTPrice(props: {
       if (props.item && availableBorrow) {
         setBuyPopOpen(true)
       }
-    } catch (e:any) {
+    } catch (e: any) {
       message.error(`${e.message}`)
     }
   }
@@ -218,13 +214,50 @@ export default function NFTPrice(props: {
         nft={props.item!}
         availableBorrow={availableBorrow!}
         actualAmount={actualAmount!}
-        dismiss={() => setBuyPopOpen(false)}
+        progressBlock={() => {
+          setProgressingPopupOpen(true)
+          setBuyPopOpen(false)
+        }}
+        resultBlock={(success, hash) => {
+          setProgressingPopupOpen(false)
+          if (success) {
+            setSuccessPopupOpen(true)
+            setHash(hash)
+          } else {
+            setFailedPopupOpen(true)
+          }
+        }}
+        cancelBlock={() => {
+          setBuyPopOpen(false)
+        }}
       />
     </Modal>
+
+    {/* popup loading */}
+    <Modal isOpen={progressingPopupOpen}>
+      {props.item && <NFTPayProgressing nft={props.item}/>}
+    </Modal>
+
+    {/* popup success ✅ */}
+    <Modal isOpen={successPopupOpen} onRequestClose={() => {
+      setSuccessPopupOpen(false)
+    }}>
+      {props.item && hash ? <NFTPayCongratulations hash={hash} nft={props.item!} dismiss={() => {
+        setSuccessPopupOpen(false)
+      }}/> : null}
+    </Modal>
+
+    {/* popup failed ❌ */}
+    <Modal isOpen={failedPopupOpen}>
+      <NFTPayWrong back={() => {
+        setFailedPopupOpen(false)
+      }}/>
+    </Modal>
+
     <Flex gap={".1rem"}>
       {/* origin price */}
       <Shadow>
-        <Popover 
+        <Popover
           overlayClassName="ant-popover-reset"
           content={listedPricePop}>
           <TipsIcon width={".14rem"} src={tipsIcon}/>
@@ -261,7 +294,13 @@ export default function NFTPrice(props: {
         </Flex>
         <Flex style={{cursor: 'pointer'}} alignItems={"center"} gap={".1rem"}
               onClick={() => window.open(`${props.item?.marketUrl}`)}>
-          <Icon width={".22rem"} height={".22rem"} borderRadius={".11rem"} src={props.item?.marketIcon()}/>
+          <Box
+            borderRadius={".11rem"}
+            overflow={"hidden"}
+          >
+            <Icon width={".22rem"} height={".22rem"} src={props.item?.marketIcon()}/>
+          </Box>
+
           <Typography
             fontSize={".14rem"}
             fontWeight={500}
@@ -272,7 +311,8 @@ export default function NFTPrice(props: {
       {/* Vault Apr */}
       <Shadow>
         {/* <Popover content={vaultApr({rewardAPR:123,interestAPR:321})}>     */}
-        <Popover overlayClassName="ant-popover-reset" content={VaultAprPop({rewardAPR: (rewardsAPR ?? 0), interestAPR: ((interestAPR ?? 0) / 100)})}>
+        <Popover overlayClassName="ant-popover-reset"
+                 content={VaultAprPop({rewardAPR: (rewardsAPR ?? 0), interestAPR: ((interestAPR ?? 0) / 100)})}>
           <TipsIcon width={".14rem"} src={tipsIcon}/>
         </Popover>
         <Typography
@@ -322,7 +362,7 @@ export default function NFTPrice(props: {
       flexDirection={"column"}
       alignItems={"start"}
     >
-      <Popover 
+      <Popover
         overlayClassName="ant-popover-reset"
         content={DownPaymentPop({listedPrice: props.item?.currentBasePrice, loanAmount: availableBorrow})}>
         <TipsIcon width={".14rem"} src={tipsIcon}/>

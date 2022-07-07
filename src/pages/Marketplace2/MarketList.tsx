@@ -22,6 +22,7 @@ import ContentLoader from "react-content-loader"
 import {useAsync} from "react-use";
 import BigNumber from "bignumber.js";
 import SkeletonTemplate from "component/SkeletonTemplate";
+import progressIcon from "../../assets/images/market/nft_pay_progressing.gif"
 
 const {Option} = Select;
 
@@ -74,6 +75,12 @@ const AntdSelect = styled(Select)`
     }
   }
 `
+
+const Loading = () => {
+  return <Flex alignItems={"center"} justifyContent={"center"}>
+    <Icon src={progressIcon} width={"1.6rem"} height={"1.6rem"}></Icon>
+  </Flex>
+}
 
 export default function MarketList() {
 
@@ -200,7 +207,7 @@ export default function MarketList() {
                 }
               }}
               hasMore={listData.length < total}
-              loader={<div></div>}
+              loader={<Loading />}
               initialLoad={false}>
               <Grid
                 padding={".25rem .4rem"}
