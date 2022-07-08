@@ -26,6 +26,8 @@ function Home() {
   const [textContent, setTextContent] = useState<string>('')
   const [progress, setProgress] = useState<string>("0%");
   const [timer, setTimer] = useState<NodeJS.Timeout>();
+  const [isHover, setIsHover] = useState<boolean>(false);
+  const [debounceTime, setDebounceTime] = useState<NodeJS.Timeout>();
   const [aprData, setAprData] = useState<{ apr: number, rewardApr: number }>({ apr: 0, rewardApr: 0 })
 
   const PartnerData = [
@@ -64,18 +66,20 @@ function Home() {
   }
 
   useEffect(() => {
-    let timer;
-    const startSwiper = () => {
-      timer = setTimeout(() => {
-        if (checkText === 3) {
-          setCheckText(1);
-        } else {
-          setCheckText(checkText + 1);
-        }
-      }, 3000)
-      setTimer(timer)
+    let startTimer;
+    if (!isHover) {
+      const startSwiper = () => {
+        startTimer = setTimeout(() => {
+          if (checkText === 3) {
+            setCheckText(1);
+          } else {
+            setCheckText(checkText + 1);
+          }
+        }, 5000)
+        setTimer(startTimer)
+      }
+      startSwiper();
     }
-    startSwiper();
     switch (checkText) {
       case 1:
         setTextContent('Without tedious comparisons, Npics delivers all vaild listings among NFT markets and executes each transaction at the best price and optimal financing.');
@@ -93,25 +97,6 @@ function Home() {
         break;
     }
   }, [checkText])
-
-  // useEffect(() => {
-  //   let timer;
-  //   const startSwiper = () => {
-  //     timer = setTimeout(() => {
-  //       if (selected + 1 === 3) {
-  //         setSelected(0);
-  //       } else {
-  //         setSelected(selected + 1);
-  //       }
-  //     }, 3000)
-  //     setTimer(timer)
-  //   }
-  //   startSwiper();
-  // }, [selected])
-  useEffect(() => {
-    return clearTimeout(timer);
-  }, [])
-
   useEffect(() => {
     // get thw arp
     http.myPost("/npics-nft/app-api/v2/nfthome/getAprInfo", {}).then((resp) => {
@@ -123,7 +108,24 @@ function Home() {
         })
       }
     })
+    return clearTimeout(timer);
   }, []);
+
+  const mouseEnter = () => {
+    clearTimeout(timer);
+    setIsHover(true);
+  }
+  const mouseLeave = () => {
+    setIsHover(false)
+    setTimeout(() => {
+      if (checkText === 3) {
+        setCheckText(1);
+      } else {
+        setCheckText(checkText + 1);
+      }
+    }, 5000)
+  }
+
 
   return (
     <HomeWrap>
@@ -163,7 +165,7 @@ function Home() {
       </DetailBox>
 
       <BorrowBox>
-        <div className='borrow_left'>
+        <div className='borrow_left' onMouseEnter={mouseEnter} onMouseLeave={mouseLeave}>
           <div className='borrow_title'>
             Using Npics Leverage to borrow money to buy will get an unexpected earnings.
           </div>
@@ -235,7 +237,7 @@ function Home() {
 
       <Partners>
         <div className='title'>
-          Our Partnners & Ecosystem
+          Our Partners & Ecosystem
         </div>
 
         <div className='partnerGroup'>

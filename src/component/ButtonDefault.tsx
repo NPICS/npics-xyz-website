@@ -19,34 +19,35 @@ interface Iprops {
 
 const StyledButton = styled.button<Iprops>`
   &:hover {
-    background: ${(props => props.types === 'normal'? "#333333" : '')};
-    background: ${(props => props.types === 'second'? "#FFFFFF" : '')};
-    box-shadow: ${(props => props.types === 'second'? "0px 0px 20px rgba(0, 0, 0, 0.1)" : '')};
-    border: ${(props => props.types === 'second'? "0" : '')};
+    background: ${(props => props.types === 'normal' ? "#333333" : '')};
+    background: ${(props => props.types === 'second' ? "#FFFFFF" : '')};
+    background: ${(props => props.types === 'two' ? "#333" : '')};
+    box-shadow: ${(props => props.types === 'second' ? "0px 0px 20px rgba(0, 0, 0, 0.1)" : '')};
+    border: ${(props => props.types === 'second' ? "0" : '')};
     transform: ${(props => props.disabled ? '' : props.scale ? 'scale(1.06)' : '')};
   }
   transition: all .2s;
   &:disabled {
-    border: ${(props => props.types === 'second'? "0" : '')};
-    box-shadow: ${(props => props.types === 'second'? "none" : '')};
-    background-color: ${(props => props.types === 'normal'? "rgba(204,204,204)" : '#fff')};
+    border: ${(props => props.types === 'second' ? "0" : '')};
+    box-shadow: ${(props => props.types === 'second' ? "none" : '')};
+    background-color: ${(props => props.types === 'normal' ? "rgba(204,204,204)" : '#fff')};
   }
   background: ${(props => {
-     switch (props.types) {
+    switch (props.types) {
       case 'one':
-       return 'rgba(255,255,255,.1)';
+        return 'rgba(255,255,255,.1)';
       case 'two':
-       return 'transparent';
+        return 'transparent';
       case 'three':
-       return 'linear-gradient(284.2deg, #FF0000 0%, #FEB240 101.06%);';
+        return 'linear-gradient(284.2deg, #FF0000 0%, #FEB240 101.06%);';
       case 'four':
-       return 'rgba(255, 255, 255, 1)';
+        return 'rgba(255, 255, 255, 1)';
       case 'disabled':
-       return '#999';
+        return '#999';
       case 'normal':
-       return '#000';
+        return '#000';
       case 'second':
-       return '#fff';
+        return '#fff';
       default:
         return null;
     }
@@ -56,7 +57,7 @@ const StyledButton = styled.button<Iprops>`
       case 'one':
         return '0';
       case 'two':
-        return '.02rem solid rgba(255,255,255,.2)';
+        return '.02rem solid rgba(255,255,255,1)';
       case 'three':
         return '0';
       case 'four':
@@ -84,8 +85,8 @@ const StyledButton = styled.button<Iprops>`
         return null;
     }
   })};
-  background: ${(props => props.disabled ?  props.types === 'normal'? 'rgba(204,204,204)' : "#fff" : '')};
-  color: ${(props => props.disabled ?  props.types === 'normal'? '#fff' : "rgba(0,0,0,.5)" : '')};
+  background: ${(props => props.disabled ? props.types === 'normal' ? 'rgba(204,204,204)' : "#fff" : '')};
+  color: ${(props => props.disabled ? props.types === 'normal' ? '#fff' : "rgba(0,0,0,.5)" : '')};
   min-width: ${(props => props.minWidth)};
   height: ${(props => props.height)};
   font-size: ${(props => props.fontSize)};
@@ -99,19 +100,19 @@ const StyledButton = styled.button<Iprops>`
   ${flex}
 `
 
-function ButtonDefault(props:Iprops) {
+function ButtonDefault(props: Iprops) {
 
   const onClick = () => {
-    if(props.disabled) return
+    if (props.disabled) return
     return props.onClick()
   }
 
-  return (<StyledButton 
+  return (<StyledButton
     {...props}
     onClick={onClick}
     disabled={props.disabled}
   >
-      {props.children}
+    {props.children}
   </StyledButton>
   );
 }
@@ -126,5 +127,5 @@ ButtonDefault.defaultProps = {
   // color: '#fff',
   disabled: false,
 }
- 
+
 export default ButtonDefault

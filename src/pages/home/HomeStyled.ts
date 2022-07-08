@@ -419,9 +419,10 @@ export const BorrowBox = styled.div`
     .borrow_title{
     font-size: 0.25rem;
     width: 5.9rem;
-    margin-bottom: 0.83rem;
+    margin-bottom: 0.53rem;
   }
   .borrow_step{
+    padding-top: 0.3rem;
     .step_list{
       display: flex;
       justify-content: space-between;
@@ -540,7 +541,7 @@ export const StepProgress = styled.div`
       background: rgba(255,255,255,0.1);
       border-radius: 0.4rem;
       z-index: 2;
-      margin:0.28rem auto;
+      margin:0.18rem auto 0.28rem;
       &::before{
         content: "";
         position: absolute;
@@ -556,7 +557,12 @@ export const StepProgress = styled.div`
 `
 
 export const SliderChoose = styled.span`
-  font-size: .18rem;
+  display: block;
+  width: 3rem;
+  padding: 0.1rem;
+  text-align: center;
+  font-size: .16rem;
+  padding-left: 0.1rem;
   color: ${(props: { color: string }) => props.color};;
   cursor: pointer;
 
