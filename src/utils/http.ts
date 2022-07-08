@@ -91,7 +91,7 @@ export function myGet(url: any, param: any) {
 //                         resolve(resp.data)
 //                         break
 //                     case 4003:
-//                         /// token invalid, clear app state
+//                         /// token invalid, clear app updater
 //                         sessionStorage.removeItem(SessionStorageKey.AccessToken)
 //                         break
 //                 }

@@ -78,6 +78,8 @@ const MarkdownContainer = styled.div<{
   word-break: break-all;
   word-wrap: break-word;
   -webkit-box-orient: vertical;
+  font-size: .14rem;
+  font-weight: 500;
   //
   //p {
   //  margin: .06rem 0;

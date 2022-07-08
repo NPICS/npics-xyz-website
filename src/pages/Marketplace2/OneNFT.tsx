@@ -33,7 +33,8 @@ function Label(props: {
     border={"1px solid #FFFFFF4D"}
     background={"#FFFFFF33"}
     style={{
-      "cursor": "pointer"
+      "cursor": "pointer",
+      "backdropFilter": "blur(10px)"
     }}
   >
     {props.icon && <Icon width={".2rem"} src={props.icon}/>}
@@ -41,7 +42,7 @@ function Label(props: {
       fontSize={".14rem"}
       fontWeight={500}
       color={"#fff"}
-    >{`${props.icon ? '' : '# '}${props.num}`}</Typography>
+    >{`${props.icon ? '' : '#'}${props.num}`}</Typography>
   </Flex>
 }
 

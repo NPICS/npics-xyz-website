@@ -15,6 +15,7 @@ export const GlobalStyle = createGlobalStyle`
     min-width: 1280px;
     font-family: 'Montserrat';
     line-height: normal;
+    font-size: .14rem;
   }
 
   .ant-selectDropDown-reset {

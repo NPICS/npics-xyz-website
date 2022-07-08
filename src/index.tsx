@@ -17,13 +17,14 @@ import {ethers} from "ethers"
 import {Web3ReactProvider} from "@web3-react/core"
 import {GlobalStyle} from 'utils/globaStyle'
 import Web3Provider from "./connectors/Web3Provider";
+import Updater from "./updater";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
 const StyledThemeProvider = (props: any) => {
-  // const isDark = useAppSelector(state => state.app.Theme.isDark)
+  // const isDark = useAppSelector(updater => updater.app.Theme.isDark)
   // Temporary solution 😅
   const history = useLocation()
   const [isHome, setIsHome] = useState<boolean>(true)
@@ -45,12 +46,14 @@ const web3GetLibrary = (provider: any) => {
   return library
 }
 
+
 root.render(
   <Provider store={store}>
     <Router>
       <StyledThemeProvider>
         {/*<Web3ReactProvider getLibrary={web3GetLibrary}>*/}
         <Web3Provider>
+          <Updater/>
           <GlobalStyle/>
           <App/>
         </Web3Provider>

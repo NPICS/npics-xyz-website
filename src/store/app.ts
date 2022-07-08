@@ -43,7 +43,7 @@ const initialState: IAppState = {
     EthPrice: ''
   },
   isLogin: false,
-  bendExchangeRate:''
+  bendExchangeRate: ''
 }
 
 export const fetchUser2 = createAsyncThunk("app/fetchUser2", async (args, ThunkAPI) => {
@@ -57,27 +57,36 @@ export const fetchUser2 = createAsyncThunk("app/fetchUser2", async (args, ThunkA
   }
 })
 
+/*
+* update ARP
+* */
 export const updateARP = createAsyncThunk("app/updateARP", async (args, thunkAPI) => {
   let resp: any = await http.myPost("/npics-nft/app-api/v2/nfthome/getAprInfo")
   return resp.code === 200 ? resp.data : undefined
 })
 
+/*
+* update ustd <=> eth rate
+* */
 export const updateUSDTExchangeRate = createAsyncThunk("app/updateUSDTExchangeRate", async (args, thunkAPI) => {
-    let resp: any = await http.myPost(`/npics-nft/app-api/v2/currencyPrice/getEthPrice`)
-    if (resp.code === 200 && resp.data) {
-      return resp.data as string
-    } else {
-      return undefined
-    }
+  let resp: any = await http.myPost(`/npics-nft/app-api/v2/currencyPrice/getEthPrice`)
+  if (resp.code === 200 && resp.data) {
+    return resp.data as string
+  } else {
+    return undefined
+  }
 })
 
+/*
+* update ustd <=> bend
+* */
 export const updateBENDExchangeRate = createAsyncThunk("app/updateBENDExchangeRate", async (args, thunkAPI) => {
-    let resp: any = await http.myPost(`/npics-nft/app-api/v2/currencyPrice/getBendPrice`)
-    if (resp.code === 200 && resp.data) {
-      return resp.data as string
-    } else {
-      return undefined
-    }
+  let resp: any = await http.myPost(`/npics-nft/app-api/v2/currencyPrice/getBendPrice`)
+  if (resp.code === 200 && resp.data) {
+    return resp.data as string
+  } else {
+    return undefined
+  }
 })
 
 const appSlice = createSlice({
@@ -105,8 +114,11 @@ const appSlice = createSlice({
     setEthPrice: (state, action) => {
       state.data.EthPrice = action.payload
     },
-    setIsLogin(state, action) {
-      state.isLogin = action.payload
+    /*
+    * local contain access token
+    * */
+    updateLoginState(state) {
+      state.isLogin = sessionStorage.getItem(SessionStorageKey.AccessToken) != null
     }
   },
   extraReducers: (builder) => {
@@ -151,7 +163,8 @@ export const {
   setIsShowConnect,
   setIsLoading,
   setEthPrice,
-  setIsLogin,
+  // setIsLogin,
+  updateLoginState,
   clearUserData
 } = appSlice.actions
 export default appSlice;

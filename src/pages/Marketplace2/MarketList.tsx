@@ -182,7 +182,7 @@ export default function MarketList() {
           <Option value="rarityScore">Rarity: Rarest to Common</Option>
         </AntdSelect>
         <Flex flex={1}></Flex>
-        <Flex flexDirection={"row"} alignItems={"center"} gap={".2rem"}>
+        <Flex flexDirection={"row"} alignItems={"center"} gap={".15rem"}>
           <Icon height={".24rem"} width={".24rem"} src={compactMode ? LooseUnselectIcon : LooseSelectIcon}
                 onClick={() => setCompactMode(false)}/>
           <Icon height={".24rem"} width={".24rem"} src={compactMode ? CompactSelectIcon : CompactUnselectIcon}

@@ -28,11 +28,6 @@ const connect = async (connector: Connector) => {
 
 export default function Web3Provider({children}: { children: ReactNode }) {
   const selectedWallet = useAppSelector(state => state.user.selectedWallet)
-  // const connectors: [Connector, Web3ReactHooks][] = [
-  //   [injected, injectedHooks],
-  //   [coinbase, coinbaseHooks],
-  //   [walletConnect, walletConnectHooks]
-  // ]
   const connectors = useConnectors(selectedWallet)
 
   useAsync(async () => {

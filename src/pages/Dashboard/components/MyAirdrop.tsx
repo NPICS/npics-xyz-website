@@ -16,13 +16,13 @@ const ContractAuthorization = styled.div`
   border-radius: 10px;
   margin-bottom: .3rem;
   .theme {
-    ${font2051}
+    ${font2051};
   }
   .describe {
-    ${font1465}
+    ${font1465};
   }
   .contract-btn {
-    ${font1661}
+    ${font1661};
     padding: .15rem .38rem;
     background: linear-gradient(284.2deg, #FF0000 0%, #FEB240 101.06%);
     border-radius: 10px;
@@ -62,11 +62,11 @@ const Project = styled.div`
       }
       span {
         margin-right: .1rem;
-        ${font1455}
+        ${font1455};
       }
     }
     .actions-btn {
-      ${font1461}
+      ${font1461};
       background: #000000;
       border: 1px solid rgba(255, 255, 255, .2);
       border-radius: 10px;
@@ -82,7 +82,7 @@ const Project = styled.div`
   }
 `
 const MyAidrop = styled.div`
-  ${font3081}
+  ${font3081};
   margin-bottom: .2rem;
 `
 

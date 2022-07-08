@@ -12,7 +12,7 @@ type Price = {
 
 export const compute = (value: CollectionDetail | undefined) => {
   if (!value) return
-  // const EthPrice = useAppSelector((state) => state.app.data.EthPrice)
+  // const EthPrice = useAppSelector((updater) => updater.app.data.EthPrice)
   let result: Price = {
     price: new BigNumber(0),
     loanFunds: new BigNumber(0),

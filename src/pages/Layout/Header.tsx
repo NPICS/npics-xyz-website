@@ -6,7 +6,7 @@ import { notification, Popover, message } from 'antd';
 import { useWeb3React } from '@web3-react/core';
 import { connectors } from "utils/connectors";
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { clearUserData, fetchUser, fetchUser2, setIsLogin, setIsShowConnect } from 'store/app';
+import { clearUserData, fetchUser, fetchUser2, setIsShowConnect } from 'store/app';
 import { FlexDiv, LogoLink, Nav } from './headerStyled';
 import WalletBalance from './WalletBalance';
 import { deserialize } from "class-transformer";
@@ -17,8 +17,6 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { Flex, Icon, Typography, Box } from 'component/Box';
 import styled from 'styled-components';
 import { injected } from 'connectors/hooks';
-
-
 
 const StyledtWallet = styled(Flex)`
   cursor: pointer;

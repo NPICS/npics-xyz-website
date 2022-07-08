@@ -7,7 +7,7 @@ import { ColumnsType } from 'antd/lib/table';
 import { LendPool } from 'abi/LendPool'
 import { useWeb3React } from '@web3-react/core';
 import { getSignMessage } from 'utils/sign';
-import { fetchUser, setIsLogin } from 'store/app';
+import {fetchUser, updateLoginState} from 'store/app';
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 import { connectors } from 'utils/connectors';
 import { SessionStorageKey } from 'utils/enums';
@@ -262,8 +262,9 @@ function VaultsTable(props: IProps) {
         "signature": signatureMsg
       })
       if (loginRep.code === 200) {
-        sessionStorage.setItem("ACCESS_TOKEN", loginRep.data)
-        action(setIsLogin(true))
+        sessionStorage.setItem(SessionStorageKey.AccessToken, loginRep.data)
+        // action(setIsLogin(true))
+        action(updateLoginState())
       } else {
         message.warning('Signing failed')
       }

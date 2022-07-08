@@ -8,7 +8,7 @@ import {useWeb3React} from '@web3-react/core';
 import {LendPool} from 'abi/LendPool';
 import {notification, message, Popover, InputNumber} from 'antd';
 import BigNumber from 'bignumber.js';
-import {fetchUser, setIsLogin} from 'store/app';
+import {fetchUser, updateLoginState} from 'store/app';
 import {SessionStorageKey} from 'utils/enums';
 import http from 'utils/http';
 import {getSignMessage} from 'utils/sign';
@@ -252,8 +252,9 @@ export default function VaultsDetail() {
         "signature": signatureMsg
       })
       if (loginRep.code === 200) {
-        sessionStorage.setItem("ACCESS_TOKEN", loginRep.data)
-        action(setIsLogin(true))
+        sessionStorage.setItem(SessionStorageKey.AccessToken, loginRep.data)
+        action(updateLoginState())
+        // action(setIsLogin(true))
       } else {
         message.warning('Signing failed')
       }

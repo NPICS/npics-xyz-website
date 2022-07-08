@@ -59,7 +59,9 @@ export default function MyAirdop() {
     padding={".4rem .6rem"}
   >
     <Typography fontSize={".3rem"} fontWeight={800} color={'#000'} marginBottom=".3rem">NPics Airdrop</Typography>
-    <Typography fontSize={".16rem"} fontWeight={500} color={'rgba(0,0,0,.5)'} marginBottom={".5rem"}>Participate in the down payment loan to buy NFT and earn double rewards</Typography>
+    <Typography fontSize={".16rem"} fontWeight={500} color={'rgba(0,0,0,.5)'} marginBottom={".5rem"}>
+      Holding NEO NFTs entitles you to claim airdrop rewards for NFT assets in your vault on the protocol.
+    </Typography>
     
     <Box
       background={"rgba(255,255,255,.03)"}

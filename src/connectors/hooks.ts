@@ -61,6 +61,8 @@ export enum Wallet {
 
 export const WALLETS = [Wallet.COINBASE_WALLET, Wallet.WALLET_CONNECT, Wallet.INJECTED]
 
+export const CHAIN_ID = 1
+
 export function getWalletForConnector(connector: Connector) {
   switch (connector) {
     case injected:

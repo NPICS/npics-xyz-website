@@ -120,7 +120,7 @@ export default function NFTPrice(props: {
   const action = useAppDispatch()
   const ethRate = useAppSelector(state => new BigNumber(state.app.data.EthPrice))
   const vaultAPR = useAppSelector(state => (state.app.rewardsAPR ?? 0) - (state.app.interestAPR ?? 0) / 100)
-  // const state = useAppSelector(state => state.app)
+  // const updater = useAppSelector(updater => updater.app)
   const rewardsAPR = useAppSelector(state => state.app.rewardsAPR)
   const interestAPR = useAppSelector(state => state.app.interestAPR)
   const [recommendNFTs, setRecommendNFTs] = useState<CollectionItems[]>([]) // max is 6

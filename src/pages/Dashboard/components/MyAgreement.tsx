@@ -12,7 +12,7 @@ import { LendPool } from 'abi/LendPool'
 import { useWeb3React } from '@web3-react/core';
 import { useEthPrice, useUpdateEffect } from 'utils/hook';
 import { getSignMessage } from 'utils/sign';
-import { fetchUser, setIsLogin } from 'store/app';
+import { fetchUser } from 'store/app';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { connectors } from 'utils/connectors';
 import { SessionStorageKey } from 'utils/enums';
@@ -106,7 +106,7 @@ function MyAgreement() {
   const [sortedInfo, setSortedInfo] = useState("All")
   const DollarDebt = useEthPrice(totalDebt)
   const action = useAppDispatch()
-  // const currentUser = useAppSelector(state => deserialize(User, state.app.currentUser))
+  // const currentUser = useAppSelector(updater => deserialize(User, updater.app.currentUser))
   const isLogin = useAppSelector(state => state.app.isLogin)
   const DebtPosition = useRef<DataSource[]>()
   const columns: ColumnsType<DataSource> = [
