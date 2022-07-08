@@ -6,7 +6,7 @@ import ButtonDefault from "component/ButtonDefault";
 import { message, notification } from 'antd';
 import { useAsync } from "react-use";
 import { useWeb3React } from "@web3-react/core";
-import {Erc20} from "abi/Erc20";
+import {Erc20} from "abis/Erc20";
 import { injected } from "connectors/hooks";
 import { deserializeArray } from "class-transformer";
 export default function MyAirdop() {

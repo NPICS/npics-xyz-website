@@ -4,8 +4,8 @@ import {CollectionDetail} from "../../model/user";
 import {AddressAbbreviation} from "../marketplace/components/utils";
 import addressLinkIcon from "../../assets/images/market/address_link.png"
 import {useEffect, useState} from "react";
-import {Npics} from "../../abi/Npics";
-import {Erc721} from "../../abi/Erc721";
+import {Npics} from "../../abis/Npics";
+import {Erc721} from "../../abis/Erc721";
 import {ethers} from "ethers";
 import {urls} from "../../utils/urls";
 import titlePrefixIcon from "../../assets/images/market/info_block_title_prefix.png"
@@ -26,7 +26,10 @@ const Value = styled(Title)`
 export function AddressLink(props: {
     address?: string
 }) {
-    return <Popover content={"View on Etherscan"}><Flex
+    return <Popover
+      content={"View on Etherscan"}
+      overlayClassName="ant-popover-reset"
+    ><Flex
       alignItems={"center"}
       justifyContent={"end"}
       gap={".06rem"}

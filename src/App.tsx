@@ -18,11 +18,14 @@ import {notification} from 'antd';
 import {SessionStorageKey} from 'utils/enums';
 import {CHAIN_ID, injected} from 'connectors/hooks';
 import ContentLoader from "react-content-loader";
+import {useContract, useERC20Contract, useWETHContract} from "./hooks/useContract";
 
 function App() {
   const action = useAppDispatch()
   const {account} = useWeb3React()
   const oldAccount = useRef<string | undefined | null>()
+
+  const weth = useWETHContract()
 
   useEffect(() => {
     console.log(`Account Change => New: ${account}, Old: ${oldAccount.current}`)
@@ -61,9 +64,11 @@ function App() {
     oldAccount.current = account
   }, [account])
 
-  return <>
-    <Layout/>
-  </>;
+  useAsync(async () => {
+    // let tx = await weth?.callStatic.transfer(`0xf26D94d535107A5e0c5a24f6Ce3eDCc8352f01e2`, 0)
+  }, [])
+
+  return <Layout/>;
 }
 
 export default App;

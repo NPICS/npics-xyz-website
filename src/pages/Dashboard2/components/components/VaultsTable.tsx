@@ -4,7 +4,7 @@ import { imgurl } from 'utils/globalimport';
 import BigNumber from 'bignumber.js';
 import http from 'utils/http'
 import { ColumnsType } from 'antd/lib/table';
-import { LendPool } from 'abi/LendPool'
+import { LendPool } from 'abis/LendPool'
 import { useWeb3React } from '@web3-react/core';
 import { getSignMessage } from 'utils/sign';
 import {fetchUser, updateLoginState} from 'store/app';
@@ -21,7 +21,7 @@ import styled from 'styled-components';
 import ButtonDefault from 'component/ButtonDefault';
 import { thousandFormat } from "../../../../utils/urls";
 import { deserializeArray, plainToClass } from 'class-transformer';
-import { injected } from 'connectors/hooks';
+import {CHAIN_ID, injected} from 'connectors/hooks';
 // import { aa } from './data'
 import { TextPlaceholder } from 'component/styled';
 import { useAsync } from 'react-use';
@@ -222,31 +222,44 @@ function VaultsTable(props: IProps) {
     // eslint-disable-next-line
   }, [activities])
 
-  useEffect(() => {
+  // useEffect(() => {
+  //   if (isLogin) {
+  //     setShowModal(false)
+  //     getNftActivities()
+  //   } else {
+  //     setShowModal(true)
+  //   }
+  //   // eslint-disable-next-line
+  // }, [isLogin, account,provider])
+  //
+  // useEffect(() => {
+  //   if(account && !isLogin) {
+  //     setShowModal(true)
+  //   }
+  // },[account,isLogin])
+
+  // useAsync(async() => {
+  //   if(!account) {
+  //     try{
+  //       await injected.activate(1)
+  //     }catch(e:any){
+  // notification.error({ message: e.message})
+  //     }
+  //   }
+  // },[])
+
+  useAsync(async () => {
     if (isLogin) {
       setShowModal(false)
-      getNftActivities()
+      await getNftActivities()
     } else {
-      setShowModal(true)
-    }
-    // eslint-disable-next-line
-  }, [isLogin, account,provider])
-
-  useEffect(() => {
-    if(account && !isLogin) {
-      setShowModal(true)
-    }
-  },[account,isLogin])
-
-  useAsync(async() => {
-    if(!account) {
-      try{
-        await injected.activate(1)
-      }catch(e:any){
-        notification.error({ message: e.message})
+      if (account) {
+        setShowModal(true)
+      } else {
+        await injected.activate(CHAIN_ID)
       }
     }
-  },[])
+  }, [isLogin, account, provider])
 
 
   async function login2() {

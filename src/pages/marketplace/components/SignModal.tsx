@@ -10,7 +10,7 @@ import SignGif from './SignGif';
 import { useWeb3React } from '@web3-react/core';
 import BigNumber from 'bignumber.js';
 import { ContractAddresses } from 'utils/addresses';
-import { Erc20 } from 'abi/Erc20';
+import { Erc20 } from 'abis/Erc20';
 import { useEthPrice } from 'utils/hook';
 import { urls } from 'utils/urls';
 

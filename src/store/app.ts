@@ -115,7 +115,7 @@ const appSlice = createSlice({
       state.data.EthPrice = action.payload
     },
     /*
-    * local contain access token
+    * local store contain access token
     * */
     updateLoginState(state) {
       state.isLogin = sessionStorage.getItem(SessionStorageKey.AccessToken) != null

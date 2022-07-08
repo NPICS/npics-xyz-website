@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { message, Progress } from 'antd';
 import { imgurl } from 'utils/globalimport';
 import ButtonDefault from 'component/ButtonDefault';
-import { Npics } from 'abi/Npics'
+import { Npics } from 'abis/Npics'
 import { useWeb3React } from '@web3-react/core';
 import { CollectionDetail } from 'model/user';
 import http from 'utils/http';

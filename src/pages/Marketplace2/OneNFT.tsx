@@ -164,7 +164,10 @@ export default function OneNFT() {
               color={"#fff"}
               fontWeight={800}
             >{`${detailData?.singularForName()} #${detailData?.tokenId}`}</Typography>
-            <Popover content={"Reported for Suspicious Activity on OpenSea"}>
+            <Popover
+              overlayClassName="ant-popover-reset"
+              content={"Reported for Suspicious Activity on OpenSea"
+            }>
               <Icon
                 width={".24rem"}
                 height={".24rem"}
@@ -176,7 +179,10 @@ export default function OneNFT() {
           <Flex flexDirection={"row"} gap={".15rem"} alignItems={"stretch"}>
             {
               rarityData && Object.entries(rarityData).map(([key, val]) => {
-                return val && val.rank && <Popover content={getRarityPopoverText(key, val.status)}>
+                return val && val.rank && <Popover
+                  overlayClassName="ant-popover-reset"
+                  content={getRarityPopoverText(key, val.status)}
+                >
                   <Box onClick={() => window.open(val.url)}>
                     <Label
                       key={key}

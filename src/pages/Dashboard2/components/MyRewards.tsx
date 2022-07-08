@@ -2,7 +2,7 @@ import React,{useState,useEffect} from "react"
 import { Box, Flex, Icon, Typography } from "component/Box";
 import ButtonDefault from "component/ButtonDefault";
 import { useWeb3React } from '@web3-react/core';
-import { Npics } from 'abi/Npics'
+import { Npics } from 'abis/Npics'
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { setIsLoading } from 'store/app';
 import { message } from 'antd';

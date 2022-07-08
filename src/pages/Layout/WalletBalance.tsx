@@ -4,7 +4,7 @@ import BigNumber from 'bignumber.js'
 import React, { useEffect, useState } from 'react'
 import { imgurl } from 'utils/globalimport';
 import styled from 'styled-components';
-import { Erc20 } from 'abi/Erc20';
+import { Erc20 } from 'abis/Erc20';
 import { ContractAddresses } from 'utils/addresses';
 import { useBendPrice, useEthPrice } from 'utils/hook';
 import { font01651, font01455 } from 'component/styled';

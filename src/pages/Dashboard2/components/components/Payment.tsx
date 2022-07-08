@@ -1,7 +1,7 @@
 import React,{useEffect} from "react"
 import { Flex, Icon, Typography } from "component/Box";
 import { imgurl } from 'utils/globalimport';
-import { Npics } from "abi/Npics";
+import { Npics } from "abis/Npics";
 import { message } from "antd";
 import { setIsLoading } from "store/app";
 import { useWeb3React } from "@web3-react/core";

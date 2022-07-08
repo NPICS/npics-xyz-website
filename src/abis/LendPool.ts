@@ -1,7 +1,7 @@
 import BigNumber from "bignumber.js";
 import {Contract, ethers} from "ethers";
 import {ContractAddresses} from "../utils/addresses";
-import LendPool_ABI from "../abi/lendPool.json"
+import LendPool_ABI from ".//lendPool.json"
 
 export class LendPool {
     signer: any

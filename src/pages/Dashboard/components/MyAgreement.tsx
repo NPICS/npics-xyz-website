@@ -8,7 +8,7 @@ import http from 'utils/http'
 import { ColumnsType } from 'antd/lib/table';
 import { BgTable, Record, DebtData, LiquidatePrice, DataSource } from './components/Tableutils'
 import AgDetail from './components/AgDetail'
-import { LendPool } from 'abi/LendPool'
+import { LendPool } from 'abis/LendPool'
 import { useWeb3React } from '@web3-react/core';
 import { useEthPrice, useUpdateEffect } from 'utils/hook';
 import { getSignMessage } from 'utils/sign';

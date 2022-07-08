@@ -1,7 +1,7 @@
 import BigNumber from "bignumber.js";
 import {ethers} from "ethers";
 import {ContractAddresses} from "../utils/addresses";
-import NPICS_ABI from "../abi/npics.json"
+import NPICS_ABI from ".//npics.json"
 import {Erc20} from "./Erc20";
 
 export class Npics {

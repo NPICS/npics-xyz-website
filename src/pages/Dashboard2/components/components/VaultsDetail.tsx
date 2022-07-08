@@ -5,7 +5,7 @@ import ProgressBar from 'pages/Dashboard/components/components/ProgressBar';
 import ButtonDefault from 'component/ButtonDefault'
 import {DataSource, DebtData, LiquidatePrice, Record} from './StyledInterface';
 import {useWeb3React} from '@web3-react/core';
-import {LendPool} from 'abi/LendPool';
+import {LendPool} from 'abis/LendPool';
 import {notification, message, Popover, InputNumber} from 'antd';
 import BigNumber from 'bignumber.js';
 import {fetchUser, updateLoginState} from 'store/app';

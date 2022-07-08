@@ -10,7 +10,7 @@ import {fetchUser, updateARP} from "../../store/app";
 import {percentageFormat} from "../marketplace/components/utils";
 import http from "../../utils/http";
 import {deserializeArray} from "class-transformer";
-import {Npics} from "../../abi/Npics";
+import {Npics} from "../../abis/Npics";
 import {ethers} from "ethers";
 import Modal from "../../component/Modal";
 import NFTPay from "./NFTPay";
@@ -23,7 +23,6 @@ import {getNFTStatusInOpensea} from "../../utils/opensea";
 import {listedPricePop, VaultAprPop, DownPaymentPop} from "utils/popover";
 import ethIcon from "../../assets/images/market/eth_icon.svg"
 import {SessionStorageKey} from "utils/enums";
-import useActiveWeb3React from "../../hooks/useActiveWeb3React";
 import {simpleRpcProvider} from "../../utils/rpcUrl";
 import {useAsync} from "react-use";
 import {injected} from "../../connectors/hooks";

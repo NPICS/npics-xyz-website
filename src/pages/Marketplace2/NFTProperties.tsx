@@ -3,6 +3,7 @@ import {CollectionDetail} from "../../model/user";
 import styled from "styled-components";
 import titlePrefixIcon from "../../assets/images/market/nft_properties_icon.png"
 import {TextPlaceholder} from "../../component/styled";
+import _ from "lodash"
 
 const CellBackground = styled.div`
   background: linear-gradient(#F2BE58, #E84866);
@@ -87,7 +88,7 @@ export default function NFTProperties(props: {
                     return <PropertiesCell
                         key={idx}
                         title={it.trait_type}
-                        value={it.value ?? TextPlaceholder}
+                        value={_.capitalize(it.value ?? TextPlaceholder)}
                         description={
                             `${it.trait_count} (${(it.trait_count / 100).toFixed(2)}%) have this`
                         }

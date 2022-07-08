@@ -9,7 +9,7 @@ import {useNavigate} from "react-router-dom";
 import {StatusGif} from "./NFTPayWrong";
 import {useState} from "react";
 import {useAsync} from "react-use";
-import {Npics} from "../../abi/Npics";
+import {Npics} from "../../abis/Npics";
 import {useWeb3React} from "@web3-react/core";
 import {copyToClipboard} from "../../utils/clipboard-utils";
 

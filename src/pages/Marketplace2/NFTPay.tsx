@@ -7,18 +7,17 @@ import {CollectionDetail} from "../../model/user";
 import BigNumber from "bignumber.js";
 import downPayIcon from "../../assets/images/market/down_pay_icon.png"
 import {numberFormat, urls} from "../../utils/urls";
-import {Erc20} from "../../abi/Erc20";
+import {Erc20} from "../../abis/Erc20";
 import {ContractAddresses} from "../../utils/addresses";
 import {useWeb3React} from "@web3-react/core";
 import http from "../../utils/http";
 import {message, notification} from "antd";
-import {Npics} from "../../abi/Npics";
+import {Npics} from "../../abis/Npics";
 import Modal from "../../component/Modal";
 import NFTPayProgressing from "./NFTPayProgressing";
 import NFTPayCongratulations, {AttrLink} from "./NFTPayCongratulations";
 import NFTPayWrong from "./NFTPayWrong";
 import {useAsync} from "react-use";
-import useActiveWeb3React from "../../hooks/useActiveWeb3React";
 import { TextPlaceholder } from "component/styled";
 import wethIcon from "../../assets/images/market/weth_icon.svg"
 import Checkbox from "../../component/Input/Checkbox";

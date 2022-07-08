@@ -2,7 +2,7 @@ import { message } from 'antd';
 import ButtonDefault from 'component/ButtonDefault'
 import React, { useState, useEffect } from 'react'
 import ProgressBar from './ProgressBar'
-import { Npics } from 'abi/Npics'
+import { Npics } from 'abis/Npics'
 import { DataSource } from './Tableutils'
 import { Wrap, Repay, Offers } from './Tableutils'
 import { useWeb3React } from '@web3-react/core';
