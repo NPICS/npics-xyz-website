@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react"
+import React, { useState, useEffect } from "react"
 import { Box, Flex, Icon, Typography } from "component/Box";
 import ButtonDefault from "component/ButtonDefault";
 import { useWeb3React } from '@web3-react/core';
@@ -7,11 +7,10 @@ import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { setIsLoading } from 'store/app';
 import { message } from 'antd';
 import BigNumber from 'bignumber.js';
-import {User} from "../../../model/user";
-import {deserialize} from "class-transformer";
-import Dashboard from '../../Dashboard/Dashboard';
+import { User } from "../../../model/user";
+import { deserialize } from "class-transformer";
 import { imgurl } from "utils/globalimport";
-import { urls } from '../../../utils/urls';
+import More from "./components/More";
 
 export default function MyRewards() {
   const { account, provider } = useWeb3React()
@@ -23,7 +22,7 @@ export default function MyRewards() {
     // eslint-disable-next-line
   }, [])
   const getBalance = async () => {
-    if(!provider) return
+    if (!provider) return
     // TODO: library => provider @quan
     const signer = provider.getSigner(account)
     let npics = new Npics(signer)
@@ -48,7 +47,8 @@ export default function MyRewards() {
 
 
   return <Box
-  padding={".4rem .6rem"}
+    padding={".4rem .6rem"}
+    position={"relative"}
   >
     <Typography fontSize={".3rem"} fontWeight={800} color={'#000'} marginBottom=".3rem">NPics Rewards</Typography>
     {/* <Typography fontSize={".16rem"} fontWeight={500} color={'rgba(0,0,0,.5)'} marginBottom={".3rem"}>Participate in the down payment loan to buy NFT and earn double rewards</Typography> */}
@@ -66,29 +66,29 @@ export default function MyRewards() {
         gap={".2rem"}
       >
         <Flex gap={".17rem"} alignItems={"center"}>
-          <Icon width=".4rem" height=".4rem" src={imgurl.dashboard.rewardBend}/>
+          <Icon width=".4rem" height=".4rem" src={imgurl.dashboard.rewardBend} />
           <Typography fontSize={".18rem"} fontWeight={"500"} color={"#000"}>BEND</Typography>
         </Flex>
 
         <Flex gap={"1.6rem"} alignItems={"center"}>
           <Flex alignItems={"end"} gap={".12rem"}>
             <Typography fontSize={".14rem"} fontWeight={"500"} color={"rgba(0,0,0,.5)"}>Reward to be received : </Typography>
-            <Typography fontSize={".24rem"} fontWeight={"700"} color={"#000"}>{balance && new BigNumber(balance?.toString()).dp(3,1).div(10 ** 18).toFixed(4,1)}</Typography>
+            <Typography fontSize={".24rem"} fontWeight={"700"} color={"#000"}>{balance && new BigNumber(balance?.toString()).dp(3, 1).div(10 ** 18).toFixed(4, 1)}</Typography>
           </Flex>
-         
+
           <ButtonDefault padding="0rem .5rem" height=".5rem" minWidth="1.5rem" scale={true} disabled={balance?.toString() === '0'} types={"normal"} onClick={onRewards}>
             Claim
           </ButtonDefault>
-
-          {/* <ButtonDefault scale={true} types={'normal'} onClick={() => {window.open(urls.gitBookRewards)}}>
-            NBP
-          </ButtonDefault> */}
-
         </Flex>
       </Flex>
     </Box>
-    
 
-
+    <Box
+      position={'absolute'}
+      right={'.3rem'}
+      top={'.3rem'}
+    >
+      <More />
+    </Box>
   </Box>
 }

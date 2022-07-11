@@ -99,7 +99,7 @@ export default function MyTable() {
       render: (text, row) => <Link to={`/marketplace/collections/${row.address}`} onClick={() => ScrollTop()}>
         <div style={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center'}}>
           <img src={row.imageUrl} alt="" style={{ width: ".6rem", height: ".6rem", marginRight: ".1rem", borderRadius: '30px'}} />
-          <span style={{ wordBreak: 'break-all', color: '#fff', fontWeight: '700', marginRight: '.1rem' }}>{text}</span>
+          <span style={{ wordBreak: 'break-all',fontSize: '.16rem', color: '#fff', fontWeight: '700', marginRight: '.1rem' }}>{text}</span>
           <Icon style={{flexShrink: '0'}} src={openseaValidIcon} width={".16rem"} height={".16rem"}/>
         </div>
       </Link>,
@@ -131,7 +131,7 @@ export default function MyTable() {
       sorter: (a, b) => a.floorPrice - b.floorPrice,
       render: (text) => <div style={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center'}}>
         <img src={imgurl.whitePrice} alt=""  style={{marginRight: ".1rem"}}/>
-        <span>{text}</span>
+        <span style={{ fontSize: '.16rem', color: '#fff', fontWeight: '500'}}>{text}</span>
       </div>
     },
     {
@@ -141,7 +141,7 @@ export default function MyTable() {
       key: 'advanceRate',
       // defaultSortOrder: 'descend',
       sorter: (a, b) => a.advanceRate - b.advanceRate,
-      render: (text) => <div>{`${text}%`}</div>
+      render: (text) => <div style={{ fontSize: '.16rem', color: '#fff', fontWeight: '500'}}>{`${text}%`}</div>
     },
     {
       title: 'Down Payment',
@@ -152,7 +152,7 @@ export default function MyTable() {
       sorter: (a, b) => a.floorPrice - b.floorPrice,
       render: (text) => <div style={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center'}}>
         <img src={imgurl.whitePrice} alt="" style={{marginRight: ".1rem"}}/>
-        <span>{text}</span>
+        <span style={{ fontSize: '.16rem', color: '#fff', fontWeight: '500'}}>{text}</span>
       </div>
     },
   ];

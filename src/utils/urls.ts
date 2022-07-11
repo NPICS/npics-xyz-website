@@ -40,7 +40,7 @@ export function numberFormat(
 export function thousandFormat(
   num: number | string
 ): string {
-  return numeral(num).format('$ 0.0a').toLocaleUpperCase()
+  return numeral(num).format('$0.0a').toLocaleUpperCase()
 }
   // let format = Intl.NumberFormat(`en-US`, {
   //   style: "currency",

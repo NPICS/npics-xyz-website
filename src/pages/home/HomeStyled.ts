@@ -17,7 +17,7 @@ export const HomeWrap = styled.div`
   .collections-title {
     width: 16rem;
     margin: 0 auto;
-    padding: 1.3rem 0 .2rem;
+    padding: 1.3rem 0 .4rem;
     ${title};
   }
 `

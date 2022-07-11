@@ -368,7 +368,7 @@ export default function VaultsDetail() {
     >
       <Flex
         marginTop={"2.14rem"}
-        marginBottom={".1rem"}
+        marginBottom={".3rem"}
         gap={".2rem"}
         alignItems={"center"}
       >
@@ -380,7 +380,7 @@ export default function VaultsDetail() {
 
       <Box
         background={"#fff"}
-        minHeight={"60vh"}
+        // minHeight={"60vh"}
         borderRadius={"10px"}
         padding={".4rem .6rem"}
       >
@@ -410,6 +410,7 @@ export default function VaultsDetail() {
         <Grid
           marginTop={".3rem"}
           gridTemplateColumns={"3.4rem auto"}
+
           gridGap={".3rem"}
         >
           <Icon style={{borderRadius: '10px', background: "#e5e5e5"}} width='3.4rem' height='3.4rem'
@@ -434,7 +435,7 @@ export default function VaultsDetail() {
                 content={MintedNFTPop}>
                 <TipsIcon width={".14rem"} src={imgurl.market.tipsIcon}/>
               </Popover>
-              <Flex alignItems={'center'} marginBottom={".14rem"}>
+              <Flex alignItems={'center'} marginBottom={".12rem"}>
                 <Typography marginRight={'.1rem'} fontSize=".24rem" fontWeight='700' color="#000">
                   {`NEO ${activities?.collectionName ?? TextPlaceholder} #${activities?.tokenId ?? TextPlaceholder}`}
                 </Typography>
@@ -482,10 +483,10 @@ export default function VaultsDetail() {
               background={"rgba(0,0,0,.03)"}
               border={"1px solid rgba(0,0,0,.1)"}
               borderRadius={"10px"}
-              padding={".32rem 1.5rem"}
-              gridGap={".4rem 1.3rem"}
+              padding={".3rem 1.5rem"}
+              gridGap={".35rem 1.3rem"}
             >
-              <Flex alignItems={"center"} justifyContent={"center"} flexDirection="column" gap='.12rem'>
+              <Flex alignItems={"center"} justifyContent={"center"} flexDirection="column" gap='.1rem'>
                 <Flex gap="10px">
                   <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Health factor</Typography>
                   <Popover 
@@ -497,7 +498,7 @@ export default function VaultsDetail() {
                 </Flex>
                 <Typography fontSize=".2rem" fontWeight='500' color="#000">{activities?.healthFactor}</Typography>
               </Flex>
-              <Flex alignItems={"center"} justifyContent={"center"} flexDirection="column" gap='.12rem'>
+              <Flex alignItems={"center"} justifyContent={"center"} flexDirection="column" gap='.1rem'>
                 <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Floor price</Typography>
                 <Flex alignItems={'center'}>
                   <Icon width='.22rem' height='.22rem' src={imgurl.home.ethBlack22}/>
@@ -505,7 +506,7 @@ export default function VaultsDetail() {
                               color="#000">{activities?.floorPrice.div(10 ** globalConstant.bit).toFixed(2, 1)}</Typography>
                 </Flex>
               </Flex>
-              <Flex alignItems={"center"} justifyContent={"center"} flexDirection="column" gap='.12rem'>
+              <Flex alignItems={"center"} justifyContent={"center"} flexDirection="column" gap='.1rem'>
                 <Flex gap="10px">
                   <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Debt</Typography>
                   <Popover 
@@ -520,7 +521,7 @@ export default function VaultsDetail() {
                   <Typography fontSize=".2rem" fontWeight='500' color="#000">  {activities?.debtString}</Typography>
                 </Flex>
               </Flex>
-              <Flex alignItems={"center"} justifyContent={"center"} flexDirection="column" gap='.12rem'>
+              <Flex alignItems={"center"} justifyContent={"center"} flexDirection="column" gap='.1rem'>
                 <Flex gap="10px">
                   <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Vault APR</Typography>
 
@@ -534,7 +535,7 @@ export default function VaultsDetail() {
                 <Typography fontSize=".2rem" fontWeight='500'
                             color="#000">{`${(aprData.rewardApr * 100 - aprData.apr).toFixed(2)}%`}</Typography>
               </Flex>
-              <Flex alignItems={"center"} justifyContent={"center"} flexDirection="column" gap='.12rem'>
+              <Flex alignItems={"center"} justifyContent={"center"} flexDirection="column" gap='.1rem'>
                 <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Liquidation Price</Typography>
                 <Flex alignItems={'center'}>
                   <Icon width='.22rem' height='.22rem' src={imgurl.home.ethBlack22}/>
@@ -549,15 +550,16 @@ export default function VaultsDetail() {
 
       <Box
         background={"#fff"}
-        minHeight={"60vh"}
+        // minHeight={"60vh"}
         borderRadius={"10px"}
-        padding={".4rem .6rem"}
+        padding={".4rem 2.6rem .4rem .6rem"}
         marginTop={".1rem"}
       >
         <Typography marginBottom={".4rem"} fontSize={".2rem"} fontWeight={"700"} color={"#000"}>Repay</Typography>
         <Grid
           gridTemplateAreas='"debt pay" "factor pay""balance pay"'
           gridTemplateColumns={"3.2rem auto "}
+          gridTemplateRows={"1.2rem 1.2rem 1.2rem"}
           gridGap={".1rem .7rem"}
         >
           <GridItem
@@ -623,7 +625,7 @@ export default function VaultsDetail() {
               background={progressVal === 1 ? "rgba(0, 0, 0, 0.03)" : "#fff"}
               border="1px solid rgba(0, 0, 0, 0.1)"
               borderRadius="10px"
-              padding=".31rem .5rem"
+              padding=".3rem .5rem"
               alignItems="center"
               justifyContent="space-between"
               flex="auto"
@@ -641,15 +643,15 @@ export default function VaultsDetail() {
               <Icon width='.4rem' height='.4rem' src={imgurl.home.ethBlack40}/>
             </Flex>
 
-            <Box marginTop=".36rem">
+            <Box marginTop=".3rem">
               <ProgressBar
                 onChange={onProgressBar}
                 value={progressVal}
               ></ProgressBar>
             </Box>
 
-            <Box minHeight={'1rem'} marginTop=".3rem">
-              <Flex alignItems="center" marginBottom=".3rem" gap='.1rem'>
+            <Flex minHeight={'.9rem'} marginTop=".55rem" flexDirection={'column'}>
+              <Flex alignItems="center" marginBottom=".2rem" gap='.1rem'>
                 <label style={{display:'flex',alignItems:'center'}}>
                   <Checkbox 
                     style={{width: ".24rem", height: ".24rem", cursor: "pointer"}}
@@ -674,11 +676,11 @@ export default function VaultsDetail() {
                   All unused ETH will be returned to your wallet.
                 </Typography> : null
               }
-            </Box>
+            </Flex>
 
 
-            <Typography marginTop=".3rem">
-              <ButtonDefault disabled={payDebt?.eq(0) ? true : false} types='normal' color='#fff'
+            <Typography marginTop=".2rem">
+              <ButtonDefault height='.7rem' disabled={payDebt?.eq(0) ? true : false} types='normal' color='#fff'
                              onClick={handleRepay}>{progressVal === 1 ? 'Repay all' :`Repay`}</ButtonDefault>
             </Typography>
 

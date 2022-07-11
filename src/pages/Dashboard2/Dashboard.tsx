@@ -72,7 +72,7 @@ export default function Market() {
       </Flex>
       <Box
         background={"#fff"}
-        minHeight={"60vh"}
+        // minHeight={"60vh"}
         borderRadius={"10px"}
       >
         <Outlet />
