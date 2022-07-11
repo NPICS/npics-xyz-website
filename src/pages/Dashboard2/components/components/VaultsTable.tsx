@@ -182,8 +182,8 @@ function VaultsTable(props: IProps) {
       align: 'center',
       width: '1.8rem',
       onCell: (row) => ({style: {backgroundColor: row.terminated() ? 'rgba(0, 0, 0, 0.03)' : ''}}),
-      render: (t, row: any) => row.terminated() ? <div /> : <Flex alignItems='center' justifyContent='center'>
-        <ButtonDefault height='.48rem' minWidth='1.2rem' types='normal' onClick={() => navigate(`/vaultsDetail/${row.address}/${row.tokenId}`)}>
+      render: (t, row) => row.terminated() ? <div /> : <Flex alignItems='center' justifyContent='center'>
+        <ButtonDefault height='.48rem' minWidth='1.2rem' types='normal' onClick={() => navigate(`/vaultsDetail/${row.nftAddress}/${row.tokenId}`)}>
           Repay
         </ButtonDefault>
       </Flex>,
