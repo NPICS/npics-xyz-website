@@ -16,8 +16,8 @@ import Npics from './components/Npics';
 import Title from './components/Title';
 import Detail from './components/Detail';
 const MyTable: any = styled(Table)`
-  width: 16rem;
-  height: 7.47rem;
+  width: 1600px;
+  height: 747px;
   margin: 0 auto;
 `
 
@@ -243,7 +243,7 @@ function Home() {
         <div className='partnerGroup'>
           {PartnerData.map((item, index) => {
             return (
-              <PartnerBox key={index} width={index === 6 ? '1.35rem' : '1.9rem'}>
+              <PartnerBox key={index} width={index === 6 ? '135px' : '190px'}>
                 <img src={item.url} alt="" />
               </PartnerBox>)
           })}

@@ -28,9 +28,9 @@ const ImageContainer = styled.div`
 
 const IconTest = styled.img`
   display: block;
-  width: .22rem;
-  height: .22rem;
-  border-radius: .11rem;
+  width: 22px;
+  height: 22px;
+  border-radius: 11px;
   user-select: none;
 `
 
@@ -67,7 +67,7 @@ export default function CollectionCell(props: {
     }
 
     return <ShadowBox
-        borderRadius={'.1rem'}
+        borderRadius={'10px'}
         // border={"1px solid rgba(0,0,0,.1)"}
         boxShadow="0 0 20px rgba(0, 0, 0, 0.1)"
         overflow={"hidden"}
@@ -89,44 +89,44 @@ export default function CollectionCell(props: {
         {/* tag */}
         <Flex
             flexDirection={"row"}
-            padding={".01rem .06rem"}
+            padding={"1px 6px"}
             borderRadius={"10px"}
             boxShadow="0px 0px 10px rgba(0, 0, 0, 0.1)"
             background={"rgba(255,255,255,.5)"}
             alignItems={"center"}
-            gap={".04rem"}
+            gap={"4px"}
             position={"absolute"}
-            top={".08rem"}
-            left={".08rem"}
+            top={"8px"}
+            left={"8px"}
             zIndex={"1"}
             hidden={props.item.rarityScore <= 0}>
-            {/*<Icon height={".2rem"} width={".2rem"} src={CellTagIcon}/>*/}
+            {/*<Icon height={"20px"} width={"20px"} src={CellTagIcon}/>*/}
             <Typography
                 color={"rgba(0,0,0,.6)"}
-                fontSize={props.compact ? ".14rem" : ".16rem"}
+                fontSize={props.compact ? "14px" : "16px"}
                 fontWeight={"500"}
             >{`#${props.item.rarityScore}`}</Typography>
         </Flex>
-        <Box padding={".07rem .15rem .18rem"}>
-            <Flex alignItems={"center"} gap={".06rem"}>
-                <NoWarpTypography fontWeight={500} fontSize={".14rem"}
+        <Box padding={"7px 15px 18px"}>
+            <Flex alignItems={"center"} gap={"6px"}>
+                <NoWarpTypography fontWeight={500} fontSize={"14px"}
                     color={"rgba(0,0,0,.5)"}>{props.item.singularForName().length > 10 ? props.item.singularForName().replace(props.item.singularForName().substring(10), '...') : props.item.singularForName()}</NoWarpTypography>
                 <Typography fontWeight={500}
-                    fontSize={".14rem"}
+                    fontSize={"14px"}
                     color={"rgba(0,0,0,.5)"}>
                     {`#${props.item.tokenId}`}</Typography>
             </Flex>
             <Flex
                 alignItems={"center"}
                 justifyContent={"space-between"}
-                gap={".06rem"}
-                marginTop={".1rem"}
+                gap={"6px"}
+                marginTop={"10px"}
             >
                 <NoWarpTypography fontWeight={'500'} hidden={props.compact}>Down Payment</NoWarpTypography>
                 <Flex
                     alignItems={"center"}
-                    gap={".06rem"}>
-                    <Icon height={".15rem"} width={".1rem"} src={ethIcon}/>
+                    gap={"6px"}>
+                    <Icon height={"15px"} width={"10px"} src={ethIcon}/>
                     <Typography fontWeight={'700'}>{props.item.downPaymentPriceFormat()}</Typography>
                 </Flex>
 
@@ -134,22 +134,22 @@ export default function CollectionCell(props: {
           <Box
             height={"1px"}
             background={"#0000001a"}
-            margin={".12rem 0"}
+            margin={"12px 0"}
           ></Box>
-          <Flex alignItems={"center"} gap={".06rem"}>
+          <Flex alignItems={"center"} gap={"6px"}>
             <IconTest src={props.item.marketIcon()} alt=""/>
             <NoWarpTypography
               color={"#00000080"}
-              fontSize={".14rem"}
+              fontSize={"14px"}
               fontWeight={500}
             >{props.item.marketDisplay()}</NoWarpTypography>
             <Flex flex={1}></Flex>
             <Icon style={{
               "flexShrink": 0
-            }} src={unselectedEthIcon} width={".1rem"} height={".15rem"}></Icon>
+            }} src={unselectedEthIcon} width={"10px"} height={"15px"}></Icon>
             <Typography
               color={"#00000080"}
-              fontSize={".14rem"}
+              fontSize={"14px"}
               fontWeight={500}
             >{props.item.basePrice()}</Typography>
           </Flex>

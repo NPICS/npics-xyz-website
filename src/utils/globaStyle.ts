@@ -15,14 +15,14 @@ export const GlobalStyle = createGlobalStyle`
     min-width: 1280px;
     font-family: 'Montserrat';
     line-height: normal;
-    font-size: .14rem;
+    font-size: 14px;
   }
 
   .ant-selectDropDown-reset {
     background-color: #1a1a1a;
     color: #fff;
     border: 1px solid rgba(255, 255, 255, .5);
-    border-radius: .1rem;
+    border-radius: 10px;
     text-align: center;
     .ant-select:not(.ant-select-disabled):hover .ant-select-selector {
       border-color: transparent;
@@ -40,14 +40,14 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
   .ant-select-reset {
-    font-size: .14rem;
+    font-size: 14px;
     background-color: #fff;
     color: rgba(0, 0, 0, .5);
     border: 1px solid rgba(0, 0, 0, .2);
     transition: all 0s;
-    border-radius: .1rem;
+    border-radius: 10px;
     text-align: center;
-    padding: .05rem 0;
+    padding: 5px 0;
     .ant-select:not(.ant-select-disabled):hover .ant-select-selector {
       border-color: transparent;
       box-shadow: none;
@@ -62,8 +62,8 @@ export const GlobalStyle = createGlobalStyle`
     .ant-select-item {
       text-align: left;
       color: rgba(0, 0, 0, .5);
-      font-size: .14rem;
-      padding: .1rem .2rem;
+      font-size: 14px;
+      padding: 10px 20px;
       transition: all 0s;
       min-height: initial;
       &:hover {
@@ -87,7 +87,7 @@ export const GlobalStyle = createGlobalStyle`
     border: 1px solid rgba(0,0,0,.2);
     border-radius: 10px;
     color: rgba(0, 0, 0, .5);
-    font-size: .16rem;
+    font-size: 16px;
     font-weight: 500;
     transition: all 0s;
   }
@@ -96,8 +96,8 @@ export const GlobalStyle = createGlobalStyle`
       .ant-modal-close {
         .ant-modal-close-x {
           height: 100%;
-          line-height: .73rem;
-          font-size: .16rem;
+          line-height: 73px;
+          font-size: 16px;
         }
       }
       .ant-modal-header {
@@ -106,14 +106,14 @@ export const GlobalStyle = createGlobalStyle`
       .ant-modal-body {
         &>div {
           display: flex;
-          font-size: .24rem;
+          font-size: 24px;
           color: #353945;
           font-weight: 700;
           border-radius: 10px;
-          padding: .05rem;
+          padding: 5px;
           cursor: pointer;
           img {
-            width: .4rem;
+            width: 40px;
           }
           &:hover {
             background: rgba(0, 0, 0, .07);
@@ -136,7 +136,7 @@ export const GlobalStyle = createGlobalStyle`
       color: red;
     }
     .ant-table-thead {
-      margin-bottom: .05rem;
+      margin-bottom: 5px;
       background: #000000;
       /* border: 1px solid rgba(255, 255, 255, .2); */
       border-radius: 10px;
@@ -150,7 +150,7 @@ export const GlobalStyle = createGlobalStyle`
           flex: none;
         }
         .ant-table-column-sorter {
-          margin-left: .1rem;
+          margin-left: 10px;
         }
       }
       .ant-table-column-sort {
@@ -161,18 +161,18 @@ export const GlobalStyle = createGlobalStyle`
           background: #000;
         }
         th:first-child {
-          width: 1.2rem;
+          width: 120px;
         }
         th:nth-child(2) {
-          width: 4rem;
+          width: 400px;
         }
         th {
           color: #fff;
           border-bottom: none;
           background-color: #000;
-          height: .68rem;
-          width: 2.716rem;
-          padding: .22rem .16rem;
+          height: 68px;
+          width: 271.6px;
+          padding: 22px 16px;
           transition: all 0s;
         }
         th:last-child {
@@ -188,13 +188,13 @@ export const GlobalStyle = createGlobalStyle`
       border-radius: 10px;
       display: grid;
       &>tr td:first-child {
-        width: 1.2rem;
+        width: 120px;
         border-top-left-radius: 10px;
         border-bottom-left-radius: 10px;
         /* border-left: 1px solid rgba(255,255,255,.2); */
       }
       &>tr td:nth-child(2) {
-        width: 4rem;
+        width: 400px;
       }
       &>tr td:last-child {
         /* border-right: 1px solid rgba(255,255,255,.2); */
@@ -216,9 +216,9 @@ export const GlobalStyle = createGlobalStyle`
           border-bottom: 0;
           transition: all 0s;
           /* border-top: 1px solid rgba(255,255,255,.2); */
-          height: .8rem;
-          padding: .1rem .16rem;
-          width: 2.716rem;
+          height: 80px;
+          padding: 10px 16px;
+          width: 271.6px;
         }
         &>.ant-table-cell {
           background: rgba(255, 255, 255, .03);
@@ -228,14 +228,14 @@ export const GlobalStyle = createGlobalStyle`
             align-items: center;
             &>div:nth-child(1) {
               align-self: start;
-              margin-right: .1rem;
+              margin-right: 10px;
             }
             &>div:nth-child(2) {
               display: flex;
               flex-direction: column;
-              font-size: .16rem;
+              font-size: 16px;
               &>span {
-                font-size: .12rem;
+                font-size: 12px;
               }
             }
           }
@@ -247,7 +247,7 @@ export const GlobalStyle = createGlobalStyle`
         align-items: center;
         &>.ant-table-cell {
           flex: 1;
-          min-height: 1.5rem;
+          min-height: 150px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -275,7 +275,7 @@ export const GlobalStyle = createGlobalStyle`
       color: red;
     }
     .ant-table-thead {
-      margin-bottom: .05rem;
+      margin-bottom: 5px;
       background: #fff;
       border: 1px solid rgba(0, 0, 0, .2);
       border-radius: 10px;
@@ -291,9 +291,9 @@ export const GlobalStyle = createGlobalStyle`
           color: #000;
           border-bottom: none;
           background-color: #fff;
-          height: .68rem;
-          width: 2.666rem;
-          padding: .16rem;
+          height: 68px;
+          width: 266.6px;
+          padding: 16px;
           &::before {
             height: 0 !important;
           }
@@ -332,8 +332,8 @@ export const GlobalStyle = createGlobalStyle`
           color: #fff;
           border-bottom: 1px solid rgba(0,0,0,.2);
           border-top: 1px solid rgba(0,0,0,.2);
-          height: 1rem;
-          width: 2.666rem;
+          height: 100px;
+          width: 266.6px;
         }
         &>.ant-table-cell {
           background: #fff;
@@ -344,14 +344,14 @@ export const GlobalStyle = createGlobalStyle`
             align-items: center;
             &>div:nth-child(1) {
               align-self: start;
-              margin-right: .1rem;
+              margin-right: 10px;
             }
             &>div:nth-child(2) {
               display: flex;
               flex-direction: column;
-              font-size: .16rem;
+              font-size: 16px;
               &>span {
-                font-size: .12rem;
+                font-size: 12px;
               }
             }
           }
@@ -363,7 +363,7 @@ export const GlobalStyle = createGlobalStyle`
         align-items: center;
         &>.ant-table-cell {
           flex: 1;
-          min-height: 1.5rem;
+          min-height: 150px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -392,8 +392,8 @@ export const GlobalStyle = createGlobalStyle`
           border-top: 1px solid rgba(255, 255, 255, .2);
           border-bottom: none;
           background-color: #000;
-          padding: .16rem;
-          height: .76rem;
+          padding: 16px;
+          height: 76px;
         }
         th:first-child {
           border-top-left-radius: 10px;
@@ -411,7 +411,7 @@ export const GlobalStyle = createGlobalStyle`
       border: 1px solid rgba(255, 255, 255, .2);
       border-radius: 10px;
       tr:first-child td {
-        border-top: .01rem solid rgba(255,255,255,.2);
+        border-top: 1px solid rgba(255,255,255,.2);
         /* border-top-left-radius: 10px; */
       }
       tr:first-child td:last-child {
@@ -443,9 +443,9 @@ export const GlobalStyle = createGlobalStyle`
         }
         td {
           color: #fff;
-          border-bottom: .01rem solid rgba(255,255,255,.2);
-          padding: .16rem;
-          height: .8rem;
+          border-bottom: 1px solid rgba(255,255,255,.2);
+          padding: 16px;
+          height: 80px;
         }
         .ant-table-cell {
           .descend {
@@ -454,14 +454,14 @@ export const GlobalStyle = createGlobalStyle`
             align-items: center;
             &>div:nth-child(1) {
               align-self: start;
-              margin-right: .1rem;
+              margin-right: 10px;
             }
             &>div:nth-child(2) {
               display: flex;
               flex-direction: column;
-              font-size: .16rem;
+              font-size: 16px;
               &>span {
-                font-size: .12rem;
+                font-size: 12px;
               }
             }
           }
@@ -475,7 +475,7 @@ export const GlobalStyle = createGlobalStyle`
       justify-content: center;
       align-items: center;
       &>.ant-table-cell {
-        min-height: 1.5rem;
+        min-height: 150px;
         display: flex;
         align-items: center;
       }
@@ -487,7 +487,7 @@ export const GlobalStyle = createGlobalStyle`
   }
   }
   .ant-popover-collectionPopver {
-    padding-top: .1rem;
+    padding-top: 10px;
     .ant-popover-arrow {
       display: none;
     }
@@ -497,8 +497,8 @@ export const GlobalStyle = createGlobalStyle`
       /* backdrop-filter: blur(30px); */
       border-radius: 20px;
       .ant-popover-inner-content {
-        padding: .05rem .1rem;
-        font-size: .14rem;
+        padding: 5px 10px;
+        font-size: 14px;
         color: #fff;
         font-weight: 500;
       }
@@ -510,7 +510,7 @@ export const GlobalStyle = createGlobalStyle`
     .ant-popover-inner {
       border-radius: 20px;
       .ant-popover-inner-content {
-        padding: .2rem .3rem .3rem;
+        padding: 20px 30px 30px;
       }
     }
   }

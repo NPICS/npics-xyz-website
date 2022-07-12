@@ -10,24 +10,24 @@ import {deserializeArray} from "class-transformer";
 const MySwiper = styled(Swiper)`
   width: 100%;
   transition-timing-function: linear;
-  margin-top: .37rem;
+  margin-top: 37px;
   display: flex;
 `
 const SwiperItem = styled.div`
   background: rgba(255, 255, 255, .1);
-  border: .01rem solid rgba(255, 255, 255, .2);
-  border-radius: .12rem;
+  border: 1px solid rgba(255, 255, 255, .2);
+  border-radius: 12px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   box-sizing: border-box;
-  padding-bottom: .16rem;
+  padding-bottom: 16px;
   cursor: pointer;
 
   & > img {
-    width: 2.2rem;
-    height: 2.2rem;
-    border-radius: .12rem .12rem 0 0;
+    width: 220px;
+    height: 220px;
+    border-radius: 12px 12px 0 0;
   }
 
   .info {
@@ -36,7 +36,7 @@ const SwiperItem = styled.div`
     justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
-    padding: .05rem .25rem 0 .16rem;
+    padding: 5px 25px 0 16px;
 
     .text {
       & > span {
@@ -44,7 +44,7 @@ const SwiperItem = styled.div`
         font-family: 'PingFang HK';
         font-style: normal;
         font-weight: 600;
-        font-size: .14rem;
+        font-size: 14px;
         line-height: 20px;
         color: rgba(255, 255, 255, .6);
       }
@@ -56,14 +56,14 @@ const SwiperItem = styled.div`
           font-family: 'PingFang HK';
           font-style: normal;
           font-weight: 600;
-          font-size: .16rem;
-          line-height: .22rem;
+          font-size: 16px;
+          line-height: 22px;
           color: #fff;
           display: inline-block;
         }
 
         & > span:nth-child(1) {
-          width: .85rem;
+          width: 85px;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
@@ -75,19 +75,19 @@ const SwiperItem = styled.div`
 const SwiperWrap = styled.div`
   width: 100%;
   height: 100%;
-  padding: 0 1.56rem;
+  padding: 0 156px;
   box-sizing: border-box;
 
   &::before {
     content: '';
     display: inline-block;
     position: absolute;
-    width: 2.56rem;
-    height: 2.88rem;
-    top: 1.38rem;
-    left: -1rem;
+    width: 256px;
+    height: 288px;
+    top: 138px;
+    left: -100px;
     background: #333;
-    box-shadow: 1.96rem 0px 1.72rem 1.1rem rgb(51 51 51 / 95%);
+    box-shadow: 196px 0px 172px 110px rgb(51 51 51 / 95%);
     z-index: 2;
   }
 
@@ -95,12 +95,12 @@ const SwiperWrap = styled.div`
     content: '';
     display: inline-block;
     position: absolute;
-    width: 2.56rem;
-    height: 2.88rem;
-    top: 1.38rem;
-    right: -1rem;
+    width: 256px;
+    height: 288px;
+    top: 138px;
+    right: -100px;
     background: #333;
-    box-shadow: -1.96rem 0px 1.72rem 1.1rem rgb(51 51 51 / 95%);
+    box-shadow: -196px 0px 172px 110px rgb(51 51 51 / 95%);
     z-index: 2;
   }
 `

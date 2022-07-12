@@ -7,7 +7,7 @@ import { NavList } from "./components/components/data";
 const Banner = () => {
   return <Box
     position={"absolute"}
-    height={"4.2rem"}
+    height={"420px"}
     top={0}
     left={0}
     right={0}
@@ -39,32 +39,32 @@ export default function Market() {
   return <Flex
       position={"relative"}
       flexDirection={"column"}
-      padding={"0 1.6rem"}
+      padding={"0 160px"}
       background={"transparent"}
-      marginBottom={"1.6rem"}
+      marginBottom={"160px"}
     >
     <Banner />
     <Box
       zIndex={1}
     >
       <Flex
-        marginTop={"2.14rem"}
-        marginBottom={".1rem"}
-        gap={".1rem"}
+        marginTop={"214px"}
+        marginBottom={"10px"}
+        gap={"10px"}
       >
         {
           NavList.map((item, idx) => {
             return <Link to={item.key} key={item.key}>
               <Flex 
-                padding={".16rem .4rem"}
-                borderRadius={".1rem"}
+                padding={"16px 40px"}
+                borderRadius={"10px"}
                 background = {active === idx ? "#fff" : "rgba(255,255,255,.1)"}
                 alignItems= {"center"}
-                gap={".25rem"}
+                gap={"25px"}
                 onClick={() => setActive(idx)}
               >
-                <Icon height={".4rem"} width={".4rem"} src={ active === idx ? item.iconActive :item.icon}/>
-                <Typography textAlign={"center"} color={active === idx ? "#000" : "#fff"} fontSize={".16rem"} fontWeight={"500"}>{item.text}</Typography>
+                <Icon height={"40px"} width={"40px"} src={ active === idx ? item.iconActive :item.icon}/>
+                <Typography textAlign={"center"} color={active === idx ? "#000" : "#fff"} fontSize={"16px"} fontWeight={"500"}>{item.text}</Typography>
               </Flex>
             </Link>
           })

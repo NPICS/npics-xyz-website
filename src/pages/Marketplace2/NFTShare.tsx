@@ -14,10 +14,10 @@ function IconWithBorder(props: {
 }) {
   return <Flex alignItems={"center"}
                justifyContent={"center"}
-               borderRadius={".1rem"}
+               borderRadius={"10px"}
                border={"1px solid #00000033"}
-               width={".4rem"}
-               height={".4rem"}
+               width={"40px"}
+               height={"40px"}
                style={{
                  "cursor": "pointer",
                  "userSelect": "none"
@@ -25,7 +25,7 @@ function IconWithBorder(props: {
                onClick={props.tap}
   >
     <Icon
-      width={".24rem"}
+      width={"24px"}
       src={props.icon}
     />
   </Flex>
@@ -45,7 +45,7 @@ export default function NFTShare(props: {
     message.success("Copy Successfully")
   };
 
-  return <Flex justifyContent={"end"} alignItems={"start"} gap={".06rem"}>
+  return <Flex justifyContent={"end"} alignItems={"start"} gap={"6px"}>
     <IconWithBorder icon={refreshIcon} tap={async () => {
       window.location.reload()
     }}/>

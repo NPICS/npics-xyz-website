@@ -25,11 +25,11 @@ function Label(props: {
   num: number,
 }) {
   return <Flex
-    gap={".06rem"}
+    gap={"6px"}
     alignItems={"center"}
-    padding={".04rem .09rem"}
-    minHeight={".3rem"}
-    borderRadius={".14rem"}
+    padding={"4px 9px"}
+    minHeight={"30px"}
+    borderRadius={"14px"}
     border={"1px solid #FFFFFF4D"}
     background={"#FFFFFF33"}
     style={{
@@ -37,9 +37,9 @@ function Label(props: {
       "backdropFilter": "blur(10px)"
     }}
   >
-    {props.icon && <Icon width={".2rem"} src={props.icon}/>}
+    {props.icon && <Icon width={"20px"} src={props.icon}/>}
     <Typography
-      fontSize={".14rem"}
+      fontSize={"14px"}
       fontWeight={500}
       color={"#fff"}
     >{`${props.icon ? '' : '#'}${props.num}`}</Typography>
@@ -47,15 +47,15 @@ function Label(props: {
 }
 
 const NFTMain = styled.div`
-  margin-top: .24rem;
+  margin-top: 24px;
   background: #fff;
-  border-radius: .1rem;
-  padding: .3rem;
+  border-radius: 10px;
+  padding: 30px;
   display: grid;
-  grid-template-columns: 4.8rem 6.5rem auto;
-  //grid-template-rows: 4.8rem auto auto;
-  grid-template-rows: 4.8rem auto auto;
-  grid-gap: .26rem;
+  grid-template-columns: 480px 650px auto;
+  //grid-template-rows: 480px auto auto;
+  grid-template-rows: 480px auto auto;
+  grid-gap: 26px;
   grid-template-areas: 
           "cover price share"
           "info activities activities"
@@ -66,7 +66,7 @@ const Cover = styled.img`
   display: block;
   width: 100%;
   overflow: hidden;
-  border-radius: .1rem;
+  border-radius: 10px;
 `
 
 export default function OneNFT() {
@@ -143,8 +143,8 @@ export default function OneNFT() {
   }
 
   return <Box
-    padding={"1.6rem"}
-    // width={"16rem"}
+    padding={"160px"}
+    // width={"1600px"}
     background={"transparent"}
     position={"relative"}
   >
@@ -152,15 +152,15 @@ export default function OneNFT() {
     <Banner url={detailData?.bannerImageUrl}/>
     <Box position={"relative"} zIndex={1}>
       {/* nav */}
-      <Flex flexDirection={"row"} gap={".15rem"} alignItems={"start"}>
-        <Icon style={{cursor: 'pointer'}} height={".36rem"} width={".36rem"} src={PopIcon}
+      <Flex flexDirection={"row"} gap={"15px"} alignItems={"start"}>
+        <Icon style={{cursor: 'pointer'}} height={"36px"} width={"36px"} src={PopIcon}
               onClick={() => navigate(`/marketplace/collections/${detailData?.address}`)}/>
-        <Flex flexDirection={"column"} gap={".05rem"}>
-          <Typography fontSize={".16rem"} color={"#fff"} fontWeight={500}
+        <Flex flexDirection={"column"} gap={"5px"}>
+          <Typography fontSize={"16px"} color={"#fff"} fontWeight={500}
                       fontFamily={"Montserrat"}>{detailData?.collectionName}</Typography>
-          <Flex alignItems={"center"} gap={".12rem"}>
+          <Flex alignItems={"center"} gap={"12px"}>
             <Typography
-              fontSize={".3rem"}
+              fontSize={"30px"}
               color={"#fff"}
               fontWeight={800}
             >{`${detailData?.singularForName()} #${detailData?.tokenId}`}</Typography>
@@ -169,14 +169,14 @@ export default function OneNFT() {
               content={"Reported for Suspicious Activity on OpenSea"
             }>
               <Icon
-                width={".24rem"}
-                height={".24rem"}
+                width={"24px"}
+                height={"24px"}
                 src={nftWarningIcon}
                 hidden={openSeaIsNormalization}/>
             </Popover>
           </Flex>
 
-          <Flex flexDirection={"row"} gap={".15rem"} alignItems={"stretch"}>
+          <Flex flexDirection={"row"} gap={"15px"} alignItems={"stretch"}>
             {
               rarityData && Object.entries(rarityData).map(([key, val]) => {
                 return val && val.rank && <Popover

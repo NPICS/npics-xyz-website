@@ -14,7 +14,7 @@ import BigNumber from 'bignumber.js';
 
 const Wrap = styled.div`
   text-align: center;
-  width: 8rem;
+  width: 800px;
   margin: 0 auto;
   .progress {
     .progress-text {
@@ -24,22 +24,22 @@ const Wrap = styled.div`
         font-family: 'PingFang HK';
         font-style: normal;
         font-weight: 600;
-        font-size: .16rem;
+        font-size: 16px;
         color: rgba(255,255,255,.5);
       }
     }
   }
   .loading {
     text-align: center;
-    margin: .6rem 0;
+    margin: 60px 0;
   }
   .wait-time {
-    margin-top: .3rem;
-    margin-bottom: .8rem;
+    margin-top: 30px;
+    margin-bottom: 80px;
     &>span:nth-child(1) {
-      font-size: .14rem;
+      font-size: 14px;
       color: rgba(255,255,255,.5);
-      margin-right: .1rem;
+      margin-right: 10px;
     }
   }
   .bottomBtn {
@@ -49,7 +49,7 @@ const Wrap = styled.div`
       display: flex;
       align-items: center;
       img {
-        margin-right: .1rem;
+        margin-right: 10px;
       }
     }
   }
@@ -235,7 +235,7 @@ export default function SignGif(props: Iprops) {
       <div className='bottomBtn'>
         {list.map((item) => {
           return (
-            <ButtonDefault types='two' minWidth='1.8rem' height='.52rem' key={item.text}>
+            <ButtonDefault types='two' minWidth='180px' height='52px' key={item.text}>
               <div className='logo'>
                 <img src={item.imgurl} alt="" />
                 <span>{item.text}</span>

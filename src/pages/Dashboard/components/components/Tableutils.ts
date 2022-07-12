@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 export const BgTable = styled.div`
   overflow: auto;
-  height: 4.7rem;
+  height: 470px;
   &::-webkit-scrollbar{
       display:none;
     }
@@ -13,22 +13,22 @@ export const BgTable = styled.div`
     display: flex;
     cursor: pointer;
     .avatar {
-      width: .48rem;
-      height: .48rem;
+      width: 48px;
+      height: 48px;
       border-radius: 10px;
     }
     .text {
       display: flex;
       flex-direction: column;
-      margin-left: .1rem;
+      margin-left: 10px;
       &>div:nth-child(1) {
         display: flex;
         flex-wrap: nowrap;
         color: #fff;
-        font-size: .16rem;
+        font-size: 16px;
         &>span:nth-child(1) {
-          max-width: .42rem;
-          margin-right: .03rem;
+          max-width: 42px;
+          margin-right: 3px;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
@@ -41,12 +41,12 @@ export const BgTable = styled.div`
       &>div:nth-child(2) {
         display: flex;
         color: rgba(255, 255, 255, .5);
-        font-size: .14rem;
+        font-size: 14px;
         &>span {
           ${flex}
           &>img {
-            margin: 0 .04rem 0 .08rem;
-            height: .14rem;
+            margin: 0 4px 0 8px;
+            height: 14px;
           }
         }
       }
@@ -55,57 +55,57 @@ export const BgTable = styled.div`
   .contract {
     ${flex}
     font-weight: 500;
-    font-size: .16rem;
+    font-size: 16px;
     color: #fff;
     cursor: pointer;
     &>span {
-      max-width: .42rem;
-      margin-right: .03rem;
+      max-width: 42px;
+      margin-right: 3px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
     &>img {
-      width: .16rem;
-      height: .16rem;
-      margin-left: .06rem;
+      width: 16px;
+      height: 16px;
+      margin-left: 6px;
     }
   }
   .imgPrice {
     ${flex}
     font-weight: 600;
-    font-size: .16rem;
+    font-size: 16px;
     color: #fff;
     &>img {
-      width: .14rem;
-      height: .22rem;
-      margin-right: .06rem;
+      width: 14px;
+      height: 22px;
+      margin-right: 6px;
     }
   }
   .healthFactor {
     ${flex}
     font-weight: 600;
-    font-size: .16rem;
+    font-size: 16px;
     color: #fff;
   }
   .status {
     ${flex}
     font-weight: 500;
-    font-size: .16rem;
+    font-size: 16px;
   }
 
 
   .ant-table-thead {
     tr {
       th {
-        width: 1.85rem !important;
+        width: 185px !important;
       }
     }
   }
   .ant-table-tbody {
     tr {  
       td {
-        width: 1.85rem !important;
+        width: 185px !important;
         height: 0 !important;
       }
     }
@@ -113,13 +113,13 @@ export const BgTable = styled.div`
       background: #000000;
       border: 1px solid rgba(255, 255, 255, .2);
       border-radius: 10px;
-      width: 1.2rem;
-      height: .48rem;
-      line-height: .48rem;
+      width: 120px;
+      height: 48px;
+      line-height: 48px;
       text-align: center;
       border: 1px solid rgba(255, 255, 255, .2);
       font-weight: 600;
-      font-size: .14rem;
+      font-size: 14px;
       cursor: pointer;
     }
     .ant-table-placeholder {
@@ -145,29 +145,29 @@ export const Wrap = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin-bottom: .2rem;
+  margin-bottom: 20px;
   .total {
     display: flex;
     align-items: end;
     .backBtn {
-      width: .36rem;
-      height: .36rem;
-      line-height: .36rem;
+      width: 36px;
+      height: 36px;
+      line-height: 36px;
       display: flex;
       justify-content: center;
       align-items: center;
       color: #fff;
       background: rgba(255, 255, 255, .2);
-      border: .01rem solid rgba(255, 255, 255, .3);
-      border-radius: .05rem;
-      margin-right: .15rem;
+      border: 1px solid rgba(255, 255, 255, .3);
+      border-radius: 5px;
+      margin-right: 15px;
       cursor: pointer;
     }
     .title {
       font-family: 'Montserrat';
       font-style: normal;
       font-weight: 800;
-      font-size: .3rem;
+      font-size: 30px;
       color: #fff;
     }
     .collection-name {
@@ -175,9 +175,9 @@ export const Wrap = styled.div`
     }
   }
   .checkBtn {
-    width: 1.48rem;
-    height: .42rem;
-    padding: .11rem .18rem;
+    width: 148px;
+    height: 42px;
+    padding: 11px 18px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -186,7 +186,7 @@ export const Wrap = styled.div`
     border: 1px solid rgba(255, 255, 255, .2);
     border-radius: 10px;
     &>div:nth-child(1) {
-      margin-right: .1rem;
+      margin-right: 10px;
     }
     &>div:nth-child(2) {
       color: #7BD742;
@@ -195,18 +195,18 @@ export const Wrap = styled.div`
 }
 .price {
   display: flex;
-  width: 12.7rem;
-  /* height: 3.06rem; */
-  padding: .2rem;
+  width: 1270px;
+  /* height: 306px; */
+  padding: 20px;
   align-items: center;
   background: rgba(255, 255, 255, .1);
-  border: .01rem solid rgba(255, 255, 255, .2);
-  border-radius: .1rem;
+  border: 1px solid rgba(255, 255, 255, .2);
+  border-radius: 10px;
   &>img {
-    width: 2.58rem;
-    height: 2.58rem;
+    width: 258px;
+    height: 258px;
     border-radius: 10px;
-    margin-right: 1.14rem;
+    margin-right: 114px;
   }
   .price-item {
     color: #fff;
@@ -217,22 +217,22 @@ export const Wrap = styled.div`
     display: grid;
     grid-template-columns: repeat(3,auto);
     flex: 1;
-    grid-gap: .3rem;
+    grid-gap: 30px;
     &>div {
       display: flex;
       flex-direction: column;
       &>div:nth-child(1) {
         font-weight: 500;
-        font-size: .14rem;  
+        font-size: 14px;  
         color: rgba(255,255,255,.5);
       }
       &>div:nth-child(2) {
         display: flex;
         align-items: center;
         font-weight: 600;
-        font-size: .2rem;
+        font-size: 20px;
         &>:first-child {
-          margin-right: .08rem;
+          margin-right: 8px;
         }
       }
       &>div {
@@ -243,25 +243,25 @@ export const Wrap = styled.div`
 }
 .rotation {
   display: flex;
-  margin-top: .5rem;
+  margin-top: 50px;
   &>div {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 1.08rem;
-    height: .42rem;
+    width: 108px;
+    height: 42px;
     background: #000000;
     color: #fff;
-    border: .01rem solid rgba(255, 255, 255, .2);
-    border-radius: .1rem;
+    border: 1px solid rgba(255, 255, 255, .2);
+    border-radius: 10px;
     font-family: 'PingFang HK';
     font-style: normal;
     font-weight: 600;
-    font-size: .16rem;
+    font-size: 16px;
     cursor: pointer;
   }
   .Repay {
-    margin-right: .1rem;
+    margin-right: 10px;
   }
   .active {
     background: #fff;
@@ -271,17 +271,17 @@ export const Wrap = styled.div`
 `
 
 export const Repay = styled.div`
-  width: 12.7rem;
-  margin-top: .2rem;
+  width: 1270px;
+  margin-top: 20px;
   .panel {
     background: rgba(255, 255, 255, .1);
-    border: .01rem solid rgba(255, 255, 255, .2);
-    border-radius: .1rem;
+    border: 1px solid rgba(255, 255, 255, .2);
+    border-radius: 10px;
     overflow: hidden;
     .enough {
       background: #7BD742;
       color: #000;
-      height: .88rem;
+      height: 88px;
       ${flex}
       font-weight: 600;
     }
@@ -289,15 +289,15 @@ export const Repay = styled.div`
       ${flex}
       background: blue;
       color: #fff;
-      height: .88rem;
+      height: 88px;
       text-align: center;
       font-weight: 600;
     }
     .un-enough {
       background: #D03434;
       color: #fff;
-      height: .88rem;
-      line-height: .88rem;
+      height: 88px;
+      line-height: 88px;
       text-align: center;
       font-weight: 600;
     }
@@ -305,21 +305,21 @@ export const Repay = styled.div`
       display: flex;
       justify-content: space-evenly;
       align-items: center;
-      height: 1.92rem;
+      height: 192px;
       color: #ffffff;
       .space {
-        margin-left: .05rem;
+        margin-left: 5px;
       }
     }
   }
 
   .progress {
-    margin-top: .35rem;
+    margin-top: 35px;
   }
 
   .confirm {
-    margin-top: 1rem;
-    margin-bottom: 1.5rem;
+    margin-top: 100px;
+    margin-bottom: 150px;
     button {
       margin: 0 auto;
     }

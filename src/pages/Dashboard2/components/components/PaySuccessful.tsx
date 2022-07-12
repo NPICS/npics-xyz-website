@@ -46,42 +46,42 @@ export default function PaySuccessful(props:IProps) {
   return <Flex
     flexDirection={"column"}
   >
-    <Flex alignItems="center" justifyContent="space-between" marginBottom=".3rem">
+    <Flex alignItems="center" justifyContent="space-between" marginBottom="30px">
       <Typography></Typography>
-      <Typography  fontSize=".3rem" fontWeight="800" color="#000">Congratulations！</Typography>
-      <div style={{cursor: 'pointer'}}><Icon width=".24rem" height=".24rem" src={imgurl.dashboard.Cancel} onClick={() => {onClose()}}/></div>
+      <Typography  fontSize="30px" fontWeight="800" color="#000">Congratulations！</Typography>
+      <div style={{cursor: 'pointer'}}><Icon width="24px" height="24px" src={imgurl.dashboard.Cancel} onClick={() => {onClose()}}/></div>
     </Flex>
 
-    <Flex width="7rem" height="4rem" border="1px solid rgba(0,0,0,.1)" borderRadius="10px" flexDirection='column' justifyContent="space-around">
-      <Typography textAlign="center"><Icon width="1.6rem" height="1.6rem" src={imgurl.dashboard.success} /></Typography>
+    <Flex width="700px" height="400px" border="1px solid rgba(0,0,0,.1)" borderRadius="10px" flexDirection='column' justifyContent="space-around">
+      <Typography textAlign="center"><Icon width="160px" height="160px" src={imgurl.dashboard.success} /></Typography>
       
-      <Flex gap=".2rem" justifyContent="center" alignItems="center">
-        <Icon style={{borderRadius:"10px"}}  width=".88rem" height=".88rem" src={activities?.imageUrl}/>
+      <Flex gap="20px" justifyContent="center" alignItems="center">
+        <Icon style={{borderRadius:"10px"}}  width="88px" height="88px" src={activities?.imageUrl}/>
         <Flex flexDirection="column">
-          <Flex maxWidth="3.4rem" flexWrap="wrap" marginBottom=".12rem">
-              <Typography fontSize=".16rem" fontWeight="700" color="#FF490F">
-                <Typography marginRight={".05rem"} display="inline-block" fontSize=".16rem" fontWeight="700" color="#000">You've deposited</Typography>
+          <Flex maxWidth="340px" flexWrap="wrap" marginBottom="12px">
+              <Typography fontSize="16px" fontWeight="700" color="#FF490F">
+                <Typography marginRight={"5px"} display="inline-block" fontSize="16px" fontWeight="700" color="#000">You've deposited</Typography>
                 {`${activities && _toString(activities?.collectionName)} ${activities?.tokenId}`} 
-                <Typography marginLeft={".05rem"} display="inline-block" fontSize=".16rem" fontWeight="700" color="#000">and minted</Typography>
+                <Typography marginLeft={"5px"} display="inline-block" fontSize="16px" fontWeight="700" color="#000">and minted</Typography>
               </Typography>
           </Flex>
-          <Flex alignItems="center" gap=".1rem" onClick={() => jumpToNeoEtherscan()}>
-            <Typography style={{cursor: 'pointer'}} fontSize=".16rem" fontWeight="500" color="rgba(0,0,0,.5)">
+          <Flex alignItems="center" gap="10px" onClick={() => jumpToNeoEtherscan()}>
+            <Typography style={{cursor: 'pointer'}} fontSize="16px" fontWeight="500" color="rgba(0,0,0,.5)">
               {`NEO ${activities &&  _toString(activities?.collectionName)} ${activities?.tokenId}`} 
             </Typography>
-            <Icon marginLeft=".1rem" width=".14rem" height=".14rem" src={imgurl.dashboard.export14}/>
+            <Icon marginLeft="10px" width="14px" height="14px" src={imgurl.dashboard.export14}/>
           </Flex>
         </Flex>
       </Flex>
 
       <Flex alignItems="center" justifyContent='center' onClick={() => jumpToEtherscan()} >
-        <Typography style={{cursor: 'pointer'}} marginRight={".05rem"} fontSize=".14rem" fontWeight="500" color="rgba(0,0,0,.5)">View on etherscan</Typography>
-        <Icon width=".14rem" height=".14rem" src={imgurl.dashboard.export14}/>
+        <Typography style={{cursor: 'pointer'}} marginRight={"5px"} fontSize="14px" fontWeight="500" color="rgba(0,0,0,.5)">View on etherscan</Typography>
+        <Icon width="14px" height="14px" src={imgurl.dashboard.export14}/>
       </Flex>
     </Flex>
-    <Flex display="inline-block" marginTop=".21rem" justifyContent='center' alignItems="center" >
-      <div style={{ padding: ".16rem .24rem", border: "1px solid rgba(0, 0, 0, 0.2)", borderRadius: "10px", cursor: "pointer" }}>
-        <Typography fontSize=".16rem" fontWeight="700" color="#000" onClick={async()=> {
+    <Flex display="inline-block" marginTop="21px" justifyContent='center' alignItems="center" >
+      <div style={{ padding: "16px 24px", border: "1px solid rgba(0, 0, 0, 0.2)", borderRadius: "10px", cursor: "pointer" }}>
+        <Typography fontSize="16px" fontWeight="700" color="#000" onClick={async()=> {
           activities && await copyToClipboard(activities?.address);
           onClose()
         }}>Add to wallet</Typography>

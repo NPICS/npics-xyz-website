@@ -32,7 +32,7 @@ export function PopupTitle(props: {
   >
     <Typography
       fontWeight={800}
-      fontSize={".3rem"}
+      fontSize={"30px"}
       color={"#000"}
     >{props.title}</Typography>
   </Flex>
@@ -41,7 +41,7 @@ export function PopupTitle(props: {
 const Cover = styled.img`
   display: block;
   background: #eee;
-  border-radius: .1rem;
+  border-radius: 10px;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -55,8 +55,8 @@ function PayTypeButton(props: {
   tap(): void
 }) {
   return <Flex
-    borderRadius={".1rem"}
-    padding={".25rem .4rem"}
+    borderRadius={"10px"}
+    padding={"25px 40px"}
     background={props.isSelected ? `#7BD742` : `#fff`}
     border={`1px solid ${props.isSelected ? "#7BD742" : "#e5e5e5"}`}
     alignItems={"center"}
@@ -67,26 +67,26 @@ function PayTypeButton(props: {
     onClick={props.tap}
   >
     <Icon
-      width={".2rem"}
-      height={".14rem"}
+      width={"20px"}
+      height={"14px"}
       src={payTypeSelectedIcon}
       style={{
         "display": props.isSelected ? "block" : "none"
       }}
     />
     <Typography
-      fontSize={".18rem"}
+      fontSize={"18px"}
       fontWeight={500}
       color={"#000"}
-      marginLeft={".1rem"}
+      marginLeft={"10px"}
     >{props.name}</Typography>
     <Flex flex={1}></Flex>
-    <Icon width={".12rem"} height={".19rem"} src={props.isEth ? ethIcon : wethIcon}/>
+    <Icon width={"12px"} height={"19px"} src={props.isEth ? ethIcon : wethIcon}/>
     <Typography
-      fontSize={".2rem"}
+      fontSize={"20px"}
       fontWeight={500}
       color={"#000"}
-      marginLeft={".1rem"}
+      marginLeft={"10px"}
     >{props.balance}</Typography>
   </Flex>
 }
@@ -102,19 +102,19 @@ export const CancelButton = styled.button`
   border: 1px solid #00000033;
   background: #fff;
   color: #000;
-  font-size: .16rem;
+  font-size: 16px;
   font-weight: 700;
-  border-radius: .1rem;
-  height: .52rem;
-  min-width: 2rem;
+  border-radius: 10px;
+  height: 52px;
+  min-width: 200px;
   cursor: pointer;
 `
 
 export const ConfirmButton = styled(Button2)`
   cursor: pointer;
-  height: .52rem;
-  min-width: 2rem;
-  font-size: .16rem;
+  height: 52px;
+  min-width: 200px;
+  font-size: 16px;
   font-weight: 700;
 `
 
@@ -301,10 +301,10 @@ export default function NFTPay(props: {
   }
 
   return <Flex
-    width={"8.8rem"}
+    width={"880px"}
     background={"#fff"}
-    borderRadius={".1rem"}
-    padding={".4rem"}
+    borderRadius={"10px"}
+    padding={"40px"}
     flexDirection={"column"}
   >
 
@@ -314,11 +314,11 @@ export default function NFTPay(props: {
 
     {/* nft info */}
     <Grid
-      marginTop={".3rem"}
+      marginTop={"30px"}
       border={"1px solid #e5e5e5"}
-      borderRadius={".1rem"}
-      padding={".2rem"}
-      gridTemplateColumns={"2.7rem auto"}
+      borderRadius={"10px"}
+      padding={"20px"}
+      gridTemplateColumns={"270px auto"}
       // alignItems={"start"}
       alignContent={"start"}
       gridTemplateAreas={`
@@ -328,8 +328,8 @@ export default function NFTPay(props: {
                 "payTitle payTitle"
                 "payType payType"
             `}
-      gridColumnGap={".16rem"}
-      gridRowGap={".16rem"}
+      gridColumnGap={"16px"}
+      gridRowGap={"16px"}
     >
       <Grid gridArea={"cover"}>
         <Cover src={props.nft.imageUrl}/>
@@ -337,91 +337,91 @@ export default function NFTPay(props: {
       <Grid gridArea={"title"}>
         <Typography
           color={"rgba(0,0,0,.5)"}
-          fontSize={".14rem"}
+          fontSize={"14px"}
           fontWeight={500}
         >
           {props.nft.collectionName}
         </Typography>
         <Typography
           color={"#000"}
-          fontSize={".2rem"}
+          fontSize={"20px"}
           fontWeight={700}
-          marginTop={".06rem"}
+          marginTop={"6px"}
         >{`${props.nft.collectionName} #${props.nft.tokenId}`}</Typography>
       </Grid>
       <Grid
         gridArea={"payment"}
         border={"1px solid #e5e5e5"}
-        borderRadius={".1rem"}
-        padding={".2rem .28rem"}
+        borderRadius={"10px"}
+        padding={"20px 28px"}
       >
         <Flex flexDirection={"row"} alignItems={"center"}>
-          <Icon width={".24rem"} height={".24rem"} src={downPayIcon}/>
+          <Icon width={"24px"} height={"24px"} src={downPayIcon}/>
           <Typography
-            marginLeft={".1rem"}
+            marginLeft={"10px"}
             fontWeight={700}
-            fontSize={".16rem"}
+            fontSize={"16px"}
             color={"#FF490F"}
           >Down Payment</Typography>
           <Flex flex={1}></Flex>
-          <Icon width={".12rem"} height={".18rem"} src={ethIcon}/>
+          <Icon width={"12px"} height={"18px"} src={ethIcon}/>
           <Typography
             fontWeight={700}
-            fontSize={".24rem"}
-            marginLeft={".1rem"}
+            fontSize={"24px"}
+            marginLeft={"10px"}
           >{numberFormat(props.actualAmount.div(10 ** 18).toFixed())}</Typography>
         </Flex>
       </Grid>
       <Grid
         gridArea={"loan"}
         border={"1px solid #e5e5e5"}
-        borderRadius={".1rem"}
-        padding={".2rem .28rem"}
-        gridGap={".22rem"}
+        borderRadius={"10px"}
+        padding={"20px 28px"}
+        gridGap={"22px"}
       >
         <Flex alignItems={"center"}>
           <Typography
             color={"#000"}
-            fontSize={".14rem"}
+            fontSize={"14px"}
             fontWeight={500}
           >Listed Price</Typography>
           <Flex flex={1}></Flex>
-          <Icon width={".10rem"} height={".15rem"} src={ethIcon}/>
+          <Icon width={"10px"} height={"15px"} src={ethIcon}/>
           <Typography
             color={"#000"}
-            fontSize={".16rem"}
+            fontSize={"16px"}
             fontWeight={500}
-            marginLeft={".06rem"}
+            marginLeft={"6px"}
           >{props.nft.basePriceFormat()}</Typography>
         </Flex>
         <Flex alignItems={"center"}>
           <Typography
             color={"#000"}
-            fontSize={".14rem"}
+            fontSize={"14px"}
             fontWeight={500}
           >Loan Amount</Typography>
           <Flex flex={1}></Flex>
-          <Icon width={".10rem"} height={".15rem"} src={ethIcon}/>
+          <Icon width={"10px"} height={"15px"} src={ethIcon}/>
           <Typography
             color={"#000"}
-            fontSize={".16rem"}
+            fontSize={"16px"}
             fontWeight={500}
-            marginLeft={".06rem"}
+            marginLeft={"6px"}
           >{numberFormat(props.availableBorrow.div(10 ** 18).toFixed())}</Typography>
         </Flex>
       </Grid>
       <Grid gridArea={"payTitle"}>
         <Typography
           fontWeight={500}
-          fontSize={".2rem"}
+          fontSize={"20px"}
           color={"#000"}
-          marginTop={".24rem"}
+          marginTop={"24px"}
         >Pay With</Typography>
       </Grid>
       <Grid
         gridArea={"payType"}
         gridTemplateColumns={"1fr 1fr"}
-        gridColumnGap={".1rem"}
+        gridColumnGap={"10px"}
       >
         <PayTypeButton
           isSelected={(payType & PayType.ETH) > 0}
@@ -446,9 +446,9 @@ export default function NFTPay(props: {
       </Grid>
     </Grid>
     {/*  terms of service  */}
-    <Box marginTop={".24rem"}>
+    <Box marginTop={"24px"}>
       <label>
-        <Flex alignItems={"center"} gap={".12rem"}>
+        <Flex alignItems={"center"} gap={"12px"}>
           <Checkbox
 
             defaultChecked={didReadService}
@@ -456,7 +456,7 @@ export default function NFTPay(props: {
           />
           <Typography
             color={"#000"}
-            fontSize={".14rem"}
+            fontSize={"14px"}
             fontWeight={500}
             style={{
               "userSelect": "none"
@@ -465,7 +465,7 @@ export default function NFTPay(props: {
         </Flex>
       </label>
     </Box>
-    <Flex alignItems={"center"} justifyContent={"center"} gap={".2rem"} marginTop={".4rem"}>
+    <Flex alignItems={"center"} justifyContent={"center"} gap={"20px"} marginTop={"40px"}>
       <CancelButton type={"button"} onClick={() => props.cancelBlock?.()}>Cancel</CancelButton>
       <ConfirmButton
         type={"button"}

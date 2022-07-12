@@ -18,34 +18,34 @@ const Wrap = styled.div`
   display: flex;
   flex-direction: row;
   height: 100%;
-  padding-top: .9rem;
+  padding-top: 90px;
   background-color: #191919;
   .collections {
-    width: 5.3rem;
+    width: 530px;
     color: #fff;
-    border-right: .01rem solid rgba(255,255,255,.1);
-    padding-top: .9rem;
-    padding-right: .2rem;
-    padding-left: 1.5rem;
+    border-right: 1px solid rgba(255,255,255,.1);
+    padding-top: 90px;
+    padding-right: 20px;
+    padding-left: 150px;
     .collections-title {
       font-weight: 600;
-      font-size: .2rem;
-      margin-bottom: .2rem;
+      font-size: 20px;
+      margin-bottom: 20px;
     }
     .collections-box {
       display: flex;
-      border: .01rem solid rgba(255,255,255,.3);
+      border: 1px solid rgba(255,255,255,.3);
       border-radius: 10px;
       color: #fff;
       justify-content: space-between;
       align-items: center;
-      padding: .1rem;
-      margin-bottom: .08rem;
+      padding: 10px;
+      margin-bottom: 8px;
       cursor: pointer;
       &>img {
-        width: .5rem;
-        height: .5rem;
-        margin-right: .08rem;
+        width: 50px;
+        height: 50px;
+        margin-right: 8px;
         border-radius: 25px;
       }
       .text {
@@ -56,14 +56,14 @@ const Wrap = styled.div`
           display: flex;
           justify-content: space-between;
           align-items: center;
-          line-height: .22rem;
-          margin-bottom: .05rem;
+          line-height: 22px;
+          margin-bottom: 5px;
           &>span:nth-child(1) {
-            font-size: .16rem;
+            font-size: 16px;
             font-weight: 600;
           }
           &>span:nth-child(2) {
-            font-size: .16rem;
+            font-size: 16px;
             font-weight: 500;
           }
         }
@@ -71,22 +71,22 @@ const Wrap = styled.div`
           display: flex;
           justify-content: space-between;
           align-items: center;
-          font-size: .14rem;
+          font-size: 14px;
           font-weight: 500;
-          line-height: .2rem;
+          line-height: 20px;
           &>div:nth-child(1) {
             display: flex;
             align-items: center;
             &>span {
-              margin-right: .1rem;
+              margin-right: 10px;
             }
             &>div {
               display: flex;
               align-items: center;
               img {
-                margin-right: .02rem;
-                width: .1rem;
-                height: .15rem;
+                margin-right: 2px;
+                width: 10px;
+                height: 15px;
               }
             }
           }
@@ -94,9 +94,9 @@ const Wrap = styled.div`
             display: flex;
             align-items: center;
             &>img {
-              margin-right: .02rem;
-              width: .1rem;
-              height: .15rem;
+              margin-right: 2px;
+              width: 10px;
+              height: 15px;
             }
           }
           &>div:nth-child(3) {
@@ -107,13 +107,13 @@ const Wrap = styled.div`
     }
   }
   .content {
-    width: calc(100% - 5.3rem);
-    padding-right: 1.2rem;
-    padding-left: .26rem;
-    padding-top: .6rem;
-    padding-bottom: .3rem;
+    width: calc(100% - 530px);
+    padding-right: 120px;
+    padding-left: 26px;
+    padding-top: 60px;
+    padding-bottom: 30px;
     .content-search {
-      height: 1.08rem;
+      height: 108px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -125,31 +125,31 @@ const Wrap = styled.div`
           font-family: 'Montserrat';
           font-style: normal;
           font-weight: 800;
-          font-size: .3rem;
+          font-size: 30px;
         }
         &>span:nth-child(2) {
           font-family: 'Montserrat';
           font-style: normal;
           font-weight: 600;
-          font-size: .14rem;
+          font-size: 14px;
           color: rgba(255,255,255,.5);
         }
       }
       &>div:nth-child(2) {
         display: flex;
         &>input {
-          margin-right: .2rem;
+          margin-right: 20px;
         }
         .ant-select {
-          width: 2.48rem;
+          width: 248px;
         }
       }
 
       .ant-select {
         align-self: end;
-        width: 2.48rem;
+        width: 248px;
         border: 1px solid rgba(255, 255, 255, .5);
-        border-radius: .1rem;
+        border-radius: 10px;
         .ant-select-arrow {
           color: #fff;
         }
@@ -169,14 +169,14 @@ const Wrap = styled.div`
     }
     .content-items {
       display: flex;
-      min-height: 5rem;
+      min-height: 500px;
       /* cursor: pointer; */
       &>div {
         width: 100%;
         display: grid;
-        grid-template-columns: repeat(auto-fill, 2.96rem);
+        grid-template-columns: repeat(auto-fill, 296px);
         align-items: start;
-        grid-gap: .1rem;
+        grid-gap: 10px;
         justify-content: space-between;
         //display: flex;
         //flex-wrap: wrap;
@@ -192,7 +192,7 @@ const Wrap = styled.div`
         justify-content: center;
         align-items: center;
         color: #fff;
-        font-size: .2rem;
+        font-size: 20px;
         font-weight: 600;
       }
     }

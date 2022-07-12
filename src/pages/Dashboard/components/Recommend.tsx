@@ -6,7 +6,7 @@ import { imgurl } from 'utils/globalimport';
 const MySwiper = styled(Swiper)`
   width: 100%;
   transition-timing-function: linear;
-  margin-top: .37rem;
+  margin-top: 37px;
   display: flex;
 `
 const SwiperWrap = styled.div`
@@ -16,25 +16,25 @@ const SwiperWrap = styled.div`
   .swiper-slide {
     position: relative;
     &>img {
-      width: 4.2rem;
-      height: 2.4rem;
+      width: 420px;
+      height: 240px;
     }
     .text {
       position: absolute;
       color: #fff;
       bottom: 0;
-      width: 4.2rem;
-      height: .8rem;
+      width: 420px;
+      height: 80px;
       display: flex;
       align-items: center;
-      padding-left: .3rem;
+      padding-left: 30px;
       background: rgba(0, 0, 0, .8);
-      border: .01rem solid rgba(255, 255, 255, .2);
+      border: 1px solid rgba(255, 255, 255, .2);
       backdrop-filter: blur(20px);
       img {
-        width: .5rem;
-        height: .5rem;
-        margin-right: .18rem;
+        width: 50px;
+        height: 50px;
+        margin-right: 18px;
       }
     }
   }

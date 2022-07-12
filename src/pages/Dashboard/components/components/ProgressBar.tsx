@@ -9,20 +9,20 @@ interface IProps {
 const Container = styled.div`
   position: relative;
   width: 100%;
-  height: .08rem;
+  height: 8px;
   display: flex;
   justify-content: center;
   align-items: center;
   & > :first-child {
   width: inherit;
   background-color: rgba(0,0,0,.1);
-  border: .01rem solid rgba(255, 255, 255, .2);
-  border-radius: .05rem;
+  border: 1px solid rgba(255, 255, 255, .2);
+  border-radius: 5px;
   overflow: hidden;
   display: flex;
   align-items: center;
   div {
-    height: .06rem;
+    height: 6px;
     background: linear-gradient(284.2deg, #FF0000 0%, #FEB240 101.06%);
     border-radius: 5px;
   }
@@ -32,9 +32,9 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   position: absolute;
-  width: .2rem;
-  height: .2rem;
-  border-radius: .1rem;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
   text-align: center;
   cursor: pointer;
   transform: translateX(-.5vw);
@@ -45,19 +45,19 @@ const Container = styled.div`
     width: .9vw;
   }
   .centerCircle {
-    width: .08rem;
-    height: .08rem;
-    border-radius: .04rem;
+    width: 8px;
+    height: 8px;
+    border-radius: 4px;
     background-color: #FF490F;
   }
 }
 .text {
   user-select: none;
   font-weight: 500;
-  font-size: .16rem;
+  font-size: 16px;
   color: rgba(0,0,0,.5);
   position: absolute;
-  top: .13rem;
+  top: 13px;
   transform: translateX(-.5vw);
 }
 `

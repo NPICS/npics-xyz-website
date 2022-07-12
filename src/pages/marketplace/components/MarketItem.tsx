@@ -230,7 +230,7 @@ function MarketItem() {
               </div>
             </div>
             <div onClick={showModal}>
-              <Button width='2rem' height='.48rem' text='Buy Now' fontSize='.2rem'></Button>
+              <Button width='200px' height='48px' text='Buy Now' fontSize='20px'></Button>
             </div>
           </div>
 
@@ -275,7 +275,7 @@ function MarketItem() {
           <Flexible
             title="Activities"
             headerBackground='#000000'
-            height=".76rem"
+            height="76px"
             // titleSelect={ActivitiesSelect}
           >
             <div>

@@ -28,9 +28,9 @@ interface DataType {
 }
 
 const BgTable = styled.div`
-  width: 16rem;
+  width: 1600px;
   margin: 0 auto;
-  /* margin-top: .5rem; */
+  /* margin-top: 50px; */
 `
 
 
@@ -98,9 +98,9 @@ export default function MyTable() {
       align: 'left',
       render: (text, row) => <Link to={`/marketplace/collections/${row.address}`} onClick={() => ScrollTop()}>
         <div style={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center'}}>
-          <img src={row.imageUrl} alt="" style={{ width: ".6rem", height: ".6rem", marginRight: ".1rem", borderRadius: '30px'}} />
-          <span style={{ wordBreak: 'break-all',fontSize: '.16rem', color: '#fff', fontWeight: '700', marginRight: '.1rem' }}>{text}</span>
-          <Icon style={{flexShrink: '0'}} src={openseaValidIcon} width={".16rem"} height={".16rem"}/>
+          <img src={row.imageUrl} alt="" style={{ width: "60px", height: "60px", marginRight: "10px", borderRadius: '30px'}} />
+          <span style={{ wordBreak: 'break-all',fontSize: '16px', color: '#fff', fontWeight: '700', marginRight: '10px' }}>{text}</span>
+          <Icon style={{flexShrink: '0'}} src={openseaValidIcon} width={"16px"} height={"16px"}/>
         </div>
       </Link>,
     },
@@ -130,8 +130,8 @@ export default function MyTable() {
       // defaultSortOrder: 'descend',
       sorter: (a, b) => a.floorPrice - b.floorPrice,
       render: (text) => <div style={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center'}}>
-        <img src={imgurl.whitePrice} alt=""  style={{marginRight: ".1rem"}}/>
-        <span style={{ fontSize: '.16rem', color: '#fff', fontWeight: '500'}}>{text}</span>
+        <img src={imgurl.whitePrice} alt=""  style={{marginRight: "10px"}}/>
+        <span style={{ fontSize: '16px', color: '#fff', fontWeight: '500'}}>{text}</span>
       </div>
     },
     {
@@ -141,7 +141,7 @@ export default function MyTable() {
       key: 'advanceRate',
       // defaultSortOrder: 'descend',
       sorter: (a, b) => a.advanceRate - b.advanceRate,
-      render: (text) => <div style={{ fontSize: '.16rem', color: '#fff', fontWeight: '500'}}>{`${text}%`}</div>
+      render: (text) => <div style={{ fontSize: '16px', color: '#fff', fontWeight: '500'}}>{`${text}%`}</div>
     },
     {
       title: 'Down Payment',
@@ -151,8 +151,8 @@ export default function MyTable() {
       // defaultSortOrder: 'descend',
       sorter: (a, b) => a.floorPrice - b.floorPrice,
       render: (text) => <div style={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center'}}>
-        <img src={imgurl.whitePrice} alt="" style={{marginRight: ".1rem"}}/>
-        <span style={{ fontSize: '.16rem', color: '#fff', fontWeight: '500'}}>{text}</span>
+        <img src={imgurl.whitePrice} alt="" style={{marginRight: "10px"}}/>
+        <span style={{ fontSize: '16px', color: '#fff', fontWeight: '500'}}>{text}</span>
       </div>
     },
   ];

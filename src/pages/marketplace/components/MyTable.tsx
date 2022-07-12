@@ -31,10 +31,10 @@ interface activities {
 
 const BgTable = styled.div`
   overflow: auto;
-  max-height: 8.1rem;
-  padding-bottom: .1rem;
-  border-bottom-left-radius: .1rem;
-  border-bottom-right-radius: .1rem;
+  max-height: 810px;
+  padding-bottom: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
   &::-webkit-scrollbar{
     display:none;
   }
@@ -42,9 +42,9 @@ const BgTable = styled.div`
     tr {
       th {
         color: #fff;
-        border-bottom: .01rem solid rgba(255,255,255,.2);
+        border-bottom: 1px solid rgba(255,255,255,.2);
         background-color: #191919;
-        height: .74rem;
+        height: 74px;
       }
     }
     color: #fff;
@@ -58,9 +58,9 @@ const BgTable = styled.div`
       }
       td {
         color: #fff;
-        border-bottom: .01rem solid rgba(255,255,255,.2);
+        border-bottom: 1px solid rgba(255,255,255,.2);
         background-color: #191919;
-        height: .7rem;
+        height: 70px;
       }
     }
   }
@@ -94,7 +94,7 @@ const columns:ColumnsType<activities> = [
     key: 'amount',
     align: 'left',
     render: (text,row) => text ? <div style={{display:"flex", alignItems: "center"}}>
-      <img src={row.imageUrl} alt="" style={{width:".14rem", height:".22rem", marginRight: ".1rem", verticalAlign: 'bottom'}}/>
+      <img src={row.imageUrl} alt="" style={{width:"14px", height:"22px", marginRight: "10px", verticalAlign: 'bottom'}}/>
       <span>{text}</span>
     </div> : <div>--</div>
   },

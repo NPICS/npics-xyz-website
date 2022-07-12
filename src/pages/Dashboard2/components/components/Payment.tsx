@@ -62,20 +62,20 @@ export default function Payment(props:IProps) {
   return <Flex
     flexDirection={"column"}
   >
-    <Flex alignItems="center" justifyContent="center" marginBottom=".3rem">
-      <Typography  fontSize=".3rem" fontWeight="800" color="#000">Repayment</Typography>
-      {/* <div style={{cursor: 'pointer'}}><Icon width=".24rem" height=".24rem" src={imgurl.dashboard.Cancel} onClick={() => {
+    <Flex alignItems="center" justifyContent="center" marginBottom="30px">
+      <Typography  fontSize="30px" fontWeight="800" color="#000">Repayment</Typography>
+      {/* <div style={{cursor: 'pointer'}}><Icon width="24px" height="24px" src={imgurl.dashboard.Cancel} onClick={() => {
         setShowPayment(false)
         setReload(!reload)
       }}/></div> */}
     </Flex>
 
-    <Flex width="7rem" height="4rem" border="1px solid rgba(0,0,0,.1)" borderRadius="10px" flexDirection='column'>
-      <Typography textAlign="center"><Icon width="2.87rem" height="2.87rem" src={progressIcon} /></Typography>
-      <Typography marginBottom=".21rem" textAlign="center" fontSize=".16rem" fontWeight="500" color="#000">Contract in progress</Typography>
-      <Typography textAlign="center" fontSize=".14rem" fontWeight="500" color="rgba(0,0,0,.5)">Estimated waiting time is <Typography display={"inline-block"} fontSize=".16rem" fontWeight="500" color="#000"  >30s</Typography></Typography>
+    <Flex width="700px" height="400px" border="1px solid rgba(0,0,0,.1)" borderRadius="10px" flexDirection='column'>
+      <Typography textAlign="center"><Icon width="287px" height="287px" src={progressIcon} /></Typography>
+      <Typography marginBottom="21px" textAlign="center" fontSize="16px" fontWeight="500" color="#000">Contract in progress</Typography>
+      <Typography textAlign="center" fontSize="14px" fontWeight="500" color="rgba(0,0,0,.5)">Estimated waiting time is <Typography display={"inline-block"} fontSize="16px" fontWeight="500" color="#000"  >30s</Typography></Typography>
     </Flex>
 
-    <Typography style={{cursor:'pointer'}} marginTop=".21rem" textAlign="center" fontSize=".14rem" fontWeight="500" color="rgba(0,0,0,.5)" onClick={() => {window.open(urls.resource)}}>How it works?</Typography>
+    <Typography style={{cursor:'pointer'}} marginTop="21px" textAlign="center" fontSize="14px" fontWeight="500" color="rgba(0,0,0,.5)" onClick={() => {window.open(urls.resource)}}>How it works?</Typography>
   </Flex>
 }

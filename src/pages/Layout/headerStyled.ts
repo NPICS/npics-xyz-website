@@ -32,12 +32,12 @@ export const accountNav = [
 
 export const Nav = styled.div`
   width: 100%;
-  height: .9rem;
+  height: 90px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 0 auto;
-  padding: .2rem 1.5rem;
+  padding: 20px 150px;
   /* background: transparent; */
   background: ${(props) => props.theme.headerBg};
   &>div {
@@ -52,25 +52,25 @@ export const Nav = styled.div`
         background: #fff;
         box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.1);
         border-radius: 20px;
-        margin-top: .2rem;
+        margin-top: 20px;
         .ant-popover-title{
           border-bottom: 0;
           &::after {
             content: '';
             display: block;
             width: 100%;
-            height: .01rem;
+            height: 1px;
             background-color: rgba(0,0,0,.1);
           }
           .account-title {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: .1rem 0;
+            padding: 10px 0;
             span {
               color: #000;
               font-weight: 700;
-              font-size: .16rem;
+              font-size: 16px;
             }
           }
         }
@@ -79,9 +79,9 @@ export const Nav = styled.div`
             display: flex;
             justify-content: space-between;
             color: #000;
-            font-size: .14rem;
+            font-size: 14px;
             font-weight: 600;
-            margin-bottom: .22rem;
+            margin-bottom: 22px;
             &>div:nth-child(2){
               color: #FF490F;
               cursor: pointer;
@@ -91,35 +91,35 @@ export const Nav = styled.div`
             display: flex;
             flex-direction: row;
             .address-icon {
-              margin-right: .1rem;
+              margin-right: 10px;
             }
             img {
-              width: .24rem;
-              height: .24rem;
+              width: 24px;
+              height: 24px;
             }
             .copy-icon {
-              margin-left: .1rem;
+              margin-left: 10px;
               cursor: pointer;
             }
             .address-text {
               color: #000;
               font-weight: 600;
-              font-size: .16rem;
+              font-size: 16px;
               .connected {
-                font-size: .14rem;
+                font-size: 14px;
                 color:rgba(0, 0, 0, .5);
               }
             }
           }
           .account-wallet {
-            margin-top: .4rem;
+            margin-top: 40px;
             .wallet-title {
               ${font01671}
               &::after {
                 content: '';
                 display: inline-block;
                 width: 100%;
-                height: .01rem;
+                height: 1px;
                 background-color: rgba(0,0,0,.1);
               }
             }
@@ -138,15 +138,15 @@ export const Nav = styled.div`
         background: #fff;
         box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.1);
         border-radius: 20px;
-        margin-top: .2rem;
-        padding: .2rem .2rem .3rem .2rem;
+        margin-top: 20px;
+        padding: 20px 20px 30px 20px;
         .ant-popover-title{
           min-height: 0;
           font-weight: 700;
-          font-size: .16rem;
+          font-size: 16px;
           color: #000;
-          margin-left: .1rem;
-          margin-bottom: .1rem;
+          margin-left: 10px;
+          margin-bottom: 10px;
           border-bottom: 0;
           padding: 0;
         }
@@ -161,9 +161,9 @@ export const BtnLink = styled(NavLink)`
   position: relative;
   color: #fff;
   font-weight: 700;
-  font-size: .16rem;
+  font-size: 16px;
   text-decoration: none;
-  margin-right: 1.3rem;
+  margin-right: 130px;
   &:hover {
     color: #fff;
   }
@@ -171,9 +171,9 @@ export const BtnLink = styled(NavLink)`
 export const LogoLink = styled(NavLink)`
   display: flex;
   align-items: center;
-  margin-right: 1.2rem;
+  margin-right: 120px;
   img{
-    width: 1.8rem;
+    width: 180px;
   }
 `
 export const FlexDiv = styled.div`
@@ -189,16 +189,16 @@ export const FlexDiv = styled.div`
     /* display: flex;
     justify-content: center;
     align-items: center;
-    width: 0.28rem;
-    height: 0.28rem;
+    width: 28px;
+    height: 28px;
     background: rgba(255,255,255,0.5);
-    margin-right: 0.2rem;
+    margin-right: 20px;
     border-radius: 7px; */
   }
 `
 export const ThemeImg = styled.img`
-  width: .34rem;
-  height: .34rem;
+  width: 34px;
+  height: 34px;
   cursor: pointer;
-  margin-left: .2rem;
+  margin-left: 20px;
 `;

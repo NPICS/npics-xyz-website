@@ -14,7 +14,7 @@ import {Popover} from "antd";
 
 const Title = styled.div`
   color: #000;
-  font-size: .14rem;
+  font-size: 14px;
   font-weight: 500;
   vertical-align: middle;
 `
@@ -32,7 +32,7 @@ export function AddressLink(props: {
     ><Flex
       alignItems={"center"}
       justifyContent={"end"}
-      gap={".06rem"}
+      gap={"6px"}
       style={{
         "cursor": "pointer"
       }}
@@ -43,7 +43,7 @@ export function AddressLink(props: {
       }}
     >
       <Value>{AddressAbbreviation(props.address) ?? TextPlaceholder}</Value>
-      <Icon width={".16rem"} src={addressLinkIcon}/>
+      <Icon width={"16px"} src={addressLinkIcon}/>
     </Flex></Popover>
 }
 
@@ -68,28 +68,28 @@ export default function NFTInfo(props: {
     return <Flex
         flexDirection={"column"}
         border={"1px solid #0000001A"}
-        borderRadius={".1rem"}
+        borderRadius={"10px"}
         alignItems={"stretch"}
     >
         <Flex
             flexDirection={"row"}
-            gap={".12rem"}
+            gap={"12px"}
             borderBottom={"1px solid #0000001A"}
-            padding={".14rem .25rem"}
+            padding={"14px 25px"}
             alignItems={"center"}
         >
-            <Icon width={".24rem"} height={".24rem"} src={titlePrefixIcon}/>
+            <Icon width={"24px"} height={"24px"} src={titlePrefixIcon}/>
             <Typography
                 fontWeight={500}
-                fontSize={".16rem"}
+                fontSize={"16px"}
                 color={"#000"}
             >Info</Typography>
         </Flex>
         <Grid
             gridTemplateColumns={"repeat(2, auto)"}
-            gridRowGap={".24rem"}
-            gridColumnGap={".24rem"}
-            padding={".24rem"}
+            gridRowGap={"24px"}
+            gridColumnGap={"24px"}
+            padding={"24px"}
         >
             <Title>Contract Address</Title>
             {/* TODO: link to etherscan nft */}

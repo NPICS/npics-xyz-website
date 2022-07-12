@@ -57,10 +57,10 @@ function Button(props:Iprops) {
 Button.defaultProps = {
   horizontal: true,
   border: false,
-  width: '2.1rem',
-  height: '.58rem',
+  width: '210px',
+  height: '58px',
   text: 'button',
-  fontSize: '.2rem',
+  fontSize: '20px',
   fontWeight: 700,
   borderRadius: '10px',
   types: "one"

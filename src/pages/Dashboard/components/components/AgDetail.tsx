@@ -275,7 +275,7 @@ export default function AgDetail(props: Iprops) {
           </div>
         </Repay> :
         <Offers>
-          <h2 style={{ "color": "#fff", "margin": ".16rem 0 0 .08rem" }}>Coming soon</h2>
+          <h2 style={{ "color": "#fff", "margin": "16px 0 0 8px" }}>Coming soon</h2>
         </Offers>
     }
 

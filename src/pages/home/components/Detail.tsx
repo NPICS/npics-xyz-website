@@ -7,16 +7,16 @@ const DetailSwiper = styled.div`
   width: 100%;
   .swiper_list{
     width: 100%;
-    /* height: 6rem; */
+    /* height: 600px; */
     display: flex;
     justify-content: center;
     align-items:center;
     flex-direction: column;
-    margin-bottom: 0.28rem;
-    /* margin: 1.12rem 0 0.8rem; */
+    margin-bottom: 28px;
+    /* margin: 112px 0 80px; */
     .detail_info_item{
       width: 100%;
-      height: 1.4rem;
+      height: 140px;
       display: flex;
       justify-content: center;
       align-items:flex-start;
@@ -25,22 +25,22 @@ const DetailSwiper = styled.div`
         font-family: 'Montserrat';
         font-style: normal;
         font-weight: 800;
-        font-size: .22rem;
+        font-size: 22px;
         color: #FFFFFF;
-        margin-bottom: 0.1rem;
+        margin-bottom: 10px;
       }
       .info_item_text{
         font-family: 'Montserrat';
         font-style: normal;
-        font-size: .12rem;
-        line-height: .2rem;
+        font-size: 12px;
+        line-height: 20px;
         -webkit-letter-spacing: 0.05em;
         -moz-letter-spacing: 0.05em;
         -ms-letter-spacing: 0.05em;
         letter-spacing: 0.05em;
         color: rgba(255,255,255,0.5);
         width: 80%;
-        /* margin-bottom: .47rem; */
+        /* margin-bottom: 47px; */
       }
     }
   }

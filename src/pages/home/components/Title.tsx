@@ -10,19 +10,19 @@ import { Link } from 'react-router-dom';
 import ButtonDefault from 'component/ButtonDefault';
 
 const TitleBox = styled.div`
-  width: 7.03rem;
+  width: 703px;
   .mySwiper{
     width: 100%;
   }
   .title_item{
     color: #fff;
       font-weight: 900;
-      font-size: .38rem;
-      line-height: .49rem;
+      font-size: 38px;
+      line-height: 49px;
       text-transform: uppercase;
       color: #FFFFFF;
-      width: 7.03rem;
-      margin-bottom: .1rem;
+      width: 703px;
+      margin-bottom: 10px;
       font-family: 'Montserrat';
       font-style: italic;
   }
@@ -30,17 +30,17 @@ const TitleBox = styled.div`
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 300;
-    font-size: .16rem;
-    line-height: .32rem;
+    font-size: 16px;
+    line-height: 32px;
     letter-spacing: 0.05em;
     color: rgba(255, 255, 255, 0.5);
-    width: 5.41rem;
-    margin-top:.2rem;
-    margin-bottom: .72rem;
+    width: 541px;
+    margin-top:20px;
+    margin-bottom: 72px;
   }
   .title_point{
     height: 10px;
-    margin-bottom: .27rem;
+    margin-bottom: 27px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -56,7 +56,7 @@ const TitleBox = styled.div`
   .title_btn{
     display: flex;
     button {
-        margin-right: .2rem;
+        margin-right: 20px;
       }
   }
 `

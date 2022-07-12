@@ -53,7 +53,7 @@ const StyledModal = styled(Modal)`
     border-radius: 10px;
   }
   .ant-modal-body {
-    padding: .4rem .5rem;
+    padding: 40px 50px;
     line-height: 1.2 !important;
   }
   .ant-modal-header {
@@ -98,7 +98,7 @@ function VaultsTable(props: IProps) {
             Floor: <span>
               <img src={imgurl.dashboard.ethGrey18} alt="" />
               {row.floorPrice.div(10 ** globalConstant.bit).toFixed(2, 1)}
-              <Typography marginLeft=".05rem">{`(${thousandFormat(row.floorPrice.times(ethRate)
+              <Typography marginLeft="5px">{`(${thousandFormat(row.floorPrice.times(ethRate)
                 .div(10 ** 18)
                 .toNumber())})`}</Typography>
             </span>
@@ -115,7 +115,7 @@ function VaultsTable(props: IProps) {
       render: (text, row) => <div className='contract' style={{ cursor: `${row.terminated() ? '' : 'pointer'}` }} onClick={() => jumpToNEOEthscan(row)}>
         <span title={row.singularForName()}>NEO {row.singularForName()}</span>
         &nbsp;{`#${row.tokenId}`}
-        {row.terminated() ? null : <Icon width=".16rem" height=".16rem" src={imgurl.dashboard.exportBlack18} alt="" />}
+        {row.terminated() ? null : <Icon width="16px" height="16px" src={imgurl.dashboard.exportBlack18} alt="" />}
       </div>
     },
     {
@@ -123,14 +123,14 @@ function VaultsTable(props: IProps) {
       dataIndex: 'debtString',
       key: 'debtString',
       align: 'center',
-      width: '1.8rem',
+      width: '180px',
       onCell: (row) => ({style: {backgroundColor: row.terminated() ? 'rgba(0, 0, 0, 0.03)' : ''}}),
       render: (text, row) => row.terminated() ? TextPlaceholder : <Flex className='imgPrice' flexDirection='column'>
-        <Flex alignItems='center' marginBottom=".04rem">
-          <Icon width=".18rem" height=".18rem" src={imgurl.dashboard.ethBlack18} alt="" />
+        <Flex alignItems='center' marginBottom="4px">
+          <Icon width="18px" height="18px" src={imgurl.dashboard.ethBlack18} alt="" />
           {row.debtString()}
         </Flex>
-        <Typography fontSize=".14rem" fontWeight="500" color="rgba(0,0,0,.5)">
+        <Typography fontSize="14px" fontWeight="500" color="rgba(0,0,0,.5)">
           {`(${thousandFormat(row.totalDebt.times(ethRate)
             .div(10 ** 18)
             .toNumber())})`}
@@ -144,11 +144,11 @@ function VaultsTable(props: IProps) {
       key: 'liquidationPrice',
       onCell: (row) => ({style: {backgroundColor: row.terminated() ? 'rgba(0, 0, 0, 0.03)' : ''}}),
       render: (text, row) => row.terminated() ? TextPlaceholder : <Flex className='imgPrice' flexDirection='column'>
-        <Flex alignItems='center' marginBottom=".04rem">
-          <Icon width=".18rem" height=".18rem" src={imgurl.dashboard.ethBlack18} alt="" />
+        <Flex alignItems='center' marginBottom="4px">
+          <Icon width="18px" height="18px" src={imgurl.dashboard.ethBlack18} alt="" />
           {row.liquidationPrice().div(10 ** 18).toFixed(4, 1)}
         </Flex>
-        <Typography fontSize=".14rem" fontWeight="500" color="rgba(0,0,0,.5)" >{`(${thousandFormat(row.liquidationPrice().times(ethRate)
+        <Typography fontSize="14px" fontWeight="500" color="rgba(0,0,0,.5)" >{`(${thousandFormat(row.liquidationPrice().times(ethRate)
           .div(10 ** 18)
           .toNumber())})`}</Typography>
       </Flex>
@@ -158,7 +158,7 @@ function VaultsTable(props: IProps) {
       dataIndex: 'healthFactor',
       align: 'center',
       key: 'healthFactor',
-      width: '1.8rem',
+      width: '180px',
       onCell: (row) => ({style: {backgroundColor: row.terminated() ? 'rgba(0, 0, 0, 0.03)' : ''}}),
       render: (text,row) => row.terminated() ? TextPlaceholder : <div className='healthFactor'>
         {row.healthFactor.div(10 ** 18).toFixed(4, 1)}
@@ -169,7 +169,7 @@ function VaultsTable(props: IProps) {
       dataIndex: 'factorStatus',
       key: 'factorStatus',
       align: 'center',
-      width: '1.8rem',
+      width: '180px',
       onCell: (row) => ({style: {backgroundColor: row.terminated() ? 'rgba(0, 0, 0, 0.03)' : ''}}),
       render: (text,row) => <div className='status' style={{ color: `${Color[text as 'Inforce' | 'In Risk' | 'In Liquidation' | 'Terminated']}` }}>
         {row.factorStatus}
@@ -180,10 +180,10 @@ function VaultsTable(props: IProps) {
       dataIndex: 'actions',
       key: 'actions',
       align: 'center',
-      width: '1.8rem',
+      width: '180px',
       onCell: (row) => ({style: {backgroundColor: row.terminated() ? 'rgba(0, 0, 0, 0.03)' : ''}}),
       render: (t, row) => row.terminated() ? <div /> : <Flex alignItems='center' justifyContent='center'>
-        <ButtonDefault height='.48rem' minWidth='1.2rem' types='normal' onClick={() => navigate(`/vaultsDetail/${row.nftAddress}/${row.tokenId}`)}>
+        <ButtonDefault height='48px' minWidth='120px' types='normal' onClick={() => navigate(`/vaultsDetail/${row.nftAddress}/${row.tokenId}`)}>
           Repay
         </ButtonDefault>
       </Flex>,
@@ -392,20 +392,20 @@ function VaultsTable(props: IProps) {
 
   const ConfirmModal = (props: {
     enter?(): void
-  }) => <Grid gridGap=".3rem">
+  }) => <Grid gridGap="30px">
       <Flex alignItems="center" justifyContent="space-between" >
         <Typography></Typography>
-        <Typography fontSize=".3rem" fontWeight="800" color="#000">Verify Address</Typography>
+        <Typography fontSize="30px" fontWeight="800" color="#000">Verify Address</Typography>
         <Typography></Typography>
-        {/* <div style={{ cursor: 'pointer' }}><Icon width=".24rem" height=".24rem" src={imgurl.dashboard.Cancel} onClick={() => {
+        {/* <div style={{ cursor: 'pointer' }}><Icon width="24px" height="24px" src={imgurl.dashboard.Cancel} onClick={() => {
           setShowModal(false)
         }} /></div> */}
       </Flex>
 
       <Typography >You will be asked to sign a message in your wallet to verify you as the owner of the address.</Typography>
-      <Flex gap=".2rem" justifyContent='center' marginTop=".3rem" >
-        <ButtonDefault minWidth='2rem' height='.52rem' types='second' color='#000' onClick={() => { setShowModal(false) }}>Cancel</ButtonDefault>
-        <ButtonDefault minWidth='2rem' height='.52rem' types='normal' color='#fff' onClick={async () => {
+      <Flex gap="20px" justifyContent='center' marginTop="30px" >
+        <ButtonDefault minWidth='200px' height='52px' types='second' color='#000' onClick={() => { setShowModal(false) }}>Cancel</ButtonDefault>
+        <ButtonDefault minWidth='200px' height='52px' types='normal' color='#fff' onClick={async () => {
           if (account) {
             login2()
           } else {
@@ -428,7 +428,7 @@ function VaultsTable(props: IProps) {
       dataSource={activities}
       pagination={false}
       className="ant-table-reset-white"
-    ></Table> : <NotFound padding={"1rem 0"}/>}
+    ></Table> : <NotFound padding={"100px 0"}/>}
     <StyledModal
       visible={showModal}
       footer={null}
@@ -436,7 +436,7 @@ function VaultsTable(props: IProps) {
       destroyOnClose={true}
       maskClosable={false}
       centered={true}
-      width='5.48rem'
+      width='548px'
     >
       <ConfirmModal />
     </StyledModal>

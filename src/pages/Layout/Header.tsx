@@ -24,9 +24,9 @@ const StyledtWallet = styled(Flex)`
   background: #FFFFFF;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 10px;
-  padding: .1rem 0 .1rem .25rem;
-  min-width: 2.6rem;
-  min-height: .6rem;
+  padding: 10px 0 10px 25px;
+  min-width: 260px;
+  min-height: 60px;
   &:hover {
     background: #FFFFFF;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
@@ -202,8 +202,8 @@ function XHeader() {
   }
   const ConnectWallet = () => {
     return (<StyledtWallet onClick={connect} alignItems="center">
-      <Typography marginRight='.2rem'><Icon width='.4rem' height='.4rem' src={imgurl.metamaskLogo} alt="" /></Typography>
-      <Typography fontSize='.16rem' fontWeight='700' color='#000'>MetaMask</Typography>
+      <Typography marginRight='20px'><Icon width='40px' height='40px' src={imgurl.metamaskLogo} alt="" /></Typography>
+      <Typography fontSize='16px' fontWeight='700' color='#000'>MetaMask</Typography>
     </StyledtWallet>)
   }
 
@@ -221,16 +221,16 @@ function XHeader() {
   let normal = {
     color: 'rgba(255,255,255,.5)',
     fontWeight: '700',
-    fontSize: '.16rem',
+    fontSize: '16px',
     textDecoration: 'none',
-    marginRight: '1.3rem',
+    marginRight: '130px',
   };
   let active = {
     color: '#fff',
     fontWeight: '700',
-    fontSize: '.16rem',
+    fontSize: '16px',
     textDecoration: 'none',
-    marginRight: '1.3rem',
+    marginRight: '130px',
   };
   const history = useLocation()
   const [activiRoute, setActiviRoute] = useState<string>('')
@@ -255,7 +255,7 @@ function XHeader() {
     <Nav>
       <Flex
         position="absolute"
-        width="16.06rem"
+        width="1606px"
         justifyContent="space-between"
       >
         <FlexDiv>
@@ -277,7 +277,7 @@ function XHeader() {
           </NavLink>
 
           <a style={{
-            fontSize: ".16rem",
+            fontSize: "16px",
             fontWeight: "600",
             color: activiRoute === 'home' ? '#fff' : 'rgba(255,255,255,.5)'
           }} target="_blank" rel="noreferrer" href={urls.resource}>Resources</a>
@@ -291,7 +291,7 @@ function XHeader() {
                 return (
                   <a href={item.link} key={item.name} target="_blank" >
                     <div className='tools_bg'>
-                      <Icon style={{ cursor: 'pointer', marginRight: '0.22rem' }} width='.22rem' height='.22rem' src={item.darkIcon} />
+                      <Icon style={{ cursor: 'pointer', marginRight: '22px' }} width='22px' height='22px' src={item.darkIcon} />
                     </div>
                   </a>
                 )
@@ -307,24 +307,24 @@ function XHeader() {
             justifyContent='center'
             background={`${showConnect ? "rgba(255,255,255,.1)" : "rgba(255,255,255,.2)"}`}
             borderRadius="10px"
-            width='.34rem'
-            height='.34rem'
+            width='34px'
+            height='34px'
             id="baseAccount"
             style={{ cursor: 'pointer' }}
             onClick={walletPop}
           >
-            {/* <Icon width={`${account ? '.34rem' : '.14rem' } `} height={`${account ? '.34rem' : '.16rem' } `} src={account ? defaultAvatar : login} /> */}
+            {/* <Icon width={`${account ? '34px' : '14px' } `} height={`${account ? '34px' : '16px' } `} src={account ? defaultAvatar : login} /> */}
             {
               account ?
-              <Icon width='.34rem' height='.34rem' src={defaultAvatar} /> :
+              <Icon width='34px' height='34px' src={defaultAvatar} /> :
               <Flex 
                 alignItems='center'
                 justifyContent='center'
-                width='.34rem'
-                height='.34rem'
+                width='34px'
+                height='34px'
                 borderRadius="10px"
               >
-                <Icon width='.14rem' height='.16rem' src={login} />
+                <Icon width='14px' height='16px' src={login} />
               </Flex>
             }
 
@@ -343,7 +343,7 @@ function XHeader() {
           <Popover
             content={ConnectWallet}
             title={<Typography
-              fontSize=".16rem"
+              fontSize="16px"
               fontWeight="700"
               color="#000"
             >Connect a wallet</Typography>}

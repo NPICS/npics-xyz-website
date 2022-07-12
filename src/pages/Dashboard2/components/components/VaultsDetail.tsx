@@ -30,7 +30,7 @@ import { TextPlaceholder } from 'component/styled';
 const Banner = () => {
   return <Box
     position={"absolute"}
-    height={"4.2rem"}
+    height={"420px"}
     top={0}
     left={0}
     right={0}
@@ -45,7 +45,7 @@ const StyledModal = styled(Modal)`
   }
 
   .ant-modal-body {
-    padding: .24rem;
+    padding: 24px;
     line-height: 1.2 !important;
   }
 
@@ -60,8 +60,8 @@ const StyledModal = styled(Modal)`
 
 const TipsIcon = styled(Icon)`
   position: absolute;
-  top: .14rem;
-  right: .14rem;
+  top: 14px;
+  right: 14px;
 `
 
 const InputNumberStyled = styled(InputNumber)`
@@ -69,7 +69,7 @@ const InputNumberStyled = styled(InputNumber)`
     .ant-input-number-input {
       font-family: Montserrat;
       user-select: auto;
-      font-size: .3rem;
+      font-size: 30px;
       font-weight: 800;
       color: #000;
       width: inherit;
@@ -358,73 +358,73 @@ export default function VaultsDetail() {
   return <Flex
     position={"relative"}
     flexDirection={"column"}
-    padding={"0 1.6rem"}
+    padding={"0 160px"}
     background={"transparent"}
-    marginBottom={"1.6rem"}
+    marginBottom={"160px"}
   >
     <Banner/>
     <Box
       zIndex={1}
     >
       <Flex
-        marginTop={"2.14rem"}
-        marginBottom={".3rem"}
-        gap={".2rem"}
+        marginTop={"214px"}
+        marginBottom={"30px"}
+        gap={"20px"}
         alignItems={"center"}
       >
-        {/*<Icon width='.36rem' height='.36rem' src={imgurl.dashboard.reback} />*/}
-        <div style={{cursor: 'pointer'}}><Icon width='.36rem' height='.36rem' src={imgurl.dashboard.reback}
+        {/*<Icon width='36px' height='36px' src={imgurl.dashboard.reback} />*/}
+        <div style={{cursor: 'pointer'}}><Icon width='36px' height='36px' src={imgurl.dashboard.reback}
                                                onClick={goBack}/></div>
-        <Typography fontSize={".3rem"} fontWeight={"800"} color={"#fff"}>Repay</Typography>
+        <Typography fontSize={"30px"} fontWeight={"800"} color={"#fff"}>Repay</Typography>
       </Flex>
 
       <Box
         background={"#fff"}
         // minHeight={"60vh"}
         borderRadius={"10px"}
-        padding={".4rem .6rem"}
+        padding={"40px 60px"}
       >
         <Flex alignItems={"center"} justifyContent={"space-between"}>
           <Flex flexDirection={"column"}>
-            <Typography fontSize={".2rem"} fontWeight={"700"} color={"#000"}>Vault Detail</Typography>
-            <Flex alignItems={"center"} marginRight=".05rem">
-              <Typography marginRight=".07rem" fontSize={".16rem"} fontWeight={"500"}
+            <Typography fontSize={"20px"} fontWeight={"700"} color={"#000"}>Vault Detail</Typography>
+            <Flex alignItems={"center"} marginRight="5px">
+              <Typography marginRight="7px" fontSize={"16px"} fontWeight={"500"}
                           color={"rgba(0,0,0,.5)"}>Asset:</Typography>
               <Flex alignItems={'center'}>
-                <Typography marginRight={'.1rem'} fontSize={".16rem"} fontWeight={"500"} color={"rgba(0,0,0,.5)"}>
+                <Typography marginRight={'10px'} fontSize={"16px"} fontWeight={"500"} color={"rgba(0,0,0,.5)"}>
                   {`${activities?.collectionName ?? TextPlaceholder} #${activities?.tokenId ?? TextPlaceholder}`}
                 </Typography>
-                <Icon style={{cursor: "pointer"}} width=".16rem" height=".16rem" src={imgurl.dashboard.export14} alt=""
+                <Icon style={{cursor: "pointer"}} width="16px" height="16px" src={imgurl.dashboard.export14} alt=""
                       onClick={() => window.open(`https://etherscan.io/nft/${activities?.address}/${activities?.tokenId}`)}/>
               </Flex>
             </Flex>
           </Flex>
           <Flex alignItems={"center"} background={"#fff"} boxShadow={"0 0 20px rgba(0,0,0,.1)"} borderRadius={"10px"}
-                gap={".12rem"} padding={".11rem"}>
-            {/* <Typography fontSize={".14rem"} fontWeight={"500"} color={"#000"}>Status</Typography> */}
-            <Typography fontSize={".16rem"} fontWeight={"700"}
+                gap={"12px"} padding={"11px"}>
+            {/* <Typography fontSize={"14px"} fontWeight={"500"} color={"#000"}>Status</Typography> */}
+            <Typography fontSize={"16px"} fontWeight={"700"}
                         color={activities?.statusSrt === "Inforce" ? "#7BD742" : "#FF4949"}>{activities?.statusSrt}</Typography>
           </Flex>
         </Flex>
 
         <Grid
-          marginTop={".3rem"}
-          gridTemplateColumns={"3.4rem auto"}
+          marginTop={"30px"}
+          gridTemplateColumns={"340px auto"}
 
-          gridGap={".3rem"}
+          gridGap={"30px"}
         >
-          <Icon style={{borderRadius: '10px', background: "#e5e5e5"}} width='3.4rem' height='3.4rem'
+          <Icon style={{borderRadius: '10px', background: "#e5e5e5"}} width='340px' height='340px'
                 src={activities?.imageUrl ?? ""}/>
           <Grid
             gridTemplateAreas='"Minted Profit" "Numerical Numerical"'
-            gridGap={".1rem"}
+            gridGap={"10px"}
           >
             <GridItem
               background={"#fff"}
               boxShadow={"0 0 20px rgba(0,0,0,.1)"}
               borderRadius={"10px"}
               gridArea={'Minted'}
-              padding={".3rem 0"}
+              padding={"30px 0"}
               flexDirection="column"
               alignItems="center"
               justifyContent={"center"}
@@ -433,26 +433,26 @@ export default function VaultsDetail() {
               <Popover 
                 overlayClassName="ant-popover-reset"
                 content={MintedNFTPop}>
-                <TipsIcon width={".14rem"} src={imgurl.market.tipsIcon}/>
+                <TipsIcon width={"14px"} src={imgurl.market.tipsIcon}/>
               </Popover>
-              <Flex alignItems={'center'} marginBottom={".12rem"}>
-                <Typography marginRight={'.1rem'} fontSize=".24rem" fontWeight='700' color="#000">
+              <Flex alignItems={'center'} marginBottom={"12px"}>
+                <Typography marginRight={'10px'} fontSize="24px" fontWeight='700' color="#000">
                   {`NEO ${activities?.collectionName ?? TextPlaceholder} #${activities?.tokenId ?? TextPlaceholder}`}
                 </Typography>
-                <Icon style={{cursor: "pointer"}} width=".16rem" height=".16rem" src={imgurl.dashboard.export14} alt=""
+                <Icon style={{cursor: "pointer"}} width="16px" height="16px" src={imgurl.dashboard.export14} alt=""
                       onClick={() => {
                         if (!activities) return
                         window.open(`https://cn.etherscan.com/nft/${activities.neoAddress}/${activities.tokenId}`)
                       }}/>
               </Flex>
-              <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">NEO NFT</Typography>
+              <Typography fontSize="14px" fontWeight='500' color="rgba(0,0,0,.5)">NEO NFT</Typography>
             </GridItem>
             <GridItem
               background={"#fff"}
               boxShadow={"0 0 20px rgba(0,0,0,.1)"}
               borderRadius={"10px"}
               gridArea={'Profit'}
-              padding={".3rem 0"}
+              padding={"30px 0"}
               flexDirection="column"
               alignItems="center"
               justifyContent={"center"}
@@ -465,16 +465,16 @@ export default function VaultsDetail() {
                   ltv: activities?.ltv,
                   floorPrice: activities?.floorPrice
                 })}>
-                <TipsIcon width={".14rem"} src={imgurl.market.tipsIcon}/>
+                <TipsIcon width={"14px"} src={imgurl.market.tipsIcon}/>
               </Popover>
-              <Flex alignItems="center" marginBottom={".14rem"}>
-                <Icon width='.22rem' height='.22rem' src={imgurl.home.ethBlack22}/>
-                <Typography fontSize=".24rem" fontWeight='700' color="#000">
+              <Flex alignItems="center" marginBottom={"14px"}>
+                <Icon width='22px' height='22px' src={imgurl.home.ethBlack22}/>
+                <Typography fontSize="24px" fontWeight='700' color="#000">
                   {activities?.purchaseFloorPrice && `${activities?.floorPrice.minus(activities?.purchaseFloorPrice).div(10 ** globalConstant.bit).toFixed(2, 1)}`}
                   {activities?.purchaseFloorPrice && ` (${activities?.floorPrice.minus(activities?.purchaseFloorPrice).div(activities?.purchaseFloorPrice?.times(new BigNumber(1).minus(activities?.ltv?.div(10 ** 4) as BigNumber))).times(10 ** 2).toFixed(2, 1)}%)`}
                 </Typography>
               </Flex>
-              <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Estimated Profit</Typography>
+              <Typography fontSize="14px" fontWeight='500' color="rgba(0,0,0,.5)">Estimated Profit</Typography>
             </GridItem>
 
             <Grid
@@ -483,63 +483,63 @@ export default function VaultsDetail() {
               background={"rgba(0,0,0,.03)"}
               border={"1px solid rgba(0,0,0,.1)"}
               borderRadius={"10px"}
-              padding={".3rem 1.5rem"}
-              gridGap={".35rem 1.5rem"}
+              padding={"30px 150px"}
+              gridGap={"35px 150px"}
             >
-              <Flex alignItems={"self-start"} justifyContent={"center"} flexDirection="column" gap='.1rem'>
+              <Flex alignItems={"self-start"} justifyContent={"center"} flexDirection="column" gap='10px'>
                 <Flex gap="10px">
-                  <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Health factor</Typography>
+                  <Typography fontSize="14px" fontWeight='500' color="rgba(0,0,0,.5)">Health factor</Typography>
                   <Popover 
                     overlayClassName="ant-popover-reset"
                     content={HealthFactorPop}>
-                    <Icon width={".14rem"} src={imgurl.market.tipsIcon}/>
+                    <Icon width={"14px"} src={imgurl.market.tipsIcon}/>
                   </Popover>
 
                 </Flex>
-                <Typography fontSize=".2rem" fontWeight='500' color="#000">{activities?.healthFactor}</Typography>
+                <Typography fontSize="20px" fontWeight='500' color="#000">{activities?.healthFactor}</Typography>
               </Flex>
-              <Flex alignItems={"self-start"} justifyContent={"center"} flexDirection="column" gap='.1rem'>
-                <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Floor price</Typography>
+              <Flex alignItems={"self-start"} justifyContent={"center"} flexDirection="column" gap='10px'>
+                <Typography fontSize="14px" fontWeight='500' color="rgba(0,0,0,.5)">Floor price</Typography>
                 <Flex alignItems={'center'}>
-                  <Icon width='.22rem' height='.22rem' src={imgurl.home.ethBlack22}/>
-                  <Typography fontSize=".2rem" fontWeight='500'
+                  <Icon width='22px' height='22px' src={imgurl.home.ethBlack22}/>
+                  <Typography fontSize="20px" fontWeight='500'
                               color="#000">{activities?.floorPrice.div(10 ** globalConstant.bit).toFixed(2, 1)}</Typography>
                 </Flex>
               </Flex>
-              <Flex alignItems={"self-start"} justifyContent={"center"} flexDirection="column" gap='.1rem'>
+              <Flex alignItems={"self-start"} justifyContent={"center"} flexDirection="column" gap='10px'>
                 <Flex gap="10px">
-                  <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Debt</Typography>
+                  <Typography fontSize="14px" fontWeight='500' color="rgba(0,0,0,.5)">Debt</Typography>
                   <Popover 
                     overlayClassName="ant-popover-reset"
                     content={DebtPop({Principal: activities?.debt, noInterest: TextPlaceholder})}>
-                    <Icon width={".14rem"} src={imgurl.market.tipsIcon}/>
+                    <Icon width={"14px"} src={imgurl.market.tipsIcon}/>
                   </Popover>
 
                 </Flex>
                 <Flex alignItems={'self-start'}>
-                  <Icon width='.22rem' height='.22rem' src={imgurl.home.ethBlack22}/>
-                  <Typography fontSize=".2rem" fontWeight='500' color="#000">  {activities?.debtString}</Typography>
+                  <Icon width='22px' height='22px' src={imgurl.home.ethBlack22}/>
+                  <Typography fontSize="20px" fontWeight='500' color="#000">  {activities?.debtString}</Typography>
                 </Flex>
               </Flex>
-              <Flex alignItems={"self-start"} justifyContent={"center"} flexDirection="column" gap='.1rem'>
+              <Flex alignItems={"self-start"} justifyContent={"center"} flexDirection="column" gap='10px'>
                 <Flex gap="10px">
-                  <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Vault APR</Typography>
+                  <Typography fontSize="14px" fontWeight='500' color="rgba(0,0,0,.5)">Vault APR</Typography>
 
                   <Popover
                     overlayClassName="ant-popover-reset"
                     content={VaultAprPop({rewardAPR: (aprData.rewardApr ?? 0), interestAPR: aprData.apr / 100 ?? 0})}>
-                    <Icon width={".14rem"} src={imgurl.market.tipsIcon}/>
+                    <Icon width={"14px"} src={imgurl.market.tipsIcon}/>
                   </Popover>
 
                 </Flex>
-                <Typography fontSize=".2rem" fontWeight='500'
+                <Typography fontSize="20px" fontWeight='500'
                             color="#000">{`${(aprData.rewardApr * 100 - aprData.apr).toFixed(2)}%`}</Typography>
               </Flex>
-              <Flex alignItems={"self-start"} justifyContent={"center"} flexDirection="column" gap='.1rem'>
-                <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Liquidation Price</Typography>
+              <Flex alignItems={"self-start"} justifyContent={"center"} flexDirection="column" gap='10px'>
+                <Typography fontSize="14px" fontWeight='500' color="rgba(0,0,0,.5)">Liquidation Price</Typography>
                 <Flex alignItems={'center'}>
-                  <Icon width='.22rem' height='.22rem' src={imgurl.home.ethBlack22}/>
-                  <Typography fontSize=".2rem" fontWeight='500'
+                  <Icon width='22px' height='22px' src={imgurl.home.ethBlack22}/>
+                  <Typography fontSize="20px" fontWeight='500'
                               color="#000">{activities && new BigNumber(activities?.debt.toString()).div('0.9').div(10 ** 18).toFixed(2, 1)}</Typography>
                 </Flex>
               </Flex>
@@ -552,15 +552,15 @@ export default function VaultsDetail() {
         background={"#fff"}
         // minHeight={"60vh"}
         borderRadius={"10px"}
-        padding={".4rem 2.6rem .4rem .6rem"}
-        marginTop={".1rem"}
+        padding={"40px 260px 40px 60px"}
+        marginTop={"10px"}
       >
-        <Typography marginBottom={".4rem"} fontSize={".2rem"} fontWeight={"700"} color={"#000"}>Repay</Typography>
+        <Typography marginBottom={"40px"} fontSize={"20px"} fontWeight={"700"} color={"#000"}>Repay</Typography>
         <Grid
           gridTemplateAreas='"debt pay" "factor pay""balance pay"'
-          gridTemplateColumns={"3.2rem auto "}
-          gridTemplateRows={"1.2rem 1.2rem 1.2rem"}
-          gridGap={".1rem .7rem"}
+          gridTemplateColumns={"320px auto "}
+          gridTemplateRows={"120px 120px 120px"}
+          gridGap={"10px 70px"}
         >
           <GridItem
             boxShadow={"0px 0px 30px rgba(0, 0, 0, 0.05)"}
@@ -569,16 +569,16 @@ export default function VaultsDetail() {
             flexDirection="column"
             alignItems="center"
             justifyContent={"center"}
-            gap={".1rem"}
-            padding={".32rem 0"}
+            gap={"10px"}
+            padding={"32px 0"}
           >
             <Flex alignItems="center">
-              {remainingDebt && <Icon width='.22rem' height='.22rem' src={imgurl.home.ethBlack22}/>}
-              <Typography fontSize=".24rem" fontWeight='700' color="#000">
+              {remainingDebt && <Icon width='22px' height='22px' src={imgurl.home.ethBlack22}/>}
+              <Typography fontSize="24px" fontWeight='700' color="#000">
                 {remainingDebt && remainingDebt.div(10 ** 18).toFixed(4, 1)}
               </Typography>
             </Flex>
-            <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Remaining Debt</Typography>
+            <Typography fontSize="14px" fontWeight='500' color="rgba(0,0,0,.5)">Remaining Debt</Typography>
           </GridItem>
           <GridItem
             boxShadow={"0px 0px 30px rgba(0, 0, 0, 0.05)"}
@@ -587,10 +587,10 @@ export default function VaultsDetail() {
             flexDirection="column"
             alignItems="center"
             justifyContent={"center"}
-            gap={".1rem"}
-            padding={".32rem 0"}
+            gap={"10px"}
+            padding={"32px 0"}
           >
-            <Typography fontSize=".24rem" fontWeight='700' color="#000">
+            <Typography fontSize="24px" fontWeight='700' color="#000">
               {
                 activities &&
                 remainingDebt &&
@@ -601,7 +601,7 @@ export default function VaultsDetail() {
                     new BigNumber(activities?.floorPrice.div(10 ** 18).toString()).times('0.9').div(remainingDebt?.div(10 ** 18)).toFixed(4, 1))
               }
             </Typography>
-            <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">New Health Factor</Typography>
+            <Typography fontSize="14px" fontWeight='500' color="rgba(0,0,0,.5)">New Health Factor</Typography>
           </GridItem>
           <GridItem
             boxShadow={"0px 0px 30px rgba(0, 0, 0, 0.05)"}
@@ -610,22 +610,22 @@ export default function VaultsDetail() {
             flexDirection="column"
             alignItems="center"
             justifyContent={"center"}
-            gap={".1rem"}
-            padding={".32rem 0"}
+            gap={"10px"}
+            padding={"32px 0"}
           >
             <Flex alignItems={"center"}>
-              <Icon width='.22rem' height='.22rem' src={imgurl.home.ethBlack22}/>
-              <Typography fontSize=".24rem" fontWeight='700'
+              <Icon width='22px' height='22px' src={imgurl.home.ethBlack22}/>
+              <Typography fontSize="24px" fontWeight='700'
                           color="#000">{walletBalance && new BigNumber(walletBalance.toString()).div(10 ** 18).dp(4, 1).toFixed()}</Typography>
             </Flex>
-            <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Wallet Balance</Typography>
+            <Typography fontSize="14px" fontWeight='500' color="rgba(0,0,0,.5)">Wallet Balance</Typography>
           </GridItem>
           <GridItem gridArea={'pay'} flexDirection="column">
             <Flex
               background={progressVal === 1 ? "rgba(0, 0, 0, 0.03)" : "#fff"}
               border="1px solid rgba(0, 0, 0, 0.1)"
               borderRadius="10px"
-              padding=".3rem .5rem"
+              padding="30px 50px"
               alignItems="center"
               justifyContent="space-between"
               flex="auto"
@@ -640,32 +640,32 @@ export default function VaultsDetail() {
                 bordered={false} precision={4}
                 disabled={progressVal === 1 ? true : false }           
               />
-              <Icon width='.4rem' height='.4rem' src={imgurl.home.ethBlack40}/>
+              <Icon width='40px' height='40px' src={imgurl.home.ethBlack40}/>
             </Flex>
 
-            <Box marginTop=".3rem">
+            <Box marginTop="30px">
               <ProgressBar
                 onChange={onProgressBar}
                 value={progressVal}
               ></ProgressBar>
             </Box>
 
-            <Flex minHeight={'.9rem'} marginTop=".55rem" flexDirection={'column'}>
-              <Flex alignItems="center" marginBottom=".2rem" gap='.1rem'>
+            <Flex minHeight={'90px'} marginTop="55px" flexDirection={'column'}>
+              <Flex alignItems="center" marginBottom="20px" gap='10px'>
                 <label style={{display:'flex',alignItems:'center'}}>
                   <Checkbox 
-                    style={{width: ".24rem", height: ".24rem", cursor: "pointer"}}
+                    style={{width: "24px", height: "24px", cursor: "pointer"}}
                     onChange={(e:any) => handleCheck(e)}
                     // _checked={checked}
                     _checked={checked}
                     // value={checked}
                   />
-                  <Typography marginLeft=".12rem">Repay all</Typography>
+                  <Typography marginLeft="12px">Repay all</Typography>
                 </label>
-                {/* <input style={{width: ".24rem", height: ".24rem", cursor: "pointer"}} type={'checkbox'}
+                {/* <input style={{width: "24px", height: "24px", cursor: "pointer"}} type={'checkbox'}
                        onChange={(e) => handleCheck(e)} checked={checked} id="payAll"/>
                 <label style={{cursor: "pointer"}} htmlFor="payAll">Repay all</label> */}
-                <Typography fontSize={".16rem"} fontWeight={"500"} color="rgba(0,0,0,.5)">(Repay the whole loan to
+                <Typography fontSize={"16px"} fontWeight={"500"} color="rgba(0,0,0,.5)">(Repay the whole loan to
                   regain NFT ownership)</Typography>
               </Flex>
 
@@ -679,8 +679,8 @@ export default function VaultsDetail() {
             </Flex>
 
 
-            <Typography marginTop=".2rem">
-              <ButtonDefault height='.7rem' disabled={payDebt?.eq(0) ? true : false} types='normal' color='#fff'
+            <Typography marginTop="20px">
+              <ButtonDefault height='70px' disabled={payDebt?.eq(0) ? true : false} types='normal' color='#fff'
                              onClick={handleRepay}>{progressVal === 1 ? 'Repay all' :`Repay`}</ButtonDefault>
             </Typography>
 
@@ -699,7 +699,7 @@ export default function VaultsDetail() {
       }}
       maskClosable={false}
       destroyOnClose={true}
-      width='7.48rem'
+      width='748px'
     >
       {
         isPayingAllDebts ?

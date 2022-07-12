@@ -10,23 +10,23 @@ export const BgTable = styled.div`
   .items {
     display: flex;
     .avatar {
-      width: .48rem;
-      height: .48rem;
+      width: 48px;
+      height: 48px;
       border-radius: 10px;
     }
     .text {
       display: flex;
       flex-direction: column;
       justify-content: space-evenly;
-      margin-left: .1rem;
+      margin-left: 10px;
       &>div:nth-child(1) {
         display: flex;
         align-items: center;
         flex-wrap: nowrap;
         color: #000;
-        font-size: .16rem;
+        font-size: 16px;
         &>span:nth-child(1) {
-          max-width: .7rem;
+          max-width: 70px;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
@@ -39,12 +39,12 @@ export const BgTable = styled.div`
       &>div:nth-child(2) {
         display: flex;
         color: rgba(0, 0, 0, .5);
-        font-size: .14rem;
+        font-size: 14px;
         &>span {
           ${flex}
           &>img {
-            margin-left: .08rem;
-            height: .14rem;
+            margin-left: 8px;
+            height: 14px;
           }
         }
       }
@@ -55,104 +55,104 @@ export const BgTable = styled.div`
     justify-content: left;
     align-items: center;
     font-weight: 500;
-    font-size: .16rem;
+    font-size: 16px;
     color: #000;
-    margin-left: .25rem;
+    margin-left: 25px;
     &>span {
-      max-width: 1.11rem;
+      max-width: 111px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
       text-align: left;
     }
     &>img {
-      width: .16rem;
-      height: .16rem;
-      margin-left: .06rem;
+      width: 16px;
+      height: 16px;
+      margin-left: 6px;
     }
   }
   .imgPrice {
     ${flex}
     font-weight: 600;
-    font-size: .16rem;
+    font-size: 16px;
     color: #000;
     &>img {
-      /* width: .14rem;
-      height: .22rem; */
-      margin-right: .06rem;
+      /* width: 14px;
+      height: 22px; */
+      margin-right: 6px;
     }
   }
   .healthFactor {
     ${flex}
     font-weight: 600;
-    font-size: .16rem;
+    font-size: 16px;
     color: #000;
   }
   .status {
     ${flex}
     font-weight: 500;
-    font-size: .16rem;
+    font-size: 16px;
   }
   .actionBtn {
     background: #000000;
     border: 1px solid rgba(255, 255, 255, .2);
     border-radius: 10px;
-    line-height: .48rem;
+    line-height: 48px;
     text-align: center;
     font-weight: 600;
-    font-size: .14rem;
+    font-size: 14px;
     color: #fff;
     cursor: pointer;
   }
   .ant-table-thead {
     tr {
       th:nth-child(2) {
-        width: 2.55rem !important;
+        width: 255px !important;
       } 
       th:nth-child(3) {
-        width: 1.6rem !important;
+        width: 160px !important;
       } 
       th:nth-child(4) {
-        width: 1.8rem !important;
+        width: 180px !important;
       } 
       th:nth-child(5) {
-        width: 1.6rem !important;
+        width: 160px !important;
       }
       th:nth-child(6) {
-        width: 1.8rem !important;
+        width: 180px !important;
       }
       th:nth-child(7) {
-        width: 1.9rem !important;
+        width: 190px !important;
       }
       th {
-        width: 3.5rem !important;
-        padding: .16rem !important;
+        width: 350px !important;
+        padding: 16px !important;
       }
     }
   }
   .ant-table-tbody {
     tr {
       td:nth-child(2) {
-        width: 2.55rem !important;
+        width: 255px !important;
       }
       td:nth-child(3) {
-        width: 1.6rem !important;
+        width: 160px !important;
       }
       td:nth-child(4) {
-        width: 1.8rem !important;
+        width: 180px !important;
       }
       td:nth-child(5) {
-        width: 1.6rem !important;
+        width: 160px !important;
       }  
       td:nth-child(6) {
-        width: 1.8rem !important;
+        width: 180px !important;
       }
       td:nth-child(7) {
-        width: 1.9rem !important;
+        width: 190px !important;
       }
       td {
-        width: 3.5rem !important;
-        padding: .16rem !important;
+        width: 350px !important;
+        padding: 16px !important;
       }
     }
     .ant-table-placeholder {
@@ -170,8 +170,8 @@ export const BgTable = styled.div`
     align-items: center;
     width: 100%;
     img {
-      width: 2.5rem;
-      height: 2.5rem;
+      width: 250px;
+      height: 250px;
     }
   }
 `

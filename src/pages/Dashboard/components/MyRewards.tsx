@@ -15,9 +15,9 @@ import {deserialize} from "class-transformer";
 const Rewards = styled.div`
   color: #fff;
   .title {
-    margin-bottom: .2rem;
+    margin-bottom: 20px;
     &>div {
-      font-size: .3rem;
+      font-size: 30px;
       color: #fff;
       font-weight: 800;
       font-family: 'Montserrat';
@@ -27,28 +27,28 @@ const Rewards = styled.div`
       font-family: 'PingFang HK';
       font-style: normal;
       font-weight: 600;
-      font-size: .16rem;
+      font-size: 16px;
       color: rgba(255,255,255,.5);
     }
   }
   .content-reward {
-    width: 12.7rem;
-    //height: 5.75rem;
+    width: 1270px;
+    //height: 575px;
     background: rgba(255, 255, 255, .1);
-    border: .01rem solid rgba(255, 255, 255, .2);
-    border-radius: .1rem;
-    padding: .3rem .8rem .4rem .6rem;
+    border: 1px solid rgba(255, 255, 255, .2);
+    border-radius: 10px;
+    padding: 30px 80px 40px 60px;
     display: flex;
     flex-direction: column;
     .content-arp {
       display: flex;
-      min-height: 2rem;
+      min-height: 200px;
       &>div:nth-child(1) {
-        width: 6rem;
-        margin-right: 1.2rem;
+        width: 600px;
+        margin-right: 120px;
         .text {
           color: rgba(255,255,255,.5);
-          font-size: .14rem;
+          font-size: 14px;
           font-weight: 400;
         }
       }
@@ -56,9 +56,9 @@ const Rewards = styled.div`
         display: flex;
         align-items: center;
         img{
-          width: .56rem;
-          height: .56rem;
-          margin-right: .2rem;
+          width: 56px;
+          height: 56px;
+          margin-right: 20px;
         }
         &>div {
           &>div {
@@ -67,17 +67,17 @@ const Rewards = styled.div`
               font-family: 'Montserrat';
               font-style: normal;
               font-weight: 700;
-              font-size: .3rem;
+              font-size: 30px;
               color: #fff;
-              margin-right: .18rem;
+              margin-right: 18px;
             }
             &>span:nth-child(2) {
               display: inline-block;
-              width: 2.18rem;
+              width: 218px;
               font-family: 'Montserrat';
               font-style: italic;
               font-weight: 800;
-              font-size: .4rem;
+              font-size: 40px;
               background: linear-gradient(265.23deg,#FF0F0F 0%,#FF820F 97.96%);
               background-clip: text;
               -webkit-background-clip: text;
@@ -89,14 +89,14 @@ const Rewards = styled.div`
             white-space: nowrap;
             color: rgba(255,255,255,.5);
             font-weight: 400;
-            font-size: .14rem;
+            font-size: 14px;
           }
         }
       }
     }
     .reward-button {
       button {
-        margin: .3rem auto;
+        margin: 30px auto;
       }
     }
     .your-rewards {
@@ -105,28 +105,28 @@ const Rewards = styled.div`
         font-family: 'PingFang HK';
         font-style: normal;
         font-weight: 600;
-        font-size: .16rem;
+        font-size: 16px;
         color: #fff;
-        margin-bottom: .1rem;
+        margin-bottom: 10px;
       }
       .NPT,.BEND {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        height: .94rem;
-        border-bottom: .01rem solid rgba(255, 255, 255, .1);
+        height: 94px;
+        border-bottom: 1px solid rgba(255, 255, 255, .1);
         .text {
           span {
             color: rgba(255,255,255,.5);
-            font-size: .14rem;
+            font-size: 14px;
           }
           span:last-child {
             color: #fff;
-            margin-left: .25rem;
+            margin-left: 25px;
           }
         }
         img {
-          height: .44rem;
+          height: 44px;
         }
       }
     }

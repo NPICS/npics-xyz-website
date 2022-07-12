@@ -57,11 +57,11 @@ const StyledButton = styled.button<Iprops>`
       case 'one':
         return '0';
       case 'two':
-        return '.02rem solid rgba(255,255,255,1)';
+        return '2px solid rgba(255,255,255,1)';
       case 'three':
         return '0';
       case 'four':
-        return '.01rem solid rgba(255, 255, 255, 3)';
+        return '1px solid rgba(255, 255, 255, 3)';
       case 'disabled':
         return '0';
       case 'normal':
@@ -95,7 +95,7 @@ const StyledButton = styled.button<Iprops>`
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 600;
-  /* font-size: .2rem; */
+  /* font-size: 20px; */
   cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
   ${flex}
 `
@@ -118,11 +118,11 @@ function ButtonDefault(props: Iprops) {
 }
 ButtonDefault.defaultProps = {
   border: 0,
-  minWidth: '2rem',
-  Width: '2rem',
-  height: '.66rem',
+  minWidth: '200px',
+  Width: '200px',
+  height: '66px',
   text: 'button',
-  fontSize: '.16rem',
+  fontSize: '16px',
   types: 'one',
   // color: '#fff',
   disabled: false,

@@ -5,8 +5,8 @@ import { urls } from 'utils/urls'
 
 export default function More() {
   
-  return (<a href={urls.gitBookRewards} style={{ cursor: 'pointer' }} target="_blank"><Flex alignItems={'center'} gap=".02rem">
-    <Typography fontSize={'.16rem'} fontWeight="500" color="rgba(0,0,0,.5)">More</Typography>
-    <Icon width=".24rem" height=".24rem" src={expansion} />
+  return (<a href={urls.gitBookRewards} style={{ cursor: 'pointer' }} target="_blank"><Flex alignItems={'center'} gap="2px">
+    <Typography fontSize={'16px'} fontWeight="500" color="rgba(0,0,0,.5)">More</Typography>
+    <Icon width="24px" height="24px" src={expansion} />
   </Flex></a>)
 }

@@ -34,38 +34,38 @@ import NFTPayWrong from "./NFTPayWrong";
 const Shadow = styled(Flex)`
   background: #fff;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  border-radius: .1rem;
+  border-radius: 10px;
   width: 0;
   flex: 1;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: .13rem;
+  gap: 13px;
   position: relative;
 `
 
 const TipsIcon = styled(Icon)`
   position: absolute;
-  top: .14rem;
-  right: .14rem;
+  top: 14px;
+  right: 14px;
 `
 
 const BuyBox = styled(Flex)`
   box-sizing: border-box;
   background: #00000008;
   border: 1px solid #00000033;
-  border-radius: .1rem;
-  padding: .2rem 0 0 .4rem;
+  border-radius: 10px;
+  padding: 20px 0 0 40px;
   position: relative;
 `
 
 const BuyButton = styled(Button2)`
   cursor: pointer;
   font-weight: 700;
-  font-size: .2rem;
-  min-width: 3.9rem;
-  height: .82rem;
-  margin-top: .21rem;
+  font-size: 20px;
+  min-width: 390px;
+  height: 82px;
+  margin-top: 21px;
 `
 
 const OtherNFT = styled.img`
@@ -73,7 +73,7 @@ const OtherNFT = styled.img`
   overflow: hidden;
   cursor: pointer;
   height: 100%;
-  border-radius: .1rem;
+  border-radius: 10px;
   border: 1px solid #eee;
   position: relative;
   background: transparent;
@@ -85,9 +85,9 @@ function MoreNFT(props: {
   tap?(): void
 }) {
   return <Box position={"relative"}
-              borderRadius={".1rem"}
+              borderRadius={"10px"}
               overflow={"hidden"}
-              width={"1rem"}
+              width={"100px"}
               style={{
                 "cursor": "pointer"
               }}
@@ -104,7 +104,7 @@ function MoreNFT(props: {
         lineHeight={"1.5"}
         color={"#fff"}
         fontWeight={500}
-        fontSize={".16rem"}
+        fontSize={"16px"}
       >
         {props.total}<br/>Items
       </Typography>
@@ -206,7 +206,7 @@ export default function NFTPrice(props: {
     }
   }
 
-  return <Grid gridTemplateRows={"1.1rem 1rem auto"} gridRowGap={".12rem"}>
+  return <Grid gridTemplateRows={"110px 100px auto"} gridRowGap={"12px"}>
     <Modal isOpen={buyPopOpen} onRequestClose={() => setBuyPopOpen(false)}>
       <NFTPay
         /// line 150: require value
@@ -253,31 +253,31 @@ export default function NFTPrice(props: {
       }}/>
     </Modal>
 
-    <Flex gap={".1rem"}>
+    <Flex gap={"10px"}>
       {/* origin price */}
       <Shadow>
         <Popover
           overlayClassName="ant-popover-reset"
           content={listedPricePop}>
-          <TipsIcon width={".14rem"} src={tipsIcon}/>
+          <TipsIcon width={"14px"} src={tipsIcon}/>
         </Popover>
 
         <Flex flexDirection={"row"} alignItems={"end"}>
-          <Icon width={".22rem"} height={".22rem"} src={ethIcon}/>
+          <Icon width={"22px"} height={"22px"} src={ethIcon}/>
           <Typography
-            fontSize={".24rem"}
+            fontSize={"24px"}
             fontWeight={700}
             color={"rgba(0,0,0,1)"}
             lineHeight={"100%"}
             // verticalAlign={"middle"}
             // height={"auto"}
-            marginLeft={".1rem"}
+            marginLeft={"10px"}
           >{props.item?.basePriceFormat() ?? TextPlaceholder}</Typography>
           <Typography
-            fontSize={".14rem"}
+            fontSize={"14px"}
             fontWeight={500}
             color={"rgba(0,0,0,.5)"}
-            marginLeft={".02rem"}
+            marginLeft={"2px"}
             lineHeight={"100%"}
             style={{alignSelf: 'end'}}
           >
@@ -291,17 +291,17 @@ export default function NFTPrice(props: {
             }
           </Typography>
         </Flex>
-        <Flex style={{cursor: 'pointer'}} alignItems={"center"} gap={".1rem"}
+        <Flex style={{cursor: 'pointer'}} alignItems={"center"} gap={"10px"}
               onClick={() => window.open(`${props.item?.marketUrl}`)}>
           <Box
-            borderRadius={".11rem"}
+            borderRadius={"11px"}
             overflow={"hidden"}
           >
-            <Icon width={".22rem"} height={".22rem"} src={props.item?.marketIcon()}/>
+            <Icon width={"22px"} height={"22px"} src={props.item?.marketIcon()}/>
           </Box>
 
           <Typography
-            fontSize={".14rem"}
+            fontSize={"14px"}
             fontWeight={500}
             color={"rgba(0,0,0,.5)"}
           >Listed price</Typography>
@@ -312,15 +312,15 @@ export default function NFTPrice(props: {
         {/* <Popover content={vaultApr({rewardAPR:123,interestAPR:321})}>     */}
         <Popover overlayClassName="ant-popover-reset"
                  content={VaultAprPop({rewardAPR: (rewardsAPR ?? 0), interestAPR: ((interestAPR ?? 0) / 100)})}>
-          <TipsIcon width={".14rem"} src={tipsIcon}/>
+          <TipsIcon width={"14px"} src={tipsIcon}/>
         </Popover>
         <Typography
           color={"#FF490F"}
-          fontSize={".24rem"}
+          fontSize={"24px"}
           fontWeight={700}
         >{percentageFormat(vaultAPR)}</Typography>
         <Typography
-          fontSize={".14rem"}
+          fontSize={"14px"}
           fontWeight={500}
           color={"rgba(0,0,0,.5)"}
         >Vault APR</Typography>
@@ -329,7 +329,7 @@ export default function NFTPrice(props: {
     {/* Other NFTs */}
     <Grid
       gridTemplateColumns={"repeat(6, auto)"}
-      gridGap={".1rem"}
+      gridGap={"10px"}
       overflow={"hidden"}
       justifyContent={"start"}
     >
@@ -364,18 +364,18 @@ export default function NFTPrice(props: {
       <Popover
         overlayClassName="ant-popover-reset"
         content={DownPaymentPop({listedPrice: props.item?.currentBasePrice, loanAmount: availableBorrow})}>
-        <TipsIcon width={".14rem"} src={tipsIcon}/>
+        <TipsIcon width={"14px"} src={tipsIcon}/>
       </Popover>
       <Typography
-        fontSize={".16rem"}
+        fontSize={"16px"}
         fontWeight={500}
         color={"#000"}
       >Down Payment</Typography>
-      <Flex alignItems={"end"} marginTop={".22rem"}>
-        <Flex gap={".14rem"} alignItems={"center"}>
-          <Icon width={".4rem"} height={".4rem"} src={ethIcon}/>
+      <Flex alignItems={"end"} marginTop={"22px"}>
+        <Flex gap={"14px"} alignItems={"center"}>
+          <Icon width={"40px"} height={"40px"} src={ethIcon}/>
           <Typography
-            fontSize={".4rem"}
+            fontSize={"40px"}
             fontWeight={700}
             color={"#000"}
             lineHeight={"100%"}
@@ -388,7 +388,7 @@ export default function NFTPrice(props: {
           }</Typography>
         </Flex>
         <Typography
-          fontSize={".14rem"}
+          fontSize={"14px"}
           fontWeight={500}
           lineHeight={"2"}
           padding={0}

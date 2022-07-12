@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const StepsSquare = styled.div`
   position: relative;
-  height: .08rem;
+  height: 8px;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -27,13 +27,13 @@ const StepsSquare = styled.div`
           return '15%'
       }
     }};
-    height: .06rem;
+    height: 6px;
     background: linear-gradient(284.2deg, #FF0000 0%, #FEB240 101.06%);
     border-radius: 5px;
   }
   .ball {
-    width: .35rem;
-    height: .35rem;
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -54,7 +54,7 @@ const StepsText = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-top: .2rem;
+  margin-top: 20px;
   ${font1665}
 `
 

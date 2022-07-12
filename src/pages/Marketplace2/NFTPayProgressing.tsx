@@ -12,21 +12,21 @@ function MarketLabel(props: {
 }) {
     return <Flex
         border={"1px solid #e5e5e5"}
-        borderRadius={".1rem"}
+        borderRadius={"10px"}
         alignItems={"center"}
-        height={".52rem"}
-        padding={"0 .21rem"}
+        height={"52px"}
+        padding={"0 21px"}
         style={{
             "userSelect": "none",
             "cursor": "pointer"
         }}
     >
-        <Icon width={".28rem"} height={".28rem"} src={props.icon} />
+        <Icon width={"28px"} height={"28px"} src={props.icon} />
         <Typography
             fontWeight={500}
-            fontSize={".2rem"}
+            fontSize={"20px"}
             color={"#000"}
-            marginLeft={".12rem"}
+            marginLeft={"12px"}
             fontStyle={"normal"}
         >{props.name}</Typography>
     </Flex>
@@ -36,36 +36,36 @@ export default function NFTPayProgressing(props: {
     nft: CollectionDetail
 }) {
     return <Flex
-        width={"8.8rem"}
+        width={"880px"}
         background={"#fff"}
-        borderRadius={".1rem"}
-        padding={".4rem"}
+        borderRadius={"10px"}
+        padding={"40px"}
         flexDirection={"column"}
     >
         <PopupTitle title={"Progressing"} canClose={true}/>
         <Flex alignSelf={"center"}>
             <StatusGif src={progressIcon}/>
         </Flex>
-        <Flex alignSelf={"center"} alignItems={"center"} gap={".06rem"}>
+        <Flex alignSelf={"center"} alignItems={"center"} gap={"6px"}>
             <Typography
-                fontSize={".14rem"}
+                fontSize={"14px"}
                 fontWeight={500}
                 color={"rgba(0,0,0,.5)"}
             >Estimated waiting time is</Typography>
             <Typography
-              fontSize={".16rem"}
+              fontSize={"16px"}
               fontWeight={500}
               color={"#000"}
             >30s</Typography>
         </Flex>
-        <Flex alignItems={"center"} justifyContent={"center"} gap={".3rem"} marginTop={".3rem"}>
+        <Flex alignItems={"center"} justifyContent={"center"} gap={"30px"} marginTop={"30px"}>
             <MarketLabel name={props.nft.marketDisplay()} icon={props.nft.marketIcon()}/>
             <MarketLabel name={"DYDX"} icon={imgurl.market.DYDXBuy}/>
             <MarketLabel name={"BendDAO"} icon={imgurl.market.BendDAOBuy}/>
         </Flex>
-        <Flex marginTop={".7rem"} justifyContent={"center"}>
+        <Flex marginTop={"70px"} justifyContent={"center"}>
             <Typography
-                fontSize={".14rem"}
+                fontSize={"14px"}
                 fontWeight={500}
                 color={"rgba(0,0,0,.5)"}
                 style={{

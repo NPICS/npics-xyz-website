@@ -2,83 +2,83 @@ import styled from 'styled-components';
 
 export const ModalBody = styled.div`
   .content {
-    width: 10.8rem;
-    /* height: 6.38rem; */
+    width: 1080px;
+    /* height: 638px; */
     margin: 0 auto;
-    border: .01rem solid rgba(255,255,255,.2);
-    border-radius: .1rem;
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 10px;
     .content-top {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: .01rem solid rgba(255,255,255,.2);
-      height: .6rem;
-      padding: .18rem 1rem .22rem;
-      font-size: .14rem;
+      border-bottom: 1px solid rgba(255,255,255,.2);
+      height: 60px;
+      padding: 18px 100px 22px;
+      font-size: 14px;
       color: #fff;
     }
     .content-agreement {
-      padding: .2rem .3rem .35rem;
+      padding: 20px 30px 35px;
       .info {
         display: flex;
         justify-content: space-between; 
         &>div:nth-child(1) {
           display: flex;
           &>img {
-            width: 1.2rem;
-            height: 1.2rem;
-            border-radius: .2rem;
+            width: 120px;
+            height: 120px;
+            border-radius: 20px;
           }
           .nft-name {
-            margin-left: .17rem;
+            margin-left: 17px;
             &>div:nth-child(1) {
               font-weight: 600;
-              font-size: .14rem;
+              font-size: 14px;
               color: rgba(255,255,255,.5);
-              margin-bottom: .05rem;
+              margin-bottom: 5px;
             }
             &>div:nth-child(2) {
               font-weight: 600;
-              font-size: .16rem;
+              font-size: 16px;
               color: #fff;
-              margin-bottom: .16rem;
+              margin-bottom: 16px;
             }
             &>div:nth-child(3) {
               display: flex;
               align-items: center;
               &>span {
                 font-weight: 600;
-                font-size: .14rem;
+                font-size: 14px;
                 color: rgba(255,255,255,.5);
               }
               &>img {
-                width: .24rem;
-                height: .24rem;
-                margin-right: .1rem;
+                width: 24px;
+                height: 24px;
+                margin-right: 10px;
               }
             }
           }
         }
         &>div:nth-child(2) {
           display: flex;
-          margin-right: .5rem;
-          margin-top: .2rem;
+          margin-right: 50px;
+          margin-top: 20px;
           &>div:nth-child(1) {
             &>img {
-              margin-top: .12rem;
-              margin-right: .15rem;
-              width: .26rem;
-              height: .26rem;
+              margin-top: 12px;
+              margin-right: 15px;
+              width: 26px;
+              height: 26px;
             }
           }
           .priceAmount {
             &>div:nth-child(1) {
-              font-size: .3rem;
+              font-size: 30px;
               color: #fff;
               font-weight: 800;
             }
             &>div:nth-child(2) {
-              font-size: .14rem;
+              font-size: 14px;
               color: rgba(255,255,255,.5);
               font-weight: 400;
               //letter-spacing: .5px;
@@ -90,10 +90,10 @@ export const ModalBody = styled.div`
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        border: .01rem solid rgba(255,255,255,.2) ;
-        border-radius: .1rem;
-        padding: .2rem .3rem .25rem;
-        margin: .13rem 0;
+        border: 1px solid rgba(255,255,255,.2) ;
+        border-radius: 10px;
+        padding: 20px 30px 25px;
+        margin: 13px 0;
         &>div {
           display: flex;
           justify-content: space-between;
@@ -104,17 +104,17 @@ export const ModalBody = styled.div`
           flex-direction: row;
           align-items: center;
           img {
-            margin-right: .08rem;
-            width: .22rem;
-            height: .22rem;
+            margin-right: 8px;
+            width: 22px;
+            height: 22px;
           }
           &>span:nth-child(2) {
             font-weight: 600;
-            font-size: .16rem;
+            font-size: 16px;
           }
           &>span:nth-child(3) {
-            margin-left: .1rem;
-            font-size: .14rem;
+            margin-left: 10px;
+            font-size: 14px;
             color:rgba(255,255,255,.5);
             //letter-spacing: 1px;
           }
@@ -125,13 +125,13 @@ export const ModalBody = styled.div`
         justify-content: space-between;
         align-items: center;
         background: rgba(255,255,255,.2);
-        border-radius: .1rem;
-        height: .98rem;
-        padding: .2rem .4rem .2rem .3rem;
+        border-radius: 10px;
+        height: 98px;
+        padding: 20px 40px 20px 30px;
         box-sizing: border-box;
-        margin-bottom: .3rem;
+        margin-bottom: 30px;
         &>div:nth-child(1) {
-          font-size: .2rem;
+          font-size: 20px;
           color: #fff;
           font-weight: 600;
         }
@@ -139,20 +139,20 @@ export const ModalBody = styled.div`
           display: flex;
           img {
             display: inline-block;
-            width: .3rem;
-            height: .3rem;
-            margin-top: .1rem;
-            margin-right: .1rem;
+            width: 30px;
+            height: 30px;
+            margin-top: 10px;
+            margin-right: 10px;
           }
           .total-price {
             &>div:nth-child(1) {
-              font-size: .3rem;
+              font-size: 30px;
               color: #fff;
               font-weight: 800;
               font-style: italic;
             }
             &>div:nth-child(2) {
-              font-size: .16rem;
+              font-size: 16px;
               color: #fff;
               font-weight: 600;
             }
@@ -160,7 +160,7 @@ export const ModalBody = styled.div`
         }
       }
       .pay-with {
-        margin-bottom: .3rem;
+        margin-bottom: 30px;
       }
 
       .pay-button {
@@ -170,11 +170,11 @@ export const ModalBody = styled.div`
       }
       .failure {
         width: 100%;
-        height: .66rem;
-        line-height: .66rem;
+        height: 66px;
+        line-height: 66px;
         text-align: center;
         background: #D03434;
-        border-radius: .1rem;
+        border-radius: 10px;
       }
       .success-content {
         .success {
@@ -183,13 +183,13 @@ export const ModalBody = styled.div`
           justify-content: center;
           align-items: center;
           width: 100%;
-          height: 1rem;
+          height: 100px;
           background: #7BD742;
-          border-radius: .1rem;
+          border-radius: 10px;
           color: #000;
         }
         button {
-          margin: .3rem auto 0;
+          margin: 30px auto 0;
         }
       }
 
@@ -198,11 +198,11 @@ export const ModalBody = styled.div`
   .confirm {
     display: flex;
     align-items: center;
-    margin: .3rem auto .5rem;
+    margin: 30px auto 50px;
     .ant-checkbox-wrapper {
       display: flex;
       align-items: center;
-      margin-right: .1rem;
+      margin-right: 10px;
       .ant-checkbox {
         top: 0;
       }
@@ -210,12 +210,12 @@ export const ModalBody = styled.div`
         background: rgba(255, 255, 255, .2);
         border: 1px solid rgba(255, 255, 255, .3);
         border-radius: 5px;
-        width: .24rem;
-        height: .24rem;
+        width: 24px;
+        height: 24px;
         animation: all 0;
         &::after {
-          width: .09rem;
-          height: .15rem;
+          width: 9px;
+          height: 15px;
         }
       }
       .ant-checkbox-checked::after {
@@ -225,11 +225,11 @@ export const ModalBody = styled.div`
 
     .checkText {
       font-weight: 600;
-      font-size: .14rem;
+      font-size: 14px;
       color: #fff;
       a {
         font-weight: 600;
-        font-size: .14rem;
+        font-size: 14px;
         color: #fff;
       }
     }
@@ -238,9 +238,9 @@ export const ModalBody = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: .2rem;
+    margin-top: 20px;
     .footerBtn {
-      width: 5rem;
+      width: 500px;
       margin:0 auto ;
       display: flex;
       justify-content: space-between;
@@ -250,42 +250,42 @@ export const ModalBody = styled.div`
 `
 
 export const PayButton = styled.button<{ active: boolean }>`
-  padding: .2rem .6rem .2rem .92rem;
+  padding: 20px 60px 20px 92px;
   display: flex;
   align-items: center;
-  border-radius: .1rem;
-  border: ${(props => props.active ? '0' : '.01rem solid #fff')};
+  border-radius: 10px;
+  border: ${(props => props.active ? '0' : '1px solid #fff')};
   color: ${(props => props.active ? '#000000' : '#fff')};
   background: ${(props => props.active ? '#7BD742' : '#000000')};
   cursor: pointer;
   position: relative;
   &>div {
-    width: 3.5rem;
-    height: .2rem;
+    width: 350px;
+    height: 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     &>div:nth-child(1){
       font-weight: 600;
-      font-size: .18rem;
+      font-size: 18px;
     }
     &>div:nth-child(2){
       display: flex;
       align-items: center;
       img {
         display: inline-block;
-        width: .24rem;
-        height: .24rem;
+        width: 24px;
+        height: 24px;
       }
       font-weight: 600;
-      font-size: .2rem;
+      font-size: 20px;
     }
   }
   &>img {
     position: absolute;
-    top: .2rem;
-    left: .6rem;
-    width: .2rem;
-    height: .2rem;
+    top: 20px;
+    left: 60px;
+    width: 20px;
+    height: 20px;
   }
 `

@@ -37,21 +37,21 @@ const Wrap = styled.div`
         font-family: 'Montserrat';
         font-style: normal;
         font-weight: 800;
-        font-size: .3rem;
+        font-size: 30px;
         color: #fff;
       }
       .total-information {
         color: rgba(255, 255, 255, .5);
-        font-size: .14rem;
+        font-size: 14px;
         font-weight: 600;
         & > span:nth-child(1) {
-          margin-right: .4rem;
+          margin-right: 40px;
         }
         & > span:nth-child(2) {
-          margin-right: .2rem;
+          margin-right: 20px;
           & > img {
-            margin-right: .1rem;
-            margin-bottom: .05rem;
+            margin-right: 10px;
+            margin-bottom: 5px;
           }
         }
       }
@@ -59,10 +59,10 @@ const Wrap = styled.div`
 
     .ant-select {
       align-self: end;
-      min-width: 1.2rem;
-      height: .42rem;
+      min-width: 120px;
+      height: 42px;
       border: 1px solid rgba(255, 255, 255, .5);
-      border-radius: .1rem;
+      border-radius: 10px;
       .ant-select-arrow {
         color: #fff;
       }
@@ -73,27 +73,27 @@ const Wrap = styled.div`
         box-shadow: none !important;
         border-color: rgba(255, 255, 255, .5);
         text-align: center;
-        height: .42rem;
+        height: 42px;
         display: flex;
         align-items: center;
       }
     }
 
   .recommend {
-    margin-top: .5rem;
-    margin-bottom: .87rem;
+    margin-top: 50px;
+    margin-bottom: 87px;
 
     .title {
       font-family: 'PingFang HK';
       font-style: normal;
       font-weight: 500;
-      font-size: .2rem;
+      font-size: 20px;
       color: #fff;
     }
   }
   }
   .table {
-    margin-top: .2rem;
+    margin-top: 20px;
   }
 `
 function MyAgreement() {

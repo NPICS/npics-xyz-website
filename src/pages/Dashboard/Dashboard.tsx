@@ -10,32 +10,32 @@ const Wrap = styled.div`
   display: flex;
   flex-direction: row;
   height: 100%;
-  padding-top: .9rem;
+  padding-top: 90px;
   background-color: #191919;
   .dashboard {
-    width: 4.7rem;
+    width: 470px;
     color: #fff;
-    border-right: .01rem solid rgba(255,255,255,.1);
-    padding-top: .9rem;
-    padding-left: 1.5rem;
+    border-right: 1px solid rgba(255,255,255,.1);
+    padding-top: 90px;
+    padding-left: 150px;
     .title {
       font-family: 'PingFang HK';
       font-style: normal;
       font-weight: 600;
-      font-size: .2rem;
-      margin-bottom: .2rem;
+      font-size: 20px;
+      margin-bottom: 20px;
     }
     .nav {
-      margin-right: .2rem;
+      margin-right: 20px;
       .nav-item {
-        padding: .18rem 0 .2rem .41rem;
-        border: .01rem solid rgba(255,255,255,.1);
-        border-radius: .12rem;
-        margin-bottom: .1rem;
+        padding: 18px 0 20px 41px;
+        border: 1px solid rgba(255,255,255,.1);
+        border-radius: 12px;
+        margin-bottom: 10px;
         cursor: pointer;
         span {
           color: #fff;  
-          margin-left: .23rem;
+          margin-left: 23px;
         }
       }
       .active {
@@ -50,8 +50,8 @@ const Wrap = styled.div`
     }
   }
   .content {
-    width: 14.33rem;
-    padding: .6rem 1.2rem .3rem .26rem;
+    width: 1433px;
+    padding: 60px 120px 30px 26px;
   }
 `
 

@@ -32,8 +32,8 @@ const InputStyled = styled(Input)`
     border: 1px solid rgba(0,0,0,.2);
     border-radius: 10px;
     color: rgba(0,0,0,.5);
-    height: .5rem;
-    padding: .04rem .6rem;
+    height: 50px;
+    padding: 4px 60px;
     .ant-select-selection-item {
         transition: all 0s !important;
     }
@@ -43,7 +43,7 @@ const BoxBefore = styled(Icon)`
   display: inline-block;
   position: absolute;
   top: 50%;
-  left: .2rem;
+  left: 20px;
   transform: translateY(-50%);
   z-index: 1;
 `
@@ -51,26 +51,26 @@ const BoxBefore = styled(Icon)`
 export const Portrait = styled.img`
   display: block;
   object-fit: cover;
-  border-radius: .1rem;
+  border-radius: 10px;
   /* background: #e5e5e5; */
   overflow: hidden;
-  width: 1.46rem;
-  height: 1.46rem;
+  width: 146px;
+  height: 146px;
 `
 const AntdSelect = styled(Select)`
   .ant-select-selector {
     color: rgba(0, 0, 0, .5);
     font-weight: 500;
-    font-size: .14rem;
+    font-size: 14px;
     transition: all 0s !important;
-    min-width: 2.8rem;
-    min-height: .5rem;
-    padding: 0 .23rem !important;
+    min-width: 280px;
+    min-height: 50px;
+    padding: 0 23px !important;
     border: 1px solid rgba(0, 0, 0, 0.2) !important;
     box-shadow: none !important;
     border-radius: 10px !important;
     .ant-select-selection-item {
-      line-height: .5rem;
+      line-height: 50px;
       transition: all 0s !important;
     }
   }
@@ -78,7 +78,7 @@ const AntdSelect = styled(Select)`
 
 const Loading = () => {
   return <Flex alignItems={"center"} justifyContent={"center"}>
-    <Icon src={progressIcon} width={"1.6rem"} height={"1.6rem"}></Icon>
+    <Icon src={progressIcon} width={"160px"} height={"160px"}></Icon>
   </Flex>
 }
 
@@ -153,13 +153,13 @@ export default function MarketList() {
 
   return <Box>
     <Box
-      borderRadius={".1rem"}
+      borderRadius={"10px"}
       background={"#fff"}
-      padding={".4rem 0"}
-      marginTop={".1rem"}
+      padding={"40px 0"}
+      marginTop={"10px"}
       boxShadow={"rgba(0,0,0,.5)"}>
-      <Flex height={".5rem"} gap={".12rem"} alignItems={"center"} padding={"0 .4rem"}>
-        <Box width={"6.85rem"} position="relative">
+      <Flex height={"50px"} gap={"12px"} alignItems={"center"} padding={"0 40px"}>
+        <Box width={"685px"} position="relative">
           <InputStyled
             type="text"
             placeholder='Search NFTs by name or token ID'
@@ -171,7 +171,7 @@ export default function MarketList() {
             }}
             className="ant-input-reset"
           />
-          <BoxBefore width=".2rem" height=".2rem" src={search}/>
+          <BoxBefore width="20px" height="20px" src={search}/>
         </Box>
         <AntdSelect onSelect={(value: any) => setCurrentSort(value)}
                     defaultValue="asc"
@@ -182,19 +182,19 @@ export default function MarketList() {
           <Option value="rarityScore">Rarity: Rarest to Common</Option>
         </AntdSelect>
         <Flex flex={1}></Flex>
-        <Flex flexDirection={"row"} alignItems={"center"} gap={".15rem"}>
-          <Icon height={".24rem"} width={".24rem"} src={compactMode ? LooseUnselectIcon : LooseSelectIcon}
+        <Flex flexDirection={"row"} alignItems={"center"} gap={"15px"}>
+          <Icon height={"24px"} width={"24px"} src={compactMode ? LooseUnselectIcon : LooseSelectIcon}
                 onClick={() => setCompactMode(false)}/>
-          <Icon height={".24rem"} width={".24rem"} src={compactMode ? CompactSelectIcon : CompactUnselectIcon}
+          <Icon height={"24px"} width={"24px"} src={compactMode ? CompactSelectIcon : CompactUnselectIcon}
                 onClick={() => setCompactMode(true)}/>
         </Flex>
       </Flex>
       {
         loading ? <Grid
-            padding={".25rem .4rem"}
-            // marginTop={".25rem"}
+            padding={"25px 40px"}
+            // marginTop={"25px"}
             gridTemplateColumns={`repeat(${compactMode ? 8 : 5}, 1fr)`}
-            gridGap={".1rem"}
+            gridGap={"10px"}
             justifyContent={"space-between"}
             alignItems={"start"}
             overflow={"auto"}
@@ -213,10 +213,10 @@ export default function MarketList() {
               loader={<Loading />}
               initialLoad={false}>
               <Grid
-                padding={".25rem .4rem"}
-                // marginTop={".25rem"}
+                padding={"25px 40px"}
+                // marginTop={"25px"}
                 gridTemplateColumns={`repeat(${compactMode ? 8 : 5}, 1fr)`}
-                gridGap={compactMode ? `.16rem` : `.25rem`}
+                gridGap={compactMode ? `16px` : `25px`}
                 justifyContent={"space-between"}
                 alignItems={"start"}
                 overflow={"auto"}>
@@ -230,7 +230,7 @@ export default function MarketList() {
                 }
               </Grid>
             </InfiniteScroll> :
-            <Box padding={"1.6rem 0"}>
+            <Box padding={"160px 0"}>
               <NotFound
                 title={"No npics found"}
                 text={"This collection doesn’t have any NFTs available to found."}

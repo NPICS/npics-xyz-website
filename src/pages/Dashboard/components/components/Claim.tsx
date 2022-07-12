@@ -6,18 +6,18 @@ import { imgurl } from 'utils/globalimport'
 import { useLocation, useNavigate } from 'react-router-dom'
 const MyAidrop = styled.div`
   ${font3081}
-  margin-bottom: .2rem;
+  margin-bottom: 20px;
 `
 const FlashClaim = styled.div`
   display: grid;
   grid-template-rows: repeat(2);
-  grid-gap: .2rem;
+  grid-gap: 20px;
   background: #000000;
   border: 1px solid rgba(255, 255, 255, .2);
   border-radius: 10px;
-  padding: .24rem 0 .48rem .5rem;
+  padding: 24px 0 48px 50px;
   color: #fff;
-  margin-bottom: .2rem;
+  margin-bottom: 20px;
   .title {
     ${font2051}
   }
@@ -29,47 +29,47 @@ const FlashClaim = styled.div`
     }
     &>span:nth-child(2) {
       ${font1461}
-      margin-right: .12rem;
-      margin-left: .12rem;
+      margin-right: 12px;
+      margin-left: 12px;
     }
     img {
-      width: .16rem;
-      height: .16rem;
+      width: 16px;
+      height: 16px;
     }
   }
 `
 const Information = styled.div`
   display: flex;
-  padding: .6rem .46rem;
+  padding: 60px 46px;
   background: rgba(255, 255, 255, .1);
   border: 1px solid rgba(255, 255, 255, .2);
   border-radius: 10px;
   &>img {
-    width: 1.8rem;
-    height: 1.8rem;
-    border-radius: .9rem;
-    margin-right: 1rem;
+    width: 180px;
+    height: 180px;
+    border-radius: 90px;
+    margin-right: 100px;
   }
   .info {
     width: 100%;
     display: grid;
     grid-template-columns: repeat(2,1fr);
     grid-template-rows: repeat(3);
-    grid-gap: .5rem;
+    grid-gap: 50px;
     &>div {
       &>span {
         ${font1455}
         display: inline-block;
-        margin-bottom: .12rem;
+        margin-bottom: 12px;
       }
       &>div {
         display: flex;
         align-items: center;
         ${font1661}
         img {
-          width: .16rem;
-          height: .16rem;
-          margin-left: .12rem;
+          width: 16px;
+          height: 16px;
+          margin-left: 12px;
         }
       }
     }
@@ -80,7 +80,7 @@ const ProgressContent = styled.div`
   background: rgba(255, 255, 255, .1);
   border: 1px solid rgba(255, 255, 255, .2);
   border-radius: 10px;
-  padding: .31rem .37rem .5rem .37rem;
+  padding: 31px 37px 50px 37px;
 `
 interface DataSource {
   key: string,
@@ -177,7 +177,7 @@ export default function Claim() {
 
     <ProgressContent>
 
-      <div style={{marginBottom: ".5rem"}}>
+      <div style={{marginBottom: "50px"}}>
         <button onClick={onBack}>Back</button>
         <button onClick={onConfirm}>Confirm</button>
       </div>

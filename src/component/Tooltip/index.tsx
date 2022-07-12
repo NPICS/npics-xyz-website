@@ -6,7 +6,7 @@ import Popover, { PopoverProps } from '../Popover'
 
 export const TooltipContainer = styled.div`
   max-width: 256px;
-  padding: 0.6rem 1rem;
+  padding: 60px 100px;
   font-weight: 400;
   word-break: break-word;
 
@@ -67,7 +67,7 @@ export function MouseoverTooltipContent({
   return (
     <TooltipContent {...rest} show={show} content={disableHover ? null : content}>
       <div
-        style={{ display: 'inline-block', lineHeight: 0, padding: '0.25rem' }}
+        style={{ display: 'inline-block', lineHeight: 0, padding: '25px' }}
         onMouseEnter={open}
         onMouseLeave={close}
       >

@@ -24,9 +24,9 @@ const StyledtWallet = styled(Flex)`
   background: #FFFFFF;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 10px;
-  padding: .1rem 0 .1rem .25rem;
-  min-width: 2.6rem;
-  min-height: .6rem;
+  padding: 10px 0 10px 25px;
+  min-width: 260px;
+  min-height: 60px;
   &:hover {
     background: #FFFFFF;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
@@ -35,10 +35,10 @@ const StyledtWallet = styled(Flex)`
 `
 
 const WalletTtitle = styled(Typography)`
-  font-size: .16rem;
+  font-size: 16px;
   font-weight: 700;
   color:#000;
-  margin-bottom: .2rem;
+  margin-bottom: 20px;
 `
 
 
@@ -77,12 +77,12 @@ export default function ConnectedWallet () {
   
   
     return (<Grid
-      gridGap='.2rem'
+      gridGap='20px'
     >
       {types.map(item => (
         <StyledtWallet key={item.name} onClick={() => connect(item)} alignItems="center">
-          <Typography marginRight='.2rem'><Icon width='.4rem' height='.4rem' src={item.icon} alt="" /></Typography>
-          <Typography fontSize='.16rem' fontWeight='700' color='#000'>{item.name}</Typography>
+          <Typography marginRight='20px'><Icon width='40px' height='40px' src={item.icon} alt="" /></Typography>
+          <Typography fontSize='16px' fontWeight='700' color='#000'>{item.name}</Typography>
         </StyledtWallet>
       ))}
     </Grid>
@@ -90,7 +90,7 @@ export default function ConnectedWallet () {
   }
   return (<Box
     background="#fff"
-    padding=".22rem .2rem .3rem"
+    padding="22px 20px 30px"
     borderRadius="20px"
   >
     <WalletTtitle>Connect a wallet</WalletTtitle>

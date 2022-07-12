@@ -18,13 +18,13 @@ interface ItemsRequest {
   pageIndex: number,
 }
 const Collection = styled.div`
-    width: calc(100% - 5.3rem);
-    padding-right: 1.2rem;
-    padding-left: .26rem;
-    padding-top: .6rem;
-    padding-bottom: .3rem;
+    width: calc(100% - 530px);
+    padding-right: 120px;
+    padding-left: 26px;
+    padding-top: 60px;
+    padding-bottom: 30px;
     .content-search {
-      height: 1.08rem;
+      height: 108px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -36,31 +36,31 @@ const Collection = styled.div`
           font-family: 'Montserrat';
           font-style: normal;
           font-weight: 800;
-          font-size: .3rem;
+          font-size: 30px;
         }
         &>span:nth-child(2) {
           font-family: 'Montserrat';
           font-style: normal;
           font-weight: 600;
-          font-size: .14rem;
+          font-size: 14px;
           color: rgba(255,255,255,.5);
         }
       }
       &>div:nth-child(2) {
         display: flex;
         &>input {
-          margin-right: .2rem;
+          margin-right: 20px;
         }
         .ant-select {
-          width: 2.48rem;
+          width: 248px;
         }
       }
 
       .ant-select {
         align-self: end;
-        width: 2.48rem;
+        width: 248px;
         border: 1px solid rgba(255, 255, 255, .5);
-        border-radius: .1rem;
+        border-radius: 10px;
         .ant-select-arrow {
           color: #fff;
         }
@@ -80,14 +80,14 @@ const Collection = styled.div`
     }
     .content-items {
       display: flex;
-      min-height: 5rem;
+      min-height: 500px;
       /* cursor: pointer; */
       &>div {
         width: 100%;
         display: grid;
-        grid-template-columns: repeat(auto-fill, 2.96rem);
+        grid-template-columns: repeat(auto-fill, 296px);
         align-items: start;
-        grid-gap: .1rem;
+        grid-gap: 10px;
         justify-content: space-between;
         //display: flex;
         //flex-wrap: wrap;
@@ -103,7 +103,7 @@ const Collection = styled.div`
         justify-content: center;
         align-items: center;
         color: #fff;
-        font-size: .2rem;
+        font-size: 20px;
         font-weight: 600;
       }
     }
@@ -113,52 +113,52 @@ const Collection = styled.div`
 `
 
 const CollectionItem = styled.div`
-  border-radius: .1rem;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   background: rgba(255, 255, 255, .1);
-  box-shadow: 0px .05rem .05rem rgba(0, 0, 0, .1);
-  margin-bottom: .1rem;
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, .1);
+  margin-bottom: 10px;
   cursor: pointer;
   overflow: hidden;
   .co-image {
     position: relative;
     .market {
       position: absolute;
-      top: .12rem;
-      left: .12rem;
-      width: .38rem;
-      height: .38rem;
+      top: 12px;
+      left: 12px;
+      width: 38px;
+      height: 38px;
     }
     .rarity {
       position: absolute;
-      top: .12rem;
-      right: .12rem;
+      top: 12px;
+      right: 12px;
       display: flex;
       align-items: center;
-      font-size: .16rem;
-      padding: .05rem;
+      font-size: 16px;
+      padding: 5px;
       border-radius: 10px;
       color: #000;
       font-weight: 500;
       background: #fff;
       &>img {
-        margin-right: .05rem;
+        margin-right: 5px;
       }
     }
     .nft-img {
-      width: 2.96rem;
-      height: 3.07rem;
+      width: 296px;
+      height: 307px;
     }
   }
   .co-info {
     display: flex;
     flex-direction: column;
-    padding: .1rem .15rem .1rem;
+    padding: 10px 15px 10px;
     color: #fff;
     &>span {
       font-weight: 600;
-      font-size: .14rem;
+      font-size: 14px;
       color: rgba(255, 255, 255, .5);
     }
     &>div {
@@ -171,8 +171,8 @@ const CollectionItem = styled.div`
           overflow: hidden;
           text-overflow: ellipsis;
           vertical-align: middle;
-          max-width: 1.2rem;
-          margin-right: .05rem;
+          max-width: 120px;
+          margin-right: 5px;
         }
       }
       &>div:nth-child(2) {
@@ -182,10 +182,10 @@ const CollectionItem = styled.div`
           display: flex;
           align-items: center;
           img {
-            margin-right: .1rem;
-            width: .1rem;
-            height: .16rem;
-            line-height: .16rem;
+            margin-right: 10px;
+            width: 10px;
+            height: 16px;
+            line-height: 16px;
             vertical-align: middle;
           }
         }
@@ -203,7 +203,7 @@ const Scroll = styled.div`
   
   .marketplace-scroll {
     overflow-y: scroll;
-    height: 8.5rem;
+    height: 850px;
     scrollbar-width: none;
     -ms-overflow-style:none;
     &::-webkit-scrollbar{

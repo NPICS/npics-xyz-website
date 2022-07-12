@@ -7,14 +7,14 @@ const Input = styled.input.attrs({
   type: "checkbox"
 })`
   background: transparent url(${checkUnselectedIcon}) no-repeat center;
-  background-size: .24rem .24rem;
+  background-size: 24px 24px;
   appearance: none;
-  width: .24rem;
-  height: .24rem;
+  width: 24px;
+  height: 24px;
 
   &:checked {
     background: transparent url(${checkSelectedIcon}) no-repeat center;
-    background-size: .24rem .24rem;
+    background-size: 24px 24px;
   }
 `
 

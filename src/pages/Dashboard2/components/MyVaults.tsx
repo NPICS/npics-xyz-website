@@ -14,16 +14,16 @@ const AntdSelect = styled(Select)`
   .ant-select-selector {
     color: rgba(0,0,0,.5);
     font-weight: 500;
-    font-size: .14rem;
-    min-width: 2rem;
-    min-height: .5rem;
-    padding: 0 .23rem !important;
+    font-size: 14px;
+    min-width: 200px;
+    min-height: 50px;
+    padding: 0 23px !important;
     border: 1px solid rgba(0, 0, 0, 0.1) !important;
     box-shadow: none !important;
     border-radius: 10px !important;
     transition: all 0s !important;
     .ant-select-selection-item {
-      line-height: .5rem;
+      line-height: 50px;
       transition: all 0s !important;
     }
   }
@@ -41,18 +41,18 @@ export default function MyVaults() {
   }
 
   return <Box
-    padding={".4rem .6rem"}
+    padding={"40px 60px"}
   >
     <Flex
       alignItems={"center"}
       justifyContent={"space-between"}
-      marginBottom={".24rem"}
+      marginBottom={"24px"}
     >
       <Flex
         flexDirection={"column"}
       >
         <Typography
-          fontSize={".3rem"}
+          fontSize={"30px"}
           fontWeight={"800"}
           color={"#000"}
           // userSelect={"none"}
@@ -64,19 +64,19 @@ export default function MyVaults() {
         >
           <Typography 
             fontWeight={500}
-            fontSize={".14rem"}
+            fontSize={"14px"}
             color={"rgba(0,0,0,.5)"}
           >Total Debt：</Typography>
-          <Icon width=".18rem" height=".18rem" src={imgurl.dashboard.ethGrey18} />
+          <Icon width="18px" height="18px" src={imgurl.dashboard.ethGrey18} />
           <Typography
             fontWeight={500}
-            fontSize={".14rem"}
+            fontSize={"14px"}
             color={"rgba(0,0,0,.5)"}
           >{totalDebts.div(10 ** 18).toFixed(3, 1)}</Typography>
           <Typography
             fontWeight={500}
-            fontSize={".14rem"}
-            marginLeft={".1rem"}
+            fontSize={"14px"}
+            marginLeft={"10px"}
             color={"rgba(0,0,0,.5)"}
           >{`(${totalDebts && thousandFormat(totalDebts.times(ethRate)
             .div(10 ** 18)

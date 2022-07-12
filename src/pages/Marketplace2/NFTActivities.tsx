@@ -23,19 +23,19 @@ const _Table = styled.table`
     outline: 1px solid #0000001A;
 
     th {
-      padding: .26rem;
+      padding: 26px;
     }
   }
 
   tbody {
     td {
-      padding: .26rem;
+      padding: 26px;
     }
   }
 
   tr th {
     font-weight: 500;
-    font-size: .16rem;
+    font-size: 16px;
     color: #000000;
   }
 
@@ -46,8 +46,8 @@ const _Table = styled.table`
 
 const Symbol = styled.img`
   user-select: none;
-  width: .18rem;
-  height: .18rem;
+  width: 18px;
+  height: 18px;
   object-fit: contain;
   background: transparent;
 `
@@ -56,7 +56,7 @@ function PriceWithSymbol(props: {
     displayAmount?: string,
     iconOrUrl: string
 }) {
-    return <Flex hidden={props.displayAmount == null} flexDirection={"row"} alignItems={"center"} gap={".06rem"}>
+    return <Flex hidden={props.displayAmount == null} flexDirection={"row"} alignItems={"center"} gap={"6px"}>
         <Symbol src={props.iconOrUrl} hidden={props.displayAmount == `0`}/>
         <Typography lineHeight={"normal"}>{props.displayAmount ?? ``}</Typography>
     </Flex>
@@ -94,20 +94,20 @@ export default function NFTActivities(props: {
     return <Flex
         flexDirection={"column"}
         border={"1px solid #0000001A"}
-        borderRadius={".1rem"}
+        borderRadius={"10px"}
         alignItems={"stretch"}
     >
         <Flex
             flexDirection={"row"}
-            gap={".12rem"}
+            gap={"12px"}
             borderBottom={"1px solid #0000001A"}
-            padding={".14rem .25rem"}
+            padding={"14px 25px"}
             alignItems={"center"}
         >
-            <Icon width={".24rem"} height={".24rem"} src={titlePrefixIcon}/>
+            <Icon width={"24px"} height={"24px"} src={titlePrefixIcon}/>
             <Typography
                 fontWeight={500}
-                fontSize={".16rem"}
+                fontSize={"16px"}
                 color={"#000"}
             >Activities</Typography>
         </Flex>
@@ -135,8 +135,8 @@ export default function NFTActivities(props: {
                         listData.map((item, idx) => {
                             return <tr key={idx}>
                                 <td align={"left"}>
-                                  <Flex alignItems={"center"} gap={".12rem"} hidden={item.eventTypeExplain() == undefined}>
-                                    <Icon src={item.eventTypeIcon()} width={".2rem"} height={".2rem"}/>
+                                  <Flex alignItems={"center"} gap={"12px"} hidden={item.eventTypeExplain() == undefined}>
+                                    <Icon src={item.eventTypeIcon()} width={"20px"} height={"20px"}/>
                                     <Typography>
                                       {item.eventTypeExplain() ?? ``}
                                     </Typography>

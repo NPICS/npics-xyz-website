@@ -9,12 +9,12 @@ import { Link } from 'react-router-dom'
 const ContractAuthorization = styled.div`
   display: grid;
   grid-template-rows: repeat(3);
-  padding: .24rem .5rem .26rem .5rem;
-  grid-gap: .2rem;
+  padding: 24px 50px 26px 50px;
+  grid-gap: 20px;
   background: #000000;
   border: 1px solid rgba(255, 255, 255, .2);
   border-radius: 10px;
-  margin-bottom: .3rem;
+  margin-bottom: 30px;
   .theme {
     ${font2051};
   }
@@ -23,7 +23,7 @@ const ContractAuthorization = styled.div`
   }
   .contract-btn {
     ${font1661};
-    padding: .15rem .38rem;
+    padding: 15px 38px;
     background: linear-gradient(284.2deg, #FF0000 0%, #FEB240 101.06%);
     border-radius: 10px;
     width: fit-content;
@@ -34,7 +34,7 @@ const Project = styled.div`
   .project-title {
     display: flex;
     flex-direction: column;
-    margin-bottom: .3rem;
+    margin-bottom: 30px;
     .line-header {
       ${font2051}
     }
@@ -46,9 +46,9 @@ const Project = styled.div`
     .project {
       ${flex}
       img {
-        width: .44rem;
-        height: .44rem;
-        margin-right: .18rem;
+        width: 44px;
+        height: 44px;
+        margin-right: 18px;
       }
       span {
         ${font1861}
@@ -57,11 +57,11 @@ const Project = styled.div`
     .contract-address {
       ${flex}
       img {
-        width: .16rem;
-        height: .16rem;
+        width: 16px;
+        height: 16px;
       }
       span {
-        margin-right: .1rem;
+        margin-right: 10px;
         ${font1455};
       }
     }
@@ -70,9 +70,9 @@ const Project = styled.div`
       background: #000000;
       border: 1px solid rgba(255, 255, 255, .2);
       border-radius: 10px;
-      padding: .14rem 0;
+      padding: 14px 0;
       cursor: pointer;
-      min-width: 1.5rem;
+      min-width: 150px;
     }
     .disabled {
       cursor: not-allowed;
@@ -83,7 +83,7 @@ const Project = styled.div`
 `
 const MyAidrop = styled.div`
   ${font3081};
-  margin-bottom: .2rem;
+  margin-bottom: 20px;
 `
 
 
