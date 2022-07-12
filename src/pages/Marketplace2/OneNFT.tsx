@@ -22,7 +22,7 @@ import rarity_2_icon from "../../assets/images/market/rarity_2.svg"
 
 function Label(props: {
   icon?: string,
-  num: number
+  num: number,
 }) {
   return <Flex
     gap={".06rem"}
@@ -33,7 +33,7 @@ function Label(props: {
     border={"1px solid #FFFFFF4D"}
     background={"#FFFFFF33"}
     style={{
-      "cursor": "pointer",
+      "cursor": `${props.icon ? "pointer" : ''}`,
       "backdropFilter": "blur(10px)"
     }}
   >
@@ -124,7 +124,7 @@ export default function OneNFT() {
       case "trait_sniper":
         return `Trait Sniper Ranking ${status ? `(${status})` : ''}`
       case "gem":
-        return `Gem Ranking ${status ? `(${status})` : ''}`
+        return `NPics Ranking ${status ? `(${status})` : ''}`
       default:
         return ''
     }
@@ -183,12 +183,18 @@ export default function OneNFT() {
                   overlayClassName="ant-popover-reset"
                   content={getRarityPopoverText(key, val.status)}
                 >
-                  <Box onClick={() => window.open(val.url)}>
+                  <Box onClick={() => {
+                    // Temporary solution
+                    if(key === 'gem') return
+                    window.open(val.url)
+                  }}>
+                  {/* <a href={val.url} target="_blank"> */}
                     <Label
                       key={key}
                       icon={getRarityIconByName(key)}
                       num={Number(val.rank) ?? 0}
                     />
+                  {/* </a> */}
                   </Box>
                 </Popover>
               })

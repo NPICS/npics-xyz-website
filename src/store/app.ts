@@ -29,6 +29,7 @@ interface IAppState {
   usdtExchangeRate?: string
   // bend -> usdt rate
   bendExchangeRate: string
+  showWalletModalOpen: boolean
 }
 
 const initialState: IAppState = {
@@ -43,7 +44,9 @@ const initialState: IAppState = {
     EthPrice: ''
   },
   isLogin: false,
-  bendExchangeRate: ''
+  bendExchangeRate: '',
+  showWalletModalOpen: false
+
 }
 
 export const fetchUser2 = createAsyncThunk("app/fetchUser2", async (args, ThunkAPI) => {
@@ -119,6 +122,9 @@ const appSlice = createSlice({
     * */
     updateLoginState(state) {
       state.isLogin = sessionStorage.getItem(SessionStorageKey.AccessToken) != null
+    },
+    setShowWalletModalOpen(state, action) {
+      state.showWalletModalOpen = action.payload
     }
   },
   extraReducers: (builder) => {
@@ -165,6 +171,7 @@ export const {
   setEthPrice,
   // setIsLogin,
   updateLoginState,
-  clearUserData
+  clearUserData,
+  setShowWalletModalOpen
 } = appSlice.actions
 export default appSlice;

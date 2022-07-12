@@ -160,6 +160,8 @@ export class CollectionItems {
         return "Space Doodle"
       case "CryptoPunks":
         return "CryptoPunk"
+      case "Wrapped Cryptopunks":
+        return "Wrapped Cryptopunk"
       case "CLONE X - X TAKASHI MURAKAMI":
         return "Clone X"
       default:

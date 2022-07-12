@@ -63,9 +63,15 @@ export const GlobalStyle = createGlobalStyle`
       text-align: left;
       color: rgba(0, 0, 0, .5);
       font-size: .14rem;
-      padding: .05rem .1rem;
+      padding: .1rem .2rem;
       transition: all 0s;
       min-height: initial;
+      &:hover {
+        color: rgba(0,0,0,.7);
+      }
+    }
+    .ant-select-item-option-selected {
+      color: #000;
     }
   }
   .ant-input-reset {    

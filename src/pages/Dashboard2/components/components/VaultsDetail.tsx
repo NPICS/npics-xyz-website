@@ -484,9 +484,9 @@ export default function VaultsDetail() {
               border={"1px solid rgba(0,0,0,.1)"}
               borderRadius={"10px"}
               padding={".3rem 1.5rem"}
-              gridGap={".35rem 1.3rem"}
+              gridGap={".35rem 1.5rem"}
             >
-              <Flex alignItems={"center"} justifyContent={"center"} flexDirection="column" gap='.1rem'>
+              <Flex alignItems={"self-start"} justifyContent={"center"} flexDirection="column" gap='.1rem'>
                 <Flex gap="10px">
                   <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Health factor</Typography>
                   <Popover 
@@ -498,7 +498,7 @@ export default function VaultsDetail() {
                 </Flex>
                 <Typography fontSize=".2rem" fontWeight='500' color="#000">{activities?.healthFactor}</Typography>
               </Flex>
-              <Flex alignItems={"center"} justifyContent={"center"} flexDirection="column" gap='.1rem'>
+              <Flex alignItems={"self-start"} justifyContent={"center"} flexDirection="column" gap='.1rem'>
                 <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Floor price</Typography>
                 <Flex alignItems={'center'}>
                   <Icon width='.22rem' height='.22rem' src={imgurl.home.ethBlack22}/>
@@ -506,7 +506,7 @@ export default function VaultsDetail() {
                               color="#000">{activities?.floorPrice.div(10 ** globalConstant.bit).toFixed(2, 1)}</Typography>
                 </Flex>
               </Flex>
-              <Flex alignItems={"center"} justifyContent={"center"} flexDirection="column" gap='.1rem'>
+              <Flex alignItems={"self-start"} justifyContent={"center"} flexDirection="column" gap='.1rem'>
                 <Flex gap="10px">
                   <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Debt</Typography>
                   <Popover 
@@ -516,12 +516,12 @@ export default function VaultsDetail() {
                   </Popover>
 
                 </Flex>
-                <Flex alignItems={'center'}>
+                <Flex alignItems={'self-start'}>
                   <Icon width='.22rem' height='.22rem' src={imgurl.home.ethBlack22}/>
                   <Typography fontSize=".2rem" fontWeight='500' color="#000">  {activities?.debtString}</Typography>
                 </Flex>
               </Flex>
-              <Flex alignItems={"center"} justifyContent={"center"} flexDirection="column" gap='.1rem'>
+              <Flex alignItems={"self-start"} justifyContent={"center"} flexDirection="column" gap='.1rem'>
                 <Flex gap="10px">
                   <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Vault APR</Typography>
 
@@ -535,7 +535,7 @@ export default function VaultsDetail() {
                 <Typography fontSize=".2rem" fontWeight='500'
                             color="#000">{`${(aprData.rewardApr * 100 - aprData.apr).toFixed(2)}%`}</Typography>
               </Flex>
-              <Flex alignItems={"center"} justifyContent={"center"} flexDirection="column" gap='.1rem'>
+              <Flex alignItems={"self-start"} justifyContent={"center"} flexDirection="column" gap='.1rem'>
                 <Typography fontSize=".14rem" fontWeight='500' color="rgba(0,0,0,.5)">Liquidation Price</Typography>
                 <Flex alignItems={'center'}>
                   <Icon width='.22rem' height='.22rem' src={imgurl.home.ethBlack22}/>

@@ -154,7 +154,7 @@ function VaultsTable(props: IProps) {
       </Flex>
     },
     {
-      title: 'Health factor',
+      title: 'Health Factor',
       dataIndex: 'healthFactor',
       align: 'center',
       key: 'healthFactor',
