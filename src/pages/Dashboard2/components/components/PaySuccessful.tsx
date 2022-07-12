@@ -3,6 +3,7 @@ import { Box, Flex, Icon, Typography } from "component/Box";
 import { imgurl } from 'utils/globalimport';
 import { DataSource } from './StyledInterface';
 import { copyToClipboard } from 'utils/clipboard-utils'
+import { _toString } from "./data";
 interface IProps {
   setShowPayment: React.Dispatch<React.SetStateAction<boolean>>
   setIsPayingAllDebts: React.Dispatch<React.SetStateAction<boolean>>
@@ -27,20 +28,6 @@ export default function PaySuccessful(props:IProps) {
     props.setShowPayment(false);
     props.setIsPayingAllDebts(false)
     props.setReload(!props.reload)
-  }
-  const _toString = (collectionName: string):string => {
-    switch (collectionName) {
-      case "Doodles":
-        return "Doodle"
-      case "Space Doodles":
-        return "Space Doodle"
-      case "CryptoPunks":
-        return "CryptoPunk"
-      case "CLONE X - X TAKASHI MURAKAMI":
-        return "Clone X"
-      default:
-        return collectionName
-    }
   }
 
   return <Flex

@@ -6,9 +6,9 @@ import ButtonDefault from 'component/ButtonDefault'
 import {DataSource, DebtData, LiquidatePrice, Record} from './StyledInterface';
 import {useWeb3React} from '@web3-react/core';
 import {LendPool} from 'abis/LendPool';
-import {notification, message, Popover, InputNumber} from 'antd';
+import {notification, message, Popover, InputNumber, Skeleton} from 'antd';
 import BigNumber from 'bignumber.js';
-import {fetchUser, setShowWalletModalOpen, updateLoginState} from 'store/app';
+import {fetchUser, setIsShowConnect, setShowWalletModalOpen, updateLoginState} from 'store/app';
 import {SessionStorageKey} from 'utils/enums';
 import http from 'utils/http';
 import {getSignMessage} from 'utils/sign';
@@ -25,6 +25,7 @@ import { injected } from 'connectors/hooks';
 import { useAsync } from 'react-use';
 import Checkbox from 'component/Input/Checkbox';
 import { TextPlaceholder } from 'component/styled';
+import { _toString } from './data';
 
 
 const Banner = () => {
@@ -56,6 +57,12 @@ const StyledModal = styled(Modal)`
   .ant-modal-close {
     display: none;
   }
+`
+const Cover = styled.img`
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 10px;
 `
 
 const TipsIcon = styled(Icon)`
@@ -226,7 +233,8 @@ export default function VaultsDetail() {
       // Prevent refresh popup windows
       let walletAddress = sessionStorage.getItem(SessionStorageKey.WalletAuthorized)
       if (!account && !walletAddress) {
-        action(setShowWalletModalOpen(true))
+        // action(setIsShowConnect(true)) // popover
+        action(setShowWalletModalOpen(true)) // modal
       }
     }
     // eslint-disable-next-line
@@ -384,7 +392,7 @@ export default function VaultsDetail() {
                           color={"rgba(0,0,0,.5)"}>Asset:</Typography>
               <Flex alignItems={'center'}>
                 <Typography marginRight={'10px'} fontSize={"16px"} fontWeight={"500"} color={"rgba(0,0,0,.5)"}>
-                  {`${activities?.collectionName ?? TextPlaceholder} #${activities?.tokenId ?? TextPlaceholder}`}
+                  {activities && `${_toString(activities?.collectionName) ?? TextPlaceholder} #${activities?.tokenId ?? TextPlaceholder}`}
                 </Typography>
                 <Icon style={{cursor: "pointer"}} width="16px" height="16px" src={imgurl.dashboard.export14} alt=""
                       onClick={() => window.open(`https://etherscan.io/nft/${activities?.address}/${activities?.tokenId}`)}/>
@@ -405,8 +413,15 @@ export default function VaultsDetail() {
 
           gridGap={"30px"}
         >
-          <Icon style={{borderRadius: '10px', background: "#e5e5e5"}} width='340px' height='340px'
-                src={activities?.imageUrl ?? ""}/>
+          {/* <Icon style={{borderRadius: '10px', background: "#e5e5e5"}} width='340px' height='340px'
+                src={activities?.imageUrl ?? ""}/> */}
+          <Grid>
+            {
+              activities?.imageUrl ?
+                <Cover src={activities?.imageUrl} /> :
+                <Skeleton.Image style={{ width: '100%', height: '100%', borderRadius: '10px' }} />
+            }
+          </Grid>
           <Grid
             gridTemplateAreas='"Minted Profit" "Numerical Numerical"'
             gridGap={"10px"}
@@ -429,7 +444,7 @@ export default function VaultsDetail() {
               </Popover>
               <Flex alignItems={'center'} marginBottom={"12px"}>
                 <Typography marginRight={'10px'} fontSize="24px" fontWeight='700' color="#000">
-                  {`NEO ${activities?.collectionName ?? TextPlaceholder} #${activities?.tokenId ?? TextPlaceholder}`}
+                  {activities && `NEO ${_toString(activities?.collectionName) ?? TextPlaceholder} #${activities?.tokenId ?? TextPlaceholder}`}
                 </Typography>
                 <Icon style={{cursor: "pointer"}} width="16px" height="16px" src={imgurl.dashboard.export14} alt=""
                       onClick={() => {
@@ -475,8 +490,8 @@ export default function VaultsDetail() {
               background={"rgba(0,0,0,.03)"}
               border={"1px solid rgba(0,0,0,.1)"}
               borderRadius={"10px"}
-              padding={"30px 150px"}
-              gridGap={"35px 150px"}
+              padding={"20px 150px"}
+              gridGap={"30px 150px"}
             >
               <Flex alignItems={"self-start"} justifyContent={"center"} flexDirection="column" gap='10px'>
                 <Flex gap="10px">

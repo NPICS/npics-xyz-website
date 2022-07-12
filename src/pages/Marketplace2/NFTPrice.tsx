@@ -84,7 +84,7 @@ function MoreNFT(props: {
   total?: number,
   tap?(): void
 }) {
-  return <Box position={"relative"}
+  return <Popover content="View All" overlayClassName="ant-popover-reset20"><Box position={"relative"}
               borderRadius={"10px"}
               overflow={"hidden"}
               width={"100px"}
@@ -109,7 +109,7 @@ function MoreNFT(props: {
         {props.total}<br/>Items
       </Typography>
     </Flex>
-  </Box>
+  </Box></Popover>
 }
 
 export default function NFTPrice(props: {
@@ -346,13 +346,16 @@ export default function NFTPrice(props: {
               key={idx}
             />
           } else {
-            return <OtherNFT
+            return <Popover
+              content={`${nft.collectionName} #${nft.tokenId}`}
+              overlayClassName="ant-popover-reset20"
+            ><OtherNFT
               src={nft.imageUrl}
               onClick={() => {
                 navigate(`/nft/${nft.address}/${nft.tokenId}`, {replace: true})
               }}
               key={idx}
-            />
+            /></Popover>
           }
         })
       }
