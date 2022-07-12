@@ -60,6 +60,7 @@ const NFTMain = styled.div`
           "cover price share"
           "info activities activities"
           "props activities activities";
+  min-width: calc(480px + 650px + 300px);
 `
 
 const Cover = styled.img`

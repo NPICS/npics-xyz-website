@@ -35,7 +35,7 @@ function Index() {
   const isShowLoading = useAppSelector(state => state.app.data.isShowLoading)
 
   return (
-    <div>
+    <>
       {isShowLoading ? <Loading></Loading> : null}
       <Flex>
         <Nav>
@@ -48,7 +48,7 @@ function Index() {
           <Footer></Footer>
         </FooterBox>
       </Flex>
-    </div>
+    </>
   );
 }
 
