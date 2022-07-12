@@ -17,7 +17,7 @@ import {notification} from 'antd';
 import {SessionStorageKey} from 'utils/enums';
 import {CHAIN_ID, injected} from 'connectors/hooks';
 import ContentLoader from "react-content-loader";
-import {useContract, useERC20Contract, useWETHContract} from "./hooks/useContract";
+import {useContract, useERC20Contract, useLendPoolContract, useWETHContract} from "./hooks/useContract";
 // import { Content, Footer } from 'antd/lib/layout/layout';
 import Loading from 'component/Loading';
 import XHeader from 'pages/Layout/Header';
@@ -55,6 +55,7 @@ function App() {
   const oldAccount = useRef<string | undefined | null>()
   const isShowLoading = useAppSelector(state => state.app.data.isShowLoading)
   // const weth = useWETHContract()
+  // const npics = useLendPoolContract()
 
 
   useEffect(() => {
@@ -96,6 +97,7 @@ function App() {
 
   useAsync(async () => {
     // let tx = await weth?.callStatic.transfer(`0xf26D94d535107A5e0c5a24f6Ce3eDCc8352f01e2`, 0)
+
   }, [])
 
   return (

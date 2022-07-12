@@ -168,6 +168,21 @@ export class CollectionItems {
         return this.collectionName
     }
   }
+
+  @Expose()
+  nftName(): string | undefined {
+    if (this.isNoName()) {
+      return undefined
+    } else {
+      return this.singularForName()
+    }
+  }
+
+  @Expose()
+  isNoName(): boolean {
+    return this.collectionName === `Bored Ape Yacht Club` ||
+      this.collectionName === `Mutant Ape Yacht Club`
+  }
 }
 
 type Traits = {

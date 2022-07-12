@@ -164,7 +164,10 @@ export default function OneNFT() {
               fontSize={"30px"}
               color={"#fff"}
               fontWeight={800}
-            >{`${detailData?.singularForName()} #${detailData?.tokenId}`}</Typography>
+            >{
+              // `${detailData?.singularForName()} #${detailData?.tokenId}`
+              detailData && `${detailData.nftName() ?? ""}${detailData.isNoName() ? "" : " #"}${detailData.tokenId}`
+            }</Typography>
             <Popover
               overlayClassName="ant-popover-reset"
               content={"Reported for Suspicious Activity on OpenSea"

@@ -263,7 +263,7 @@ export default function NFTPrice(props: {
         </Popover>
 
         <Flex flexDirection={"row"} alignItems={"end"}>
-          <Icon width={"22px"} height={"22px"} src={ethIcon}/>
+          <Flex alignSelf={"center"}><Icon width={"22px"} height={"22px"} src={ethIcon}/></Flex>
           <Typography
             fontSize={"24px"}
             fontWeight={700}
@@ -271,7 +271,7 @@ export default function NFTPrice(props: {
             lineHeight={"100%"}
             // verticalAlign={"middle"}
             // height={"auto"}
-            marginLeft={"10px"}
+            marginLeft={"2px"}
           >{props.item?.basePriceFormat() ?? TextPlaceholder}</Typography>
           <Typography
             fontSize={"14px"}
@@ -279,6 +279,7 @@ export default function NFTPrice(props: {
             color={"rgba(0,0,0,.5)"}
             marginLeft={"2px"}
             lineHeight={"100%"}
+            marginBottom={"3px"}
             style={{alignSelf: 'end'}}
           >
             {
@@ -372,7 +373,7 @@ export default function NFTPrice(props: {
         color={"#000"}
       >Down Payment</Typography>
       <Flex alignItems={"end"} marginTop={"22px"}>
-        <Flex gap={"14px"} alignItems={"center"}>
+        <Flex gap={"2px"} alignItems={"center"}>
           <Icon width={"40px"} height={"40px"} src={ethIcon}/>
           <Typography
             fontSize={"40px"}
