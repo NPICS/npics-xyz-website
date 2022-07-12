@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import ReactDOM from 'react-dom/client';
+import {Buffer} from "buffer"
 import App from './App';
 import './App.css'
 import reportWebVitals from './reportWebVitals';
@@ -18,6 +19,8 @@ import {Web3ReactProvider} from "@web3-react/core"
 import {GlobalStyle} from 'utils/globaStyle'
 import Web3Provider from "./connectors/Web3Provider";
 import Updater from "./updater";
+
+window.Buffer = window.Buffer || Buffer
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

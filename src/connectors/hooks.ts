@@ -22,7 +22,7 @@ export const [walletConnect, walletConnectHooks] = initializeConnector<WalletCon
   return new WalletConnect({
     actions,
     options: {
-      rpc: nodeUrl(),
+      rpc: {1: nodeUrl()},
       qrcode: true
     },
     onError
