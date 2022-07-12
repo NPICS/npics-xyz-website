@@ -1,5 +1,4 @@
 import ButtonDefault from 'component/ButtonDefault';
-import { Properties } from 'pages/marketplace/components/ItemStyled';
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 

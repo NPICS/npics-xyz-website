@@ -1,7 +1,7 @@
 import React from 'react'
 import Modal from "component/Modal";
-import ConnectedWallet from 'updater/ConnectedWallet';
-import { useAppDispatch, useAppSelector } from '../store/hooks';
+import ConnectedWallet from 'component/WalletBlock/ConnectedWallet';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { setShowWalletModalOpen } from 'store/app';
 
 export default function WalletConnectModal() {

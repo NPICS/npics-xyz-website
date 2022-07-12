@@ -27,42 +27,6 @@ const Home = loadable({
   loading: LoadingTip 
 })
 
-const Marketplace = loadable({
-  loader: () => import('../pages/marketplace/Marketplace'), 
-  loading: LoadingTip 
-})
-
-const MarketCollection = loadable({
-  loader: () => import('../pages/marketplace/MarketCollection'), 
-  loading: LoadingTip 
-})
-
-const Dashboard = loadable({
-  loader: () => import('../pages/Dashboard/Dashboard'), 
-  loading: LoadingTip 
-})
-
-const MarketItem = loadable({
-  loader: () => import('../pages/marketplace/components/MarketItem'), 
-  loading: LoadingTip 
-})
-const MyAgreement = loadable({
-  loader: () => import('pages/Dashboard/components/MyAgreement'), 
-  loading: LoadingTip 
-})
-const MyRewards = loadable({
-  loader: () => import('pages/Dashboard/components/MyRewards'), 
-  loading: LoadingTip 
-})
-const MyAirdrop = loadable({
-  loader: () => import('pages/Dashboard/components/MyAirdrop'), 
-  loading: LoadingTip 
-})
-const Claim = loadable({
-  loader: () => import('pages/Dashboard/components/components/Claim'), 
-  loading: LoadingTip 
-})
-
 export default function Routers() {
   const location = useLocation()
 

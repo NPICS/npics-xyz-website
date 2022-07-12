@@ -5,7 +5,7 @@ import http from "../../utils/http";
 import {deserializeArray} from "class-transformer";
 import {Activities, CollectionDetail} from "../../model/user";
 import {log} from "util";
-import {AddressAbbreviation} from "../marketplace/components/utils";
+import {AddressAbbreviation} from "./utils";
 import moment from "moment";
 import titlePrefixIcon from "../../assets/images/market/nft_activities_icon.png"
 import {urls} from "../../utils/urls";

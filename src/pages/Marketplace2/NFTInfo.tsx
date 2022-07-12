@@ -1,7 +1,7 @@
 import {Box, Flex, Grid, Icon, Typography} from "../../component/Box";
 import styled from "styled-components";
 import {CollectionDetail} from "../../model/user";
-import {AddressAbbreviation} from "../marketplace/components/utils";
+import {AddressAbbreviation} from "./utils";
 import addressLinkIcon from "../../assets/images/market/address_link.png"
 import {useEffect, useState} from "react";
 import {Npics} from "../../abis/Npics";

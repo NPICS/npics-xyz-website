@@ -1,14 +1,14 @@
 import React, {useState, useEffect} from 'react'
 import {Box, Flex, Icon, Typography, Grid, GridItem} from "component/Box";
 import {imgurl} from 'utils/globalimport';
-import ProgressBar from 'pages/Dashboard/components/components/ProgressBar';
+import ProgressBar from 'pages/Dashboard2/components/components/ProgressBar';
 import ButtonDefault from 'component/ButtonDefault'
 import {DataSource, DebtData, LiquidatePrice, Record} from './StyledInterface';
 import {useWeb3React} from '@web3-react/core';
 import {LendPool} from 'abis/LendPool';
 import {notification, message, Popover, InputNumber} from 'antd';
 import BigNumber from 'bignumber.js';
-import {fetchUser, updateLoginState} from 'store/app';
+import {fetchUser, setShowWalletModalOpen, updateLoginState} from 'store/app';
 import {SessionStorageKey} from 'utils/enums';
 import http from 'utils/http';
 import {getSignMessage} from 'utils/sign';
@@ -218,23 +218,15 @@ export default function VaultsDetail() {
   }, [isLogin, params, account, reload])
 
   useAsync(async () => {
+    console.log(account,isLogin)
     if (account && !isLogin) {
-      login2()
       console.log(`😈 ${isLogin}`)
+      login2()
     } else {
-      if (!account) {
-        // TODO: connect wallet
-        // activate(connectors.injected, (error) => {
-        //   const _error = JSON.parse(JSON.stringify(error))
-        //   if (_error.name === "UnsupportedChainIdError") {
-        //     sessionStorage.removeItem(SessionStorageKey.WalletAuthorized)
-        //     action(fetchUser(`{}`))
-        //     notification.error({ message: "Prompt connection failed, please use the Ethereum network" })
-        //   } else {
-        //     notification.error({ message: "Please authorize to access your account" })
-        //   }
-        // })
-        await injected.activate(1)
+      // Prevent refresh popup windows
+      let walletAddress = sessionStorage.getItem(SessionStorageKey.WalletAuthorized)
+      if (!account && !walletAddress) {
+        action(setShowWalletModalOpen(true))
       }
     }
     // eslint-disable-next-line

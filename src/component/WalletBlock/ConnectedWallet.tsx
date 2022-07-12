@@ -10,7 +10,7 @@ import { useWeb3React } from '@web3-react/core';
 import { CHAIN_ID, injected } from 'connectors/hooks';
 import { SUPPORTED_WALLETS, WalletInfo } from './wallet';
 import { setShowWalletModalOpen } from 'store/app';
-import { useAppDispatch } from '../store/hooks';
+import { useAppDispatch } from '../../store/hooks';
 
 export enum Wallet {
   METAMASK = 'MetaMask',
@@ -44,7 +44,7 @@ const WalletTtitle = styled(Typography)`
 
 
 export default function ConnectedWallet () {
-  const {account, provider, connector} = useWeb3React()
+  // const {account, provider, connector} = useWeb3React()
   const action = useAppDispatch()
   const WalletType = () => {
   
@@ -53,14 +53,14 @@ export default function ConnectedWallet () {
         icon: MetaMask,
         name: Wallet.METAMASK,
       },
-      {
-        icon: Walletconnect,
-        name: Wallet.WALLETCONNECT,
-      },
-      {
-        icon: CoinbaseWallet,
-        name: Wallet.COINBASEWALLET,
-      }
+      // {
+      //   icon: Walletconnect,
+      //   name: Wallet.WALLETCONNECT,
+      // },
+      // {
+      //   icon: CoinbaseWallet,
+      //   name: Wallet.COINBASEWALLET,
+      // }
     ]
   
     const connect = async (item: { icon: string; name: string }) => {

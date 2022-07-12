@@ -7,7 +7,7 @@ import { ColumnsType } from 'antd/lib/table';
 import { LendPool } from 'abis/LendPool'
 import { useWeb3React } from '@web3-react/core';
 import { getSignMessage } from 'utils/sign';
-import {fetchUser, updateLoginState} from 'store/app';
+import {fetchUser, setShowWalletModalOpen, updateLoginState} from 'store/app';
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 import { connectors } from 'utils/connectors';
 import { SessionStorageKey } from 'utils/enums';
@@ -256,7 +256,11 @@ function VaultsTable(props: IProps) {
       if (account) {
         setShowModal(true)
       } else {
-        await injected.activate(CHAIN_ID)
+         // Prevent refresh popup windows
+        let walletAddress = sessionStorage.getItem(SessionStorageKey.WalletAuthorized)
+        if(!walletAddress) {
+          action(setShowWalletModalOpen(true))
+        }
       }
     }
   }, [isLogin, account, provider])

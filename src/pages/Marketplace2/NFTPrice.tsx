@@ -7,7 +7,7 @@ import BigNumber from "bignumber.js";
 import {numberFormat, thousandFormat} from "../../utils/urls";
 import {useEffect, useState} from "react";
 import {fetchUser, updateARP} from "../../store/app";
-import {percentageFormat} from "../marketplace/components/utils";
+import {percentageFormat} from "./utils";
 import http from "../../utils/http";
 import {deserializeArray} from "class-transformer";
 import {Npics} from "../../abis/Npics";

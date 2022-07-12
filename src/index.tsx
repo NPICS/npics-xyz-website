@@ -14,8 +14,6 @@ import {BrowserRouter as Router, useLocation} from 'react-router-dom';
 import {ThemeProvider} from 'styled-components'
 import {lightColors, darkColors} from './theme/colors';
 // import { useAppSelector } from './store/hooks';
-import {ethers} from "ethers"
-import {Web3ReactProvider} from "@web3-react/core"
 import {GlobalStyle} from 'utils/globaStyle'
 import Web3Provider from "./connectors/Web3Provider";
 import Updater from "./updater";
@@ -43,24 +41,15 @@ const StyledThemeProvider = (props: any) => {
   return <ThemeProvider theme={isDark ? darkColors : lightColors} {...props} />
 }
 
-const web3GetLibrary = (provider: any) => {
-  const library = new ethers.providers.Web3Provider(provider);
-  library.pollingInterval = 8000
-  return library
-}
-
-
 root.render(
   <Provider store={store}>
     <Router>
       <StyledThemeProvider>
-        {/*<Web3ReactProvider getLibrary={web3GetLibrary}>*/}
         <Web3Provider>
           <Updater/>
           <GlobalStyle/>
           <App/>
         </Web3Provider>
-        {/*</Web3ReactProvider>*/}
       </StyledThemeProvider>
     </Router>
   </Provider>

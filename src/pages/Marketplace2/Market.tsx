@@ -7,7 +7,7 @@ import {Collections} from "../../model/user";
 import {Outlet, useNavigate, useParams} from "react-router-dom";
 import {numberFormat} from "../../utils/urls";
 import {Portrait} from "./MarketList";
-import {percentageFormat} from "../marketplace/components/utils";
+import {percentageFormat} from "./utils";
 import ethIcon from "../../assets/images/market/eth_icon_10x15.svg"
 import numeral from "numeral";
 import {Popover} from "antd";
