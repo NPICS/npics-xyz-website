@@ -214,3 +214,18 @@ export const airdropProject = [
     allowed: false
   }
 ]
+
+export const _toString = (collectionName: string):string => {
+  switch (collectionName) {
+    case "Doodles":
+      return "Doodle"
+    case "Space Doodles":
+      return "Space Doodle"
+    case "CryptoPunks":
+      return "CryptoPunk"
+    case "CLONE X - X TAKASHI MURAKAMI":
+      return "Clone X"
+    default:
+      return collectionName
+  }
+}
