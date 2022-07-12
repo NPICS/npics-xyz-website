@@ -181,7 +181,7 @@ export default function OneNFT() {
             {
               rarityData && Object.entries(rarityData).map(([key, val]) => {
                 return val && val.rank && <Popover
-                  overlayClassName="ant-popover-reset"
+                  overlayClassName="ant-popover-reset20"
                   content={getRarityPopoverText(key, val.status)}
                 >
                   <Box onClick={() => {

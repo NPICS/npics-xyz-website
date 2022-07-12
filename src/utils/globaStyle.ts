@@ -514,6 +514,16 @@ export const GlobalStyle = createGlobalStyle`
       }
     }
   }
+  .ant-popover-reset20 {
+    .ant-popover-arrow {
+    }
+    .ant-popover-inner {
+      border-radius: 20px;
+      .ant-popover-inner-content {
+        padding: 20px;
+      }
+    }
+  }
 
 
 `
