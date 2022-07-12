@@ -8,6 +8,7 @@ import {
 import { imgurl } from 'utils/globalimport';
 import ButtonDefault from 'component/ButtonDefault';
 import Table from './components/Table';
+import TableA from 'component/Table/Table'
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { urls } from "../../utils/urls";
@@ -16,7 +17,7 @@ import Npics from './components/Npics';
 import Title from './components/Title';
 import Detail from './components/Detail';
 const MyTable: any = styled(Table)`
-  width: 1600px;
+  /* min-width: 1600px; */
   height: 747px;
   margin: 0 auto;
 `
@@ -151,6 +152,7 @@ function Home() {
           Collections
         </div>
         <MyTable></MyTable>
+        {/* <TableA /> */}
       </div>
       <DetailBox>
         <div className='title'>Product Framework</div>

@@ -13,7 +13,7 @@ export const HomeWrap = styled.div`
   height: 100%;
   background: #1A1A1A;
   margin: 0 auto;
-
+  min-width: 1600px;
   .collections-title {
     width: 1600px;
     margin: 0 auto;

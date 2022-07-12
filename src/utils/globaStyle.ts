@@ -12,7 +12,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    min-width: 1280px;
+    min-width: 1680px;
     font-family: 'Montserrat';
     line-height: normal;
     font-size: 14px;

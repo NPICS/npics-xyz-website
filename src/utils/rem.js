@@ -9,6 +9,6 @@ function setRem() {
 
 setRem()
 
-window.onresize = function () {
-  setRem()
-}
+// window.onresize = function () {
+//   setRem()
+// }

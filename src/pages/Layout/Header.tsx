@@ -253,11 +253,11 @@ function XHeader() {
 
   return (
     <Nav>
-      <Flex
+      {/* <Flex
         position="absolute"
-        width="1606px"
+        // width="100%"
         justifyContent="space-between"
-      >
+      > */}
         <FlexDiv>
           <LogoLink to={"/"}>
             <img src={imgurl.logoBeta} alt="" />
@@ -364,7 +364,7 @@ function XHeader() {
       >
         <div onClick={connect}><img src={imgurl.metamaskLogo} alt=""></img>MetaMask</div>
       </Modal> */}
-      </Flex>
+      {/* </Flex> */}
     </Nav>
   );
 }
