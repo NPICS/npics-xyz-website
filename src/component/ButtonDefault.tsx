@@ -94,6 +94,7 @@ const StyledButton = styled.button<Iprops>`
   border-radius: 10px;
   font-style: normal;
   font-weight: 600;
+  line-height: normal;
   /* font-size: 20px; */
   cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
   ${flex}

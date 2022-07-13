@@ -255,7 +255,7 @@ export default function Market() {
                 nft && numeral(nft.floorPrice.div(10 ** 18).toFixed()).format("0,0.[00]")
               }</Typography>
             </Flex>
-            <Typography fontSize={"14px"} color={"#000"}>Floor</Typography>
+            <Typography fontWeight={"500"} fontSize={"14px"} color={"#000"}>Floor</Typography>
           </Flex>
           <Flex
             flexDirection={"column"}
@@ -277,7 +277,7 @@ export default function Market() {
               }</Typography>
             </Flex>
             <Flex alignItems={"center"} gap={"10px"}>
-              <Typography fontSize={"14px"} color={"#000"}>24h</Typography>
+              <Typography fontWeight={"500"} fontSize={"14px"} color={"#000"}>24h</Typography>
               <Typography
                 fontSize={`14px`}
                 fontWeight={500}
