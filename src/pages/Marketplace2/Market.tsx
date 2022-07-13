@@ -245,7 +245,7 @@ export default function Market() {
             gap={"5px"}
             minWidth={"136px"}>
             <Flex alignItems={"center"} gap={"2px"}>
-              <Icon style={{marginBottom:"3px"}} width={"18px"} height={"18px"} src={ethIcon}/>
+              <Icon width={"18px"} height={"18px"} src={ethIcon}/>
               <Typography
                 fontSize={"20px"}
                 color={"#000"}
@@ -266,7 +266,7 @@ export default function Market() {
             gap={"2px"}
             minWidth={"136px"}>
             <Flex alignItems={"center"} gap={"2px"}>
-              <Icon style={{marginBottom:"3px"}} width={"18px"} height={"18px"} src={ethIcon}/>
+              <Icon width={"18px"} height={"18px"} src={ethIcon}/>
               <Typography
                 fontSize={"20px"}
                 color={"#000"}
