@@ -184,6 +184,7 @@ export default function OneNFT() {
               rarityData && Object.entries(rarityData).map(([key, val]) => {
                 return val && val.rank && <Pop20
                   content={getRarityPopoverText(key, val.status)}
+                  key={val.url}
                 >
                   <Box onClick={() => {
                     // Temporary solution

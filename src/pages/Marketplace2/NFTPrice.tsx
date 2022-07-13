@@ -343,17 +343,18 @@ export default function NFTPrice(props: {
               }}
               img={nft.imageUrl}
               total={recommendNFTTotal}
-              key={idx}
+              key={nft.tokenId}
             />
           } else {
             return <Pop20
-              content={`${nft.collectionName} #${nft.tokenId}`}
+              key={nft.tokenId}
+              content={`${nft && `${nft.nftName() ?? ""}${nft.isNoName() ? "" : " #"}${nft.tokenId}`}`}
             ><OtherNFT
               src={nft.imageUrl}
               onClick={() => {
                 navigate(`/nft/${nft.address}/${nft.tokenId}`, {replace: true})
               }}
-              key={idx}
+              key={nft.tokenId}
             /></Pop20>
           }
         })

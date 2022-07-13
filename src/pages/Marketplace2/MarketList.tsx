@@ -199,10 +199,9 @@ export default function MarketList() {
             alignItems={"start"}
             overflow={"auto"}
           >
-            {new Array(30).fill(0).map(() => <SkeletonTemplate widthWrap={'100%'}/>)}
+            {new Array(30).fill(0).map((item,idx) => <SkeletonTemplate key={idx} widthWrap={'100%'}/>)}
           </Grid>
           : listData.length ? <InfiniteScroll
-
               pageStart={1}
               loadMore={() => {
                 if (!isLoading.current) {
@@ -210,7 +209,7 @@ export default function MarketList() {
                 }
               }}
               hasMore={listData.length < total}
-              loader={<Loading />}
+              loader={<Loading key={0}/>}
               initialLoad={false}>
               <Grid
                 padding={"25px 40px"}
