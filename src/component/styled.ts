@@ -2,6 +2,17 @@ import {Skeleton} from 'antd'
 import {css} from 'styled-components'
 import {Flex} from './Box'
 
+export const font_14px: string = '14px'
+export const font_16px: string = '16px'
+export const weight_500: string = '500'
+
+
+
+/// text not load text
+export const TextPlaceholder: string = `-`
+
+
+
 export const flex = css`
   display: flex;
   justify-content: center;
@@ -78,6 +89,3 @@ export const font2071 = css`
   font-size: 20px;
   color: rgba(255, 255, 255);
 `
-
-/// text not load text
-export const TextPlaceholder: string = `-`

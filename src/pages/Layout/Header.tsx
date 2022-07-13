@@ -16,7 +16,7 @@ import { urls } from "../../utils/urls";
 import { NavLink, useLocation } from 'react-router-dom';
 import { Flex, Icon, Typography, Box } from 'component/Box';
 import styled from 'styled-components';
-import { injected } from 'connectors/hooks';
+import { CHAIN_ID, injected } from 'connectors/hooks';
 
 const StyledtWallet = styled(Flex)`
   cursor: pointer;
@@ -110,7 +110,7 @@ function XHeader() {
   const connect = async () => {
     try {
       // TODO: wallet connect
-      await injected.activate(1)
+      await injected.activate(CHAIN_ID)
       // await activate(connectors.injected, (error) => {
       //   const Error = JSON.parse(JSON.stringify(error))
       //   if (Error.name === "UnsupportedChainIdError") {

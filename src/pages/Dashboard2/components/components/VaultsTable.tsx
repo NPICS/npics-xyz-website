@@ -3,28 +3,23 @@ import { message, Modal, notification, Table } from 'antd';
 import { imgurl } from 'utils/globalimport';
 import BigNumber from 'bignumber.js';
 import http from 'utils/http'
-import { ColumnsType } from 'antd/lib/table';
 import { LendPool } from 'abis/LendPool'
 import { useWeb3React } from '@web3-react/core';
 import { getSignMessage } from 'utils/sign';
 import {fetchUser, setShowWalletModalOpen, updateLoginState} from 'store/app';
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
-import { connectors } from 'utils/connectors';
 import { SessionStorageKey } from 'utils/enums';
 import { BgTable, DataSource, DebtData, LiquidatePrice, Record, DataSource2 } from './StyledInterface';
-import { useNavigate } from "react-router-dom";
 import NotFound from 'component/NotFound';
 import { useUpdateEffect } from 'utils/hook';
 import { Flex, Grid, Icon, Typography } from 'component/Box';
-import { globalConstant } from 'utils/globalConstant';
 import styled from 'styled-components';
 import ButtonDefault from 'component/ButtonDefault';
-import { thousandFormat } from "../../../../utils/urls";
 import { deserializeArray, plainToClass } from 'class-transformer';
 import {CHAIN_ID, injected} from 'connectors/hooks';
 // import { aa } from './data'
-import { TextPlaceholder } from 'component/styled';
 import { useAsync } from 'react-use';
+import TableWarehouse from './TableWarehouse';
 
 interface Result {
   createTime: string,
@@ -39,13 +34,6 @@ interface Result {
   ltv: BigNumber,
   purchaseFloorPrice: BigNumber,
   status: number
-}
-
-enum Color {
-  'Inforce' = "#7BD742",
-  'In Risk' = "#FFD43B",
-  'In Liquidation' = "#FF4949",
-  'Terminated' = "#7F7F7F"
 }
 
 const StyledModal = styled(Modal)`
@@ -76,128 +64,9 @@ function VaultsTable(props: IProps) {
   const [showModal, setShowModal] = useState<boolean>(false)
   const action = useAppDispatch()
   const isLogin = useAppSelector(state => state.app.isLogin)
-  const ethRate = useAppSelector(state => new BigNumber(state.app.data.EthPrice))
+  // const ethRate = useAppSelector(state => new BigNumber(state.app.data.EthPrice))
   const DebtPosition = useRef<DataSource2[]>()
-  const navigate = useNavigate()
-  const columns: ColumnsType<DataSource2> = [
-    {
-      title: 'Asset',
-      dataIndex: 'items',
-      key: 'items',
-      align: 'center',
-      onCell: (row) => ({style: {backgroundColor: row.terminated() ? 'rgba(0, 0, 0, 0.03)' : ''}}),
-      render: (text, row) => {
-      return <div className='items' style={{ cursor: `${row.terminated() ? '' : 'pointer'}` }} onClick={() => jumpToEthscan(row)}>
-        <img className='avatar' src={row.imageUrl} alt="" />
-        <div className='text'>
-          <div>
-            <span title={row.singularForName()}>{row.singularForName()}</span>
-            <span>&nbsp;{`#${row.tokenId}`}</span>
-          </div>
-          <div>
-            Floor: <span>
-              <img src={imgurl.dashboard.ethGrey18} alt="" />
-              {row.floorPrice.div(10 ** globalConstant.bit).toFixed(2, 1)}
-              <Typography marginLeft="5px">{`(${thousandFormat(row.floorPrice.times(ethRate)
-                .div(10 ** 18)
-                .toNumber())})`}</Typography>
-            </span>
-          </div>
-        </div>
-      </div>}
-    },
-    {
-      title: 'NEO NFT',
-      dataIndex: 'contract',
-      key: 'contract',
-      align: 'center',
-      onCell: (row) => ({style: {backgroundColor: row.terminated() ? 'rgba(0, 0, 0, 0.03)' : ''}}),
-      render: (text, row) => <div className='contract' style={{ cursor: `${row.terminated() ? '' : 'pointer'}` }} onClick={() => jumpToNEOEthscan(row)}>
-        <span title={row.singularForName()}>NEO {row.singularForName()}</span>
-        &nbsp;{`#${row.tokenId}`}
-        {row.terminated() ? null : <Icon width="16px" height="16px" src={imgurl.dashboard.exportBlack18} alt="" />}
-      </div>
-    },
-    {
-      title: 'Debt',
-      dataIndex: 'debtString',
-      key: 'debtString',
-      align: 'center',
-      width: '180px',
-      onCell: (row) => ({style: {backgroundColor: row.terminated() ? 'rgba(0, 0, 0, 0.03)' : ''}}),
-      render: (text, row) => row.terminated() ? TextPlaceholder : <Flex className='imgPrice' flexDirection='column'>
-        <Flex alignItems='center' marginBottom="4px">
-          <Icon width="18px" height="18px" src={imgurl.dashboard.ethBlack18} alt="" />
-          {row.debtString()}
-        </Flex>
-        <Typography fontSize="14px" fontWeight="500" color="rgba(0,0,0,.5)">
-          {`(${thousandFormat(row.totalDebt.times(ethRate)
-            .div(10 ** 18)
-            .toNumber())})`}
-        </Typography>
-      </Flex>
-    },
-    {
-      title: 'Liquidation Price',
-      dataIndex: 'liquidationPrice',
-      align: 'center',
-      key: 'liquidationPrice',
-      onCell: (row) => ({style: {backgroundColor: row.terminated() ? 'rgba(0, 0, 0, 0.03)' : ''}}),
-      render: (text, row) => row.terminated() ? TextPlaceholder : <Flex className='imgPrice' flexDirection='column'>
-        <Flex alignItems='center' marginBottom="4px">
-          <Icon width="18px" height="18px" src={imgurl.dashboard.ethBlack18} alt="" />
-          {row.liquidationPrice().div(10 ** 18).toFixed(4, 1)}
-        </Flex>
-        <Typography fontSize="14px" fontWeight="500" color="rgba(0,0,0,.5)" >{`(${thousandFormat(row.liquidationPrice().times(ethRate)
-          .div(10 ** 18)
-          .toNumber())})`}</Typography>
-      </Flex>
-    },
-    {
-      title: 'Health Factor',
-      dataIndex: 'healthFactor',
-      align: 'center',
-      key: 'healthFactor',
-      width: '180px',
-      onCell: (row) => ({style: {backgroundColor: row.terminated() ? 'rgba(0, 0, 0, 0.03)' : ''}}),
-      render: (text,row) => row.terminated() ? TextPlaceholder : <div className='healthFactor'>
-        {row.healthFactor.div(10 ** 18).toFixed(4, 1)}
-      </div>
-    },
-    {
-      title: 'Status',
-      dataIndex: 'factorStatus',
-      key: 'factorStatus',
-      align: 'center',
-      width: '180px',
-      onCell: (row) => ({style: {backgroundColor: row.terminated() ? 'rgba(0, 0, 0, 0.03)' : ''}}),
-      render: (text,row) => <div className='status' style={{ color: `${Color[text as 'Inforce' | 'In Risk' | 'In Liquidation' | 'Terminated']}` }}>
-        {row.factorStatus}
-      </div>
-    },
-    {
-      title: 'Actions',
-      dataIndex: 'actions',
-      key: 'actions',
-      align: 'center',
-      width: '180px',
-      onCell: (row) => ({style: {backgroundColor: row.terminated() ? 'rgba(0, 0, 0, 0.03)' : ''}}),
-      render: (t, row) => row.terminated() ? <div /> : <Flex alignItems='center' justifyContent='center'>
-        <ButtonDefault height='48px' minWidth='120px' types='normal' onClick={() => navigate(`/vaultsDetail/${row.nftAddress}/${row.tokenId}`)}>
-          Repay
-        </ButtonDefault>
-      </Flex>,
-    },
-  ]
-
-  const jumpToEthscan = (e: DataSource2) => {
-    if (e.terminated()) return
-    navigate(`/vaultsDetail/${e.nftAddress}/${e.tokenId}`)
-  }
-  const jumpToNEOEthscan = (e: DataSource2) => {
-    if (e.terminated()) return
-    window.open(`https://cn.etherscan.com/nft/${e.neoAddress}/${e.tokenId}`)
-  }
+  // const navigate = useNavigate()
 
   useUpdateEffect(() => {
     if (!DebtPosition.current) return
@@ -221,32 +90,6 @@ function VaultsTable(props: IProps) {
     props.setTotalDebts(Debt)
     // eslint-disable-next-line
   }, [activities])
-
-  // useEffect(() => {
-  //   if (isLogin) {
-  //     setShowModal(false)
-  //     getNftActivities()
-  //   } else {
-  //     setShowModal(true)
-  //   }
-  //   // eslint-disable-next-line
-  // }, [isLogin, account,provider])
-  //
-  // useEffect(() => {
-  //   if(account && !isLogin) {
-  //     setShowModal(true)
-  //   }
-  // },[account,isLogin])
-
-  // useAsync(async() => {
-  //   if(!account) {
-  //     try{
-  //       await injected.activate(1)
-  //     }catch(e:any){
-  // notification.error({ message: e.message})
-  //     }
-  //   }
-  // },[])
 
   useAsync(async () => {
     if (isLogin) {
@@ -427,12 +270,12 @@ function VaultsTable(props: IProps) {
     </Grid>
 
   return (<BgTable>
-    {loading ? <div className='loading'><img src={imgurl.market.progressIcon} alt="" /></div> : activities.length ? <Table
-      columns={columns}
-      dataSource={activities}
-      pagination={false}
-      className="ant-table-reset-white"
-    ></Table> : <NotFound padding={"100px 0"}/>}
+    {loading ? <div className='loading'>
+      <img src={imgurl.market.progressIcon} alt="" />
+    </div> :
+      activities.length ?
+        <TableWarehouse Source={activities} />
+        : <NotFound padding={"100px 0"} />}
     <StyledModal
       visible={showModal}
       footer={null}

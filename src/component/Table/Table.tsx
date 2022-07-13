@@ -1,23 +1,33 @@
 import React from 'react'
 import styled from 'styled-components/macro';
+import { Td, Th, Table, Tr } from './Cell'
 
-
-const StyledTable = styled.table`
-  border-collapse: separate;
-`
-export default function Table() {
+export default function Index() {
 
 
   return (
-    <StyledTable>
+    <Table
+
+    >
+      <thead>
+        <Tr
+          height="90px"
+        >
+          <Th>health factor</Th>
+          <Th>2222</Th>
+          <Th
+            color="#fff"
+            textAlign={'left'}
+          >3333</Th>
+        </Tr>
+      </thead>
       <tbody>
-        <tr><th>Browser</th> <th>Layout Engine</th></tr>
-        <tr><td>Firefox</td> <td>Gecko</td></tr>
-        <tr><td>Edge</td> <td>EdgeHTML</td></tr>
-        <tr><td>Safari</td> <td>Webkit</td></tr>
-        <tr><td>Chrome</td> <td>Blink</td></tr>
-        <tr><td>Opera</td> <td>Blink</td></tr>
+        <Tr><Td>Firefox</Td> <Td>Firefox</Td> <Td>Gecko</Td></Tr>
+        <Tr><Td>Edge</Td> <Td>Firefox</Td> <Td>EdgeHTML</Td></Tr>
+        <Tr><Td>Safari</Td> <Td>Firefox</Td> <Td>Webkit</Td></Tr>
+        <Tr><Td>Chrome</Td> <Td>Firefox</Td> <Td>Blink</Td></Tr>
+        <Tr><Td>Opera</Td> <Td>Firefox</Td> <Td>Blink</Td></Tr>
       </tbody>
-    </StyledTable>
+    </Table>
   )
 }

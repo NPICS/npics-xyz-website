@@ -495,7 +495,7 @@ export default function VaultsDetail() {
             >
               <Flex alignItems={"self-start"} justifyContent={"center"} flexDirection="column" gap='10px'>
                 <Flex gap="10px">
-                  <Typography fontSize="14px" fontWeight='500' color="rgba(0,0,0,.5)">Health factor</Typography>
+                  <Typography fontSize="14px" fontWeight='500' color="rgba(0,0,0,.5)">Health Factor</Typography>
                   <Popover 
                     overlayClassName="ant-popover-reset"
                     content={HealthFactorPop}>
@@ -506,7 +506,7 @@ export default function VaultsDetail() {
                 <Typography fontSize="20px" fontWeight='500' color="#000">{activities?.healthFactor}</Typography>
               </Flex>
               <Flex alignItems={"self-start"} justifyContent={"center"} flexDirection="column" gap='10px'>
-                <Typography fontSize="14px" fontWeight='500' color="rgba(0,0,0,.5)">Floor price</Typography>
+                <Typography fontSize="14px" fontWeight='500' color="rgba(0,0,0,.5)">Floor Price</Typography>
                 <Flex alignItems={'center'}>
                   <Icon width='22px' height='22px' src={imgurl.home.ethBlack22}/>
                   <Typography fontSize="20px" fontWeight='500'

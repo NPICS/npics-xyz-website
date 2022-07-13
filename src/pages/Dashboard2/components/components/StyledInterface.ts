@@ -57,7 +57,7 @@ export const BgTable = styled.div`
     font-weight: 500;
     font-size: 16px;
     color: #000;
-    margin-left: 25px;
+    /* align-items: flex-start; */
     &>span {
       max-width: 111px;
       white-space: nowrap;
@@ -73,6 +73,7 @@ export const BgTable = styled.div`
   }
   .imgPrice {
     ${flex}
+    align-items: flex-start;
     font-weight: 600;
     font-size: 16px;
     color: #000;
@@ -84,12 +85,14 @@ export const BgTable = styled.div`
   }
   .healthFactor {
     ${flex}
+    justify-content: left;
     font-weight: 600;
     font-size: 16px;
     color: #000;
   }
   .status {
     ${flex}
+    justify-content: left;
     font-weight: 500;
     font-size: 16px;
   }
