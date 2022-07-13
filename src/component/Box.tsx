@@ -88,6 +88,7 @@ const Icon = styled.img<IconProps>`
   -webkit-user-drag: none;
   ${background}
 `
+
 const GridItem = styled(Box)<GridProps>`
   display: flex;
   gap: ${(props) => props.gap};

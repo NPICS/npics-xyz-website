@@ -57,9 +57,10 @@ const CollectionItem = styled.img<{
   height: 50px;
   //background: transparent url(${(props) => props.imgUrl}) no-repeat center;
   //background-size: cover;
-  background: #fff;
-  border: 0;
-  overflow: hidden;
+  background: ${(props) => props.isSelected ? `#fff` : `transparent`};
+  border: none;
+  outline: none;
+  //overflow: hidden;
   border-radius: 10px;
   object-fit: cover;
   // border: ${(props) => props.isSelected ? `3px` : 0} solid #fff;
@@ -185,7 +186,7 @@ export default function Market() {
             <Flex alignItems={"center"} gap={"6px"}>
               <Typography
                 fontWeight={800}
-                fontSize={"46px"}
+                fontSize={"40px"}
                 lineHeight={"56px"}
                 color={"#000"}
               >{nft?.name}</Typography>
@@ -277,6 +278,8 @@ export default function Market() {
             <Flex alignItems={"center"} gap={"10px"}>
               <Typography fontSize={"14px"} color={"#000"}>24h</Typography>
               <Typography
+                fontSize={`14px`}
+                fontWeight={500}
                 color={
                   (nft?.dayChange.toNumber() ?? 0) > 0 ? `#18CF15` : `#FF4949`
                 }
@@ -296,7 +299,11 @@ export default function Market() {
             <Typography fontSize={"20px"} color={"#000"} fontWeight={700}>{
               nft ? numberFormat(nft.realTotalSupply) : TextPlaceholder
             }</Typography>
-            <Typography>Total</Typography>
+            <Typography
+              color={`#000`}
+              fontSize={`14px`}
+              fontWeight={500}
+            >Total</Typography>
           </Flex>
           <Flex
             flexDirection={"column"}
@@ -309,7 +316,11 @@ export default function Market() {
             <Typography fontSize={"20px"} color={"#000"} fontWeight={700}>{
               nft ? numberFormat(nft.totalShelves) : TextPlaceholder
             }</Typography>
-            <Typography>Listed Items</Typography>
+            <Typography
+              color={`#000`}
+              fontSize={`14px`}
+              fontWeight={500}
+            >Listed Items</Typography>
           </Flex>
         </Flex>
       </Box>

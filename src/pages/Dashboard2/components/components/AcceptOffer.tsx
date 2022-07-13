@@ -3,8 +3,6 @@ import {Box, Flex, Grid, Icon, Typography} from "../../../../component/Box";
 import {CancelButton, ConfirmButton, PopupTitle} from "../../../Marketplace2/NFTPay";
 import validIcon from "../../../../assets/images/market/nfts_opensea_valid.svg"
 import wethIcon from "../../../../assets/images/market/weth_icon.svg"
-import {ReactNode} from "react";
-import {copyToClipboard} from "../../../../utils/clipboard-utils";
 
 export default function AcceptOffer() {
   return <Modal isOpen={true}>
@@ -146,14 +144,3 @@ function OfferCell(props: {
     </Flex>
   </Flex>
 }
-
-// function MoneyBox(props: {
-//   icon?: ReactNode,
-//   iconPosition: `left` | `right`
-// }) {
-//   return <Flex
-//
-//   >
-//
-//   </Flex>
-// }

@@ -101,13 +101,15 @@ function AcceptOffersCell() {
   >
     {/* Market Icon */}
     <Box borderRadius={"18px"} background={"#eee"}>
-      <Icon
-        width={"36px"}
-        height={"36px"}
-      ></Icon>
+      <Icon width={"36px"} height={"36px"}></Icon>
     </Box>
     {/* Price */}
-    <Flex marginLeft={"20px"} width={"38%"} alignItems={"start"} gap={"2px"} flexDirection={"column"}>
+    <Flex marginLeft={"20px"}
+          width={"38%"}
+          alignItems={"start"}
+          gap={"2px"}
+          flexDirection={"column"}
+    >
       <Flex alignItems={"start"} gap={"4px"}>
         <Flex alignItems={"center"} gap={"6px"}>
           <Icon src={wethIcon} width={"10px"} height={"15px"}></Icon>

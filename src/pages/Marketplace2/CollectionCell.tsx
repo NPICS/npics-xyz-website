@@ -104,17 +104,22 @@ export default function CollectionCell(props: {
             <Typography
                 color={"rgba(0,0,0,.6)"}
                 fontSize={props.compact ? "14px" : "16px"}
-                fontWeight={"500"}
+                fontWeight={500}
             >{`#${props.item.rarityScore}`}</Typography>
         </Flex>
         <Box padding={"7px 15px 18px"}>
-            <Flex alignItems={"center"} gap={"6px"}>
+            <Flex alignItems={"center"} gap={props.item.nftName() ? `6px` : `0`}>
                 <NoWarpTypography fontWeight={500} fontSize={"14px"}
-                    color={"rgba(0,0,0,.5)"}>{props.item.singularForName().length > 10 ? props.item.singularForName().replace(props.item.singularForName().substring(10), '...') : props.item.singularForName()}</NoWarpTypography>
-                <Typography fontWeight={500}
-                    fontSize={"14px"}
-                    color={"rgba(0,0,0,.5)"}>
-                    {`#${props.item.tokenId}`}</Typography>
+                    color={"rgba(0,0,0,.5)"}>{
+                  // props.item.nftName() && props.item.nftName().length > 10 ? props.item.nftName()?.replace(props.item.singularForName().substring(10), '...') : props.item.nftName()
+                  props.item && `${props.item.nftName()}`
+                }</NoWarpTypography>
+                <Typography
+                  fontWeight={500}
+                  fontSize={"14px"}
+                  color={"rgba(0,0,0,.5)"}
+                >
+                    {`${props.item.isNoName() ? "" : " #"}${props.item.tokenId}`}</Typography>
             </Flex>
             <Flex
                 alignItems={"center"}
