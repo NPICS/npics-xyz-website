@@ -6,7 +6,7 @@ import http from 'utils/http'
 import { LendPool } from 'abis/LendPool'
 import { useWeb3React } from '@web3-react/core';
 import { getSignMessage } from 'utils/sign';
-import {fetchUser, setShowWalletModalOpen, updateLoginState} from 'store/app';
+import {fetchUser, setIsShowConnect, setShowWalletModalOpen, updateLoginState} from 'store/app';
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 import { SessionStorageKey } from 'utils/enums';
 import { BgTable, DataSource, DebtData, LiquidatePrice, Record, DataSource2 } from './StyledInterface';
@@ -102,7 +102,10 @@ function VaultsTable(props: IProps) {
          // Prevent refresh popup windows
         let walletAddress = sessionStorage.getItem(SessionStorageKey.WalletAuthorized)
         if(!walletAddress) {
-          action(setShowWalletModalOpen(true))
+          // action(setShowWalletModalOpen(true)) // Modal
+          setTimeout(() => {
+            action(setIsShowConnect(true)) // Popover
+          },500)
         }
       }
     }

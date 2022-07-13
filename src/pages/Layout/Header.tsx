@@ -208,13 +208,21 @@ function XHeader() {
   }
 
   document.addEventListener("click", event => {
-    if (!accountPop && !showConnect) return
+    if (!accountPop) return
+    var cDom = document.getElementById("baseAccount") || document.body;
+    var tDom: any = event.target;
+    if (cDom === tDom || cDom.contains(tDom)) {
+    } else {
+      setAccountPop(false)
+    }
+  });
+  document.addEventListener("click", event => {
+    if (!showConnect) return
     var cDom = document.getElementById("baseAccount") || document.body;
     var tDom: any = event.target;
     if (cDom === tDom || cDom.contains(tDom)) {
     } else {
       action(setIsShowConnect(false))
-      setAccountPop(false)
     }
   });
 

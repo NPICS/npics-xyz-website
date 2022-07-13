@@ -233,8 +233,10 @@ export default function VaultsDetail() {
       // Prevent refresh popup windows
       let walletAddress = sessionStorage.getItem(SessionStorageKey.WalletAuthorized)
       if (!account && !walletAddress) {
-        // action(setIsShowConnect(true)) // popover
-        action(setShowWalletModalOpen(true)) // modal
+        setTimeout(() => {
+          action(setIsShowConnect(true)) // Popover
+        },500)
+        // action(setShowWalletModalOpen(true)) // modal
       }
     }
     // eslint-disable-next-line
