@@ -103,11 +103,11 @@ export default function CollectionCell(props: {
             {/*<Icon height={"20px"} width={"20px"} src={CellTagIcon}/>*/}
             <Typography
                 color={"rgba(0,0,0,.6)"}
-                fontSize={props.compact ? "14px" : "16px"}
-                fontWeight={500}
+                fontSize={props.compact ? "12px" : "12px"}
+                fontWeight={600}
             >{`#${props.item.rarityScore}`}</Typography>
         </Flex>
-        <Box padding={"7px 15px 18px"}>
+        <Box padding={"11px 15px 18px"}>
             <Flex alignItems={"center"} gap={props.item.nftName() ? `6px` : `0`}>
                 <NoWarpTypography fontWeight={500} fontSize={"14px"}
                     color={"rgba(0,0,0,.5)"}>{
@@ -125,7 +125,7 @@ export default function CollectionCell(props: {
                 alignItems={"center"}
                 justifyContent={"space-between"}
                 gap={"6px"}
-                marginTop={"10px"}
+                marginTop={"12px"}
             >
                 <NoWarpTypography fontWeight={'500'} hidden={props.compact}>Down Payment</NoWarpTypography>
                 <Flex

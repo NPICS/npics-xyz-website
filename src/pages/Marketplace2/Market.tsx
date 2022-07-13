@@ -183,7 +183,7 @@ export default function Market() {
             flex={1}
             justifyContent={"center"}
           >
-            <Flex alignItems={"center"} gap={"6px"}>
+            <Flex alignItems={"center"} gap={"2px"}>
               <Typography
                 fontWeight={800}
                 fontSize={"40px"}
@@ -243,7 +243,7 @@ export default function Market() {
             padding={"12px 20px"}
             gap={"5px"}
             minWidth={"136px"}>
-            <Flex alignItems={"center"} gap={"6px"}>
+            <Flex alignItems={"center"} gap={"2px"}>
               <Icon width={"18px"} height={"18px"} src={ethIcon}/>
               <Typography
                 fontSize={"20px"}
@@ -262,9 +262,9 @@ export default function Market() {
             boxShadow={"0 0 10px rgba(0,0,0,.1)"}
             borderRadius={"10px"}
             padding={"12px 20px"}
-            gap={"5px"}
+            gap={"2px"}
             minWidth={"136px"}>
-            <Flex alignItems={"center"} gap={"6px"}>
+            <Flex alignItems={"center"} gap={"2px"}>
               <Icon width={"18px"} height={"18px"} src={ethIcon}/>
               <Typography
                 fontSize={"20px"}
@@ -294,7 +294,7 @@ export default function Market() {
             boxShadow={"0 0 10px rgba(0,0,0,.1)"}
             borderRadius={"10px"}
             padding={"12px 20px"}
-            gap={"5px"}
+            gap={"2px"}
             minWidth={"136px"}>
             <Typography fontSize={"20px"} color={"#000"} fontWeight={700}>{
               nft ? numberFormat(nft.realTotalSupply) : TextPlaceholder
@@ -311,7 +311,7 @@ export default function Market() {
             boxShadow={"0 0 10px rgba(0,0,0,.1)"}
             borderRadius={"10px"}
             padding={"12px 20px"}
-            gap={"5px"}
+            gap={"2px"}
             minWidth={"136px"}>
             <Typography fontSize={"20px"} color={"#000"} fontWeight={700}>{
               nft ? numberFormat(nft.totalShelves) : TextPlaceholder
