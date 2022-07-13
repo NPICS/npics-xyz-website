@@ -19,6 +19,7 @@ import {useAsync} from "react-use";
 import {Popover} from "antd";
 import rarity_1_icon from "../../assets/images/market/rarity_1.svg"
 import rarity_2_icon from "../../assets/images/market/rarity_2.svg"
+import { Pop20 } from "component/Popover/Popover";
 
 function Label(props: {
   icon?: string,
@@ -167,8 +168,7 @@ export default function OneNFT() {
               // `${detailData?.singularForName()} #${detailData?.tokenId}`
               detailData && `${detailData.nftName() ?? ""}${detailData.isNoName() ? "" : " #"}${detailData.tokenId}`
             }</Typography>
-            <Popover
-              overlayClassName="ant-popover-reset"
+            <Pop20
               content={"Reported for Suspicious Activity on OpenSea"
             }>
               <Icon
@@ -176,14 +176,13 @@ export default function OneNFT() {
                 height={"24px"}
                 src={nftWarningIcon}
                 hidden={openSeaIsNormalization}/>
-            </Popover>
+            </Pop20>
           </Flex>
 
           <Flex flexDirection={"row"} gap={"15px"} alignItems={"stretch"}>
             {
               rarityData && Object.entries(rarityData).map(([key, val]) => {
-                return val && val.rank && <Popover
-                  overlayClassName="ant-popover-reset20"
+                return val && val.rank && <Pop20
                   content={getRarityPopoverText(key, val.status)}
                 >
                   <Box onClick={() => {
@@ -199,7 +198,7 @@ export default function OneNFT() {
                     />
                   {/* </a> */}
                   </Box>
-                </Popover>
+                </Pop20>
               })
             }
           </Flex>

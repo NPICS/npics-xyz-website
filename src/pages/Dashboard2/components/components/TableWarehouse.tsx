@@ -108,7 +108,7 @@ export default function TableWarehouse(props: {
                 {
                   item.terminated() ? TextPlaceholder : <Flex alignItems='center' marginBottom="4px">
                       <Icon width="18px" height="18px" src={imgurl.dashboard.ethBlack18} alt="" />
-                      <Typography fontSize="16px" fontWeight="500" color="#000">{item.liquidationPrice().div(10 ** 18).toFixed(4, 1)}</Typography>
+                      <Typography fontSize="14px" fontWeight="500" color="#000">{item.liquidationPrice().div(10 ** 18).toFixed(4, 1)}</Typography>
                     </Flex>
                     /* <Typography marginLeft="3px" fontSize="14px" fontWeight="500" color="rgba(0,0,0,.5)" >{`(${thousandFormat(item.liquidationPrice().times(ethRate)
                       .div(10 ** 18)

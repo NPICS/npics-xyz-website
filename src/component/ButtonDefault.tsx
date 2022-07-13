@@ -121,7 +121,7 @@ ButtonDefault.defaultProps = {
   Width: '200px',
   height: '66px',
   text: 'button',
-  fontSize: '16px',
+  fontSize: '14px',
   types: 'one',
   // color: '#fff',
   disabled: false,

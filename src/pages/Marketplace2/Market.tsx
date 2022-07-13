@@ -15,6 +15,7 @@ import openseaValidIcon from "../../assets/images/market/nfts_opensea_valid.svg"
 import NPopover from "../../component/Popover";
 import ReactMarkdown from "react-markdown";
 import {TextPlaceholder} from "../../component/styled";
+import { Pop20 } from "component/Popover/Popover";
 
 
 export const Banner = styled(Box)<{ url?: string }>`
@@ -190,13 +191,13 @@ export default function Market() {
                 lineHeight={"56px"}
                 color={"#000"}
               >{nft?.name}</Typography>
-              <Popover content={"Verified On OpenSea"}>
+              <Pop20 content={"Verified On OpenSea"}>
                 <Icon
                   hidden={params.address == undefined}
                   src={openseaValidIcon}
                   width={"24px"}
                   height={"24px"}/>
-              </Popover>
+              </Pop20>
             </Flex>
             <MarkdownContainer ref={(e) => {
               if (!e) return

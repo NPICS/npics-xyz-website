@@ -54,7 +54,7 @@ const Container = styled.div`
 .text {
   user-select: none;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 14px;
   color: rgba(0,0,0,.5);
   position: absolute;
   top: 13px;

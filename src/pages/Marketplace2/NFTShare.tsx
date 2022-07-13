@@ -7,7 +7,7 @@ import { copyToClipboard } from "../../utils/clipboard-utils";
 import Checkbox from "../../component/Input/Checkbox";
 import refreshIcon from "../../assets/images/market/nft_refresh.svg"
 import homePageIcon from "../../assets/images/market/nft_homepage.svg"
-
+import { Pop20 } from "component/Popover/Popover"
 function IconWithBorder(props: {
   icon: string,
   tap?(): void
@@ -46,29 +46,26 @@ export default function NFTShare(props: {
   };
 
   return <Flex justifyContent={"end"} alignItems={"start"} gap={"6px"}>
-    <Popover
+    <Pop20
       content="Refresh"
-      overlayClassName="ant-popover-reset20"
     >
       <Box>
         <IconWithBorder icon={refreshIcon} tap={async () => {
           window.location.reload()
         }} />
       </Box>
-    </Popover>
-    <Popover
+    </Pop20>
+    <Pop20
       content="Open on project website"
-      overlayClassName="ant-popover-reset20"
     >
       <Box>
         <IconWithBorder icon={homePageIcon} tap={async () => {
           props.item?.externalUrl && window.open(props.item.externalUrl)
         }} />
       </Box>
-    </Popover>
-    <Popover
+    </Pop20>
+    <Pop20
       content="Share"
-      overlayClassName="ant-popover-reset20"
     >
       <Box>
         <IconWithBorder icon={ShareIcon} tap={async () => {
@@ -76,6 +73,6 @@ export default function NFTShare(props: {
           await copyToClipboard(link)
         }} />
       </Box>
-    </Popover>
+    </Pop20>
   </Flex>
 }

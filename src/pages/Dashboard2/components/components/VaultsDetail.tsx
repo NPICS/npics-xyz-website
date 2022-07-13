@@ -26,6 +26,7 @@ import { useAsync } from 'react-use';
 import Checkbox from 'component/Input/Checkbox';
 import { TextPlaceholder } from 'component/styled';
 import { _toString } from './data';
+import { Pop } from 'component/Popover/Popover';
 
 
 const Banner = () => {
@@ -389,13 +390,13 @@ export default function VaultsDetail() {
           <Flex flexDirection={"column"}>
             <Typography fontSize={"20px"} fontWeight={"700"} color={"#000"}>Vault Detail</Typography>
             <Flex alignItems={"center"} marginRight="5px">
-              <Typography marginRight="7px" fontSize={"16px"} fontWeight={"500"}
+              <Typography marginRight="7px" fontSize={"14px"} fontWeight={"500"}
                           color={"rgba(0,0,0,.5)"}>Asset:</Typography>
               <Flex alignItems={'center'}>
-                <Typography marginRight={'10px'} fontSize={"16px"} fontWeight={"500"} color={"rgba(0,0,0,.5)"}>
+                <Typography marginRight={'10px'} fontSize={"14px"} fontWeight={"500"} color={"rgba(0,0,0,.5)"}>
                   {activities && `${_toString(activities?.collectionName) ?? TextPlaceholder} #${activities?.tokenId ?? TextPlaceholder}`}
                 </Typography>
-                <Icon style={{cursor: "pointer"}} width="16px" height="16px" src={imgurl.dashboard.export14} alt=""
+                <Icon style={{cursor: "pointer"}} width="14px" height="14px" src={imgurl.dashboard.export14} alt=""
                       onClick={() => window.open(`https://etherscan.io/nft/${activities?.address}/${activities?.tokenId}`)}/>
               </Flex>
             </Flex>
@@ -432,17 +433,16 @@ export default function VaultsDetail() {
               boxShadow={"0 0 20px rgba(0,0,0,.1)"}
               borderRadius={"10px"}
               gridArea={'Minted'}
-              padding={"30px 0"}
+              padding={"25px 0"}
               flexDirection="column"
               alignItems="center"
               justifyContent={"center"}
               position={"relative"}
             >
-              <Popover 
-                overlayClassName="ant-popover-reset"
+              <Pop
                 content={MintedNFTPop}>
                 <TipsIcon width={"14px"} src={imgurl.market.tipsIcon}/>
-              </Popover>
+              </Pop>
               <Flex alignItems={'center'} marginBottom={"12px"}>
                 <Typography marginRight={'10px'} fontSize="24px" fontWeight='700' color="#000">
                   {activities && `NEO ${_toString(activities?.collectionName) ?? TextPlaceholder} #${activities?.tokenId ?? TextPlaceholder}`}
@@ -460,21 +460,20 @@ export default function VaultsDetail() {
               boxShadow={"0 0 20px rgba(0,0,0,.1)"}
               borderRadius={"10px"}
               gridArea={'Profit'}
-              padding={"30px 0"}
+              padding={"25px 0"}
               flexDirection="column"
               alignItems="center"
               justifyContent={"center"}
               position="relative"
             >
-              <Popover 
-                overlayClassName="ant-popover-reset"
+              <Pop
                 content={EstimatProfitPop({
                   purchaseFloorPrice: activities?.purchaseFloorPrice,
                   ltv: activities?.ltv,
                   floorPrice: activities?.floorPrice
                 })}>
                 <TipsIcon width={"14px"} src={imgurl.market.tipsIcon}/>
-              </Popover>
+              </Pop>
               <Flex alignItems="center" marginBottom={"14px"}>
                 <Icon width='22px' height='22px' src={imgurl.home.ethBlack22}/>
                 <Typography fontSize="24px" fontWeight='700' color="#000">
@@ -492,16 +491,15 @@ export default function VaultsDetail() {
               border={"1px solid rgba(0,0,0,.1)"}
               borderRadius={"10px"}
               padding={"20px 150px"}
-              gridGap={"30px 150px"}
+              gridGap={"25px 150px"}
             >
               <Flex alignItems={"self-start"} justifyContent={"center"} flexDirection="column" gap='10px'>
                 <Flex gap="10px">
                   <Typography fontSize="14px" fontWeight='500' color="rgba(0,0,0,.5)">Health Factor</Typography>
-                  <Popover 
-                    overlayClassName="ant-popover-reset"
+                  <Pop 
                     content={HealthFactorPop}>
                     <Icon width={"14px"} src={imgurl.market.tipsIcon}/>
-                  </Popover>
+                  </Pop>
 
                 </Flex>
                 <Typography fontSize="20px" fontWeight='500' color="#000">{activities?.healthFactor}</Typography>
@@ -517,11 +515,10 @@ export default function VaultsDetail() {
               <Flex alignItems={"self-start"} justifyContent={"center"} flexDirection="column" gap='10px'>
                 <Flex gap="10px">
                   <Typography fontSize="14px" fontWeight='500' color="rgba(0,0,0,.5)">Debt</Typography>
-                  <Popover 
-                    overlayClassName="ant-popover-reset"
+                  <Pop 
                     content={DebtPop({Principal: activities?.debt, noInterest: TextPlaceholder})}>
                     <Icon width={"14px"} src={imgurl.market.tipsIcon}/>
-                  </Popover>
+                  </Pop>
 
                 </Flex>
                 <Flex alignItems={'self-start'}>
@@ -533,11 +530,10 @@ export default function VaultsDetail() {
                 <Flex gap="10px">
                   <Typography fontSize="14px" fontWeight='500' color="rgba(0,0,0,.5)">Vault APR</Typography>
 
-                  <Popover
-                    overlayClassName="ant-popover-reset"
+                  <Pop
                     content={VaultAprPop({rewardAPR: (aprData.rewardApr ?? 0), interestAPR: aprData.apr / 100 ?? 0})}>
                     <Icon width={"14px"} src={imgurl.market.tipsIcon}/>
-                  </Popover>
+                  </Pop>
 
                 </Flex>
                 <Typography fontSize="20px" fontWeight='500'
@@ -668,17 +664,17 @@ export default function VaultsDetail() {
                     _checked={checked}
                     // value={checked}
                   />
-                  <Typography marginLeft="12px">Repay all</Typography>
+                  <Typography marginLeft="12px" fontSize="14px">Repay all</Typography>
                 </label>
                 {/* <input style={{width: "24px", height: "24px", cursor: "pointer"}} type={'checkbox'}
                        onChange={(e) => handleCheck(e)} checked={checked} id="payAll"/>
                 <label style={{cursor: "pointer"}} htmlFor="payAll">Repay all</label> */}
-                <Typography fontSize={"16px"} fontWeight={"500"} color="rgba(0,0,0,.5)">(Repay the whole loan to
+                <Typography fontSize={"12px"} fontWeight={"500"} color="rgba(0,0,0,.5)">(Repay the whole loan to
                   regain NFT ownership)</Typography>
               </Flex>
 
               {
-                checked ? <Typography color="#FF490F">
+                checked ? <Typography color="#FF490F" fontSize="14px">
                   Because of the change in interest rates, this transaction is set up with a default slippage of 0.1%
                   and a maximum slippage of 0.01 ETH.
                   All unused ETH will be returned to your wallet.

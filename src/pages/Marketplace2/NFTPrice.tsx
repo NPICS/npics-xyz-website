@@ -30,6 +30,7 @@ import {TextPlaceholder} from "../../component/styled";
 import NFTPayProgressing from "./NFTPayProgressing";
 import NFTPayCongratulations from "./NFTPayCongratulations";
 import NFTPayWrong from "./NFTPayWrong";
+import { Pop, Pop20 } from "component/Popover/Popover";
 
 const Shadow = styled(Flex)`
   background: #fff;
@@ -84,7 +85,7 @@ function MoreNFT(props: {
   total?: number,
   tap?(): void
 }) {
-  return <Popover content="View All" overlayClassName="ant-popover-reset20"><Box position={"relative"}
+  return <Pop20 content="View All"><Box position={"relative"}
               borderRadius={"10px"}
               overflow={"hidden"}
               width={"100px"}
@@ -109,7 +110,7 @@ function MoreNFT(props: {
         {props.total}<br/>Items
       </Typography>
     </Flex>
-  </Box></Popover>
+  </Box></Pop20>
 }
 
 export default function NFTPrice(props: {
@@ -256,11 +257,10 @@ export default function NFTPrice(props: {
     <Flex gap={"10px"}>
       {/* origin price */}
       <Shadow>
-        <Popover
-          overlayClassName="ant-popover-reset"
+        <Pop20
           content={listedPricePop}>
           <TipsIcon width={"14px"} src={tipsIcon}/>
-        </Popover>
+        </Pop20>
 
         <Flex flexDirection={"row"} alignItems={"end"}>
           <Flex alignSelf={"center"}><Icon width={"22px"} height={"22px"} src={ethIcon}/></Flex>
@@ -305,16 +305,16 @@ export default function NFTPrice(props: {
             fontSize={"14px"}
             fontWeight={500}
             color={"rgba(0,0,0,.5)"}
-          >Listed price</Typography>
+          >Listed Price</Typography>
         </Flex>
       </Shadow>
       {/* Vault Apr */}
       <Shadow>
         {/* <Popover content={vaultApr({rewardAPR:123,interestAPR:321})}>     */}
-        <Popover overlayClassName="ant-popover-reset"
+        <Pop
                  content={VaultAprPop({rewardAPR: (rewardsAPR ?? 0), interestAPR: ((interestAPR ?? 0) / 100)})}>
           <TipsIcon width={"14px"} src={tipsIcon}/>
-        </Popover>
+        </Pop>
         <Typography
           color={"#FF490F"}
           fontSize={"24px"}
@@ -346,16 +346,15 @@ export default function NFTPrice(props: {
               key={idx}
             />
           } else {
-            return <Popover
+            return <Pop20
               content={`${nft.collectionName} #${nft.tokenId}`}
-              overlayClassName="ant-popover-reset20"
             ><OtherNFT
               src={nft.imageUrl}
               onClick={() => {
                 navigate(`/nft/${nft.address}/${nft.tokenId}`, {replace: true})
               }}
               key={idx}
-            /></Popover>
+            /></Pop20>
           }
         })
       }
@@ -365,13 +364,12 @@ export default function NFTPrice(props: {
       flexDirection={"column"}
       alignItems={"start"}
     >
-      <Popover
-        overlayClassName="ant-popover-reset"
+      <Pop
         content={DownPaymentPop({listedPrice: props.item?.currentBasePrice, loanAmount: availableBorrow})}>
         <TipsIcon width={"14px"} src={tipsIcon}/>
-      </Popover>
+      </Pop>
       <Typography
-        fontSize={"16px"}
+        fontSize={"14px"}
         fontWeight={500}
         color={"#000"}
       >Down Payment</Typography>

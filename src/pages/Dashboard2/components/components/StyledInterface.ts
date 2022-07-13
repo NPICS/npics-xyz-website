@@ -24,7 +24,7 @@ export const BgTable = styled.div`
         align-items: center;
         flex-wrap: nowrap;
         color: #000;
-        font-size: 16px;
+        font-size: 14px;
         &>span:nth-child(1) {
           max-width: 70px;
           white-space: nowrap;
@@ -39,7 +39,7 @@ export const BgTable = styled.div`
       &>div:nth-child(2) {
         display: flex;
         color: rgba(0, 0, 0, .5);
-        font-size: 14px;
+        font-size: 12px;
         &>span {
           ${flex}
           &>img {
@@ -55,7 +55,7 @@ export const BgTable = styled.div`
     justify-content: left;
     align-items: center;
     font-weight: 500;
-    font-size: 16px;
+    font-size: 14px;
     color: #000;
     /* align-items: flex-start; */
     &>span {
@@ -75,7 +75,7 @@ export const BgTable = styled.div`
     ${flex}
     align-items: flex-start;
     font-weight: 600;
-    font-size: 16px;
+    font-size: 14px;
     color: #000;
     &>img {
       /* width: 14px;
@@ -87,14 +87,14 @@ export const BgTable = styled.div`
     ${flex}
     justify-content: left;
     font-weight: 600;
-    font-size: 16px;
+    font-size: 14px;
     color: #000;
   }
   .status {
     ${flex}
     justify-content: left;
     font-weight: 500;
-    font-size: 16px;
+    font-size: 14px;
   }
   .actionBtn {
     background: #000000;
@@ -106,66 +106,6 @@ export const BgTable = styled.div`
     font-size: 14px;
     color: #fff;
     cursor: pointer;
-  }
-  .ant-table-thead {
-    tr {
-      th:nth-child(2) {
-        width: 255px !important;
-      } 
-      th:nth-child(3) {
-        width: 160px !important;
-      } 
-      th:nth-child(4) {
-        width: 180px !important;
-      } 
-      th:nth-child(5) {
-        width: 160px !important;
-      }
-      th:nth-child(6) {
-        width: 180px !important;
-      }
-      th:nth-child(7) {
-        width: 190px !important;
-      }
-      th {
-        width: 350px !important;
-        padding: 16px !important;
-      }
-    }
-  }
-  .ant-table-tbody {
-    tr {
-      td:nth-child(2) {
-        width: 255px !important;
-      }
-      td:nth-child(3) {
-        width: 160px !important;
-      }
-      td:nth-child(4) {
-        width: 180px !important;
-      }
-      td:nth-child(5) {
-        width: 160px !important;
-      }  
-      td:nth-child(6) {
-        width: 180px !important;
-      }
-      td:nth-child(7) {
-        width: 190px !important;
-      }
-      td {
-        width: 350px !important;
-        padding: 16px !important;
-      }
-    }
-    .ant-table-placeholder {
-      .ant-empty-description {
-        color: #000;
-      }
-      .ant-empty-normal {
-        margin: 0;
-      }
-    }
   }
   .loading {
     display: flex;

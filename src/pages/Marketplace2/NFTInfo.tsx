@@ -11,6 +11,7 @@ import {urls} from "../../utils/urls";
 import titlePrefixIcon from "../../assets/images/market/info_block_title_prefix.png"
 import {TextPlaceholder} from "../../component/styled";
 import {Popover} from "antd";
+import { Pop20 } from "component/Popover/Popover";
 
 const Title = styled.div`
   color: #000;
@@ -27,9 +28,8 @@ export function AddressLink(props: {
     address?: string,
   justifyContent?: `center` | `end`
 }) {
-    return <Popover
+    return <Pop20
       content={"View on Etherscan"}
-      overlayClassName="ant-popover-reset"
     ><Flex
       alignItems={"center"}
       justifyContent={props.justifyContent ?? `end`}
@@ -45,7 +45,7 @@ export function AddressLink(props: {
     >
       <Value>{AddressAbbreviation(props.address) ?? TextPlaceholder}</Value>
       <Icon width={"16px"} src={addressLinkIcon}/>
-    </Flex></Popover>
+    </Flex></Pop20>
 }
 
 export default function NFTInfo(props: {

@@ -47,19 +47,19 @@ export function DownPaymentPop(props: { listedPrice?: BigNumber, loanAmount?: Bi
 
   return <Grid width={'600px'} gridGap="20px" borderRadius="20px">
     <Flex alignItems='center' justifyContent="space-between">
-      <Typography fontSize="16px" fontWeight="500" color="#000">Listed Price (real-time)</Typography>
-      <Typography fontSize="16px" fontWeight="500"
+      <Typography fontSize="14px" fontWeight="500" color="#000">Listed Price (real-time)</Typography>
+      <Typography fontSize="14px" fontWeight="500"
                   color="#000">{`${props.listedPrice?.div(10 ** globalConstant.bit).toFixed(2, 1)}ETH ` ?? '---'}{` ($${listedPrice})`}</Typography>
     </Flex>
     <Flex alignItems='center' justifyContent="space-between">
-      <Typography fontSize="16px" fontWeight="500" color="#000">Loan Amount (real-time)</Typography>
-      <Typography fontSize="16px" fontWeight="500"
+      <Typography fontSize="14px" fontWeight="500" color="#000">Loan Amount (real-time)</Typography>
+      <Typography fontSize="14px" fontWeight="500"
                   color="#000">{`${props.loanAmount?.div(10 ** globalConstant.bit).toFixed(2, 1)}ETH ` ?? "---"}{` ($${loanAmount})`}</Typography>
     </Flex>
 
     <BorderBottom/>
 
-    <Typography fontSize="16px" fontWeight="500" color="#000">Down Payment = Listed Price - Loan Amount</Typography>
+    <Typography fontSize="14px" fontWeight="500" color="#000">Down Payment = Listed Price - Loan Amount</Typography>
 
     <Typography fontSize="14px" fontWeight="500" color="rgba(0,0,0,.5)">The system obtains the prime price based on
       the market listing price in real- time, And the amount paid will be used as down payment for your position</Typography>
