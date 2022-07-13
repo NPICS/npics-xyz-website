@@ -92,7 +92,6 @@ const StyledButton = styled.button<Iprops>`
   font-size: ${(props => props.fontSize)};
   padding: ${(props => props.padding)};
   border-radius: 10px;
-  font-family: 'Montserrat';
   font-style: normal;
   font-weight: 600;
   /* font-size: 20px; */

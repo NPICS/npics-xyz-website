@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import HomeBg from "../../assets/images/home/head_bg.png"
 
 export const title = css`
-  font-family: 'Montserrat';
+
   font-style: normal;
   font-weight: 800;
   font-size: 36px;
@@ -118,7 +118,6 @@ export const Glass = styled.div`
     margin-top: 250px;
 
     & > div:nth-child(1) {
-      font-family: 'Montserrat';
       font-style: italic;
       font-weight: 900;
       font-size: 40px;
@@ -130,7 +129,6 @@ export const Glass = styled.div`
     }
 
     & > div:nth-child(2) {
-      font-family: 'Montserrat';
       font-style: normal;
       font-weight: 300;
       font-size: 16px;
@@ -383,7 +381,6 @@ export const IntroduceBox = styled.div`
   }
 
   & > :nth-child(2) {
-    font-family: 'Montserrat';
     font-style: normal;
     font-weight: 800;
     font-size: 30px;
@@ -481,7 +478,7 @@ export const BorrowBox = styled.div`
           }
           & > span:nth-child(2){
             font-size: 50px;
-            font-family: 'Montserrat';
+    
             font-style: normal;
             font-weight: 800;
             line-height: 100px;
@@ -513,7 +510,7 @@ export const BorrowBox = styled.div`
           }
           & > span:nth-child(2){
             font-size: 32px;
-            font-family: 'Montserrat';
+    
             font-style: normal;
             font-weight: 800;
             margin-left: 20px;

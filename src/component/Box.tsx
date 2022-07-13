@@ -68,7 +68,6 @@ const Grid = styled(Box)<GridProps>`
 
 
 const Typography = styled.div<_TypographyProps>`
-  font-family: ${(props) => props.family ?? 'Montserrat'};
   user-select: ${(props) => props.userSelect ?? 'auto'};
   ${typography}
   ${layout}

@@ -13,7 +13,7 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     min-width: 1680px;
-    font-family: 'Montserrat';
+    font-family: 'Poppins';
     line-height: normal;
     font-size: 14px;
   }

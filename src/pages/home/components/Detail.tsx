@@ -21,7 +21,6 @@ const DetailSwiper = styled.div`
       align-items:flex-start;
       flex-direction: column;
       .info_item_title{
-        font-family: 'Montserrat';
         font-style: normal;
         font-weight: 800;
         font-size: 22px;
@@ -29,7 +28,6 @@ const DetailSwiper = styled.div`
         margin-bottom: 10px;
       }
       .info_item_text{
-        font-family: 'Montserrat';
         font-style: normal;
         font-size: 12px;
         line-height: 20px;

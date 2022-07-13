@@ -74,7 +74,6 @@ const TipsIcon = styled(Icon)`
 const InputNumberStyled = styled(InputNumber)`
   .ant-input-number-input-wrap {
     .ant-input-number-input {
-      font-family: Montserrat;
       user-select: auto;
       font-size: 30px;
       font-weight: 800;
