@@ -23,6 +23,8 @@ import {useAsync} from "react-use";
 import BigNumber from "bignumber.js";
 import SkeletonTemplate from "component/SkeletonTemplate";
 import progressIcon from "../../assets/images/market/nft_pay_progressing.gif"
+import axios, { Canceler } from "axios";
+// import axios, { Canceler } from "axios";
 
 const {Option} = Select;
 
@@ -95,6 +97,9 @@ export default function MarketList() {
   const [pressEnter, setPressEnter] = useState<boolean>(false)
   const isLoading = useRef(false)
   const [currentSort, setCurrentSort] = useState<"asc" | "desc" | "rarityScore" | "rarityScoreDesc" | string>("asc")
+  const CancelToken = axios.CancelToken;
+  const cancel = useRef<Canceler>()
+  // let cancel:Canceler
 
   useEffect(() => {
     if (params.address) {
@@ -123,32 +128,48 @@ export default function MarketList() {
   }, [currentPage])
 
   async function loadData() {
-    isLoading.current = true
-    if (currentPage > 0) {
-      // Prevent more list loading from loading
-      if (currentPage === 1) {
-        setLoading(true)
+    try {
+      isLoading.current = true
+      if (currentPage > 0) {
+        // Prevent more list loading from loading
+        if (currentPage === 1) {
+          setLoading(true)
+        }
+        // isLoading.current = false
+        let resp: any = await http.myPost(`/npics-nft/app-api/v2/nft/getCollectionItems`, {
+          address: nftAddress,
+          direction: currentSort,
+          pageIndex: currentPage,
+          pageSize: 30,
+          search: searchText,
+          showNftx: globalConstant.showNftx
+        },
+          {
+            cancelToken: new CancelToken(function executor(c) {
+              if(currentPage === 1) {
+                isLoading.current = false
+              }
+              cancel.current?.()
+              cancel.current = c;
+            })
+          })
+        if (resp.code === 200 && resp.data.records) {
+          let newListData = deserializeArray(CollectionItems, JSON.stringify(resp.data.records))
+          setListData(currentPage === 1 ? newListData : listData.concat(newListData))
+          setTotal(resp.data.total)
+        } else {
+          setListData(currentPage === 1 ? [] : listData)
+        }
+        if (currentPage === 1) {
+          setLoading(false)
+        }
       }
-      let resp: any = await http.myPost(`/npics-nft/app-api/v2/nft/getCollectionItems`, {
-        address: nftAddress,
-        direction: currentSort,
-        pageIndex: currentPage,
-        pageSize: 30,
-        search: searchText,
-        showNftx: globalConstant.showNftx
-      })
-      if (resp.code === 200 && resp.data.records) {
-        let newListData = deserializeArray(CollectionItems, JSON.stringify(resp.data.records))
-        setListData(currentPage === 1 ? newListData : listData.concat(newListData))
-        setTotal(resp.data.total)
-      } else {
-        setListData(currentPage === 1 ? [] : listData)
-      }
-      if (currentPage === 1) {
-        setLoading(false)
-      }
+    } catch(e) {
+      isLoading.current = false
+    } 
+    finally {
+      isLoading.current = false
     }
-    isLoading.current = false
   }
 
   return <Box>
