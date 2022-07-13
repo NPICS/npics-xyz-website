@@ -87,7 +87,7 @@ export const GlobalStyle = createGlobalStyle`
     border: 1px solid rgba(0,0,0,.2);
     border-radius: 10px;
     color: rgba(0, 0, 0, .5);
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 500;
     transition: all 0s;
   }

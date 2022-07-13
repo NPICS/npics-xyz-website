@@ -46,7 +46,7 @@ export default function TableWarehouse(props: {
       <thead>
         <Tr>
           <Th>Asset</Th>
-          <Th textAlign="left">NEO NFT</Th>
+          <Th textAlign="center">NEO NFT</Th>
           <Th textAlign="left">Debt</Th>
           <Th textAlign="left">Liquidation Price</Th>
           <Th textAlign="left">Health Factor</Th>
@@ -95,9 +95,9 @@ export default function TableWarehouse(props: {
                   item.terminated() ? TextPlaceholder : <Flex className='imgPrice' flexDirection='column'>
                     <Flex alignItems='center' marginBottom="4px">
                       <Icon width="18px" height="18px" src={imgurl.dashboard.ethBlack18} alt="" />
-                      {item.debtString()}
+                      <Typography fontSize="16px" fontWeight="500" color="#000">{item.debtString()}</Typography>
                     </Flex>
-                    <Typography fontSize="14px" fontWeight="500" color="rgba(0,0,0,.5)">
+                    <Typography fontSize="14px" fontWeight="500" color="rgba(0,0,0,.5)" marginLeft="3px">
                       {`(${thousandFormat(item.totalDebt.times(ethRate)
                         .div(10 ** 18)
                         .toNumber())})`}
@@ -111,9 +111,9 @@ export default function TableWarehouse(props: {
                   item.terminated() ? TextPlaceholder : <Flex className='imgPrice' flexDirection='column'>
                     <Flex alignItems='center' marginBottom="4px">
                       <Icon width="18px" height="18px" src={imgurl.dashboard.ethBlack18} alt="" />
-                      {item.liquidationPrice().div(10 ** 18).toFixed(4, 1)}
+                      <Typography fontSize="16px" fontWeight="500" color="#000">{item.liquidationPrice().div(10 ** 18).toFixed(4, 1)}</Typography>
                     </Flex>
-                    <Typography fontSize="14px" fontWeight="500" color="rgba(0,0,0,.5)" >{`(${thousandFormat(item.liquidationPrice().times(ethRate)
+                    <Typography marginLeft="3px" fontSize="14px" fontWeight="500" color="rgba(0,0,0,.5)" >{`(${thousandFormat(item.liquidationPrice().times(ethRate)
                       .div(10 ** 18)
                       .toNumber())})`}</Typography>
                   </Flex>
