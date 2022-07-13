@@ -242,7 +242,7 @@ export default function Market() {
             boxShadow={"0 0 10px rgba(0,0,0,.1)"}
             borderRadius={"10px"}
             padding={"12px 20px"}
-            gap={"5px"}
+            gap={"2px"}
             minWidth={"136px"}>
             <Flex alignItems={"center"} gap={"2px"}>
               <Icon width={"18px"} height={"18px"} src={ethIcon}/>
