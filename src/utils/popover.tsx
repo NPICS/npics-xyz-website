@@ -20,17 +20,17 @@ export function VaultAprPop(props: { rewardAPR: number, interestAPR: number }) {
 
   return <Grid width={'600px'} gridGap="20px" borderRadius="20px">
     <Flex alignItems='center' justifyContent="space-between">
-      <Typography fontSize="16px" fontWeight="500" color="#000">Reward APR (real-time)</Typography>
-      <Typography fontSize="16px" fontWeight="500" color="#000">{(props.rewardAPR * 100).toFixed(2)}%</Typography>
+      <Typography fontSize="14px" fontWeight="500" color="#000">Reward APR (real-time)</Typography>
+      <Typography fontSize="14px" fontWeight="500" color="#000">{(props.rewardAPR * 100).toFixed(2)}%</Typography>
     </Flex>
     <Flex alignItems='center' justifyContent="space-between">
-      <Typography fontSize="16px" fontWeight="500" color="#000">Interest APR (real-time)</Typography>
-      <Typography fontSize="16px" fontWeight="500" color="#000">{-(props.interestAPR * 100).toFixed(2)}%</Typography>
+      <Typography fontSize="14px" fontWeight="500" color="#000">Interest APR (real-time)</Typography>
+      <Typography fontSize="14px" fontWeight="500" color="#000">{-(props.interestAPR * 100).toFixed(2)}%</Typography>
     </Flex>
 
     <BorderBottom/>
 
-    <Typography fontSize="16px" fontWeight="500" color="#000">Vault APR = Reward APR + Interest APR</Typography>
+    <Typography fontSize="14px" fontWeight="500" color="#000">Vault APR = Reward APR + Interest APR</Typography>
 
     <Typography fontSize="14px" fontWeight="500" color="rgba(0,0,0,.5)">Rates shown are estimates, and fluctuate based
       on many different factors
@@ -68,7 +68,7 @@ export function DownPaymentPop(props: { listedPrice?: BigNumber, loanAmount?: Bi
 }
 
 export const MintedNFTPop = <Grid gridGap="20px" width="450px">
-  <Typography fontSize="16px" fontWeight="500" color="#000">NEO NFT NPics Everlasting Option NFT</Typography>
+  <Typography fontSize="14px" fontWeight="500" color="#000">NEO NFT NPics Everlasting Option NFT</Typography>
   <Typography fontSize="14px" fontWeight="500" color="rgba(0,0,0,.5)">NEO is NBPs voucher issued by the NPics on
     Ethereum,which is also a voucher held by the user to purchase NFT.
   </Typography>
@@ -113,26 +113,26 @@ export function EstimatProfitPop(props: { purchaseFloorPrice?: BigNumber, ltv?: 
 
   return <Grid width={'600px'} gridGap="20px" borderRadius="20px">
     <Flex alignItems='center' justifyContent="space-between">
-      <Typography fontSize="16px" fontWeight="500" color="#000">PFP (Purchase floor price history)</Typography>
-      <Typography fontSize="16px" fontWeight="500"
+      <Typography fontSize="14px" fontWeight="500" color="#000">PFP (Purchase floor price history)</Typography>
+      <Typography fontSize="14px" fontWeight="500"
                   color="#000">{`${purchaseFloorPrice?.div(10 ** globalConstant.bit).toFixed(2, 1)}ETH ` ?? '---'}{` ($${purchaseFloorPriceDollar})`}</Typography>
     </Flex>
     <Flex alignItems='center' justifyContent="space-between">
-      <Typography fontSize="16px" fontWeight="500" color="#000">FP(real-time floor price)</Typography>
-      <Typography fontSize="16px" fontWeight="500"
+      <Typography fontSize="14px" fontWeight="500" color="#000">FP(real-time floor price)</Typography>
+      <Typography fontSize="14px" fontWeight="500"
                   color="#000">{`${floorPrice?.div(10 ** globalConstant.bit).toFixed(2, 1)}ETH ` ?? '---'}{` ($${floorPriceDollar})`}</Typography>
     </Flex>
 
     <Flex alignItems='center' justifyContent="space-between">
-      <Typography fontSize="16px" fontWeight="500" color="#000">DP(Down Payment history)</Typography>
-      <Typography fontSize="16px" fontWeight="500"
+      <Typography fontSize="14px" fontWeight="500" color="#000">DP(Down Payment history)</Typography>
+      <Typography fontSize="14px" fontWeight="500"
                   color="#000">{`${paymentHistory?.div(10 ** globalConstant.bit).toFixed(2, 1)}ETH ` ?? '---'}{` ($${paymentHistoryDollar})`}</Typography>
     </Flex>
 
     <BorderBottom/>
 
-    <Typography fontSize="16px" fontWeight="500" color="#000">Profit Amount =(FP- PFP) * 1</Typography>
-    <Typography fontSize="16px" fontWeight="500" color="#000">Profit Rate = Profit Amount / DP * 100%</Typography>
+    <Typography fontSize="14px" fontWeight="500" color="#000">Profit Amount =(FP- PFP) * 1</Typography>
+    <Typography fontSize="14px" fontWeight="500" color="#000">Profit Rate = Profit Amount / DP * 100%</Typography>
 
     <Typography fontSize="14px" fontWeight="500" color="rgba(0,0,0,.5)">The estimated position profit are calculated
       by floor price difference andoriginal expense amount, actual profit is listed price difference.</Typography>

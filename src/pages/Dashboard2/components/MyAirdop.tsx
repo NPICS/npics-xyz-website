@@ -77,7 +77,7 @@ export default function MyAirdop() {
         gridTemplateRows={"repeat(5, 1fr)"}
       >
         <Grid
-          gridTemplateColumns={"1fr auto 4fr auto 1fr"}
+          gridTemplateColumns={"2fr auto 3fr auto 2fr"}
           background="#fff"
           border="1px solid rgba(0, 0, 0, 0.1)"
           borderRadius="10px"
@@ -85,7 +85,7 @@ export default function MyAirdop() {
           padding="19px 60px"
         >
           <Flex alignItems="center" justifyContent="left">
-            <Typography marginLeft="20px" fontSize={"14px"} fontWeight={500} color={'#000'} textAlign={"left"}>Project</Typography>
+            <Typography marginLeft="5px" fontSize={"14px"} fontWeight={500} color={'#000'} textAlign={"left"}>Project</Typography>
           </Flex>
           <Flex alignItems="center" justifyContent="center"><Typography textAlign={"center"}></Typography></Flex>
           <Flex alignItems="center" justifyContent="center">
@@ -98,7 +98,7 @@ export default function MyAirdop() {
         {project && project.map((item,idx) => (
           <Grid
             key={idx}
-            gridTemplateColumns={"1fr auto 4fr auto 1fr"}
+            gridTemplateColumns={"2fr auto 3fr auto 2fr"}
             background="#fff"
             border="1px solid rgba(0, 0, 0, 0.1)"
             borderRadius="10px"

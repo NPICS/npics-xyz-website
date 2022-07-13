@@ -71,7 +71,7 @@ export default function MyRewards() {
         </Flex>
 
         <Flex gap={"160px"} alignItems={"center"}>
-          <Flex alignItems={"end"} gap={"12px"}>
+          <Flex alignItems={"center"} gap={"12px"}>
             <Typography fontSize={"14px"} fontWeight={"500"} color={"rgba(0,0,0,.5)"}>Reward to be received : </Typography>
             <Typography fontSize={"24px"} fontWeight={"700"} color={"#000"}>{balance && new BigNumber(balance?.toString()).dp(3, 1).div(10 ** 18).toFixed(4, 1)}</Typography>
           </Flex>
