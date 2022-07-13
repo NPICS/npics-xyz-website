@@ -95,11 +95,6 @@ function App() {
     oldAccount.current = account
   }, [account])
 
-  useAsync(async () => {
-    // let tx = await weth?.callStatic.transfer(`0xf26D94d535107A5e0c5a24f6Ce3eDCc8352f01e2`, 0)
-
-  }, [])
-
   return (
     <>
       {isShowLoading ? <Loading></Loading> : null}

@@ -8,6 +8,8 @@ import BigNumber from "bignumber.js";
 import { useEthPrice } from "utils/hook";
 import { numberFormat, thousandFormat } from "utils/urls";
 import { useAppSelector } from "store/hooks";
+import AcceptOffersList from "./components/AcceptOffersList";
+import AcceptOffer from "./components/AcceptOffer";
 const {Option} = Select
 
 const AntdSelect = styled(Select)`
@@ -98,7 +100,11 @@ export default function MyVaults() {
         </AntdSelect>
       </Typography >
     </Flex>
-    
+
+    {/*Test*/}
+    {/*<AcceptOffersList />*/}
+    {/*<AcceptOffer />*/}
+
     <VaultsTable setTotalDebts={setTotalDebts} sortedInfo={sortedInfo} />
 
     {/* <NotFound /> */}

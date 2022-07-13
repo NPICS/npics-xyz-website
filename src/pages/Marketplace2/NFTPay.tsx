@@ -116,6 +116,10 @@ export const ConfirmButton = styled(Button2)`
   min-width: 200px;
   font-size: 16px;
   font-weight: 700;
+  transition: all .3s;
+  &:hover {
+    background: #333;
+  }
 `
 
 export default function NFTPay(props: {

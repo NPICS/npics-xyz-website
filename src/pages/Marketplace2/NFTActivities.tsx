@@ -35,8 +35,12 @@ const _Table = styled.table`
 
   tr th {
     font-weight: 500;
-    font-size: 16px;
-    color: #000000;
+    font-size: 14px;
+    color: #000;
+  }
+  
+  td {
+    font-size: 14px;
   }
 
   tr:not(:last-child) {
@@ -137,7 +141,9 @@ export default function NFTActivities(props: {
                                 <td align={"left"}>
                                   <Flex alignItems={"center"} gap={"12px"} hidden={item.eventTypeExplain() == undefined}>
                                     <Icon src={item.eventTypeIcon()} width={"20px"} height={"20px"}/>
-                                    <Typography>
+                                    <Typography
+
+                                    >
                                       {item.eventTypeExplain() ?? ``}
                                     </Typography>
                                   </Flex>
@@ -148,14 +154,14 @@ export default function NFTActivities(props: {
                                         "cursor": item.fromAccount ? "pointer" : "auto"
                                     }}
                                 >{
-                                  item.fromAccount ? <AddressLink address={item.fromAccount} /> : TextPlaceholder
+                                  item.fromAccount ? <AddressLink address={item.fromAccount} justifyContent={`center`} /> : TextPlaceholder
                                 }</td>
                                 <td align={"center"}
                                     style={{
                                         "cursor": item.toAccount ? "pointer" : "auto"
                                     }}
                                 >{
-                                  item.toAccount ? <AddressLink address={item.toAccount}/> : TextPlaceholder
+                                  item.toAccount ? <AddressLink address={item.toAccount} justifyContent={`center`}/> : TextPlaceholder
                                 }</td>
                                 <td align={"center"}>{
                                     moment(item.createdTime).parseZone().endOf('m').fromNow() ?? TextPlaceholder

@@ -24,14 +24,15 @@ const Value = styled(Title)`
 `;
 
 export function AddressLink(props: {
-    address?: string
+    address?: string,
+  justifyContent?: `center` | `end`
 }) {
     return <Popover
       content={"View on Etherscan"}
       overlayClassName="ant-popover-reset"
     ><Flex
       alignItems={"center"}
-      justifyContent={"end"}
+      justifyContent={props.justifyContent ?? `end`}
       gap={"6px"}
       style={{
         "cursor": "pointer"

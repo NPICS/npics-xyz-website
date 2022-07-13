@@ -87,6 +87,7 @@ const Icon = styled.img<IconProps>`
   height: ${props => props.height ?? "auto"};
   object-fit: contain;
   -webkit-user-drag: none;
+  ${background}
 `
 const GridItem = styled(Box)<GridProps>`
   display: flex;
