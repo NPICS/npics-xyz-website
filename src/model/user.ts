@@ -170,9 +170,9 @@ export class CollectionItems {
   }
 
   @Expose()
-  nftName(): string | undefined {
+  nftName(): string {
     if (this.isNoName()) {
-      return undefined
+      return ``
     } else {
       return this.singularForName()
     }
