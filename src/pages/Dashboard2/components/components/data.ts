@@ -5,10 +5,10 @@ import navRewardsIcon from 'assets/images/dashboard/navRewardsIcon.png'
 import navActiveAirdopIcon from 'assets/images/dashboard/navActiveAirdopIcon.png'
 import navActiveVaultsIcon from 'assets/images/dashboard/navActiveVaultsIcon.png'
 import navActiveRewardsIcon from 'assets/images/dashboard/navActiveRewardsIcon.png'
-import airdropBAYC from 'assets/images/dashboard/airdropBAYC.png'
-import airdropCoin from 'assets/images/dashboard/airdropCoin.png'
-import airdropMAWS from 'assets/images/dashboard/airdropMAWS.png'
-import airdropDooles from 'assets/images/dashboard/airdropDooles.jpg'
+import airdropBAYC from 'assets/images/dashboard/airdropBAYC.svg'
+import airdropCoin from 'assets/images/dashboard/airdropCoin.svg'
+import airdropMAWS from 'assets/images/dashboard/airdropMAWS.svg'
+import airdropDooles from 'assets/images/dashboard/airdropDooles.svg'
 import exportIcon from "assets/images/dashboard/export14.png"
 import BigNumber from "bignumber.js";
 import TransformBigNumber from "model/transform/bigNumber";

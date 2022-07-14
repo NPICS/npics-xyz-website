@@ -107,7 +107,9 @@ export default function MyAirdop() {
           >
             <Flex alignItems="center" justifyContent="left">
               {item.icon ? <img style={{
-                borderRadius: "10px", height: "42px",
+                borderRadius: "10px",
+                height: "38px",
+                width: "38px",
                 display: 'inlineBlock',
                 overflow: 'hidden',
                 userSelect: 'none',

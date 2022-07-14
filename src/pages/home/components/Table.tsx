@@ -98,7 +98,7 @@ export default function MyTable() {
       align: 'left',
       render: (text, row) => <Link to={`/marketplace/collections/${row.address}`} onClick={() => ScrollTop()}>
         <div style={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center'}}>
-          <img src={row.imageUrl} alt="" style={{ width: "60px", height: "60px", marginRight: "10px", borderRadius: '30px'}} />
+          <img src={row.imageUrl} alt="" style={{ width: "50px", height: "50px", marginRight: "10px", borderRadius: '30px'}} />
           <span style={{ wordBreak: 'break-all',fontSize: '16px', color: '#fff', fontWeight: '700', marginRight: '10px' }}>{text}</span>
           <Icon style={{flexShrink: '0'}} src={openseaValidIcon} width={"16px"} height={"16px"}/>
         </div>
