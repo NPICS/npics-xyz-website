@@ -220,11 +220,13 @@ export const _toString = (collectionName: string):string => {
     case "Doodles":
       return "Doodle"
     case "Space Doodles":
-      return "Space Doodle"
+      return "SDoodle"
     case "CryptoPunks":
       return "CryptoPunk"
+    case "Wrapped Cryptopunks":
+      return "Wrapped Cryptopunk"
     case "CLONE X - X TAKASHI MURAKAMI":
-      return "Clone X"
+      return "CLONEX"
     default:
       return collectionName
   }
