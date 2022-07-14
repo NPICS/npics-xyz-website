@@ -7,7 +7,7 @@ import { message, notification } from 'antd';
 import { useAsync } from "react-use";
 import { useWeb3React } from "@web3-react/core";
 import {Erc20} from "abis/Erc20";
-import { injected } from "connectors/hooks";
+import { CHAIN_ID, injected } from "connectors/hooks";
 import { deserializeArray } from "class-transformer";
 export default function MyAirdop() {
   // whether to allow clicks
@@ -17,11 +17,12 @@ export default function MyAirdop() {
 
   useAsync(async()=> {
     if (!account) {
-      try{
-        await injected.activate(1)
-      }catch(e:any){
-        notification.error({ message: e.message})
-      }
+      // try{
+        await injected.activate(CHAIN_ID)
+      // }
+      // catch(e:any){
+      //   notification.error({ message: e.message})
+      // }
   }
   },[])
 
