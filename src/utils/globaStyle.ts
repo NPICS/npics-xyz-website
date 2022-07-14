@@ -161,10 +161,10 @@ export const GlobalStyle = createGlobalStyle`
           background: #000;
         }
         th:first-child {
-          width: 120px;
+          width: 80px;
         }
         th:nth-child(2) {
-          width: 400px;
+          width: 440px;
         }
         th {
           color: #fff;
@@ -188,13 +188,13 @@ export const GlobalStyle = createGlobalStyle`
       border-radius: 10px;
       display: grid;
       &>tr td:first-child {
-        width: 120px;
+        width: 80px;
         border-top-left-radius: 10px;
         border-bottom-left-radius: 10px;
         /* border-left: 1px solid rgba(255,255,255,.2); */
       }
       &>tr td:nth-child(2) {
-        width: 400px;
+        width: 440px;
       }
       &>tr td:last-child {
         /* border-right: 1px solid rgba(255,255,255,.2); */
