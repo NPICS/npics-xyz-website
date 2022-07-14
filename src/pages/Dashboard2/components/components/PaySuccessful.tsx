@@ -47,7 +47,7 @@ export default function PaySuccessful(props:IProps) {
         <Flex flexDirection="column">
           <Flex maxWidth="340px" flexWrap="wrap" marginBottom="12px">
               <Typography fontSize="16px" fontWeight="700" color="#FF490F">
-                <Typography marginRight={"5px"} display="inline-block" fontSize="16px" fontWeight="700" color="#000">You've deposited</Typography>
+                <Typography marginRight={"5px"} display="inline-block" fontSize="16px" fontWeight="700" color="#000">You've destroyed</Typography>
                 {`NEO ${activities && _toString(activities?.collectionName)} #${activities?.tokenId}`} 
                 <Typography marginLeft={"5px"} display="inline-block" fontSize="16px" fontWeight="700" color="#000">and obtained</Typography>
               </Typography>
