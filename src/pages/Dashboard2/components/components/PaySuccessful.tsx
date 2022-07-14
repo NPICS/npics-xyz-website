@@ -20,8 +20,8 @@ export default function PaySuccessful(props:IProps) {
     console.log('tradeTx',tradeTx);
     window.open(`https://etherscan.io/tx/${tradeTx}`)
   }
-  const jumpToNeoEtherscan = () => {
-    window.open(`https://cn.etherscan.com/nft/${activities?.neoAddress}/${activities?.tokenId}`)
+  const jumpToNFTEtherscan = () => {
+    window.open(`https://cn.etherscan.com/nft/${activities?.address}/${activities?.tokenId}`)
   }
 
   const onClose = () => {
@@ -52,7 +52,7 @@ export default function PaySuccessful(props:IProps) {
                 <Typography marginLeft={"5px"} display="inline-block" fontSize="16px" fontWeight="700" color="#000">and obtained</Typography>
               </Typography>
           </Flex>
-          <Flex alignItems="center" gap="10px" onClick={() => jumpToNeoEtherscan()}>
+          <Flex alignItems="center" gap="10px" onClick={() => jumpToNFTEtherscan()}>
             <Typography style={{cursor: 'pointer'}} fontSize="16px" fontWeight="500" color="rgba(0,0,0,.5)">
               {`${activities &&  _toString(activities?.collectionName)} #${activities?.tokenId}`} 
             </Typography>
@@ -70,7 +70,7 @@ export default function PaySuccessful(props:IProps) {
       <div style={{ padding: "16px 24px", border: "1px solid rgba(0, 0, 0, 0.2)", borderRadius: "10px", cursor: "pointer" }}>
         <Typography fontSize="16px" fontWeight="700" color="#000" onClick={async()=> {
           activities && await copyToClipboard(activities?.address);
-          onClose()
+          // onClose()
         }}>Add to Wallet</Typography>
       </div>
     </Flex>
