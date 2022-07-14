@@ -75,6 +75,8 @@ const TipsIcon = styled(Icon)`
 const InputNumberStyled = styled(InputNumber)`
   .ant-input-number-input-wrap {
     .ant-input-number-input {
+      height: 100%;
+      padding-top: 5px;
       user-select: auto;
       font-size: 30px;
       font-weight: 800;

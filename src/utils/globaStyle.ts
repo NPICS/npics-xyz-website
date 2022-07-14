@@ -88,7 +88,7 @@ export const GlobalStyle = createGlobalStyle`
     border-radius: 10px;
     color: rgba(0, 0, 0, .5);
     font-size: 12px;
-    font-weight: 500;
+    font-weight: 600;
     transition: all 0s;
   }
   .ant-modal-reset {
