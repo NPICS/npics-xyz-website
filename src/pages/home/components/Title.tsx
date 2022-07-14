@@ -10,51 +10,51 @@ import { Link } from 'react-router-dom';
 import ButtonDefault from 'component/ButtonDefault';
 
 const TitleBox = styled.div`
-  width: 703px;
+  width: 7.03rem;
   .mySwiper{
     width: 100%;
   }
   .title_item{
     color: #fff;
       font-weight: 900;
-      font-size: 38px;
-      line-height: 49px;
+      font-size: 0.38rem;
+      line-height: 0.49rem;
       text-transform: uppercase;
       color: #FFFFFF;
-      width: 703px;
-      margin-bottom: 10px;
+      width: 7.03rem;
+      margin-bottom: 0.1rem;
       font-style: italic;
   }
   .title_text{
     font-style: normal;
     font-weight: 300;
-    font-size: 16px;
-    line-height: 32px;
+    font-size: 0.16rem;
+    line-height: 0.32rem;
     letter-spacing: 0.05em;
     color: rgba(255, 255, 255, 0.5);
-    width: 541px;
-    margin-top:20px;
-    margin-bottom: 72px;
+    width: 5.41rem;
+    margin-top:0.2rem;
+    margin-bottom: 0.72rem;
   }
   .title_point{
-    height: 10px;
-    margin-bottom: 27px;
+    height: 0.1rem;
+    margin-bottom: 0.27rem;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     .title_point_item{
-      width: 70px;
-      height: 4px;
-      border-radius: 9999px;
+      width: 0.7rem;
+      height: 0.04rem;
+      border-radius: 99.99rem;
       cursor: pointer;
       background: rgba(255, 255, 255, 0.4);
-      margin-left: 10px;
+      margin-left: 0.1rem;
     }
   }
   .title_btn{
     display: flex;
     button {
-        margin-right: 20px;
+        margin-right: 0.2rem;
       }
   }
 `

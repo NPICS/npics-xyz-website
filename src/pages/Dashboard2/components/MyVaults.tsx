@@ -16,16 +16,16 @@ const AntdSelect = styled(Select)`
   .ant-select-selector {
     color: rgba(0,0,0,.5);
     font-weight: 500;
-    font-size: 14px;
-    min-width: 200px;
-    min-height: 50px;
-    padding: 0 23px !important;
-    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    font-size: 0.14rem;
+    min-width: 2rem;
+    min-height: 0.5rem;
+    padding: 0 0.23rem !important;
+    border: 0.01rem solid rgba(0, 0, 0, 0.1) !important;
     box-shadow: none !important;
-    border-radius: 10px !important;
+    border-radius: 0.1rem !important;
     transition: all 0s !important;
     .ant-select-selection-item {
-      line-height: 50px;
+      line-height: 0.5rem;
       transition: all 0s !important;
     }
   }
@@ -43,18 +43,18 @@ export default function MyVaults() {
   }
 
   return <Box
-    padding={"40px 60px"}
+    padding={"0.4rem 0.6rem"}
   >
     <Flex
       alignItems={"center"}
       justifyContent={"space-between"}
-      marginBottom={"24px"}
+      marginBottom={"0.24rem"}
     >
       <Flex
         flexDirection={"column"}
       >
         <Typography
-          fontSize={"30px"}
+          fontSize={"0.3rem"}
           fontWeight={"800"}
           color={"#000"}
           // userSelect={"none"}
@@ -66,19 +66,19 @@ export default function MyVaults() {
         >
           <Typography 
             fontWeight={500}
-            fontSize={"14px"}
+            fontSize={"0.14rem"}
             color={"rgba(0,0,0,.5)"}
           >Total Debt：</Typography>
-          <Icon width="18px" height="18px" src={imgurl.dashboard.ethGrey18} />
+          <Icon width="0.18rem" height="0.18rem" src={imgurl.dashboard.ethGrey18} />
           <Typography
             fontWeight={500}
-            fontSize={"14px"}
+            fontSize={"0.14rem"}
             color={"rgba(0,0,0,.5)"}
           >{totalDebts.div(10 ** 18).toFixed(3, 1)}</Typography>
           <Typography
             fontWeight={500}
-            fontSize={"14px"}
-            marginLeft={"10px"}
+            fontSize={"0.14rem"}
+            marginLeft={"0.1rem"}
             color={"rgba(0,0,0,.5)"}
           >{`(${totalDebts && thousandFormat(totalDebts.times(ethRate)
             .div(10 ** 18)

@@ -7,8 +7,8 @@ import { useLocation } from 'react-router-dom';
 
 
 const FooterWrap = styled.div`
-  padding: 50px 283px 60px 260px;
-  border-top: 2px solid rgba(255, 255, 255, .1);
+  padding: 0.5rem 2.83rem 0.6rem 2.6rem;
+  border-top: 0.02rem solid rgba(255, 255, 255, .1);
   background: ${(props) => props.theme.footerBg};
   display: flex;
   flex-direction: row;
@@ -18,7 +18,7 @@ const FooterWrap = styled.div`
   .footer-left {
     display: flex;
     flex-direction: column;
-    font-size: 14px;
+    font-size: 0.14rem;
     font-family: 'PingFang HK';
     font-style: normal;
     font-weight: 500;
@@ -27,28 +27,28 @@ const FooterWrap = styled.div`
       text-align: left;
     }
     span {
-      padding-top: 10px;
+      padding-top: 0.1rem;
     }
   }
 
   .footer-right {
     display: flex;
     flex-direction: column;
-    font-size: 14px;
+    font-size: 0.14rem;
     font-family: 'PingFang HK';
     font-style: normal;
     font-weight: 500;
     color: ${(props) => props.theme.textColor};
     & > div {
       display: flex;
-      gap: 25px;
+      gap: 0.25rem;
       justify-content: end;
     }
   }
   .resources {
     display: flex;
-    gap: 16px;
-    margin-top: 35px;
+    gap: 0.16rem;
+    margin-top: 0.35rem;
     a {
       color: ${(props) => props.theme.textColor};
     }
@@ -105,7 +105,7 @@ function Footer() {
     <FooterWrap>
       <div className='footer-left'>
         <a href="/">
-          <Icon width='140px' height='50px' src={ isHome ? imgurl.logo : imgurl.lightLogo} />
+          <Icon width='1.4rem' height='0.5rem' src={ isHome ? imgurl.logo : imgurl.lightLogo} />
         </a>
         <span>Copyright © 2022 Npics Foundation Singapore LTD. rights reserved</span>
       </div>
@@ -114,7 +114,7 @@ function Footer() {
           {
             terms.map((item) => {
               return <a key={item.name} href={item.link} style={{opacity:0.5}} target="_blank" rel="noreferrer">
-                <Icon width='22px' height='22px' src={isHome ? item.darkIcon : item.lightIcon} />
+                <Icon width='0.22rem' height='0.22rem' src={isHome ? item.darkIcon : item.lightIcon} />
               </a>
             })
           }

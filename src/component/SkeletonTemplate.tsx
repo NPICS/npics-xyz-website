@@ -11,10 +11,10 @@ interface IProps {
 }
 
 SkeletonTemplate.defaultProps = {
-  widthWrap: '200px',
-  widthTitle: '90px',
-  widthText: '70px',
-  widthIcon: '50px',
+  widthWrap: '2rem',
+  widthTitle: '0.9rem',
+  widthText: '0.7rem',
+  widthIcon: '0.5rem',
 }
 
 const Square = styled.div`
@@ -26,14 +26,14 @@ export default function SkeletonTemplate(props:IProps) {
 
   return (<Flex
     flexDirection="column"
-    gap="10px"
+    gap="0.1rem"
     width={props.widthWrap}
   >
     {/*<Square>*/}
     {/*  <Skeleton.Image style={{*/}
     {/*    width: `${props.widthWrap}`,*/}
-    {/*    // height: '200px',*/}
-    {/*    borderRadius: '10px',*/}
+    {/*    // height: '2rem',*/}
+    {/*    borderRadius: '0.1rem',*/}
     {/*    height: '100%',*/}
     {/*    position: "absolute",*/}
     {/*    left: 0,*/}
@@ -42,13 +42,13 @@ export default function SkeletonTemplate(props:IProps) {
     {/*    top: 0*/}
     {/*  }} />*/}
     {/*</Square>*/}
-    <Skeleton.Image style={{ width: `${props.widthWrap}`, height: '200px', borderRadius: '10px' }} />
-    <Skeleton.Button shape={'round'} active style={{ height: '16px', minWidth: `${props.widthTitle}` }}></Skeleton.Button>
+    <Skeleton.Image style={{ width: `${props.widthWrap}`, height: '2rem', borderRadius: '0.1rem' }} />
+    <Skeleton.Button shape={'round'} active style={{ height: '0.16rem', minWidth: `${props.widthTitle}` }}></Skeleton.Button>
     <Flex
       justifyContent='space-between'
     >
-      <Skeleton.Button shape={'round'} active style={{ height: '16px', minWidth: `${props.widthText}` }}></Skeleton.Button>
-      <Skeleton.Button shape={'round'} active style={{ height: '16px', minWidth: `${props.widthIcon}` }}></Skeleton.Button>
+      <Skeleton.Button shape={'round'} active style={{ height: '0.16rem', minWidth: `${props.widthText}` }}></Skeleton.Button>
+      <Skeleton.Button shape={'round'} active style={{ height: '0.16rem', minWidth: `${props.widthIcon}` }}></Skeleton.Button>
     </Flex>
   </Flex>)
 }

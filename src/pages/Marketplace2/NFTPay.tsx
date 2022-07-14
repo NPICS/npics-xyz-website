@@ -32,7 +32,7 @@ export function PopupTitle(props: {
   >
     <Typography
       fontWeight={800}
-      fontSize={"30px"}
+      fontSize={"0.3rem"}
       color={"#000"}
     >{props.title}</Typography>
   </Flex>
@@ -41,7 +41,7 @@ export function PopupTitle(props: {
 const Cover = styled.img`
   display: block;
   background: #eee;
-  border-radius: 10px;
+  border-radius: 0.1rem;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -55,10 +55,10 @@ function PayTypeButton(props: {
   tap(): void
 }) {
   return <Flex
-    borderRadius={"10px"}
-    padding={"25px 40px"}
+    borderRadius={"0.1rem"}
+    padding={"0.25rem 0.4rem"}
     background={props.isSelected ? `#7BD742` : `#fff`}
-    border={`1px solid ${props.isSelected ? "#7BD742" : "#e5e5e5"}`}
+    border={`0.01rem solid ${props.isSelected ? "#7BD742" : "#e5e5e5"}`}
     alignItems={"center"}
     style={{
       "cursor": "pointer",
@@ -67,26 +67,26 @@ function PayTypeButton(props: {
     onClick={props.tap}
   >
     <Icon
-      width={"20px"}
-      height={"14px"}
+      width={"0.2rem"}
+      height={"0.14rem"}
       src={payTypeSelectedIcon}
       style={{
         "display": props.isSelected ? "block" : "none"
       }}
     />
     <Typography
-      fontSize={"18px"}
+      fontSize={"0.18rem"}
       fontWeight={500}
       color={"#000"}
-      marginLeft={"10px"}
+      marginLeft={"0.1rem"}
     >{props.name}</Typography>
     <Flex flex={1}></Flex>
-    <Icon width={"12px"} height={"19px"} src={props.isEth ? ethIcon : wethIcon}/>
+    <Icon width={"0.12rem"} height={"0.19rem"} src={props.isEth ? ethIcon : wethIcon}/>
     <Typography
-      fontSize={"20px"}
+      fontSize={"0.2rem"}
       fontWeight={500}
       color={"#000"}
-      marginLeft={"10px"}
+      marginLeft={"0.1rem"}
     >{props.balance}</Typography>
   </Flex>
 }
@@ -99,22 +99,22 @@ enum PayType {
 
 export const CancelButton = styled.button`
   variance: "secondary";
-  border: 1px solid #00000033;
+  border: 0.01rem solid #00000033;
   background: #fff;
   color: #000;
-  font-size: 16px;
+  font-size: 0.16rem;
   font-weight: 700;
-  border-radius: 10px;
-  height: 52px;
-  min-width: 200px;
+  border-radius: 0.1rem;
+  height: 0.52rem;
+  min-width: 2rem;
   cursor: pointer;
 `
 
 export const ConfirmButton = styled(Button2)`
   cursor: pointer;
-  height: 52px;
-  min-width: 200px;
-  font-size: 16px;
+  height: 0.52rem;
+  min-width: 2rem;
+  font-size: 0.16rem;
   font-weight: 700;
   transition: all .3s;
   &:hover {
@@ -305,10 +305,10 @@ export default function NFTPay(props: {
   }
 
   return <Flex
-    width={"880px"}
+    width={"8.8rem"}
     background={"#fff"}
-    borderRadius={"10px"}
-    padding={"40px"}
+    borderRadius={"0.1rem"}
+    padding={"0.4rem"}
     flexDirection={"column"}
   >
 
@@ -318,11 +318,11 @@ export default function NFTPay(props: {
 
     {/* nft info */}
     <Grid
-      marginTop={"30px"}
-      border={"1px solid #e5e5e5"}
-      borderRadius={"10px"}
-      padding={"20px"}
-      gridTemplateColumns={"270px auto"}
+      marginTop={"0.3rem"}
+      border={"0.01rem solid #e5e5e5"}
+      borderRadius={"0.1rem"}
+      padding={"0.2rem"}
+      gridTemplateColumns={"2.7rem auto"}
       // alignItems={"start"}
       alignContent={"start"}
       gridTemplateAreas={`
@@ -332,8 +332,8 @@ export default function NFTPay(props: {
                 "payTitle payTitle"
                 "payType payType"
             `}
-      gridColumnGap={"16px"}
-      gridRowGap={"16px"}
+      gridColumnGap={"0.16rem"}
+      gridRowGap={"0.16rem"}
     >
       <Grid gridArea={"cover"}>
         <Cover src={props.nft.imageUrl}/>
@@ -341,91 +341,91 @@ export default function NFTPay(props: {
       <Grid gridArea={"title"}>
         <Typography
           color={"rgba(0,0,0,.5)"}
-          fontSize={"14px"}
+          fontSize={"0.14rem"}
           fontWeight={500}
         >
           {props.nft.collectionName}
         </Typography>
         <Typography
           color={"#000"}
-          fontSize={"20px"}
+          fontSize={"0.2rem"}
           fontWeight={700}
-          marginTop={"6px"}
+          marginTop={"0.06rem"}
         >{`${props.nft.collectionName} #${props.nft.tokenId}`}</Typography>
       </Grid>
       <Grid
         gridArea={"payment"}
-        border={"1px solid #e5e5e5"}
-        borderRadius={"10px"}
-        padding={"20px 28px"}
+        border={"0.01rem solid #e5e5e5"}
+        borderRadius={"0.1rem"}
+        padding={"0.2rem 0.28rem"}
       >
         <Flex flexDirection={"row"} alignItems={"center"}>
-          <Icon width={"24px"} height={"24px"} src={downPayIcon}/>
+          <Icon width={"0.24rem"} height={"0.24rem"} src={downPayIcon}/>
           <Typography
-            marginLeft={"10px"}
+            marginLeft={"0.1rem"}
             fontWeight={700}
-            fontSize={"16px"}
+            fontSize={"0.16rem"}
             color={"#FF490F"}
           >Down Payment</Typography>
           <Flex flex={1}></Flex>
-          <Icon width={"12px"} height={"18px"} src={ethIcon}/>
+          <Icon width={"0.12rem"} height={"0.18rem"} src={ethIcon}/>
           <Typography
             fontWeight={700}
-            fontSize={"24px"}
-            marginLeft={"10px"}
+            fontSize={"0.24rem"}
+            marginLeft={"0.1rem"}
           >{numberFormat(props.actualAmount.div(10 ** 18).toFixed())}</Typography>
         </Flex>
       </Grid>
       <Grid
         gridArea={"loan"}
-        border={"1px solid #e5e5e5"}
-        borderRadius={"10px"}
-        padding={"20px 28px"}
-        gridGap={"22px"}
+        border={"0.01rem solid #e5e5e5"}
+        borderRadius={"0.1rem"}
+        padding={"0.2rem 0.28rem"}
+        gridGap={"0.22rem"}
       >
         <Flex alignItems={"center"}>
           <Typography
             color={"#000"}
-            fontSize={"14px"}
+            fontSize={"0.14rem"}
             fontWeight={500}
           >Listed Price</Typography>
           <Flex flex={1}></Flex>
-          <Icon width={"10px"} height={"15px"} src={ethIcon}/>
+          <Icon width={"0.1rem"} height={"0.15rem"} src={ethIcon}/>
           <Typography
             color={"#000"}
-            fontSize={"16px"}
+            fontSize={"0.16rem"}
             fontWeight={500}
-            marginLeft={"6px"}
+            marginLeft={"0.06rem"}
           >{props.nft.basePriceFormat()}</Typography>
         </Flex>
         <Flex alignItems={"center"}>
           <Typography
             color={"#000"}
-            fontSize={"14px"}
+            fontSize={"0.14rem"}
             fontWeight={500}
           >Loan Amount</Typography>
           <Flex flex={1}></Flex>
-          <Icon width={"10px"} height={"15px"} src={ethIcon}/>
+          <Icon width={"0.1rem"} height={"0.15rem"} src={ethIcon}/>
           <Typography
             color={"#000"}
-            fontSize={"16px"}
+            fontSize={"0.16rem"}
             fontWeight={500}
-            marginLeft={"6px"}
+            marginLeft={"0.06rem"}
           >{numberFormat(props.availableBorrow.div(10 ** 18).toFixed())}</Typography>
         </Flex>
       </Grid>
       <Grid gridArea={"payTitle"}>
         <Typography
           fontWeight={500}
-          fontSize={"20px"}
+          fontSize={"0.2rem"}
           color={"#000"}
-          marginTop={"24px"}
+          marginTop={"0.24rem"}
         >Pay With</Typography>
       </Grid>
       <Grid
         gridArea={"payType"}
         gridTemplateColumns={"1fr 1fr"}
-        gridColumnGap={"10px"}
+        gridColumnGap={"0.1rem"}
       >
         <PayTypeButton
           isSelected={(payType & PayType.ETH) > 0}
@@ -450,9 +450,9 @@ export default function NFTPay(props: {
       </Grid>
     </Grid>
     {/*  terms of service  */}
-    <Box marginTop={"24px"}>
+    <Box marginTop={"0.24rem"}>
       <label>
-        <Flex alignItems={"center"} gap={"12px"}>
+        <Flex alignItems={"center"} gap={"0.12rem"}>
           <Checkbox
 
             defaultChecked={didReadService}
@@ -460,7 +460,7 @@ export default function NFTPay(props: {
           />
           <Typography
             color={"#000"}
-            fontSize={"14px"}
+            fontSize={"0.14rem"}
             fontWeight={500}
             style={{
               "userSelect": "none"
@@ -469,7 +469,7 @@ export default function NFTPay(props: {
         </Flex>
       </label>
     </Box>
-    <Flex alignItems={"center"} justifyContent={"center"} gap={"20px"} marginTop={"40px"}>
+    <Flex alignItems={"center"} justifyContent={"center"} gap={"0.2rem"} marginTop={"0.4rem"}>
       <CancelButton type={"button"} onClick={() => props.cancelBlock?.()}>Cancel</CancelButton>
       <ConfirmButton
         type={"button"}

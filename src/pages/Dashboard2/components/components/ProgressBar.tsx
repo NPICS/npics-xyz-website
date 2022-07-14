@@ -9,22 +9,22 @@ interface IProps {
 const Container = styled.div`
   position: relative;
   width: 100%;
-  height: 8px;
+  height: 0.08rem;
   display: flex;
   justify-content: center;
   align-items: center;
   & > :first-child {
   width: inherit;
   background-color: rgba(0,0,0,.1);
-  border: 1px solid rgba(255, 255, 255, .2);
-  border-radius: 5px;
+  border: 0.01rem solid rgba(255, 255, 255, .2);
+  border-radius: 0.05rem;
   overflow: hidden;
   display: flex;
   align-items: center;
   div {
-    height: 6px;
+    height: 0.06rem;
     background: linear-gradient(284.2deg, #FF0000 0%, #FEB240 101.06%);
-    border-radius: 5px;
+    border-radius: 0.05rem;
   }
 }
 .point {
@@ -32,32 +32,32 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   position: absolute;
-  width: 20px;
-  height: 20px;
-  border-radius: 10px;
+  width: 0.2rem;
+  height: 0.2rem;
+  border-radius: 0.1rem;
   text-align: center;
   cursor: pointer;
   transform: translateX(-.5vw);
   background: #FFFFFF;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  box-shadow: 0px 0px 20px rgba(202, 175, 156, 0.16);
+  border: 0.01rem solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0rem 0rem 0.2rem rgba(202, 175, 156, 0.16);
   svg {
     width: .9vw;
   }
   .centerCircle {
-    width: 8px;
-    height: 8px;
-    border-radius: 4px;
+    width: 0.08rem;
+    height: 0.08rem;
+    border-radius: 0.04rem;
     background-color: #FF490F;
   }
 }
 .text {
   user-select: none;
   font-weight: 500;
-  font-size: 14px;
+  font-size: 0.14rem;
   color: rgba(0,0,0,.5);
   position: absolute;
-  top: 13px;
+  top: 0.13rem;
   transform: translateX(-.5vw);
 }
 `

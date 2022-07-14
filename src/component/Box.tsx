@@ -102,8 +102,8 @@ interface Button2Props extends BoxProps {
 
 export const Button2 = styled.button<Button2Props>`
   background: ${(props) => props.variant ?? "primary" === "primary" ? "#000" : "#fff"};
-  border-radius: 10px;
-  border: ${(props) => props.variant ?? "primary" === "primary" ? "0" : "1px"} solid #00000033;
+  border-radius: 0.1rem;
+  border: ${(props) => props.variant ?? "primary" === "primary" ? "0" : "0.01rem"} solid #00000033;
   color: ${(props) => props.variant ?? "primary" === "primary" ? "#fff" : "#000"};
   cursor: pointer;
 

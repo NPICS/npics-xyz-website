@@ -19,7 +19,7 @@ interface wallet {
 }
 const Wrap = styled.div`
   display: grid;
-  grid-gap: 20px;
+  grid-gap: 0.2rem;
 
   .item {
     display: flex;
@@ -30,9 +30,9 @@ const Wrap = styled.div`
       align-items: center;
       ${font01651}
       img {
-        width: 22px;
-        height: 22px;
-        margin-right: 10px;
+        width: 0.22rem;
+        height: 0.22rem;
+        margin-right: 0.1rem;
       }
     }
     .right {

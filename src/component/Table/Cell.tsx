@@ -1,5 +1,5 @@
 import { _TypographyProps } from "component/Box";
-import { font_14px, weight_500 } from "component/styled";
+import { font_14, weight_500 } from "component/styled";
 import styled from "styled-components";
 import { BackgroundProps, background, typography, space, layout, color, LayoutProps } from "styled-system";
 
@@ -9,10 +9,10 @@ export interface TrProps extends LayoutProps,BackgroundProps {
 }
 
 export const Td = styled.td<Td_ThProps>`
-  border-bottom: 1px solid #0000001A;
-  border-top: 1px solid #0000001A;
+  border-bottom: 0.01rem solid #0000001A;
+  border-top: 0.01rem solid #0000001A;
   color: #000;
-  padding: 16px;
+  padding: 0.16rem;
   vertical-align: middle;
   
   ${typography}
@@ -24,12 +24,12 @@ export const Td = styled.td<Td_ThProps>`
 
 export const Th = styled.th<Td_ThProps>`
   color: #000;
-  font-size: ${font_14px};
+  font-size: ${font_14};
   font-weight: ${weight_500};
-  padding: 16px;
+  padding: 0.16rem;
   text-transform: capitalize;
-  border-bottom: 1px solid #0000001A;
-  border-top: 1px solid #0000001A;
+  border-bottom: 0.01rem solid #0000001A;
+  border-top: 0.01rem solid #0000001A;
   ${typography}
   ${layout}
   ${space}
@@ -41,31 +41,31 @@ export const Tr = styled.tr<TrProps>`
   ${layout}
   ${background}
   th:first-child {
-    border-left: 1px solid #0000001A;
-    border-bottom-left-radius: 10px;
-    border-top-left-radius: 10px;
+    border-left: 0.01rem solid #0000001A;
+    border-bottom-left-radius: 0.1rem;
+    border-top-left-radius: 0.1rem;
   }
   th:last-child {
-    border-right: 1px solid #0000001A;
-    border-bottom-right-radius: 10px;
-    border-top-right-radius: 10px;
+    border-right: 0.01rem solid #0000001A;
+    border-bottom-right-radius: 0.1rem;
+    border-top-right-radius: 0.1rem;
   }
   td:first-child {
-    border-left: 1px solid #0000001A;
-    border-bottom-left-radius: 10px;
-    border-top-left-radius: 10px;
+    border-left: 0.01rem solid #0000001A;
+    border-bottom-left-radius: 0.1rem;
+    border-top-left-radius: 0.1rem;
   }
   td:last-child {
-    border-right: 1px solid #0000001A;
-    border-bottom-right-radius: 10px;
-    border-top-right-radius: 10px;
+    border-right: 0.01rem solid #0000001A;
+    border-bottom-right-radius: 0.1rem;
+    border-top-right-radius: 0.1rem;
   }
 `
 
 export const Table = styled.table<_TypographyProps>`
   width: 100%;
   border-collapse: separate;
-  border-spacing: 0 10px;
+  border-spacing: 0 0.1rem;
   ${space}
   ${layout}
 `;

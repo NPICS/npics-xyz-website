@@ -13,7 +13,7 @@ const Groups = styled.div`
   }
   &>div {
     color: rgba(255,255,255,.5);
-    margin: 10px;
+    margin: 0.1rem;
     cursor: pointer;
   }
   .active {

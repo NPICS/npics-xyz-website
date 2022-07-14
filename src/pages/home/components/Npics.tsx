@@ -8,20 +8,20 @@ import { Autoplay, Navigation } from "swiper";
 import Swiper from "swiper/types/swiper-class"
 
 const PointBox = styled.div`
-  height: 30px;
+  height: 0.3rem;
   display: flex;
   justify-content: center;
   align-items: flex-end;
 `
 
 const PointItem = styled.div`
-    height: 8px;
+    height: 0.08rem;
     background:#D9D9D9;
-    border-radius: 9999px;
+    border-radius: 99.99rem;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
     & ~ & {
-      margin-left: 12px;
+      margin-left: 0.12rem;
     }
 `
 const Npics = memo(
@@ -74,9 +74,9 @@ const Npics = memo(
           </SwiperProvide>
         </div >
         <PointBox>
-          <PointItem style={{ width: selected === 1 || selected === 4 ? '30px' : '8px' }} onClick={() => changePoint(1)}></PointItem>
-          <PointItem style={{ width: selected === 2 ? '30px' : '8px' }} onClick={() => changePoint(2)}></PointItem>
-          <PointItem style={{ width: selected === 3 ? '30px' : '8px' }} onClick={() => changePoint(3)}></PointItem>
+          <PointItem style={{ width: selected === 1 || selected === 4 ? '0.3rem' : '0.08rem' }} onClick={() => changePoint(1)}></PointItem>
+          <PointItem style={{ width: selected === 2 ? '0.3rem' : '0.08rem' }} onClick={() => changePoint(2)}></PointItem>
+          <PointItem style={{ width: selected === 3 ? '0.3rem' : '0.08rem' }} onClick={() => changePoint(3)}></PointItem>
         </PointBox>
       </div>
     )

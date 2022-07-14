@@ -46,7 +46,7 @@ export default function TableWarehouse(props: {
       <thead>
         <Tr>
           <Th>Asset</Th>
-          <Th textAlign="left" paddingLeft="60px">NEO NFT</Th>
+          <Th textAlign="left" paddingLeft="0.6rem">NEO NFT</Th>
           <Th textAlign="left">Debt</Th>
           <Th textAlign="left">Liquidation Price</Th>
           <Th textAlign="left">Health Factor</Th>
@@ -73,7 +73,7 @@ export default function TableWarehouse(props: {
                       Floor: <span>
                         <img src={imgurl.dashboard.ethGrey18} alt="" />
                         {item.floorPrice.div(10 ** globalConstant.bit).toFixed(2, 1)}
-                        <Typography marginLeft="5px">{`(${thousandFormat(item.floorPrice.times(ethRate)
+                        <Typography marginLeft="0.05rem">{`(${thousandFormat(item.floorPrice.times(ethRate)
                           .div(10 ** 18)
                           .toNumber())})`}</Typography>
                       </span>
@@ -86,17 +86,17 @@ export default function TableWarehouse(props: {
                 <div className='contract' style={{ cursor: `${item.terminated() ? '' : 'pointer'}` }} onClick={() => jumpToNEOEthscan(item)}>
                   <span title={item.singularForName()}>NEO {item.singularForName()}</span>
                   &nbsp;{`#${item.tokenId}`}
-                  {item.terminated() ? null : <Icon width="14px" height="14px" src={imgurl.dashboard.exportBlack18} alt="" />}
+                  {item.terminated() ? null : <Icon width="0.14rem" height="0.14rem" src={imgurl.dashboard.exportBlack18} alt="" />}
                 </div>
               </Td>
 
               <Td>
                 {
                   item.terminated() ? TextPlaceholder : <Flex alignItems='center'>
-                      <Icon width="18px" height="18px" src={imgurl.dashboard.ethBlack18} alt="" />
-                      <Typography fontSize="14px" fontWeight="500" color="#000">{item.debtString()}</Typography>
+                      <Icon width="0.18rem" height="0.18rem" src={imgurl.dashboard.ethBlack18} alt="" />
+                      <Typography fontSize="0.14rem" fontWeight="500" color="#000">{item.debtString()}</Typography>
                     </Flex>
-                    /* <Typography fontSize="14px" fontWeight="500" color="rgba(0,0,0,.5)" marginLeft="3px">
+                    /* <Typography fontSize="0.14rem" fontWeight="500" color="rgba(0,0,0,.5)" marginLeft="0.03rem">
                       {`(${thousandFormat(item.totalDebt.times(ethRate)
                         .div(10 ** 18)
                         .toNumber())})`}
@@ -107,10 +107,10 @@ export default function TableWarehouse(props: {
               <Td>
                 {
                   item.terminated() ? TextPlaceholder : <Flex alignItems='center'>
-                      <Icon width="18px" height="18px" src={imgurl.dashboard.ethBlack18} alt="" />
-                      <Typography fontSize="14px" fontWeight="500" color="#000">{item.liquidationPrice().div(10 ** 18).toFixed(4, 1)}</Typography>
+                      <Icon width="0.18rem" height="0.18rem" src={imgurl.dashboard.ethBlack18} alt="" />
+                      <Typography fontSize="0.14rem" fontWeight="500" color="#000">{item.liquidationPrice().div(10 ** 18).toFixed(4, 1)}</Typography>
                     </Flex>
-                    /* <Typography marginLeft="3px" fontSize="14px" fontWeight="500" color="rgba(0,0,0,.5)" >{`(${thousandFormat(item.liquidationPrice().times(ethRate)
+                    /* <Typography marginLeft="0.03rem" fontSize="0.14rem" fontWeight="500" color="rgba(0,0,0,.5)" >{`(${thousandFormat(item.liquidationPrice().times(ethRate)
                       .div(10 ** 18)
                       .toNumber())})`}</Typography> */
                 }
@@ -130,11 +130,11 @@ export default function TableWarehouse(props: {
               </Td>
               <Td>
                 {
-                  item.terminated() ? <div /> : <Flex alignItems='center' justifyContent='center' gap="10px">
-                    <ButtonDefault height='45px' minWidth='120px' types='normal' onClick={() => navigate(`/vaultsDetail/${item.nftAddress}/${item.tokenId}`)}>
+                  item.terminated() ? <div /> : <Flex alignItems='center' justifyContent='center' gap="0.1rem">
+                    <ButtonDefault height='0.45rem' minWidth='1.2rem' types='normal' onClick={() => navigate(`/vaultsDetail/${item.nftAddress}/${item.tokenId}`)}>
                       Repay
                     </ButtonDefault>
-                    {/* <ButtonDefault height='45px' minWidth='120px' types='second'}>
+                    {/* <ButtonDefault height='0.45rem' minWidth='1.2rem' types='second'}>
                       Offers
                     </ButtonDefault> */}
                   </Flex>

@@ -18,24 +18,24 @@ const ReferenceElement = styled.div`
 `
 
 const Arrow = styled.div`
-  width: 8px;
-  height: 8px;
+  width: 0.08rem;
+  height: 0.08rem;
   z-index: 9998;
 
   ::before {
     position: absolute;
-    width: 8px;
-    height: 8px;
+    width: 0.08rem;
+    height: 0.08rem;
     z-index: 9998;
 
     content: '';
-    border: 1px solid ${({theme}) => theme.bg2};
+    border: 0.01rem solid ${({theme}) => theme.bg2};
     transform: rotate(45deg);
     background: ${({theme}) => theme.bg0};
   }
 
   &.arrow-top {
-    bottom: -5px;
+    bottom: -0.05rem;
 
     ::before {
       border-top: none;
@@ -44,7 +44,7 @@ const Arrow = styled.div`
   }
 
   &.arrow-bottom {
-    top: -5px;
+    top: -0.05rem;
 
     ::before {
       border-bottom: none;
@@ -53,7 +53,7 @@ const Arrow = styled.div`
   }
 
   &.arrow-left {
-    right: -5px;
+    right: -0.05rem;
 
     ::before {
       border-bottom: none;
@@ -62,7 +62,7 @@ const Arrow = styled.div`
   }
 
   &.arrow-right {
-    left: -5px;
+    left: -0.05rem;
 
     ::before {
       border-right: none;

@@ -6,16 +6,16 @@ const DetailSwiper = styled.div`
   width: 100%;
   .swiper_list{
     width: 100%;
-    /* height: 600px; */
+    /* height: 6rem; */
     display: flex;
     justify-content: center;
     align-items:center;
     flex-direction: column;
-    margin-bottom: 28px;
-    /* margin: 112px 0 80px; */
+    margin-bottom: 0.28rem;
+    /* margin: 1.12rem 0 0.8rem; */
     .detail_info_item{
       width: 100%;
-      height: 140px;
+      height: 1.4rem;
       display: flex;
       justify-content: center;
       align-items:flex-start;
@@ -23,21 +23,21 @@ const DetailSwiper = styled.div`
       .info_item_title{
         font-style: normal;
         font-weight: 800;
-        font-size: 22px;
+        font-size: 0.22rem;
         color: #FFFFFF;
-        margin-bottom: 10px;
+        margin-bottom: 0.1rem;
       }
       .info_item_text{
         font-style: normal;
-        font-size: 12px;
-        line-height: 20px;
+        font-size: 0.12rem;
+        line-height: 0.2rem;
         -webkit-letter-spacing: 0.05em;
         -moz-letter-spacing: 0.05em;
         -ms-letter-spacing: 0.05em;
         letter-spacing: 0.05em;
         color: rgba(255,255,255,0.5);
         width: 80%;
-        /* margin-bottom: 47px; */
+        /* margin-bottom: 0.47rem; */
       }
     }
   }

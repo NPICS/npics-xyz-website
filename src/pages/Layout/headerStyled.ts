@@ -32,12 +32,12 @@ export const accountNav = [
 
 export const Nav = styled.div`
   width: 100%;
-  height: 90px;
+  height: 0.9rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 0 auto;
-  padding: 20px 150px;
+  padding: 0.2rem 1.5rem;
   /* background: transparent; */
   background: ${(props) => props.theme.headerBg};
   &>div {
@@ -50,27 +50,27 @@ export const Nav = styled.div`
         }
       .ant-popover-inner {
         background: #fff;
-        box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.1);
-        border-radius: 20px;
-        margin-top: 20px;
+        box-shadow: 0rem 0.04rem 0.3rem rgba(0, 0, 0, 0.1);
+        border-radius: 0.2rem;
+        margin-top: 0.2rem;
         .ant-popover-title{
           border-bottom: 0;
           &::after {
             content: '';
             display: block;
             width: 100%;
-            height: 1px;
+            height: 0.01rem;
             background-color: rgba(0,0,0,.1);
           }
           .account-title {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 0;
+            padding: 0.1rem 0;
             span {
               color: #000;
               font-weight: 700;
-              font-size: 16px;
+              font-size: 0.16rem;
             }
           }
         }
@@ -79,9 +79,9 @@ export const Nav = styled.div`
             display: flex;
             justify-content: space-between;
             color: #000;
-            font-size: 14px;
+            font-size: 0.14rem;
             font-weight: 600;
-            margin-bottom: 22px;
+            margin-bottom: 0.22rem;
             &>div:nth-child(2){
               color: #FF490F;
               cursor: pointer;
@@ -91,35 +91,35 @@ export const Nav = styled.div`
             display: flex;
             flex-direction: row;
             .address-icon {
-              margin-right: 10px;
+              margin-right: 0.1rem;
             }
             img {
-              width: 24px;
-              height: 24px;
+              width: 0.24rem;
+              height: 0.24rem;
             }
             .copy-icon {
-              margin-left: 10px;
+              margin-left: 0.1rem;
               cursor: pointer;
             }
             .address-text {
               color: #000;
               font-weight: 600;
-              font-size: 16px;
+              font-size: 0.16rem;
               .connected {
-                font-size: 14px;
+                font-size: 0.14rem;
                 color:rgba(0, 0, 0, .5);
               }
             }
           }
           .account-wallet {
-            margin-top: 40px;
+            margin-top: 0.4rem;
             .wallet-title {
               ${font01671}
               &::after {
                 content: '';
                 display: inline-block;
                 width: 100%;
-                height: 1px;
+                height: 0.01rem;
                 background-color: rgba(0,0,0,.1);
               }
             }
@@ -136,17 +136,17 @@ export const Nav = styled.div`
         }
       .ant-popover-inner {
         background: #fff;
-        box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.1);
-        border-radius: 20px;
-        margin-top: 20px;
-        padding: 20px 20px 30px 20px;
+        box-shadow: 0rem 0.04rem 0.3rem rgba(0, 0, 0, 0.1);
+        border-radius: 0.2rem;
+        margin-top: 0.2rem;
+        padding: 0.2rem 0.2rem 0.3rem 0.2rem;
         .ant-popover-title{
           min-height: 0;
           font-weight: 700;
-          font-size: 16px;
+          font-size: 0.16rem;
           color: #000;
-          margin-left: 10px;
-          margin-bottom: 10px;
+          margin-left: 0.1rem;
+          margin-bottom: 0.1rem;
           border-bottom: 0;
           padding: 0;
         }
@@ -161,9 +161,9 @@ export const BtnLink = styled(NavLink)`
   position: relative;
   color: #fff;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 0.16rem;
   text-decoration: none;
-  margin-right: 130px;
+  margin-right: 1.3rem;
   &:hover {
     color: #fff;
   }
@@ -171,9 +171,9 @@ export const BtnLink = styled(NavLink)`
 export const LogoLink = styled(NavLink)`
   display: flex;
   align-items: center;
-  margin-right: 120px;
+  margin-right: 1.2rem;
   img{
-    width: 180px;
+    width: 1.8rem;
   }
 `
 export const FlexDiv = styled.div`
@@ -189,16 +189,16 @@ export const FlexDiv = styled.div`
     /* display: flex;
     justify-content: center;
     align-items: center;
-    width: 28px;
-    height: 28px;
+    width: 0.28rem;
+    height: 0.28rem;
     background: rgba(255,255,255,0.5);
-    margin-right: 20px;
-    border-radius: 7px; */
+    margin-right: 0.2rem;
+    border-radius: 0.07rem; */
   }
 `
 export const ThemeImg = styled.img`
-  width: 34px;
-  height: 34px;
+  width: 0.34rem;
+  height: 0.34rem;
   cursor: pointer;
-  margin-left: 20px;
+  margin-left: 0.2rem;
 `;

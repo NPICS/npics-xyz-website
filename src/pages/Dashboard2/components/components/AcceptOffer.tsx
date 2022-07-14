@@ -11,57 +11,57 @@ export default function AcceptOffer() {
 
   return <Modal isOpen={true}>
     <Box
-      minWidth={"880px"}
+      minWidth={"8.8rem"}
       background={`#fff`}
-      borderRadius={`20px`}
-      padding={`40px`}
+      borderRadius={`0.2rem`}
+      padding={`0.4rem`}
     >
       <PopupTitle title={"Accept Offec"} canClose={false}/>
       <Grid
-        marginTop={`30px`}
-        padding={`20px 25px`}
-        borderRadius={`10px`}
-        border={`1px solid #0000001A`}
-        gridTemplateRows={"306px auto"}
-        gridTemplateColumns={`306px auto`}
+        marginTop={`0.3rem`}
+        padding={`0.2rem 0.25rem`}
+        borderRadius={`0.1rem`}
+        border={`0.01rem solid #0000001A`}
+        gridTemplateRows={"3.06rem auto"}
+        gridTemplateColumns={`3.06rem auto`}
         gridTemplateAreas={`
           "img price"
           "receive receive"
         `}
-        gridGap={`14px`}
+        gridGap={`0.14rem`}
       >
-        <Grid gridArea={`img`} borderRadius={"6px"} background={`#eee`} overflow={"hidden"}>
+        <Grid gridArea={`img`} borderRadius={"0.06rem"} background={`#eee`} overflow={"hidden"}>
           <Icon width={"100%"} height={"100%"}></Icon>
         </Grid>
         <Grid gridArea={`price`}>
           {/* Name and price */}
           <Flex flexDirection={`column`} alignItems={`stretch`}>
-            <Flex gap={`6px`} alignItems={`center`}>
+            <Flex gap={`0.06rem`} alignItems={`center`}>
               <Typography
                 color={`#000`}
-                fontSize={`14px`}
+                fontSize={`0.14rem`}
                 fontWeight={500}
               >Doodles</Typography>
-              <Icon src={validIcon} width={`12px`} height={`12px`}></Icon>
+              <Icon src={validIcon} width={`0.12rem`} height={`0.12rem`}></Icon>
             </Flex>
             <Typography
-              marginTop={`6px`}
+              marginTop={`0.06rem`}
               fontWeight={700}
-              fontSize={`20px`}
+              fontSize={`0.2rem`}
               color={`#000`}
             >Doodle #582</Typography>
             {/* Offer */}
             <Flex
-              marginTop={`10px`}
-              border={`1px solid #0000001A`}
+              marginTop={`0.1rem`}
+              border={`0.01rem solid #0000001A`}
               flex={1}
-              borderRadius={`10px`}
+              borderRadius={`0.1rem`}
               flexDirection={`column`}
               alignItems={`stretch`}
               background={`#F6F6F6`}
               overflow={`hidden`}
             >
-              <Flex flex={1} borderBottom={`1px solid #0000001A`} background={`#fff`}>
+              <Flex flex={1} borderBottom={`0.01rem solid #0000001A`} background={`#fff`}>
                 <OfferCell title={`Offer`} titleColor={`#000`} symbolIcon={true} symbolOrVal={`40.7`}/>
               </Flex>
               <OfferCell title={`Vault Debt`} symbolIcon={true} symbolOrVal={`40.7`}/>
@@ -74,8 +74,8 @@ export default function AcceptOffer() {
         <Grid gridArea={`receive`}>
           <Flex
             background={`#7BD742`}
-            borderRadius={`10px`}
-            padding={`30px 40px`}
+            borderRadius={`0.1rem`}
+            padding={`0.3rem 0.4rem`}
             alignItems={`center`}
             justifyContent={`space-between`}
             style={{
@@ -85,28 +85,28 @@ export default function AcceptOffer() {
           >
             <Typography
               color={`#000`}
-              fontSize={`20px`}
+              fontSize={`0.2rem`}
               fontWeight={700}
             >You Receive</Typography>
-            <Flex flexDirection={`row`} gap={`6px`} alignItems={`center`}>
+            <Flex flexDirection={`row`} gap={`0.06rem`} alignItems={`center`}>
               <Icon src={wethIcon}></Icon>
               <Typography
                 color={`#000`}
-                fontSize={`20px`}
+                fontSize={`0.2rem`}
                 fontWeight={700}
               >998.12</Typography>
               <Typography
                 color={`rgba(0, 0, 0, .5)`}
-                fontSize={`16px`}
+                fontSize={`0.16rem`}
                 fontWeight={500}
-                marginLeft={`4px`}
+                marginLeft={`0.04rem`}
               >($123.123)</Typography>
             </Flex>
           </Flex>
         </Grid>
       </Grid>
       {/* buttons */}
-      <Flex alignItems={"center"} justifyContent={"center"} gap={"20px"} marginTop={"30px"}>
+      <Flex alignItems={"center"} justifyContent={"center"} gap={"0.2rem"} marginTop={"0.3rem"}>
         <CancelButton
           onClick={async () => {
 
@@ -131,17 +131,17 @@ function OfferCell(props: {
     flex={1}
     alignItems={`center`}
     justifyContent={`space-between`}
-    padding={`0 30px`}
+    padding={`0 0.3rem`}
   >
     <Typography
       color={props.titleColor ?? `rgba(0, 0, 0, .5)`}
-      fontSize={`14px`}
+      fontSize={`0.14rem`}
       fontWeight={500}
     >{props.title}</Typography>
-    <Flex alignItems={`center`} gap={`6px`}>
-      <Icon src={wethIcon} width={`10px`} height={`15px`} hidden={!props.symbolIcon}/>
+    <Flex alignItems={`center`} gap={`0.06rem`}>
+      <Icon src={wethIcon} width={`0.1rem`} height={`0.15rem`} hidden={!props.symbolIcon}/>
       <Typography
-        fontSize={`14px`}
+        fontSize={`0.14rem`}
         color={`#000`}
         fontWeight={500}
       >{props.symbolOrVal ?? `-`}</Typography>

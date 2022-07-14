@@ -20,38 +20,38 @@ const _Table = styled.table`
     position: sticky;
     top: 0;
     background: #fff;
-    outline: 1px solid #0000001A;
+    outline: 0.01rem solid #0000001A;
 
     th {
-      padding: 26px;
+      padding: 0.26rem;
     }
   }
 
   tbody {
     td {
-      padding: 26px;
+      padding: 0.26rem;
     }
   }
 
   tr th {
     font-weight: 500;
-    font-size: 14px;
+    font-size: 0.14rem;
     color: #000;
   }
 
   td {
-    font-size: 14px;
+    font-size: 0.14rem;
   }
 
   tr:not(:last-child) {
-    border-bottom: 1px solid #0000001A;
+    border-bottom: 0.01rem solid #0000001A;
   }
 `
 
 const Symbol = styled.img`
   user-select: none;
-  width: 18px;
-  height: 18px;
+  width: 0.18rem;
+  height: 0.18rem;
   object-fit: contain;
   background: transparent;
 `
@@ -60,7 +60,7 @@ function PriceWithSymbol(props: {
   displayAmount?: string,
   iconOrUrl: string
 }) {
-  return <Flex hidden={props.displayAmount == null} flexDirection={"row"} alignItems={"center"} gap={"6px"}>
+  return <Flex hidden={props.displayAmount == null} flexDirection={"row"} alignItems={"center"} gap={"0.06rem"}>
     <Symbol src={props.iconOrUrl} hidden={props.displayAmount == `0`}/>
     <Typography lineHeight={"normal"}>{props.displayAmount ?? ``}</Typography>
   </Flex>
@@ -97,21 +97,21 @@ export default function NFTActivities(props: {
 
   return <Flex
     flexDirection={"column"}
-    border={"1px solid #0000001A"}
-    borderRadius={"10px"}
+    border={"0.01rem solid #0000001A"}
+    borderRadius={"0.1rem"}
     alignItems={"stretch"}
   >
     <Flex
       flexDirection={"row"}
-      gap={"12px"}
-      borderBottom={"1px solid #0000001A"}
-      padding={"14px 25px"}
+      gap={"0.12rem"}
+      borderBottom={"0.01rem solid #0000001A"}
+      padding={"0.14rem 0.25rem"}
       alignItems={"center"}
     >
-      <Icon width={"24px"} height={"24px"} src={titlePrefixIcon}/>
+      <Icon width={"0.24rem"} height={"0.24rem"} src={titlePrefixIcon}/>
       <Typography
         fontWeight={500}
-        fontSize={"16px"}
+        fontSize={"0.16rem"}
         color={"#000"}
       >Activities</Typography>
     </Flex>
@@ -139,8 +139,8 @@ export default function NFTActivities(props: {
             listData.map((item, idx) => {
               return <tr key={idx}>
                 <td align={"left"}>
-                  <Flex alignItems={"center"} gap={"12px"} hidden={item.eventTypeExplain() == undefined}>
-                    <Icon src={item.eventTypeIcon()} width={"20px"} height={"20px"}/>
+                  <Flex alignItems={"center"} gap={"0.12rem"} hidden={item.eventTypeExplain() == undefined}>
+                    <Icon src={item.eventTypeIcon()} width={"0.2rem"} height={"0.2rem"}/>
                     <Typography
 
                     >

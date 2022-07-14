@@ -8,8 +8,8 @@ export const StatusGif = styled.img`
   display: block;
   overflow: hidden;
   background: transparent;
-  width: 280px;
-  height: 280px;
+  width: 2.8rem;
+  height: 2.8rem;
   user-select: none;
   border: 0;
 `
@@ -18,51 +18,51 @@ export default function NFTPayWrong(props: {
     back?(): void
 }) {
     return <Flex
-        width={"880px"}
+        width={"8.8rem"}
         background={"#fff"}
-        borderRadius={"10px"}
-        padding={"40px"}
+        borderRadius={"0.1rem"}
+        padding={"0.4rem"}
         flexDirection={"column"}
     >
         <PopupTitle title={"Something went wrong"} canClose={true}/>
         <Flex
-            marginTop={"30px"}
+            marginTop={"0.3rem"}
             flexDirection={"column"}
-            border={"1px solid #e5e5e5"}
-            borderRadius={"10px"}
-            padding={"40px 140px 20px"}
+            border={"0.01rem solid #e5e5e5"}
+            borderRadius={"0.1rem"}
+            padding={"0.4rem 1.4rem 0.2rem"}
         >
             <Flex alignSelf={"center"}>
                 <StatusGif src={failedGif}/>
             </Flex>
             <Typography
-                marginTop={"32px"}
+                marginTop={"0.32rem"}
                 fontWeight={700}
-                fontSize={"16px"}
+                fontSize={"0.16rem"}
                 color={"#000"}
                 textAlign={"center"}
             >
                 Contract execution failed, maybe something went wrong.
             </Typography>
             <Flex
-                marginTop={"42px"}
+                marginTop={"0.42rem"}
                 alignSelf={"center"}
                 alignItems={"center"}
-                gap={"10px"}
+                gap={"0.1rem"}
                 style={{
                     "userSelect": "none",
                     "cursor": "pointer"
                 }}
             >
                 <Typography
-                    fontSize={"14px"}
+                    fontSize={"0.14rem"}
                     fontWeight={500}
                     color={"rgba(0,0,0,.5)"}
                 >View on etherscan</Typography>
-                <Icon width={"14px"} height={"14px"} src={nftLinkIcon}/>
+                <Icon width={"0.14rem"} height={"0.14rem"} src={nftLinkIcon}/>
             </Flex>
         </Flex>
-        <Flex alignItems={"center"} justifyContent={"center"} gap={"20px"} marginTop={"30px"}>
+        <Flex alignItems={"center"} justifyContent={"center"} gap={"0.2rem"} marginTop={"0.3rem"}>
             <CancelButton onClick={props.back}>Back</CancelButton>
         </Flex>
     </Flex>

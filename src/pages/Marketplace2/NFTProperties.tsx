@@ -7,8 +7,8 @@ import _ from "lodash"
 
 const CellBackground = styled.div`
   background: linear-gradient(#F2BE58, #E84866);
-  padding: 1px;
-  border-radius: 10px;
+  padding: 0.01rem;
+  border-radius: 0.1rem;
 `
 
 function PropertiesCell(props: {
@@ -19,12 +19,12 @@ function PropertiesCell(props: {
     return <CellBackground>
         <Flex
             background={"#FFEAE4"}
-            borderRadius={"10px"}
-            gap={"6px"}
+            borderRadius={"0.1rem"}
+            gap={"0.06rem"}
             flexDirection={"column"}
             alignItems={"center"}
             justifyContent={"space-evenly"}
-            padding={"12px 18px"}
+            padding={"0.12rem 0.18rem"}
             height={"100%"}
             style={{
                 // "userSelect": "none",
@@ -32,19 +32,19 @@ function PropertiesCell(props: {
             }}
         >
             <Typography
-                fontSize={"14px"}
+                fontSize={"0.14rem"}
                 fontWeight={500}
                 color={"#ff8933"}
                 textAlign={"center"}
             >{props.title.toUpperCase()}</Typography>
             <Typography
-                fontSize={`16px`}
+                fontSize={`0.16rem`}
                 fontWeight={800}
                 color={`#000`}
                 textAlign={'center'}
             >{props.value}</Typography>
             <Typography
-                fontSize={`14px`}
+                fontSize={`0.14rem`}
                 fontWeight={500}
                 color={`rgba(0, 0, 0, .5)`}
                 textAlign={"center"}
@@ -58,28 +58,28 @@ export default function NFTProperties(props: {
 }) {
     return <Flex
         flexDirection={"column"}
-        border={"1px solid #0000001A"}
-        borderRadius={"10px"}
+        border={"0.01rem solid #0000001A"}
+        borderRadius={"0.1rem"}
         alignItems={"stretch"}
     >
         <Flex
             flexDirection={"row"}
-            gap={"12px"}
-            borderBottom={"1px solid #0000001A"}
-            padding={"14px 25px"}
+            gap={"0.12rem"}
+            borderBottom={"0.01rem solid #0000001A"}
+            padding={"0.14rem 0.25rem"}
             alignItems={"center"}
         >
-            <Icon width={"24px"} height={"24px"} src={titlePrefixIcon}/>
+            <Icon width={"0.24rem"} height={"0.24rem"} src={titlePrefixIcon}/>
             <Typography
                 fontWeight={500}
-                fontSize={"16px"}
+                fontSize={"0.16rem"}
                 color={"#000"}
             >Properties</Typography>
         </Flex>
         <Grid
             gridTemplateColumns={"repeat(2, 1fr)"}
-            gridGap={"10px"}
-            padding={"20px"}
+            gridGap={"0.1rem"}
+            padding={"0.2rem"}
             alignItems={"stretch"}
             justifyContent={"stretch"}
         >
