@@ -71,7 +71,7 @@ export default function PaySuccessful(props:IProps) {
         <Typography fontSize="16px" fontWeight="700" color="#000" onClick={async()=> {
           activities && await copyToClipboard(activities?.address);
           onClose()
-        }}>Add to wallet</Typography>
+        }}>Add to Wallet</Typography>
       </div>
     </Flex>
   </Flex>
