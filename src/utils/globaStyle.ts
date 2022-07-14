@@ -89,7 +89,10 @@ export const GlobalStyle = createGlobalStyle`
     color: rgba(0, 0, 0, .5);
     font-size: 12px;
     font-weight: 600;
-    transition: all 0s;
+    transition: all 0s; 
+    &::placeholder {
+      color: rgba(0,0,0,.5);
+    }
   }
   .ant-modal-reset {
     .ant-modal-content {
