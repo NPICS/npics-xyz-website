@@ -48,13 +48,13 @@ export default function PaySuccessful(props:IProps) {
           <Flex maxWidth="340px" flexWrap="wrap" marginBottom="12px">
               <Typography fontSize="16px" fontWeight="700" color="#FF490F">
                 <Typography marginRight={"5px"} display="inline-block" fontSize="16px" fontWeight="700" color="#000">You've deposited</Typography>
-                {`${activities && _toString(activities?.collectionName)} ${activities?.tokenId}`} 
-                <Typography marginLeft={"5px"} display="inline-block" fontSize="16px" fontWeight="700" color="#000">and minted</Typography>
+                {`NEO ${activities && _toString(activities?.collectionName)} #${activities?.tokenId}`} 
+                <Typography marginLeft={"5px"} display="inline-block" fontSize="16px" fontWeight="700" color="#000">and obtained</Typography>
               </Typography>
           </Flex>
           <Flex alignItems="center" gap="10px" onClick={() => jumpToNeoEtherscan()}>
             <Typography style={{cursor: 'pointer'}} fontSize="16px" fontWeight="500" color="rgba(0,0,0,.5)">
-              {`NEO ${activities &&  _toString(activities?.collectionName)} ${activities?.tokenId}`} 
+              {`${activities &&  _toString(activities?.collectionName)} #${activities?.tokenId}`} 
             </Typography>
             <Icon marginLeft="10px" width="14px" height="14px" src={imgurl.dashboard.export14}/>
           </Flex>
