@@ -31,6 +31,7 @@ const {Option} = Select;
 
 const InputStyled = styled(Input)`
     background: #fff;
+    font-weight: 600;
     border: 1px solid rgba(0,0,0,.2);
     border-radius: 10px;
     color: rgba(0,0,0,.5);
@@ -60,9 +61,9 @@ export const Portrait = styled.img`
   height: 146px;
 `
 const AntdSelect = styled(Select)`
+  font-weight: 600;
   .ant-select-selector {
     color: rgba(0, 0, 0, .5);
-    font-weight: 600;
     font-size: 12px;
     transition: all 0s !important;
     min-width: 280px;
@@ -72,6 +73,7 @@ const AntdSelect = styled(Select)`
     box-shadow: none !important;
     border-radius: 10px !important;
     .ant-select-selection-item {
+      font-weight: 600;
       line-height: 50px;
       transition: all 0s !important;
     }

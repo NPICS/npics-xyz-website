@@ -5,6 +5,10 @@ import validIcon from "../../../../assets/images/market/nfts_opensea_valid.svg"
 import wethIcon from "../../../../assets/images/market/weth_icon.svg"
 
 export default function AcceptOffer() {
+
+
+  
+
   return <Modal isOpen={true}>
     <Box
       minWidth={"880px"}

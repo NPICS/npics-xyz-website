@@ -67,7 +67,7 @@ const CollectionItem = styled.img<{
   // border: ${(props) => props.isSelected ? `3px` : 0} solid #fff;
   box-shadow: 0 0 0 ${(props) => props.isSelected ? `3px` : 0} #fff;
   transform: ${(props) => props.isSelected ? "scale(1.15)" : "scale(1)"};
-  transition: all .1s;
+  //transition: all .1s;
 `
 
 const MarkdownContainer = styled.div<{

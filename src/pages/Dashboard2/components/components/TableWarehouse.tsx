@@ -86,15 +86,15 @@ export default function TableWarehouse(props: {
                 <div className='contract' style={{ cursor: `${item.terminated() ? '' : 'pointer'}` }} onClick={() => jumpToNEOEthscan(item)}>
                   <span title={item.singularForName()}>NEO {item.singularForName()}</span>
                   &nbsp;{`#${item.tokenId}`}
-                  {item.terminated() ? null : <Icon width="16px" height="16px" src={imgurl.dashboard.exportBlack18} alt="" />}
+                  {item.terminated() ? null : <Icon width="14px" height="14px" src={imgurl.dashboard.exportBlack18} alt="" />}
                 </div>
               </Td>
 
               <Td>
                 {
-                  item.terminated() ? TextPlaceholder : <Flex alignItems='center' marginBottom="4px">
+                  item.terminated() ? TextPlaceholder : <Flex alignItems='center'>
                       <Icon width="18px" height="18px" src={imgurl.dashboard.ethBlack18} alt="" />
-                      <Typography fontSize="16px" fontWeight="500" color="#000">{item.debtString()}</Typography>
+                      <Typography fontSize="14px" fontWeight="500" color="#000">{item.debtString()}</Typography>
                     </Flex>
                     /* <Typography fontSize="14px" fontWeight="500" color="rgba(0,0,0,.5)" marginLeft="3px">
                       {`(${thousandFormat(item.totalDebt.times(ethRate)
@@ -106,7 +106,7 @@ export default function TableWarehouse(props: {
 
               <Td>
                 {
-                  item.terminated() ? TextPlaceholder : <Flex alignItems='center' marginBottom="4px">
+                  item.terminated() ? TextPlaceholder : <Flex alignItems='center'>
                       <Icon width="18px" height="18px" src={imgurl.dashboard.ethBlack18} alt="" />
                       <Typography fontSize="14px" fontWeight="500" color="#000">{item.liquidationPrice().div(10 ** 18).toFixed(4, 1)}</Typography>
                     </Flex>

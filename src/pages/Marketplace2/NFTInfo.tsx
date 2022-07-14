@@ -44,7 +44,7 @@ export function AddressLink(props: {
       }}
     >
       <Value>{AddressAbbreviation(props.address) ?? TextPlaceholder}</Value>
-      <Icon width={"16px"} src={addressLinkIcon}/>
+      <Icon width={"14px"} src={addressLinkIcon}/>
     </Flex></Pop20>
 }
 

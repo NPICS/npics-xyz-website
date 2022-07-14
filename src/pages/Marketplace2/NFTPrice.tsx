@@ -318,6 +318,7 @@ export default function NFTPrice(props: {
         <Typography
           color={"#FF490F"}
           fontSize={"24px"}
+          lineHeight={"100%"}
           fontWeight={700}
         >{percentageFormat(vaultAPR)}</Typography>
         <Typography

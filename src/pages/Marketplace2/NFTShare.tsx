@@ -25,7 +25,7 @@ function IconWithBorder(props: {
     onClick={props.tap}
   >
     <Icon
-      width={"24px"}
+      width={"16px"}
       src={props.icon}
     />
   </Flex>

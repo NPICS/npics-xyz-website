@@ -515,13 +515,13 @@ export default function VaultsDetail() {
               <Flex alignItems={"self-start"} justifyContent={"center"} flexDirection="column" gap='10px'>
                 <Flex gap="10px">
                   <Typography fontSize="14px" fontWeight='500' color="rgba(0,0,0,.5)">Debt</Typography>
-                  <Pop 
+                  <Pop
                     content={DebtPop({Principal: activities?.debt, noInterest: TextPlaceholder})}>
                     <Icon width={"14px"} src={imgurl.market.tipsIcon}/>
                   </Pop>
 
                 </Flex>
-                <Flex alignItems={'self-start'}>
+                <Flex alignItems={'center'}>
                   <Icon width='22px' height='22px' src={imgurl.home.ethBlack22}/>
                   <Typography fontSize="20px" fontWeight='500' color="#000">  {activities?.debtString}</Typography>
                 </Flex>

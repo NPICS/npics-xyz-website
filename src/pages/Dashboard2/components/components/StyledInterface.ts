@@ -66,8 +66,8 @@ export const BgTable = styled.div`
       text-align: left;
     }
     &>img {
-      width: 16px;
-      height: 16px;
+      //width: 16px;
+      //height: 16px;
       margin-left: 6px;
     }
   }
@@ -86,7 +86,7 @@ export const BgTable = styled.div`
   .healthFactor {
     ${flex}
     justify-content: left;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 14px;
     color: #000;
   }
