@@ -170,6 +170,28 @@ export class CollectionItems {
   }
 
   @Expose()
+  neoOneName() {
+    switch (this.collectionName) {
+      case "Doodles":
+        return `NEO Doodle #${this.tokenId}`
+      case "Space Doodles":
+        return `NEO SDoodles #${this.tokenId}`
+      case "CryptoPunks":
+        return `NEO CryptoPunk #${this.tokenId}`
+      case "Wrapped Cryptopunks":
+        return `NEO CryptoPunk #${this.tokenId}`
+      case "CLONE X - X TAKASHI MURAKAMI":
+        return `NEO CLONEX #${this.tokenId}`
+      case "Bored Ape Yacht Club":
+        return `NEO BAYC #${this.tokenId}`
+      case "Mutant Ape Yacht Club":
+        return `NEO MAYC #${this.tokenId}`
+      case "Azuki":
+        return `NEO Azuki #${this.tokenId}`
+    }
+  }
+
+  @Expose()
   nftName(): string {
     if (this.isNoName()) {
       return ``

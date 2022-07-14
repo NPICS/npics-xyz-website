@@ -90,7 +90,10 @@ export default function NFTPayCongratulations(props: {
               fontSize={"16px"}
               fontWeight={500}
               color={"rgba(0,0,0,.5)"}
-            >{`NEO ${props.nft.collectionName} #${props.nft.tokenId}`}</Typography>
+            >{
+              // `NEO ${props.nft.collectionName} #${props.nft.tokenId}`
+              props.nft.neoOneName()
+            }</Typography>
             <Icon width={"14px"} height={"14px"} src={nftLinkIcon}/>
           </Flex>
         </Flex>
