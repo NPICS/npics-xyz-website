@@ -78,4 +78,9 @@ export class Npics {
     let contract = new ethers.Contract(ContractAddresses.NpicsProxy, NPICS_ABI, this.signer)
     return await contract.neoFor(nft)
   }
+
+  async getNeoFor(nft: string): Promise<string> {
+    let contract = new ethers.Contract(ContractAddresses.NpicsProxy, NPICS_ABI, this.signer)
+    return await contract.getNeoFor(nft)
+  }
 }

@@ -33,100 +33,101 @@ export const AttrLink = styled.a`
 `
 
 export default function NFTPayCongratulations(props: {
-    nft: CollectionDetail,
-    hash: string,
-    dismiss?(): void
+  nft: CollectionDetail,
+  hash: string,
+  dismiss?(): void
 }) {
-    const navigate = useNavigate()
-    const [neoAddress, setNeoAddress] = useState<string>()
-    const {provider} = useWeb3React()
+  const navigate = useNavigate()
+  const [neoAddress, setNeoAddress] = useState<string>()
+  const {provider} = useWeb3React()
 
-    useAsync(async () => {
-        if (!provider) return
-        let c = new Npics(provider)
-        let address = await c.neoFor(props.nft.address)
-        setNeoAddress(address)
-    }, [provider, props.nft])
+  useAsync(async () => {
+    if (!provider) return
+    let c = new Npics(provider)
+    let address = await c.getNeoFor(props.nft.address)
+    setNeoAddress(address)
+  }, [provider, props.nft])
 
-    return <Flex
-        width={"880px"}
-        background={"#fff"}
-        borderRadius={"10px"}
-        padding={"40px"}
-        flexDirection={"column"}
+  return <Flex
+    width={"880px"}
+    background={"#fff"}
+    borderRadius={"10px"}
+    padding={"40px"}
+    flexDirection={"column"}
+  >
+    <PopupTitle title={"Congratulations!"} canClose={true}/>
+    <Flex
+      marginTop={"30px"}
+      flexDirection={"column"}
+      border={"1px solid #e5e5e5"}
+      borderRadius={"10px"}
+      padding={"40px 140px 20px"}
     >
-        <PopupTitle title={"Congratulations!"} canClose={true}/>
-        <Flex
-            marginTop={"30px"}
-            flexDirection={"column"}
-            border={"1px solid #e5e5e5"}
-            borderRadius={"10px"}
-            padding={"40px 140px 20px"}
-        >
-            <Flex alignSelf={"center"}>
-                <StatusGif src={successIcon}/>
-            </Flex>
-            <Flex gap={"18px"} alignItems={"center"}>
-                <NFTCover src={props.nft.imageUrl}/>
-                <Flex justifyContent={"center"} flexDirection={"column"} flex={1}>
-                    <Box>You've deposited <AttrLink href={
-                        urls.etherscanNft(props.nft.address, props.nft.tokenId)
-                    } target={"_blank"}>
-                        {`${props.nft.singularForName()} #${props.nft.tokenId}`}
-                    </AttrLink> and minted</Box>
-                    <Flex
-                        alignItems={"center"}
-                        gap={"10px"}
-                        marginTop={"8px"}
-                        style={{
-                            "userSelect": "none",
-                            "cursor": "pointer"
-                        }}
-                        onClick={() => {
-                            neoAddress && window.open(urls.etherscanNft(neoAddress, props.nft.tokenId))
-                        }}
-                    >
-                        <Typography
-                            fontSize={"16px"}
-                            fontWeight={500}
-                            color={"rgba(0,0,0,.5)"}
-                        >{`NEO ${props.nft.collectionName} #${props.nft.tokenId}`}</Typography>
-                        <Icon width={"14px"} height={"14px"} src={nftLinkIcon}/>
-                    </Flex>
-                </Flex>
-            </Flex>
-            <Flex
-                marginTop={"42px"}
-                alignSelf={"center"}
-                alignItems={"center"}
-                gap={"10px"}
-                style={{
-                    "userSelect": "none",
-                    "cursor": "pointer"
-                }}
-                onClick={() => {
-                    window.open(urls.etherscanTxDetail(props.hash))
-                }}
-            >
-                <Typography
-                    fontSize={"14px"}
-                    fontWeight={500}
-                    color={"rgba(0,0,0,.5)"}
-                >View on etherscan</Typography>
-                <Icon width={"14px"} height={"14px"} src={nftLinkIcon}/>
-            </Flex>
+      <Flex alignSelf={"center"}>
+        <StatusGif src={successIcon}/>
+      </Flex>
+      <Flex gap={"18px"} alignItems={"center"}>
+        <NFTCover src={props.nft.imageUrl}/>
+        <Flex justifyContent={"center"} flexDirection={"column"} flex={1}>
+          <Box>You've deposited <AttrLink href={
+            urls.etherscanNft(props.nft.address, props.nft.tokenId)
+          } target={"_blank"}>
+            {`${props.nft.singularForName()} #${props.nft.tokenId}`}
+          </AttrLink> and minted</Box>
+          <Flex
+            alignItems={"center"}
+            gap={"10px"}
+            marginTop={"8px"}
+            style={{
+              "userSelect": "none",
+              "cursor": "pointer"
+            }}
+            onClick={() => {
+              neoAddress && window.open(urls.etherscanNft(neoAddress, props.nft.tokenId))
+            }}
+          >
+            <Typography
+              fontSize={"16px"}
+              fontWeight={500}
+              color={"rgba(0,0,0,.5)"}
+            >{`NEO ${props.nft.collectionName} #${props.nft.tokenId}`}</Typography>
+            <Icon width={"14px"} height={"14px"} src={nftLinkIcon}/>
+          </Flex>
         </Flex>
-        <Flex alignItems={"center"} justifyContent={"center"} gap={"20px"} marginTop={"30px"}>
-            <CancelButton
-                onClick={async () => {
-                    props.dismiss?.()
-                    await copyToClipboard(props.nft.address)
-                }}>Add to Wallet</CancelButton>
-            <ConfirmButton
-                onClick={() => {
-                    navigate(`/vaultsDetail/${props.nft.address}/${props.nft.tokenId}`, {})
-                }}
-            >Check Vault</ConfirmButton>
-        </Flex>
+      </Flex>
+      <Flex
+        marginTop={"42px"}
+        alignSelf={"center"}
+        alignItems={"center"}
+        gap={"10px"}
+        style={{
+          "userSelect": "none",
+          "cursor": "pointer"
+        }}
+        onClick={() => {
+          window.open(urls.etherscanTxDetail(props.hash))
+        }}
+      >
+        <Typography
+          fontSize={"14px"}
+          fontWeight={500}
+          color={"rgba(0,0,0,.5)"}
+        >View on etherscan</Typography>
+        <Icon width={"14px"} height={"14px"} src={nftLinkIcon}/>
+      </Flex>
     </Flex>
+    <Flex alignItems={"center"} justifyContent={"center"} gap={"20px"} marginTop={"30px"}>
+      <CancelButton
+        onClick={async () => {
+          if (neoAddress) {
+            await copyToClipboard(neoAddress)
+          }
+        }}>Add to Wallet</CancelButton>
+      <ConfirmButton
+        onClick={() => {
+          navigate(`/vaultsDetail/${props.nft.address}/${props.nft.tokenId}`, {})
+        }}
+      >Check Vault</ConfirmButton>
+    </Flex>
+  </Flex>
 }
