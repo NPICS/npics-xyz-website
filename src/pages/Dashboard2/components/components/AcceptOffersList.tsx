@@ -4,7 +4,8 @@ import refreshIcon from "../../../../assets/images/dashboard/refresh_icon.svg"
 import wethIcon from "../../../../assets/images/market/weth_icon.svg"
 import {useState} from "react";
 import styled from "styled-components";
-
+import { OfferModal } from "./TableWarehouse";
+import { useUser } from 'hooks/useSwr'
 const Button = styled.button`
   color: #fff;
   background: #000;
@@ -30,11 +31,19 @@ const FlexList = styled(Flex)`
     display: none;
   }
 `
-
-export default function AcceptOffersList() {
+interface IProps {
+  showOffer: OfferModal
+  nftAddress: string | undefined
+  setShowOffer:React.Dispatch<React.SetStateAction<OfferModal>>
+}
+export default function AcceptOffersList(props:IProps) {
+  const { showOffer, setShowOffer, nftAddress } = props
   const [topOfferPrice, setTopOfferPrice] = useState(0)
+  // const aaaa:any = useUser()
+  const { user, isError } = useUser()
+  console.log(user, isError)
 
-  return <Modal isOpen={true}>
+  return <Modal isOpen={showOffer === OfferModal.OFFERSLIST}  onRequestClose={() => setShowOffer(OfferModal.NONE)}>
     {/* Box */}
     <Flex
       background={"#fff"}
@@ -84,7 +93,7 @@ export default function AcceptOffersList() {
       <FlexList flexDirection={"column"} gap={"10px"} overflow={"auto"} marginTop={"20px"}>
         {
           new Array(20).fill(``).map((item, idx) => {
-            return <AcceptOffersCell/>
+            return <AcceptOffersCell key={idx} setShowOffer={setShowOffer}/>
           })
         }
       </FlexList>
@@ -92,7 +101,7 @@ export default function AcceptOffersList() {
   </Modal>
 }
 
-function AcceptOffersCell() {
+function AcceptOffersCell(props: { setShowOffer: React.Dispatch<React.SetStateAction<OfferModal>> }) {
   return <Flex
     border={"1px solid #0000001A"}
     borderRadius={"10px"}
@@ -140,6 +149,6 @@ function AcceptOffersCell() {
       color={"#000"}
     >Expires in 1 hours</Typography>
     <Flex flex={1}></Flex>
-    <Button>Accept Offer</Button>
+    <Button onClick={() => props.setShowOffer(OfferModal.OFFER)}>Accept Offer</Button>
   </Flex>
 }

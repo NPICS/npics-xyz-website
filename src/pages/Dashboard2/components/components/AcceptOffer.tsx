@@ -3,13 +3,17 @@ import {Box, Flex, Grid, Icon, Typography} from "../../../../component/Box";
 import {CancelButton, ConfirmButton, PopupTitle} from "../../../Marketplace2/NFTPay";
 import validIcon from "../../../../assets/images/market/nfts_opensea_valid.svg"
 import wethIcon from "../../../../assets/images/market/weth_icon.svg"
-
-export default function AcceptOffer() {
-
+import { OfferModal } from "./TableWarehouse";
+interface IProps {
+  showOffer: OfferModal
+  setShowOffer:React.Dispatch<React.SetStateAction<OfferModal>>
+}
+export default function AcceptOffer(props:IProps) {
+  const {showOffer} = props
 
   
 
-  return <Modal isOpen={true}>
+  return <Modal isOpen={showOffer === OfferModal.OFFER}>
     <Box
       minWidth={"880px"}
       background={`#fff`}
@@ -109,7 +113,7 @@ export default function AcceptOffer() {
       <Flex alignItems={"center"} justifyContent={"center"} gap={"20px"} marginTop={"30px"}>
         <CancelButton
           onClick={async () => {
-
+            props.setShowOffer(OfferModal.NONE)
           }}>Cancel</CancelButton>
         <ConfirmButton
           onClick={() => {
