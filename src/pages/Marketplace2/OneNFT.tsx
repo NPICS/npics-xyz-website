@@ -166,7 +166,8 @@ export default function OneNFT() {
               fontWeight={800}
             >{
               // `${detailData?.singularForName()} #${detailData?.tokenId}`
-              detailData && `${detailData.nftName() ?? ""}${detailData.isNoName() ? "" : " #"}${detailData.tokenId}`
+              // detailData && `${detailData.nftName() ?? ""}${detailData.isNoName() ? "" : " #"}${detailData.tokenId}`
+              (detailData && detailData.name && detailData.name.length > 0) ? detailData.name : `${detailData?.tokenId}`
             }</Typography>
             <Pop20
               content={"Reported for Suspicious Activity on OpenSea"

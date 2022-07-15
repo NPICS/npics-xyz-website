@@ -99,6 +99,8 @@ export class CollectionItems {
   collectionName!: string;
   ltv!: number
 
+  name?: string
+
   @TransformBigNumber()
   floorPrice!: BigNumber
 

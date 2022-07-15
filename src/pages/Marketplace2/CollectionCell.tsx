@@ -112,14 +112,16 @@ export default function CollectionCell(props: {
                 <NoWarpTypography fontWeight={500} fontSize={"0.14rem"}
                     color={"rgba(0,0,0,.5)"}>{
                   // props.item.nftName() && props.item.nftName().length > 10 ? props.item.nftName()?.replace(props.item.singularForName().substring(10), '...') : props.item.nftName()
-                  props.item && `${props.item.nftName()}`
+                  // props.item && `${props.item.nftName()}`
+                  props.item.name && props.item.name.length > 0 ? props.item.name : `${props.item.tokenId}`
                 }</NoWarpTypography>
-                <Typography
-                  fontWeight={500}
-                  fontSize={"0.14rem"}
-                  color={"rgba(0,0,0,.5)"}
-                >
-                    {`${props.item.isNoName() ? "" : " #"}${props.item.tokenId}`}</Typography>
+                {/*<Typography*/}
+                {/*  fontWeight={500}*/}
+                {/*  fontSize={"0.14rem"}*/}
+                {/*  color={"rgba(0,0,0,.5)"}*/}
+                {/*>*/}
+                {/*    {props.item.name ?? `${props.item.isNoName() ? "" : " #"}${props.item.tokenId}`}*/}
+                {/*</Typography>*/}
             </Flex>
             <Flex
                 alignItems={"center"}
