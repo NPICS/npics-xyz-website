@@ -13,6 +13,7 @@ import ButtonDefault from 'component/ButtonDefault'
 import styled from 'styled-components'
 import AcceptOffersList from './AcceptOffersList'
 import AcceptOffer from './AcceptOffer'
+import { Offers } from 'model/offers'
 
 enum Color {
   'Inforce' = "#7BD742",
@@ -36,7 +37,8 @@ export default function TableWarehouse(props: {
 }) {
   const { Source } = props
   const [showOffer, setShowOffer] = useState<OfferModal>(OfferModal.NONE)
-  const [addressOffer, setAddressOffer] = useState<string>()
+  const [nftInfo, setNftInfo] = useState<DataSource2>()
+  const [accpetOffer, setAcceptOffer] = useState<Offers>()
   const navigate = useNavigate()
   const ethRate = useAppSelector(state => new BigNumber(state.app.data.EthPrice))
 
@@ -149,7 +151,7 @@ export default function TableWarehouse(props: {
                         types='second'
                         onClick={() => {
                           setShowOffer(OfferModal.OFFERSLIST)
-                          setAddressOffer(item.nftAddress)
+                          setNftInfo(item)
                         }}
                       >
                         Offers
@@ -162,8 +164,8 @@ export default function TableWarehouse(props: {
           }
         </tbody>
       </Table>
-      <AcceptOffersList showOffer={showOffer} setShowOffer={setShowOffer} nftAddress={addressOffer} />
-      <AcceptOffer showOffer={showOffer} setShowOffer={setShowOffer}/>
+      <AcceptOffersList nftInfo={nftInfo} setAcceptOffer={setAcceptOffer} showOffer={showOffer} setShowOffer={setShowOffer} nftAddress={nftInfo?.nftAddress} />
+      <AcceptOffer nftInfo={nftInfo} accpetOffer={accpetOffer} showOffer={showOffer} setShowOffer={setShowOffer}/>
     </>
   )
 }

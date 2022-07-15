@@ -52,8 +52,8 @@ export function useContract<T extends Contract = Contract>(
   }, [address, ABI, provider, chainId, withSignerIfPossible, account]) as T
 }
 
-export function useERC20Contract(address: string) {
-  return useContract<Erc20>(address, ERC20_ABI, true)
+export function useERC20Contract(address: string, withSignerIfPossible: boolean) {
+  return useContract<Erc20>(address, ERC20_ABI, withSignerIfPossible)
 }
 
 export function useNpicsContract() {
@@ -68,6 +68,6 @@ export function useERC721Contract(address: string) {
   return useContract<Erc721>(address, ERC721_ABI, true)
 }
 
-export function useWETHContract() {
-  return useERC20Contract(ContractAddresses.WETH)
+export function useWETHContract(withSignerIfPossible: boolean) {
+  return useERC20Contract(ContractAddresses.WETH, withSignerIfPossible)
 }
