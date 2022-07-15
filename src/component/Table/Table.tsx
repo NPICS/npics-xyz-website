@@ -11,7 +11,7 @@ export default function Index() {
     >
       <thead>
         <Tr
-          height="90px"
+          height="0.9rem"
         >
           <Th>health factor</Th>
           <Th>2222</Th>

@@ -15,9 +15,9 @@ import {copyToClipboard} from "../../utils/clipboard-utils";
 
 const NFTCover = styled.img`
   display: block;
-  width: 92px;
-  height: 92px;
-  border-radius: 10px;
+  width: 0.92rem;
+  height: 0.92rem;
+  border-radius: 0.1rem;
   background: #eee;
   object-fit: cover;
   overflow: hidden;
@@ -49,24 +49,24 @@ export default function NFTPayCongratulations(props: {
   }, [provider, props.nft])
 
   return <Flex
-    width={"880px"}
+    width={"8.8rem"}
     background={"#fff"}
-    borderRadius={"10px"}
-    padding={"40px"}
+    borderRadius={"0.1rem"}
+    padding={"0.4rem"}
     flexDirection={"column"}
   >
     <PopupTitle title={"Congratulations!"} canClose={true}/>
     <Flex
-      marginTop={"30px"}
+      marginTop={"0.3rem"}
       flexDirection={"column"}
-      border={"1px solid #e5e5e5"}
-      borderRadius={"10px"}
-      padding={"40px 140px 20px"}
+      border={"0.01rem solid #e5e5e5"}
+      borderRadius={"0.1rem"}
+      padding={"0.4rem 1.4rem 0.2rem"}
     >
       <Flex alignSelf={"center"}>
         <StatusGif src={successIcon}/>
       </Flex>
-      <Flex gap={"18px"} alignItems={"center"}>
+      <Flex gap={"0.18rem"} alignItems={"center"}>
         <NFTCover src={props.nft.imageUrl}/>
         <Flex justifyContent={"center"} flexDirection={"column"} flex={1}>
           <Box>You've deposited <AttrLink href={
@@ -76,8 +76,8 @@ export default function NFTPayCongratulations(props: {
           </AttrLink> and minted</Box>
           <Flex
             alignItems={"center"}
-            gap={"10px"}
-            marginTop={"8px"}
+            gap={"0.1rem"}
+            marginTop={"0.08rem"}
             style={{
               "userSelect": "none",
               "cursor": "pointer"
@@ -87,22 +87,22 @@ export default function NFTPayCongratulations(props: {
             }}
           >
             <Typography
-              fontSize={"16px"}
+              fontSize={"0.16rem"}
               fontWeight={500}
               color={"rgba(0,0,0,.5)"}
             >{
               // `NEO ${props.nft.collectionName} #${props.nft.tokenId}`
               props.nft.neoOneName()
             }</Typography>
-            <Icon width={"14px"} height={"14px"} src={nftLinkIcon}/>
+            <Icon width={"0.14rem"} height={"0.14rem"} src={nftLinkIcon}/>
           </Flex>
         </Flex>
       </Flex>
       <Flex
-        marginTop={"42px"}
+        marginTop={"0.42rem"}
         alignSelf={"center"}
         alignItems={"center"}
-        gap={"10px"}
+        gap={"0.1rem"}
         style={{
           "userSelect": "none",
           "cursor": "pointer"
@@ -112,14 +112,14 @@ export default function NFTPayCongratulations(props: {
         }}
       >
         <Typography
-          fontSize={"14px"}
+          fontSize={"0.14rem"}
           fontWeight={500}
           color={"rgba(0,0,0,.5)"}
         >View on etherscan</Typography>
-        <Icon width={"14px"} height={"14px"} src={nftLinkIcon}/>
+        <Icon width={"0.14rem"} height={"0.14rem"} src={nftLinkIcon}/>
       </Flex>
     </Flex>
-    <Flex alignItems={"center"} justifyContent={"center"} gap={"20px"} marginTop={"30px"}>
+    <Flex alignItems={"center"} justifyContent={"center"} gap={"0.2rem"} marginTop={"0.3rem"}>
       <CancelButton
         onClick={async () => {
           if (neoAddress) {

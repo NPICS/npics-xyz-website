@@ -5,7 +5,7 @@ export const title = css`
 
   font-style: normal;
   font-weight: 800;
-  font-size: 36px;
+  font-size: 0.36rem;
   color: #FFFFFF;
 `
 
@@ -13,11 +13,11 @@ export const HomeWrap = styled.div`
   height: 100%;
   background: #1A1A1A;
   margin: 0 auto;
-  min-width: 1600px;
+  min-width: 16rem;
   .collections-title {
-    width: 1600px;
+    width: 16rem;
     margin: 0 auto;
-    padding: 130px 0 40px;
+    padding: 1.3rem 0 0.4rem;
     ${title};
   }
 `
@@ -30,10 +30,10 @@ export const Background = styled.div`
 
 export const HomeBox = styled.div`
   position: relative;
-  width: 1600px;
+  width: 16rem;
   height: 100vh;
   margin: 0 auto;
-  padding: 100px 0 20px;
+  padding: 1rem 0 0.2rem;
 `
 
 export const HomeLeft = styled.div`
@@ -51,20 +51,20 @@ export const HomeNFT = styled.div`
     width: 100%;
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 10.24rem) {
     top: 25% !important;
     right: 12% !important;
     width: 28%;
     // height: 22%;
   }
 
-  @media (min-width: 1280px) {
+  @media (min-width: 12.8rem) {
     top: 25% !important;
     right: 12% !important;
     width: 28%;
   }
 
-  @media (min-width: 1536px) {
+  @media (min-width: 15.36rem) {
     top: 25% !important;
     right: 12% !important;
     width: 28%;
@@ -74,9 +74,9 @@ export const HomeNFT = styled.div`
 
 export const FirstDiv = styled.div`
   position: relative;
-  min-height: 980px;
-  padding-top: 90px;
-  padding-bottom: 90px;
+  min-height: 9.8rem;
+  padding-top: 0.9rem;
+  padding-bottom: 0.9rem;
   box-sizing: border-box;
 `
 export const Projection = styled.div`
@@ -85,10 +85,10 @@ export const Projection = styled.div`
 
   & > img {
     position: absolute;
-    left: 1000px;
-    top: 200px;
-    width: 545px;
-    height: 540px;
+    left: 10rem;
+    top: 2rem;
+    width: 5.45rem;
+    height: 5.4rem;
   }
 `
 export const Glass = styled.div`
@@ -104,46 +104,46 @@ export const Glass = styled.div`
     right: 0;
     bottom: 0;
     left: 0;
-    /* filter: blur(13px); */
-    /* backdrop-filter: blur(13px); */
-    margin: -30px;
+    /* filter: blur(0.13rem); */
+    /* backdrop-filter: blur(0.13rem); */
+    margin: -0.3rem;
   }
 
   .text {
     position: absolute;
-    padding-top: 90px;
-    padding-bottom: 90px;
+    padding-top: 0.9rem;
+    padding-bottom: 0.9rem;
     box-sizing: border-box;
-    margin-left: 183px;
-    margin-top: 250px;
+    margin-left: 1.83rem;
+    margin-top: 2.5rem;
 
     & > div:nth-child(1) {
       font-style: italic;
       font-weight: 900;
-      font-size: 40px;
-      line-height: 49px;
+      font-size: 0.4rem;
+      line-height: 0.49rem;
       text-transform: uppercase;
       color: #FFFFFF;
-      width: 583px;
-      margin-bottom: 10px;
+      width: 5.83rem;
+      margin-bottom: 0.1rem;
     }
 
     & > div:nth-child(2) {
       font-style: normal;
       font-weight: 300;
-      font-size: 16px;
-      line-height: 32px;
+      font-size: 0.16rem;
+      line-height: 0.32rem;
       letter-spacing: 0.05em;
       color: rgba(255, 255, 255, 0.5);
-      width: 541px;
-      margin-bottom: 47px;
+      width: 5.41rem;
+      margin-bottom: 0.47rem;
     }
 
     .jumpBtn {
       display: flex;
 
       button {
-        margin-right: 20px;
+        margin-right: 0.2rem;
       }
     }
   }
@@ -152,18 +152,18 @@ export const Glass = styled.div`
     display: flex;
     justify-content: space-between;
     position: absolute;
-    width: 424px;
-    height: 420px;
-    /* padding-top: 90px;
-    padding-bottom: 90px; */
+    width: 4.24rem;
+    height: 4.2rem;
+    /* padding-top: 0.9rem;
+    padding-bottom: 0.9rem; */
     box-sizing: border-box;
-    margin-left: 1100px;
-    margin-top: 250px;
+    margin-left: 11rem;
+    margin-top: 2.5rem;
 
     img {
       display: block;
-      width: 120px;
-      height: 120px;
+      width: 1.2rem;
+      height: 1.2rem;
     }
 
     .col1 {
@@ -172,7 +172,7 @@ export const Glass = styled.div`
       align-self: end;
 
       & > img {
-        margin-top: 30px;
+        margin-top: 0.3rem;
       }
     }
 
@@ -192,18 +192,18 @@ export const Glass = styled.div`
   .socialityIcon {
     display: flex;
     position: absolute;
-    bottom: 90px;
+    bottom: 0.9rem;
     width: 100%;
     display: flex;
     justify-content: center;
 
     & > a {
-      margin: 0 15px;
+      margin: 0 0.15rem;
       cursor: pointer;
 
       img {
-        width: 22px;
-        height: 22px;
+        width: 0.22rem;
+        height: 0.22rem;
       }
     }
   }
@@ -215,8 +215,8 @@ export const SwiperBox = styled.div`
   /* justify-content: center; */
   align-items: center;
   background-color: rgba(255, 255, 255, .1);
-  height: 540px;
-  padding: 60px 0 106px;
+  height: 5.4rem;
+  padding: 0.6rem 0 1.06rem;
   box-sizing: border-box;
   position: relative;
   overflow: hidden;
@@ -231,14 +231,14 @@ export const DetailBox = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   flex-direction: column;
-  width: 1600px;
+  width: 16rem;
   height: 88vh;
   margin: 0 auto;
-  padding: 130px 0 20px;
+  padding: 1.3rem 0 0.2rem;
   color: #fff;
   .title{
     ${title};
-    margin-bottom: 100px;
+    margin-bottom: 1rem;
   }
   .detail_div{
     display: flex;
@@ -265,23 +265,23 @@ export const DetailBox = styled.div`
 `
 export const Partners = styled.div`
   margin: 0 auto;
-  padding-bottom: 200px;
+  padding-bottom: 2rem;
 
   .title {
-    width: 530px;
+    width: 5.3rem;
     margin: 0 auto;
-    margin-bottom: 60px;
-    padding: 130px 0 20px;
+    margin-bottom: 0.6rem;
+    padding: 1.3rem 0 0.2rem;
     ${title};
   }
 
   .partnerGroup {
-    width: 1440px;
+    width: 14.4rem;
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     grid-template-rows: repeat(3, minmax(0, 1fr));
-    gap: 30px;
+    gap: 0.3rem;
   }
 `
 export const PartnerBox = styled.div`
@@ -289,9 +289,9 @@ export const PartnerBox = styled.div`
   justify-content: center;
   align-items: center;
   color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 6px;
-  padding: 20px;
+  border: 0.01rem solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.06rem;
+  padding: 0.2rem;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
 
@@ -304,18 +304,18 @@ export const PartnerBox = styled.div`
   }
 
   span {
-    width: 80px;
-    margin-left: 10px;
+    width: 0.8rem;
+    margin-left: 0.1rem;
     font-family: 'PingFang HK';
     font-style: normal;
     font-weight: 600;
     white-space: nowrap;
-    font-size: 20px;
+    font-size: 0.2rem;
   }
 `
 export const Introduces = styled.div`
   margin: 0 auto;
-  /* margin-bottom: 160px; */
+  /* margin-bottom: 1.6rem; */
 
   .title {
     display: flex;
@@ -324,25 +324,25 @@ export const Introduces = styled.div`
 
     & > span:nth-child(1) {
       ${title}
-      padding: 130px 0 20px;
+      padding: 1.3rem 0 0.2rem;
       text-align: center;
-      margin-bottom: 27px;
+      margin-bottom: 0.27rem;
     }
 
     & > span:nth-child(2) {
       font-family: 'PingFang HK';
       font-style: normal;
       font-weight: 400;
-      font-size: 16px;
-      line-height: 22px;
+      font-size: 0.16rem;
+      line-height: 0.22rem;
       text-align: center;
       color: rgba(255, 255, 255, .6);
-      margin-bottom: 66px;
+      margin-bottom: 0.66rem;
     }
   }
 
   .IntroduceGroup {
-    width: 1556px;
+    width: 15.56rem;
     margin: 0 auto;
     display: flex;
     flex-direction: row;
@@ -353,20 +353,20 @@ export const Introduces = styled.div`
   }
 
   .Introduces_swiper {
-    width: 1600px;
+    width: 16rem;
     margin: 0 auto;
-    /* padding: 100px 0 20px; */
+    /* padding: 1rem 0 0.2rem; */
   }
 `
 export const IntroduceBox = styled.div`
   position: relative;
-  width: 450px;
-  height: 500px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 10px;
-  margin-right: 103px;
+  width: 4.5rem;
+  height: 5rem;
+  border: 0.01rem solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.1rem;
+  margin-right: 1.03rem;
   box-sizing: border-box;
-  padding-bottom: 87px;
+  padding-bottom: 0.87rem;
   display: flex;
   flex-direction: column;
   justify-content: end;
@@ -376,16 +376,16 @@ export const IntroduceBox = styled.div`
     position: absolute;
     top: 0;
     left: 0;
-    width: 450px;
-    height: 500px;
+    width: 4.5rem;
+    height: 5rem;
   }
 
   & > :nth-child(2) {
     font-style: normal;
     font-weight: 800;
-    font-size: 30px;
-    line-height: 37px;
-    width: 276px;
+    font-size: 0.3rem;
+    line-height: 0.37rem;
+    width: 2.76rem;
     text-align: center;
     color: #FFFFFF;
   }
@@ -394,73 +394,73 @@ export const IntroduceBox = styled.div`
     font-family: 'PingFang HK';
     font-style: normal;
     font-weight: 400;
-    font-size: 16px;
-    line-height: 24px;
-    width: 328px;
+    font-size: 0.16rem;
+    line-height: 0.24rem;
+    width: 3.28rem;
     text-align: center;
     color: rgba(255, 255, 255, 0.6);
   }
 `
 
 export const BorrowBox = styled.div`
-  width: 1600px;
-  /* height: 600px; */
+  width: 16rem;
+  /* height: 6rem; */
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
   color: #fff;
-  padding-top: 188px;
+  padding-top: 1.88rem;
   .borrow_left{
-    width: 650px;
+    width: 6.5rem;
     .borrow_title{
-    font-size: 25px;
-    width: 590px;
-    margin-bottom: 53px;
+    font-size: 0.25rem;
+    width: 5.9rem;
+    margin-bottom: 0.53rem;
   }
   .borrow_step{
-    padding-top: 30px;
+    padding-top: 0.3rem;
     .step_list{
       display: flex;
       justify-content: space-between;
       align-items: center;
       .step_item{
-        font-size: 20px;
+        font-size: 0.2rem;
       }
     }
     .step_text{
       display: block;
-      height: 76px;
-      font-size: 12px;
-      line-height: 18px;
+      height: 0.76rem;
+      font-size: 0.12rem;
+      line-height: 0.18rem;
       color: rgba(255,255,255,0.5);
     }
   }
   .borrow_more{
-    width: 410px;
+    width: 4.1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 120px;
+    margin-top: 1.2rem;
   }
   }
   .borrow_right{
-    width: 950px;
+    width: 9.5rem;
     display: flex;
     justify-content: flex-end;
     align-items: center;
     .borrow_channel{
-    width: 850px;
-    height: 300px;
+    width: 8.5rem;
+    height: 3rem;
     display: flex;
     justify-content: center;
     align-items: center;
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
-    border-radius: 20px;
+    border-radius: 0.2rem;
     .channel_left{
       width: 35%;
       height: 100%;
-      border-right: 2px dashed #191919;
+      border-right: 0.02rem dashed #191919;
       .left_content{
         width: 100%;
         height: 100%;
@@ -473,15 +473,15 @@ export const BorrowBox = styled.div`
           align-items: flex-start;
           flex-direction: column;
           & > span:nth-child(1){
-          font-size: 22px;
-          line-height:20px;
+          font-size: 0.22rem;
+          line-height:0.2rem;
           }
           & > span:nth-child(2){
-            font-size: 50px;
+            font-size: 0.5rem;
     
             font-style: normal;
             font-weight: 800;
-            line-height: 100px;
+            line-height: 1rem;
             background: linear-gradient(268.82deg, #FF0000 0.48%, #FEB240 96.5%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -499,21 +499,21 @@ export const BorrowBox = styled.div`
       align-items: center;
       flex-direction: column;
       .content{
-        width: 450px;
-        height: 110px;
+        width: 4.5rem;
+        height: 1.1rem;
         margin: 0 auto;
         .content_apr{
-          margin-bottom: 10px;
+          margin-bottom: 0.1rem;
           & > span:nth-child(1){
-            font-size: 20px;
-            margin-bottom: 18px;
+            font-size: 0.2rem;
+            margin-bottom: 0.18rem;
           }
           & > span:nth-child(2){
-            font-size: 32px;
+            font-size: 0.32rem;
     
             font-style: normal;
             font-weight: 800;
-            margin-left: 20px;
+            margin-left: 0.2rem;
             background: linear-gradient(268.82deg, #FF0000 0.48%, #FEB240 96.5%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -522,9 +522,9 @@ export const BorrowBox = styled.div`
           }
         }
         & > span{
-          width: 300px;
+          width: 3rem;
           color: rgba(255,255,255,0.5);
-          font-size: 12px;
+          font-size: 0.12rem;
         }
       }
     }
@@ -534,18 +534,18 @@ export const BorrowBox = styled.div`
 `
 export const StepProgress = styled.div`
       position: relative;
-      height: 2px;
+      height: 0.02rem;
       background: rgba(255,255,255,0.1);
-      border-radius: 40px;
+      border-radius: 0.4rem;
       z-index: 2;
-      margin:18px auto 28px;
+      margin:0.18rem auto 0.28rem;
       &::before{
         content: "";
         position: absolute;
         top: 0;
         left: ${(props: { left: string }) => props.left};
         width: 33.33%;
-        border-radius: 40px;
+        border-radius: 0.4rem;
         height: 100%;
         background: #FF490F;
         z-index: 1;
@@ -555,11 +555,11 @@ export const StepProgress = styled.div`
 
 export const SliderChoose = styled.span`
   display: block;
-  width: 300px;
-  padding: 10px;
+  width: 3rem;
+  padding: 0.1rem;
   text-align: center;
-  font-size: 16px;
-  padding-left: 10px;
+  font-size: 0.16rem;
+  padding-left: 0.1rem;
   color: ${(props: { color: string }) => props.color};;
   cursor: pointer;
 
@@ -569,8 +569,8 @@ export const SliderChoose = styled.span`
 `
 
 export const BorrowBtn = styled.div`
-  width: 630px;
-  padding-top: 40px;
+  width: 6.3rem;
+  padding-top: 0.4rem;
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;

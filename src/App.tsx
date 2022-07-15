@@ -32,16 +32,16 @@ const Nav = styled.div`
   z-index: 2;
 `
 const FooterBox = styled.div`
-  /* height: 226px; */
+  /* height: 2.26rem; */
   text-align: center;
   /* background-color: #1A1A1A; */
   `
 const ContentBox = styled.div`
   color: #000;
-  /* min-height: 800px; */
+  /* min-height: 8rem; */
   background-color: #F1F1F1;
   flex: 1;
-  margin-top: -90px;
+  margin-top: -0.9rem;
 `
 const Flex = styled.div`
   display: flex;

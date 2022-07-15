@@ -57,43 +57,43 @@ export default function MyAirdop() {
 
 
   return <Box
-    padding={"40px 60px"}
+    padding={"0.4rem 0.6rem"}
   >
-    <Typography fontSize={"30px"} fontWeight={800} color={'#000'} marginBottom="30px">NPics Airdrop</Typography>
-    <Typography fontSize={"16px"} fontWeight={500} color={'rgba(0,0,0,.5)'} marginBottom={"50px"}>
+    <Typography fontSize={"0.3rem"} fontWeight={800} color={'#000'} marginBottom="0.3rem">NPics Airdrop</Typography>
+    <Typography fontSize={"0.16rem"} fontWeight={500} color={'rgba(0,0,0,.5)'} marginBottom={"0.5rem"}>
       Holding NEO NFTs entitles you to claim airdrop rewards for NFT assets in your vault on the protocol.
     </Typography>
     
     <Box
       background={"rgba(255,255,255,.03)"}
-      borderRadius="10px"
-      boxShadow="0px 0px 30px rgba(0, 0, 0, 0.05)"
-      padding="30px 40px 70px"
+      borderRadius="0.1rem"
+      boxShadow="0rem 0rem 0.3rem rgba(0, 0, 0, 0.05)"
+      padding="0.3rem 0.4rem 0.7rem"
     >
-      <Typography fontSize={"20px"} fontWeight={700} color={'#000'} marginBottom="8px">Airdrop Project</Typography>
-      <Typography fontSize={"14px"} fontWeight={500} color={'rgba(0,0,0,.5)'} marginBottom="20px">Current Active：4</Typography>
+      <Typography fontSize={"0.2rem"} fontWeight={700} color={'#000'} marginBottom="0.08rem">Airdrop Project</Typography>
+      <Typography fontSize={"0.14rem"} fontWeight={500} color={'rgba(0,0,0,.5)'} marginBottom="0.2rem">Current Active：4</Typography>
       
       <Grid
-        gridGap="10px"
+        gridGap="0.1rem"
         gridTemplateRows={"repeat(5, 1fr)"}
       >
         <Grid
           gridTemplateColumns={"2fr auto 3fr auto 2fr"}
           background="#fff"
-          border="1px solid rgba(0, 0, 0, 0.1)"
-          borderRadius="10px"
-          minHeight="70px"
-          padding="19px 60px"
+          border="0.01rem solid rgba(0, 0, 0, 0.1)"
+          borderRadius="0.1rem"
+          minHeight="0.7rem"
+          padding="0.19rem 0.6rem"
         >
           <Flex alignItems="center" justifyContent="left">
-            <Typography marginLeft="5px" fontSize={"14px"} fontWeight={500} color={'#000'} textAlign={"left"}>Project</Typography>
+            <Typography marginLeft="0.05rem" fontSize={"0.14rem"} fontWeight={500} color={'#000'} textAlign={"left"}>Project</Typography>
           </Flex>
           <Flex alignItems="center" justifyContent="center"><Typography textAlign={"center"}></Typography></Flex>
           <Flex alignItems="center" justifyContent="center">
-            <Typography marginRight="10px" fontSize={"14px"} fontWeight={500} color={'#000)'} textAlign={"center"}>Contract Address</Typography>
+            <Typography marginRight="0.1rem" fontSize={"0.14rem"} fontWeight={500} color={'#000)'} textAlign={"center"}>Contract Address</Typography>
           </Flex>
           <Flex alignItems="center" justifyContent="center"><Typography textAlign={"center"}></Typography></Flex>
-          <Flex alignItems="center" justifyContent="center"><Typography fontSize={"14px"} fontWeight={500} color={'#000'} textAlign={"center"}>Actions</Typography></Flex>
+          <Flex alignItems="center" justifyContent="center"><Typography fontSize={"0.14rem"} fontWeight={500} color={'#000'} textAlign={"center"}>Actions</Typography></Flex>
         </Grid>
 
         {project && project.map((item,idx) => (
@@ -101,37 +101,37 @@ export default function MyAirdop() {
             key={idx}
             gridTemplateColumns={"2fr auto 3fr auto 2fr"}
             background="#fff"
-            border="1px solid rgba(0, 0, 0, 0.1)"
-            borderRadius="10px"
-            minHeight="70px"
-            padding="19px 60px"
+            border="0.01rem solid rgba(0, 0, 0, 0.1)"
+            borderRadius="0.1rem"
+            minHeight="0.7rem"
+            padding="0.19rem 0.6rem"
           >
             <Flex alignItems="center" justifyContent="left">
               {item.icon ? <img style={{
-                borderRadius: "10px",
-                height: "38px",
-                width: "38px",
+                borderRadius: "0.1rem",
+                height: "0.38rem",
+                width: "0.38rem",
                 display: 'inlineBlock',
                 overflow: 'hidden',
                 userSelect: 'none',
               }} src={item.icon} /> : null}
-              <Typography marginLeft="20px" fontSize={"16px"} fontWeight={700} color={'#000'} textAlign={"left"}>{item.project}</Typography>
+              <Typography marginLeft="0.2rem" fontSize={"0.16rem"} fontWeight={700} color={'#000'} textAlign={"left"}>{item.project}</Typography>
             </Flex>
             <Flex alignItems="center" justifyContent="center"><Typography textAlign={"center"}></Typography></Flex>
             <Flex  alignItems="center" justifyContent="center">
               <Flex style={{cursor: 'pointer'}} alignItems="center" justifyContent="center" onClick={() => window.open(`https://etherscan.io/address/${item.address}`)}>
-                <Typography marginRight="10px" fontSize={"14px"} fontWeight={500} color={'rgba(0,0,0,.5)'} textAlign={"center"}>
+                <Typography marginRight="0.1rem" fontSize={"0.14rem"} fontWeight={500} color={'rgba(0,0,0,.5)'} textAlign={"center"}>
                   {item.address}
                 </Typography>
-                {item.exportIcon ? <Icon height="16px" src={item.exportIcon}/> : null}
+                {item.exportIcon ? <Icon height="0.16rem" src={item.exportIcon}/> : null}
               </Flex>
             </Flex>
             <Flex alignItems="center" justifyContent="center"><Typography textAlign={"center"}></Typography></Flex>
             <Flex alignItems="center" justifyContent="center">
               <ButtonDefault 
                 disabled={!item.isAllowed()}
-                height='48px' 
-                minWidth='120px' 
+                height='0.48rem' 
+                minWidth='1.2rem' 
                 types='normal' 
                 onClick={() => message.warn('This item airdrop has been claimed.')}
               >
@@ -143,7 +143,7 @@ export default function MyAirdop() {
       </Grid>
 
     </Box>
-    {/* <Box paddingTop="100px">
+    {/* <Box paddingTop="1rem">
       <NotFound
         title="Coming Soon"
         text=""

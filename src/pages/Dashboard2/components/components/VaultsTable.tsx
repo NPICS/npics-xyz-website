@@ -38,10 +38,10 @@ interface Result {
 
 const StyledModal = styled(Modal)`
   .ant-modal-content {
-    border-radius: 10px;
+    border-radius: 0.1rem;
   }
   .ant-modal-body {
-    padding: 40px 50px;
+    padding: 0.4rem 0.5rem;
     line-height: 1.2 !important;
   }
   .ant-modal-header {
@@ -242,20 +242,20 @@ function VaultsTable(props: IProps) {
 
   const ConfirmModal = (props: {
     enter?(): void
-  }) => <Grid gridGap="30px">
+  }) => <Grid gridGap="0.3rem">
       <Flex alignItems="center" justifyContent="space-between" >
         <Typography></Typography>
-        <Typography fontSize="30px" fontWeight="800" color="#000">Verify Address</Typography>
+        <Typography fontSize="0.3rem" fontWeight="800" color="#000">Verify Address</Typography>
         <Typography></Typography>
-        {/* <div style={{ cursor: 'pointer' }}><Icon width="24px" height="24px" src={imgurl.dashboard.Cancel} onClick={() => {
+        {/* <div style={{ cursor: 'pointer' }}><Icon width="0.24rem" height="0.24rem" src={imgurl.dashboard.Cancel} onClick={() => {
           setShowModal(false)
         }} /></div> */}
       </Flex>
 
       <Typography >You will be asked to sign a message in your wallet to verify you as the owner of the address.</Typography>
-      <Flex gap="20px" justifyContent='center' marginTop="30px" >
-        <ButtonDefault minWidth='200px' height='52px' types='second' color='#000' onClick={() => { setShowModal(false) }}>Cancel</ButtonDefault>
-        <ButtonDefault minWidth='200px' height='52px' types='normal' color='#fff' onClick={async () => {
+      <Flex gap="0.2rem" justifyContent='center' marginTop="0.3rem" >
+        <ButtonDefault minWidth='2rem' height='0.52rem' types='second' color='#000' onClick={() => { setShowModal(false) }}>Cancel</ButtonDefault>
+        <ButtonDefault minWidth='2rem' height='0.52rem' types='normal' color='#fff' onClick={async () => {
           if (account) {
             login2()
           } else {
@@ -278,7 +278,7 @@ function VaultsTable(props: IProps) {
     </div> :
       activities.length ?
         <TableWarehouse Source={activities} />
-        : <NotFound padding={"100px 0"} />}
+        : <NotFound padding={"1rem 0"} />}
     <StyledModal
       visible={showModal}
       footer={null}
@@ -286,7 +286,7 @@ function VaultsTable(props: IProps) {
       destroyOnClose={true}
       maskClosable={false}
       centered={true}
-      width='548px'
+      width='5.48rem'
     >
       <ConfirmModal />
     </StyledModal>

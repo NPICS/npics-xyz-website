@@ -7,7 +7,7 @@ import { NavList } from "./components/components/data";
 const Banner = () => {
   return <Box
     position={"absolute"}
-    height={"420px"}
+    height={"4.2rem"}
     top={0}
     left={0}
     right={0}
@@ -39,32 +39,32 @@ export default function Market() {
   return <Flex
       position={"relative"}
       flexDirection={"column"}
-      padding={"0 160px"}
+      padding={"0 1.6rem"}
       background={"transparent"}
-      marginBottom={"160px"}
+      marginBottom={"1.6rem"}
     >
     <Banner />
     <Box
       zIndex={1}
     >
       <Flex
-        marginTop={"214px"}
-        marginBottom={"10px"}
-        gap={"10px"}
+        marginTop={"2.14rem"}
+        marginBottom={"0.1rem"}
+        gap={"0.1rem"}
       >
         {
           NavList.map((item, idx) => {
             return <Link to={item.key} key={item.key}>
               <Flex 
-                padding={"16px 40px"}
-                borderRadius={"10px"}
+                padding={"0.16rem 0.4rem"}
+                borderRadius={"0.1rem"}
                 background = {active === idx ? "#fff" : "rgba(255,255,255,.1)"}
                 alignItems= {"center"}
-                gap={"25px"}
+                gap={"0.25rem"}
                 onClick={() => setActive(idx)}
               >
-                <Icon height={"40px"} width={"40px"} src={ active === idx ? item.iconActive :item.icon}/>
-                <Typography textAlign={"center"} color={active === idx ? "#000" : "#fff"} fontSize={"16px"} fontWeight={"500"}>{item.text}</Typography>
+                <Icon height={"0.4rem"} width={"0.4rem"} src={ active === idx ? item.iconActive :item.icon}/>
+                <Typography textAlign={"center"} color={active === idx ? "#000" : "#fff"} fontSize={"0.16rem"} fontWeight={"500"}>{item.text}</Typography>
               </Flex>
             </Link>
           })
@@ -73,7 +73,7 @@ export default function Market() {
       <Box
         background={"#fff"}
         // minHeight={"60vh"}
-        borderRadius={"10px"}
+        borderRadius={"0.1rem"}
       >
         <Outlet />
       </Box>

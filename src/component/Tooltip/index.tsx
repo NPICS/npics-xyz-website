@@ -5,14 +5,14 @@ import styled from 'styled-components/macro'
 import Popover, { PopoverProps } from '../Popover'
 
 export const TooltipContainer = styled.div`
-  max-width: 256px;
-  padding: 60px 100px;
+  max-width: 2.56rem;
+  padding: 0.6rem 1rem;
   font-weight: 400;
   word-break: break-word;
 
   background: ${({ theme }) => theme.bg0};
-  border-radius: 12px;
-  border: 1px solid ${({ theme }) => theme.bg2};
+  border-radius: 0.12rem;
+  border: 0.01rem solid ${({ theme }) => theme.bg2};
 `
 
 interface TooltipProps extends Omit<PopoverProps, 'content'> {
@@ -67,7 +67,7 @@ export function MouseoverTooltipContent({
   return (
     <TooltipContent {...rest} show={show} content={disableHover ? null : content}>
       <div
-        style={{ display: 'inline-block', lineHeight: 0, padding: '25px' }}
+        style={{ display: 'inline-block', lineHeight: 0, padding: '0.25rem' }}
         onMouseEnter={open}
         onMouseLeave={close}
       >

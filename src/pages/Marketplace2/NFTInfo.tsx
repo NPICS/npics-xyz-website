@@ -15,7 +15,7 @@ import { Pop20 } from "component/Popover/Popover";
 
 const Title = styled.div`
   color: #000;
-  font-size: 14px;
+  font-size: 0.14rem;
   font-weight: 500;
   vertical-align: middle;
 `
@@ -33,7 +33,7 @@ export function AddressLink(props: {
     ><Flex
       alignItems={"center"}
       justifyContent={props.justifyContent ?? `end`}
-      gap={"6px"}
+      gap={"0.06rem"}
       style={{
         "cursor": "pointer"
       }}
@@ -44,7 +44,7 @@ export function AddressLink(props: {
       }}
     >
       <Value>{AddressAbbreviation(props.address) ?? TextPlaceholder}</Value>
-      <Icon width={"14px"} src={addressLinkIcon}/>
+      <Icon width={"0.14rem"} src={addressLinkIcon}/>
     </Flex></Pop20>
 }
 
@@ -68,29 +68,29 @@ export default function NFTInfo(props: {
 
     return <Flex
         flexDirection={"column"}
-        border={"1px solid #0000001A"}
-        borderRadius={"10px"}
+        border={"0.01rem solid #0000001A"}
+        borderRadius={"0.1rem"}
         alignItems={"stretch"}
     >
         <Flex
             flexDirection={"row"}
-            gap={"12px"}
-            borderBottom={"1px solid #0000001A"}
-            padding={"14px 25px"}
+            gap={"0.12rem"}
+            borderBottom={"0.01rem solid #0000001A"}
+            padding={"0.14rem 0.25rem"}
             alignItems={"center"}
         >
-            <Icon width={"24px"} height={"24px"} src={titlePrefixIcon}/>
+            <Icon width={"0.24rem"} height={"0.24rem"} src={titlePrefixIcon}/>
             <Typography
                 fontWeight={500}
-                fontSize={"16px"}
+                fontSize={"0.16rem"}
                 color={"#000"}
             >Info</Typography>
         </Flex>
         <Grid
             gridTemplateColumns={"repeat(2, auto)"}
-            gridRowGap={"24px"}
-            gridColumnGap={"24px"}
-            padding={"24px"}
+            gridRowGap={"0.24rem"}
+            gridColumnGap={"0.24rem"}
+            padding={"0.24rem"}
         >
             <Title>Contract Address</Title>
             {/* TODO: link to etherscan nft */}

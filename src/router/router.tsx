@@ -92,7 +92,7 @@ const checkAuth = (routers:any, path:String)=>{
     },
     {
       path: "*",
-      component:  <main style={{ padding: "100px" }}>
+      component:  <main style={{ padding: "1rem" }}>
       <h1>404</h1>
     </main>
     },

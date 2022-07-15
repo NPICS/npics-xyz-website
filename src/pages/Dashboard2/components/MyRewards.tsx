@@ -47,36 +47,36 @@ export default function MyRewards() {
 
 
   return <Box
-    padding={"40px 60px"}
+    padding={"0.4rem 0.6rem"}
     position={"relative"}
   >
-    <Typography fontSize={"30px"} fontWeight={800} color={'#000'} marginBottom="30px">NPics Rewards</Typography>
-    {/* <Typography fontSize={"16px"} fontWeight={500} color={'rgba(0,0,0,.5)'} marginBottom={"30px"}>Participate in the down payment loan to buy NFT and earn double rewards</Typography> */}
-    <Typography fontSize={"16px"} fontWeight={500} color={'rgba(0,0,0,.5)'} marginBottom={"50px"}>Rates shown are estimates, and fluctuate based on many different factors, including collection floor price, trading volume, pool liquidity, token price, etc.</Typography>
-    <Typography fontSize={"20px"} fontWeight={700} color={'#000'} marginBottom={"20px"}>Your Rewards</Typography>
+    <Typography fontSize={"0.3rem"} fontWeight={800} color={'#000'} marginBottom="0.3rem">NPics Rewards</Typography>
+    {/* <Typography fontSize={"0.16rem"} fontWeight={500} color={'rgba(0,0,0,.5)'} marginBottom={"0.3rem"}>Participate in the down payment loan to buy NFT and earn double rewards</Typography> */}
+    <Typography fontSize={"0.16rem"} fontWeight={500} color={'rgba(0,0,0,.5)'} marginBottom={"0.5rem"}>Rates shown are estimates, and fluctuate based on many different factors, including collection floor price, trading volume, pool liquidity, token price, etc.</Typography>
+    <Typography fontSize={"0.2rem"} fontWeight={700} color={'#000'} marginBottom={"0.2rem"}>Your Rewards</Typography>
     <Box
       background={"rgba(0,0,0,.03)"}
-      border={"1px solid rgba(0,0,0,.1)"}
-      borderRadius={"10px"}
-      padding={"40px 40px 46px 40px"}
+      border={"0.01rem solid rgba(0,0,0,.1)"}
+      borderRadius={"0.1rem"}
+      padding={"0.4rem 0.4rem 0.46rem 0.4rem"}
       display={"inline-block"}
     >
       <Flex
         flexDirection={"column"}
-        gap={"20px"}
+        gap={"0.2rem"}
       >
-        <Flex gap={"17px"} alignItems={"center"}>
-          <Icon width="40px" height="40px" src={imgurl.dashboard.rewardBend} />
-          <Typography fontSize={"18px"} fontWeight={"500"} color={"#000"}>BEND</Typography>
+        <Flex gap={"0.17rem"} alignItems={"center"}>
+          <Icon width="0.4rem" height="0.4rem" src={imgurl.dashboard.rewardBend} />
+          <Typography fontSize={"0.18rem"} fontWeight={"500"} color={"#000"}>BEND</Typography>
         </Flex>
 
-        <Flex gap={"160px"} alignItems={"center"}>
-          <Flex alignItems={"center"} gap={"12px"}>
-            <Typography fontSize={"14px"} fontWeight={"500"} color={"rgba(0,0,0,.5)"}>Reward to be received : </Typography>
-            <Typography fontSize={"24px"} fontWeight={"700"} color={"#000"}>{balance && new BigNumber(balance?.toString()).dp(3, 1).div(10 ** 18).toFixed(4, 1)}</Typography>
+        <Flex gap={"1.6rem"} alignItems={"center"}>
+          <Flex alignItems={"center"} gap={"0.12rem"}>
+            <Typography fontSize={"0.14rem"} fontWeight={"500"} color={"rgba(0,0,0,.5)"}>Reward to be received : </Typography>
+            <Typography fontSize={"0.24rem"} fontWeight={"700"} color={"#000"}>{balance && new BigNumber(balance?.toString()).dp(3, 1).div(10 ** 18).toFixed(4, 1)}</Typography>
           </Flex>
 
-          <ButtonDefault padding="0px 50px" height="50px" minWidth="150px" scale={true} disabled={balance?.toString() === '0'} types={"normal"} onClick={onRewards}>
+          <ButtonDefault padding="0rem 0.5rem" height="0.5rem" minWidth="1.5rem" scale={true} disabled={balance?.toString() === '0'} types={"normal"} onClick={onRewards}>
             Claim
           </ButtonDefault>
         </Flex>
@@ -85,8 +85,8 @@ export default function MyRewards() {
 
     <Box
       position={'absolute'}
-      right={'30px'}
-      top={'30px'}
+      right={'0.3rem'}
+      top={'0.3rem'}
     >
       <More />
     </Box>

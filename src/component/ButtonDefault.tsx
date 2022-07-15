@@ -22,7 +22,7 @@ const StyledButton = styled.button<Iprops>`
     background: ${(props => props.types === 'normal' ? "#333333" : '')};
     background: ${(props => props.types === 'second' ? "#FFFFFF" : '')};
     background: ${(props => props.types === 'two' ? "#333" : '')};
-    box-shadow: ${(props => props.types === 'second' ? "0px 0px 20px rgba(0, 0, 0, 0.1)" : '')};
+    box-shadow: ${(props => props.types === 'second' ? "0rem 0rem 0.2rem rgba(0, 0, 0, 0.1)" : '')};
     border: ${(props => props.types === 'second' ? "0" : '')};
     transform: ${(props => props.disabled ? '' : props.scale ? 'scale(1.06)' : '')};
   }
@@ -57,17 +57,17 @@ const StyledButton = styled.button<Iprops>`
       case 'one':
         return '0';
       case 'two':
-        return '2px solid rgba(255,255,255,1)';
+        return '0.02rem solid rgba(255,255,255,1)';
       case 'three':
         return '0';
       case 'four':
-        return '1px solid rgba(255, 255, 255, 3)';
+        return '0.01rem solid rgba(255, 255, 255, 3)';
       case 'disabled':
         return '0';
       case 'normal':
         return '0';
       case 'second':
-        return '1px solid rgba(0,0,0,.2)';
+        return '0.01rem solid rgba(0,0,0,.2)';
       default:
         return null;
     }
@@ -91,11 +91,11 @@ const StyledButton = styled.button<Iprops>`
   height: ${(props => props.height)};
   font-size: ${(props => props.fontSize)};
   padding: ${(props => props.padding)};
-  border-radius: 10px;
+  border-radius: 0.1rem;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-  /* font-size: 20px; */
+  /* font-size: 0.2rem; */
   cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
   ${flex}
 `
@@ -118,11 +118,11 @@ function ButtonDefault(props: Iprops) {
 }
 ButtonDefault.defaultProps = {
   border: 0,
-  minWidth: '200px',
-  Width: '200px',
-  height: '66px',
+  minWidth: '2rem',
+  Width: '2rem',
+  height: '0.66rem',
   text: 'button',
-  fontSize: '14px',
+  fontSize: '0.14rem',
   types: 'one',
   // color: '#fff',
   disabled: false,

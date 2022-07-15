@@ -22,15 +22,15 @@ const StyledtWallet = styled(Flex)`
   cursor: pointer;
   box-sizing: border-box;
   background: #FFFFFF;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  padding: 10px 0 10px 25px;
-  min-width: 260px;
-  min-height: 60px;
+  border: 0.01rem solid rgba(0, 0, 0, 0.1);
+  border-radius: 0.1rem;
+  padding: 0.1rem 0 0.1rem 0.25rem;
+  min-width: 2.6rem;
+  min-height: 0.6rem;
   &:hover {
     background: #FFFFFF;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
-    border: 1px solid #fff;
+    box-shadow: 0rem 0rem 0.2rem rgba(0, 0, 0, 0.1);
+    border: 0.01rem solid #fff;
   }
 `
 
@@ -160,7 +160,7 @@ function XHeader() {
       document.body.appendChild(textarea);
       textarea.style.position = 'fixed';
       textarea.style.clip = 'rect(0 0 0 0)';
-      textarea.style.top = '10px';
+      textarea.style.top = '0.1rem';
       textarea.value = text;
       textarea.select();
       document.execCommand('copy', true);
@@ -202,8 +202,8 @@ function XHeader() {
   }
   const ConnectWallet = () => {
     return (<StyledtWallet onClick={connect} alignItems="center">
-      <Typography marginRight='20px'><Icon width='40px' height='40px' src={imgurl.metamaskLogo} alt="" /></Typography>
-      <Typography fontSize='16px' fontWeight='700' color='#000'>MetaMask</Typography>
+      <Typography marginRight='0.2rem'><Icon width='0.4rem' height='0.4rem' src={imgurl.metamaskLogo} alt="" /></Typography>
+      <Typography fontSize='0.16rem' fontWeight='700' color='#000'>MetaMask</Typography>
     </StyledtWallet>)
   }
 
@@ -229,16 +229,16 @@ function XHeader() {
   let normal = {
     color: 'rgba(255,255,255,.5)',
     fontWeight: '700',
-    fontSize: '16px',
+    fontSize: '0.16rem',
     textDecoration: 'none',
-    marginRight: '130px',
+    marginRight: '1.3rem',
   };
   let active = {
     color: '#fff',
     fontWeight: '700',
-    fontSize: '16px',
+    fontSize: '0.16rem',
     textDecoration: 'none',
-    marginRight: '130px',
+    marginRight: '1.3rem',
   };
   const history = useLocation()
   const [activiRoute, setActiviRoute] = useState<string>('')
@@ -285,7 +285,7 @@ function XHeader() {
           </NavLink>
 
           <a style={{
-            fontSize: "16px",
+            fontSize: "0.16rem",
             fontWeight: "600",
             color: activiRoute === 'home' ? '#fff' : 'rgba(255,255,255,.5)'
           }} target="_blank" rel="noreferrer" href={urls.resource}>Resources</a>
@@ -299,7 +299,7 @@ function XHeader() {
                 return (
                   <a href={item.link} key={item.name} target="_blank" >
                     <div className='tools_bg'>
-                      <Icon style={{ cursor: 'pointer', marginRight: '22px' }} width='22px' height='22px' src={item.darkIcon} />
+                      <Icon style={{ cursor: 'pointer', marginRight: '0.22rem' }} width='0.22rem' height='0.22rem' src={item.darkIcon} />
                     </div>
                   </a>
                 )
@@ -314,25 +314,25 @@ function XHeader() {
             alignItems='center'
             justifyContent='center'
             background={`${showConnect ? "rgba(255,255,255,.1)" : "rgba(255,255,255,.2)"}`}
-            borderRadius="10px"
-            width='34px'
-            height='34px'
+            borderRadius="0.1rem"
+            width='0.34rem'
+            height='0.34rem'
             id="baseAccount"
             style={{ cursor: 'pointer' }}
             onClick={walletPop}
           >
-            {/* <Icon width={`${account ? '34px' : '14px' } `} height={`${account ? '34px' : '16px' } `} src={account ? defaultAvatar : login} /> */}
+            {/* <Icon width={`${account ? '0.34rem' : '0.14rem' } `} height={`${account ? '0.34rem' : '0.16rem' } `} src={account ? defaultAvatar : login} /> */}
             {
               account ?
-              <Icon width='34px' height='34px' src={defaultAvatar} /> :
+              <Icon width='0.34rem' height='0.34rem' src={defaultAvatar} /> :
               <Flex 
                 alignItems='center'
                 justifyContent='center'
-                width='34px'
-                height='34px'
-                borderRadius="10px"
+                width='0.34rem'
+                height='0.34rem'
+                borderRadius="0.1rem"
               >
-                <Icon width='14px' height='16px' src={login} />
+                <Icon width='0.14rem' height='0.16rem' src={login} />
               </Flex>
             }
 
@@ -351,7 +351,7 @@ function XHeader() {
           <Popover
             content={ConnectWallet}
             title={<Typography
-              fontSize="16px"
+              fontSize="0.16rem"
               fontWeight="700"
               color="#000"
             >Connect a wallet</Typography>}

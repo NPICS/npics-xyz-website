@@ -19,11 +19,11 @@ interface FlexProps {
 const Flex = styled.div`
  ${flex}
  img {
-   margin-right: 16px;
+   margin-right: 0.16rem;
  }
 `
 const StyledFlex = styled.div<FlexProps>`
-  border-radius: 10px;
+  border-radius: 0.1rem;
   color: ${(props => props.color)};
   border: ${(props => props.border)};
   background-color: ${(props => props.background)};
@@ -31,8 +31,8 @@ const StyledFlex = styled.div<FlexProps>`
     height: ${(props => props.height)};
     background-color: ${(props => props.headerBackground)};
     font-size: ${(props => props.fontSize)};
-    padding: 16px 20px 15px;
-    border-radius: 10px;
+    padding: 0.16rem 0.2rem 0.15rem;
+    border-radius: 0.1rem;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
     color: #fff;
@@ -81,11 +81,11 @@ Flexible.defaultProps = {
   title: '',
   iconUrl: imgurl.Vector,
   isExpand: false,
-  height: '51px',
-  border: '1px solid rgba(255,255,255,.2)',
+  height: '0.51rem',
+  border: '0.01rem solid rgba(255,255,255,.2)',
   background: '',
   headerBackground: '',
-  fontSize: '16px',
+  fontSize: '0.16rem',
 }
 
 export default Flexible

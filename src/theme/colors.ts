@@ -10,7 +10,7 @@ export const lightColors:Colors = {
   btnBackground: "#fff",
   iconBackground: "#F1EFEF",
   color: "#282626",
-  border: "1px solid #DCDCDC",
+  border: "0.01rem solid #DCDCDC",
   gradients: {
     horizontal: 'linear-gradient(91.24deg, #F2BE58 2.91%, #EB3557 100.17%)',
     vertical: 'linear-gradient(180deg, #F2BE58 0%, #E84866 100%)'
@@ -25,7 +25,7 @@ export const darkColors:Colors = {
   btnBackground: "#000000",
   iconBackground: "#282626",
   color: "#ffffff",
-  border: "1px solid #DCDCDC",
+  border: "0.01rem solid #DCDCDC",
   gradients: {
     horizontal: 'linear-gradient(91.24deg, #F2BE58 2.91%, #EB3557 100.17%)',
     vertical: 'linear-gradient(180deg, #F2BE58 0%, #E84866 100%)'

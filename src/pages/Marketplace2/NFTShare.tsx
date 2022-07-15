@@ -14,10 +14,10 @@ function IconWithBorder(props: {
 }) {
   return <Flex alignItems={"center"}
     justifyContent={"center"}
-    borderRadius={"10px"}
-    border={"1px solid #00000033"}
-    width={"40px"}
-    height={"40px"}
+    borderRadius={"0.1rem"}
+    border={"0.01rem solid #00000033"}
+    width={"0.4rem"}
+    height={"0.4rem"}
     style={{
       "cursor": "pointer",
       "userSelect": "none"
@@ -25,7 +25,7 @@ function IconWithBorder(props: {
     onClick={props.tap}
   >
     <Icon
-      width={"16px"}
+      width={"0.16rem"}
       src={props.icon}
     />
   </Flex>
@@ -45,7 +45,7 @@ export default function NFTShare(props: {
     message.success("Copy Successfully")
   };
 
-  return <Flex justifyContent={"end"} alignItems={"start"} gap={"6px"}>
+  return <Flex justifyContent={"end"} alignItems={"start"} gap={"0.06rem"}>
     <Pop20
       content="Refresh"
     >

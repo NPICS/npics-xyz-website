@@ -20,7 +20,7 @@ import { Pop20 } from "component/Popover/Popover";
 
 export const Banner = styled(Box)<{ url?: string }>`
   position: absolute;
-  height: 480px;
+  height: 4.8rem;
   top: 0;
   left: 0;
   right: 0;
@@ -43,7 +43,7 @@ export const Banner = styled(Box)<{ url?: string }>`
 
 export const ExpandBtn = styled(Box)`
   color: #FF490F;
-  font-size: 14px;
+  font-size: 0.14rem;
   font-weight: 500;
   user-select: none;
   cursor: pointer;
@@ -54,18 +54,18 @@ const CollectionItem = styled.img<{
   imgUrl?: string
 }>`
   display: block;
-  width: 50px;
-  height: 50px;
+  width: 0.5rem;
+  height: 0.5rem;
   //background: transparent url(${(props) => props.imgUrl}) no-repeat center;
   //background-size: cover;
   background: ${(props) => props.isSelected ? `#fff` : `transparent`};
   border: none;
   outline: none;
   //overflow: hidden;
-  border-radius: 10px;
+  border-radius: 0.1rem;
   object-fit: cover;
-  // border: ${(props) => props.isSelected ? `3px` : 0} solid #fff;
-  box-shadow: 0 0 0 ${(props) => props.isSelected ? `3px` : 0} #fff;
+  // border: ${(props) => props.isSelected ? `0.03rem` : 0} solid #fff;
+  box-shadow: 0 0 0 ${(props) => props.isSelected ? `0.03rem` : 0} #fff;
   transform: ${(props) => props.isSelected ? "scale(1.15)" : "scale(1)"};
   //transition: all .1s;
 `
@@ -80,11 +80,11 @@ const MarkdownContainer = styled.div<{
   word-break: break-all;
   word-wrap: break-word;
   -webkit-box-orient: vertical;
-  font-size: 14px;
+  font-size: 0.14rem;
   font-weight: 500;
   //
   //p {
-  //  margin: 6px 0;
+  //  margin: 0.06rem 0;
   //}
 `
 
@@ -131,14 +131,14 @@ export default function Market() {
   return <Flex
     position={"relative"}
     flexDirection={"column"}
-    padding={"0 160px"}
+    padding={"0 1.6rem"}
     background={"transparent"}>
     <Banner url={nft?.bannerImageUrl}/>
     <Box zIndex={1}>
-      <Box marginTop={"210px"}>
+      <Box marginTop={"2.1rem"}>
         <Typography
           color={"#fff"}
-          fontSize={"30px"}
+          fontSize={"0.3rem"}
           fontWeight={"800"}>
           Collections
         </Typography>
@@ -146,8 +146,8 @@ export default function Market() {
       <Flex
         flexDirection={"row"}
         alignItems={"stretch"}
-        gap={"26px"}
-        marginTop={"35px"}>
+        gap={"0.26rem"}
+        marginTop={"0.35rem"}>
         {
           listData.map((item, idx) => {
             return <Popover
@@ -169,34 +169,34 @@ export default function Market() {
         }
       </Flex>
       <Box
-        marginTop={"40px"}
-        borderRadius={"10px"}
+        marginTop={"0.4rem"}
+        borderRadius={"0.1rem"}
         background={"#fff"}
-        padding={"40px"}
+        padding={"0.4rem"}
         boxShadow={"rgba(0,0,0,.5)"}
       >
         <Flex>
           <Portrait src={nft?.imageUrl}/>
           <Flex
-            marginLeft={"24px"}
+            marginLeft={"0.24rem"}
             flexDirection={"column"}
-            gap={"8px"}
+            gap={"0.08rem"}
             flex={1}
             justifyContent={"center"}
           >
-            <Flex alignItems={"center"} gap={"2px"}>
+            <Flex alignItems={"center"} gap={"0.02rem"}>
               <Typography
                 fontWeight={800}
-                fontSize={"40px"}
-                lineHeight={"56px"}
+                fontSize={"0.4rem"}
+                lineHeight={"0.56rem"}
                 color={"#000"}
               >{nft?.name}</Typography>
               <Pop20 content={"Verified On OpenSea"}>
                 <Icon
                   hidden={params.address == undefined}
                   src={openseaValidIcon}
-                  width={"24px"}
-                  height={"24px"}/>
+                  width={"0.24rem"}
+                  height={"0.24rem"}/>
               </Pop20>
             </Flex>
             <MarkdownContainer ref={(e) => {
@@ -221,7 +221,7 @@ export default function Market() {
 
             {/*<Typography*/}
             {/*    fontWeight={"500"}*/}
-            {/*    fontSize={"14px"}*/}
+            {/*    fontSize={"0.14rem"}*/}
             {/*    lineHeight={"120%"}*/}
             {/*    color={"rgba(0, 0, 0, .5)"}*/}
             {/*    textAlign={"justify"}*/}
@@ -231,23 +231,23 @@ export default function Market() {
           </Flex>
         </Flex>
         <Flex
-          marginTop={"16px"}
+          marginTop={"0.16rem"}
           flexDirection={"row"}
-          gap={"10px"}
+          gap={"0.1rem"}
           alignItems={"stretch"}
         >
           <Flex
             flexDirection={"column"}
             alignItems={"center"}
-            boxShadow={"0 0 10px rgba(0,0,0,.1)"}
-            borderRadius={"10px"}
-            padding={"12px 20px"}
-            gap={"2px"}
-            minWidth={"136px"}>
-            <Flex alignItems={"center"} gap={"2px"}>
-              <Icon width={"18px"} height={"18px"} src={ethIcon}/>
+            boxShadow={"0 0 0.1rem rgba(0,0,0,.1)"}
+            borderRadius={"0.1rem"}
+            padding={"0.12rem 0.2rem"}
+            gap={"0.02rem"}
+            minWidth={"1.36rem"}>
+            <Flex alignItems={"center"} gap={"0.02rem"}>
+              <Icon width={"0.18rem"} height={"0.18rem"} src={ethIcon}/>
               <Typography
-                fontSize={"20px"}
+                fontSize={"0.2rem"}
                 color={"#000"}
                 fontWeight={700}
               >{
@@ -255,20 +255,20 @@ export default function Market() {
                 nft && numeral(nft.floorPrice.div(10 ** 18).toFixed()).format("0,0.[00]")
               }</Typography>
             </Flex>
-            <Typography fontWeight={"500"} fontSize={"14px"} color={"#000"}>Floor</Typography>
+            <Typography fontWeight={"500"} fontSize={"0.14rem"} color={"#000"}>Floor</Typography>
           </Flex>
           <Flex
             flexDirection={"column"}
             alignItems={"center"}
-            boxShadow={"0 0 10px rgba(0,0,0,.1)"}
-            borderRadius={"10px"}
-            padding={"12px 20px"}
-            gap={"2px"}
-            minWidth={"136px"}>
-            <Flex alignItems={"center"} gap={"2px"}>
-              <Icon width={"18px"} height={"18px"} src={ethIcon}/>
+            boxShadow={"0 0 0.1rem rgba(0,0,0,.1)"}
+            borderRadius={"0.1rem"}
+            padding={"0.12rem 0.2rem"}
+            gap={"0.02rem"}
+            minWidth={"1.36rem"}>
+            <Flex alignItems={"center"} gap={"0.02rem"}>
+              <Icon width={"0.18rem"} height={"0.18rem"} src={ethIcon}/>
               <Typography
-                fontSize={"20px"}
+                fontSize={"0.2rem"}
                 color={"#000"}
                 fontWeight={700}
               >{
@@ -276,10 +276,10 @@ export default function Market() {
                 // nft && numberFormat(new BigNumber(nft.dayVolume).toFixed(2,1))
               }</Typography>
             </Flex>
-            <Flex alignItems={"center"} gap={"10px"}>
-              <Typography fontWeight={"500"} fontSize={"14px"} color={"#000"}>24h</Typography>
+            <Flex alignItems={"center"} gap={"0.1rem"}>
+              <Typography fontWeight={"500"} fontSize={"0.14rem"} color={"#000"}>24h</Typography>
               <Typography
-                fontSize={`14px`}
+                fontSize={`0.14rem`}
                 fontWeight={500}
                 color={
                   (nft?.dayChange.toNumber() ?? 0) > 0 ? `#18CF15` : `#FF4949`
@@ -292,43 +292,43 @@ export default function Market() {
           <Flex
             flexDirection={"column"}
             alignItems={"center"}
-            boxShadow={"0 0 10px rgba(0,0,0,.1)"}
-            borderRadius={"10px"}
-            padding={"12px 20px"}
-            gap={"2px"}
-            minWidth={"136px"}>
-            <Typography fontSize={"20px"} color={"#000"} fontWeight={700}>{
+            boxShadow={"0 0 0.1rem rgba(0,0,0,.1)"}
+            borderRadius={"0.1rem"}
+            padding={"0.12rem 0.2rem"}
+            gap={"0.02rem"}
+            minWidth={"1.36rem"}>
+            <Typography fontSize={"0.2rem"} color={"#000"} fontWeight={700}>{
               nft ? numberFormat(nft.realTotalSupply) : TextPlaceholder
             }</Typography>
             <Typography
               color={`#000`}
-              fontSize={`14px`}
+              fontSize={`0.14rem`}
               fontWeight={500}
             >Total</Typography>
           </Flex>
           <Flex
             flexDirection={"column"}
             alignItems={"center"}
-            boxShadow={"0 0 10px rgba(0,0,0,.1)"}
-            borderRadius={"10px"}
-            padding={"12px 20px"}
-            gap={"2px"}
-            minWidth={"136px"}>
-            <Typography fontSize={"20px"} color={"#000"} fontWeight={700}>{
+            boxShadow={"0 0 0.1rem rgba(0,0,0,.1)"}
+            borderRadius={"0.1rem"}
+            padding={"0.12rem 0.2rem"}
+            gap={"0.02rem"}
+            minWidth={"1.36rem"}>
+            <Typography fontSize={"0.2rem"} color={"#000"} fontWeight={700}>{
               nft ? numberFormat(nft.totalShelves) : TextPlaceholder
             }</Typography>
             <Typography
               color={`#000`}
-              fontSize={`14px`}
+              fontSize={`0.14rem`}
               fontWeight={500}
             >Listed Items</Typography>
           </Flex>
         </Flex>
       </Box>
       <Box
-        marginTop={"10px"}
+        marginTop={"0.1rem"}
         minHeight={"50vh"}
-        marginBottom={"60px"}
+        marginBottom={"0.6rem"}
       >
         <Outlet/>
       </Box>
