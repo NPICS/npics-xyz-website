@@ -17,7 +17,10 @@ export const ContractAddresses = {
   WETH: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
   DebtTokenProxy: "0x87ddE3A3f4b629E389ce5894c9A1F34A7eeC5648",
   BendDaoProxy: "0x0d02755a5700414B26FF040e1dE35D337DF56218",
-
+  /*
+  * x2y2market
+  * */
+  x2y2Market: "0xF849de01B080aDC3A814FaBE1E2087475cF2E354",
   /*
   * get contract address by market name
   * @warning: some market contract address is not found, like `xMarket`

@@ -231,3 +231,29 @@ export const _toString = (collectionName: string):string => {
       return collectionName
   }
 }
+
+export enum Sort {
+  priceToLow='PROCETOLOW',
+  priceToHigh='PROCETOHIGHT',
+  timeNew="TIMENEW",
+  timeExpiring="TIMEEXPIRING",
+}
+
+export const sort = {
+  [Sort.priceToLow]: {
+    sort: 'price',
+    direction: 'asc'
+  },
+  [Sort.priceToHigh]: {
+    sort: 'price',
+    direction: 'desc'
+  },
+  [Sort.timeNew]: {
+    sort: 'created_at',
+    direction: 'desc'
+  },
+  [Sort.timeExpiring]: {
+    sort: 'created_at',
+    direction: 'asc'
+  }
+}

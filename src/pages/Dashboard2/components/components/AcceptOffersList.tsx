@@ -2,10 +2,9 @@ import Modal from "../../../../component/Modal";
 import { Box, Flex, Icon, Typography } from "../../../../component/Box";
 import refreshIcon from "../../../../assets/images/dashboard/refresh_icon.svg"
 import wethIcon from "../../../../assets/images/market/weth_icon.svg"
-import { useState } from "react";
+import { Key, useState } from "react";
 import styled from "styled-components";
 import { OfferModal } from "./TableWarehouse";
-import { Sort, useSwrOffer } from 'hooks/useSwr'
 import { Offers } from "model/offers";
 import { thousandFormat } from '../../../../utils/urls';
 import BigNumber from "bignumber.js";
@@ -19,6 +18,9 @@ import { useAsync } from "react-use";
 import { useWETHContract } from 'hooks/useContract';
 import { useWeb3React } from "@web3-react/core";
 import ButtonDefault from "component/ButtonDefault";
+import { sort, Sort } from "./data";
+import http from "utils/http";
+import { deserializeArray } from "class-transformer";
 const { Option } = Select;
 const Button = styled.button`
   color: #fff;
@@ -56,6 +58,13 @@ const StyledSelect = styled(Select)`
     }
   }
 `
+const RotateIcon = styled(Icon) <{ refresh: boolean }>`
+    animation: ${(props) => `rotateImg 1s linear infinite ${props.refresh ? '' : 'paused'}`};
+    @keyframes rotateImg {
+      0% {transform : rotate(0deg);}
+      100% {transform : rotate(360deg);}
+  }
+`
 
 const FlexList = styled(Flex)`
   overflow-style: unset;
@@ -71,30 +80,53 @@ interface IProps {
   setShowOffer: React.Dispatch<React.SetStateAction<OfferModal>>
   setAcceptOffer: React.Dispatch<React.SetStateAction<Offers | undefined>>
 }
-let timer: NodeJS.Timer
+
 export default function AcceptOffersList(props: IProps) {
   const { showOffer, setShowOffer, nftAddress, nftInfo } = props
-  const [topOfferPrice, setTopOfferPrice] = useState(0)
-  const [second, setSecond] = useState(0)
-  const [currentSort, setCurrentSort] = useState<Sort>(Sort.priceToLow)
-  const { offerList, isError, isLoading } = useSwrOffer("0x8a90cab2b38dba80c64b7734e58ee1db38b8992e", currentSort)
+  const [second, setSecond] = useState(1)
+  const [currentSort, setCurrentSort] = useState<Sort>(Sort.priceToHigh)
+  const [offerList, setOfferList] = useState<Offers[]>()
+  const [refresh, setRefresh] = useState<boolean>(false)
+  const [cursor, setCursor] = useState<string>('')
+  const [pageIndex, setPageIndex] = useState<number>(1)
+  // const { offerList, isError, isLoading } = useSwrOffer("0x8a90cab2b38dba80c64b7734e58ee1db38b8992e", currentSort)
+  const getOfferList = async () => {
+    setRefresh(true)
+    let result: any = await http.myPost(`/npics-nft/app-api/v2/neo/getOfferList`, {
+      cursor: "",
+      pageSize: 5 * pageIndex,
+      address: nftAddress,
+      ...sort[currentSort]
+    })
+    try {
+      if (result.code === 200 && result.data.offerList) {
+        setCursor(result.data.cursor)
+        const offerList = deserializeArray(Offers, JSON.stringify(result.data.offerList))
+        setOfferList(offerList)
+        setSecond(1)
+      }
+      setRefresh(false)
+    } catch (e) {
+      setSecond(0)
+      setRefresh(false)
+    }
+  }
+
+  useAsync(async () => {
+    if (!nftAddress) return
+    getOfferList()
+  }, [currentSort, nftAddress, pageIndex])
 
 
-  // useEffect(() => {
-  //   console.log('asdasdasdasdas13518888888888888');
-  //   console.log(offerList)
+  useIntervalWhen(() => {
+    let s = second + 1
+    if (s === 10) {
+      // setSecond(0)
+      getOfferList()
+    }
+    setSecond(s)
+  }, 1000 * 1, true, true)
 
-  // }, [offerList, isLoading])
-
-  // useIntervalWhen(() => {
-  //   let s = second + 1
-  //   if(s === 10) {
-  //     s = 0
-  //   }
-  //   setSecond(s)
-  // }, 1000 * 1, true, true)
-
-  // console.log(offerList, isError, isLoading)
 
 
 
@@ -127,14 +159,14 @@ export default function AcceptOffersList(props: IProps) {
             borderRadius={"0.05rem"}
             border={"0.01rem solid #0000004D"}
           >
-            <Icon src={refreshIcon} width={"0.13rem"} height={"0.13rem"}></Icon>
+            <RotateIcon refresh={refresh} src={refreshIcon} width={"0.13rem"} height={"0.13rem"}></RotateIcon>
           </Flex>
         </Flex>
       </Flex>
 
       {
 
-        isError ? <Box>Error</Box> : <>
+        <>
           {/* Select Office */}
           <Flex justifyContent={"end"} alignItems={"center"} marginTop={"0.32rem"}>
             <StyledSelect onSelect={(value: any) => setCurrentSort(value)}
@@ -150,12 +182,20 @@ export default function AcceptOffersList(props: IProps) {
           {/* List */}
           <FlexList flexDirection={"column"} gap={"0.1rem"} overflow={"auto"} marginTop={"0.2rem"}>
             {
-              offerList && offerList.offerList.map((item, idx) => {
-                return <AcceptOffersCell nftInfo={nftInfo} setAcceptOffer={props.setAcceptOffer} offerInfo={item} key={idx} setShowOffer={setShowOffer} />
+              offerList && offerList.map((item: Offers, idx: Key | null | undefined) => {
+                return <>
+                  <AcceptOffersCell nftInfo={nftInfo} setAcceptOffer={props.setAcceptOffer} offerInfo={item} key={idx} setShowOffer={setShowOffer} />
+                </>
               })
             }
           </FlexList>
+
         </>
+      }
+      {
+        cursor ? <Flex marginTop={"0.26rem"} justifyContent="center">
+          <ButtonDefault onClick={() => setPageIndex(pageIndex + 1)} types="second" height=".56rem" minWidth="1.8rem">Load More</ButtonDefault>
+        </Flex> : null
       }
 
     </Flex>
@@ -175,10 +215,8 @@ function AcceptOffersCell(props: {
   const weth = useWETHContract(true)
   useAsync(async () => {
     if (!account || !weth) return
-    const aa = await weth.balanceOf(account)
-    setWethBalance(new BigNumber(aa.toString()))
-    console.log(`weth => ${aa}`)
-    console.log(`offerInfo => ${offerInfo.price}`)
+    const balance = await weth.balanceOf(account)
+    setWethBalance(new BigNumber(balance.toString()))
   }, [weth])
   return <Flex
     border={"0.01rem solid #0000001A"}
@@ -228,7 +266,7 @@ function AcceptOffersCell(props: {
       color={"#000"}
     >Expires {offerInfo.ExpiresTime()}</Typography>
     <Flex flex={1}></Flex>
-    <ButtonDefault disabled={offerInfo.price.gt(wethBalance)} minWidth="1.5rem" height="0.45rem" types="normal" onClick={() => {
+    <ButtonDefault disabled={offerInfo.price.lt(wethBalance)} minWidth="1.5rem" height="0.45rem" types="normal" onClick={() => {
       setShowOffer(OfferModal.OFFER)
       setAcceptOffer(offerInfo)
     }}>Accept Offer</ButtonDefault>

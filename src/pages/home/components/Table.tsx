@@ -99,7 +99,7 @@ export default function MyTable() {
       render: (text, row) => <Link to={`/marketplace/collections/${row.address}`} onClick={() => ScrollTop()}>
         <div style={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center'}}>
           <img src={row.imageUrl} alt="" style={{ width: "0.5rem", height: "0.5rem", marginRight: "0.1rem", borderRadius: '0.3rem'}} />
-          <span style={{ wordBreak: 'break-all',fontSize: '0.16rem', color: '#fff', fontWeight: '700', marginRight: '0.1rem' }}>{text}</span>
+          <span style={{ wordBreak: 'break-all',fontSize: '0.12rem', color: '#fff', fontWeight: '700', marginRight: '0.1rem' }}>{text}</span>
           <Icon style={{flexShrink: '0'}} src={openseaValidIcon} width={"0.16rem"} height={"0.16rem"}/>
         </div>
       </Link>,
@@ -131,7 +131,7 @@ export default function MyTable() {
       sorter: (a, b) => a.floorPrice - b.floorPrice,
       render: (text) => <div style={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center'}}>
         <img src={imgurl.whitePrice} alt=""  style={{marginRight: "0.1rem"}}/>
-        <span style={{ fontSize: '0.16rem', color: '#fff', fontWeight: '500'}}>{text}</span>
+        <span style={{ fontSize: '0.12rem', color: '#fff', fontWeight: '500'}}>{text}</span>
       </div>
     },
     {
@@ -141,7 +141,7 @@ export default function MyTable() {
       key: 'advanceRate',
       // defaultSortOrder: 'descend',
       sorter: (a, b) => a.advanceRate - b.advanceRate,
-      render: (text) => <div style={{ fontSize: '0.16rem', color: '#fff', fontWeight: '500'}}>{`${text}%`}</div>
+      render: (text) => <div style={{ fontSize: '0.12rem', color: '#fff', fontWeight: '500'}}>{`${text}%`}</div>
     },
     {
       title: 'Down Payment',
@@ -152,7 +152,7 @@ export default function MyTable() {
       sorter: (a, b) => a.floorPrice - b.floorPrice,
       render: (text) => <div style={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center'}}>
         <img src={imgurl.whitePrice} alt="" style={{marginRight: "0.1rem"}}/>
-        <span style={{ fontSize: '0.16rem', color: '#fff', fontWeight: '500'}}>{text}</span>
+        <span style={{ fontSize: '0.12rem', color: '#fff', fontWeight: '500'}}>{text}</span>
       </div>
     },
   ];

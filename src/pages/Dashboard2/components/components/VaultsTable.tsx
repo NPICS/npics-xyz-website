@@ -230,14 +230,15 @@ function VaultsTable(props: IProps) {
 
         DebtPosition.current = dataSource
         setActivities(dataSource)
+        setLoading(false)
       } else {
         setActivities([])
+        setLoading(false)
       }
     } catch (e) {
       console.error(`Error => ${e}`)
-    } finally {
       setLoading(false)
-    }
+    } 
   }
 
   const ConfirmModal = (props: {

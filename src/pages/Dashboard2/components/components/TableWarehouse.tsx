@@ -14,6 +14,8 @@ import styled from 'styled-components'
 import AcceptOffersList from './AcceptOffersList'
 import AcceptOffer from './AcceptOffer'
 import { Offers } from 'model/offers'
+import NFTPayProgressing from 'pages/Marketplace2/NFTPayProgressing'
+import Progressing from 'component/Modal/Progressing'
 
 enum Color {
   'Inforce' = "#7BD742",
@@ -30,6 +32,7 @@ export enum OfferModal {
   NONE,
   OFFERSLIST = 1 << 0,
   OFFER = 1 << 1,
+  PROGRESSING = 1 << 2,
 }
 
 export default function TableWarehouse(props: {
@@ -166,6 +169,9 @@ export default function TableWarehouse(props: {
       </Table>
       <AcceptOffersList nftInfo={nftInfo} setAcceptOffer={setAcceptOffer} showOffer={showOffer} setShowOffer={setShowOffer} nftAddress={nftInfo?.nftAddress} />
       <AcceptOffer nftInfo={nftInfo} accpetOffer={accpetOffer} showOffer={showOffer} setShowOffer={setShowOffer}/>
+      
+      {/* popup loading */}
+      <Progressing isOpen={showOffer === OfferModal.PROGRESSING} />
     </>
   )
 }

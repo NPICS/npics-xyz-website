@@ -34,6 +34,17 @@ const StyledtWallet = styled(Flex)`
   }
 `
 
+const StyledHoverA = styled.a`
+  &:hover {
+    color: #fff !important
+  }
+`
+const StyledHoverSpan = styled.span`
+  &:hover {
+    color: #fff
+  }
+`
+
 function XHeader() {
   const { account, connector } = useWeb3React()
   const oldAccount = useRef<string | undefined | null>()
@@ -275,20 +286,20 @@ function XHeader() {
             style={({ isActive }) =>
               isActive ? active : normal}
           >
-            <span style={{ color: `${activiRoute === 'nft' || activiRoute === 'home' ? '#fff' : ''}` }}>Marketplace</span>
+            <StyledHoverSpan style={{color: `${activiRoute === 'nft' || activiRoute === 'home' ? '#fff' : ''}` }}>Marketplace</StyledHoverSpan>
           </NavLink>
           <NavLink to={"/dashboard"}
             style={({ isActive }) =>
               isActive ? active : normal}
           >
-            <span style={{ color: `${activiRoute === 'vaultsDetail' || activiRoute === 'home' ? '#fff' : ''}` }}>Dashboard</span>
+            <StyledHoverSpan style={{ color: `${activiRoute === 'vaultsDetail' || activiRoute === 'home' ? '#fff' : ''}` }}>Dashboard</StyledHoverSpan>
           </NavLink>
 
-          <a style={{
+          <StyledHoverA style={{
             fontSize: "0.16rem",
             fontWeight: "600",
             color: activiRoute === 'home' ? '#fff' : 'rgba(255,255,255,.5)'
-          }} target="_blank" rel="noreferrer" href={urls.resource}>Resources</a>
+          }} target="_blank" rel="noreferrer" href={urls.resource}>Resources</StyledHoverA>
         </FlexDiv>
 
         <FlexDiv>

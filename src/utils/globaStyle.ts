@@ -176,6 +176,7 @@ export const GlobalStyle = createGlobalStyle`
           height: 0.68rem;
           width: 2.716rem;
           padding: 0.22rem 0.16rem;
+          font-size: .12rem;
           transition: all 0s;
         }
         th:last-child {
@@ -236,7 +237,7 @@ export const GlobalStyle = createGlobalStyle`
             &>div:nth-child(2) {
               display: flex;
               flex-direction: column;
-              font-size: 0.16rem;
+              font-size: 0.12rem;
               &>span {
                 font-size: 0.12rem;
               }
@@ -352,7 +353,7 @@ export const GlobalStyle = createGlobalStyle`
             &>div:nth-child(2) {
               display: flex;
               flex-direction: column;
-              font-size: 0.16rem;
+              font-size: 0.12rem;
               &>span {
                 font-size: 0.12rem;
               }
@@ -462,7 +463,7 @@ export const GlobalStyle = createGlobalStyle`
             &>div:nth-child(2) {
               display: flex;
               flex-direction: column;
-              font-size: 0.16rem;
+              font-size: 0.12rem;
               &>span {
                 font-size: 0.12rem;
               }
