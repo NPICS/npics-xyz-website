@@ -310,7 +310,7 @@ function XHeader() {
                 return (
                   <a href={item.link} key={item.name} target="_blank" >
                     <div className='tools_bg'>
-                      <Icon style={{ cursor: 'pointer', marginRight: '0.22rem' }} width='0.22rem' height='0.22rem' src={item.darkIcon} />
+                      <Icon className='tools_icon' style={{ cursor: 'pointer'}} width='0.22rem' height='0.22rem' src={item.darkIcon} />
                     </div>
                   </a>
                 )

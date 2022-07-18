@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import http from 'utils/http';
 import type { ColumnsType } from 'antd/lib/table';
-import { Table } from 'antd';
+import { Skeleton, Table } from 'antd';
 import { Collections } from "../../../model/user";
 import { deserializeArray } from 'class-transformer';
 import styled from 'styled-components';
@@ -9,6 +9,7 @@ import { imgurl } from 'utils/globalimport';
 import BigNumber from 'bignumber.js';
 import { Link } from 'react-router-dom';
 import { Icon } from 'component/Box'
+import SkeletonTable from "./SkeletonTable"
 import openseaValidIcon from "assets/images/market/nfts_opensea_valid.svg"
 interface DataType {
   index: string,
@@ -37,6 +38,18 @@ const BgTable = styled.div`
 export default function MyTable() {
 
   const [collections, setCollections] = useState<DataType[]>()
+  const [showTable,setShowTable] = useState<boolean>(false)
+
+  const skeleton = [
+    {
+      index:1,
+      collection:"1",
+      dayVolume:"1",
+      floorPrice:"1",
+      advanceRate:"1",
+      primePrice:"1"
+    }
+  ]
   useEffect(() => {
     getData()
     // eslint-disable-next-line
@@ -56,6 +69,7 @@ export default function MyTable() {
       const changeData = deserializeArray(Collections, JSON.stringify(orgData));
       const relData: DataType[] = []
       if (changeData && changeData.length) {
+        setShowTable(true)
         for (let i = 0; i < changeData.length; i++) {
           relData.push({
             index: `${i+1}`,
@@ -99,7 +113,7 @@ export default function MyTable() {
       render: (text, row) => <Link to={`/marketplace/collections/${row.address}`} onClick={() => ScrollTop()}>
         <div style={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center'}}>
           <img src={row.imageUrl} alt="" style={{ width: "0.5rem", height: "0.5rem", marginRight: "0.1rem", borderRadius: '0.3rem'}} />
-          <span style={{ wordBreak: 'break-all',fontSize: '0.12rem', color: '#fff', fontWeight: '700', marginRight: '0.1rem' }}>{text}</span>
+          <span style={{ wordBreak: 'break-all',fontSize: '0.16rem', color: '#fff', fontWeight: '700', marginRight: '0.1rem' }}>{text}</span>
           <Icon style={{flexShrink: '0'}} src={openseaValidIcon} width={"0.16rem"} height={"0.16rem"}/>
         </div>
       </Link>,
@@ -131,7 +145,7 @@ export default function MyTable() {
       sorter: (a, b) => a.floorPrice - b.floorPrice,
       render: (text) => <div style={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center'}}>
         <img src={imgurl.whitePrice} alt=""  style={{marginRight: "0.1rem"}}/>
-        <span style={{ fontSize: '0.12rem', color: '#fff', fontWeight: '500'}}>{text}</span>
+        <span style={{ fontSize: '0.16rem', color: '#fff', fontWeight: '500'}}>{text}</span>
       </div>
     },
     {
@@ -141,7 +155,7 @@ export default function MyTable() {
       key: 'advanceRate',
       // defaultSortOrder: 'descend',
       sorter: (a, b) => a.advanceRate - b.advanceRate,
-      render: (text) => <div style={{ fontSize: '0.12rem', color: '#fff', fontWeight: '500'}}>{`${text}%`}</div>
+      render: (text) => <div style={{ fontSize: '0.16rem', color: '#fff', fontWeight: '500'}}>{`${text}%`}</div>
     },
     {
       title: 'Down Payment',
@@ -152,15 +166,24 @@ export default function MyTable() {
       sorter: (a, b) => a.floorPrice - b.floorPrice,
       render: (text) => <div style={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center'}}>
         <img src={imgurl.whitePrice} alt="" style={{marginRight: "0.1rem"}}/>
-        <span style={{ fontSize: '0.12rem', color: '#fff', fontWeight: '500'}}>{text}</span>
+        <span style={{ fontSize: '0.16rem', color: '#fff', fontWeight: '500'}}>{text}</span>
       </div>
     },
   ];
 
-  return (<BgTable><Table
-    columns={columns}
-    dataSource={collections}
-    pagination={false}
-    className="ant-table-reset"
-  ></Table></BgTable>)
+  return (
+  <BgTable>
+    {
+      showTable ?
+      <Table
+      columns={columns}
+      dataSource={showTable ? collections : []}
+      pagination={false}
+      className="ant-table-reset"
+    ></Table>
+    :
+    <SkeletonTable></SkeletonTable>
+    }
+
+  </BgTable>)
 }
