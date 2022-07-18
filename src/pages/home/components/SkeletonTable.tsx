@@ -15,6 +15,9 @@ const BgTable = styled.div`
   width: 16rem;
   margin: 0 auto;
   /* margin-top: 0.5rem; */
+  .table_col{
+    padding: 0.1rem !important;
+  }
 `
 
 
@@ -92,6 +95,7 @@ export default function MyTable() {
       dataIndex: 'index',
       key: 'index',
       align: 'center',
+      className:'table_col',
       render: () => {
       return <Skeleton.Button shape={'square'} active style={{ height: '0.3rem', minWidth: '0.1rem',borderRadius:'8px' }}></Skeleton.Button>
       }
@@ -101,6 +105,7 @@ export default function MyTable() {
       dataIndex: 'collection',
       key: 'collection',
       align: 'left',
+      className:'table_col',
       render: () =>{
         return (
           <Space size={15}>
@@ -115,29 +120,33 @@ export default function MyTable() {
       dataIndex: 'dayVolume',
       key: 'dayVolume',
       align: 'left',
+      className:'table_col',
       render: () => {
-      return <Skeleton.Button shape={'square'} active style={{ height: '0.3rem', minWidth: '0.3rem',borderRadius:'8px' }}></Skeleton.Button>}
+      return <Skeleton.Button shape={'square'} active style={{ height: '0.3rem', minWidth: '1rem',borderRadius:'8px' }}></Skeleton.Button>}
     },
     {
       title: 'Floor Price',
       dataIndex: 'floorPrice',
       key: 'floorPrice',
       align: 'left',
-      render: () => <Skeleton.Button shape={'square'} active style={{ height: '0.3rem', minWidth: '0.3rem',borderRadius:'8px' }}></Skeleton.Button>
+      className:'table_col',
+      render: () => <Skeleton.Button shape={'square'} active style={{ height: '0.3rem', minWidth: '1rem',borderRadius:'8px' }}></Skeleton.Button>
     },
     {
       title: 'Down Payment ( % )',
       dataIndex: 'advanceRate',
       align: 'left',
       key: 'advanceRate',
-      render: () => <Skeleton.Button shape={'square'} active style={{ height: '0.3rem', minWidth: '0.3rem',borderRadius:'8px' }}></Skeleton.Button>
+      className:'table_col',
+      render: () => <Skeleton.Button shape={'square'} active style={{ height: '0.3rem', minWidth: '1rem',borderRadius:'8px' }}></Skeleton.Button>
     },
     {
       title: 'Down Payment',
       dataIndex: 'primePrice',
       key: 'primePrice',
       align: 'left',
-      render: () => <Skeleton.Button shape={'square'} active style={{ height: '0.3rem', minWidth: '0.3rem',borderRadius:'8px' }}></Skeleton.Button>
+      className:'table_col',
+      render: () => <Skeleton.Button shape={'square'} active style={{ height: '0.3rem', minWidth: '1rem',borderRadius:'8px' }}></Skeleton.Button>
     },
   ];
 
