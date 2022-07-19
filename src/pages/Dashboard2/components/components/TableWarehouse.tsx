@@ -45,7 +45,6 @@ export default function TableWarehouse(props: {
   const navigate = useNavigate()
   const ethRate = useAppSelector(state => new BigNumber(state.app.data.EthPrice))
 
-  console.log('item', Source)
   const jumpToEthscan = (e: DataSource2) => {
     if (e.terminated()) return
     navigate(`/vaultsDetail/${e.nftAddress}/${e.tokenId}`)

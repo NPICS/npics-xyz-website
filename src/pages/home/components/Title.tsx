@@ -133,7 +133,7 @@ export default function Title() {
           start={{ opacity: 0, transform: 'translateX(-0.5rem)' }}
           end={{ opacity: 1, transform: 'translateX(0)' }}
         >
-          <Link to={'/marketPlace'}>
+          <Link to={'/marketplace'}>
             <ButtonDefault types="three" scale={true}>
               Marketplace
             </ButtonDefault>

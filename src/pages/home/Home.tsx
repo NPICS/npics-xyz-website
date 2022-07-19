@@ -96,7 +96,6 @@ function Home() {
       if (!isHover) {
         const startSwiper = () => {
           startTimer = setTimeout(() => {
-            console.log('执行')
             if (checkText === 3) {
               setCheckText(1)
             } else {

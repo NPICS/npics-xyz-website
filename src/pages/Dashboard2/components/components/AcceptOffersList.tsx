@@ -183,9 +183,7 @@ export default function AcceptOffersList(props: IProps) {
           <FlexList flexDirection={"column"} gap={"0.1rem"} overflow={"auto"} marginTop={"0.2rem"}>
             {
               offerList && offerList.map((item: Offers, idx: Key | null | undefined) => {
-                return <>
-                  <AcceptOffersCell nftInfo={nftInfo} setAcceptOffer={props.setAcceptOffer} offerInfo={item} key={idx} setShowOffer={setShowOffer} />
-                </>
+                return <AcceptOffersCell nftInfo={nftInfo} setAcceptOffer={props.setAcceptOffer} offerInfo={item} key={idx} setShowOffer={setShowOffer} />
               })
             }
           </FlexList>

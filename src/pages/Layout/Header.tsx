@@ -282,7 +282,7 @@ function XHeader() {
             <img src={imgurl.logoBeta} alt="" />
           </LogoLink>
           <NavLink
-            to={"marketPlace"}
+            to={"marketplace"}
             style={({ isActive }) =>
               isActive ? active : normal}
           >
