@@ -143,6 +143,7 @@ export default function TableWarehouse(props: {
                 </Td>
                 <Td>
                   {
+                    // <Flex alignItems='center' justifyContent='center' gap="10px">
                     item.terminated() ? <div /> : <Flex alignItems='center' justifyContent='center' gap="10px">
                       <ButtonDefault height='45px' minWidth='120px' types='normal' onClick={() => navigate(`/vaultsDetail/${item.nftAddress}/${item.tokenId}`)}>
                         Repay

@@ -103,7 +103,7 @@ export default function AcceptOffersList(props: IProps) {
         setCursor(result.data.cursor)
         const offerList = deserializeArray(Offers, JSON.stringify(result.data.offerList))
         setOfferList(offerList)
-        setSecond(1)
+        setSecond(0)
       }
       setRefresh(false)
     } catch (e) {
@@ -149,7 +149,7 @@ export default function AcceptOffersList(props: IProps) {
           textAlign={"center"}
         >Acceptable Offers List</Typography>
         {/* Refresh  */}
-        <Flex gap={"0.2rem"} alignItems={"center"} justifyContent={"end"} width={"24%"} style={{ cursor: "pointer" }}>
+        <Flex gap={"0.2rem"} alignItems={"center"} justifyContent={"end"} width={"26%"} style={{ cursor: "pointer" }}>
           <Typography>{second} seconds ago</Typography>
           <Flex
             alignItems={"center"}
@@ -170,10 +170,10 @@ export default function AcceptOffersList(props: IProps) {
           {/* Select Office */}
           <Flex justifyContent={"end"} alignItems={"center"} marginTop={"0.32rem"}>
             <StyledSelect onSelect={(value: any) => setCurrentSort(value)}
-              defaultValue={Sort.priceToHigh}
+              defaultValue={Sort.priceToLow}
               dropdownClassName="ant-select-reset">
-              <Option value={Sort.priceToHigh}>Price: Low to High</Option>
               <Option value={Sort.priceToLow}>Price: high to low</Option>
+              <Option value={Sort.priceToHigh}>Price: Low to High</Option>
               <Option value={Sort.timeNew}>Newest</Option>
               <Option value={Sort.timeExpiring}>Expiring Soon</Option>
             </StyledSelect>
@@ -224,7 +224,7 @@ function AcceptOffersCell(props: {
   >
     {/* Market Icon */}
     <Box borderRadius={"0.18rem"} background={"#eee"}>
-      <Icon style={{ borderRadius: '0.18rem' }} width={"0.36rem"} height={"0.36rem"} src={nftInfo?.imageUrl}></Icon>
+      <Icon style={{ borderRadius: '0.18rem' }} width={"0.36rem"} height={"0.36rem"} src={imgurl.market.seaport} />
     </Box>
     {/* Price */}
     <Flex marginLeft={"0.2rem"}

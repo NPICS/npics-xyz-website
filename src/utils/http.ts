@@ -59,7 +59,7 @@ export function myPost(url: any, params?: any, cancel?:any) {
     })
 }
 
-export function myGet(url: any, param: any) {
+export function myGet(url: any, param: any = {}) {
     return new Promise((resolve, reject) => {
         axios.get(url, {
             params: param

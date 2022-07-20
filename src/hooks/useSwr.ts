@@ -6,21 +6,32 @@ import { useDeserializeArray, useDeserialize } from './useDeserialize';
 import { Offers } from "model/offers";
 import { deserialize, deserializeArray } from "class-transformer";
 import {useMemo} from 'react';
-interface SwrData {
-  code: number;
-  data: any;
-  message: string;
-  success: boolean;
-}
 
 
-function useTokenInvalidation(data:SwrData) {
-  const dispatch = useAppDispatch()
-  if(!data) return
-  if (data.code === 4003) {
-    dispatch(clearUserData())
-  }
-}
+// export function useSwrCreatorRoyalty () {
+
+
+//   const { data, error } = useSWR(`/npics-nft/app-api/v2/neo/getOfferFee/${'address'}`)
+// }
+
+
+
+
+// interface SwrData {
+//   code: number;
+//   data: any;
+//   message: string;
+//   success: boolean;
+// }
+
+
+// function useTokenInvalidation(data:SwrData) {
+//   const dispatch = useAppDispatch()
+//   if(!data) return
+//   if (data.code === 4003) {
+//     dispatch(clearUserData())
+//   }
+// }
 
 // export enum Sort {
 //   priceToLow='PROCETOLOW',

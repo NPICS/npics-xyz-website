@@ -13,9 +13,11 @@ import { useAppSelector } from "store/hooks";
 import { useAsync } from 'react-use';
 import { ContractAddresses } from 'utils/addresses';
 import { useERC721Contract, useNpicsContract } from 'hooks/useContract';
-import { notification } from 'antd';
+import { notification, Popover } from 'antd';
 import http from 'utils/http';
-import { useERC20Contract } from '../../../../hooks/useContract';
+// import { useERC20Contract } from '../../../../hooks/useContract';
+import tipsIcon from "assets/images/market/exclamation_point.png"
+import { Pop20 } from 'component/Popover/Popover';
 interface IProps {
   showOffer: OfferModal
   nftInfo: DataSource2 | undefined
@@ -23,13 +25,18 @@ interface IProps {
   setShowOffer:React.Dispatch<React.SetStateAction<OfferModal>>
 }
 
+let X2Y2Fee = 0.005
+let MarkerFee = 0.02
+
 export default function AcceptOffer(props:IProps) {
   const ethRate = useAppSelector(state => new BigNumber(state.app.data.EthPrice))
   const {showOffer, accpetOffer, nftInfo, setShowOffer} = props
   const [accept,setAccept] = useState<boolean>(false)
+  const [creatorRoyalty, setCreatorRoyalty] = useState<number>(0)
   // const erc721 = useERC721Contract(nftInfo?.nftAddress as string)
   const npics = useNpicsContract()
   const nft = useERC721Contract(nftInfo?.nftAddress as string)
+  
   useAsync(async () => {
     if (!nftInfo || !accpetOffer || !npics) return
     try {
@@ -37,8 +44,8 @@ export default function AcceptOffer(props:IProps) {
       // await erc721?.approve(approveTo,nftInfo.tokenId)
       const nbpAddress = await npics.getNbpFor(nftInfo.nftAddress, nftInfo.tokenId)
       const owner = await nft?.ownerOf(nftInfo.tokenId)
-      console.log(`owner => ${owner}`) 
-      console.log(`nbpAddress => ${nbpAddress}`)
+      // console.log(`owner => ${owner}`) 
+      // console.log(`nbpAddress => ${nbpAddress}`)
       const parameter = {
         "caller": owner,
         "op": 2,
@@ -81,6 +88,18 @@ export default function AcceptOffer(props:IProps) {
     }
 
   },[accept])
+
+  useAsync(async() => {
+    if(!nftInfo) return
+    console.log(`nftInfo => ${nftInfo?.nftAddress}`)
+    const result: any =  await http.myGet(`/npics-nft/app-api/v2/neo/getOfferFee/${nftInfo?.nftAddress}`)
+    console.log(`CreatorRoyalty => ${result.data.data}`)
+    if(result.data.code === 200) {
+      const _creatorRoyalty = result.data.data / 10000 / 100
+      setCreatorRoyalty(_creatorRoyalty)
+    }
+    
+  },[nftInfo])
   
 
   return <Modal isOpen={showOffer === OfferModal.OFFER}>
@@ -90,7 +109,7 @@ export default function AcceptOffer(props:IProps) {
       borderRadius={`0.2rem`}
       padding={`0.4rem`}
     >
-      <PopupTitle title={"Accept Offec"} canClose={false}/>
+      <PopupTitle title={"Accept Offer"} canClose={false}/>
       <Grid
         marginTop={`0.3rem`}
         padding={`0.2rem 0.25rem`}
@@ -136,12 +155,12 @@ export default function AcceptOffer(props:IProps) {
               overflow={`hidden`}
             >
               <Flex flex={1} borderBottom={`0.01rem solid #0000001A`} background={`#fff`}>
-                <OfferCell title={`Offer`} titleColor={`#000`} symbolIcon={true} symbolOrVal={`${accpetOffer?.OfferPriceDisplay()}`}/>
+                <OfferCell title={`Offer`} titleColor={`#000`} infoIcon={false} symbolIcon={true} symbolOrVal={`${accpetOffer?.OfferPriceDisplay()}`}/>
               </Flex>
-              <OfferCell title={`Vault Debt`} symbolIcon={true} symbolOrVal={`${nftInfo?.debtString()}`}/>
-              <OfferCell title={`X2Y2 Fee`} symbolIcon={false} symbolOrVal={`0.5%`}/>
-              <OfferCell title={`Marker Fee`} symbolIcon={false} symbolOrVal={`2%`}/>
-              <OfferCell title={`Creator Royalty`} symbolIcon={false} symbolOrVal={`5%`}/>
+              <OfferCell title={`Vault Debt`} infoIcon={false} symbolIcon={true} symbolOrVal={`${nftInfo?.debtString()}`}/>
+              <OfferCell title={`X2Y2 Fee`} popoverInfo={"Fee to X2Y2"} infoIcon={true} symbolIcon={false} symbolOrVal={`${X2Y2Fee * 100}%`}/>
+              <OfferCell title={`Marker Fee`} popoverInfo={"Fee to NPics"} infoIcon={true} symbolIcon={false} symbolOrVal={`${MarkerFee * 100}%`}/>
+              <OfferCell title={`Creator Royalty`} popoverInfo={"Fee to the creator of NFT"} infoIcon={true} symbolIcon={false} symbolOrVal={`${ creatorRoyalty && creatorRoyalty * 100}%`}/>
             </Flex>
           </Flex>
         </Grid>
@@ -171,7 +190,7 @@ export default function AcceptOffer(props:IProps) {
               >
                 {
                   nftInfo && accpetOffer &&
-                  accpetOffer.price.minus(nftInfo.totalDebt).minus(new BigNumber('0.055').times(accpetOffer.price)).div(10 ** 18).toFixed(2,1)
+                  accpetOffer.price.minus(nftInfo.totalDebt).minus(new BigNumber(`${X2Y2Fee + MarkerFee + creatorRoyalty}`).times(accpetOffer.price)).div(10 ** 18).toFixed(2,1)
                 }
               </Typography>
               <Typography
@@ -182,7 +201,7 @@ export default function AcceptOffer(props:IProps) {
               >
                 {
                   nftInfo && accpetOffer &&
-                  `(${thousandFormat(accpetOffer.price.minus(nftInfo.totalDebt).minus(new BigNumber('0.055').times(accpetOffer.price)).times(ethRate).div(10 ** 18).toFixed(2,1))})`
+                  `(${thousandFormat(accpetOffer.price.minus(nftInfo.totalDebt).minus(new BigNumber(X2Y2Fee + MarkerFee + creatorRoyalty).times(accpetOffer.price)).times(ethRate).div(10 ** 18).toFixed(2,1))})`
                 }
               </Typography>
             </Flex>
@@ -209,6 +228,8 @@ function OfferCell(props: {
   title: string,
   titleColor?: string
   symbolIcon: boolean
+  infoIcon: boolean
+  popoverInfo?: string
   symbolOrVal?: string | number
 }) {
   return <Flex
@@ -221,7 +242,15 @@ function OfferCell(props: {
       color={props.titleColor ?? `rgba(0, 0, 0, .5)`}
       fontSize={`0.14rem`}
       fontWeight={500}
-    >{props.title}</Typography>
+    >
+      {props.title}
+      <Pop20
+        content={props.popoverInfo ?? ''}
+      >
+        <Icon style={{marginLeft: '0.08rem'}} width={"0.14rem"} src={tipsIcon} hidden={!props.infoIcon}/>
+      </Pop20>
+    </Typography>
+    
     <Flex alignItems={`center`} gap={`0.06rem`}>
       <Icon src={wethIcon} width={`0.1rem`} height={`0.15rem`} hidden={!props.symbolIcon}/>
       <Typography
