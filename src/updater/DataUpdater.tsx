@@ -30,8 +30,8 @@ export default function DataUpdater() {
   * */
   useAsync(async () => {
     try {
-      if (sessionStorage.getItem(SessionStorageKey.WalletAuthorized)) {
-        let walletName = sessionStorage.getItem(SessionStorageKey.WalletName) ?? Wallet.INJECTED.toString()
+      if (localStorage.getItem(SessionStorageKey.WalletAuthorized)) {
+        let walletName = localStorage.getItem(SessionStorageKey.WalletName) ?? Wallet.INJECTED.toString()
         let wallet = walletName as unknown as Wallet
         let connector = getConnectorForWallet(wallet)
         await connector.activate(CHAIN_ID)

@@ -63,9 +63,9 @@ function App() {
     // changed account
     if (account && oldAccount.current) {
       // remove old account data
-      sessionStorage.clear()
+      localStorage.clear()
       // store new account
-      sessionStorage.setItem(SessionStorageKey.WalletAuthorized, account)
+      localStorage.setItem(SessionStorageKey.WalletAuthorized, account)
       // fetch new account data
       action(clearUserData())
       action(fetchUser2())
@@ -78,7 +78,7 @@ function App() {
     else if (oldAccount.current && !account) {
       console.log(`?????, ${oldAccount.current}, ${account}`)
       // remove all data
-      sessionStorage.clear()
+      localStorage.clear()
       // logout
       action(clearUserData())
       // action(setIsLogin(false))
@@ -87,7 +87,7 @@ function App() {
 
     /// first connect
     else if (!oldAccount.current && account) {
-      sessionStorage.setItem(SessionStorageKey.WalletAuthorized, account)
+      localStorage.setItem(SessionStorageKey.WalletAuthorized, account)
       action(fetchUser2())
     }
 

@@ -100,7 +100,7 @@ function VaultsTable(props: IProps) {
         setShowModal(true)
       } else {
          // Prevent refresh popup windows
-        let walletAddress = sessionStorage.getItem(SessionStorageKey.WalletAuthorized)
+        let walletAddress = localStorage.getItem(SessionStorageKey.WalletAuthorized)
         if(!walletAddress) {
           // action(setShowWalletModalOpen(true)) // Modal
           setTimeout(() => {
@@ -125,7 +125,7 @@ function VaultsTable(props: IProps) {
         "signature": signatureMsg
       })
       if (loginRep.code === 200) {
-        sessionStorage.setItem(SessionStorageKey.AccessToken, loginRep.data)
+        localStorage.setItem(SessionStorageKey.AccessToken, loginRep.data)
         // action(setIsLogin(true))
         action(updateLoginState())
       } else {

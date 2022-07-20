@@ -16,7 +16,7 @@ axios.interceptors.request.use((config: any) => {
     if (config.method === 'post') {
         config.data = JSON.stringify(config.data);
     }
-    config.headers['Authorization'] = sessionStorage.getItem(SessionStorageKey.AccessToken);
+    config.headers['Authorization'] = localStorage.getItem(SessionStorageKey.AccessToken);
     return config;
 }, (error: any) => {
     console.log('wrong parameter')
@@ -26,7 +26,7 @@ axios.interceptors.request.use((config: any) => {
 
 axios.interceptors.response.use((res: any) => {
     if(res.data.code === 4003) {
-        sessionStorage.removeItem(SessionStorageKey.AccessToken)
+        localStorage.removeItem(SessionStorageKey.AccessToken)
         message.error(res.data.message)
     }
     if (!res.data.success) {
@@ -80,7 +80,7 @@ export function myGet(url: any, param: any = {}) {
 //         axios.get(uri, {
 //             params: params ?? {},
 //             headers: {
-//                 "Authorization": sessionStorage.getItem(SessionStorageKey.AccessToken) ?? ""
+//                 "Authorization": localStorage.getItem(SessionStorageKey.AccessToken) ?? ""
 //             }
 //         }).then(resp => {
 //             // http request success
@@ -92,7 +92,7 @@ export function myGet(url: any, param: any = {}) {
 //                         break
 //                     case 4003:
 //                         /// token invalid, clear app updater
-//                         sessionStorage.removeItem(SessionStorageKey.AccessToken)
+//                         localStorage.removeItem(SessionStorageKey.AccessToken)
 //                         break
 //                 }
 //             } else {

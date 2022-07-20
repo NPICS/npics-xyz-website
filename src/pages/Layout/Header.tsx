@@ -73,9 +73,9 @@ function XHeader() {
   //   // changed account
   //   if (account && oldAccount.current) {
   //     // remove old account data
-  //     sessionStorage.clear()
+  //     localStorage.clear()
   //     // save new account
-  //     sessionStorage.setItem(SessionStorageKey.WalletAuthorized, account)
+  //     localStorage.setItem(SessionStorageKey.WalletAuthorized, account)
   //     // fetch new account data
   //     action(clearUserData())
   //     action(fetchUser2())
@@ -87,7 +87,7 @@ function XHeader() {
   //   else if (oldAccount.current && !account) {
   //     console.log(`?????, ${oldAccount.current}, ${account}`)
   //     // remove all data
-  //     sessionStorage.clear()
+  //     localStorage.clear()
   //     // make unlogin
   //     action(clearUserData())
   //     action(setIsLogin(false))
@@ -95,7 +95,7 @@ function XHeader() {
 
   //   /// first connect
   //   else if (!oldAccount.current && account) {
-  //     sessionStorage.setItem(SessionStorageKey.WalletAuthorized, account)
+  //     localStorage.setItem(SessionStorageKey.WalletAuthorized, account)
   //     action(fetchUser2())
   //   }
 
@@ -107,12 +107,12 @@ function XHeader() {
   // active wallet connect
   useEffect(() => {
     // check account, auto connect wallet
-    // let account = sessionStorage.getItem(SessionStorageKey.WalletAuthorized)
+    // let account = localStorage.getItem(SessionStorageKey.WalletAuthorized)
     // if (account) {
     //   activate(connectors.injected).then(() => { })
     // }
     // check token
-    // let token = sessionStorage.getItem(SessionStorageKey.AccessToken)
+    // let token = localStorage.getItem(SessionStorageKey.AccessToken)
     // action(setIsLogin(token != null))
     // eslint-disable-next-line
   }, [])
@@ -125,7 +125,7 @@ function XHeader() {
       // await activate(connectors.injected, (error) => {
       //   const Error = JSON.parse(JSON.stringify(error))
       //   if (Error.name === "UnsupportedChainIdError") {
-      //     sessionStorage.removeItem(SessionStorageKey.WalletAuthorized)
+      //     localStorage.removeItem(SessionStorageKey.WalletAuthorized)
       //     action(fetchUser(`{}`))
       //     notification.error({ message: "Prompt connection failed, please use the Ethereum network" })
       //   } else {
@@ -150,7 +150,7 @@ function XHeader() {
 
   const onQuit = () => {
     setAccountPop(false)
-    sessionStorage.removeItem(SessionStorageKey.WalletAuthorized)
+    localStorage.removeItem(SessionStorageKey.WalletAuthorized)
     // connector.deActivate()
     console.log(injected)
     injected.resetState()

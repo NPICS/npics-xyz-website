@@ -233,7 +233,7 @@ export default function VaultsDetail() {
       login2()
     } else {
       // Prevent refresh popup windows
-      let walletAddress = sessionStorage.getItem(SessionStorageKey.WalletAuthorized)
+      let walletAddress = localStorage.getItem(SessionStorageKey.WalletAuthorized)
       if (!account && !walletAddress) {
         setTimeout(() => {
           action(setIsShowConnect(true)) // Popover
@@ -256,7 +256,7 @@ export default function VaultsDetail() {
         "signature": signatureMsg
       })
       if (loginRep.code === 200) {
-        sessionStorage.setItem(SessionStorageKey.AccessToken, loginRep.data)
+        localStorage.setItem(SessionStorageKey.AccessToken, loginRep.data)
         action(updateLoginState())
         // action(setIsLogin(true))
       } else {

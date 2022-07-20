@@ -74,7 +74,7 @@ export default function Market() {
         background={"#fff"}
         // minHeight={"60vh"}
         borderRadius={"0.1rem"}
-        minWidth={"15.5rem"}
+        minWidth={"15rem"}
       >
         <Outlet />
       </Box>

@@ -50,7 +50,7 @@ const initialState: IAppState = {
 }
 
 export const fetchUser2 = createAsyncThunk("app/fetchUser2", async (args, ThunkAPI) => {
-  let walletAddress = sessionStorage.getItem(SessionStorageKey.WalletAuthorized)
+  let walletAddress = localStorage.getItem(SessionStorageKey.WalletAuthorized)
   if (walletAddress) {
     return await http.myPost("/npics-server/app-api/v2/user/getUserInfo", {
       address: walletAddress
@@ -121,7 +121,7 @@ const appSlice = createSlice({
     * local store contain access token
     * */
     updateLoginState(state) {
-      state.isLogin = sessionStorage.getItem(SessionStorageKey.AccessToken) != null
+      state.isLogin = localStorage.getItem(SessionStorageKey.AccessToken) != null
     },
     setShowWalletModalOpen(state, action) {
       state.showWalletModalOpen = action.payload
