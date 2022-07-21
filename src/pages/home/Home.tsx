@@ -27,6 +27,7 @@ import Npics from './components/Npics'
 import Title from './components/Title'
 import Detail from './components/Detail'
 import { Animate } from 'react-simple-animate'
+import {useAppSelector} from "../../store/hooks"
 const MyTable: any = styled(Table)`
   /* min-width: 16rem; */
   height: 7.47rem;
@@ -34,6 +35,7 @@ const MyTable: any = styled(Table)`
 `
 
 function Home() {
+  const isAnimate = useAppSelector(state=>state.app.isAnimate)
   const [checkText, setCheckText] = useState<number>(1)
   const [textContent, setTextContent] = useState<string>('')
   const [progress, setProgress] = useState<string>('0%')
@@ -142,24 +144,22 @@ function Home() {
         })
       }
     })
-    const detailDom = document.querySelector('.detail_div')
-    const windowHeight = window.innerHeight
-    window.addEventListener('scroll', handleScroll, false)
-    return () => {
-      clearTimeout(timer)
-      window.removeEventListener('scroll', handleScroll)
-    }
+    // window.addEventListener('scroll', handleScroll, false)
+    // return () => {
+    //   clearTimeout(timer)
+    //   window.removeEventListener('scroll', handleScroll)
+    // }
   }, [])
-  const handleScroll = () => {
-    const detailDom = document.querySelector('.detail_div')
-    const windowHeight = window.innerHeight
-    if (detailDom) {
-      const domHeight = detailDom.getBoundingClientRect().y
-      if (domHeight! <= windowHeight) {
-        setShowAnimeta(true)
-      }
-    }
-  }
+  // const handleScroll = () => {
+  //   const detailDom = document.querySelector('.detail_div')
+  //   const windowHeight = window.innerHeight
+  //   if (detailDom) {
+  //     const domHeight = detailDom.getBoundingClientRect().y
+  //     if (domHeight! <= windowHeight) {
+  //       setShowAnimeta(true)
+  //     }
+  //   }
+  // }
   const mouseEnter = () => {
     clearTimeout(timer)
     setIsHover(true)
@@ -200,11 +200,11 @@ function Home() {
         <div className="title detail_title">Product Framework</div>
         <div className="detail_div">
           <div className="detail_info">
-            <Detail animeta={showAnimeta} />
+            <Detail />
           </div>
           <div className="detail_img_box">
             <Animate
-              play={showAnimeta}
+              play={isAnimate}
               duration={0.5}
               delay={0.5}
               start={{ opacity: 0, transform: 'translateX(1rem)' }}
@@ -249,8 +249,9 @@ function Home() {
           </div>
           <div className="borrow_more">
             <ButtonDefault
-              types={'second'}
-              scale={true}
+              types='primary'
+              color='#fff'
+              isScale={true}
               onClick={() => {
                 window.open(urls.resource, '_blank')
               }}
@@ -258,7 +259,7 @@ function Home() {
               Get Started
             </ButtonDefault>
             <Link to={'/dashboard/rewards'}>
-              <ButtonDefault color="#fff" types={'two'} scale={true}>
+              <ButtonDefault color="#333" types={'second'} isScale={true}>
                 Claim Rewards
               </ButtonDefault>
             </Link>
@@ -294,7 +295,7 @@ function Home() {
                   <span>{`${(aprData.rewardApr * 100).toFixed(2)}%`}</span>
                 </div>
                 <span>
-                  The rewards APR is real-time annual rate of Agreement subsidy
+                  The rewards APR is real-time annual rate of lending pool subsidy
                 </span>
               </div>
             </div>

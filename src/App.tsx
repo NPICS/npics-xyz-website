@@ -94,7 +94,6 @@ function App() {
     // store old account
     oldAccount.current = account
   }, [account])
-
   return (
     <>
       {isShowLoading ? <Loading></Loading> : null}

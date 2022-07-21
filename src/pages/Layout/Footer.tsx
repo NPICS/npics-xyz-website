@@ -57,7 +57,7 @@ const FooterWrap = styled.div`
     a {
       color: ${props => props.theme.textColor};
       &:hover {
-        color: #fff;
+        color:${(props:{isHome:boolean}) => props.isHome ? '#fff' : '#333'};
       }
     }
   }
@@ -112,7 +112,7 @@ function Footer() {
   ]
 
   return (
-    <FooterWrap>
+    <FooterWrap isHome={isHome}>
       <div className="footer-left">
         <a href="/">
           <Icon

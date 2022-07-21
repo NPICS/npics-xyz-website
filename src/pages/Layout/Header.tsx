@@ -7,7 +7,7 @@ import { useWeb3React } from '@web3-react/core';
 import { connectors } from "utils/connectors";
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { clearUserData, fetchUser, fetchUser2, setIsShowConnect, setShowWalletModalOpen } from 'store/app';
-import { FlexDiv, LogoLink, Nav } from './headerStyled';
+import { FlexDiv, Height, LogoLink, Nav } from './headerStyled';
 import WalletBalance from './WalletBalance';
 import { deserialize } from "class-transformer";
 import { User } from "../../model/user";
@@ -46,6 +46,7 @@ const StyledHoverSpan = styled.span`
 `
 
 function XHeader() {
+  const isFixed = useAppSelector(state => state.app.isFixed)
   const { account, connector } = useWeb3React()
   const oldAccount = useRef<string | undefined | null>()
   const [accountPop, setAccountPop] = useState<boolean>(false)
@@ -133,7 +134,7 @@ function XHeader() {
       //   }
       // })
       action(fetchUser2())
-    } catch (e:any) {
+    } catch (e: any) {
       notification.error({ message: e.message })
     } finally {
       action(setIsShowConnect(false))
@@ -256,23 +257,27 @@ function XHeader() {
   useEffect(() => {
     console.log(history.pathname.substring(1, 4));
     console.log(history.pathname.substring(1, 13));
-    if(history.pathname === '/'){
+    if (history.pathname === '/') {
       console.log("home");
       setActiviRoute('home')
-    }else if (history.pathname.substring(1, 4) === 'nft') {
+    } else if (history.pathname.substring(1, 4) === 'nft') {
       setActiviRoute('nft')
       return
     } else if (history.pathname.substring(1, 13) === 'vaultsDetail') {
       setActiviRoute('vaultsDetail')
       return
     }
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+    window.scrollTo(0, 0)
     setActiviRoute('')
     // eslint-disable-next-line
   }, [history.pathname])
 
   return (
-    <Nav>
-      {/* <Flex
+    <>
+      <Nav fixed={isFixed}>
+        {/* <Flex
         position="absolute"
         // width="100%"
         justifyContent="space-between"
@@ -286,7 +291,7 @@ function XHeader() {
             style={({ isActive }) =>
               isActive ? active : normal}
           >
-            <StyledHoverSpan style={{color: `${activiRoute === 'nft' || activiRoute === 'home' ? '#fff' : ''}` }}>Marketplace</StyledHoverSpan>
+            <StyledHoverSpan style={{ color: `${activiRoute === 'nft' || activiRoute === 'home' ? '#fff' : ''}` }}>Marketplace</StyledHoverSpan>
           </NavLink>
           <NavLink to={"/dashboard"}
             style={({ isActive }) =>
@@ -310,7 +315,7 @@ function XHeader() {
                 return (
                   <a href={item.link} key={item.name} target="_blank" >
                     <div className='tools_bg'>
-                      <Icon className='tools_icon' style={{ cursor: 'pointer'}} width='0.22rem' height='0.22rem' src={item.darkIcon} />
+                      <Icon className='tools_icon' style={{ cursor: 'pointer' }} width='0.22rem' height='0.22rem' src={item.darkIcon} />
                     </div>
                   </a>
                 )
@@ -335,16 +340,16 @@ function XHeader() {
             {/* <Icon width={`${account ? '0.34rem' : '0.14rem' } `} height={`${account ? '0.34rem' : '0.16rem' } `} src={account ? defaultAvatar : login} /> */}
             {
               account ?
-              <Icon width='0.34rem' height='0.34rem' src={defaultAvatar} /> :
-              <Flex 
-                alignItems='center'
-                justifyContent='center'
-                width='0.34rem'
-                height='0.34rem'
-                borderRadius="0.1rem"
-              >
-                <Icon width='0.14rem' height='0.16rem' src={login} />
-              </Flex>
+                <Icon width='0.34rem' height='0.34rem' src={defaultAvatar} /> :
+                <Flex
+                  alignItems='center'
+                  justifyContent='center'
+                  width='0.34rem'
+                  height='0.34rem'
+                  borderRadius="0.1rem"
+                >
+                  <Icon width='0.14rem' height='0.16rem' src={login} />
+                </Flex>
             }
 
           </Flex>
@@ -383,8 +388,11 @@ function XHeader() {
       >
         <div onClick={connect}><img src={imgurl.metamaskLogo} alt=""></img>MetaMask</div>
       </Modal> */}
-      {/* </Flex> */}
-    </Nav>
+        {/* </Flex> */}
+      </Nav>
+      <Height></Height>
+    </>
+
   );
 }
 

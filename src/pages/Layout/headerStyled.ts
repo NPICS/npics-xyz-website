@@ -32,14 +32,17 @@ export const accountNav = [
 
 export const Nav = styled.div`
   width: 100%;
-  height: 0.9rem;
+  height: 0.8rem;
+  position: fixed;
   display: flex;
   justify-content: space-between;
+  backdrop-filter: blur(10px);
   align-items: center;
   margin: 0 auto;
-  padding: 0.2rem 1.5rem;
+  padding: 0.15rem 1.5rem;
+  transition:all .1s ease-in-out;
   /* background: transparent; */
-  background: ${props => props.theme.headerBg};
+  background: ${(props: { fixed: boolean }) => props.fixed ? 'rgba(0,0,0,.8)' : 'transparent'};
   & > div {
     text-align: center;
   }
@@ -155,6 +158,10 @@ export const Nav = styled.div`
       }
     }
   }
+`
+export const Height = styled.div`
+  width: 100%;
+  height: 0.8rem;
 `
 export const BtnLink = styled(NavLink)`
   position: relative;

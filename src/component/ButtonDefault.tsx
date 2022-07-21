@@ -12,6 +12,7 @@ interface Iprops {
   types?: string,
   disabled?: boolean,
   scale?: boolean,
+  isScale?:boolean,
   children: string | any,
   onClick?: Function | any,
   color?: string
@@ -25,6 +26,7 @@ const StyledButton = styled.button<Iprops>`
     box-shadow: ${(props => props.types === 'second' ? "0rem 0rem 0.2rem rgba(0, 0, 0, 0.1)" : '')};
     border: ${(props => props.types === 'second' ? "0" : '')};
     transform: ${(props => props.disabled ? '' : props.scale ? 'scale(1.06)' : '')};
+    transform: ${(props => props.isScale ? 'scale(1.06)' : '')};
   }
   transition: all .2s;
   &:disabled {
@@ -34,6 +36,8 @@ const StyledButton = styled.button<Iprops>`
   }
   background: ${(props => {
     switch (props.types) {
+      case 'primary':
+        return '#FF490F'
       case 'one':
         return 'rgba(255,255,255,.1)';
       case 'two':
@@ -54,6 +58,8 @@ const StyledButton = styled.button<Iprops>`
   })};
    border: ${(props => {
     switch (props.types) {
+      case 'primary':
+        return '0'
       case 'one':
         return '0';
       case 'two':
