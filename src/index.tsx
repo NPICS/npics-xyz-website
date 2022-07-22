@@ -36,10 +36,10 @@ const StyledThemeProvider = (props: any) => {
   useEffect(() => {
     if (history.pathname === '/') {
       setIsHome(true);
-      window.addEventListener('scroll', handleScroll, false)
     } else {
       setIsHome(false)
     }
+    window.addEventListener('scroll', handleScroll, false)
     // eslint-disable-next-line
   }, [history.pathname])
 
