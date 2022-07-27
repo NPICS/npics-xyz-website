@@ -20,13 +20,13 @@ export default function MyRewards() {
   useEffect(() => {
     getBalance()
     // eslint-disable-next-line
-  }, [])
+  }, [account, provider])
   const getBalance = async () => {
     if (!provider) return
     // TODO: library => provider @quan
     const signer = provider.getSigner(account)
     let npics = new Npics(signer)
-    const Balance: BigNumber = await npics.getRewardsBalance(userInfo?.address || '')
+    const Balance: BigNumber = await npics.getRewardsBalance(account || '')
     setBalance(new BigNumber(Balance.toString()))
   }
 
