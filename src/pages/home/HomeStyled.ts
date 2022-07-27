@@ -232,7 +232,7 @@ export const DetailBox = styled.div`
   align-items: flex-start;
   flex-direction: column;
   width: 16rem;
-  height: 88vh;
+  /* height: 88vh; */
   margin: 0 auto;
   padding: 1.3rem 0 0.2rem;
   color: #fff;
@@ -437,7 +437,7 @@ export const BorrowBox = styled.div`
     }
   }
   .borrow_more{
-    width: 4.1rem;
+    width: 4.2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;

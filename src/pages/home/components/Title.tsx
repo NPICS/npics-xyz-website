@@ -134,7 +134,7 @@ export default function Title() {
           end={{ opacity: 1, transform: 'translateX(0)' }}
         >
           <Link to={'/marketplace'}>
-            <ButtonDefault types="three" scale={true}>
+            <ButtonDefault types="primary" isScale={true} color='#fff'>
               Marketplace
             </ButtonDefault>
           </Link>
@@ -147,7 +147,7 @@ export default function Title() {
           end={{ opacity: 1, transform: 'translateX(0)' }}
         >
           <Link to={'/dashboard/rewards'}>
-            <ButtonDefault types="second" scale={true} color={'#000'}>
+            <ButtonDefault types="second" isScale={true} color="#333">
               Rewards
             </ButtonDefault>
           </Link>

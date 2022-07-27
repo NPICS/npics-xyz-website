@@ -33,7 +33,7 @@ export default function MyTable() {
       primePrice:"1"
     },
     {
-      index:1,
+      index:2,
       collection:"1",
       dayVolume:"1",
       floorPrice:"1",
@@ -41,7 +41,7 @@ export default function MyTable() {
       primePrice:"1"
     },
     {
-      index:1,
+      index:3,
       collection:"1",
       dayVolume:"1",
       floorPrice:"1",
@@ -49,7 +49,7 @@ export default function MyTable() {
       primePrice:"1"
     },
     {
-      index:1,
+      index:4,
       collection:"1",
       dayVolume:"1",
       floorPrice:"1",
@@ -57,7 +57,7 @@ export default function MyTable() {
       primePrice:"1"
     },
     {
-      index:1,
+      index:5,
       collection:"1",
       dayVolume:"1",
       floorPrice:"1",
@@ -65,7 +65,7 @@ export default function MyTable() {
       primePrice:"1"
     },
     {
-      index:1,
+      index:6,
       collection:"1",
       dayVolume:"1",
       floorPrice:"1",
@@ -73,7 +73,7 @@ export default function MyTable() {
       primePrice:"1"
     },
     {
-      index:1,
+      index:7,
       collection:"1",
       dayVolume:"1",
       floorPrice:"1",
@@ -109,7 +109,7 @@ export default function MyTable() {
       render: () =>{
         return (
           <Space size={15}>
-            <Skeleton.Button shape={'circle'} active style={{ height: '0.3rem', minWidth: '0.3rem' }}></Skeleton.Button>
+            <Skeleton.Avatar active shape="circle" />
             <Skeleton.Button shape={'square'} active style={{ height: '0.3rem', minWidth: '3rem',borderRadius:'8px' }}></Skeleton.Button>
           </Space>
         )
@@ -153,6 +153,7 @@ export default function MyTable() {
   return (
   <BgTable>
       <Table
+      rowKey="index"
       columns={columns}
       dataSource={collections}
       pagination={false}

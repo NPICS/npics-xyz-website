@@ -1,9 +1,9 @@
 // import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {Collections} from "../model/user";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { Collections } from "../model/user";
 // import {deserialize} from "class-transformer";
 import http from "../utils/http";
-import {SessionStorageKey} from "../utils/enums";
+import { SessionStorageKey } from "../utils/enums";
 import BigNumber from "bignumber.js";
 
 class Theme {
@@ -23,6 +23,8 @@ interface IAppState {
   Theme: Theme,
   data: data,
   isLogin: boolean,
+  isFixed: boolean,
+  isAnimate: boolean,
   interestAPR?: number
   rewardsAPR?: number,
   // eth -> usdt rate
@@ -37,6 +39,8 @@ const initialState: IAppState = {
   Theme: {
     isDark: true
   },
+  isFixed: false,
+  isAnimate: false,
   data: {
     collections: <Collections>{},
     isShowConnect: false,
@@ -92,6 +96,7 @@ export const updateBENDExchangeRate = createAsyncThunk("app/updateBENDExchangeRa
   }
 })
 
+
 const appSlice = createSlice({
   name: "app",
   initialState,
@@ -125,6 +130,12 @@ const appSlice = createSlice({
     },
     setShowWalletModalOpen(state, action) {
       state.showWalletModalOpen = action.payload
+    },
+    setFixed(state, action) {
+      state.isFixed = action.payload
+    },
+    setAnimate(state, action) {
+      state.isAnimate = action.payload
     }
   },
   extraReducers: (builder) => {
@@ -169,6 +180,8 @@ export const {
   setIsShowConnect,
   setIsLoading,
   setEthPrice,
+  setFixed,
+  setAnimate,
   // setIsLogin,
   updateLoginState,
   clearUserData,

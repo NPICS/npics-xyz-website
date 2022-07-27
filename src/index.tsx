@@ -1,20 +1,22 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
-import {Buffer} from "buffer"
+import { Buffer } from "buffer"
 import App from './App';
+import { setAnimate, setFixed } from 'store/app';
+import { useAppDispatch } from "./store/hooks"
 import './App.css'
 import reportWebVitals from './reportWebVitals';
 import "utils/rem"
 import "normalize.css"
 import 'antd/dist/antd'
 // import 'antd/dist/antd.css'
-import {Provider} from "react-redux";
+import { Provider } from "react-redux";
 import store from "./store";
-import {BrowserRouter as Router, useLocation} from 'react-router-dom';
-import {ThemeProvider} from 'styled-components'
-import {lightColors, darkColors} from './theme/colors';
+import { BrowserRouter as Router, useLocation } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components'
+import { lightColors, darkColors } from './theme/colors';
 // import { useAppSelector } from './store/hooks';
-import {GlobalStyle} from 'utils/globaStyle'
+import { GlobalStyle } from 'utils/globaStyle'
 import Web3Provider from "./connectors/Web3Provider";
 import Updater from "./updater";
 
@@ -27,16 +29,32 @@ const root = ReactDOM.createRoot(
 const StyledThemeProvider = (props: any) => {
   // const isDark = useAppSelector(updater => updater.app.Theme.isDark)
   // Temporary solution 😅
+  //That's it for now, it's alright 😁
+  const action = useAppDispatch()
   const history = useLocation()
   const [isHome, setIsHome] = useState<boolean>(true)
   useEffect(() => {
     if (history.pathname === '/') {
-      setIsHome(true)
+      setIsHome(true);
     } else {
       setIsHome(false)
     }
+    window.addEventListener('scroll', handleScroll, false)
     // eslint-disable-next-line
   }, [history.pathname])
+
+  const handleScroll = () => {
+    const detailDom = document.querySelector('.detail_div')
+    const scrollTop = document.documentElement.scrollTop
+    const windowHeight = window.innerHeight
+    if (detailDom) {
+      const domHeight = detailDom.getBoundingClientRect().y;
+      if (domHeight! <= windowHeight) {
+        action(setAnimate(true))
+      }
+    }
+    scrollTop > 150 ? action(setFixed(true)) : action(setFixed(false))
+  }
   const isDark = isHome
   return <ThemeProvider theme={isDark ? darkColors : lightColors} {...props} />
 }
@@ -46,9 +64,9 @@ root.render(
     <Router>
       <StyledThemeProvider>
         <Web3Provider>
-          <Updater/>
-          <GlobalStyle/>
-          <App/>
+          <Updater />
+          <GlobalStyle />
+          <App />
         </Web3Provider>
       </StyledThemeProvider>
     </Router>

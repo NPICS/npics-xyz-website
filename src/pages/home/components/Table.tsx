@@ -32,6 +32,9 @@ const BgTable = styled.div`
   width: 16rem;
   margin: 0 auto;
   /* margin-top: 0.5rem; */
+  .table_col{
+    font-size: 0.14rem !important;
+  }
 `
 
 
@@ -100,6 +103,7 @@ export default function MyTable() {
       dataIndex: 'index',
       key: 'index',
       align: 'center',
+      className:"table_col",
       render: (text,row,index) => {
       return <div>
         {index+1}
@@ -110,10 +114,11 @@ export default function MyTable() {
       dataIndex: 'collection',
       key: 'collection',
       align: 'left',
+      className:"table_col",
       render: (text, row) => <Link to={`/marketplace/collections/${row.address}`} onClick={() => ScrollTop()}>
         <div style={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center'}}>
           <img src={row.imageUrl} alt="" style={{ width: "0.5rem", height: "0.5rem", marginRight: "0.1rem", borderRadius: '0.3rem'}} />
-          <span style={{ wordBreak: 'break-all',fontSize: '0.16rem', color: '#fff', fontWeight: '700', marginRight: '0.1rem' }}>{text}</span>
+          <span style={{ wordBreak: 'break-all',fontSize: '0.14rem', color: '#fff', marginRight: '0.1rem' }}>{text}</span>
           <Icon style={{flexShrink: '0'}} src={openseaValidIcon} width={"0.16rem"} height={"0.16rem"}/>
         </div>
       </Link>,
@@ -123,6 +128,7 @@ export default function MyTable() {
       dataIndex: 'dayVolume',
       key: 'dayVolume',
       align: 'left',
+      className:"table_col",
       defaultSortOrder: 'descend',
       sorter: (a, b) => {
         return +a.dayVolume.toNumber() - +b.dayVolume.toNumber()
@@ -141,6 +147,7 @@ export default function MyTable() {
       dataIndex: 'floorPrice',
       key: 'floorPrice',
       align: 'left',
+      className:"table_col",
       // defaultSortOrder: 'descend',
       sorter: (a, b) => a.floorPrice - b.floorPrice,
       render: (text) => <div style={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center'}}>
@@ -152,6 +159,7 @@ export default function MyTable() {
       title: 'Down Payment ( % )',
       dataIndex: 'advanceRate',
       align: 'left',
+      className:"table_col",
       key: 'advanceRate',
       // defaultSortOrder: 'descend',
       sorter: (a, b) => a.advanceRate - b.advanceRate,
@@ -162,6 +170,7 @@ export default function MyTable() {
       dataIndex: 'primePrice',
       key: 'primePrice',
       align: 'left',
+      className:"table_col",
       // defaultSortOrder: 'descend',
       sorter: (a, b) => a.floorPrice - b.floorPrice,
       render: (text) => <div style={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center'}}>

@@ -3,6 +3,7 @@ import { transform } from 'lodash'
 import React, { useEffect, useState } from 'react'
 import { Animate } from 'react-simple-animate'
 import styled from 'styled-components'
+import {useAppSelector} from "../../../store/hooks"
 
 const DetailSwiper = styled.div`
   width: 100%;
@@ -77,7 +78,8 @@ const DetailButton = styled.div`
   align-items: center;
 `
 
-function Detail(props: { animeta: boolean }) {
+function Detail() {
+  const isAnimate = useAppSelector(state=>state.app.isAnimate)
   const [selected, setSelected] = useState<number>(0)
   const [timer, setTimer] = useState<NodeJS.Timeout>()
   // useEffect(() => {
@@ -123,6 +125,8 @@ function Detail(props: { animeta: boolean }) {
     }
   ]
 
+  const leanMoreUrl = "https://npics.gitbook.io/npics-v1.0/user-guides/mortgage-to-buy-nft"
+
   // const mouseEnter = () => {
   //   clearTimeout(timer);
   // }
@@ -142,7 +146,7 @@ function Detail(props: { animeta: boolean }) {
           return (
             <div className="detail_info_item" key={item.title}>
               <Animate
-                play={props.animeta}
+                play={isAnimate}
                 duration={0.5}
                 delay={index / 2}
                 start={{ opacity: 0, transform: 'translateX(-1rem)' }}
@@ -160,13 +164,13 @@ function Detail(props: { animeta: boolean }) {
         })}
       </div>
       <Animate
-        play={props.animeta}
+        play={isAnimate}
         duration={0.5}
         delay={1.5}
         start={{ opacity: 0, transform: 'translateX(-1rem)' }}
         end={{ opacity: 1, transform: 'translateX(0)' }}
       >
-        <ButtonDefault types="second" scale={true}>Learn More</ButtonDefault>
+        <ButtonDefault types="primary" onClick={()=>window.open(leanMoreUrl)} isScale={true} color='#fff'>Learn More</ButtonDefault>
       </Animate>
     </DetailSwiper>
   )
