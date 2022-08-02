@@ -36,7 +36,7 @@ export const Nav = styled.div`
   position: fixed;
   display: flex;
   justify-content: space-between;
-  backdrop-filter: blur(10px);
+  backdrop-filter: ${(props: { fixed: boolean }) => props.fixed ? 'blur(10px)' : 'blur(0)'};
   align-items: center;
   margin: 0 auto;
   padding: 0.15rem 1.5rem;

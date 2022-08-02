@@ -148,7 +148,7 @@ export default function TableWarehouse(props: {
                       <ButtonDefault height='45px' minWidth='120px' types='normal' onClick={() => navigate(`/vaultsDetail/${item.nftAddress}/${item.tokenId}`)}>
                         Repay
                       </ButtonDefault>
-                      <ButtonDefault
+                      {/* <ButtonDefault
                         height='45px' 
                         minWidth='120px' 
                         types='second'
@@ -158,7 +158,7 @@ export default function TableWarehouse(props: {
                         }}
                       >
                         Offers
-                      </ButtonDefault>
+                      </ButtonDefault> */}
                     </Flex>
                   }
                 </Td>
