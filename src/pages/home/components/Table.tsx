@@ -137,8 +137,8 @@ export default function MyTable() {
       return <div className='descend'>
         <div><img src={imgurl.whitePrice} alt=""/></div>
         <div>
-          {text.toFixed(2,1)}
-          <span style={{color:`${+row.dayChange >= 0 ? "#7BD742" : "#D03434"}`}}>{`${+row.dayChange >= 0 ? '+' : ''}${row.dayChange}%`}</span>
+          <span style={{fontSize:'0.14rem'}}>{text.toFixed(2,1)}</span>
+          <span style={{fontSize:'0.14rem',color:`${+row.dayChange >= 0 ? "#7BD742" : "#D03434"}`}}>{`${+row.dayChange >= 0 ? '+' : ''}${row.dayChange}%`}</span>
         </div>
       </div>}
     },
@@ -152,7 +152,7 @@ export default function MyTable() {
       sorter: (a, b) => a.floorPrice - b.floorPrice,
       render: (text) => <div style={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center'}}>
         <img src={imgurl.whitePrice} alt=""  style={{marginRight: "0.1rem"}}/>
-        <span style={{ fontSize: '0.16rem', color: '#fff', fontWeight: '500'}}>{text}</span>
+        <span style={{ fontSize: '0.14rem', color: '#fff', fontWeight: '500'}}>{text}</span>
       </div>
     },
     {
@@ -163,7 +163,7 @@ export default function MyTable() {
       key: 'advanceRate',
       // defaultSortOrder: 'descend',
       sorter: (a, b) => a.advanceRate - b.advanceRate,
-      render: (text) => <div style={{ fontSize: '0.16rem', color: '#fff', fontWeight: '500'}}>{`${text}%`}</div>
+      render: (text) => <div style={{ fontSize: '0.14rem', color: '#fff', fontWeight: '500'}}>{`${text}%`}</div>
     },
     {
       title: 'Down Payment',
@@ -175,7 +175,7 @@ export default function MyTable() {
       sorter: (a, b) => a.floorPrice - b.floorPrice,
       render: (text) => <div style={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center'}}>
         <img src={imgurl.whitePrice} alt="" style={{marginRight: "0.1rem"}}/>
-        <span style={{ fontSize: '0.16rem', color: '#fff', fontWeight: '500'}}>{text}</span>
+        <span style={{ fontSize: '0.14rem', color: '#fff', fontWeight: '500'}}>{text}</span>
       </div>
     },
   ];
