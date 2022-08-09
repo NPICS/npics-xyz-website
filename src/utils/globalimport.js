@@ -100,6 +100,8 @@ import rewards from '../assets/images/dashboard/rewards.png'
 import rewardsActive from '../assets/images/dashboard/rewards_active.png'
 import airdrop from '../assets/images/dashboard/airdrop.png'
 import airdropActive from '../assets/images/dashboard/airdrop_active.png'
+import airdropTurboDescribe from '../assets/images/dashboard/airdrop-turbo-describe.png'
+import turboOG from "../assets/images/dashboard/Turbo-og.jpg"
 import price_icon from '../assets/images/dashboard/price_icon.png'
 import NPT from '../assets/images/dashboard/NPT.png'
 import BEND from '../assets/images/dashboard/BEND.svg'
@@ -261,6 +263,8 @@ export const imgurl = {
     rewardsActive,
     airdrop,
     airdropActive,
+    airdropTurboDescribe,
+    turboOG,
     price_icon,
     NPT,
     BEND,
