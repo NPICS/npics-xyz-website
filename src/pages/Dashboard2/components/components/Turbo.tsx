@@ -11,6 +11,7 @@ interface ITurbo {
   price: number;
   endTime: number;
   isSale: boolean;
+  url: string;
 }
 const TurboBox = styled.div`
   .describe_box{
@@ -33,10 +34,11 @@ const Turbo = memo(
       {
         id: 1,
         img: "",
-        title: "OG NFT Series-Turbo Activetity",
+        title: "TURBO - NPics‘ OG NFT 1st Raffle",
         price: 0,
-        endTime: 1660044745, //2022-08-09 04:20:05
-        isSale: true
+        endTime: 1662811200, //2022-08-09 04:20:05
+        isSale: false,
+        url: "https://www.premint.xyz/npics/"
       }
     ]
     return (

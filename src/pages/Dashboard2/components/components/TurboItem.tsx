@@ -14,6 +14,7 @@ interface ITurbo {
   price: number;
   endTime: number;
   isSale: boolean;
+  url: string;
 }
 interface ITurboItem {
   item: ITurbo,
@@ -47,7 +48,11 @@ const ItemBox = styled.div`
     justify-content: flex-start;
     align-items: center;
     font-size: 0.16rem;
+    color: rgba(0,0,0,1);
     font-weight: 700;
+    &:hover{
+      color: rgba(0, 0, 0, 0.6);
+    }
   }
   .item_price{
     display: flex;
@@ -108,7 +113,7 @@ const TurboItem = memo(
           <img src={imgurl.dashboard.turboOG} alt="" />
         </div>
         <div className='item_info'>
-          <div className='item_title'>{item.title}</div>
+          <a className='item_title' href={item.url} target="_blank" rel="noreferrer">{item.title}</a>
           <div className='item_price'>
             <span>Mint Fee</span>
             <span style={{ opacity: 0.5 }}>{item.price === 0 ? 'Free Mint' : `$ ${item.price / 1000}`}</span>
