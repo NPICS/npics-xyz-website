@@ -21,8 +21,17 @@ export const ContractAddresses = {
    * x2y2market
    * */
   x2y2Market: "0xF849de01B080aDC3A814FaBE1E2087475cF2E354",
-
   x2y2R1: "0x74312363e45DCaBA76c59ec49a7Aa8A65a67EeD3",
+
+  /**
+   * TurBo contracts
+   */
+  TurboProxy: "0xDE80533ea9F05CE0F6dE7E45f18593A0bAbE3F7B",
+  /**
+   * TurBo Rinkeby
+   */
+  TurboTestProxy: "0xfC2f8134f1aAA865e0B0642393Db73c4F7eb41f9",
+
   /*
    * get contract address by market name
    * @warning: some market contract address is not found, like `xMarket`
