@@ -1,78 +1,97 @@
-import axios from 'axios'
-import {message} from 'antd';
-import {SessionStorageKey} from "./enums";
+import axios from "axios";
+import { message } from "antd";
+import { SessionStorageKey } from "./enums";
 // import store from "../store";
 // import {Params} from "react-router-dom";
 // import store from "../store";
 
+export const X2Y2_ORDER_SIGN_API =
+  "http://18.163.41.76:19094/api/x2y2/api/orders/sign";
+
 axios.defaults.timeout = 15000;
-axios.defaults.headers.post['Content-Type'] = 'application/json';
-if (process.env.NODE_ENV === 'development') {
-    axios.defaults.baseURL = '/api'
+axios.defaults.headers.post["Content-Type"] = "application/json";
+if (process.env.NODE_ENV === "development") {
+  axios.defaults.baseURL = "/apis";
 } else {
-    axios.defaults.baseURL = '/api'
+  axios.defaults.baseURL = "/apis";
 }
-axios.interceptors.request.use((config: any) => {
-    if (config.method === 'post') {
-        config.data = JSON.stringify(config.data);
+axios.interceptors.request.use(
+  (config: any) => {
+    if (config.method === "post") {
+      config.data = JSON.stringify(config.data);
     }
-    config.headers['Authorization'] = localStorage.getItem(SessionStorageKey.AccessToken);
+    if (config.url !== X2Y2_ORDER_SIGN_API) {
+      config.headers["Authorization"] = localStorage.getItem(
+        SessionStorageKey.AccessToken
+      );
+    }
     return config;
-}, (error: any) => {
-    console.log('wrong parameter')
+  },
+  (error: any) => {
+    console.log("wrong parameter");
     return Promise.reject(error);
-});
+  }
+);
 
-
-axios.interceptors.response.use((res: any) => {
-    if(res.data.code === 4003) {
-        localStorage.removeItem(SessionStorageKey.AccessToken)
-        message.error(res.data.message)
+axios.interceptors.response.use(
+  (res: any) => {
+    if (res.data.code === 4003) {
+      localStorage.removeItem(SessionStorageKey.AccessToken);
+      message.error(res.data.message);
     }
     if (!res.data.success) {
-        return Promise.resolve(res);
+      return Promise.resolve(res);
     }
     return res;
-}, (err: any) => {
+  },
+  (err: any) => {
     if (err.code === 504 || err.code === 404) {
-        console.log(`error ${err.message}`)
+      console.log(`error ${err.message}`);
     } else if (err.code === 403) {
-        console.log(`error ${err.message}`)
+      console.log(`error ${err.message}`);
     } else {
-        console.log(`err: ${err}`)
+      console.log(`err: ${err}`);
     }
     return Promise.reject(err);
-});
+  }
+);
 
-
-export function myPost(url: any, params?: any, cancel?:any) {
-    return new Promise((resolve, reject) => {
-        axios.post(url, params ?? {}, cancel)
-            .then((response: any) => {
-                resolve(response.data);
-            }, (err: any) => {
-                reject(err);
-            })
-            .catch((error: any) => {
-                reject(error)
-            })
-    })
+export function myPost(url: any, params?: any, cancel?: any) {
+  return new Promise((resolve, reject) => {
+    axios
+      .post(url, params ?? {}, cancel)
+      .then(
+        (response: any) => {
+          resolve(response.data);
+        },
+        (err: any) => {
+          reject(err);
+        }
+      )
+      .catch((error: any) => {
+        reject(error);
+      });
+  });
 }
 
 export function myGet(url: any, param: any = {}) {
-    return new Promise((resolve, reject) => {
-        axios.get(url, {
-            params: param
-        })
-            .then((response: any) => {
-                resolve(response)
-            }, (err: any) => {
-                reject(err)
-            })
-            .catch((error: any) => {
-                reject(error)
-            })
-    })
+  return new Promise((resolve, reject) => {
+    axios
+      .get(url, {
+        params: param,
+      })
+      .then(
+        (response: any) => {
+          resolve(response);
+        },
+        (err: any) => {
+          reject(err);
+        }
+      )
+      .catch((error: any) => {
+        reject(error);
+      });
+  });
 }
 //
 // export function getWithJSON(uri: string, params?: {}) {
@@ -108,7 +127,8 @@ export function myGet(url: any, param: any = {}) {
 // }
 
 const http = {
-    myPost,
-    myGet,
-}
-export default http
+  myPost,
+  myGet,
+};
+
+export default http;
