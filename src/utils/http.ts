@@ -5,8 +5,7 @@ import { SessionStorageKey } from "./enums";
 // import {Params} from "react-router-dom";
 // import store from "../store";
 
-export const X2Y2_ORDER_SIGN_API =
-  "http://18.163.41.76:19094/api/x2y2/api/orders/sign";
+export const X2Y2_ORDER_SIGN_API = "/x2y2/api/orders/sign";
 
 axios.defaults.timeout = 15000;
 axios.defaults.headers.post["Content-Type"] = "application/json";

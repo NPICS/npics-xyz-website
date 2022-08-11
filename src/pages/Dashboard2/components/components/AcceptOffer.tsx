@@ -75,15 +75,15 @@ export default function AcceptOffer(props: IProps) {
         .myPost(X2Y2_ORDER_SIGN_API, parameter)
         .then((res: any) => res.data[0].input);
 
-      const _owner = owner?.replace("0x", "").toLocaleLowerCase();
-      const _nbpAddress = nbpAddress?.replace("0x", "");
+      // const _owner = owner?.replace("0x", "").toLocaleLowerCase();
+      // const _nbpAddress = nbpAddress?.replace("0x", "");
       const _BytesData = BytesData.replace("0x", "0x357a150b");
-      const __BytesData = _BytesData.replace(`${_owner}`, `${_nbpAddress}`);
+      // const __BytesData = _BytesData.replace(`${_owner}`, `${_nbpAddress}`);
       const acceptOrder = await npics.acceptOffer(
         nftInfo.nftAddress,
         nftInfo.tokenId,
         ContractAddresses.x2y2R1,
-        __BytesData,
+        _BytesData,
         ContractAddresses.x2y2Market
       );
       console.log(`acceptOrder => ${acceptOrder}`);
