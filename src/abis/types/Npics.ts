@@ -717,6 +717,15 @@ export interface Npics extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  acceptOffer(
+    nft: PromiseOrValue<string>,
+    tokenId: PromiseOrValue<BigNumberish>,
+    market: PromiseOrValue<string>,
+    data: PromiseOrValue<BytesLike>,
+    approveTo: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   availableBorrowsInETH(
     nft: PromiseOrValue<string>,
     overrides?: CallOverrides
