@@ -104,7 +104,7 @@ export default function MyAirdop() {
   >
     <Typography fontSize={"0.3rem"} fontWeight={800} color={'#000'} marginBottom="0.3rem">My Airdrop</Typography>
     <Typography fontSize={"0.16rem"} fontWeight={500} color={'rgba(0,0,0,.5)'} marginBottom={"0.5rem"}>
-      Participate in the down payment loan to buy NFT and earn double rewards
+      Participate in platform campaigns or interactions to receive rewards for applying for airdrops.
     </Typography>
     <TabBox>
       <Tabs defaultActiveKey="turbo" onChange={changeTab} animated={true}>
