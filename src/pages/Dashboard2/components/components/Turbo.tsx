@@ -5,8 +5,10 @@ import { imgurl } from "../../../../utils/globalimport";
 import TurboItem from './TurboItem';
 import whiteList from "../../../../config/constants/whiteList";
 import { Turbo as TurboContract } from "../../../../abis/Turbo";
+import TurboABI from "../../../../abis/Turbo.json";
 import { useWeb3React } from "@web3-react/core"
 import { ethers } from 'ethers';
+import BigNumber from 'bignumber.js';
 interface ITurbo {
   id: number;
   img: string;
@@ -77,7 +79,7 @@ const Turbo = memo(
         title: "TURBO - NPics‘ OG NFT 1st Raffle",
         price: 0,
         endTime: 1662811200, //2022-08-09 04:20:05
-        isSale: false,
+        isSale: true,
         url: "https://www.premint.xyz/npics/"
       }
     ];
@@ -89,8 +91,8 @@ const Turbo = memo(
             const signer = provider.getSigner();
             const contract = new TurboContract(signer);
             const minted = await contract.getMinted();
-            const mintedNum = parseInt(ethers.utils.formatEther(minted));
-            setMinted(mintedNum);
+            const count = Number(minted._hex);
+            setMinted(count)
           } catch (err) {
             console.log(err);
           }
