@@ -26,7 +26,7 @@ export const ContractAddresses = {
   /**
    * TurBo contracts
    */
-  TurboProxy: "0xDE80533ea9F05CE0F6dE7E45f18593A0bAbE3F7B",
+  TurboProxy: "0xe7cdb036b9e80d6d2235e08c1003a0b730fe6520",
   /**
    * TurBo Rinkeby
    */
