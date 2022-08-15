@@ -18,7 +18,7 @@ const StyledButton = styled.button<Iprops>`
       case 'one':
        return '#FF490F';
       case 'two':
-       return "#FFFFFF";
+       return "#fff";
       default:
         return null;
     }
@@ -26,7 +26,7 @@ const StyledButton = styled.button<Iprops>`
   color: ${(props => {
      switch (props.types) {
       case 'one':
-       return '#FFFFFF';
+       return '#fff';
       case 'two':
        return "#000000";
       default:
@@ -58,10 +58,11 @@ Button.defaultProps = {
   horizontal: true,
   border: false,
   width: '2.1rem',
-  height: '.58rem',
+  height: '0.58rem',
   text: 'button',
-  fontSize: '.18rem',
-  borderRadius: '10px',
+  fontSize: '0.2rem',
+  fontWeight: 700,
+  borderRadius: '0.1rem',
   types: "one"
 }
  

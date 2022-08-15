@@ -1,4 +1,5 @@
 root = true
 
-[*.tsx]
+[{*.ts, *.tsx}]
 indent_size = 2
+

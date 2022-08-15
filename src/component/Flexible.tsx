@@ -13,16 +13,17 @@ interface FlexProps {
   border: string,
   background?: string,
   headerBackground?: string,
-  fontSize: string
+  fontSize: string,
+  titleSelect?: React.ReactNode
 }
 const Flex = styled.div`
  ${flex}
  img {
-   margin-right: .16rem;
+   margin-right: 0.16rem;
  }
 `
 const StyledFlex = styled.div<FlexProps>`
-  border-radius: .1rem;
+  border-radius: 0.1rem;
   color: ${(props => props.color)};
   border: ${(props => props.border)};
   background-color: ${(props => props.background)};
@@ -30,8 +31,8 @@ const StyledFlex = styled.div<FlexProps>`
     height: ${(props => props.height)};
     background-color: ${(props => props.headerBackground)};
     font-size: ${(props => props.fontSize)};
-    padding: .16rem .20rem .15rem;
-    border-radius: .1rem;
+    padding: 0.16rem 0.2rem 0.15rem;
+    border-radius: 0.1rem;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
     color: #fff;
@@ -65,6 +66,7 @@ function Flexible(props:FlexProps) {
             <span>{props.title}</span>
           </Flex>
           {props.isExpand ? <div className={`${isShow ? 'up' : 'down'} `} onClick={handleFlex}>&gt;</div> : null }
+          <div>{props.titleSelect}</div>
       </div>
       <UnmountClosed  isOpened={isShow ? true : false}>
         <div>
@@ -79,11 +81,11 @@ Flexible.defaultProps = {
   title: '',
   iconUrl: imgurl.Vector,
   isExpand: false,
-  height: '.51rem',
-  border: '.01rem solid rgba(255,255,255,.2)',
+  height: '0.51rem',
+  border: '0.01rem solid rgba(255,255,255,.2)',
   background: '',
   headerBackground: '',
-  fontSize: '.16rem'
+  fontSize: '0.16rem',
 }
 
 export default Flexible

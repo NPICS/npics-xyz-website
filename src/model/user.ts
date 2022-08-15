@@ -1,39 +1,47 @@
 import BigNumber from "bignumber.js";
-import { Expose } from "class-transformer";
-import { TransformBigNumber } from "./transform";
+import {Expose} from "class-transformer";
+import TransformBigNumber from "./transform/bigNumber";
+import {numberFormat} from "../utils/urls";
+import {imgurl} from "../utils/globalimport";
+import listIcon from "../assets/images/market/nft_active_list.svg"
+import offerIcon from "../assets/images/market/nft_active_offer.svg"
+import saleIcon from "../assets/images/market/nft_active_Sale.svg"
+import transferIcon from "../assets/images/market/nft_active_Transfer.svg"
+import cancelIcon from "../assets/images/market/nft_active_cancel.svg"
 
 export class User {
-    id?: number
+  id?: number
 
-    address?: string
+  address?: string
 
-    avatar?: string
+  avatar?: string
 
-    nickname?: string
+  nickname?: string
 
-    profile?: string
+  profile?: string
 
-    displayMode?: number
+  displayMode?: number
 
-    email?: string
+  email?: string
 
-    instagram?: string
+  instagram?: string
 
-    nonce?: string
+  nonce?: string
 
-    riskNoticeStatus?: boolean
+  riskNoticeStatus?: boolean
 
-    systemNoticeStatus?: boolean
+  systemNoticeStatus?: boolean
 
-    telegram?: string
+  telegram?: string
 
-    twitter?: string
+  twitter?: string
 
-    youtube?: string
+  youtube?: string
 }
-export class  Collections {
-  key? : string
-  imageUrl! : string
+
+export class Collections {
+  key?: string
+  imageUrl!: string
   name!: string
   realTotalSupply!: number
   activeCollaterals!: number
@@ -47,23 +55,29 @@ export class  Collections {
   address!: string;
   totalShelves!: number;
   dayVolume!: number;
+  description?: string
+  bannerImageUrl?: string
 
   @Expose()
-  get sFloorPrice() {
+  sFloorPrice() {
     return (this.floorPrice.div(10 ** 18).toFixed(2))
   }
+
   @Expose()
   get sAdvanceRate() {
-    return (this.ltv.div(10 ** 2).toFixed(2))
+    return (new BigNumber('100').minus((this.ltv.div(10 ** 2))).toFixed(2))
   }
+
   @Expose()
   get sPrimePrice() {
-    return this.floorPrice.div(10 ** 18).multipliedBy(this.ltv.div(10 ** 4)).toFixed(2)
+    return this.floorPrice.div(10 ** 18).multipliedBy(new BigNumber('100').minus((this.ltv.div(10 ** 2))).div(10 ** 2)).toFixed(2)
   }
+
   @Expose()
   get vol() {
     return (this.floorPrice.div(10 ** 18).multipliedBy(this.ltv.div(10 ** 4)).toFixed(2))
   }
+
   @Expose()
   get sDayChange() {
     return this.dayChange.multipliedBy(100).toFixed(2)
@@ -75,19 +89,139 @@ export class CollectionItems {
   address!: string;
   @TransformBigNumber()
   currentBasePrice!: BigNumber
-  decimals!: string;
+  decimals!: number;
   id!: string;
   imageUrl!: string;
-  market!: 'opensea' | 'x2y2' | 'looksrare' | 'nftx' | 'xMarket';
+  market!: 'opensea' | 'x2y2' | 'looksrare' | 'nftx' | 'xMarket' | 'seaport';
   marketUrl!: string;
   paymentSymbol!: string;
   tokenId!: string;
   collectionName!: string;
+  ltv!: number
+
+  name?: string
+
+  @TransformBigNumber()
+  floorPrice!: BigNumber
+
+  @Expose()
+  marketIcon() {
+    switch (this.market) {
+      case "x2y2":
+        return imgurl.market.x2y2
+      case "opensea":
+        return imgurl.market.opensea
+      case "looksrare":
+        return imgurl.market.looksrare
+      case "nftx":
+        return imgurl.market.nftx
+      case "xMarket":
+        return imgurl.market.xMarket
+      case "seaport":
+        return imgurl.market.seaport
+    }
+  }
+
+  @Expose()
+  marketDisplay() {
+    switch (this.market) {
+      case "x2y2":
+        return "X2Y2"
+      case "opensea":
+        return "OpenSea"
+      case "looksrare":
+        return "LooksRare"
+      case "nftx":
+        return "NFTX"
+      case "xMarket":
+        return "xMarket"
+      case "seaport":
+        return "Seaport"
+    }
+  }
+
+  @Expose()
+  basePrice() {
+    return numberFormat(this.currentBasePrice.div(10 ** this.decimals).toFixed())
+  }
+
+  @Expose()
+  downPaymentPriceFormat() {
+    // ltv: 3000 => 30%
+    let loadRate = new BigNumber(this.ltv).div(100).div(100)
+    let downPayment = this.currentBasePrice.minus(this.floorPrice.times(loadRate)).div(10 ** this.decimals).plus(0.0001)
+    return numberFormat(downPayment.toFixed(2, 1))
+  }
+
+  @Expose()
+  singularForName() {
+    switch (this.collectionName) {
+      case "Doodles":
+        return "Doodle"
+      case "Space Doodles":
+        return "Space Doodle"
+      case "CryptoPunks":
+        return "CryptoPunk"
+      case "Wrapped Cryptopunks":
+        return "Wrapped Cryptopunk"
+      case "CLONE X - X TAKASHI MURAKAMI":
+        return "Clone X"
+      default:
+        return this.collectionName
+    }
+  }
+
+  @Expose()
+  neoOneName() {
+    switch (this.collectionName) {
+      case "Doodles":
+        return `NEO Doodle #${this.tokenId}`
+
+      case "Space Doodles":
+        return `NEO SDoodle #${this.tokenId}`
+
+      case "CryptoPunks":
+        return `NEO CryptoPunk #${this.tokenId}`
+
+      case "Wrapped Cryptopunks":
+        return `NEO CryptoPunk #${this.tokenId}`
+
+      case "CLONE X - X TAKASHI MURAKAMI":
+        return `NEO CLONEX #${this.tokenId}`
+
+      case "Bored Ape Yacht Club":
+        return `NEO BAYC #${this.tokenId}`
+
+      case "Mutant Ape Yacht Club":
+        return `NEO MAYC #${this.tokenId}`
+
+      case "Azuki":
+        return `NEO Azuki #${this.tokenId}`
+        
+      default:
+        return `NEO ${this.collectionName} #${this.tokenId}`
+    }
+  }
+
+  @Expose()
+  nftName(): string {
+    if (this.isNoName()) {
+      return ``
+    } else {
+      return this.singularForName()
+    }
+  }
+
+  @Expose()
+  isNoName(): boolean {
+    return this.collectionName === `Bored Ape Yacht Club` ||
+      this.collectionName === `Mutant Ape Yacht Club`
+  }
 }
 
 type Traits = {
   "trait_type": string,
-  "trait_value": string | null,
+  "trait_value": string | undefined,
   "trait_count": number,
   "value": string
 }
@@ -104,11 +238,22 @@ export class CollectionDetail extends CollectionItems {
   floorPrice!: BigNumber
   @TransformBigNumber()
   apr!: BigNumber
+  @TransformBigNumber()
   availableBorrow!: BigNumber
+  @TransformBigNumber()
   totalAmount!: BigNumber
+  totalSupply!: number;
+  bannerImageUrl?: string
+  externalUrl?: string
+
   @Expose()
   get agreementPrice() {
     return this.currentBasePrice.minus(new BigNumber(this.availableBorrow.toString()))
+  }
+
+  @Expose()
+  basePriceFormat(): string {
+    return numberFormat(this.currentBasePrice.div(10 ** 18).toFixed())
   }
 }
 
@@ -118,8 +263,60 @@ export class Activities {
   fromAccount!: string
   toAccount!: string
   @TransformBigNumber()
-  amount!: BigNumber
+  amount?: BigNumber
   @TransformBigNumber()
-  startAmount!: BigNumber
-  
+  startAmount?: BigNumber
+  @TransformBigNumber()
+  totalAmount?: BigNumber
+  imageUrl!: string
+  decimals: number = 18
+  symbol?: string
+
+  @Expose()
+  eventTypeExplain(): string | undefined {
+    if (this.eventType === "null") {
+      return undefined
+    } else if (this.eventType === "transfer") {
+      return "Transfer"
+    } else if (this.eventType === "offer_entered") {
+      return "Offer"
+    } else if (this.eventType === "created") {
+      return "List"
+    } else if (this.eventType === "cancelled") {
+      return "Cancelled"
+    } else if (this.eventType === "successful") {
+      return "Sale"
+    } else {
+      return this.symbol?.toUpperCase() === "ETH" ? "List" : "Offer"
+    }
+  }
+
+  @Expose()
+  eventTypeIcon(): string | undefined {
+    switch (this.eventTypeExplain()) {
+      case "Transfer":
+        return transferIcon
+      case "Offer":
+        return offerIcon
+      case "List":
+        return listIcon
+      case "Sale":
+        return saleIcon
+      case "Cancelled":
+        return cancelIcon
+      default:
+        return undefined
+    }
+  }
+
+  @Expose()
+  amountFormat(): string | undefined {
+    if (this.eventTypeExplain() === "List" || this.eventTypeExplain() === "Cancelled") {
+      return this.startAmount ? numberFormat(this.startAmount.div(10 ** this.decimals).toFixed()) : undefined
+    } else if (this.eventTypeExplain() === "Sale") {
+      return this.totalAmount ? numberFormat(this.totalAmount.div(10 ** this.decimals).toFixed()) : undefined
+    } else {
+      return this.amount ? numberFormat(this.amount.div(10 ** this.decimals).toFixed()) : undefined
+    }
+  }
 }

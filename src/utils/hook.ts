@@ -2,6 +2,7 @@ import { useAppSelector } from '../store/hooks';
 import { DependencyList, EffectCallback, useEffect, useRef } from 'react';
 import { useState } from "react";
 import BigNumber from 'bignumber.js';
+import { numberFormat } from './urls';
 interface icon {
   darkIcon: string,
   lightIcon: string
@@ -51,11 +52,37 @@ export function useUpdateEffect(effect: EffectCallback, deps?: DependencyList) {
 export const useEthPrice = (value: BigNumber | undefined) => {
   const [price, setPrice] = useState<BigNumber | undefined>()
   const EthPrice = useAppSelector((state) => state.app.data.EthPrice)
-  useUpdateEffect(() => {
+  useEffect(() => {
     if(!value) return
     const OrgPrice = new BigNumber(value.toString()).multipliedBy(EthPrice).div(10 ** 18)
     setPrice(OrgPrice)
     // eslint-disable-next-line
   },[EthPrice,value])
   return price
+}
+
+export const useBendPrice = (value: BigNumber | undefined) => {
+  const [price, setPrice] = useState<BigNumber | undefined>()
+  const BENDPrice = useAppSelector((state) => state.app.bendExchangeRate)
+  useEffect(() => {
+    if(!value) return
+    const OrgPrice = new BigNumber(value.toString()).multipliedBy(BENDPrice).div(10 ** 18)
+    setPrice(OrgPrice)
+    // eslint-disable-next-line
+  },[BENDPrice,value])
+  return price
+}
+
+export function useDebounce<T>(value: T, delay?: number): T {
+  const [debouncedValue, setDebouncedValue] = useState<T>(value)
+
+  useEffect(() => {
+    const timer = setTimeout(() => setDebouncedValue(value), delay || 500)
+  
+    return () => {
+      clearTimeout(timer)
+    }
+  }, [value, delay])
+
+  return debouncedValue
 }

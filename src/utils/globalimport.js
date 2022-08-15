@@ -1,19 +1,31 @@
 import Vector from '../assets/images/Vector.png'
 import images11 from '../assets/images/image11.png'
-import worldwide from '../assets/images/worldwide.png'
-import notification from '../assets/images/notification.png'
-import Ellipse from '../assets/images/Ellipse.png'
 import logo from '../assets/images/logo.png'
-import copy from '../assets/images/copy_icon.png'
-import address from '../assets/images/address_icon.png'
+import logoBeta from '../assets/images/logo_beta.svg'
+import lightLogo from '../assets/images/lightLogo.png'
+import copy from '../assets/images/copyBlack.png'
+import address from '../assets/images/addressBlack.png'
+import notData from '../assets/images/notData.png'
+import worldwideIcon from '../assets/images/worldwide.svg'
+import notificationIcon from '../assets/images/notification.svg'
+import withoutNoticeIcon from '../assets/images/withoutNoticeIcon.svg'
+import EllipseIcon from '../assets/images/Ellipse.svg'
 
-import Group245 from '../assets/images/footer/Group245.png'
-import Group246 from '../assets/images/footer/Group246.png'
-import Group247 from '../assets/images/footer/Group247.png'
-import Group248 from '../assets/images/footer/Group248.png'
-import MaskGroup1 from '../assets/images/home/MaskGroup1.png'
-import MaskGroup2 from '../assets/images/home/MaskGroup2.png'
-import MaskGroup3 from '../assets/images/home/MaskGroup3.png'
+import darkTG from '../assets/images/footer/darkTG.png'
+import darkT from '../assets/images/footer/darkT.png'
+import darkG from '../assets/images/footer/darkG.png'
+import darkM from '../assets/images/footer/darkM.png'
+import darkGH from '../assets/images/footer/darkGH.png'
+import lightTG from '../assets/images/footer/lightTG.png'
+import lightT from '../assets/images/footer/lightT.png'
+import lightG from '../assets/images/footer/lightG.png'
+import lightM from '../assets/images/footer/lightM.png'
+import lightGH from '../assets/images/footer/lightGH.png'
+
+
+
+import login from '../assets/images/home/login.svg'
+import defaultAvatar from '../assets/images/home/defaultAvatar.svg'
 import RectangleLeft from '../assets/images/home/Rectangle_left.png'
 import RectangleRight from '../assets/images/home/Rectangle_right.png'
 import Borrow1 from '../assets/images/home/Borrow1.png'
@@ -36,17 +48,31 @@ import gameIcon from '../assets/images/home/gameIcon.png'
 
 import MetaMask from '../assets/images/home/MetaMask.png'
 import BendDAO from '../assets/images/home/BendDAO.png'
-import gem from '../assets/images/home/gem.png'
 import X2Y2 from '../assets/images/home/X2Y2.png'
-import Opensea2 from '../assets/images/home/OpenSea2.png'
-import Looksrare from '../assets/images/home/Looksrare.png'
+import Opensea from '../assets/images/home/opensea.png'
+import Looksrare from '../assets/images/home/looks.png'
 import DYDX from '../assets/images/home/DYDX.png'
-import Trustwallet from '../assets/images/home/Trustwallet.png'
+import Aave from "../assets/images/home/aave.png"
+import Ethereum from "../assets/images/home/ethereum.png"
+import Uniswap from "../assets/images/home/uniswap.png"
+
+import gearIcon from '../assets/images/home/gearIcon.png'
+import ethBlack22 from '../assets/images/home/ethBlack22.png'
+import ethOrange22 from '../assets/images/home/ethOrange22.png'
+import ethBlack40 from '../assets/images/home/ethBlack40.png'
+import band22 from '../assets/images/home/band22.png'
+import Deail from "../assets/images/home/detail.png"
+import NpicsSwiper1 from "../assets/images/home/npics_swiper1.png"
+import NpicsSwiper2 from "../assets/images/home/npics_swiper2.png"
+import NpicsSwiper3 from "../assets/images/home/npics_swiper3.png"
+import NftsIcon from "../assets/images/home/nfts.png"
+
 import Union1 from '../assets/images/market/Union1.png'
 import Union2 from '../assets/images/market/Union2.png'
-import search from '../assets/images/market/search.png'
+import Search from '../assets/images/market/Search.svg'
 import collect from '../assets/images/market/collect.png'
 import collect2 from '../assets/images/market/collect2.png'
+import seaport from '../assets/images/market/opensea.png'
 import opensea from '../assets/images/market/opensea.png'
 import looksrare from '../assets/images/market/looksrare.svg'
 import nftx from '../assets/images/market/nftx.svg'
@@ -61,20 +87,44 @@ import Group397 from '../assets/images/market/Group397.png'
 import icon49 from '../assets/images/market/icon49.png'
 import info_icon from '../assets/images/market/info_icon.png'
 import loading from '../assets/images/market/loading.gif'
+import rarity from '../assets/images/market/rarity.png'
+import DYDXBuy from '../assets/images/market/DYDXBuy.png'
+import BendDAOBuy from '../assets/images/market/BendDAOBuy.png'
+import OpenseaBuy from '../assets/images/market/OpenseaBuy.png'
+
 import gas_icon from '../assets/images/gas_icon.png'
+
 import agreement from '../assets/images/dashboard/agreement.png'
 import agreementActive from '../assets/images/dashboard/agreement_active.png'
 import rewards from '../assets/images/dashboard/rewards.png'
 import rewardsActive from '../assets/images/dashboard/rewards_active.png'
 import airdrop from '../assets/images/dashboard/airdrop.png'
 import airdropActive from '../assets/images/dashboard/airdrop_active.png'
+import airdropTurboDescribe from '../assets/images/dashboard/airdrop-turbo-describe.png'
+import turboOG from "../assets/images/dashboard/Turbo-og.jpg"
 import price_icon from '../assets/images/dashboard/price_icon.png'
 import NPT from '../assets/images/dashboard/NPT.png'
-import BEND from '../assets/images/dashboard/BEND.png'
+import BEND from '../assets/images/dashboard/BEND.svg'
 import ARP from '../assets/images/dashboard/ARP.png'
 import href from '../assets/images/dashboard/href.png'
 import notify from '../assets/images/dashboard/notify.png'
 import setting from '../assets/images/dashboard/setting.png'
+import redPrice14 from '../assets/images/dashboard/redPrice14.png'
+import greyPrice7 from '../assets/images/dashboard/greyPrice7.png'
+import catalogue26 from '../assets/images/dashboard/catalogue26.png'
+import airdropIcon from '../assets/images/dashboard/airdropIcon.png'
+import navVaults from '../assets/images/dashboard/navVaults.svg'
+import navRewards from '../assets/images/dashboard/navRewards.svg'
+import navAirdop from '../assets/images/dashboard/navAirdop.svg'
+import ethGrey18 from '../assets/images/dashboard/ethGrey18.png'
+import rewardBend from '../assets/images/dashboard/rewardBend.png'
+import reback from '../assets/images/dashboard/reback.png'
+import Cancel from '../assets/images/dashboard/Cancel.png'
+import export14 from '../assets/images/dashboard/export14.png'
+import success from '../assets/images/dashboard/success.gif'
+import ethBlack18 from '../assets/images/dashboard/ethBlack18.png'
+import exportBlack18 from '../assets/images/dashboard/exportBlack18.png'
+
 import ETH36 from '../assets/images/eth_icon.png'
 import WETH36 from '../assets/images/weth_icon.png'
 import whitePrice from '../assets/images/whitePrice.png'
@@ -85,19 +135,17 @@ import price14 from '../assets/images/market/price14.png'
 import checked from '../assets/images/market/checked.png'
 import blackPrice from '../assets/images/market/blackPrice.png'
 import redPrice24 from '../assets/images/market/redPrice24.png'
-import redPrice14 from '../assets/images/dashboard/redPrice14.png'
-import greyPrice7 from '../assets/images/dashboard/greyPrice7.png'
-import catalogue26 from '../assets/images/dashboard/catalogue26.png'
-import airdropIcon from '../assets/images/dashboard/airdropIcon.png'
+import tipsIcon from '../assets/images/market/exclamation_point.png'
+import progressIcon from '../assets/images/market/nft_pay_progressing.gif'
+
 import metamaskLogo from '../assets/images/home/metamask_logo.png'
 
 export const imgurl = {
   logo,
+  logoBeta,
+  lightLogo,
   Vector,
   images11,
-  notification,
-  worldwide,
-  Ellipse,
   gas_icon,
   address,
   copy,
@@ -106,16 +154,26 @@ export const imgurl = {
   whitePrice,
   redPrice,
   metamaskLogo,
+  notData,
+  notificationIcon,
+  withoutNoticeIcon,
+  worldwideIcon,
+  EllipseIcon,
   footer: {
-    Group245,
-    Group246,
-    Group247,
-    Group248
+    darkTG,
+    darkG,
+    darkM,
+    darkGH,
+    darkT,
+    lightTG,
+    lightG,
+    lightM,
+    lightGH,
+    lightT,
   },
   home: {
-    MaskGroup1,
-    MaskGroup2,
-    MaskGroup3,
+    defaultAvatar,
+    login,
     RectangleLeft,
     RectangleRight,
     Borrow1,
@@ -131,26 +189,42 @@ export const imgurl = {
     HomeImg5,
     HomeImg6,
     HomeImg7,
+
     MetaMask,
     BendDAO,
-    gem,
     X2Y2,
-    Opensea2,
+    Opensea,
     Looksrare,
     DYDX,
-    Trustwallet,
+    Aave,
+    Ethereum,
+    Uniswap,
+
     map,
     twitterIcon,
     telegramIcon,
     gameIcon,
-    gitHubIcon
+    gearIcon,
+    ethBlack22,
+    ethBlack40,
+    ethOrange22,
+    band22,
+    gitHubIcon,
+    Deail,
+    NpicsSwiper1,
+    NpicsSwiper2,
+    NpicsSwiper3,
+    NftsIcon,
   },
   market: {
+    Search,
+    progressIcon,
+    tipsIcon,
     Union1,
     Union2,
-    search,
     collect,
     collect2,
+    seaport,
     opensea,
     looksrare,
     nftx,
@@ -169,15 +243,28 @@ export const imgurl = {
     price14,
     checked,
     blackPrice,
-    redPrice24
+    redPrice24,
+    rarity,
+    DYDXBuy,
+    BendDAOBuy,
+    OpenseaBuy
   },
   dashboard: {
+    exportBlack18,
+    ethBlack18,
+    reback,
+    rewardBend,
+    navVaults,
+    navRewards,
+    navAirdop,
     agreement,
     agreementActive,
     rewards,
     rewardsActive,
     airdrop,
     airdropActive,
+    airdropTurboDescribe,
+    turboOG,
     price_icon,
     NPT,
     BEND,
@@ -188,6 +275,10 @@ export const imgurl = {
     redPrice14,
     greyPrice7,
     catalogue26,
-    airdropIcon
+    airdropIcon,
+    ethGrey18,
+    Cancel,
+    export14,
+    success
   }
 }

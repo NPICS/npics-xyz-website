@@ -10,24 +10,24 @@ import {deserializeArray} from "class-transformer";
 const MySwiper = styled(Swiper)`
   width: 100%;
   transition-timing-function: linear;
-  margin-top: .37rem;
+  margin-top: 0.37rem;
   display: flex;
 `
 const SwiperItem = styled.div`
-  background: rgba(255, 255, 255, 0.1);
-  border: .01rem solid rgba(255, 255, 255, 0.2);
-  border-radius: .12rem;
+  background: rgba(255, 255, 255, .1);
+  border: 0.01rem solid rgba(255, 255, 255, .2);
+  border-radius: 0.12rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   box-sizing: border-box;
-  padding-bottom: .16rem;
+  padding-bottom: 0.16rem;
   cursor: pointer;
 
   & > img {
     width: 2.2rem;
     height: 2.2rem;
-    border-radius: .12rem .12rem 0 0;
+    border-radius: 0.12rem 0.12rem 0 0;
   }
 
   .info {
@@ -36,7 +36,7 @@ const SwiperItem = styled.div`
     justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
-    padding: .05rem .25rem 0 .16rem;
+    padding: 0.05rem 0.25rem 0 0.16rem;
 
     .text {
       & > span {
@@ -44,9 +44,9 @@ const SwiperItem = styled.div`
         font-family: 'PingFang HK';
         font-style: normal;
         font-weight: 600;
-        font-size: .14rem;
-        line-height: 20px;
-        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.14rem;
+        line-height: 0.2rem;
+        color: rgba(255, 255, 255, .6);
       }
 
       & > div {
@@ -56,14 +56,14 @@ const SwiperItem = styled.div`
           font-family: 'PingFang HK';
           font-style: normal;
           font-weight: 600;
-          font-size: .16rem;
-          line-height: .22rem;
-          color: #FFFFFF;
+          font-size: 0.16rem;
+          line-height: 0.22rem;
+          color: #fff;
           display: inline-block;
         }
 
         & > span:nth-child(1) {
-          width: .85rem;
+          width: 0.85rem;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
@@ -87,7 +87,7 @@ const SwiperWrap = styled.div`
     top: 1.38rem;
     left: -1rem;
     background: #333;
-    box-shadow: 1.96rem 0px 1.72rem 1.1rem rgb(51 51 51 / 95%);
+    box-shadow: 1.96rem 0rem 1.72rem 1.1rem rgb(51 51 51 / 95%);
     z-index: 2;
   }
 
@@ -100,75 +100,13 @@ const SwiperWrap = styled.div`
     top: 1.38rem;
     right: -1rem;
     background: #333;
-    box-shadow: -1.96rem 0px 1.72rem 1.1rem rgb(51 51 51 / 95%);
+    box-shadow: -1.96rem 0rem 1.72rem 1.1rem rgb(51 51 51 / 95%);
     z-index: 2;
   }
 `
-// type Item = {
-//   imgUrl: string,
-//   time: string,
-//   name: string,
-//   color: string,
-//   icon: string
-// }
 export default function SwiperFn() {
   const [listData, setListData] = useState<SwiperModel[]>([])
 
-  // const list = [
-  //   {
-  //     imgUrl: imgurl.home.SwiperItem,
-  //     time: '1 minutes ago',
-  //     name: 'BoreApe...',
-  //     color: '#6226',
-  //     icon: imgurl.home.SwiperIcon
-  //   },
-  //   {
-  //     imgUrl: imgurl.home.SwiperItem,
-  //     time: '2 minutes ago',
-  //     name: 'BoreApe...',
-  //     color: '#6226',
-  //     icon: imgurl.home.SwiperIcon
-  //   },
-  //   {
-  //     imgUrl: imgurl.home.SwiperItem,
-  //     time: '3 minutes ago',
-  //     name: 'BoreApe...',
-  //     color: '#6226',
-  //     icon: imgurl.home.SwiperIcon
-  //   },
-  //   {
-  //     imgUrl: imgurl.home.SwiperItem,
-  //     time: '4 minutes ago',
-  //     name: 'BoreApe...',
-  //     color: '#6226',
-  //     icon: imgurl.home.SwiperIcon
-  //   },
-  //   {
-  //     imgUrl: imgurl.home.SwiperItem,
-  //     time: '5 minutes ago',
-  //     name: 'BoreApe...',
-  //     color: '#6226',
-  //     icon: imgurl.home.SwiperIcon
-  //   },
-  //   {
-  //     imgUrl: imgurl.home.SwiperItem,
-  //     time: '6 minutes ago',
-  //     name: 'BoreApe...',
-  //     color: '#6226',
-  //     icon: imgurl.home.SwiperIcon
-  //   },
-  //   {
-  //     imgUrl: imgurl.home.SwiperItem,
-  //     time: '7 minutes ago',
-  //     name: 'BoreApe...',
-  //     color: '#6226',
-  //     icon: imgurl.home.SwiperIcon
-  //   },
-  // ]
-
-  // const handleClick = (e: Item) => {
-  //   console.log(e);
-  // }
 
   useEffect(() => {
     http.myPost("/npics-nft/app-api/v2/nfthome/getRecord", {
@@ -192,7 +130,6 @@ export default function SwiperFn() {
         initialSlide={4}
         transition-timing-function={'linear'}
         speed= {300}
-        loop={false}
         autoplay={{
           delay: 1500,
           disableOnInteraction: false,

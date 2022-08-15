@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
+import { Buffer } from "buffer"
 import App from './App';
+import { setAnimate, setFixed } from 'store/app';
+import { useAppDispatch } from "./store/hooks"
 import './App.css'
 import reportWebVitals from './reportWebVitals';
 import "utils/rem"
@@ -9,41 +12,65 @@ import 'antd/dist/antd'
 // import 'antd/dist/antd.css'
 import { Provider } from "react-redux";
 import store from "./store";
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, useLocation } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components'
 import { lightColors, darkColors } from './theme/colors';
-import { useAppSelector } from './store/hooks';
-import { ethers } from "ethers"
-import { Web3ReactProvider } from "@web3-react/core"
+// import { useAppSelector } from './store/hooks';
 import { GlobalStyle } from 'utils/globaStyle'
+import Web3Provider from "./connectors/Web3Provider";
+import Updater from "./updater";
+
+window.Buffer = window.Buffer || Buffer
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
 const StyledThemeProvider = (props: any) => {
-  const isDark = useAppSelector(state => state.app.Theme.isDark)
+  // const isDark = useAppSelector(updater => updater.app.Theme.isDark)
+  // Temporary solution 😅
+  //That's it for now, it's alright 😁
+  const action = useAppDispatch()
+  const history = useLocation()
+  const [isHome, setIsHome] = useState<boolean>(true)
+  useEffect(() => {
+    if (history.pathname === '/') {
+      setIsHome(true);
+    } else {
+      setIsHome(false)
+    }
+    window.addEventListener('scroll', handleScroll, false)
+    // eslint-disable-next-line
+  }, [history.pathname])
+
+  const handleScroll = () => {
+    const detailDom = document.querySelector('.detail_div')
+    const scrollTop = document.documentElement.scrollTop
+    const windowHeight = window.innerHeight
+    if (detailDom) {
+      const domHeight = detailDom.getBoundingClientRect().y;
+      if (domHeight! <= windowHeight) {
+        action(setAnimate(true))
+      }
+    }
+    scrollTop > 150 ? action(setFixed(true)) : action(setFixed(false))
+  }
+  const isDark = isHome
   return <ThemeProvider theme={isDark ? darkColors : lightColors} {...props} />
 }
 
-const web3GetLibrary = (provider: any) => {
-  const library = new ethers.providers.Web3Provider(provider);
-  library.pollingInterval = 8000
-  return library
-}
-
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
+  <Provider store={store}>
+    <Router>
       <StyledThemeProvider>
-        <Web3ReactProvider getLibrary={web3GetLibrary}>
-          <Router>
-            <GlobalStyle />
-              <App />
-          </Router>
-        </Web3ReactProvider>
+        <Web3Provider>
+          <Updater />
+          <GlobalStyle />
+          <App />
+        </Web3Provider>
       </StyledThemeProvider>
-    </Provider>
-  </React.StrictMode>
+    </Router>
+  </Provider>
 );
 
 reportWebVitals();
