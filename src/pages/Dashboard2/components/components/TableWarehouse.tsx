@@ -240,17 +240,17 @@ export default function TableWarehouse(props: { Source?: DataSource2[] }) {
                         >
                           Repay
                         </ButtonDefault>
-                        {/*<ButtonDefault*/}
-                        {/*  height="45px"*/}
-                        {/*  minWidth="120px"*/}
-                        {/*  types="second"*/}
-                        {/*  onClick={() => {*/}
-                        {/*    setShowOffer(OfferModal.OFFERSLIST);*/}
-                        {/*    setNftInfo(item);*/}
-                        {/*  }}*/}
-                        {/*>*/}
-                        {/*  Offers*/}
-                        {/*</ButtonDefault>*/}
+                        <ButtonDefault
+                          height="45px"
+                          minWidth="120px"
+                          types="second"
+                          onClick={() => {
+                            setShowOffer(OfferModal.OFFERSLIST);
+                            setNftInfo(item);
+                          }}
+                        >
+                          Offers
+                        </ButtonDefault>
                       </Flex>
                     )
                   }

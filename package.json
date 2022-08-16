@@ -50,6 +50,7 @@
     "redux-thunk": "^2.4.1",
     "reflect-metadata": "^0.1.13",
     "rooks": "^5.11.8",
+    "rsv-signature": "^1.1.0",
     "styled-components": "^5.3.5",
     "styled-system": "^5.1.5",
     "swiper": "^8.1.5",

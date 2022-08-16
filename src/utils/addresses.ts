@@ -17,12 +17,22 @@ export const ContractAddresses = {
   WETH: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
   DebtTokenProxy: "0x87ddE3A3f4b629E389ce5894c9A1F34A7eeC5648",
   BendDaoProxy: "0x0d02755a5700414B26FF040e1dE35D337DF56218",
-  /*
-   * x2y2market
-   * */
-  x2y2Market: "0xF849de01B080aDC3A814FaBE1E2087475cF2E354",
+  /**
+   * x2y2 market
+   */
+  x2y2_ERC721Delegate: "0xF849de01B080aDC3A814FaBE1E2087475cF2E354",
+  /**
+   * x2y2 approveTo ...
+   */
   x2y2R1: "0x74312363e45DCaBA76c59ec49a7Aa8A65a67EeD3",
-
+  /**
+   * looksRare market
+   */
+  looksRareExchange: "0x59728544B08AB483533076417FbBB2fD0B17CE3a",
+  /**
+   * looksRare approveTo ...
+   */
+  looksRare_transferManagerERC721: "0xf42aa99F011A1fA7CDA90E5E98b277E306BcA83e",
   /**
    * TurBo contracts
    */

@@ -142,6 +142,8 @@ export default function AcceptOffersList(props: IProps) {
     true
   );
 
+  // console.log("offerList", offerList);
+
   return (
     <Modal
       isOpen={showOffer === OfferModal.OFFERSLIST}
