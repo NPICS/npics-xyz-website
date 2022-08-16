@@ -10,7 +10,7 @@ export const X2Y2_ORDER_SIGN_API = "/x2y2/api/orders/sign";
 axios.defaults.timeout = 15000;
 axios.defaults.headers.post["Content-Type"] = "application/json";
 
-if (location.host.includes("npics.xyz")) {
+if (window && window.location.host.includes("npics.xyz")) {
   axios.defaults.baseURL = "https://api.npics.xyz";
 } else {
   axios.defaults.baseURL = "https://apitest.npics.xyz/";
