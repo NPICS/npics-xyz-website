@@ -22,10 +22,7 @@ import http, { X2Y2_ORDER_SIGN_API } from "utils/http";
 // import { useERC20Contract } from '../../../../hooks/useContract';
 import tipsIcon from "assets/images/market/exclamation_point.png";
 import { Pop20 } from "component/Popover/Popover";
-import axios from "axios";
-import { deserializeSignature } from "rsv-signature";
 import { useWeb3React } from "@web3-react/core";
-import { ethers } from "ethers";
 import {
   IMakerBid,
   ITakerAsk,
