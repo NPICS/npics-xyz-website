@@ -167,7 +167,7 @@ export default function AcceptOffersList(props: IProps) {
         borderRadius={"0.2rem"}
         padding={"0.4rem"}
         flexDirection={"column"}
-        minWidth={"8.2rem"}
+        minWidth={"8.8rem"}
         maxHeight={"6.8rem"}
       >
         {/* Title */}
