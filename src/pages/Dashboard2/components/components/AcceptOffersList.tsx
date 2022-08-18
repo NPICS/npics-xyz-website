@@ -5,7 +5,7 @@ import wethIcon from "../../../../assets/images/market/weth_icon.svg";
 import { Key, useState } from "react";
 import styled from "styled-components";
 import { OfferModal } from "./TableWarehouse";
-import { Offers } from "model/offers";
+import { OFFER_TYPE_ENUM, Offers } from "model/offers";
 import { thousandFormat } from "../../../../utils/urls";
 import BigNumber from "bignumber.js";
 import { useAppSelector } from "store/hooks";
@@ -92,27 +92,39 @@ export default function AcceptOffersList(props: IProps) {
   const [currentSort, setCurrentSort] = useState<Sort>(Sort.priceToHigh);
   const [offerList, setOfferList] = useState<Offers[]>();
   const [refresh, setRefresh] = useState<boolean>(false);
-  const [cursor, setCursor] = useState<string>("");
+  const [cursor, setCursor] = useState<boolean>(false);
   const [pageIndex, setPageIndex] = useState<number>(1);
   // const { offerList, isError, isLoading } = useSwrOffer("0x8a90cab2b38dba80c64b7734e58ee1db38b8992e", currentSort)
   const getOfferList = async () => {
     setRefresh(true);
     let result: any = await http.myPost(
-      `/npics-nft/app-api/v2/neo/getOfferList`,
+      `/npics-nft/app-api/v2/offers/getOffersList`,
       {
-        cursor: "",
         pageSize: 5 * pageIndex,
         address: nftAddress,
+        pageIndex: 1,
         ...sort[currentSort],
       }
     );
     try {
-      if (result.code === 200 && result.data.offerList) {
-        setCursor(result.data.cursor);
-        const offerList = deserializeArray(
-          Offers,
-          JSON.stringify(result.data.offerList)
-        );
+      const records = result.data.records;
+      if (result.code === 200 && records) {
+        setCursor(result.data.total > records.length);
+        records.map((item: any) => {
+          item.offerRaw = JSON.parse(item.offerRaw);
+          item.created_at = item.offerCreatedAt;
+          item.end_at = item.offerEndAt;
+          item.price = new BigNumber(item.price).toString();
+          if (item.offerSource === OFFER_TYPE_ENUM.x2y2) {
+            item.currency = item.offerRaw.currency;
+          } else if (item.offerSource === OFFER_TYPE_ENUM.looksrare) {
+            item.currency = item.offerRaw.order.currency;
+          }
+          item.id = item.offerId;
+          item.maker = item.buyer;
+        });
+
+        const offerList = deserializeArray(Offers, JSON.stringify(records));
         setOfferList(offerList);
         setSecond(0);
       }

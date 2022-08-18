@@ -31,7 +31,7 @@ export interface IMakerBid {
 
 export class LooksRareExchange {
   signer: any;
-  private contract: Contract;
+  contract: Contract;
 
   constructor(signer: any) {
     this.contract = new ethers.Contract(

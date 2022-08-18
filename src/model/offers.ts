@@ -1,42 +1,51 @@
-import BigNumber from "bignumber.js"
-import { Expose } from "class-transformer"
-import moment from "moment"
-import TransformBigNumber from "./transform/bigNumber"
+import BigNumber from "bignumber.js";
+import { Expose } from "class-transformer";
+import moment from "moment";
+import TransformBigNumber from "./transform/bigNumber";
+
+export enum OFFER_TYPE_ENUM {
+  "looksrare" = "looksrare",
+  "x2y2" = "x2y2",
+}
 
 export class Offers {
-  created_at!: number
+  created_at!: number;
 
-  currency!: string
+  currency!: string;
 
-  end_at!: number
+  end_at!: number;
 
-  id!: number
+  id!: number;
 
-  is_collection_offer!: boolean
+  is_collection_offer!: boolean;
 
-  maker!: string
+  maker!: string;
+
+  offerRaw!: any;
 
   @TransformBigNumber()
-  price!: BigNumber
+  price!: BigNumber;
 
-  status!: string
+  status!: string;
 
-  type!: string
+  type!: string;
 
-  updated_at!: number
+  updated_at!: number;
+
+  offerSource!: OFFER_TYPE_ENUM;
 
   @Expose()
   OfferPriceDisplay() {
-    return this.price.div(10 ** 18).toFixed(2,1)
+    return this.price.div(10 ** 18).toFixed(2, 1);
   }
 
   @Expose()
   createdTime() {
-    return moment(this.created_at,'X').fromNow()
+    return moment(this.created_at, "X").fromNow();
   }
 
   @Expose()
   ExpiresTime() {
-    return moment(this.end_at,'X').fromNow()
+    return moment(this.end_at, "X").fromNow();
   }
 }

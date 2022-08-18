@@ -9,7 +9,7 @@ import {
 import validIcon from "../../../../assets/images/market/nfts_opensea_valid.svg";
 import wethIcon from "../../../../assets/images/market/weth_icon.svg";
 import { OfferModal } from "./TableWarehouse";
-import { Offers } from "model/offers";
+import { OFFER_TYPE_ENUM, Offers } from "model/offers";
 import { DataSource2 } from "./StyledInterface";
 import BigNumber from "bignumber.js";
 import { thousandFormat } from "utils/urls";
@@ -54,160 +54,74 @@ export default function AcceptOffer(props: IProps) {
   const npics = useNpicsContract();
   const nft = useERC721Contract(nftInfo?.nftAddress as string);
 
-  const signatureToRSV = (signature: string) => {
+  const signatureToRSV = (signature: string, contract: any, msg: object) => {
     const signature_ = signature.replace("0x", "");
     const size = 64;
-    return {
-      r: signature_.substring(0, size),
-      s: signature_.substring(size, size * 2),
-      v: 27, //Number("0x" + signature_.substring(size * 2, size * 2 + 2)),
-    };
-  };
-
-  const getLockerGraphData = () => {
-    return {
-      id: "244364926",
-      type: "OFFER",
-      hash: null,
-      createdAt: "2022-08-15T00:05:20.576Z",
-      to: null,
-      from: {
-        address: "0x0fB87C2B4ac21Fb0908F194A1f1f9731d294305C",
-        name: null,
-        isVerified: false,
-        avatar: null,
-      },
-      token: null,
-      collection: {
-        address: "0x49cF6f5d44E70224e2E23fDcdd2C053F30aDA28B",
-        name: "CloneX",
-        description: null,
-        totalSupply: "19355",
-        type: "ERC721",
-        isVerified: true,
-        logo: {
-          src: "https://static.looksnice.org/0x49cF6f5d44E70224e2E23fDcdd2C053F30aDA28B/0xfa2c7077faaa0d12c0f021c39a2e5ef672e531273914161742234795360d6a25",
-          contentType: "image/png",
-        },
-        floorOrder: {
-          price: "6900000000000000000",
-        },
-      },
-      order: {
-        status: "VALID",
-        isOrderAsk: false,
-        signer: "0x0fB87C2B4ac21Fb0908F194A1f1f9731d294305C",
-        collection: {
-          address: "0x49cF6f5d44E70224e2E23fDcdd2C053F30aDA28B",
-        },
-        price: "6150000000000000000",
-        amount: "1",
-        strategy: "0x86F909F70813CdB1Bc733f4D97Dc6b03B8e7E8F3",
-        currency: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
-        nonce: "0",
-        startTime: "1660521885",
-        endTime: "1660781035",
-        minPercentageToAsk: "9300",
-        params: null,
-        signature:
-          "0x9a9635fdbf80469a7e66e19fdd94b12c5c17fd08c32dde5c6ed1274769bfcdac436819bd4a77f90c81b5908437019e7001688965c902bdc5352f03ee326d29ac00",
-        token: null,
-        hash: "0x3a8e336d93513e87e43f2fd2e53f249cf5c376b7c39a6f0efd48e8b827f10c2c",
-      },
-    };
-    return axios
-      .post(
-        "https://graphql.looksrare.org/graphql",
-        {
-          query: `
-     "query GetEventsQuery($pagination: PaginationInput, $filter: EventFilterInput) {\\n      events(pagination: $pagination, filter: $filter) {\\n        ...EventFragment\\n      }\\n    }\\n    \\n  fragment EventFragment on Event {\\n    id\\n    type\\n    hash\\n    createdAt\\n    to {\\n      ...UserEventFragment\\n    }\\n    from {\\n      ...UserEventFragment\\n    }\\n    token {\\n      tokenId\\n      image {\\n        src\\n        contentType\\n      }\\n      name\\n    }\\n    collection {\\n      address\\n      name\\n      description\\n      totalSupply\\n      type\\n      isVerified\\n      logo {\\n        src\\n        contentType\\n      }\\n      floor {\\n        floorPrice\\n      }\\n    }\\n    order {\\n      status\\n      ...OrderFragment\\n    }\\n  }\\n  \\n  fragment OrderFragment on Order {\\n    isOrderAsk\\n    signer\\n    collection {\\n      address\\n    }\\n    price\\n    amount\\n    strategy\\n    currency\\n    nonce\\n    startTime\\n    endTime\\n    minPercentageToAsk\\n    params\\n    signature\\n    token {\\n      tokenId\\n    }\\n    hash\\n  }\\n\\n  \\n  fragment UserEventFragment on User {\\n    address\\n    name\\n    isVerified\\n    avatar {\\n      image {\\n        src\\n        contentType\\n      }\\n    }\\n  }\\n\\n\\n  "
-      `,
-          variables: {
-            filter: {
-              collection: "0x49cF6f5d44E70224e2E23fDcdd2C053F30aDA28B",
-            },
-            pagination: { first: 20 },
-          },
-        }
-        // {
-        //   headers: {
-        //     ["User-Agent"]:
-        //       "Mozilla/5.0 (Macintosh; Intel Mac OS X 12_2_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36",
-        //     ["Content-Type"]: "application/json",
-        //     ["Origin"]: "https://looksrare.org",
-        //     ["Referer"]: "https://looksrare.org",
-        //   },
-        // }
-      )
-      .then((res) => {
-        return res.data.data.events[0];
-      });
-  };
-
-  const onApproveLooksRare = async (amount: string) => {
-    if (!account) {
-      return false;
-    }
-    let weth = new Erc20(
-      ContractAddresses.WETH,
-      provider ? provider.getSigner(account) : window.ethereum
-    );
-
-    const [allowance, balanceOf] = await Promise.all([
-      weth.allowance(account, ContractAddresses.looksRareExchange),
-      weth.balanceOf(account),
-    ]);
-    const _amount = new BigNumber(amount).multipliedBy(
-      new BigNumber(10).pow(18)
-    );
-    // if (balanceOf.lt(_amount)) {
-    //   throw new Error("Insufficient balance");
+    const r = signature_.substring(0, size);
+    const s = signature_.substring(size, size * 2);
+    // verifyHash  verifyString
+    // try {
+    //   const rr = contract.verifyString(JSON.stringify(msg), 27, r, s);
+    //   console.log("rrr", rr);
+    // } catch (e) {
+    //   console.log(e);
     // }
-    if (allowance.gt(_amount)) {
-      return;
-    }
-    const tx = await weth.approve(
-      ContractAddresses.looksRareExchange,
-      "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
-    );
-    await tx.wait();
+    const vMap: { [key: number]: number } = {
+      0: 27,
+      1: 28,
+      27: 27,
+      28: 28,
+    };
+    return {
+      r,
+      s,
+      v: vMap[Number("0x" + signature_.substring(size * 2, size * 2 + 2))],
+    };
   };
 
   const acceptOffer = async () => {
     if (!nftInfo || !accpetOffer || !npics || !account) return;
     setAccept(!accept);
+    console.log("accpetOffer", accpetOffer, accpetOffer?.offerSource, nftInfo);
     try {
       setShowOffer(OfferModal.PROGRESSING);
-      const looksRareData = await getLockerGraphData();
-      console.log("looksRareData", looksRareData);
-      if (looksRareData) {
-        // await onApproveLooksRare(looksRareData.order.amount);
-        const sign = signatureToRSV(looksRareData.order.signature);
-        console.log("sign", sign);
+      const offerRaw = accpetOffer.offerRaw;
+      if (accpetOffer.offerSource === OFFER_TYPE_ENUM.looksrare) {
+        const singer = provider ? provider.getSigner(account) : window.ethereum;
+        const looksRareExchangeContract = new LooksRareExchange(singer);
 
         const takerAsk: ITakerAsk = {
           isOrderAsk: true,
           taker: ContractAddresses.NpicsProxy,
-          price: looksRareData.order.price,
+          price: offerRaw.order.price,
           tokenId: nftInfo.tokenId,
-          minPercentageToAsk: looksRareData.order.minPercentageToAsk,
-          params: looksRareData.order.params || "",
+          minPercentageToAsk: offerRaw.order.minPercentageToAsk,
+          params: offerRaw.order.params || "",
         };
 
+        const signData = {
+          isOrderAsk: offerRaw.order.isOrderAsk,
+          signer: offerRaw.order.signer,
+          collection: offerRaw.order.collection.address,
+          price: offerRaw.order.price,
+          tokenId: offerRaw.token?.tokenId || 0,
+          amount: offerRaw.order.amount,
+          strategy: offerRaw.order.strategy,
+          currency: offerRaw.order.currency,
+          nonce: offerRaw.order.nonce,
+          startTime: offerRaw.order.startTime,
+          endTime: offerRaw.order.endTime,
+          minPercentageToAsk: offerRaw.order.minPercentageToAsk,
+          params: offerRaw.order.params || "",
+        };
+        const sign = signatureToRSV(
+          offerRaw.order.signature,
+          looksRareExchangeContract.contract,
+          signData
+        );
+        console.log("sign", sign);
         const makerBid: IMakerBid = {
-          isOrderAsk: looksRareData.order.isOrderAsk,
-          signer: looksRareData.order.signer,
-          collection: looksRareData.order.collection.address,
-          price: looksRareData.order.price,
-          tokenId: looksRareData.order.token || 0,
-          amount: looksRareData.order.amount,
-          strategy: looksRareData.order.strategy,
-          currency: looksRareData.order.currency,
-          nonce: looksRareData.order.nonce,
-          startTime: looksRareData.order.startTime,
-          endTime: looksRareData.order.endTime,
-          minPercentageToAsk: looksRareData.order.minPercentageToAsk,
-          params: looksRareData.order.params || "",
+          ...signData,
           v: sign.v,
           r: sign.r,
           s: sign.s,
@@ -215,8 +129,19 @@ export default function AcceptOffer(props: IProps) {
         console.log(takerAsk, makerBid);
         // console.log("takerAsk", takerAsk);
         // console.log("makerBid", makerBid);
-        const singer = provider ? provider.getSigner(account) : window.ethereum;
-        const looksRareExchangeContract = new LooksRareExchange(singer);
+        console.log(
+          "data",
+          {
+            ...takerAsk,
+            params: takerAsk.params || "0x",
+          },
+          {
+            ...makerBid,
+            r: "0x" + makerBid.r,
+            s: "0x" + makerBid.s,
+            params: makerBid.params || "0x",
+          }
+        );
         const _BytesData =
           looksRareExchangeContract.getMatchBidWithTakerAskEncodeAbi(
             {
@@ -230,7 +155,6 @@ export default function AcceptOffer(props: IProps) {
               params: makerBid.params || "0x",
             }
           );
-        console.log("_BytesData", _BytesData);
         await npics.acceptOffer(
           nftInfo.nftAddress,
           nftInfo.tokenId,
@@ -238,15 +162,12 @@ export default function AcceptOffer(props: IProps) {
           _BytesData,
           ContractAddresses.looksRare_transferManagerERC721
         );
-      } else {
+      } else if (accpetOffer.offerSource === OFFER_TYPE_ENUM.x2y2) {
         // await erc721?.approve(approveTo,nftInfo.tokenId)
         // const nbpAddress = await npics.getNbpFor(
         //   nftInfo.nftAddress,
         //   nftInfo.tokenId
         // );
-        // const owner = await nft?.ownerOf(nftInfo.tokenId);
-        // console.log(`owner => ${owner}`)
-        // console.log(`nbpAddress => ${nbpAddress}`)
         const parameter = {
           caller: ContractAddresses.NpicsProxy,
           op: 2,
@@ -256,16 +177,21 @@ export default function AcceptOffer(props: IProps) {
             {
               orderId: accpetOffer.id,
               currency: ContractAddresses.WETH,
-              price: accpetOffer.price,
+              price: new BigNumber(accpetOffer.price).toFixed(0),
               tokenId: nftInfo.tokenId,
             },
           ],
         };
 
+        console.log("parameter", parameter);
+
         let BytesData: any = await http
           .myPost(X2Y2_ORDER_SIGN_API, parameter)
           .then((res: any) => res.data[0].input);
 
+        // const owner = await nft?.ownerOf(nftInfo.tokenId);
+        // console.log(`owner => ${owner}`)
+        // console.log(`nbpAddress => ${nbpAddress}`)
         // const _owner = owner?.replace("0x", "").toLocaleLowerCase();
         // const _nbpAddress = nbpAddress?.replace("0x", "");
         const _BytesData = BytesData.replace("0x", "0x357a150b");
@@ -283,9 +209,13 @@ export default function AcceptOffer(props: IProps) {
         message: "Your vault has accepted the offer successfully.",
       });
     } catch (e: any) {
-      console.log(e.message);
+      const startMsg = e.message.indexOf('reason="') + 'reason="'.length;
+      const endMsg = e.message.indexOf('",');
+      const msg = e.message.slice(startMsg, endMsg);
       setShowOffer(OfferModal.NONE);
-      notification.error({ message: "Your vault accept the offer failed." });
+      notification.error({
+        message: msg || "Your vault accept the offer failed.",
+      });
     }
   };
 
