@@ -21,6 +21,7 @@ import ButtonDefault from "component/ButtonDefault";
 import { sort, Sort } from "./data";
 import http from "utils/http";
 import { deserializeArray } from "class-transformer";
+import looksrare from "../../../../assets/images/market/looksrare.svg";
 const { Option } = Select;
 const Button = styled.button`
   color: #fff;
@@ -293,7 +294,7 @@ function AcceptOffersCell(props: {
           style={{ borderRadius: "0.18rem" }}
           width={"0.36rem"}
           height={"0.36rem"}
-          src={imgurl.market.seaport}
+          src={imgurl.market[offerInfo.offerSource]}
         />
       </Box>
       {/* Price */}
