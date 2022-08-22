@@ -90,18 +90,19 @@ interface IProps {
 export default function AcceptOffersList(props: IProps) {
   const { showOffer, setShowOffer, nftAddress, nftInfo } = props;
   const [second, setSecond] = useState(1);
-  const [currentSort, setCurrentSort] = useState<Sort>(Sort.priceToHigh);
+  const [currentSort, setCurrentSort] = useState<Sort>(Sort.priceToLow);
   const [offerList, setOfferList] = useState<Offers[]>();
   const [refresh, setRefresh] = useState<boolean>(false);
   const [cursor, setCursor] = useState<boolean>(false);
   const [pageIndex, setPageIndex] = useState<number>(1);
+  const [topOffer, setTopOffer] = useState<Offers | null>(null);
   // const { offerList, isError, isLoading } = useSwrOffer("0x8a90cab2b38dba80c64b7734e58ee1db38b8992e", currentSort)
   const getOfferList = async () => {
     setRefresh(true);
     let result: any = await http.myPost(
       `/npics-nft/app-api/v2/offers/getOffersList`,
       {
-        pageSize: 5 * pageIndex,
+        pageSize: 10 * pageIndex,
         address: nftAddress,
         pageIndex: 1,
         ...sort[currentSort],
@@ -111,6 +112,9 @@ export default function AcceptOffersList(props: IProps) {
       const records = result.data.records;
       if (result.code === 200 && records) {
         setCursor(result.data.total > records.length);
+        if (currentSort === Sort.priceToLow && records.length > 0) {
+          setTopOffer(records[0]);
+        }
         records.map((item: any) => {
           item.offerRaw = JSON.parse(item.offerRaw);
           item.created_at = item.offerCreatedAt;
@@ -208,10 +212,40 @@ export default function AcceptOffersList(props: IProps) {
           <>
             {/* Select Office */}
             <Flex
-              justifyContent={"end"}
+              justifyContent={"space-between"}
               alignItems={"center"}
               marginTop={"0.32rem"}
             >
+              <Box>
+                <Typography
+                  color={"#000"}
+                  fontSize={"0.12rem"}
+                  fontWeight={500}
+                  style={{ opacity: 0.5 }}
+                >
+                  Top Offer
+                </Typography>
+                <Flex alignItems="center" mt="9px">
+                  <Icon
+                    src={wethIcon}
+                    width={"0.1rem"}
+                    height={"0.15rem"}
+                    marginRight="7px"
+                  ></Icon>
+                  <Typography
+                    color={"#000"}
+                    fontSize={"0.16rem"}
+                    fontWeight={500}
+                    ml="7px"
+                  >
+                    {topOffer
+                      ? new BigNumber(topOffer.price)
+                          .div(10 ** 18)
+                          .toFixed(2, 1)
+                      : "-"}
+                  </Typography>
+                </Flex>
+              </Box>
               <StyledSelect
                 onSelect={(value: any) => setCurrentSort(value)}
                 defaultValue={Sort.priceToLow}

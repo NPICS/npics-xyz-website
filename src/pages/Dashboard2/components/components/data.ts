@@ -251,11 +251,11 @@ export enum Sort {
 export const sort = {
   [Sort.priceToLow]: {
     sort: "price",
-    direction: "asc",
+    direction: "desc",
   },
   [Sort.priceToHigh]: {
     sort: "price",
-    direction: "desc",
+    direction: "asc",
   },
   [Sort.timeNew]: {
     sort: "offerCreatedAt",

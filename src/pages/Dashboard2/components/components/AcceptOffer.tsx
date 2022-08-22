@@ -37,6 +37,7 @@ interface IProps {
 }
 
 let X2Y2Fee = 0.005;
+let LooksrareFee = 0.005;
 let MarkerFee = 0.02;
 export default function AcceptOffer(props: IProps) {
   const { account, provider } = useWeb3React();
@@ -229,6 +230,40 @@ export default function AcceptOffer(props: IProps) {
     }
   }, [nftInfo]);
 
+  const thirdPartyFee = useMemo((): { name: string; fee: number } => {
+    if (accpetOffer) {
+      if (accpetOffer.offerSource === OFFER_TYPE_ENUM.x2y2) {
+        return {
+          name: "X2Y2",
+          fee: X2Y2Fee,
+        };
+      }
+      if (accpetOffer.offerSource === OFFER_TYPE_ENUM.looksrare) {
+        return {
+          name: "Looksrare",
+          fee: LooksrareFee,
+        };
+      }
+    }
+    return {
+      name: "",
+      fee: 0,
+    };
+  }, [accpetOffer]);
+
+  const youReceive =
+    nftInfo &&
+    accpetOffer &&
+    accpetOffer.price
+      .minus(nftInfo.totalDebt)
+      .minus(
+        new BigNumber(
+          `${thirdPartyFee.fee + MarkerFee + creatorRoyalty}`
+        ).times(accpetOffer.price)
+      )
+      .div(10 ** 18)
+      .toFixed(2, 1);
+
   return (
     <Modal isOpen={showOffer === OfferModal.OFFER}>
       <Box
@@ -315,11 +350,11 @@ export default function AcceptOffer(props: IProps) {
                   symbolOrVal={`${nftInfo?.debtString()}`}
                 />
                 <OfferCell
-                  title={`X2Y2 Fee`}
-                  popoverInfo={"Fee to X2Y2"}
+                  title={`${thirdPartyFee.name} Fee`}
+                  popoverInfo={`Fee to ${thirdPartyFee.name}`}
                   infoIcon={true}
                   symbolIcon={false}
-                  symbolOrVal={`${X2Y2Fee * 100}%`}
+                  symbolOrVal={`${thirdPartyFee.fee * 100}%`}
                 />
                 <OfferCell
                   title={`Marker Fee`}
@@ -356,17 +391,7 @@ export default function AcceptOffer(props: IProps) {
               <Flex flexDirection={`row`} gap={`0.06rem`} alignItems={`center`}>
                 <Icon src={wethIcon}></Icon>
                 <Typography color={`#000`} fontSize={`0.2rem`} fontWeight={700}>
-                  {nftInfo &&
-                    accpetOffer &&
-                    accpetOffer.price
-                      .minus(nftInfo.totalDebt)
-                      .minus(
-                        new BigNumber(
-                          `${X2Y2Fee + MarkerFee + creatorRoyalty}`
-                        ).times(accpetOffer.price)
-                      )
-                      .div(10 ** 18)
-                      .toFixed(2, 1)}
+                  {youReceive}
                 </Typography>
                 <Typography
                   color={`rgba(0, 0, 0, .5)`}
@@ -381,7 +406,7 @@ export default function AcceptOffer(props: IProps) {
                         .minus(nftInfo.totalDebt)
                         .minus(
                           new BigNumber(
-                            X2Y2Fee + MarkerFee + creatorRoyalty
+                            thirdPartyFee.fee + MarkerFee + creatorRoyalty
                           ).times(accpetOffer.price)
                         )
                         .times(ethRate)
@@ -407,7 +432,12 @@ export default function AcceptOffer(props: IProps) {
           >
             Cancel
           </CancelButton>
-          <ConfirmButton onClick={acceptOffer}>Accept Offer</ConfirmButton>
+          <ConfirmButton
+            onClick={acceptOffer}
+            disabled={!(Number(youReceive) > 0)}
+          >
+            Accept Offer
+          </ConfirmButton>
         </Flex>
       </Box>
     </Modal>
