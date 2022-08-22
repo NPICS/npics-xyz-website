@@ -2,10 +2,17 @@ import BigNumber from "bignumber.js";
 import { Expose } from "class-transformer";
 import moment from "moment";
 import TransformBigNumber from "./transform/bigNumber";
+import looksrare from "../assets/images/market/looksrare.svg";
+import nftx from "../assets/images/market/nftx.svg";
+import x2y2 from "../assets/images/market/x2y2.svg";
 
 export enum OFFER_TYPE_ENUM {
   "looksrare" = "looksrare",
   "x2y2" = "x2y2",
+}
+export enum OFFER_TYPE_NAME_ENUM {
+  "looksrare" = "Looksrare",
+  "x2y2" = "X2Y2",
 }
 
 export class Offers {
@@ -29,6 +36,8 @@ export class Offers {
   status!: string;
 
   type!: string;
+
+  collection!: string;
 
   updated_at!: number;
 

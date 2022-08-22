@@ -9,7 +9,7 @@ import {
 import validIcon from "../../../../assets/images/market/nfts_opensea_valid.svg";
 import wethIcon from "../../../../assets/images/market/weth_icon.svg";
 import { OfferModal } from "./TableWarehouse";
-import { OFFER_TYPE_ENUM, Offers } from "model/offers";
+import { OFFER_TYPE_ENUM, OFFER_TYPE_NAME_ENUM, Offers } from "model/offers";
 import { DataSource2 } from "./StyledInterface";
 import BigNumber from "bignumber.js";
 import { thousandFormat } from "utils/urls";
@@ -29,6 +29,10 @@ import {
   LooksRareExchange,
 } from "abis/looksRareExchange";
 import { Erc20 } from "abis/Erc20";
+import {
+  getThirdPartyFee,
+  IThirdPartyFeeConfig,
+} from "../../../../config/constants/fee";
 interface IProps {
   showOffer: OfferModal;
   nftInfo: DataSource2 | undefined;
@@ -36,9 +40,6 @@ interface IProps {
   setShowOffer: React.Dispatch<React.SetStateAction<OfferModal>>;
 }
 
-let X2Y2Fee = 0.005;
-let LooksrareFee = 0.005;
-let MarkerFee = 0.02;
 export default function AcceptOffer(props: IProps) {
   const { account, provider } = useWeb3React();
 
@@ -230,27 +231,28 @@ export default function AcceptOffer(props: IProps) {
     }
   }, [nftInfo]);
 
-  const thirdPartyFee = useMemo((): { name: string; fee: number } => {
-    if (accpetOffer) {
-      if (accpetOffer.offerSource === OFFER_TYPE_ENUM.x2y2) {
-        return {
-          name: "X2Y2",
-          fee: X2Y2Fee,
-        };
-      }
-      if (accpetOffer.offerSource === OFFER_TYPE_ENUM.looksrare) {
-        return {
-          name: "Looksrare",
-          fee: LooksrareFee,
-        };
-      }
-    }
-    return {
+  const thirdPartyFee = useMemo((): IThirdPartyFeeConfig => {
+    const empty: IThirdPartyFeeConfig = {
       name: "",
-      fee: 0,
+      contract: "",
+      [OFFER_TYPE_ENUM.x2y2]: {
+        marketFee: 0,
+        creatorFee: 0,
+      },
+      [OFFER_TYPE_ENUM.looksrare]: {
+        marketFee: 0,
+        creatorFee: 0,
+      },
     };
+    if (accpetOffer) {
+      const conf = getThirdPartyFee(accpetOffer.collection);
+      if (!conf) {
+        return empty;
+      }
+      return conf;
+    }
+    return empty;
   }, [accpetOffer]);
-
   const youReceive =
     nftInfo &&
     accpetOffer &&
@@ -258,7 +260,11 @@ export default function AcceptOffer(props: IProps) {
       .minus(nftInfo.totalDebt)
       .minus(
         new BigNumber(
-          `${thirdPartyFee.fee + MarkerFee + creatorRoyalty}`
+          `${
+            thirdPartyFee[accpetOffer.offerSource].creatorFee +
+            thirdPartyFee[accpetOffer.offerSource].marketFee +
+            creatorRoyalty
+          }`
         ).times(accpetOffer.price)
       )
       .div(10 ** 18)
@@ -350,18 +356,28 @@ export default function AcceptOffer(props: IProps) {
                   symbolOrVal={`${nftInfo?.debtString()}`}
                 />
                 <OfferCell
-                  title={`${thirdPartyFee.name} Fee`}
-                  popoverInfo={`Fee to ${thirdPartyFee.name}`}
+                  title={`${
+                    accpetOffer && OFFER_TYPE_NAME_ENUM[accpetOffer.offerSource]
+                  } Fee`}
+                  popoverInfo={`Fee to ${
+                    accpetOffer && OFFER_TYPE_NAME_ENUM[accpetOffer.offerSource]
+                  }`}
                   infoIcon={true}
                   symbolIcon={false}
-                  symbolOrVal={`${thirdPartyFee.fee * 100}%`}
+                  symbolOrVal={`${
+                    accpetOffer &&
+                    thirdPartyFee[accpetOffer.offerSource].creatorFee * 100
+                  }%`}
                 />
                 <OfferCell
-                  title={`Marker Fee`}
+                  title={`Market Fee`}
                   popoverInfo={"Fee to NPics"}
                   infoIcon={true}
                   symbolIcon={false}
-                  symbolOrVal={`${MarkerFee * 100}%`}
+                  symbolOrVal={`${
+                    accpetOffer &&
+                    thirdPartyFee[accpetOffer.offerSource].marketFee * 100
+                  }%`}
                 />
                 <OfferCell
                   title={`Creator Royalty`}
@@ -406,7 +422,9 @@ export default function AcceptOffer(props: IProps) {
                         .minus(nftInfo.totalDebt)
                         .minus(
                           new BigNumber(
-                            thirdPartyFee.fee + MarkerFee + creatorRoyalty
+                            thirdPartyFee[accpetOffer.offerSource].creatorFee +
+                              thirdPartyFee[accpetOffer.offerSource].marketFee +
+                              creatorRoyalty
                           ).times(accpetOffer.price)
                         )
                         .times(ethRate)
