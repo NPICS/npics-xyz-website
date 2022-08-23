@@ -387,7 +387,7 @@ export default function AcceptOffer(props: IProps) {
                   }%`}
                 />
                 <OfferCell
-                  title={`Creator Fee`}
+                  title={`Create Fee`}
                   popoverInfo={`Fee to ${
                     accpetOffer && OFFER_TYPE_NAME_ENUM[accpetOffer.offerSource]
                   }`}
