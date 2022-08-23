@@ -53,18 +53,11 @@ export default function AcceptOffer(props: IProps) {
   const npics = useNpicsContract();
   const nft = useERC721Contract(nftInfo?.nftAddress as string);
 
-  const signatureToRSV = (signature: string, contract: any, msg: object) => {
+  const signatureToRSV = (signature: string) => {
     const signature_ = signature.replace("0x", "");
     const size = 64;
     const r = signature_.substring(0, size);
     const s = signature_.substring(size, size * 2);
-    // verifyHash  verifyString
-    // try {
-    //   const rr = contract.verifyString(JSON.stringify(msg), 27, r, s);
-    //   console.log("rrr", rr);
-    // } catch (e) {
-    //   console.log(e);
-    // }
     const vMap: { [key: number]: number } = {
       0: 27,
       1: 28,
@@ -81,7 +74,6 @@ export default function AcceptOffer(props: IProps) {
   const acceptOffer = async () => {
     if (!nftInfo || !accpetOffer || !npics || !account) return;
     setAccept(!accept);
-    console.log("accpetOffer", accpetOffer, accpetOffer?.offerSource, nftInfo);
     try {
       setShowOffer(OfferModal.PROGRESSING);
       const offerRaw = accpetOffer.offerRaw;
@@ -113,34 +105,13 @@ export default function AcceptOffer(props: IProps) {
           minPercentageToAsk: offerRaw.order.minPercentageToAsk,
           params: offerRaw.order.params || "",
         };
-        const sign = signatureToRSV(
-          offerRaw.order.signature,
-          looksRareExchangeContract.contract,
-          signData
-        );
-        console.log("sign", sign);
+        const sign = signatureToRSV(offerRaw.order.signature);
         const makerBid: IMakerBid = {
           ...signData,
           v: sign.v,
           r: sign.r,
           s: sign.s,
         };
-        console.log(takerAsk, makerBid);
-        // console.log("takerAsk", takerAsk);
-        // console.log("makerBid", makerBid);
-        console.log(
-          "data",
-          {
-            ...takerAsk,
-            params: takerAsk.params || "0x",
-          },
-          {
-            ...makerBid,
-            r: "0x" + makerBid.r,
-            s: "0x" + makerBid.s,
-            params: makerBid.params || "0x",
-          }
-        );
         const _BytesData =
           looksRareExchangeContract.getMatchBidWithTakerAskEncodeAbi(
             {
@@ -182,8 +153,6 @@ export default function AcceptOffer(props: IProps) {
           ],
         };
 
-        console.log("parameter", parameter);
-
         let BytesData: any = await http
           .myPost(X2Y2_ORDER_SIGN_API, parameter)
           .then((res: any) => res.data[0].input);
@@ -208,9 +177,8 @@ export default function AcceptOffer(props: IProps) {
         message: "Your vault has accepted the offer successfully.",
       });
     } catch (e: any) {
-      const startMsg = e.message.indexOf('reason="') + 'reason="'.length;
-      const endMsg = e.message.indexOf('",');
-      const msg = e.message.slice(startMsg, endMsg);
+      console.log("e.message", e.message);
+      const msg = e.message;
       setShowOffer(OfferModal.NONE);
       notification.error({
         message: msg || "Your vault accept the offer failed.",
