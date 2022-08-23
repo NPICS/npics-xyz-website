@@ -262,7 +262,7 @@ export const sort = {
     direction: "desc",
   },
   [Sort.timeExpiring]: {
-    sort: "offerCreatedAt",
+    sort: "offerEndAt",
     direction: "asc",
   },
 };
