@@ -388,9 +388,7 @@ export default function AcceptOffer(props: IProps) {
                 />
                 <OfferCell
                   title={`Create Fee`}
-                  popoverInfo={`Fee to ${
-                    accpetOffer && OFFER_TYPE_NAME_ENUM[accpetOffer.offerSource]
-                  }`}
+                  popoverInfo={`Fee to the creator of NFT`}
                   infoIcon={true}
                   symbolIcon={false}
                   symbolOrVal={`${
