@@ -48,7 +48,7 @@ export default function AcceptOffer(props: IProps) {
   );
   const { showOffer, accpetOffer, nftInfo, setShowOffer } = props;
   const [accept, setAccept] = useState<boolean>(false);
-  const [creatorRoyalty, setCreatorRoyalty] = useState<number>(0);
+  // const [creatorRoyalty, setCreatorRoyalty] = useState<number>(0);
   // const erc721 = useERC721Contract(nftInfo?.nftAddress as string)
   const npics = useNpicsContract();
   const nft = useERC721Contract(nftInfo?.nftAddress as string);
@@ -218,7 +218,7 @@ export default function AcceptOffer(props: IProps) {
     }
   };
 
-  useAsync(async () => {
+  /*  useAsync(async () => {
     if (!nftInfo) return;
     console.log(`nftInfo => ${nftInfo?.nftAddress}`);
     const result: any = await http.myGet(
@@ -229,7 +229,7 @@ export default function AcceptOffer(props: IProps) {
       const _creatorRoyalty = result.data.data / 10000 / 100;
       setCreatorRoyalty(_creatorRoyalty);
     }
-  }, [nftInfo]);
+  }, [nftInfo]);*/
 
   const thirdPartyFee = useMemo((): IThirdPartyFeeConfig => {
     const empty: IThirdPartyFeeConfig = {
@@ -240,6 +240,10 @@ export default function AcceptOffer(props: IProps) {
         creatorFee: 0,
       },
       [OFFER_TYPE_ENUM.looksrare]: {
+        marketFee: 0,
+        creatorFee: 0,
+      },
+      [OFFER_TYPE_ENUM.npices]: {
         marketFee: 0,
         creatorFee: 0,
       },
@@ -263,7 +267,7 @@ export default function AcceptOffer(props: IProps) {
           `${
             thirdPartyFee[accpetOffer.offerSource].creatorFee +
             thirdPartyFee[accpetOffer.offerSource].marketFee +
-            creatorRoyalty
+            thirdPartyFee[OFFER_TYPE_ENUM.npices].marketFee
           }`
         ).times(accpetOffer.price)
       )
@@ -355,10 +359,35 @@ export default function AcceptOffer(props: IProps) {
                   symbolIcon={true}
                   symbolOrVal={`${nftInfo?.debtString()}`}
                 />
+
                 <OfferCell
                   title={`${
                     accpetOffer && OFFER_TYPE_NAME_ENUM[accpetOffer.offerSource]
-                  } Fee`}
+                  } Market Fee`}
+                  popoverInfo={`Fee to ${
+                    accpetOffer && OFFER_TYPE_NAME_ENUM[accpetOffer.offerSource]
+                  }`}
+                  infoIcon={true}
+                  symbolIcon={false}
+                  symbolOrVal={`${
+                    accpetOffer &&
+                    thirdPartyFee[accpetOffer.offerSource].marketFee * 100
+                  }%`}
+                />
+                <OfferCell
+                  title={`Market Fee`}
+                  popoverInfo={`Fee to ${
+                    accpetOffer && OFFER_TYPE_NAME_ENUM[OFFER_TYPE_ENUM.npices]
+                  }`}
+                  infoIcon={true}
+                  symbolIcon={false}
+                  symbolOrVal={`${
+                    accpetOffer &&
+                    thirdPartyFee[OFFER_TYPE_ENUM.npices].marketFee * 100
+                  }%`}
+                />
+                <OfferCell
+                  title={`Creator Fee`}
                   popoverInfo={`Fee to ${
                     accpetOffer && OFFER_TYPE_NAME_ENUM[accpetOffer.offerSource]
                   }`}
@@ -368,23 +397,6 @@ export default function AcceptOffer(props: IProps) {
                     accpetOffer &&
                     thirdPartyFee[accpetOffer.offerSource].creatorFee * 100
                   }%`}
-                />
-                <OfferCell
-                  title={`Market Fee`}
-                  popoverInfo={"Fee to NPics"}
-                  infoIcon={true}
-                  symbolIcon={false}
-                  symbolOrVal={`${
-                    accpetOffer &&
-                    thirdPartyFee[accpetOffer.offerSource].marketFee * 100
-                  }%`}
-                />
-                <OfferCell
-                  title={`Creator Royalty`}
-                  popoverInfo={"Fee to the creator of NFT"}
-                  infoIcon={true}
-                  symbolIcon={false}
-                  symbolOrVal={`${creatorRoyalty && creatorRoyalty * 100}%`}
                 />
               </Flex>
             </Flex>
@@ -424,7 +436,7 @@ export default function AcceptOffer(props: IProps) {
                           new BigNumber(
                             thirdPartyFee[accpetOffer.offerSource].creatorFee +
                               thirdPartyFee[accpetOffer.offerSource].marketFee +
-                              creatorRoyalty
+                              thirdPartyFee[OFFER_TYPE_ENUM.npices].marketFee
                           ).times(accpetOffer.price)
                         )
                         .times(ethRate)

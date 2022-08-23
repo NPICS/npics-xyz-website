@@ -10,6 +10,7 @@ export interface IThirdPartyFeeConfig {
   contract: string;
   [OFFER_TYPE_ENUM.x2y2]: IFee;
   [OFFER_TYPE_ENUM.looksrare]: IFee;
+  [OFFER_TYPE_ENUM.npices]: IFee;
 }
 
 const BAYC = "0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d";
@@ -31,6 +32,10 @@ export const thirdPartyFeeConfig: IThirdPartyFeeConfig[] = [
       marketFee: 0.02,
       creatorFee: 0.025,
     },
+    [OFFER_TYPE_ENUM.npices]: {
+      marketFee: 0.02,
+      creatorFee: 0,
+    },
   },
   {
     name: "MAYC",
@@ -42,6 +47,10 @@ export const thirdPartyFeeConfig: IThirdPartyFeeConfig[] = [
     [OFFER_TYPE_ENUM.looksrare]: {
       marketFee: 0.02,
       creatorFee: 0.025,
+    },
+    [OFFER_TYPE_ENUM.npices]: {
+      marketFee: 0.02,
+      creatorFee: 0,
     },
   },
   {
@@ -55,6 +64,10 @@ export const thirdPartyFeeConfig: IThirdPartyFeeConfig[] = [
       marketFee: 0.02,
       creatorFee: 0.05,
     },
+    [OFFER_TYPE_ENUM.npices]: {
+      marketFee: 0.02,
+      creatorFee: 0,
+    },
   },
   {
     name: "SDoodles",
@@ -66,6 +79,10 @@ export const thirdPartyFeeConfig: IThirdPartyFeeConfig[] = [
     [OFFER_TYPE_ENUM.looksrare]: {
       marketFee: 0.02,
       creatorFee: 0.025,
+    },
+    [OFFER_TYPE_ENUM.npices]: {
+      marketFee: 0.02,
+      creatorFee: 0,
     },
   },
   {
@@ -79,6 +96,10 @@ export const thirdPartyFeeConfig: IThirdPartyFeeConfig[] = [
       marketFee: 0.02,
       creatorFee: 0.05,
     },
+    [OFFER_TYPE_ENUM.npices]: {
+      marketFee: 0.02,
+      creatorFee: 0,
+    },
   },
   {
     name: "CloneX",
@@ -91,6 +112,10 @@ export const thirdPartyFeeConfig: IThirdPartyFeeConfig[] = [
       marketFee: 0.02,
       creatorFee: 0.05,
     },
+    [OFFER_TYPE_ENUM.npices]: {
+      marketFee: 0.02,
+      creatorFee: 0,
+    },
   },
   {
     name: "WCryptoPunks",
@@ -100,6 +125,10 @@ export const thirdPartyFeeConfig: IThirdPartyFeeConfig[] = [
       creatorFee: 0,
     },
     [OFFER_TYPE_ENUM.looksrare]: {
+      marketFee: 0.02,
+      creatorFee: 0,
+    },
+    [OFFER_TYPE_ENUM.npices]: {
       marketFee: 0.02,
       creatorFee: 0,
     },

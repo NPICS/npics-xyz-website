@@ -315,6 +315,15 @@ function AcceptOffersCell(props: {
     const balance = await weth.balanceOf(account);
     setWethBalance(new BigNumber(balance.toString()));
   }, [weth]);
+  const getMarketIcon = () => {
+    if (offerInfo.offerSource === OFFER_TYPE_ENUM.x2y2) {
+      return imgurl.market[OFFER_TYPE_ENUM.x2y2];
+    }
+    if (offerInfo.offerSource === OFFER_TYPE_ENUM.looksrare) {
+      return imgurl.market[OFFER_TYPE_ENUM.looksrare];
+    }
+    return "";
+  };
   return (
     <Flex
       border={"0.01rem solid #0000001A"}
@@ -328,7 +337,7 @@ function AcceptOffersCell(props: {
           style={{ borderRadius: "0.18rem" }}
           width={"0.36rem"}
           height={"0.36rem"}
-          src={imgurl.market[offerInfo.offerSource]}
+          src={getMarketIcon()}
         />
       </Box>
       {/* Price */}
