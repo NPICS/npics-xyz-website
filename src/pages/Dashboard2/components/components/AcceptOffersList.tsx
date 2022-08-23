@@ -120,11 +120,7 @@ export default function AcceptOffersList(props: IProps) {
           item.created_at = item.offerCreatedAt;
           item.end_at = item.offerEndAt;
           item.price = new BigNumber(item.price).toString();
-          if (item.offerSource === OFFER_TYPE_ENUM.x2y2) {
-            item.currency = item.offerRaw.currency;
-          } else if (item.offerSource === OFFER_TYPE_ENUM.looksrare) {
-            item.currency = item.offerRaw.order.currency;
-          }
+          item.currency = item.offerRaw.currency;
           item.id = item.offerId;
           item.maker = item.buyer;
         });
@@ -135,6 +131,7 @@ export default function AcceptOffersList(props: IProps) {
       }
       setRefresh(false);
     } catch (e) {
+      console.log(e);
       setSecond(0);
       setRefresh(false);
     }
