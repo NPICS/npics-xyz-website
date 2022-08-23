@@ -10,7 +10,7 @@ export interface IThirdPartyFeeConfig {
   contract: string;
   [OFFER_TYPE_ENUM.x2y2]: IFee;
   [OFFER_TYPE_ENUM.looksrare]: IFee;
-  [OFFER_TYPE_ENUM.npices]: IFee;
+  [OFFER_TYPE_ENUM.npics]: IFee;
 }
 
 const BAYC = "0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d";
@@ -32,7 +32,7 @@ export const thirdPartyFeeConfig: IThirdPartyFeeConfig[] = [
       marketFee: 0.02,
       creatorFee: 0.025,
     },
-    [OFFER_TYPE_ENUM.npices]: {
+    [OFFER_TYPE_ENUM.npics]: {
       marketFee: 0.02,
       creatorFee: 0,
     },
@@ -48,7 +48,7 @@ export const thirdPartyFeeConfig: IThirdPartyFeeConfig[] = [
       marketFee: 0.02,
       creatorFee: 0.025,
     },
-    [OFFER_TYPE_ENUM.npices]: {
+    [OFFER_TYPE_ENUM.npics]: {
       marketFee: 0.02,
       creatorFee: 0,
     },
@@ -64,7 +64,7 @@ export const thirdPartyFeeConfig: IThirdPartyFeeConfig[] = [
       marketFee: 0.02,
       creatorFee: 0.05,
     },
-    [OFFER_TYPE_ENUM.npices]: {
+    [OFFER_TYPE_ENUM.npics]: {
       marketFee: 0.02,
       creatorFee: 0,
     },
@@ -80,7 +80,7 @@ export const thirdPartyFeeConfig: IThirdPartyFeeConfig[] = [
       marketFee: 0.02,
       creatorFee: 0.025,
     },
-    [OFFER_TYPE_ENUM.npices]: {
+    [OFFER_TYPE_ENUM.npics]: {
       marketFee: 0.02,
       creatorFee: 0,
     },
@@ -96,7 +96,7 @@ export const thirdPartyFeeConfig: IThirdPartyFeeConfig[] = [
       marketFee: 0.02,
       creatorFee: 0.05,
     },
-    [OFFER_TYPE_ENUM.npices]: {
+    [OFFER_TYPE_ENUM.npics]: {
       marketFee: 0.02,
       creatorFee: 0,
     },
@@ -112,7 +112,7 @@ export const thirdPartyFeeConfig: IThirdPartyFeeConfig[] = [
       marketFee: 0.02,
       creatorFee: 0.05,
     },
-    [OFFER_TYPE_ENUM.npices]: {
+    [OFFER_TYPE_ENUM.npics]: {
       marketFee: 0.02,
       creatorFee: 0,
     },
@@ -128,7 +128,7 @@ export const thirdPartyFeeConfig: IThirdPartyFeeConfig[] = [
       marketFee: 0.02,
       creatorFee: 0,
     },
-    [OFFER_TYPE_ENUM.npices]: {
+    [OFFER_TYPE_ENUM.npics]: {
       marketFee: 0.02,
       creatorFee: 0,
     },

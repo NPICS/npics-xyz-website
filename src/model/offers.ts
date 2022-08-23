@@ -6,12 +6,12 @@ import TransformBigNumber from "./transform/bigNumber";
 export enum OFFER_TYPE_ENUM {
   "looksrare" = "looksrare",
   "x2y2" = "x2y2",
-  "npices" = "npices",
+  "npics" = "npics",
 }
 export enum OFFER_TYPE_NAME_ENUM {
   "looksrare" = "Looksrare",
   "x2y2" = "X2Y2",
-  "npices" = "NPices",
+  "npics" = "NPics",
 }
 
 export class Offers {

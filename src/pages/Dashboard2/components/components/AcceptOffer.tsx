@@ -243,7 +243,7 @@ export default function AcceptOffer(props: IProps) {
         marketFee: 0,
         creatorFee: 0,
       },
-      [OFFER_TYPE_ENUM.npices]: {
+      [OFFER_TYPE_ENUM.npics]: {
         marketFee: 0,
         creatorFee: 0,
       },
@@ -267,7 +267,7 @@ export default function AcceptOffer(props: IProps) {
           `${
             thirdPartyFee[accpetOffer.offerSource].creatorFee +
             thirdPartyFee[accpetOffer.offerSource].marketFee +
-            thirdPartyFee[OFFER_TYPE_ENUM.npices].marketFee
+            thirdPartyFee[OFFER_TYPE_ENUM.npics].marketFee
           }`
         ).times(accpetOffer.price)
       )
@@ -377,13 +377,13 @@ export default function AcceptOffer(props: IProps) {
                 <OfferCell
                   title={`Market Fee`}
                   popoverInfo={`Fee to ${
-                    accpetOffer && OFFER_TYPE_NAME_ENUM[OFFER_TYPE_ENUM.npices]
+                    accpetOffer && OFFER_TYPE_NAME_ENUM[OFFER_TYPE_ENUM.npics]
                   }`}
                   infoIcon={true}
                   symbolIcon={false}
                   symbolOrVal={`${
                     accpetOffer &&
-                    thirdPartyFee[OFFER_TYPE_ENUM.npices].marketFee * 100
+                    thirdPartyFee[OFFER_TYPE_ENUM.npics].marketFee * 100
                   }%`}
                 />
                 <OfferCell
@@ -436,7 +436,7 @@ export default function AcceptOffer(props: IProps) {
                           new BigNumber(
                             thirdPartyFee[accpetOffer.offerSource].creatorFee +
                               thirdPartyFee[accpetOffer.offerSource].marketFee +
-                              thirdPartyFee[OFFER_TYPE_ENUM.npices].marketFee
+                              thirdPartyFee[OFFER_TYPE_ENUM.npics].marketFee
                           ).times(accpetOffer.price)
                         )
                         .times(ethRate)
