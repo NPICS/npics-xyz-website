@@ -77,6 +77,7 @@ export default function AcceptOffer(props: IProps) {
     try {
       setShowOffer(OfferModal.PROGRESSING);
       const offerRaw = accpetOffer.offerRaw;
+      console.log("offerRaw", accpetOffer);
       if (accpetOffer.offerSource === OFFER_TYPE_ENUM.looksrare) {
         const singer = provider ? provider.getSigner(account) : window.ethereum;
         const looksRareExchangeContract = new LooksRareExchange(singer);
@@ -84,28 +85,28 @@ export default function AcceptOffer(props: IProps) {
         const takerAsk: ITakerAsk = {
           isOrderAsk: true,
           taker: ContractAddresses.NpicsProxy,
-          price: offerRaw.order.price,
+          price: offerRaw.price,
           tokenId: nftInfo.tokenId,
-          minPercentageToAsk: offerRaw.order.minPercentageToAsk,
-          params: offerRaw.order.params || "",
+          minPercentageToAsk: offerRaw.minPercentageToAsk,
+          params: offerRaw.params || "",
         };
 
         const signData = {
-          isOrderAsk: offerRaw.order.isOrderAsk,
-          signer: offerRaw.order.signer,
-          collection: offerRaw.order.collection.address,
-          price: offerRaw.order.price,
+          isOrderAsk: offerRaw.isOrderAsk,
+          signer: offerRaw.signer,
+          collection: offerRaw.collection.address,
+          price: offerRaw.price,
           tokenId: offerRaw.token?.tokenId || 0,
-          amount: offerRaw.order.amount,
-          strategy: offerRaw.order.strategy,
-          currency: offerRaw.order.currency,
-          nonce: offerRaw.order.nonce,
-          startTime: offerRaw.order.startTime,
-          endTime: offerRaw.order.endTime,
-          minPercentageToAsk: offerRaw.order.minPercentageToAsk,
-          params: offerRaw.order.params || "",
+          amount: offerRaw.amount,
+          strategy: offerRaw.strategy,
+          currency: offerRaw.currency,
+          nonce: offerRaw.nonce,
+          startTime: offerRaw.startTime,
+          endTime: offerRaw.endTime,
+          minPercentageToAsk: offerRaw.minPercentageToAsk,
+          params: offerRaw.params || "",
         };
-        const sign = signatureToRSV(offerRaw.order.signature);
+        const sign = signatureToRSV(offerRaw.signature);
         const makerBid: IMakerBid = {
           ...signData,
           v: sign.v,
