@@ -177,6 +177,9 @@ export default function AcceptOffer(props: IProps) {
       notification.success({
         message: "Your vault has accepted the offer successfully.",
       });
+      setTimeout(() => {
+        window.location.reload();
+      }, 500);
     } catch (e: any) {
       console.log("e.message", e.message);
       const msg = e.message;
