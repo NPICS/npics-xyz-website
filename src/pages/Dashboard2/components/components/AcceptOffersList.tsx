@@ -13,7 +13,7 @@ import { useEffect } from "react";
 import { useIntervalWhen } from "rooks";
 import { imgurl } from "utils/globalimport";
 import { DataSource2 } from "./StyledInterface";
-import { Select } from "antd";
+import { Select, Skeleton, Space } from "antd";
 import { useAsync } from "react-use";
 import { useWETHContract } from "hooks/useContract";
 import { useWeb3React } from "@web3-react/core";
@@ -22,6 +22,7 @@ import { sort, Sort } from "./data";
 import http from "utils/http";
 import { deserializeArray } from "class-transformer";
 import looksrare from "../../../../assets/images/market/looksrare.svg";
+import Loading from "../../../../component/Loading";
 const { Option } = Select;
 const Button = styled.button`
   color: #fff;
@@ -79,12 +80,67 @@ const FlexList = styled(Flex)`
     display: none;
   }
 `;
+const LoadingView = styled.div`
+  height: 300px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 interface IProps {
   showOffer: OfferModal;
   nftInfo: DataSource2 | undefined;
   nftAddress: string | undefined;
   setShowOffer: React.Dispatch<React.SetStateAction<OfferModal>>;
   setAcceptOffer: React.Dispatch<React.SetStateAction<Offers | undefined>>;
+}
+
+function LoadingSkeleton() {
+  return (
+    <>
+      {[0, 0, 0, 0, 0].map(() => (
+        <Flex
+          border={"0.01rem solid #0000001A"}
+          borderRadius={"0.1rem"}
+          padding={"0.11rem 0.3rem"}
+          alignItems={"center"}
+        >
+          <Box>
+            <Skeleton.Avatar
+              active={true}
+              style={{
+                borderRadius: "50%",
+                width: "0.36rem",
+                height: "0.36rem",
+              }}
+            />
+          </Box>
+          {/* Price */}
+          <Flex marginLeft={"0.2rem"} width={"32%"}>
+            <Flex gap={"0.03rem"} flex={1}>
+              <Skeleton.Input active={true} style={{ borderRadius: "10px" }} />
+            </Flex>
+          </Flex>
+          {/* Expires */}
+          <Typography marginLeft={"0.2rem"}>
+            <Skeleton.Input
+              active={true}
+              style={{ borderRadius: "10px", width: "1rem" }}
+            />
+          </Typography>
+          <Flex flex={1}></Flex>
+          <Skeleton.Button
+            active={true}
+            style={{
+              borderRadius: "10px",
+              minWidth: "1.5rem",
+              height: "0.45rem",
+            }}
+          />
+        </Flex>
+      ))}
+    </>
+  );
 }
 
 export default function AcceptOffersList(props: IProps) {
@@ -97,6 +153,7 @@ export default function AcceptOffersList(props: IProps) {
   const [pageIndex, setPageIndex] = useState<number>(1);
   const [topOffer, setTopOffer] = useState<Offers | null>(null);
   // const { offerList, isError, isLoading } = useSwrOffer("0x8a90cab2b38dba80c64b7734e58ee1db38b8992e", currentSort)
+  const [loadingN, setLoadingN] = useState<number>(0);
   const getOfferList = async () => {
     setRefresh(true);
     let result: any = await http.myPost(
@@ -130,10 +187,16 @@ export default function AcceptOffersList(props: IProps) {
         setSecond(0);
       }
       setRefresh(false);
+      if (loadingN === 0) {
+        setLoadingN(1);
+      }
     } catch (e) {
       console.log(e);
       setSecond(0);
       setRefresh(false);
+      if (loadingN === 0) {
+        setLoadingN(1);
+      }
     }
   };
 
@@ -244,7 +307,10 @@ export default function AcceptOffersList(props: IProps) {
                 </Flex>
               </Box>
               <StyledSelect
-                onSelect={(value: any) => setCurrentSort(value)}
+                onSelect={(value: any) => {
+                  setLoadingN(0);
+                  setCurrentSort(value);
+                }}
                 defaultValue={Sort.priceToLow}
                 dropdownClassName="ant-select-reset"
               >
@@ -256,25 +322,29 @@ export default function AcceptOffersList(props: IProps) {
             </Flex>
 
             {/* List */}
-            <FlexList
-              flexDirection={"column"}
-              gap={"0.1rem"}
-              overflow={"auto"}
-              marginTop={"0.2rem"}
-            >
-              {offerList &&
-                offerList.map((item: Offers, idx: Key | null | undefined) => {
-                  return (
-                    <AcceptOffersCell
-                      nftInfo={nftInfo}
-                      setAcceptOffer={props.setAcceptOffer}
-                      offerInfo={item}
-                      key={idx}
-                      setShowOffer={setShowOffer}
-                    />
-                  );
-                })}
-            </FlexList>
+            {loadingN === 0 ? (
+              <LoadingSkeleton />
+            ) : (
+              <FlexList
+                flexDirection={"column"}
+                gap={"0.1rem"}
+                overflow={"auto"}
+                marginTop={"0.2rem"}
+              >
+                {offerList &&
+                  offerList.map((item: Offers, idx: Key | null | undefined) => {
+                    return (
+                      <AcceptOffersCell
+                        nftInfo={nftInfo}
+                        setAcceptOffer={props.setAcceptOffer}
+                        offerInfo={item}
+                        key={idx}
+                        setShowOffer={setShowOffer}
+                      />
+                    );
+                  })}
+              </FlexList>
+            )}
           </>
         }
         {cursor ? (

@@ -378,10 +378,6 @@ export default function AcceptOffer(props: IProps) {
               padding={`0.3rem 0.4rem`}
               alignItems={`center`}
               justifyContent={`space-between`}
-              style={{
-                cursor: `pointer`,
-                userSelect: `none`,
-              }}
             >
               <Typography color={`#000`} fontSize={`0.2rem`} fontWeight={700}>
                 You Receive
