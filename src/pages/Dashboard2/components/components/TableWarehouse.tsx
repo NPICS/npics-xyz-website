@@ -35,8 +35,11 @@ export enum OfferModal {
   PROGRESSING = 1 << 2,
 }
 
-export default function TableWarehouse(props: { Source?: DataSource2[] }) {
-  const { Source } = props;
+export default function TableWarehouse(props: {
+  Source?: DataSource2[];
+  getNftActivities?: Function;
+}) {
+  const { Source, getNftActivities } = props;
   const [showOffer, setShowOffer] = useState<OfferModal>(OfferModal.NONE);
   const [nftInfo, setNftInfo] = useState<DataSource2>();
   const [accpetOffer, setAcceptOffer] = useState<Offers>();
@@ -272,6 +275,7 @@ export default function TableWarehouse(props: { Source?: DataSource2[] }) {
         accpetOffer={accpetOffer}
         showOffer={showOffer}
         setShowOffer={setShowOffer}
+        getNftActivities={getNftActivities}
       />
 
       {/* popup loading */}

@@ -38,6 +38,7 @@ interface IProps {
   nftInfo: DataSource2 | undefined;
   accpetOffer: Offers | undefined;
   setShowOffer: React.Dispatch<React.SetStateAction<OfferModal>>;
+  getNftActivities?: Function;
 }
 
 export default function AcceptOffer(props: IProps) {
@@ -46,7 +47,8 @@ export default function AcceptOffer(props: IProps) {
   const ethRate = useAppSelector(
     (state) => new BigNumber(state.app.data.EthPrice)
   );
-  const { showOffer, accpetOffer, nftInfo, setShowOffer } = props;
+  const { showOffer, accpetOffer, nftInfo, setShowOffer, getNftActivities } =
+    props;
   const [accept, setAccept] = useState<boolean>(false);
   // const [creatorRoyalty, setCreatorRoyalty] = useState<number>(0);
   // const erc721 = useERC721Contract(nftInfo?.nftAddress as string)
@@ -179,7 +181,7 @@ export default function AcceptOffer(props: IProps) {
         message: "Your vault has accepted the offer successfully.",
       });
       setTimeout(() => {
-        window.location.reload();
+        getNftActivities && getNftActivities();
       }, 500);
     } catch (e: any) {
       console.log("e.message", e.message);
