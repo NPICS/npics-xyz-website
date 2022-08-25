@@ -1,9 +1,8 @@
-import BigNumber from 'bignumber.js';
-import { Expose } from 'class-transformer';
-import { flex } from 'component/styled';
-import TransformBigNumber from 'model/transform/bigNumber';
-import styled from 'styled-components';
-
+import BigNumber from "bignumber.js";
+import { Expose } from "class-transformer";
+import { flex } from "component/styled";
+import TransformBigNumber from "model/transform/bigNumber";
+import styled from "styled-components";
 
 export const BgTable = styled.div`
   line-height: normal;
@@ -19,28 +18,28 @@ export const BgTable = styled.div`
       flex-direction: column;
       justify-content: space-evenly;
       margin-left: 0.1rem;
-      &>div:nth-child(1) {
+      & > div:nth-child(1) {
         display: flex;
         align-items: center;
         flex-wrap: nowrap;
         color: #000;
         font-size: 0.14rem;
-        &>span:nth-child(1) {
+        & > span:nth-child(1) {
           max-width: 0.7rem;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
           text-align: left;
         }
-        &>span:nth-child(2) {
+        & > span:nth-child(2) {
           white-space: nowrap;
         }
       }
-      &>div:nth-child(2) {
+      & > div:nth-child(2) {
         display: flex;
-        color: rgba(0, 0, 0, .5);
+        color: rgba(0, 0, 0, 0.5);
         font-size: 0.12rem;
-        &>span {
+        & > span {
           ${flex}
           &>img {
             margin-left: 0.08rem;
@@ -58,14 +57,14 @@ export const BgTable = styled.div`
     font-size: 0.14rem;
     color: #000;
     /* align-items: flex-start; */
-    &>span {
+    & > span {
       max-width: 1.11rem;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
       text-align: left;
     }
-    &>img {
+    & > img {
       //width: 0.16rem;
       //height: 0.16rem;
       margin-left: 0.06rem;
@@ -77,7 +76,7 @@ export const BgTable = styled.div`
     font-weight: 600;
     font-size: 0.14rem;
     color: #000;
-    &>img {
+    & > img {
       /* width: 0.14rem;
       height: 0.22rem; */
       margin-right: 0.06rem;
@@ -98,7 +97,7 @@ export const BgTable = styled.div`
   }
   .actionBtn {
     background: #000000;
-    border: 0.01rem solid rgba(255, 255, 255, .2);
+    border: 0.01rem solid rgba(255, 255, 255, 0.2);
     border-radius: 0.1rem;
     line-height: 0.48rem;
     text-align: center;
@@ -117,43 +116,43 @@ export const BgTable = styled.div`
       height: 2.5rem;
     }
   }
-`
+`;
 export interface Result {
-  createTime: string,
-  id: number,
-  nftAddress: string,
-  neoAddress: string,
-  tokenId: string,
-  userAddress: string,
-  imageUrl: string
-  floorPrice: BigNumber
-  ltv: BigNumber
-  purchaseFloorPrice: BigNumber
-  status: number
+  createTime: string;
+  id: number;
+  nftAddress: string;
+  neoAddress: string;
+  tokenId: string;
+  userAddress: string;
+  imageUrl: string;
+  floorPrice: BigNumber;
+  ltv: BigNumber;
+  purchaseFloorPrice: BigNumber;
+  status: number;
 }
 
 export interface Record extends Result {
   neoAddress: string;
   collectionName: string;
-  debtData: DebtData,
-  liquidatePrice: LiquidatePrice
+  debtData: DebtData;
+  liquidatePrice: LiquidatePrice;
 }
 
 export interface DebtData {
-  loanId: number,
-  reserveAsset: string,
-  totalCollateral: BigNumber,
-  totalDebt: BigNumber,
-  availableBorrows: BigNumber,
-  healthFactor: BigNumber
+  loanId: number;
+  reserveAsset: string;
+  totalCollateral: BigNumber;
+  totalDebt: BigNumber;
+  availableBorrows: BigNumber;
+  healthFactor: BigNumber;
 }
 export interface LiquidatePrice {
-  liquidatePrice: BigNumber,
-  paybackAmount: BigNumber
+  liquidatePrice: BigNumber;
+  paybackAmount: BigNumber;
 }
 
 export interface DataSource {
-  key: string,
+  key: string;
   items: string;
   contract: string;
   debt: BigNumber;
@@ -174,93 +173,99 @@ export interface DataSource {
 }
 
 export class DataSource2 {
-  key!: string
-  
-  id!: string
+  key!: string;
 
-  createTime!: string
+  id!: string;
 
-  nftAddress!: string
-  
-  neoAddress!: string
+  createTime!: string;
 
-  tokenId!: number
+  nftAddress!: string;
 
-  userAddress!: string
+  neoAddress!: string;
 
-  imageUrl!: string
+  tokenId!: number;
 
-  @TransformBigNumber()
-  floorPrice!: BigNumber
-  
-  @TransformBigNumber()
-  ltv!: BigNumber
-  
-  @TransformBigNumber()
-  purchaseFloorPrice!: BigNumber
+  userAddress!: string;
 
-  status!: number
-
-  collectionName!: string
-  
-  @TransformBigNumber()
-  liquidatePrice!: BigNumber
+  imageUrl!: string;
 
   @TransformBigNumber()
-  paybackAmount!: BigNumber
-
-  loanId!: number
-
-  reserveAsset!: string
-  
-  factorStatus!: string
+  floorPrice!: BigNumber;
 
   @TransformBigNumber()
-  totalCollateral!: BigNumber
+  ltv!: BigNumber;
 
   @TransformBigNumber()
-  totalDebt!: BigNumber
+  purchaseFloorPrice!: BigNumber;
+
+  status!: number;
+
+  collectionName!: string;
 
   @TransformBigNumber()
-  availableBorrows!: BigNumber
+  liquidatePrice!: BigNumber;
 
   @TransformBigNumber()
-  healthFactor!: BigNumber
+  paybackAmount!: BigNumber;
+
+  loanId!: number;
+
+  reserveAsset!: string;
+
+  factorStatus!: string;
+
+  @TransformBigNumber()
+  totalCollateral!: BigNumber;
+
+  @TransformBigNumber()
+  totalDebt!: BigNumber;
+
+  @TransformBigNumber()
+  availableBorrows!: BigNumber;
+
+  @TransformBigNumber()
+  healthFactor!: BigNumber;
 
   @Expose()
   maxTotalDebt() {
-    return BigNumber.minimum(this.totalDebt.multipliedBy(new BigNumber('0.001')), new BigNumber('0.01').multipliedBy(10 ** 18))
+    return BigNumber.minimum(
+      this.totalDebt.multipliedBy(new BigNumber("0.001")),
+      new BigNumber("0.01").multipliedBy(10 ** 18)
+    );
   }
 
   @Expose()
   liquidationPrice() {
-    return this.totalDebt.div('0.9')
+    return this.totalDebt.div("0.9");
   }
 
   @Expose()
   debtString() {
-    return this.totalDebt.div(10 ** 18).toFixed(4, 1)
+    return this.totalDebt.div(10 ** 18).toFixed(4, 1);
   }
-  
+
   @Expose()
   terminated(): boolean {
-    return this.status === 1 ? true : false
+    let factor = +new BigNumber(this.healthFactor.toString())
+      .div(10 ** 18)
+      .dp(0)
+      .toString();
+    return this.status === 1 || factor <= 0 ? true : false;
   }
 
   @Expose()
   singularForName() {
     switch (this.collectionName) {
       case "Doodles":
-        return "Doodle"
+        return "Doodle";
       case "Space Doodles":
-        return "Space Doodle"
+        return "Space Doodle";
       case "CryptoPunks":
-        return "CryptoPunk"
+        return "CryptoPunk";
       case "CLONE X - X TAKASHI MURAKAMI":
-        return "Clone X"
+        return "Clone X";
       default:
-        return this.collectionName
+        return this.collectionName;
     }
   }
 }
-

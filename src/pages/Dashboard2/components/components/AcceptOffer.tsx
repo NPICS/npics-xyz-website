@@ -165,13 +165,14 @@ export default function AcceptOffer(props: IProps) {
         // const _nbpAddress = nbpAddress?.replace("0x", "");
         const _BytesData = BytesData.replace("0x", "0x357a150b");
         // const __BytesData = _BytesData.replace(`${_owner}`, `${_nbpAddress}`);
-        await npics.acceptOffer(
+        const tx = await npics.acceptOffer(
           nftInfo.nftAddress,
           nftInfo.tokenId,
           ContractAddresses.x2y2R1,
           _BytesData,
           ContractAddresses.x2y2_ERC721Delegate
         );
+        await tx.wait();
       }
       setShowOffer(OfferModal.NONE);
       notification.success({
