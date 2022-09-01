@@ -390,7 +390,7 @@ export default function NFTPay(props: {
         wethAmt: weth,
       };
       let tx: any;
-      if (payType && PayType.WETH) {
+      if (payType & PayType.WETH) {
         tx = await c.downPayWithWETH(contractParams);
       } else {
         tx = await c.downPayWithETH(contractParams);

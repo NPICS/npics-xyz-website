@@ -89,7 +89,7 @@ import rarity from "../assets/images/market/rarity.png";
 import DYDXBuy from "../assets/images/market/DYDXBuy.png";
 import BendDAOBuy from "../assets/images/market/BendDAOBuy.png";
 import OpenseaBuy from "../assets/images/market/OpenseaBuy.png";
-import sudoswap from "../assets/images/market/sudoswap.png";
+import sudoswap from "../assets/images/market/sudoswap.svg";
 
 import gas_icon from "../assets/images/gas_icon.png";
 
