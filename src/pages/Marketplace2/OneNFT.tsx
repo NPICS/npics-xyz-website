@@ -223,8 +223,9 @@ export default function OneNFT() {
         );
         const spotPrice = await multicallClient([
           pairContract.getBuyNFTQuote(1),
-        ]).then((res) => res[0].resultData);
-        console.log("spotPricespotPrice", spotPrice);
+        ]).then((res) => {
+          return res[0].returnData[3];
+        });
         dats.currentBasePrice = new BigNumber(spotPrice);
         dats.pairAddress = pairAddress;
       }

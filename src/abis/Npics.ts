@@ -164,7 +164,7 @@ export class Npics {
     return BigNumber.max(result, 0);
   }
 
-  async getNbpFor(nft: string, tokenId: number): Promise<string> {
+  async getNbpFor(nft: string, tokenId: number | string): Promise<string> {
     let contract = new ethers.Contract(
       ContractAddresses.NpicsProxy,
       NPICS_ABI,

@@ -249,6 +249,9 @@ export default function NFTPay(props: {
         return;
       }
 
+      const signer = provider.getSigner(account);
+      const c = new Npics(signer);
+
       let data: string | undefined = "";
       if (props.nft.market === "sudoswap") {
         const swapETHForSpecificNFTsAbi = {
@@ -297,10 +300,53 @@ export default function NFTPay(props: {
           stateMutability: "payable",
           type: "function",
         };
+
+        // test code
+        /*const c = new ethers.Contract(
+          "0x2b2e8cda09bba9660dca5cb6233787738ad68329",
+          [swapETHForSpecificNFTsAbi],
+          provider.getSigner(account)
+        );
+        console.log("currentBasePrice", props.nft.currentBasePrice.toString());
+        const signer = provider.getSigner(account);
+        if (!signer) {
+          return;
+        }
+        const npics = new Npics(signer);
+        const nbpAddress = await npics.getNbpFor(
+          props.nft.address,
+          String(props.nft.tokenId)
+        );
+        console.log("nbpAddress", nbpAddress);
+        const txx = await c.swapETHForSpecificNFTs(
+          [
+            {
+              pair: props.nft.pairAddress,
+              nftIds: [props.nft.tokenId],
+            },
+          ],
+          ContractAddresses.NpicsProxy,
+          nbpAddress,
+          // "0x72C2CbB32936454B48CeE27e8B91c4DdF067401b",
+          ~~(new Date().getTime() / 1000) + 300,
+          {
+            value: props.nft.currentBasePrice.toString(),
+          }
+        );
+        console.log("txx", txx);
+        return;*/
+
         const swapETHForSpecificNFTsContract = new ethers.utils.Interface([
           swapETHForSpecificNFTsAbi,
         ]);
         const deadline = ~~(new Date().getTime() / 1000) + 300;
+
+        const npics = new Npics(signer);
+        const nbpAddress = await npics.getNbpFor(
+          props.nft.address,
+          props.nft.tokenId
+        );
+
         data = swapETHForSpecificNFTsContract.encodeFunctionData(
           "swapETHForSpecificNFTs",
           [
@@ -310,8 +356,8 @@ export default function NFTPay(props: {
                 nftIds: [props.nft.tokenId],
               },
             ],
-            ContractAddresses.NpicsProxy,
-            ContractAddresses.NpicsProxy,
+            nbpAddress,
+            nbpAddress,
             deadline,
           ]
         );
@@ -343,11 +389,8 @@ export default function NFTPay(props: {
           ContractAddresses.getMarketAddressByName(props.nft.market) ?? "",
         wethAmt: weth,
       };
-      const signer = provider.getSigner(account);
-      const c = new Npics(signer);
       let tx: any;
-      // tx = await c.downPayWithWETH(contractParams);
-      if (payType & PayType.WETH) {
+      if (payType && PayType.WETH) {
         tx = await c.downPayWithWETH(contractParams);
       } else {
         tx = await c.downPayWithETH(contractParams);
