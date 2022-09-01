@@ -22,6 +22,13 @@ import rarity_2_icon from "../../assets/images/market/rarity_2.svg";
 import { Pop20 } from "component/Popover/Popover";
 import axios from "axios";
 import BigNumber from "bignumber.js";
+import { ethers } from "ethers";
+import { useWeb3React } from "@web3-react/core";
+import {
+  ChainId,
+  multicallClient,
+  newClientContract,
+} from "../../utils/multicall";
 
 function Label(props: { icon?: string; num: number }) {
   return (
@@ -74,6 +81,7 @@ export default function OneNFT() {
   const [detailData, setDetailData] = useState<CollectionDetail | undefined>(
     undefined
   );
+  const { provider, account } = useWeb3React();
   const navigate = useNavigate();
   let urlParams: any = useParams();
   const params: { address: string; tokenId: string } = urlParams;
@@ -153,7 +161,7 @@ export default function OneNFT() {
     if (resp.code === 200 && resp.data) {
       const dats = deserialize(CollectionDetail, JSON.stringify(resp.data));
       if (dats.market === "sudoswap") {
-        const { pairAddress, spotPrice } = await axios
+        const pairAddress = await axios
           .post(SUDOSWAP_GRAPH_API, {
             query: `
           {
@@ -171,14 +179,52 @@ export default function OneNFT() {
           .then((res) => {
             const pairs = res.data.data.pairs;
             if (pairs.length === 0) {
-              return {};
+              return 0;
             } else {
-              return {
-                spotPrice: pairs[0].spotPrice,
-                pairAddress: pairs[0].id,
-              };
+              return pairs[0].id;
             }
           });
+        const pairContract = newClientContract(
+          [
+            {
+              inputs: [
+                { internalType: "uint256", name: "numNFTs", type: "uint256" },
+              ],
+              name: "getBuyNFTQuote",
+              outputs: [
+                {
+                  internalType: "enum CurveErrorCodes.Error",
+                  name: "error",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint256",
+                  name: "newSpotPrice",
+                  type: "uint256",
+                },
+                { internalType: "uint256", name: "newDelta", type: "uint256" },
+                {
+                  internalType: "uint256",
+                  name: "inputAmount",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "protocolFee",
+                  type: "uint256",
+                },
+              ],
+              stateMutability: "view",
+              type: "function",
+            },
+          ],
+          pairAddress,
+          ChainId.ETH
+        );
+        const spotPrice = await multicallClient([
+          pairContract.getBuyNFTQuote(1),
+        ]).then((res) => res[0].resultData);
+        console.log("spotPricespotPrice", spotPrice);
         dats.currentBasePrice = new BigNumber(spotPrice);
         dats.pairAddress = pairAddress;
       }
