@@ -6,6 +6,8 @@ import { SessionStorageKey } from "./enums";
 // import store from "../store";
 
 export const X2Y2_ORDER_SIGN_API = "/x2y2/api/orders/sign";
+export const SUDOSWAP_GRAPH_API =
+  "https://api.thegraph.com/subgraphs/name/zeframlou/sudoswap";
 
 axios.defaults.timeout = 15000;
 axios.defaults.headers.post["Content-Type"] = "application/json";
@@ -20,7 +22,7 @@ axios.interceptors.request.use(
     if (config.method === "post") {
       config.data = JSON.stringify(config.data);
     }
-    if (config.url !== X2Y2_ORDER_SIGN_API) {
+    if (![X2Y2_ORDER_SIGN_API, SUDOSWAP_GRAPH_API].includes(config.url)) {
       config.headers["Authorization"] = localStorage.getItem(
         SessionStorageKey.AccessToken
       );

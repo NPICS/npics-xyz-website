@@ -53,6 +53,7 @@ export const ContractAddresses = {
       x2y2: "0x83C8F28c26bF6aaca652Df1DbBE0e1b56F8baBa2",
       looksrare: "0x83C8F28c26bF6aaca652Df1DbBE0e1b56F8baBa2",
       nftx: "0x83C8F28c26bF6aaca652Df1DbBE0e1b56F8baBa2",
+      sudoswap: "0x2B2e8cDA09bBA9660dCA5cB6233787738Ad68329",
       xMarket: undefined,
     };
     return data[name];

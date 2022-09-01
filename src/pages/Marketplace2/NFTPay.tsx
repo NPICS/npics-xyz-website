@@ -28,6 +28,8 @@ import { useAsync } from "react-use";
 import { TextPlaceholder } from "component/styled";
 import wethIcon from "../../assets/images/market/weth_icon.svg";
 import Checkbox from "../../component/Input/Checkbox";
+import axios from "axios";
+import { ethers } from "ethers";
 
 export function PopupTitle(props: { title: string; canClose: boolean }) {
   return (
@@ -246,12 +248,81 @@ export default function NFTPay(props: {
         message.error(`Please agree to NPics Terms of Service`);
         return;
       }
+
+      let data: string | undefined = "";
+      if (props.nft.market === "sudoswap") {
+        const swapETHForSpecificNFTsAbi = {
+          inputs: [
+            {
+              components: [
+                {
+                  internalType: "contract LSSVMPair",
+                  name: "pair",
+                  type: "address",
+                },
+                {
+                  internalType: "uint256[]",
+                  name: "nftIds",
+                  type: "uint256[]",
+                },
+              ],
+              internalType: "struct LSSVMRouter.PairSwapSpecific[]",
+              name: "swapList",
+              type: "tuple[]",
+            },
+            {
+              internalType: "address payable",
+              name: "ethRecipient",
+              type: "address",
+            },
+            {
+              internalType: "address",
+              name: "nftRecipient",
+              type: "address",
+            },
+            {
+              internalType: "uint256",
+              name: "deadline",
+              type: "uint256",
+            },
+          ],
+          name: "swapETHForSpecificNFTs",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "remainingValue",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "payable",
+          type: "function",
+        };
+        const swapETHForSpecificNFTsContract = new ethers.utils.Interface([
+          swapETHForSpecificNFTsAbi,
+        ]);
+        const deadline = ~~(new Date().getTime() / 1000) + 300;
+        data = swapETHForSpecificNFTsContract.encodeFunctionData(
+          "swapETHForSpecificNFTs",
+          [
+            [
+              {
+                pair: props.nft.pairAddress,
+                nftIds: [props.nft.tokenId],
+              },
+            ],
+            ContractAddresses.NpicsProxy,
+            ContractAddresses.NpicsProxy,
+            deadline,
+          ]
+        );
+      } else {
+        data = await getTradeDetailData();
+      }
       // show progressing
       // setProgressingPopupOpen(true)
       // props.dismiss?.()
       // get transaction data
       props.progressBlock?.();
-      let data = await getTradeDetailData();
       if (!data) {
         message.error("item has been sold");
         // setProgressingPopupOpen(false)
@@ -272,15 +343,16 @@ export default function NFTPay(props: {
           ContractAddresses.getMarketAddressByName(props.nft.market) ?? "",
         wethAmt: weth,
       };
-      console.log(contractParams);
       const signer = provider.getSigner(account);
       const c = new Npics(signer);
       let tx: any;
+      // tx = await c.downPayWithWETH(contractParams);
       if (payType & PayType.WETH) {
         tx = await c.downPayWithWETH(contractParams);
       } else {
         tx = await c.downPayWithETH(contractParams);
       }
+
       // setHash(tx.hash)
       // props.resultBlock?.(true)
       props.resultBlock?.(true, tx.hash);
