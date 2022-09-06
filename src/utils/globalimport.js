@@ -256,6 +256,7 @@ export const imgurl = {
     ethBlack18,
     reback,
     rewardBend,
+    rewardPWing: PWingIcon,
     navVaults,
     navRewards,
     navAirdop,

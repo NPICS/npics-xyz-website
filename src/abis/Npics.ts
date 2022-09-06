@@ -3,6 +3,7 @@ import { ethers } from "ethers";
 import { ContractAddresses } from "../utils/addresses";
 import NPICS_ABI from ".//npics.json";
 import { Erc20 } from "./Erc20";
+import { BANK_ENUM } from "../utils/enums";
 
 export class Npics {
   signer: any;
@@ -133,22 +134,22 @@ export class Npics {
     });
   }
 
-  async getRewardsBalance(nft: string) {
+  async getRewardsBalance(nft: string, bank: BANK_ENUM) {
     let contract = new ethers.Contract(
       ContractAddresses.NpicsProxy,
       NPICS_ABI,
       this.signer
     );
-    return await contract.getRewardsBalance(nft);
+    return await contract["getRewardsBalance(address,uint256)"](nft, bank);
   }
 
-  async claimRewards() {
+  async claimRewards(bank: BANK_ENUM) {
     let contract = new ethers.Contract(
       ContractAddresses.NpicsProxy,
       NPICS_ABI,
       this.signer
     );
-    return await contract.claimRewards();
+    return await contract["claimRewards(uint256)"](bank);
   }
 
   async getAvailableBorrowsln(nft: string): Promise<BigNumber> {
