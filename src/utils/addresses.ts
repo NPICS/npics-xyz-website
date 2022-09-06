@@ -17,6 +17,7 @@ export const ContractAddresses = {
   WETH: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
   DebtTokenProxy: "0x87ddE3A3f4b629E389ce5894c9A1F34A7eeC5648",
   BendDaoProxy: "0x0d02755a5700414B26FF040e1dE35D337DF56218",
+  PWingProxy: "0xdb0f18081b505a7de20b18ac41856bcb4ba86a1a",
   /**
    * x2y2 market
    */

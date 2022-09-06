@@ -64,6 +64,7 @@ import NpicsSwiper1 from "../assets/images/home/npics_swiper1.png";
 import NpicsSwiper2 from "../assets/images/home/npics_swiper2.png";
 import NpicsSwiper3 from "../assets/images/home/npics_swiper3.png";
 import NftsIcon from "../assets/images/home/nfts.png";
+import PWingIcon from "../assets/images/home/PWing.svg";
 
 import Union1 from "../assets/images/market/Union1.png";
 import Union2 from "../assets/images/market/Union2.png";
@@ -214,6 +215,7 @@ export const imgurl = {
     NpicsSwiper2,
     NpicsSwiper3,
     NftsIcon,
+    PWingIcon,
   },
   market: {
     Search,
