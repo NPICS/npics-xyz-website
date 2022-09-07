@@ -1,34 +1,34 @@
-import { imgurl } from 'utils/globalimport'
-import { NavLink } from 'react-router-dom'
-import styled from 'styled-components'
-import { font01671 } from 'component/styled'
+import { imgurl } from "utils/globalimport";
+import { NavLink } from "react-router-dom";
+import styled from "styled-components";
+import { font01671 } from "component/styled";
 export const accountNav = [
   {
     icon: imgurl.dashboard.agreement,
-    text: 'Agreement',
-    path: '/dashboard/agreement'
+    text: "Agreement",
+    path: "/dashboard/agreement",
   },
   {
     icon: imgurl.dashboard.rewards,
-    text: 'Rewards',
-    path: '/dashboard/rewards'
+    text: "Rewards",
+    path: "/dashboard/rewards",
   },
   {
     icon: imgurl.dashboard.airdrop,
-    text: 'Airdop',
-    path: '/dashboard/airdrop'
+    text: "Airdop",
+    path: "/dashboard/airdrop",
   },
   {
     icon: imgurl.dashboard.notify,
-    text: 'Notification',
-    path: ''
+    text: "Notification",
+    path: "",
   },
   {
     icon: imgurl.dashboard.setting,
-    text: 'Settings',
-    path: ''
-  }
-]
+    text: "Settings",
+    path: "",
+  },
+];
 
 export const Nav = styled.div`
   width: 100%;
@@ -36,13 +36,15 @@ export const Nav = styled.div`
   position: fixed;
   display: flex;
   justify-content: space-between;
-  backdrop-filter: ${(props: { fixed: boolean }) => props.fixed ? 'blur(10px)' : 'blur(0)'};
+  backdrop-filter: ${(props: { fixed: boolean }) =>
+    props.fixed ? "blur(10px)" : "blur(0)"};
   align-items: center;
   margin: 0 auto;
   padding: 0.15rem 1.5rem;
-  transition:all .1s ease-in-out;
+  transition: all 0.1s ease-in-out;
   /* background: transparent; */
-  background: ${(props: { fixed: boolean }) => props.fixed ? 'rgba(0,0,0,.8)' : 'transparent'};
+  background: ${(props: { fixed: boolean }) =>
+    props.fixed ? "rgba(0,0,0,.8)" : "transparent"};
   & > div {
     text-align: center;
   }
@@ -59,11 +61,11 @@ export const Nav = styled.div`
         .ant-popover-title {
           border-bottom: 0;
           &::after {
-            content: '';
+            content: "";
             display: block;
             width: 100%;
             height: 0.01rem;
-            background-color: rgba(0, 0, 0, .1);
+            background-color: rgba(0, 0, 0, 0.1);
           }
           .account-title {
             display: flex;
@@ -110,7 +112,7 @@ export const Nav = styled.div`
               font-size: 0.16rem;
               .connected {
                 font-size: 0.14rem;
-                color: rgba(0, 0, 0, .5);
+                color: rgba(0, 0, 0, 0.5);
               }
             }
           }
@@ -118,11 +120,11 @@ export const Nav = styled.div`
             margin-top: 0.4rem;
             .wallet-title {
               ${font01671} &::after {
-                content: '';
+                content: "";
                 display: inline-block;
                 width: 100%;
                 height: 0.01rem;
-                background-color: rgba(0, 0, 0, .1);
+                background-color: rgba(0, 0, 0, 0.1);
               }
             }
           }
@@ -158,11 +160,11 @@ export const Nav = styled.div`
       }
     }
   }
-`
+`;
 export const Height = styled.div`
   width: 100%;
   height: 0.8rem;
-`
+`;
 export const BtnLink = styled(NavLink)`
   position: relative;
   color: #fff;
@@ -173,15 +175,15 @@ export const BtnLink = styled(NavLink)`
   &:hover {
     color: #fff;
   }
-`
+`;
 export const LogoLink = styled(NavLink)`
   display: flex;
   align-items: center;
   margin-right: 1.2rem;
-  img{
+  img {
     width: 1.8rem;
   }
-`
+`;
 export const FlexDiv = styled.div`
   display: flex;
   flex-direction: row;
@@ -208,10 +210,22 @@ export const FlexDiv = styled.div`
     margin-right: 0.2rem;
     border-radius: 0.07rem; */
   }
-`
+`;
 export const ThemeImg = styled.img`
   width: 0.34rem;
   height: 0.34rem;
   cursor: pointer;
   margin-left: 0.2rem;
-`
+`;
+
+export const UserAvatar = styled.div`
+  width: 0.34rem;
+  height: 0.34rem;
+  padding: 3px;
+  background: #fff;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;

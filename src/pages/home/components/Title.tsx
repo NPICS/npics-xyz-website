@@ -135,7 +135,7 @@ export default function Title() {
         >
           <Link to={'/marketplace'}>
             <ButtonDefault types="primary" isScale={true} color='#fff'>
-              Marketplace
+              Discover
             </ButtonDefault>
           </Link>
         </Animate>
@@ -146,9 +146,9 @@ export default function Title() {
           start={{ opacity: 0, transform: 'translateX(0.5rem)' }}
           end={{ opacity: 1, transform: 'translateX(0)' }}
         >
-          <Link to={'/dashboard/rewards'}>
+          <Link to={'/dashboard/vaults'}>
             <ButtonDefault types="second" isScale={true} color="#333">
-              Rewards
+              Vaults
             </ButtonDefault>
           </Link>
         </Animate>

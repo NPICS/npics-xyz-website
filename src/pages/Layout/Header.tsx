@@ -7,7 +7,7 @@ import { useWeb3React } from '@web3-react/core';
 import { connectors } from "utils/connectors";
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { clearUserData, fetchUser, fetchUser2, setIsShowConnect, setShowWalletModalOpen } from 'store/app';
-import { FlexDiv, Height, LogoLink, Nav } from './headerStyled';
+import { FlexDiv, Height, LogoLink, Nav, UserAvatar } from './headerStyled';
 import WalletBalance from './WalletBalance';
 import { deserialize } from "class-transformer";
 import { User } from "../../model/user";
@@ -313,7 +313,7 @@ function XHeader() {
             {
               terms.map((item) => {
                 return (
-                  <a href={item.link} key={item.name} target="_blank" >
+                  <a href={item.link} key={item.name} target="_blank" rel="noreferrer" >
                     <div className='tools_bg'>
                       <Icon className='tools_icon' style={{ cursor: 'pointer' }} width='0.22rem' height='0.22rem' src={item.darkIcon} />
                     </div>
@@ -329,10 +329,10 @@ function XHeader() {
           <Flex
             alignItems='center'
             justifyContent='center'
-            background={`${showConnect ? "rgba(255,255,255,.1)" : "rgba(255,255,255,.2)"}`}
-            borderRadius="0.1rem"
-            width='0.34rem'
-            height='0.34rem'
+            background={`${showConnect ? "rgba(255,255,255,.1)" : 'rgba(255,255,255,.2)'}`}
+            borderRadius="9999px"
+            width='0.35rem'
+            height='0.35rem'
             id="baseAccount"
             style={{ cursor: 'pointer' }}
             onClick={walletPop}
@@ -340,7 +340,11 @@ function XHeader() {
             {/* <Icon width={`${account ? '0.34rem' : '0.14rem' } `} height={`${account ? '0.34rem' : '0.16rem' } `} src={account ? defaultAvatar : login} /> */}
             {
               account ?
-                <Icon width='0.34rem' height='0.34rem' src={defaultAvatar} /> :
+                <UserAvatar>
+                  <Icon radius="9999px" src={defaultAvatar} />
+                </UserAvatar>
+
+                :
                 <Flex
                   alignItems='center'
                   justifyContent='center'

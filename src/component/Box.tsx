@@ -1,46 +1,46 @@
 import styled from "styled-components";
 import {
-    background,
-    border,
-    layout,
-    position,
-    space,
-    flexbox,
-    grid,
-    shadow,
-    boxShadow,
-    TypographyProps, typography, color, BoxShadowProps
+  background,
+  border,
+  layout,
+  position,
+  space,
+  flexbox,
+  grid,
+  shadow,
+  boxShadow,
+  TypographyProps, typography, color, BoxShadowProps
 } from "styled-system";
-import {HTMLAttributes} from "react";
+import { HTMLAttributes } from "react";
 import {
-    BackgroundProps,
-    BorderProps,
-    FlexboxProps,
-    LayoutProps,
-    PositionProps,
-    SpaceProps,
-    GridProps as _GridProps,
+  BackgroundProps,
+  BorderProps,
+  FlexboxProps,
+  LayoutProps,
+  PositionProps,
+  SpaceProps,
+  GridProps as _GridProps,
 } from "styled-system";
 
 export interface BoxProps extends BackgroundProps,
-    BorderProps,
-    LayoutProps,
-    PositionProps,
-    SpaceProps,
-    BoxShadowProps,
-    HTMLAttributes<HTMLDivElement> {
+  BorderProps,
+  LayoutProps,
+  PositionProps,
+  SpaceProps,
+  BoxShadowProps,
+  HTMLAttributes<HTMLDivElement> {
 }
 
 export interface FlexProps extends BoxProps, FlexboxProps {
-    gap?: string
+  gap?: string
 }
 
 export interface GridProps extends FlexProps, _GridProps {
 }
 
 export interface _TypographyProps extends TypographyProps, LayoutProps, SpaceProps, HTMLAttributes<HTMLDivElement> {
-    userSelect?: string
-    family?: string
+  userSelect?: string
+  family?: string
 }
 
 
@@ -54,13 +54,13 @@ const Box = styled.div<BoxProps>`
   ${boxShadow}
 `;
 
-const Flex = styled(Box)<FlexProps>`
+const Flex = styled(Box) <FlexProps>`
   display: flex;
   gap: ${(props) => props.gap};
   ${flexbox}
 `;
 
-const Grid = styled(Box)<GridProps>`
+const Grid = styled(Box) <GridProps>`
   display: grid;
   ${flexbox}
   ${grid}
@@ -76,12 +76,16 @@ const Typography = styled.div<_TypographyProps>`
 `;
 
 interface IconProps extends BoxProps {
+  radius?: string
+  margin?: string
 }
 
 const Icon = styled.img<IconProps>`
   display: inline-block;
   overflow: hidden;
   user-select: none;
+  border-radius: ${props => props.radius ?? '0'};
+  margin: ${props => props.margin ?? '0'};
   width: ${props => props.width};
   height: ${props => props.height ?? "auto"};
   object-fit: contain;
@@ -89,7 +93,7 @@ const Icon = styled.img<IconProps>`
   ${background}
 `
 
-const GridItem = styled(Box)<GridProps>`
+const GridItem = styled(Box) <GridProps>`
   display: flex;
   gap: ${(props) => props.gap};
   ${flexbox}
@@ -97,7 +101,7 @@ const GridItem = styled(Box)<GridProps>`
 `;
 
 interface Button2Props extends BoxProps {
-    variant?: "primary" | "secondary"
+  variant?: "primary" | "secondary"
 }
 
 export const Button2 = styled.button<Button2Props>`
@@ -118,4 +122,4 @@ export const Button2 = styled.button<Button2Props>`
   }
 `
 
-export {Box, Grid, Flex, Typography, Icon, GridItem}
+export { Box, Grid, Flex, Typography, Icon, GridItem }

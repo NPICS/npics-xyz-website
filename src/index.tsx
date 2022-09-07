@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import { Buffer } from "buffer"
 import App from './App';
-import { setAnimate, setFixed } from 'store/app';
+import { setShowDetailAnimate, setShowFrameAnimate, setFixed } from 'store/app';
 import { useAppDispatch } from "./store/hooks"
 import './App.css'
 import reportWebVitals from './reportWebVitals';
@@ -44,16 +44,23 @@ const StyledThemeProvider = (props: any) => {
   }, [history.pathname])
 
   const handleScroll = () => {
-    const detailDom = document.querySelector('.detail_div')
+    const FrameDom = document.querySelector('.frame_box')
+    const DetailDom = document.querySelector('.detail_img_box')
     const scrollTop = document.documentElement.scrollTop
     const windowHeight = window.innerHeight
-    if (detailDom) {
-      const domHeight = detailDom.getBoundingClientRect().y;
-      if (domHeight! <= windowHeight) {
-        action(setAnimate(true))
+    if (FrameDom) {
+      const frameHeight = FrameDom.getBoundingClientRect().y;
+      if (frameHeight! <= windowHeight) {
+        action(setShowFrameAnimate(true))
       }
     }
-    scrollTop > 150 ? action(setFixed(true)) : action(setFixed(false))
+    if (DetailDom) {
+      const detailHeight = DetailDom.getBoundingClientRect().y;
+      if (detailHeight! <= windowHeight) {
+        action(setShowDetailAnimate(true))
+      }
+    }
+    scrollTop > 30 ? action(setFixed(true)) : action(setFixed(false))
   }
   const isDark = isHome
   return <ThemeProvider theme={isDark ? darkColors : lightColors} {...props} />
