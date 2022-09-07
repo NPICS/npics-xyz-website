@@ -15,7 +15,6 @@ import {
   HomeNFT,
   NoteBox,
   StepProgress,
-  HomeDatas,
   FrameWarp,
 } from './HomeStyled'
 import { imgurl } from 'utils/globalimport'
@@ -32,6 +31,7 @@ import { Animate } from 'react-simple-animate'
 import { useAppSelector } from "../../store/hooks"
 import CountUp from "react-countup";
 import { Icon } from 'component/Box'
+import Datas from './components/Datas'
 const MyTable: any = styled(Table)`
   /* min-width: 16rem; */
   height: 7.47rem;
@@ -93,9 +93,6 @@ function Home() {
   const checkProgress = (e: any) => {
     setCheckText(e + 1)
   }
-
-  const [dataList, setDataList] = useState<any[]>([]);
-
   useEffect(
     () => {
       let startTimer
@@ -148,28 +145,9 @@ function Home() {
         })
       }
     })
-    //get localstorage
-    const isShowNote: boolean = JSON.parse(localStorage.getItem("note") || 'true');
+    //get sessionStorage
+    const isShowNote: boolean = JSON.parse(sessionStorage.getItem("note") || 'true');
     setShowNote(isShowNote)
-    //get datas
-    const list = [
-      {
-        id: 1,
-        name: "NFTs Listing",
-        count: 8791
-      },
-      {
-        id: 2,
-        name: "Available Supply",
-        count: 48791.05
-      },
-      {
-        id: 3,
-        name: "Vault APR",
-        count: 143.2
-      }
-    ]
-    setDataList(list)
   }, [])
   const mouseEnter = () => {
     clearTimeout(timer)
@@ -192,44 +170,11 @@ function Home() {
   const closeNote = (e: any) => {
     e.stopPropagation();
     setShowNote(false);
-    localStorage.setItem("note", JSON.stringify(false))
+    sessionStorage.setItem("note", JSON.stringify(false))
   }
   return (
     <HomeWrap>
       <Background>
-        <HomeBox>
-          <HomeLeft>
-            <Title />
-          </HomeLeft>
-          <HomeNFT>
-            <img className="nfts_img" src={imgurl.home.NftsIcon} alt="" />
-          </HomeNFT>
-          <HomeDatas>
-            {
-              dataList.map((item, index) => {
-                return (
-                  <div className='data_item' key={item.id}>
-                    <span className='data_item_count'>
-                      {
-                        index === 0 && <CountUp duration={3} start={0} end={item.count} separator={","} />
-                      }
-                      {
-                        index === 1 && <div className='data_item_available'>
-                          <img className='available_icon' src={imgurl.ETH36} />
-                          <CountUp duration={3} start={0} end={item.count} decimals={2} separator={","} />
-                        </div>
-                      }
-                      {
-                        index === 2 && <Fragment><CountUp duration={3} start={0} end={item.count} /> %</Fragment>
-                      }
-                    </span>
-                    <span className='data_item_name'>{item.name}</span>
-                  </div>
-                )
-              })
-            }
-          </HomeDatas>
-        </HomeBox>
         {/* show note */}
         <NoteBox hidden={!showNote}>
           <div className='note_content' onClick={openGitbook}>
@@ -239,6 +184,15 @@ function Home() {
             </div>
           </div>
         </NoteBox>
+        <HomeBox>
+          <HomeLeft>
+            <Title />
+          </HomeLeft>
+          <HomeNFT>
+            <img className="nfts_img" src={imgurl.home.NftsIcon} alt="" />
+          </HomeNFT>
+        </HomeBox>
+        <Datas />
       </Background>
       <SwiperBox hidden={true}>
         <div className="title">NPicser Sweeps</div>

@@ -23,7 +23,7 @@ const TitleBox = styled.div`
     text-transform: uppercase;
     color: #ffffff;
     width: 6.5rem;
-    margin-bottom: 0.1rem;
+    /* margin-bottom: 0.05rem; */
     font-style: italic;
   }
   .title_text {
@@ -34,7 +34,7 @@ const TitleBox = styled.div`
     letter-spacing: 0.05em;
     color: rgba(255, 255, 255, 0.5);
     width: 5.41rem;
-    margin-top: 0.2rem;
+    margin-top: 0.1rem;
     margin-bottom: 0.72rem;
   }
   .title_point {

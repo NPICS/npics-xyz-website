@@ -35,65 +35,21 @@ export const HomeWrap = styled.div`
   }
 `;
 export const Background = styled.div`
-  position: relative;
   width: 100%;
   min-height: 100vh;
+  padding-top: 0.9rem;
   background-image: url(${HomeBg});
   background-size: 100% 100%;
-`;
-
-export const HomeBox = styled.div`
-  position: relative;
-  width: 16rem;
-  height: 100vh;
-  margin: 0 auto;
-  padding: 1rem 0 0.2rem;
-`;
-
-export const HomeLeft = styled.div`
-  position: absolute;
-  top: 36%;
-  left: 0;
-`;
-export const HomeNFT = styled.div`
-  position: absolute;
-  width: 26%;
-  top: 26%;
-  right: 10%;
-
-  .nfts_img {
-    width: 100%;
-  }
-
-  @media (min-width: 10.24rem) {
-    top: 22% !important;
-    right: 13% !important;
-    width: 28%;
-    // height: 22%;
-  }
-
-  @media (min-width: 12.8rem) {
-    top: 22% !important;
-    right: 13% !important;
-    width: 28%;
-  }
-
-  @media (min-width: 15.36rem) {
-    top: 22% !important;
-    right: 13% !important;
-    width: 28%;
-    // height: 22%;
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 `;
 export const NoteBox = styled.div`
-  position: absolute;
-  top: 0.9rem;
-  left: 0;
   width: 100%;
+  height: 40px;
   background: #ff490f;
   color: #fff;
-  /* display: ${(props: { hidden: boolean }) =>
-    props.hidden ? "inline-block" : "none"}; */
   .note_content {
     width: 16rem;
     height: 40px;
@@ -111,41 +67,25 @@ export const NoteBox = styled.div`
     }
   }
 `;
-export const HomeDatas = styled.div`
-  width: 100%;
-  height: 1.6rem;
-  color: #fff;
-  position: absolute;
-  bottom: 0.1rem;
-  left: 0;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.1);
+export const HomeBox = styled.div`
+  width: 16rem;
+  min-height: calc(100vh - 40px - 3rem);
+  margin: 0 auto;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
-  .data_item {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    .data_item_count {
-      font-size: 0.28rem;
-      font-weight: 700;
-      line-height: 0.6rem;
-      .data_item_available {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        .available_icon {
-          width: 0.28rem;
-          height: 0.28rem;
-          margin-right: 10px;
-        }
-      }
-    }
-    .data_item_name {
-      font-weight: 300;
-    }
+`;
+
+export const HomeLeft = styled.div`
+  flex: 1;
+`;
+export const HomeNFT = styled.div`
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .nfts_img {
+    width: 68%;
   }
 `;
 
@@ -333,7 +273,7 @@ export const Partners = styled.div`
   .title {
     width: 5.3rem;
     margin: 0 auto;
-    margin-bottom: 0.6rem;
+    margin-bottom: 0.2rem;
     padding: 1.3rem 0 0.2rem;
     ${title};
   }
@@ -386,7 +326,7 @@ export const Introduces = styled.div`
 
     & > span:nth-child(1) {
       ${title}
-      padding: 1.3rem 0 0.2rem;
+      /* padding: 1.3rem 0 0.2rem; */
       text-align: center;
       margin-bottom: 0.27rem;
     }
@@ -421,10 +361,10 @@ export const Introduces = styled.div`
   }
   .Introduces_bg {
     position: absolute;
-    bottom: -12.2rem;
-    left: 0;
-    width: 7rem;
-    height: 20rem;
+    bottom: -7.5rem;
+    left: -2rem;
+    width: 10rem;
+    height: 15rem;
     & > img {
       width: 100%;
       height: 100%;

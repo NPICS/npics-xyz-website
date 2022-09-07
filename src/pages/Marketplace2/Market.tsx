@@ -1,24 +1,24 @@
-import {Box, Flex, Icon, Typography} from "../../component/Box";
+import { Box, Flex, Icon, Typography } from "../../component/Box";
 import styled from "styled-components";
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import http from "../../utils/http";
-import {deserializeArray} from "class-transformer";
-import {Collections} from "../../model/user";
-import {Outlet, useNavigate, useParams} from "react-router-dom";
-import {numberFormat} from "../../utils/urls";
-import {Portrait} from "./MarketList";
-import {percentageFormat} from "./utils";
+import { deserializeArray } from "class-transformer";
+import { Collections } from "../../model/user";
+import { Outlet, useNavigate, useParams } from "react-router-dom";
+import { numberFormat } from "../../utils/urls";
+import { Portrait } from "./MarketList";
+import { percentageFormat } from "./utils";
 import ethIcon from "../../assets/images/market/eth_icon_10x15.svg"
 import numeral from "numeral";
-import {Popover} from "antd";
+import { Popover } from "antd";
 import openseaValidIcon from "../../assets/images/market/nfts_opensea_valid.svg"
 import NPopover from "../../component/Popover";
 import ReactMarkdown from "react-markdown";
-import {TextPlaceholder} from "../../component/styled";
+import { TextPlaceholder } from "../../component/styled";
 import { Pop20 } from "component/Popover/Popover";
 
 
-export const Banner = styled(Box)<{ url?: string }>`
+export const Banner = styled(Box) <{ url?: string }>`
   position: absolute;
   height: 4.8rem;
   top: 0;
@@ -133,7 +133,7 @@ export default function Market() {
     flexDirection={"column"}
     padding={"0 1.6rem"}
     background={"transparent"}>
-    <Banner url={nft?.bannerImageUrl}/>
+    <Banner url={nft?.bannerImageUrl} />
     <Box zIndex={1}>
       <Box marginTop={"2.1rem"}>
         <Typography
@@ -176,7 +176,7 @@ export default function Market() {
         boxShadow={"rgba(0,0,0,.5)"}
       >
         <Flex>
-          <Portrait src={nft?.imageUrl}/>
+          <Portrait src={nft?.imageUrl} />
           <Flex
             marginLeft={"0.24rem"}
             flexDirection={"column"}
@@ -196,7 +196,7 @@ export default function Market() {
                   hidden={params.address == undefined}
                   src={openseaValidIcon}
                   width={"0.24rem"}
-                  height={"0.24rem"}/>
+                  height={"0.24rem"} />
               </Pop20>
             </Flex>
             <MarkdownContainer ref={(e) => {
@@ -245,15 +245,15 @@ export default function Market() {
             gap={"0.02rem"}
             minWidth={"1.36rem"}>
             <Flex alignItems={"center"} gap={"0.02rem"}>
-              <Icon width={"0.18rem"} height={"0.18rem"} src={ethIcon}/>
+              <Icon width={"0.18rem"} height={"0.18rem"} src={ethIcon} />
               <Typography
                 fontSize={"0.2rem"}
                 color={"#000"}
                 fontWeight={700}
               >{
-                // nft && numberFormat(nft.floorPrice.div(10 ** 18).toFixed())
-                nft && numeral(nft.floorPrice.div(10 ** 18).toFixed()).format("0,0.[00]")
-              }</Typography>
+                  // nft && numberFormat(nft.floorPrice.div(10 ** 18).toFixed())
+                  nft && numeral(nft.floorPrice.div(10 ** 18).toFixed()).format("0,0.[00]")
+                }</Typography>
             </Flex>
             <Typography fontWeight={"500"} fontSize={"0.14rem"} color={"#000"}>Floor</Typography>
           </Flex>
@@ -266,15 +266,37 @@ export default function Market() {
             gap={"0.02rem"}
             minWidth={"1.36rem"}>
             <Flex alignItems={"center"} gap={"0.02rem"}>
-              <Icon width={"0.18rem"} height={"0.18rem"} src={ethIcon}/>
+              <Icon width={"0.18rem"} height={"0.18rem"} src={ethIcon} />
               <Typography
                 fontSize={"0.2rem"}
                 color={"#000"}
                 fontWeight={700}
               >{
-                nft && numeral(nft.dayVolume).format("0,0.[00]")
-                // nft && numberFormat(new BigNumber(nft.dayVolume).toFixed(2,1))
-              }</Typography>
+                  // nft && numberFormat(nft.floorPrice.div(10 ** 18).toFixed())
+                  // nft && numeral(nft.floorPrice.div(10 ** 18).toFixed()).format("0,0.[00]")
+                  47.2
+                }</Typography>
+            </Flex>
+            <Typography fontWeight={"500"} fontSize={"0.14rem"} color={"#000"}>Min DP</Typography>
+          </Flex>
+          <Flex
+            flexDirection={"column"}
+            alignItems={"center"}
+            boxShadow={"0 0 0.1rem rgba(0,0,0,.1)"}
+            borderRadius={"0.1rem"}
+            padding={"0.12rem 0.2rem"}
+            gap={"0.02rem"}
+            minWidth={"1.36rem"}>
+            <Flex alignItems={"center"} gap={"0.02rem"}>
+              <Icon width={"0.18rem"} height={"0.18rem"} src={ethIcon} />
+              <Typography
+                fontSize={"0.2rem"}
+                color={"#000"}
+                fontWeight={700}
+              >{
+                  nft && numeral(nft.dayVolume).format("0,0.[00]")
+                  // nft && numberFormat(new BigNumber(nft.dayVolume).toFixed(2,1))
+                }</Typography>
             </Flex>
             <Flex alignItems={"center"} gap={"0.1rem"}>
               <Typography fontWeight={"500"} fontSize={"0.14rem"} color={"#000"}>24h</Typography>
@@ -285,8 +307,8 @@ export default function Market() {
                   (nft?.dayChange.toNumber() ?? 0) > 0 ? `#18CF15` : `#FF4949`
                 }
               >{
-                nft && percentageFormat(nft.dayChange.toNumber())
-              }</Typography>
+                  nft && percentageFormat(nft.dayChange.toNumber())
+                }</Typography>
             </Flex>
           </Flex>
           <Flex
@@ -304,7 +326,7 @@ export default function Market() {
               color={`#000`}
               fontSize={`0.14rem`}
               fontWeight={500}
-            >Total</Typography>
+            >Supply</Typography>
           </Flex>
           <Flex
             flexDirection={"column"}
@@ -321,7 +343,7 @@ export default function Market() {
               color={`#000`}
               fontSize={`0.14rem`}
               fontWeight={500}
-            >Listed Items</Typography>
+            >Listing</Typography>
           </Flex>
         </Flex>
       </Box>
@@ -330,7 +352,7 @@ export default function Market() {
         minHeight={"50vh"}
         marginBottom={"0.6rem"}
       >
-        <Outlet/>
+        <Outlet />
       </Box>
     </Box>
 
