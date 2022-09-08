@@ -21,7 +21,7 @@ import { Npics } from "../../abis/Npics";
 import { ethers } from "ethers";
 import Modal from "../../component/Modal";
 import NFTPay from "./NFTPay";
-import { message, notification, Popover } from "antd";
+import { message, notification, Popover, Space } from "antd";
 import { globalConstant } from "utils/globalConstant";
 import { useNavigate } from "react-router-dom";
 import { useWeb3React } from "@web3-react/core";
@@ -38,6 +38,8 @@ import NFTPayProgressing from "./NFTPayProgressing";
 import NFTPayCongratulations from "./NFTPayCongratulations";
 import NFTPayWrong from "./NFTPayWrong";
 import { Pop, Pop20 } from "component/Popover/Popover";
+import { imgurl } from "utils/globalimport";
+import AprSelect from "./AprSelect";
 
 const Shadow = styled(Flex)`
   background: #fff;
@@ -48,14 +50,15 @@ const Shadow = styled(Flex)`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.13rem;
-  position: relative;
+  padding:0.14rem 0.16rem;
 `;
 
+const ChangeIcon = styled.div`
+  transform: rotate(${(props: { show: boolean }) => props.show ? '180deg' : '0deg'});
+  transition: all 0.2s;
+`
+
 const TipsIcon = styled(Icon)`
-  position: absolute;
-  top: 0.14rem;
-  right: 0.14rem;
 `;
 
 const BuyBox = styled(Flex)`
@@ -63,8 +66,13 @@ const BuyBox = styled(Flex)`
   background: #00000008;
   border: 0.01rem solid #00000033;
   border-radius: 0.1rem;
-  padding: 0.2rem 0 0 0.4rem;
+  padding: 0.2rem 0.15rem 0 0.4rem;
   position: relative;
+  .buy_tips_box{
+    position: absolute;
+    top: 0.1rem;
+    right: 0.14rem;
+  }
 `;
 
 const BuyButton = styled(Button2)`
@@ -161,6 +169,9 @@ export default function NFTPrice(props: {
 
   const [buyPopOpen, setBuyPopOpen] = useState<boolean>(false);
 
+  //is show select apr modal
+  const [showAprModal, setShowAprModal] = useState<boolean>(false);
+
   useEffect(() => {
     action(updateARP());
   }, [props.item]);
@@ -236,8 +247,15 @@ export default function NFTPrice(props: {
     }
   }
 
+  const changeApr = () => {
+    //show selecte modal
+    console.log("show select apr modal");
+    setShowAprModal(true);
+  }
+
   return (
     <Grid gridTemplateRows={"1.1rem 1rem auto"} gridRowGap={"0.12rem"}>
+      {/* show pay modal */}
       <Modal isOpen={buyPopOpen} onRequestClose={() => setBuyPopOpen(false)}>
         <NFTPay
           /// line 150: require value
@@ -262,7 +280,10 @@ export default function NFTPrice(props: {
           }}
         />
       </Modal>
-
+      {/* show selece apr modal */}
+      <Modal isOpen={showAprModal} onRequestClose={() => setShowAprModal(false)}>
+        <AprSelect defaultApr="Wing" onClose={() => setShowAprModal(false)} />
+      </Modal>
       {/* popup loading */}
       <Modal isOpen={progressingPopupOpen}>
         {props.item && <NFTPayProgressing nft={props.item} />}
@@ -298,11 +319,35 @@ export default function NFTPrice(props: {
       <Flex gap={"0.1rem"}>
         {/* origin price */}
         <Shadow>
-          <Pop20 content={listedPricePop}>
-            <TipsIcon width={"0.14rem"} src={tipsIcon} />
-          </Pop20>
+          <Flex
+            style={{ cursor: "pointer" }}
+            alignItems={"center"}
+            justifyContent={"flex-start"}
+            width={"100%"}
+            height={"30%"}
+            gap={"0.1rem"}
+            onClick={() => window.open(`${props.item?.marketUrl}`)}
+          >
+            <Box borderRadius={"0.11rem"} overflow={"hidden"}>
+              <Icon
+                width={"0.22rem"}
+                height={"0.22rem"}
+                src={props.item?.marketIcon()}
+              />
+            </Box>
 
-          <Flex flexDirection={"row"} alignItems={"end"}>
+            <Typography
+              fontSize={"0.14rem"}
+              fontWeight={500}
+              color={"rgba(0,0,0,.5)"}
+            >
+              Listed Price
+            </Typography>
+            <Pop20 content={listedPricePop}>
+              <TipsIcon width={"0.14rem"} src={tipsIcon} />
+            </Pop20>
+          </Flex>
+          <Flex flexDirection={"row"} alignItems={"center"} height={"70%"}>
             <Flex alignSelf={"center"}>
               <Icon width={"0.22rem"} height={"0.22rem"} src={ethIcon} />
             </Flex>
@@ -323,69 +368,69 @@ export default function NFTPrice(props: {
               color={"rgba(0,0,0,.5)"}
               marginLeft={"0.02rem"}
               lineHeight={"100%"}
-              marginBottom={"0.03rem"}
-              style={{ alignSelf: "end" }}
+              style={{ alignSelf: "center" }}
             >
-              {`（${
-                props.item &&
+              {`（${props.item &&
                 thousandFormat(
                   props.item.currentBasePrice
                     .times(ethRate)
                     .div(10 ** 18)
                     .toNumber()
                 )
-              }）`}
-            </Typography>
-          </Flex>
-          <Flex
-            style={{ cursor: "pointer" }}
-            alignItems={"center"}
-            gap={"0.1rem"}
-            onClick={() => window.open(`${props.item?.marketUrl}`)}
-          >
-            <Box borderRadius={"0.11rem"} overflow={"hidden"}>
-              <Icon
-                width={"0.22rem"}
-                height={"0.22rem"}
-                src={props.item?.marketIcon()}
-              />
-            </Box>
-
-            <Typography
-              fontSize={"0.14rem"}
-              fontWeight={500}
-              color={"rgba(0,0,0,.5)"}
-            >
-              Listed Price
+                }）`}
             </Typography>
           </Flex>
         </Shadow>
         {/* Vault Apr */}
         <Shadow>
           {/* <Popover content={vaultApr({rewardAPR:123,interestAPR:321})}>     */}
-          <Pop
-            content={VaultAprPop({
-              rewardAPR: rewardsAPR ?? 0,
-              interestAPR: (interestAPR ?? 0) / 100,
-            })}
-          >
-            <TipsIcon width={"0.14rem"} src={tipsIcon} />
-          </Pop>
-          <Typography
-            color={"#FF490F"}
-            fontSize={"0.24rem"}
-            lineHeight={"100%"}
-            fontWeight={700}
-          >
-            {percentageFormat(vaultAPR)}
-          </Typography>
-          <Typography
-            fontSize={"0.14rem"}
-            fontWeight={500}
-            color={"rgba(0,0,0,.5)"}
-          >
-            Vault APR
-          </Typography>
+          <Flex width={'100%'} height={'30%'} justifyContent={"space-between"}>
+            <Flex justifyContent={"flex-start"} alignItems={"center"}>
+              <Space>
+                <Icon src={imgurl.market.wingPriceIcon} width={'0.22rem'} height={'0.22rem'} alt="" />
+                <Typography
+                  fontSize={"0.14rem"}
+                  fontWeight={500}
+                  color={"rgba(0,0,0,.5)"}
+                >
+                  Vault APR
+                </Typography>
+                <Pop
+                  content={VaultAprPop({
+                    rewardAPR: rewardsAPR ?? 0,
+                    interestAPR: (interestAPR ?? 0) / 100,
+                  })}
+                >
+                  <TipsIcon width={"0.14rem"} src={tipsIcon} />
+                </Pop>
+              </Space>
+            </Flex>
+            <Flex alignItems={"center"} onClick={changeApr} style={{ cursor: "pointer" }}>
+              <Space>
+                <Typography
+                  fontSize={"0.14rem"}
+                  fontWeight={700}
+                  color={"rgba(0,0,0,1)"}
+                >
+                  Change
+                </Typography>
+                <ChangeIcon show={showAprModal}>
+                  <Icon src={imgurl.market.arrowDown} width={"0.14rem"} height={"0.14rem"} />
+                </ChangeIcon>
+              </Space>
+            </Flex>
+          </Flex>
+          <Flex height={'70%'} justifyContent={"center"} alignItems={'center'}>
+            <Typography
+              color={"#FF490F"}
+              fontSize={"0.24rem"}
+              lineHeight={"100%"}
+              fontWeight={700}
+            >
+              {percentageFormat(vaultAPR)}
+            </Typography>
+          </Flex>
+
         </Shadow>
       </Flex>
       {/* Other NFTs */}
@@ -411,12 +456,10 @@ export default function NFTPrice(props: {
             return (
               <Pop20
                 key={nft.tokenId}
-                content={`${
-                  nft &&
-                  `${nft.nftName() ?? ""}${nft.isNoName() ? "" : " #"}${
-                    nft.tokenId
+                content={`${nft &&
+                  `${nft.nftName() ?? ""}${nft.isNoName() ? "" : " #"}${nft.tokenId
                   }`
-                }`}
+                  }`}
               >
                 <OtherNFT
                   src={nft.imageUrl}
@@ -434,17 +477,21 @@ export default function NFTPrice(props: {
       </Grid>
       {/* Buy handler */}
       <BuyBox flexDirection={"column"} alignItems={"start"}>
-        <Pop
-          content={DownPaymentPop({
-            listedPrice: props.item?.currentBasePrice,
-            loanAmount: availableBorrow,
-          })}
-        >
-          <TipsIcon width={"0.14rem"} src={tipsIcon} />
-        </Pop>
-        <Typography fontSize={"0.14rem"} fontWeight={500} color={"#000"}>
-          Down Payment
-        </Typography>
+        <Flex width={"100%"} justifyContent={"space-between"}>
+          <Typography fontSize={"0.14rem"} fontWeight={500} color={"#000"}>
+            Down Payment
+          </Typography>
+          <div className="buy_tips_box">
+            <Pop
+              content={DownPaymentPop({
+                listedPrice: props.item?.currentBasePrice,
+                loanAmount: availableBorrow,
+              })}
+            >
+              <TipsIcon width={"0.14rem"} src={tipsIcon} />
+            </Pop>
+          </div>
+        </Flex>
         <Flex alignItems={"end"} marginTop={"0.22rem"}>
           <Flex gap={"0.02rem"} alignItems={"center"}>
             <Icon width={"0.4rem"} height={"0.4rem"} src={ethIcon} />
@@ -470,14 +517,13 @@ export default function NFTPrice(props: {
             padding={0}
           >
             {actualAmount &&
-              `（${
-                actualAmount &&
-                thousandFormat(
-                  actualAmount
-                    .times(ethRate)
-                    .div(10 ** 18)
-                    .toFixed()
-                )
+              `（${actualAmount &&
+              thousandFormat(
+                actualAmount
+                  .times(ethRate)
+                  .div(10 ** 18)
+                  .toFixed()
+              )
               }）`}
           </Typography>
         </Flex>

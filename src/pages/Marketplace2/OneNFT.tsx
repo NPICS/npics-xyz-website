@@ -46,9 +46,8 @@ function Label(props: { icon?: string; num: number }) {
       }}
     >
       {props.icon && <Icon width={"0.2rem"} src={props.icon} />}
-      <Typography fontSize={"0.14rem"} fontWeight={500} color={"#fff"}>{`${
-        props.icon ? "" : "#"
-      }${props.num}`}</Typography>
+      <Typography fontSize={"0.14rem"} fontWeight={500} color={"#fff"}>{`${props.icon ? "" : "#"
+        }${props.num}`}</Typography>
     </Flex>
   );
 }
@@ -255,9 +254,11 @@ export default function OneNFT() {
             }
           />
           <Flex flexDirection={"column"} gap={"0.05rem"}>
+            {/* collection name */}
             <Typography fontSize={"0.16rem"} color={"#fff"} fontWeight={500}>
               {detailData?.collectionName}
             </Typography>
+            {/* nft name */}
             <Flex alignItems={"center"} gap={"0.12rem"}>
               <Typography fontSize={"0.3rem"} color={"#fff"} fontWeight={800}>
                 {
@@ -268,6 +269,7 @@ export default function OneNFT() {
                     : `${detailData?.tokenId}`
                 }
               </Typography>
+              {/* Reported */}
               <Pop20 content={"Reported for Suspicious Activity on OpenSea"}>
                 <Icon
                   width={"0.24rem"}
@@ -279,6 +281,7 @@ export default function OneNFT() {
             </Flex>
 
             <Flex flexDirection={"row"} gap={"0.15rem"} alignItems={"stretch"}>
+              {/* rank list */}
               {rarityData &&
                 Object.entries(rarityData).map(([key, val]) => {
                   return (

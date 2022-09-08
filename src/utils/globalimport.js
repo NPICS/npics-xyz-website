@@ -11,6 +11,7 @@ import notificationIcon from '../assets/images/notification.svg'
 import withoutNoticeIcon from '../assets/images/withoutNoticeIcon.svg'
 import EllipseIcon from '../assets/images/Ellipse.svg'
 import CloseIcon from '../assets/images/home/close.svg'
+import CloseIconBlack from '../assets/images/closeBlack.svg'
 import WingIcon from '../assets/images/wing_icon.svg'
 
 import darkTG from '../assets/images/footer/darkTG.png'
@@ -127,6 +128,11 @@ import export14 from '../assets/images/dashboard/export14.png'
 import success from '../assets/images/dashboard/success.gif'
 import ethBlack18 from '../assets/images/dashboard/ethBlack18.png'
 import exportBlack18 from '../assets/images/dashboard/exportBlack18.png'
+import wingPriceIcon from '../assets/images/market/wing_price.svg'
+import bendaoPriceIcon from '../assets/images/market/bendao_price.svg'
+import arrowDown from '../assets/images/market/arrow_down.svg'
+import SelectIcon from '../assets/images/market/selectIcon.svg'
+import WingSelect from '../assets/images/market/wing_select.svg'
 
 import ETH36 from '../assets/images/eth_icon.png'
 import WETH36 from '../assets/images/weth_icon.png'
@@ -162,6 +168,7 @@ export const imgurl = {
   worldwideIcon,
   EllipseIcon,
   CloseIcon,
+  CloseIconBlack,
   WingIcon,
   footer: {
     darkTG,
@@ -223,6 +230,9 @@ export const imgurl = {
     FrameBg,
   },
   market: {
+    arrowDown,
+    SelectIcon,
+    WingSelect,
     Search,
     progressIcon,
     tipsIcon,
@@ -255,6 +265,8 @@ export const imgurl = {
     BendDAOBuy,
     OpenseaBuy,
     sudoswap,
+    bendaoPriceIcon,
+    wingPriceIcon,
   },
   dashboard: {
     exportBlack18,

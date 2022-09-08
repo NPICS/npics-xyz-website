@@ -288,6 +288,7 @@ export const Partners = styled.div`
   }
 `;
 export const PartnerBox = styled.div`
+  z-index: 1;
   display: flex;
   justify-content: center;
   align-items: center;

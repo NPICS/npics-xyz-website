@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import { flex } from './styled'
 interface Iprops {
@@ -12,7 +11,7 @@ interface Iprops {
   types?: string,
   disabled?: boolean,
   scale?: boolean,
-  isScale?:boolean,
+  isScale?: boolean,
   children: string | any,
   onClick?: Function | any,
   color?: string
