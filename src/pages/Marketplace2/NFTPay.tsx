@@ -30,6 +30,8 @@ import wethIcon from "../../assets/images/market/weth_icon.svg";
 import Checkbox from "../../component/Input/Checkbox";
 import axios from "axios";
 import { ethers } from "ethers";
+import openseaValidIcon from 'assets/images/market/nfts_opensea_valid.svg'
+import { imgurl } from "utils/globalimport";
 
 export function PopupTitle(props: { title: string; canClose: boolean }) {
   return (
@@ -123,7 +125,7 @@ export const CancelButton = styled.button`
   cursor: pointer;
 `;
 
-export const ConfirmButton = styled(Button2)<{ disabled?: boolean }>`
+export const ConfirmButton = styled(Button2) <{ disabled?: boolean }>`
   height: 0.52rem;
   min-width: 2rem;
   font-size: 0.16rem;
@@ -136,6 +138,7 @@ export const ConfirmButton = styled(Button2)<{ disabled?: boolean }>`
 
 export default function NFTPay(props: {
   nft: CollectionDetail;
+  aprInfo: { name: string, icon: any };
   availableBorrow: BigNumber;
   actualAmount: BigNumber;
   progressBlock?(): void;
@@ -157,6 +160,8 @@ export default function NFTPay(props: {
 
   const [didReadService, setDidReadService] = useState(false);
 
+  const [markIcon, setMarkIcon] = useState("");
+  console.log(props.nft);
   useAsync(async () => {
     if (account && provider) {
       // let signer = library.getSigner(account)
@@ -169,6 +174,27 @@ export default function NFTPay(props: {
       setETHBalance(new BigNumber(balance.toString()));
       setWETHBalance(new BigNumber(wethBalance.toString()));
       // console.log(`ETH => ${balance.toFixed()}, WEHT => ${wethBalance.toFixed()}`)
+    }
+    //calc mark icon
+    if (props.nft) {
+      // setMarkIcon()
+      switch (props.nft.market) {
+        case "looksrare":
+          setMarkIcon(imgurl.market.looksrare);
+          break;
+        case "opensea":
+          setMarkIcon(imgurl.market.opensea);
+          break;
+        case "seaport":
+          setMarkIcon(imgurl.market.opensea);
+          break;
+        case "x2y2":
+          setMarkIcon(imgurl.market.x2y2);
+          break;
+        case "sudoswap":
+          setMarkIcon(imgurl.market.sudoswap);
+          break;
+      }
     }
   }, [props.nft, account, provider]);
 
@@ -219,7 +245,7 @@ export default function NFTPay(props: {
     let [eth, weth] = ethAndWETHAmount;
     setCanBuy(
       userSelectedAmount.isGreaterThanOrEqualTo(eth.plus(weth)) &&
-        userSelectedAmount.isGreaterThanOrEqualTo(props.actualAmount)
+      userSelectedAmount.isGreaterThanOrEqualTo(props.actualAmount)
     );
     console.log(`${userSelectedAmount.toFixed()}`);
   }, [userSelectedAmount, ethAndWETHAmount, props.actualAmount]);
@@ -470,13 +496,22 @@ export default function NFTPay(props: {
           <Cover src={props.nft.imageUrl} />
         </Grid>
         <Grid gridArea={"title"}>
-          <Typography
-            color={"rgba(0,0,0,.5)"}
-            fontSize={"0.14rem"}
-            fontWeight={500}
-          >
-            {props.nft.collectionName}
-          </Typography>
+          <Flex alignItems={"center"}>
+            <Typography
+              color={"rgba(0,0,0,.5)"}
+              fontSize={"0.14rem"}
+              fontWeight={500}
+              marginRight="0.06rem"
+            >
+              {props.nft.collectionName}
+            </Typography>
+            <Icon
+              style={{ flexShrink: '0', margin: 0 }}
+              src={openseaValidIcon}
+              width={'0.16rem'}
+              height={'0.16rem'}
+            />
+          </Flex>
           <Typography
             color={"#000"}
             fontSize={"0.2rem"}
@@ -519,9 +554,15 @@ export default function NFTPay(props: {
           gridGap={"0.22rem"}
         >
           <Flex alignItems={"center"}>
-            <Typography color={"#000"} fontSize={"0.14rem"} fontWeight={500}>
-              Listed Price
-            </Typography>
+            <Flex alignContent={"center"}>
+              {
+                markIcon && <Icon style={{ marginRight: "0.05rem" }} src={markIcon} width={"0.2rem"} height={"0.22rem"} />
+              }
+              <Typography color={"#000"} fontSize={"0.14rem"} fontWeight={500}>
+                Listed Price
+              </Typography>
+            </Flex>
+
             <Flex flex={1}></Flex>
             <Icon width={"0.1rem"} height={"0.15rem"} src={ethIcon} />
             <Typography
@@ -534,9 +575,12 @@ export default function NFTPay(props: {
             </Typography>
           </Flex>
           <Flex alignItems={"center"}>
-            <Typography color={"#000"} fontSize={"0.14rem"} fontWeight={500}>
-              Loan Amount
-            </Typography>
+            <Flex alignContent={"center"}>
+              <Icon style={{ marginRight: "0.05rem" }} width={"0.22rem"} height={"0.22rem"} src={props.aprInfo.icon} />
+              <Typography color={"#000"} fontSize={"0.14rem"} fontWeight={500}>
+                Loan Amount
+              </Typography>
+            </Flex>
             <Flex flex={1}></Flex>
             <Icon width={"0.1rem"} height={"0.15rem"} src={ethIcon} />
             <Typography

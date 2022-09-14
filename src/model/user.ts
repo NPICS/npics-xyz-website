@@ -44,7 +44,7 @@ export class Collections {
   imageUrl!: string;
   name!: string;
   realTotalSupply!: number;
-  activeCollaterals!: number;
+  activeCollaterals!: string;
   @TransformBigNumber()
   floorPrice!: BigNumber;
   ownerNum!: number;
@@ -89,6 +89,7 @@ export class Collections {
   @Expose()
   get sDayChange() {
     return this.dayChange.multipliedBy(100).toFixed(2);
+    // return this.dayChange;
   }
 }
 

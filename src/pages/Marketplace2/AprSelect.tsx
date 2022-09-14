@@ -66,7 +66,7 @@ const PanelHead = ({ apr }: { apr: Iapr }) => {
     </Flex>
   )
 }
-const AprSelect = ({ defaultApr, onClose }: { defaultApr: string, onClose: () => void }) => {
+const AprSelect = ({ defaultApr, onClose, onSelect }: { defaultApr: string, onClose: () => void, onSelect: (name: string) => void }) => {
   const { Panel } = Collapse;
   const aprList = [
     {
@@ -106,7 +106,7 @@ const AprSelect = ({ defaultApr, onClose }: { defaultApr: string, onClose: () =>
         {
           aprList.map((apr: Iapr) => {
             return (
-              <SelectItem>
+              <SelectItem key={apr.id}>
                 <Flex alignItems={"center"} justifyContent={"space-between"} paddingBottom={"0.18rem"}>
                   <Flex alignItems={"center"}>
                     <Space>
@@ -115,7 +115,7 @@ const AprSelect = ({ defaultApr, onClose }: { defaultApr: string, onClose: () =>
                       <Icon hidden={apr.name === defaultApr ? false : true} src={imgurl.market.SelectIcon} width={"0.18rem"} height={"0.18rem"} />
                     </Space>
                   </Flex>
-                  <SelectButton disabled={apr.name === defaultApr ? true : false}>Check</SelectButton>
+                  <SelectButton onClick={() => onSelect(apr.name)} disabled={apr.name === defaultApr ? true : false}>Check</SelectButton>
                 </Flex>
                 <Flex flexDirection={"column"} padding={"0.2rem 0.28rem 0 0.28rem"} background={"rgba(0,0,0,0.03)"} borderRadius={"0.1rem"} border={"1px solid rgba(0,0,0,0.1)"}>
                   <Flex width={"100%"} justifyContent={"space-between"}>

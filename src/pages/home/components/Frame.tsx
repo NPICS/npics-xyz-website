@@ -91,6 +91,10 @@ function Frame() {
       transform: 'translateY(0)',
     },
   }
+
+  const openUrl = () => {
+    window.open(leanMoreUrl)
+  }
   return (
     <FrameBox className='frame_box'>
       <AnimateGroup play={isAnimate}>
@@ -114,7 +118,7 @@ function Frame() {
       <AnimateGroup play={isAnimate}>
         <div className='frame_info_tool'>
           <Animate sequenceIndex={1} {...animateProps} delay={0.9}>
-            <FrameButton>Learn More</FrameButton>
+            <FrameButton onClick={openUrl}>Learn More</FrameButton>
           </Animate>
         </div>
         <Animate sequenceIndex={2} start={{ transform: 'translateX(100px)', opacity: 0, }} end={{ transform: 'translateX(0)', opacity: 1 }}>

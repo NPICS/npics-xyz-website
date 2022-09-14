@@ -17,6 +17,7 @@ if (window && window.location.host.includes("npics.xyz")) {
 } else {
   axios.defaults.baseURL = "https://apitest.npics.xyz/";
 }
+// axios.defaults.baseURL = "https://api.npics.xyz/";
 axios.interceptors.request.use(
   (config: any) => {
     if (config.method === "post") {

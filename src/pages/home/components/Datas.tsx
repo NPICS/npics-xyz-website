@@ -72,7 +72,7 @@ const Datas = () => {
               <span className="data_item_count">
                 {index === 0 && (
                   <CountUp
-                    duration={3}
+                    duration={2}
                     start={0}
                     end={item.count}
                     separator={','}
@@ -82,17 +82,17 @@ const Datas = () => {
                   <div className="data_item_available">
                     <img className="available_icon" src={imgurl.ETH36} />
                     <CountUp
-                      duration={3}
+                      duration={1.5}
                       start={0}
                       end={item.count}
-                      decimals={2}
+                      decimals={1.5}
                       separator={','}
                     />
                   </div>
                 )}
                 {index === 2 && (
                   <Fragment>
-                    <CountUp duration={3} start={0} end={item.count} /> %
+                    <CountUp duration={1.5} start={0} end={item.count} /> %
                   </Fragment>
                 )}
               </span>

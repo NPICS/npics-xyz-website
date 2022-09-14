@@ -361,7 +361,7 @@ function XHeader() {
             content={AccountHTML}
             title={AccountTitle}
             trigger="click"
-            visible={accountPop}
+            open={accountPop}
             getPopupContainer={(triggerNode: any) => document.getElementById("baseAccount") || document.body}
             placement={'bottomRight'}
             overlayClassName="accountPopover"
@@ -376,7 +376,7 @@ function XHeader() {
               color="#000"
             >Connect a wallet</Typography>}
             trigger="click"
-            visible={showConnect}
+            open={showConnect}
             getPopupContainer={(triggerNode: any) => document.getElementById("baseAccount") || document.body}
             placement={'bottomRight'}
             overlayClassName="walletPopover"

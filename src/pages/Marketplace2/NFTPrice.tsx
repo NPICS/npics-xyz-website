@@ -171,6 +171,11 @@ export default function NFTPrice(props: {
 
   //is show select apr modal
   const [showAprModal, setShowAprModal] = useState<boolean>(false);
+  //select apr info
+  const [aprInfo, setAprInfo] = useState<{ name: string, icon: any }>({
+    name: "Wing",
+    icon: imgurl.market.wingPriceIcon
+  })
 
   useEffect(() => {
     action(updateARP());
@@ -253,6 +258,15 @@ export default function NFTPrice(props: {
     setShowAprModal(true);
   }
 
+  const selectApr = (name: string) => {
+    let apr = {
+      name: name,
+      icon: name === "Wing" ? imgurl.market.wingPriceIcon : imgurl.market.bendaoPriceIcon
+    }
+    setAprInfo(apr);
+    setShowAprModal(false)
+  }
+
   return (
     <Grid gridTemplateRows={"1.1rem 1rem auto"} gridRowGap={"0.12rem"}>
       {/* show pay modal */}
@@ -260,6 +274,7 @@ export default function NFTPrice(props: {
         <NFTPay
           /// line 150: require value
           nft={props.item!}
+          aprInfo={aprInfo}
           availableBorrow={availableBorrow!}
           actualAmount={actualAmount!}
           progressBlock={() => {
@@ -282,7 +297,7 @@ export default function NFTPrice(props: {
       </Modal>
       {/* show selece apr modal */}
       <Modal isOpen={showAprModal} onRequestClose={() => setShowAprModal(false)}>
-        <AprSelect defaultApr="Wing" onClose={() => setShowAprModal(false)} />
+        <AprSelect defaultApr={aprInfo.name} onClose={() => setShowAprModal(false)} onSelect={selectApr} />
       </Modal>
       {/* popup loading */}
       <Modal isOpen={progressingPopupOpen}>
@@ -387,7 +402,7 @@ export default function NFTPrice(props: {
           <Flex width={'100%'} height={'30%'} justifyContent={"space-between"}>
             <Flex justifyContent={"flex-start"} alignItems={"center"}>
               <Space>
-                <Icon src={imgurl.market.wingPriceIcon} width={'0.22rem'} height={'0.22rem'} alt="" />
+                <Icon src={aprInfo.icon} width={'0.22rem'} height={'0.22rem'} alt="" />
                 <Typography
                   fontSize={"0.14rem"}
                   fontWeight={500}

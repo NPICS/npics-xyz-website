@@ -248,21 +248,20 @@ function Home() {
                   </div>
                 </div>
                 <div className="borrow_more">
-                  <ButtonDefault
-                    types='primary'
-                    color='#fff'
-                    isScale={true}
-                    onClick={() => {
-                      window.open(urls.resource, '_blank')
-                    }}
-                  >
-                    Get Started
-                  </ButtonDefault>
-                  <Link to={'/dashboard/rewards'}>
-                    <ButtonDefault color="#333" types={'second'} isScale={true}>
+                  <Link to={"/dashboard/rewards"}>
+                    <ButtonDefault
+                      types='primary'
+                      color='#fff'
+                      isScale={true}
+                    >
                       Claim Rewards
                     </ButtonDefault>
                   </Link>
+                  <ButtonDefault color="#333" types={'second'} isScale={true} onClick={() => {
+                    window.open(urls.resource, '_blank')
+                  }}>
+                    Get Started
+                  </ButtonDefault>
                 </div>
               </div>
               <div className="borrow_right">

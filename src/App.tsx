@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
   updateARP,
   updateUSDTExchangeRate,
@@ -8,16 +8,16 @@ import {
   clearUserData,
   fetchUser2, updateLoginState
 } from 'store/app';
-import {useAppDispatch, useAppSelector} from 'store/hooks';
-import {useAsync, useInterval} from "react-use";
+import { useAppDispatch, useAppSelector } from 'store/hooks';
+import { useAsync, useInterval } from "react-use";
 import moment from "moment";
-import {useWeb3React} from '@web3-react/core';
-import {useUpdateEffect} from 'utils/hook';
-import {notification} from 'antd';
-import {SessionStorageKey} from 'utils/enums';
-import {CHAIN_ID, injected} from 'connectors/hooks';
+import { useWeb3React } from '@web3-react/core';
+import { useUpdateEffect } from 'utils/hook';
+import { notification } from 'antd';
+import { SessionStorageKey } from 'utils/enums';
+import { CHAIN_ID, injected } from 'connectors/hooks';
 import ContentLoader from "react-content-loader";
-import {useContract, useERC20Contract, useLendPoolContract, useWETHContract} from "./hooks/useContract";
+import { useContract, useERC20Contract, useLendPoolContract, useWETHContract } from "./hooks/useContract";
 // import { Content, Footer } from 'antd/lib/layout/layout';
 import Loading from 'component/Loading';
 import XHeader from 'pages/Layout/Header';
@@ -29,7 +29,7 @@ const Nav = styled.div`
   left: 0;
   right: 0;
   text-align: center;
-  z-index: 2;
+  z-index: 4;
 `
 const FooterBox = styled.div`
   /* height: 2.26rem; */
@@ -51,7 +51,7 @@ const Flex = styled.div`
 
 function App() {
   const action = useAppDispatch()
-  const {account} = useWeb3React()
+  const { account } = useWeb3React()
   const oldAccount = useRef<string | undefined | null>()
   const isShowLoading = useAppSelector(state => state.app.data.isShowLoading)
   // const weth = useWETHContract()
