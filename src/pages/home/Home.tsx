@@ -13,7 +13,8 @@ import {
   HomeBox,
   HomeLeft,
   HomeNFT,
-  StepProgress
+  StepProgress,
+  NoteBox
 } from './HomeStyled'
 import { imgurl } from 'utils/globalimport'
 import ButtonDefault from 'component/ButtonDefault'
@@ -27,7 +28,7 @@ import Npics from './components/Npics'
 import Title from './components/Title'
 import Detail from './components/Detail'
 import { Animate } from 'react-simple-animate'
-import {useAppSelector} from "../../store/hooks"
+import { useAppSelector } from "../../store/hooks"
 const MyTable: any = styled(Table)`
   /* min-width: 16rem; */
   height: 7.47rem;
@@ -35,7 +36,7 @@ const MyTable: any = styled(Table)`
 `
 
 function Home() {
-  const isAnimate = useAppSelector(state=>state.app.isAnimate)
+  const isAnimate = useAppSelector(state => state.app.isAnimate)
   const [checkText, setCheckText] = useState<number>(1)
   const [textContent, setTextContent] = useState<string>('')
   const [progress, setProgress] = useState<string>('0%')
@@ -47,7 +48,7 @@ function Home() {
     apr: 0,
     rewardApr: 0
   })
-
+  const [showNote, setShowNote] = useState<boolean>(false);
   const PartnerData = [
     {
       url: imgurl.home.MetaMask,
@@ -144,22 +145,10 @@ function Home() {
         })
       }
     })
-    // window.addEventListener('scroll', handleScroll, false)
-    // return () => {
-    //   clearTimeout(timer)
-    //   window.removeEventListener('scroll', handleScroll)
-    // }
+    //get sessionStorage
+    const isShowNote: boolean = JSON.parse(sessionStorage.getItem("note") || 'true');
+    setShowNote(isShowNote)
   }, [])
-  // const handleScroll = () => {
-  //   const detailDom = document.querySelector('.detail_div')
-  //   const windowHeight = window.innerHeight
-  //   if (detailDom) {
-  //     const domHeight = detailDom.getBoundingClientRect().y
-  //     if (domHeight! <= windowHeight) {
-  //       setShowAnimeta(true)
-  //     }
-  //   }
-  // }
   const mouseEnter = () => {
     clearTimeout(timer)
     setIsHover(true)
@@ -174,10 +163,28 @@ function Home() {
       }
     }, 5000)
   }
+  const openGitbook = () => {
+    //click note
+    window.open("https://medium.com/@npics.xyz/community-noticeboard-df26affcd7af")
+  }
+  const closeNote = (e: any) => {
+    e.stopPropagation();
+    setShowNote(false);
+    sessionStorage.setItem("note", JSON.stringify(false))
+  }
 
   return (
     <HomeWrap>
       <Background>
+        {/* show note */}
+        <NoteBox hidden={!showNote}>
+          <div className='note_content' onClick={openGitbook}>
+            <div className='note_text'>Living Campaign: Contributor Rewards for Push NPics’ Funding Proposal with BendDAO</div>
+            <div className='note_close' onClick={closeNote}>
+              <img className='note_close_icon' src={imgurl.CloseIcon} />
+            </div>
+          </div>
+        </NoteBox>
         <HomeBox>
           <HomeLeft>
             <Title />
