@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
   /* img {
@@ -174,7 +174,8 @@ export const GlobalStyle = createGlobalStyle`
           border-bottom: none;
           background-color: #000;
           height: 0.68rem;
-          width: 2.716rem;
+          /* width: 2.716rem; */
+          width: 2.2rem;
           padding: 0.22rem 0.16rem;
           font-size: .12rem;
           transition: all 0s;
@@ -222,7 +223,8 @@ export const GlobalStyle = createGlobalStyle`
           /* border-top: 0.01rem solid rgba(255,255,255,.2); */
           height: 0.8rem;
           padding: 0.1rem 0.16rem;
-          width: 2.716rem;
+          /* width: 2.716rem; */
+          width: 2.2rem;
         }
         &>.ant-table-cell {
           background: rgba(255, 255, 255, .03);
@@ -530,4 +532,4 @@ export const GlobalStyle = createGlobalStyle`
   }
 
 
-`
+`;

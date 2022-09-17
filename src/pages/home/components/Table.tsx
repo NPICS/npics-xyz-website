@@ -23,6 +23,7 @@ interface DataType {
   ownerNum: number
   activeCollaterals: string
   primePrice: number
+  apr: number
   // vol: number
   dayChange: string
   dayVolume: BigNumber
@@ -37,6 +38,10 @@ const BgTable = styled.div`
   /* margin-top: 0.5rem; */
   .table_col {
     font-size: 0.14rem !important;
+  }
+  .table_col_apr{
+    font-size: 0.14rem !important;
+    padding: 0.1rem 0.16rem !important;
   }
   .ant-table-reset {
     .ant-table-tbody {
@@ -67,9 +72,7 @@ export default function MyTable() {
     let result: any = await http.myPost(url, {})
     if (result.code === 200 && result.data.length) {
       const orgData = result.data
-      console.log(' orgData', orgData)
       const changeData = deserializeArray(CollectionList, JSON.stringify(orgData))
-      console.log('changeData', changeData)
       const relData: DataType[] = []
       if (changeData && changeData.length) {
         setShowTable(true)
@@ -86,12 +89,12 @@ export default function MyTable() {
             activeCollaterals: changeData[i].activeCollaterals,
             primePrice: +changeData[i].sPrimePrice,
             // vol: +changeData[i].vol,
+            apr: +changeData[i].svaultApr,
             dayChange: changeData[i].sDayChange,
             dayVolume: new BigNumber(changeData[i].dayVolume),
             address: changeData[i].address,
           })
         }
-        console.log('relData', relData)
         setCollections(relData)
       }
     } else {
@@ -259,6 +262,30 @@ export default function MyTable() {
         </div>
       ),
     },
+    {
+      title: "Vault APR",
+      dataIndex: 'apr',
+      key: 'apr',
+      align: 'left',
+      className: 'table_col_apr',
+      // defaultSortOrder: 'descend',
+      sorter: (a, b) => a.apr - b.apr,
+      render: (text) => (
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'flex-start',
+            alignItems: 'center',
+          }}
+        >
+          <span
+            style={{ fontSize: '0.14rem', color: '#fff', fontWeight: '500' }}
+          >
+            {text}%
+          </span>
+        </div>
+      ),
+    }
   ]
 
   return (

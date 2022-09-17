@@ -284,7 +284,7 @@ function Home() {
                     <div className="content">
                       <div className="content_apr">
                         <span>Interest APR</span>
-                        <span>{`${-aprData.apr.toFixed(2)}%`}</span>
+                        <span>{`${-(aprData.apr * 100).toFixed(2)}%`}</span>
                       </div>
                       <span>
                         The real-time annual percentage rate of interest to be paid to

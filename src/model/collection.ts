@@ -12,6 +12,7 @@ export class CollectionList {
   ownerNum!: number;
   dayChange!: string;
   ltv!: string;
+  vaultApr!: string;
   address!: string;
   totalShelves!: number;
   dayVolume!: number;
@@ -42,6 +43,11 @@ export class CollectionList {
   //     .multipliedBy(this.ltv.div(10 ** 4))
   //     .toFixed(2);
   // }
+
+  @Expose()
+  get svaultApr() {
+    return (parseFloat(this.vaultApr) * 100).toFixed(2);
+  }
 
   @Expose()
   get sDayChange() {
