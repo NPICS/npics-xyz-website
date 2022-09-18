@@ -33,7 +33,7 @@ export const NoteBox = styled.div`
   top: 0.9rem;
   width: 100%;
   height: 40px;
-  background: #ff490f;
+  background: rgba(255, 255, 255, 0.2);
   color: #fff;
   .note_content {
     width: 16rem;
