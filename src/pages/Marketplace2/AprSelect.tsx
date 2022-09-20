@@ -4,6 +4,8 @@ import { imgurl } from "utils/globalimport";
 import { Space } from "antd"
 import ethIcon from "../../assets/images/market/eth_icon.svg"
 import { Collapse } from 'antd';
+import { useEffect, useState } from "react";
+import http from "utils/http";
 const AprSelectBox = styled.div`
   width: 7.2rem;
   min-height: 5rem;
@@ -50,42 +52,44 @@ const CollapseBox = styled.div`
 `
 interface Iapr {
   id: number;
-  name: string;
+  platform: string;
   available: number;
-  // vaultAPR:143.2,
-  rewardAPR: number;
   interestAPR: number;
+  rewardAPR: number;
 }
 const PanelHead = ({ apr }: { apr: Iapr }) => {
   return (
     <Flex width={"100%"} justifyContent={"space-between"}>
       <Typography fontSize={"0.14rem"}>Vault APR</Typography>
       <Flex>
-        <Typography fontSize={"0.14rem"}>{apr.rewardAPR + apr.interestAPR}%</Typography>
+        <Typography fontSize={"0.14rem"}>{apr.rewardAPR + Math.abs(apr.interestAPR)}%</Typography>
       </Flex>
     </Flex>
   )
 }
 const AprSelect = ({ defaultApr, onClose, onSelect }: { defaultApr: string, onClose: () => void, onSelect: (name: string) => void }) => {
   const { Panel } = Collapse;
-  const aprList = [
-    {
-      id: 1,
-      name: "Wing",
-      available: 30.8,
-      // vaultAPR:143.2,
-      rewardAPR: 150.26,
-      interestAPR: -7.06
-    },
-    {
-      id: 2,
-      name: "BendDao",
-      available: 50.8,
-      // vaultAPR:143.2,
-      rewardAPR: 120.26,
-      interestAPR: -10.06
+  const [aprList, setAprList] = useState<Iapr[]>([]);
+  useEffect(() => {
+    const getAllplatform = async () => {
+      const res: any = await http.myPost("npics-nft/app-api/v2/platform/getList", {});
+      const list: Iapr[] = []
+      if (res.code === 200 && res.data.records) {
+        res.data.records.map((item: any) => {
+          const obj = {
+            id: item.id,
+            platform: item.platform === "wing" ? 'Wing' : 'BendDao',
+            available: parseFloat(parseFloat(item.suppliedBalance).toFixed(2)),
+            rewardAPR: parseFloat((parseFloat(item.borrowApy) * 100).toFixed(2)),
+            interestAPR: parseFloat((parseFloat(item.supplyApy) * 100).toFixed(2)),
+          }
+          list.push(obj)
+        })
+      }
+      setAprList(list)
     }
-  ]
+    getAllplatform()
+  }, [])
   return (
     <AprSelectBox>
       {/* title */}
@@ -110,12 +114,12 @@ const AprSelect = ({ defaultApr, onClose, onSelect }: { defaultApr: string, onCl
                 <Flex alignItems={"center"} justifyContent={"space-between"} paddingBottom={"0.18rem"}>
                   <Flex alignItems={"center"}>
                     <Space>
-                      <Icon src={apr.name === 'Wing' ? imgurl.market.WingSelect : imgurl.dashboard.rewardBend} width={"0.32rem"} height={"0.32rem"} />
-                      <Typography fontSize={"0.2rem"} fontWeight={"700"}>{apr.name}</Typography>
-                      <Icon hidden={apr.name === defaultApr ? false : true} src={imgurl.market.SelectIcon} width={"0.18rem"} height={"0.18rem"} />
+                      <Icon src={apr.platform === 'Wing' ? imgurl.market.WingSelect : imgurl.dashboard.rewardBend} width={"0.32rem"} height={"0.32rem"} />
+                      <Typography fontSize={"0.2rem"} fontWeight={"700"}>{apr.platform}</Typography>
+                      <Icon hidden={apr.platform === defaultApr ? false : true} src={imgurl.market.SelectIcon} width={"0.18rem"} height={"0.18rem"} />
                     </Space>
                   </Flex>
-                  <SelectButton onClick={() => onSelect(apr.name)} disabled={apr.name === defaultApr ? true : false}>Check</SelectButton>
+                  <SelectButton onClick={() => onSelect(apr.platform)} disabled={apr.platform === defaultApr ? true : false}>Check</SelectButton>
                 </Flex>
                 <Flex flexDirection={"column"} padding={"0.2rem 0.28rem 0 0.28rem"} background={"rgba(0,0,0,0.03)"} borderRadius={"0.1rem"} border={"1px solid rgba(0,0,0,0.1)"}>
                   <Flex width={"100%"} justifyContent={"space-between"}>

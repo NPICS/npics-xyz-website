@@ -45,9 +45,10 @@ function Home() {
   const [progress, setProgress] = useState<string>('0%')
   const [timer, setTimer] = useState<NodeJS.Timeout>()
   const [isHover, setIsHover] = useState<boolean>(false)
-  const [aprData, setAprData] = useState<{ apr: number; rewardApr: number }>({
+  const [aprData, setAprData] = useState<{ apr: number; rewardApr: number, platform: string }>({
     apr: 0,
-    rewardApr: 0
+    rewardApr: 0,
+    platform: ""
   })
   const [showNote, setShowNote] = useState<boolean>(false);
   const PartnerData = [
@@ -141,7 +142,8 @@ function Home() {
       if (_resp.code === 200) {
         setAprData({
           apr: parseFloat(_resp.data.apr) || 0,
-          rewardApr: parseFloat(_resp.data.rewardApr) || 0
+          rewardApr: parseFloat(_resp.data.rewardApr) || 0,
+          platform: _resp.data.platform
         })
       }
     })
@@ -270,11 +272,11 @@ function Home() {
                     <div className="left_content">
                       <div className="left_content_apr">
                         <div className='apr_text_box'>
-                          <Icon height="0.18rem" src={imgurl.WingIcon} />
+                          <Icon height="0.18rem" src={aprData.platform === 'wing' ? imgurl.WingIcon : imgurl.home.BendDAO} />
                           <span className='apr_text'>Vaults APR</span>
 
                         </div>
-                        <span>{`${(aprData.rewardApr * 100 - aprData.apr).toFixed(
+                        <span>{`${((aprData.rewardApr - aprData.apr) * 100).toFixed(
                           2
                         )}%`}</span>
                       </div>

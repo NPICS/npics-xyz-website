@@ -1,32 +1,32 @@
-import {useLocation, useParams} from "react-router-dom";
-import React, {useEffect, useRef, useState} from "react";
-import {Box, Flex, Grid, Icon, Typography} from "../../component/Box";
+import { useLocation, useParams } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
+import { Box, Flex, Grid, Icon, Typography } from "../../component/Box";
 import styled from "styled-components";
-import {layout, space, typography, TypographyProps, color} from "styled-system"
+import { layout, space, typography, TypographyProps, color } from "styled-system"
 import CollectionCell from "./CollectionCell";
 import LooseSelectIcon from "../../assets/images/market/Frame 33.png"
 import CompactUnselectIcon from "../../assets/images/market/Frame 34.png"
 import LooseUnselectIcon from "../../assets/images/market/loose_unselect.png"
 import CompactSelectIcon from "../../assets/images/market/compact_select.png"
 import search from "../../assets/images/market/searchInt.svg"
-import {CollectionDetail, CollectionItems, Collections} from "../../model/user";
-import {deserializeArray, deserialize} from "class-transformer";
-import {imgurl} from "../../utils/globalimport";
+import { CollectionDetail, CollectionItems, Collections } from "../../model/user";
+import { deserializeArray, deserialize } from "class-transformer";
+import { imgurl } from "../../utils/globalimport";
 import http from "../../utils/http";
-import {Input, Select} from "antd";
+import { Input, Select } from "antd";
 import InfiniteScroll from 'react-infinite-scroller';
-import {numberFormat} from "../../utils/urls";
+import { numberFormat } from "../../utils/urls";
 import NotFound from "component/NotFound";
-import {globalConstant} from "utils/globalConstant";
+import { globalConstant } from "utils/globalConstant";
 import ContentLoader from "react-content-loader"
-import {useAsync} from "react-use";
+import { useAsync } from "react-use";
 import BigNumber from "bignumber.js";
 import SkeletonTemplate from "component/SkeletonTemplate";
 import progressIcon from "../../assets/images/market/nft_pay_progressing.gif"
 import axios, { Canceler } from "axios";
 // import axios, { Canceler } from "axios";
 
-const {Option} = Select;
+const { Option } = Select;
 
 
 const InputStyled = styled(Input)`
@@ -148,7 +148,7 @@ export default function MarketList() {
         },
           {
             cancelToken: new CancelToken(function executor(c) {
-              if(currentPage === 1) {
+              if (currentPage === 1) {
                 isLoading.current = false
               }
               cancel.current?.()
@@ -166,9 +166,9 @@ export default function MarketList() {
           setLoading(false)
         }
       }
-    } catch(e) {
+    } catch (e) {
       isLoading.current = false
-    } 
+    }
     finally {
       isLoading.current = false
     }
@@ -187,18 +187,18 @@ export default function MarketList() {
             type="text"
             placeholder='Search NFTs by name or token ID'
             value={searchText}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>  setSearchText(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchText(e.target.value)}
             onPressEnter={(e: any) => {
               setCurrentPage(1)
               setPressEnter(!pressEnter)
             }}
             className="ant-input-reset"
           />
-          <BoxBefore width="0.2rem" height="0.2rem" src={search}/>
+          <BoxBefore width="0.2rem" height="0.2rem" src={search} />
         </Box>
         <AntdSelect onSelect={(value: any) => setCurrentSort(value)}
-                    defaultValue="asc"
-                    dropdownClassName="ant-select-reset">
+          defaultValue="asc"
+          popupClassName="ant-select-reset">
           <Option value="asc">Price: Low to High</Option>
           <Option value="desc">Price: high to low</Option>
           <Option value="rarityScoreDesc">Rarity: Common to Rarest</Option>
@@ -207,51 +207,51 @@ export default function MarketList() {
         <Flex flex={1}></Flex>
         <Flex flexDirection={"row"} alignItems={"center"} gap={"0.02rem"}>
           <Icon height={"0.24rem"} width={"0.24rem"} src={compactMode ? LooseUnselectIcon : LooseSelectIcon}
-                onClick={() => setCompactMode(false)}/>
+            onClick={() => setCompactMode(false)} />
           <Icon height={"0.24rem"} width={"0.24rem"} src={compactMode ? CompactSelectIcon : CompactUnselectIcon}
-                onClick={() => setCompactMode(true)}/>
+            onClick={() => setCompactMode(true)} />
         </Flex>
       </Flex>
       {
         loading ? <Grid
-            padding={"0.25rem 0.4rem"}
-            // marginTop={"0.25rem"}
-            gridTemplateColumns={`repeat(${compactMode ? 8 : 5}, 1fr)`}
-            gridGap={"0.1rem"}
-            justifyContent={"space-between"}
-            alignItems={"start"}
-            overflow={"auto"}
-          >
-            {new Array(30).fill(0).map((item,idx) => <SkeletonTemplate key={idx} widthWrap={'100%'}/>)}
-          </Grid>
+          padding={"0.25rem 0.4rem"}
+          // marginTop={"0.25rem"}
+          gridTemplateColumns={`repeat(${compactMode ? 8 : 5}, 1fr)`}
+          gridGap={"0.1rem"}
+          justifyContent={"space-between"}
+          alignItems={"start"}
+          overflow={"auto"}
+        >
+          {new Array(30).fill(0).map((item, idx) => <SkeletonTemplate key={idx} widthWrap={'100%'} />)}
+        </Grid>
           : listData.length ? <InfiniteScroll
-              pageStart={1}
-              loadMore={() => {
-                if (!isLoading.current) {
-                  setCurrentPage(currentPage + 1)
-                }
-              }}
-              hasMore={listData.length < total}
-              loader={<Loading key={0}/>}
-              initialLoad={false}>
-              <Grid
-                padding={"0.25rem 0.4rem"}
-                // marginTop={"0.25rem"}
-                gridTemplateColumns={`repeat(${compactMode ? 8 : 5}, 1fr)`}
-                gridGap={compactMode ? `0.16rem` : `0.25rem`}
-                justifyContent={"space-between"}
-                alignItems={"start"}
-                overflow={"auto"}>
-                {
-                  listData.map((item, idx) => {
-                    return <CollectionCell
-                      key={idx}
-                      compact={compactMode}
-                      item={item}/>
-                  })
-                }
-              </Grid>
-            </InfiniteScroll> :
+            pageStart={1}
+            loadMore={() => {
+              if (!isLoading.current) {
+                setCurrentPage(currentPage + 1)
+              }
+            }}
+            hasMore={listData.length < total}
+            loader={<Loading key={0} />}
+            initialLoad={false}>
+            <Grid
+              padding={"0.25rem 0.4rem"}
+              // marginTop={"0.25rem"}
+              gridTemplateColumns={`repeat(${compactMode ? 8 : 5}, 1fr)`}
+              gridGap={compactMode ? `0.16rem` : `0.25rem`}
+              justifyContent={"space-between"}
+              alignItems={"start"}
+              overflow={"auto"}>
+              {
+                listData.map((item, idx) => {
+                  return <CollectionCell
+                    key={idx}
+                    compact={compactMode}
+                    item={item} />
+                })
+              }
+            </Grid>
+          </InfiniteScroll> :
             <Box padding={"1.6rem 0"}>
               <NotFound
                 title={"No npics found"}

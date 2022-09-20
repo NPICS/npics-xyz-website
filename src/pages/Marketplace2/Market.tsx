@@ -3,7 +3,7 @@ import styled from "styled-components";
 import React, { useEffect, useState } from "react";
 import http from "../../utils/http";
 import { deserializeArray } from "class-transformer";
-import { Collections } from "../../model/user";
+import { CollectionList } from "../../model/collection";
 import { Outlet, useNavigate, useParams } from "react-router-dom";
 import { numberFormat } from "../../utils/urls";
 import { Portrait } from "./MarketList";
@@ -89,11 +89,11 @@ const MarkdownContainer = styled.div<{
 `
 
 export default function Market() {
-  const [listData, setListData] = useState<Collections[]>([])
+  const [listData, setListData] = useState<CollectionList[]>([])
   // const [selectAddress, setSelectAddress] = useState<string>()
   const [descriptionExpand, setDescriptionExpand] = useState(false)
   const [expandBtnHidden, setExpandBtnHidden] = useState(true)
-  const [nft, setNft] = useState<Collections>()
+  const [nft, setNft] = useState<CollectionList>()
   const nav = useNavigate()
   const params = useParams()
 
@@ -102,7 +102,7 @@ export default function Market() {
       try {
         const resp: any = await http.myPost(`/npics-nft/app-api/v2/nft/getCollections2`)
         if (resp.code === 200 && resp.data.length) {
-          setListData(deserializeArray(Collections, JSON.stringify(resp.data)))
+          setListData(deserializeArray(CollectionList, JSON.stringify(resp.data)))
         }
       } catch (error) {
       }
@@ -252,7 +252,8 @@ export default function Market() {
                 fontWeight={700}
               >{
                   // nft && numberFormat(nft.floorPrice.div(10 ** 18).toFixed())
-                  nft && numeral(nft.floorPrice.div(10 ** 18).toFixed()).format("0,0.[00]")
+                  // nft && numeral(nft.floorPrice.div(10 ** 18).toFixed()).format("0,0.[00]")
+                  nft && nft.sFloorPrice
                 }</Typography>
             </Flex>
             <Typography fontWeight={"500"} fontSize={"0.14rem"} color={"#000"}>Floor</Typography>
@@ -274,7 +275,7 @@ export default function Market() {
               >{
                   // nft && numberFormat(nft.floorPrice.div(10 ** 18).toFixed())
                   // nft && numeral(nft.floorPrice.div(10 ** 18).toFixed()).format("0,0.[00]")
-                  47.2
+                  nft && nft.getMinDP
                 }</Typography>
             </Flex>
             <Typography fontWeight={"500"} fontSize={"0.14rem"} color={"#000"}>Min DP</Typography>
@@ -304,11 +305,12 @@ export default function Market() {
                 fontSize={`0.14rem`}
                 fontWeight={500}
                 color={
-                  (nft?.dayChange.toNumber() ?? 0) > 0 ? `#18CF15` : `#FF4949`
+                  // (nft?.dayChange.toNumber() ?? 0) > 0 ? `#18CF15` : `#FF4949`
+                  nft && nft?.sDayChange > 0 ? `#18CF15` : `#FF4949`
                 }
               >{
-                  nft && percentageFormat(nft.dayChange.toNumber())
-                }</Typography>
+                  nft && nft.sDayChange || 0
+                }%</Typography>
             </Flex>
           </Flex>
           <Flex

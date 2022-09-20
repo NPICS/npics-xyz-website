@@ -2,6 +2,7 @@ import { Fragment, useEffect, useState } from 'react'
 import CountUp from 'react-countup'
 import styled from 'styled-components'
 import { imgurl } from 'utils/globalimport'
+import http from 'utils/http'
 const DatasWarp = styled.div`
   width: 16rem;
   margin: 0 auto;
@@ -44,24 +45,31 @@ const Datas = () => {
   const [list, setList] = useState<any[]>([])
   useEffect(() => {
     //get datas
-    const list = [
-      {
-        id: 1,
-        name: 'NFTs Listing',
-        count: 8791,
-      },
-      {
-        id: 2,
-        name: 'Available Supply',
-        count: 48791.05,
-      },
-      {
-        id: 3,
-        name: 'Vault APR',
-        count: 143.2,
-      },
-    ]
-    setList(list)
+    const getData = async () => {
+      const res: any = await http.myGet("/npics-nft/app-api/v2/statistics/getStatistics", {})
+      if (res.data.code === 200 && res.data.data) {
+        let valueList: number[] = Object.values(res.data.data);
+        const list = [
+          {
+            id: 1,
+            name: 'NFTs Listing',
+            count: valueList[0],
+          },
+          {
+            id: 2,
+            name: 'Available Supply',
+            count: valueList[1],
+          },
+          {
+            id: 3,
+            name: 'Vault APR',
+            count: valueList[2] * 100,
+          },
+        ]
+        setList(list)
+      }
+    }
+    getData()
   }, [])
   return (
     <DatasWarp>

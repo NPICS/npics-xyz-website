@@ -18,6 +18,7 @@ export class CollectionList {
   dayVolume!: number;
   description?: string;
   bannerImageUrl?: string;
+  minDp!: string;
 
   @Expose()
   get sAdvanceRate() {
@@ -51,7 +52,12 @@ export class CollectionList {
 
   @Expose()
   get sDayChange() {
-    const dayChange = parseFloat(this.dayChange);
-    return (dayChange * 100).toFixed(2);
+    const dayChange = parseFloat(this.dayChange ?? 0);
+    return parseFloat((dayChange * 100).toFixed(2));
+  }
+
+  @Expose()
+  get getMinDP() {
+    return parseFloat(this.minDp).toFixed(2) || "0.00";
   }
 }

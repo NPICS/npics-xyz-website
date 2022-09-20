@@ -25,7 +25,7 @@ interface DataType {
   primePrice: number
   apr: number
   // vol: number
-  dayChange: string
+  dayChange: number
   dayVolume: BigNumber
   address: string
 }
@@ -178,7 +178,7 @@ export default function MyTable() {
               <img src={imgurl.whitePrice} alt="" />
             </div>
             <div>
-              <span style={{ fontSize: '0.14rem' }}>{text.toFixed(2, 1)}</span>
+              <span style={{ fontSize: '0.14rem' }}>{text.toFixed(2, 1) || 0.00}</span>
               <span
                 style={{
                   fontSize: '0.14rem',
