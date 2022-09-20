@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { Box, Flex, Icon, Typography, Grid, GridItem } from "component/Box";
+import React, { useEffect, useState } from "react";
+import { Box, Flex, Grid, GridItem, Icon, Typography } from "component/Box";
 import { imgurl } from "utils/globalimport";
 import ProgressBar from "pages/Dashboard2/components/components/ProgressBar";
 import ButtonDefault from "component/ButtonDefault";
 import { VaultsContractCalcData, VaultsItemData } from "./StyledInterface";
 import { useWeb3React } from "@web3-react/core";
-import { notification, message, Popover, InputNumber, Skeleton } from "antd";
+import { InputNumber, message, Modal, Skeleton } from "antd";
 import BigNumber from "bignumber.js";
 import { setIsShowConnect, updateLoginState } from "store/app";
 import { BANK_ENUM, BANK_NAME_MAP, SessionStorageKey } from "utils/enums";
@@ -13,31 +13,28 @@ import http, { NPICS_GRAPH_API } from "utils/http";
 import { getSignMessage } from "utils/sign";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { useNavigate, useParams } from "react-router-dom";
-import { Modal } from "antd";
 import Payment from "./Payment";
 import styled from "styled-components";
 import PaySuccessful from "./PaySuccessful";
 import {
-  MintedNFTPop,
-  HealthFactorPop,
   DebtPop,
-  VaultAprPop,
   EstimatProfitPop,
+  HealthFactorPop,
+  MintedNFTPop,
+  VaultAprPop,
 } from "utils/popover";
-import { globalConstant } from "utils/globalConstant";
-import { injected } from "connectors/hooks";
 import { useAsync } from "react-use";
 import Checkbox from "component/Input/Checkbox";
 import { TextPlaceholder } from "component/styled";
 import { _toString } from "./data";
 import { Pop } from "component/Popover/Popover";
-import BendDAO from "../../../../assets/images/home/BendDAO.png";
 import {
   getVaultsContractData,
   getVaultsServerListDataMap,
 } from "../../../../model/vaults";
 import { deserializeArray } from "class-transformer";
 import { Npics } from "../../../../abis/Npics";
+import wingPriceIcon from "../../../../assets/images/market/wing_price.svg";
 
 const Banner = () => {
   return (
@@ -213,7 +210,6 @@ export default function VaultsDetail() {
     const Proportion =
       inputPayDebt / +contractCalcData.debt.div(10 ** 18).toFixed(4, 1);
     setProgressVal(Proportion);
-    console.log("inputPayDebt", inputPayDebt);
   }, [inputPayDebt, contractCalcData]);
 
   const handleIptDebt = (e: string | number) => {
@@ -238,9 +234,7 @@ export default function VaultsDetail() {
   }, [isLogin, params, account, reload]);
 
   useAsync(async () => {
-    console.log(account, isLogin);
     if (account && !isLogin) {
-      console.log(`😈 ${isLogin}`);
       login2();
     } else {
       // Prevent refresh popup windows
@@ -366,6 +360,17 @@ export default function VaultsDetail() {
     };
     setPayInfo(object);
     setShowPayment(true);
+  };
+
+  const lendingProviderMap = {
+    [BANK_ENUM.bend]: {
+      name: "BenDao",
+      img: imgurl.market.BendDAOBuy,
+    },
+    [BANK_ENUM.wing]: {
+      name: "Wing",
+      img: imgurl.market.wingPriceIcon,
+    },
   };
   return (
     <Flex
@@ -756,21 +761,23 @@ export default function VaultsDetail() {
                   >
                     Lending Provider
                   </Typography>
-                  <Flex alignItems={"center"}>
-                    <Icon
-                      width="0.26rem"
-                      height="0.26rem"
-                      src={imgurl.market.BendDAOBuy}
-                    />
-                    <Typography
-                      fontSize="0.2rem"
-                      fontWeight="500"
-                      color="#000"
-                      ml="0.04rem"
-                    >
-                      BendDAO
-                    </Typography>
-                  </Flex>
+                  {activities && (
+                    <Flex alignItems={"center"}>
+                      <Icon
+                        width="0.26rem"
+                        height="0.26rem"
+                        src={lendingProviderMap[activities.bankId]?.img}
+                      />
+                      <Typography
+                        fontSize="0.2rem"
+                        fontWeight="500"
+                        color="#000"
+                        ml="0.04rem"
+                      >
+                        {lendingProviderMap[activities.bankId]?.name}
+                      </Typography>
+                    </Flex>
+                  )}
                 </Flex>
               </Grid>
             </Grid>
