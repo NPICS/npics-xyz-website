@@ -3,6 +3,12 @@ import { ethers } from "ethers";
 import { ContractAddresses } from "../utils/addresses";
 import NPICS_ABI from ".//npics.json";
 import { Erc20 } from "./Erc20";
+import { BANK_ENUM } from "../utils/enums";
+import {
+  ChainId,
+  multicallClient,
+  newClientContract,
+} from "../utils/multicall";
 
 export class Npics {
   signer: any;
@@ -105,21 +111,24 @@ export class Npics {
 
   async getLoanReserveBorrowAmount(
     nft: string,
-    tokenId: number
+    tokenId: number | string
   ): Promise<{
     reserveAsset: string;
     repayDebtAmount: BigNumber;
   }> {
-    let contract = new ethers.Contract(
-      ContractAddresses.NpicsProxy,
+    let contract = newClientContract(
       NPICS_ABI,
-      this.signer
+      ContractAddresses.NpicsProxy,
+      ChainId.ETH
     );
-    let result = await contract.getLoanReserveBorrowAmount(nft, tokenId);
-    return {
-      reserveAsset: result[0],
-      repayDebtAmount: result[1],
-    };
+    return multicallClient([
+      contract.getLoanReserveBorrowAmount(nft, tokenId),
+    ]).then((res) => {
+      return {
+        reserveAsset: res[0].returnData[0],
+        repayDebtAmount: res[0].returnData[1],
+      };
+    });
   }
 
   async repayETH(nft: string, tokenId: string, amount: BigNumber) {
@@ -133,22 +142,22 @@ export class Npics {
     });
   }
 
-  async getRewardsBalance(nft: string) {
+  async getRewardsBalance(nft: string, bank: BANK_ENUM) {
     let contract = new ethers.Contract(
       ContractAddresses.NpicsProxy,
       NPICS_ABI,
       this.signer
     );
-    return await contract.getRewardsBalance(nft);
+    return await contract["getRewardsBalance(address,uint256)"](nft, bank);
   }
 
-  async claimRewards() {
+  async claimRewards(bank: BANK_ENUM) {
     let contract = new ethers.Contract(
       ContractAddresses.NpicsProxy,
       NPICS_ABI,
       this.signer
     );
-    return await contract.claimRewards();
+    return await contract["claimRewards(uint256)"](bank);
   }
 
   async getAvailableBorrowsln(nft: string): Promise<BigNumber> {
@@ -189,5 +198,15 @@ export class Npics {
       this.signer
     );
     return await contract.getNeoFor(nft);
+  }
+  getDebtWEthOf(account: string): Promise<BigNumber> {
+    let contract = newClientContract(
+      NPICS_ABI,
+      ContractAddresses.NpicsProxy,
+      ChainId.ETH
+    );
+    return multicallClient([contract.getDebtWEthOf(account)]).then(
+      (res) => new BigNumber(res[0].returnData || "0")
+    );
   }
 }

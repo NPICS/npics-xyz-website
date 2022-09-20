@@ -184,7 +184,7 @@ export default function MyTable() {
                   fontSize: '0.14rem',
                   color: `${+row.dayChange >= 0 ? '#7BD742' : '#D03434'}`,
                 }}
-              >{`${+row.dayChange >= 0 ? '+' : ''}${row.dayChange}%`}</span>
+              >{`${+row.dayChange >= 0 ? '+' : ''}${row.dayChange === 0 ? '0.00' : row.dayChange}%`}</span>
             </div>
           </div>
         )

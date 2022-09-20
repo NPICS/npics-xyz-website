@@ -9,10 +9,8 @@ import { OFFER_TYPE_ENUM, Offers } from "model/offers";
 import { thousandFormat } from "../../../../utils/urls";
 import BigNumber from "bignumber.js";
 import { useAppSelector } from "store/hooks";
-import { useEffect } from "react";
 import { useIntervalWhen } from "rooks";
 import { imgurl } from "utils/globalimport";
-import { DataSource2 } from "./StyledInterface";
 import { Select, Skeleton, Space } from "antd";
 import { useAsync } from "react-use";
 import { useWETHContract } from "hooks/useContract";
@@ -21,7 +19,6 @@ import ButtonDefault from "component/ButtonDefault";
 import { sort, Sort } from "./data";
 import http from "utils/http";
 import { deserializeArray } from "class-transformer";
-import looksrare from "../../../../assets/images/market/looksrare.svg";
 import Loading from "../../../../component/Loading";
 const { Option } = Select;
 const Button = styled.button`
@@ -89,7 +86,6 @@ const LoadingView = styled.div`
 `;
 interface IProps {
   showOffer: OfferModal;
-  nftInfo: DataSource2 | undefined;
   nftAddress: string | undefined;
   setShowOffer: React.Dispatch<React.SetStateAction<OfferModal>>;
   setAcceptOffer: React.Dispatch<React.SetStateAction<Offers | undefined>>;
@@ -144,7 +140,7 @@ function LoadingSkeleton() {
 }
 
 export default function AcceptOffersList(props: IProps) {
-  const { showOffer, setShowOffer, nftAddress, nftInfo } = props;
+  const { showOffer, setShowOffer, nftAddress } = props;
   const [second, setSecond] = useState(1);
   const [currentSort, setCurrentSort] = useState<Sort>(Sort.priceToLow);
   const [offerList, setOfferList] = useState<Offers[]>();
@@ -335,7 +331,6 @@ export default function AcceptOffersList(props: IProps) {
                   offerList.map((item: Offers, idx: Key | null | undefined) => {
                     return (
                       <AcceptOffersCell
-                        nftInfo={nftInfo}
                         setAcceptOffer={props.setAcceptOffer}
                         offerInfo={item}
                         key={idx}
@@ -367,10 +362,9 @@ export default function AcceptOffersList(props: IProps) {
 function AcceptOffersCell(props: {
   setShowOffer: React.Dispatch<React.SetStateAction<OfferModal>>;
   offerInfo: Offers;
-  nftInfo: DataSource2 | undefined;
   setAcceptOffer: React.Dispatch<React.SetStateAction<Offers | undefined>>;
 }) {
-  const { nftInfo, offerInfo, setAcceptOffer, setShowOffer } = props;
+  const { offerInfo, setAcceptOffer, setShowOffer } = props;
   const ethRate = useAppSelector(
     (state) => new BigNumber(state.app.data.EthPrice)
   );

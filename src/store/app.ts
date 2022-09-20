@@ -5,6 +5,8 @@ import { Collections } from "../model/user";
 import http from "../utils/http";
 import { SessionStorageKey } from "../utils/enums";
 import BigNumber from "bignumber.js";
+import { ContractAddresses } from "../utils/addresses";
+import { ChainId } from "../utils/multicall";
 
 class Theme {
   isDark!: Boolean;
@@ -26,12 +28,15 @@ interface IAppState {
   isFixed: boolean;
   isShowFrameAnimate: boolean;
   isShowDetailAnimate: boolean;
+  isAnimate: boolean;
   interestAPR?: number;
   rewardsAPR?: number;
   // eth -> usdt rate
   usdtExchangeRate?: string;
   // bend -> usdt rate
   bendExchangeRate: string;
+  // pWing -> usdt rate
+  pWingExchangeRate: string;
   showWalletModalOpen: boolean;
 }
 
@@ -51,7 +56,9 @@ const initialState: IAppState = {
   },
   isLogin: false,
   bendExchangeRate: "",
+  pWingExchangeRate: "",
   showWalletModalOpen: false,
+  isAnimate: false,
 };
 
 export const fetchUser2 = createAsyncThunk(
@@ -117,6 +124,33 @@ export const updateBENDExchangeRate = createAsyncThunk(
   }
 );
 
+export const updatePWingExchangeRate = createAsyncThunk(
+  "app/updatePWingExchangeRate",
+  async (args, thunkAPI) => {
+    let resp: any = await http.myPost(
+      `https://api.defined.fi/`,
+      {
+        query: `query ExampleQuery($address: String!, $networkId: Int!) { getPrice(address: $address, networkId: $networkId) { priceUsd  }}`,
+        variables: {
+          address: ContractAddresses.PWingProxy,
+          networkId: ChainId.ETH,
+        },
+        operationName: "ExampleQuery",
+      },
+      {
+        headers: {
+          "x-api-key": "ZDhetvbpiAB1dMn9FPP8SRkcSnoueg2hf1poyY30",
+        },
+      }
+    );
+    if (resp.data.getPrice) {
+      return resp.data.getPrice.priceUsd as string;
+    } else {
+      return undefined;
+    }
+  }
+);
+
 const appSlice = createSlice({
   name: "app",
   initialState,
@@ -161,6 +195,9 @@ const appSlice = createSlice({
     setShowDetailAnimate(state, action) {
       state.isShowDetailAnimate = action.payload;
     },
+    setAnimate(state, action) {
+      state.isAnimate = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -193,6 +230,11 @@ const appSlice = createSlice({
       .addCase(updateBENDExchangeRate.fulfilled, (state, action) => {
         if (action.payload) {
           state.bendExchangeRate = action.payload;
+        }
+      })
+      .addCase(updatePWingExchangeRate.fulfilled, (state, action) => {
+        if (action.payload) {
+          state.pWingExchangeRate = action.payload;
         }
       });
   },
