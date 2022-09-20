@@ -8,7 +8,8 @@ import { SessionStorageKey } from "./enums";
 export const X2Y2_ORDER_SIGN_API = "/x2y2/api/orders/sign";
 export const SUDOSWAP_GRAPH_API =
   "https://api.thegraph.com/subgraphs/name/zeframlou/sudoswap";
-
+export const NPICS_GRAPH_API =
+  "https://api.thegraph.com/subgraphs/name/npics/npisc"; //https://thegraph.com/hosted-service/subgraph/npics/npisc
 axios.defaults.timeout = 15000;
 axios.defaults.headers.post["Content-Type"] = "application/json";
 
@@ -22,7 +23,11 @@ axios.interceptors.request.use(
     if (config.method === "post") {
       config.data = JSON.stringify(config.data);
     }
-    if (![X2Y2_ORDER_SIGN_API, SUDOSWAP_GRAPH_API].includes(config.url)) {
+    if (
+      ![X2Y2_ORDER_SIGN_API, SUDOSWAP_GRAPH_API, NPICS_GRAPH_API].includes(
+        config.url
+      )
+    ) {
       config.headers["Authorization"] = localStorage.getItem(
         SessionStorageKey.AccessToken
       );

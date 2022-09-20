@@ -1,45 +1,45 @@
-import React, { ReactNode,useEffect } from 'react';
-import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import loadable from 'react-loadable'
+import React, { ReactNode, useEffect } from "react";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import loadable from "react-loadable";
 import Market from "../pages/Marketplace2/Market";
 import MarketList from "../pages/Marketplace2/MarketList";
-import Dash from "../pages/Dashboard2/Dashboard"
-import MyVaults from 'pages/Dashboard2/components/MyVaults';
-import MyRewards2 from 'pages/Dashboard2/components/MyRewards';
-import MyAirdop2 from 'pages/Dashboard2/components/MyAirdop';
+import Dash from "../pages/Dashboard2/Dashboard";
+import MyVaults from "pages/Dashboard2/components/MyVaults";
+import MyRewards2 from "pages/Dashboard2/components/MyRewards";
+import MyAirdop2 from "pages/Dashboard2/components/MyAirdop";
 import NFTPay from "../pages/Marketplace2/NFTPay";
 import NFTPayProgressing from "../pages/Marketplace2/NFTPayProgressing";
 import NFTPayCongratulations from "../pages/Marketplace2/NFTPayCongratulations";
 import NFTPayWrong from "../pages/Marketplace2/NFTPayWrong";
-import VaultsDetail from 'pages/Dashboard2/components/components/VaultsDetail';
+import VaultsDetail from "pages/Dashboard2/components/components/VaultsDetail";
 import OneNFT from "../pages/Marketplace2/OneNFT";
 interface RouterT {
-  name?: string,
-  path: string,
-  children?: Array<RouterT>,
-  component: ReactNode
+  name?: string;
+  path: string;
+  children?: Array<RouterT>;
+  component: ReactNode;
 }
 
-const LoadingTip = () => <div></div>
+const LoadingTip = () => <div></div>;
 
 const Home = loadable({
-  loader: () => import('../pages/home/Home'), 
-  loading: LoadingTip 
-})
+  loader: () => import("../pages/home/Home"),
+  loading: LoadingTip,
+});
 
 export default function Routers() {
-  const location = useLocation()
+  const location = useLocation();
 
-const checkAuth = (routers:any, path:String)=>{
-  for (const data of routers) {
-    if (data.path==path) return data
-    if (data.children) {
-      const res:any = checkAuth(data.children, path)
-      if (res) return res
+  const checkAuth = (routers: any, path: String) => {
+    for (const data of routers) {
+      if (data.path == path) return data;
+      if (data.children) {
+        const res: any = checkAuth(data.children, path);
+        if (res) return res;
+      }
     }
-  }
-  return null
-}
+    return null;
+  };
 
   const routesD: RouterT[] = [
     // {
@@ -47,8 +47,8 @@ const checkAuth = (routers:any, path:String)=>{
     //   component: <Web3 />
     // },
     {
-      path: '/',
-      component: <Home />
+      path: "/",
+      component: <Home />,
     },
     // {
     //   path: "/web3",
@@ -60,9 +60,9 @@ const checkAuth = (routers:any, path:String)=>{
       children: [
         {
           path: "collections/:address",
-          component: <MarketList />
-        }
-      ]
+          component: <MarketList />,
+        },
+      ],
     },
     {
       path: "/nft/:address/:tokenId",
@@ -70,51 +70,45 @@ const checkAuth = (routers:any, path:String)=>{
     },
     {
       path: "/dashboard",
-      component: <Dash/>,
+      component: <Dash />,
       children: [
         {
-          path: 'vaults',
-          component: <MyVaults />
+          path: "vaults",
+          component: <MyVaults />,
         },
         {
-          path: 'rewards',
-          component: <MyRewards2 />
+          path: "rewards",
+          component: <MyRewards2 />,
         },
         {
-          path: 'airdrop',
+          path: "airdrop",
           component: <MyAirdop2 />,
-        }
-      ]
+        },
+      ],
     },
     {
-      path: 'vaultsDetail/:address/:tokenId',
-      component: <VaultsDetail />
+      path: "vaultsDetail/:graphId",
+      component: <VaultsDetail />,
     },
     {
       path: "*",
-      component:  <main style={{ padding: "1rem" }}>
-      <h1>404</h1>
-    </main>
+      component: (
+        <main style={{ padding: "1rem" }}>
+          <h1>404</h1>
+        </main>
+      ),
     },
   ];
 
-  const RouteMap = (route:RouterT[]):ReactNode => {
-      return route.map((item:RouterT) => {
-        return(
-          <Route
-            element={item.component}
-            path={item.path}
-            key={item.path}
-            >
-            {item.children && RouteMap(item.children)}
-          </Route>
-        )
-      })
-  }
+  const RouteMap = (route: RouterT[]): ReactNode => {
+    return route.map((item: RouterT) => {
+      return (
+        <Route element={item.component} path={item.path} key={item.path}>
+          {item.children && RouteMap(item.children)}
+        </Route>
+      );
+    });
+  };
 
-  return (
-    <Routes>
-      {RouteMap(routesD)}
-    </Routes>
-  )
-};
+  return <Routes>{RouteMap(routesD)}</Routes>;
+}

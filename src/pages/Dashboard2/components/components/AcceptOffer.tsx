@@ -10,7 +10,7 @@ import validIcon from "../../../../assets/images/market/nfts_opensea_valid.svg";
 import wethIcon from "../../../../assets/images/market/weth_icon.svg";
 import { OfferModal } from "./TableWarehouse";
 import { OFFER_TYPE_ENUM, OFFER_TYPE_NAME_ENUM, Offers } from "model/offers";
-import { DataSource2 } from "./StyledInterface";
+import { VaultsItemData } from "./StyledInterface";
 import BigNumber from "bignumber.js";
 import { thousandFormat } from "utils/urls";
 import { useAppSelector } from "store/hooks";
@@ -35,7 +35,7 @@ import {
 } from "../../../../config/constants/fee";
 interface IProps {
   showOffer: OfferModal;
-  nftInfo: DataSource2 | undefined;
+  nftInfo: VaultsItemData | undefined;
   accpetOffer: Offers | undefined;
   setShowOffer: React.Dispatch<React.SetStateAction<OfferModal>>;
   getNftActivities?: Function;
@@ -53,7 +53,6 @@ export default function AcceptOffer(props: IProps) {
   // const [creatorRoyalty, setCreatorRoyalty] = useState<number>(0);
   // const erc721 = useERC721Contract(nftInfo?.nftAddress as string)
   const npics = useNpicsContract();
-  const nft = useERC721Contract(nftInfo?.nftAddress as string);
 
   const signatureToRSV = (signature: string) => {
     const signature_ = signature.replace("0x", "");
@@ -129,7 +128,7 @@ export default function AcceptOffer(props: IProps) {
             }
           );
         await npics.acceptOffer(
-          nftInfo.nftAddress,
+          nftInfo.nft,
           nftInfo.tokenId,
           ContractAddresses.looksRareExchange,
           _BytesData,
@@ -138,7 +137,7 @@ export default function AcceptOffer(props: IProps) {
       } else if (accpetOffer.offerSource === OFFER_TYPE_ENUM.x2y2) {
         // await erc721?.approve(approveTo,nftInfo.tokenId)
         // const nbpAddress = await npics.getNbpFor(
-        //   nftInfo.nftAddress,
+        //   nftInfo.nft,
         //   nftInfo.tokenId
         // );
         const parameter = {
@@ -168,7 +167,7 @@ export default function AcceptOffer(props: IProps) {
         const _BytesData = BytesData.replace("0x", "0x357a150b");
         // const __BytesData = _BytesData.replace(`${_owner}`, `${_nbpAddress}`);
         const tx = await npics.acceptOffer(
-          nftInfo.nftAddress,
+          nftInfo.nft,
           nftInfo.tokenId,
           ContractAddresses.x2y2R1,
           _BytesData,
@@ -236,7 +235,7 @@ export default function AcceptOffer(props: IProps) {
     nftInfo &&
     accpetOffer &&
     accpetOffer.price
-      .minus(nftInfo.totalDebt)
+      .minus(nftInfo.debtValue)
       .minus(
         new BigNumber(
           `${
@@ -400,7 +399,7 @@ export default function AcceptOffer(props: IProps) {
                     accpetOffer &&
                     `(${thousandFormat(
                       accpetOffer.price
-                        .minus(nftInfo.totalDebt)
+                        .minus(nftInfo.debtValue)
                         .minus(
                           new BigNumber(
                             thirdPartyFee[accpetOffer.offerSource].creatorFee +

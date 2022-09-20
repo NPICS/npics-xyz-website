@@ -120,10 +120,11 @@ export default function MyRewards() {
       promiseList.push(npics.getRewardsBalance(account, rewardsList[i].bank));
     }
     Promise.all(promiseList).then((res) => {
+      console.log("res", res);
       for (let i = 0; i < rewardsList.length; i++) {
         rewardsList[i].rewards = res[i].toString();
       }
-      setRewardsList(rewardsList);
+      setRewardsList(JSON.parse(JSON.stringify(rewardsList)));
     });
   };
 

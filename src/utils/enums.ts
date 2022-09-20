@@ -8,3 +8,7 @@ export enum BANK_ENUM {
   "bend" = 0,
   "wing" = 1,
 }
+export const BANK_NAME_MAP = {
+  [BANK_ENUM.bend]: "bendao",
+  [BANK_ENUM.wing]: "wing",
+};

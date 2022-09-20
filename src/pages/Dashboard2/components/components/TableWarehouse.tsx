@@ -6,7 +6,7 @@ import { useAppSelector } from "store/hooks";
 import { globalConstant } from "utils/globalConstant";
 import { imgurl } from "utils/globalimport";
 import { thousandFormat } from "utils/urls";
-import { DataSource2 } from "./StyledInterface";
+import { VaultsItemData } from "./StyledInterface";
 import { useNavigate } from "react-router-dom";
 import { TextPlaceholder } from "component/styled";
 import ButtonDefault from "component/ButtonDefault";
@@ -36,25 +36,25 @@ export enum OfferModal {
 }
 
 export default function TableWarehouse(props: {
-  Source?: DataSource2[];
+  Source?: VaultsItemData[];
   getNftActivities?: Function;
 }) {
   const { Source, getNftActivities } = props;
   const [showOffer, setShowOffer] = useState<OfferModal>(OfferModal.NONE);
-  const [nftInfo, setNftInfo] = useState<DataSource2>();
+  const [nftInfo, setNftInfo] = useState<VaultsItemData>();
   const [accpetOffer, setAcceptOffer] = useState<Offers>();
   const navigate = useNavigate();
   const ethRate = useAppSelector(
     (state) => new BigNumber(state.app.data.EthPrice)
   );
 
-  const jumpToEthscan = (e: DataSource2) => {
+  const jumpToEthscan = (e: VaultsItemData) => {
     if (e.terminated()) return;
-    navigate(`/vaultsDetail/${e.nftAddress}/${e.tokenId}`);
+    navigate(`/vaultsDetail/${e.id}`);
   };
-  const jumpToNEOEthscan = (e: DataSource2) => {
+  const jumpToNEOEthscan = (e: VaultsItemData) => {
     if (e.terminated()) return;
-    window.open(`https://cn.etherscan.com/nft/${e.neoAddress}/${e.tokenId}`);
+    window.open(`https://cn.etherscan.com/nft/${e.neo}/${e.tokenId}`);
   };
 
   return (
@@ -98,14 +98,9 @@ export default function TableWarehouse(props: {
                         Floor:{" "}
                         <span>
                           <img src={imgurl.dashboard.ethGrey18} alt="" />
-                          {item.floorPrice
-                            .div(10 ** globalConstant.bit)
-                            .toFixed(2, 1)}
+                          {item.floorPrice.toFixed(2, 1)}
                           <Typography marginLeft="5px">{`(${thousandFormat(
-                            item.floorPrice
-                              .times(ethRate)
-                              .div(10 ** 18)
-                              .toNumber()
+                            item.floorPrice.times(ethRate).toNumber()
                           )})`}</Typography>
                         </span>
                       </div>
@@ -198,7 +193,7 @@ export default function TableWarehouse(props: {
                     TextPlaceholder
                   ) : (
                     <div className="healthFactor">
-                      {item.healthFactor.div(10 ** 18).toFixed(4, 1)}
+                      {item.getHealthFactor().toFixed(4, 1)}
                     </div>
                   )}
                 </Td>
@@ -208,7 +203,7 @@ export default function TableWarehouse(props: {
                     style={{
                       color: `${
                         Color[
-                          item.factorStatus as
+                          item.getFactorStatusString() as
                             | "Inforce"
                             | "In Risk"
                             | "In Liquidation"
@@ -217,7 +212,7 @@ export default function TableWarehouse(props: {
                       }`,
                     }}
                   >
-                    {item.factorStatus}
+                    {item.getFactorStatusString()}
                   </div>
                 </Td>
                 <Td>
@@ -235,11 +230,7 @@ export default function TableWarehouse(props: {
                           height="45px"
                           minWidth="120px"
                           types="normal"
-                          onClick={() =>
-                            navigate(
-                              `/vaultsDetail/${item.nftAddress}/${item.tokenId}`
-                            )
-                          }
+                          onClick={() => navigate(`/vaultsDetail/${item.id}`)}
                         >
                           Repay
                         </ButtonDefault>
@@ -264,11 +255,10 @@ export default function TableWarehouse(props: {
         </tbody>
       </Table>
       <AcceptOffersList
-        nftInfo={nftInfo}
         setAcceptOffer={setAcceptOffer}
         showOffer={showOffer}
         setShowOffer={setShowOffer}
-        nftAddress={nftInfo?.nftAddress}
+        nftAddress={nftInfo?.nft}
       />
       <AcceptOffer
         nftInfo={nftInfo}
