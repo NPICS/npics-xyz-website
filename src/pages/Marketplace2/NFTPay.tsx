@@ -32,6 +32,7 @@ import axios from "axios";
 import { ethers } from "ethers";
 import openseaValidIcon from 'assets/images/market/nfts_opensea_valid.svg'
 import { imgurl } from "utils/globalimport";
+import { useAppSelector } from "store/hooks";
 
 export function PopupTitle(props: { title: string; canClose: boolean }) {
   return (
@@ -161,6 +162,14 @@ export default function NFTPay(props: {
   const [didReadService, setDidReadService] = useState(false);
 
   const [markIcon, setMarkIcon] = useState("");
+
+  //platform
+  const platform = useAppSelector(state => state.platform.selectPlatform)
+
+  enum Platform_Enum {
+    "bendap" = 0,
+    "wing" = 1
+  }
   console.log(props.nft);
   useAsync(async () => {
     if (account && provider) {
@@ -414,6 +423,7 @@ export default function NFTPay(props: {
         market:
           ContractAddresses.getMarketAddressByName(props.nft.market) ?? "",
         wethAmt: weth,
+        // rank: Platform_Enum[platform]
       };
       let tx: any;
       if (payType & PayType.WETH) {

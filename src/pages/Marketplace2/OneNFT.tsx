@@ -83,7 +83,7 @@ export default function OneNFT() {
   const { provider, account } = useWeb3React();
   const navigate = useNavigate();
   let urlParams: any = useParams();
-  const params: { address: string; tokenId: string } = urlParams;
+  const params: { address: string; tokenId: string, platform: string } = urlParams;
   const [openSeaIsNormalization, setOpenSeaIsNormalization] =
     useState<boolean>(true);
   const [rarityData, setRarityData] = useState<{ [key: string]: any }>();
@@ -154,6 +154,7 @@ export default function OneNFT() {
       `/npics-nft/app-api/v2/nft/getCollectionItemsDetail`,
       {
         address: params.address,
+        paltfrom: params.platform,
         tokenId: params.tokenId,
       }
     );

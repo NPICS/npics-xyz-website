@@ -24,6 +24,7 @@ import BigNumber from "bignumber.js";
 import SkeletonTemplate from "component/SkeletonTemplate";
 import progressIcon from "../../assets/images/market/nft_pay_progressing.gif"
 import axios, { Canceler } from "axios";
+import { useAppSelector } from "../../store/hooks";
 // import axios, { Canceler } from "axios";
 
 const { Option } = Select;
@@ -101,6 +102,7 @@ export default function MarketList() {
   const [currentSort, setCurrentSort] = useState<"asc" | "desc" | "rarityScore" | "rarityScoreDesc" | string>("asc")
   const CancelToken = axios.CancelToken;
   const cancel = useRef<Canceler>()
+  const platform = useAppSelector(state => state.platform.selectPlatform)
   // let cancel:Canceler
 
   useEffect(() => {
@@ -142,6 +144,7 @@ export default function MarketList() {
           address: nftAddress,
           direction: currentSort,
           pageIndex: currentPage,
+          platform: platform,
           pageSize: 30,
           search: searchText,
           showNftx: globalConstant.showNftx

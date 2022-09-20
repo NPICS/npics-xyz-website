@@ -16,7 +16,8 @@ import NPopover from "../../component/Popover";
 import ReactMarkdown from "react-markdown";
 import { TextPlaceholder } from "../../component/styled";
 import { Pop20 } from "component/Popover/Popover";
-
+import { changePlatform } from "../../store/platfrom";
+import { useAppDispatch } from "../../store/hooks"
 
 export const Banner = styled(Box) <{ url?: string }>`
   position: absolute;
@@ -96,7 +97,7 @@ export default function Market() {
   const [nft, setNft] = useState<CollectionList>()
   const nav = useNavigate()
   const params = useParams()
-
+  const dispatch = useAppDispatch()
   useEffect(() => {
     const inner = async () => {
       try {
@@ -122,6 +123,7 @@ export default function Market() {
 
   useEffect(() => {
     if (nft?.address) {
+      dispatch(changePlatform(nft.platform))
       nav(`collections/${nft.address}`, {
         replace: true
       })

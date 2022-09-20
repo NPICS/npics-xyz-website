@@ -172,9 +172,10 @@ export default function NFTPrice(props: {
   //is show select apr modal
   const [showAprModal, setShowAprModal] = useState<boolean>(false);
   //select apr info
+  const platform = useAppSelector(state => state.platform.selectPlatform)
   const [aprInfo, setAprInfo] = useState<{ name: string, icon: any }>({
-    name: "Wing",
-    icon: imgurl.market.wingPriceIcon
+    name: platform === 'bendao' ? 'BendDao' : 'Wing',
+    icon: platform === 'bendao' ? imgurl.market.bendaoPriceIcon : imgurl.market.wingPriceIcon
   })
 
   useEffect(() => {

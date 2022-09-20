@@ -12,12 +12,12 @@ export const SUDOSWAP_GRAPH_API =
 axios.defaults.timeout = 15000;
 axios.defaults.headers.post["Content-Type"] = "application/json";
 
-if (window && window.location.host.includes("npics.xyz")) {
-  axios.defaults.baseURL = "https://api.npics.xyz";
-} else {
-  axios.defaults.baseURL = "https://apitest.npics.xyz/";
-}
-// axios.defaults.baseURL = "https://api.npics.xyz/";
+// if (window && window.location.host.includes("npics.xyz")) {
+//   axios.defaults.baseURL = "https://api.npics.xyz";
+// } else {
+//   axios.defaults.baseURL = "https://apitest.npics.xyz/";
+// }
+axios.defaults.baseURL = "https://api.npics.xyz/";
 axios.interceptors.request.use(
   (config: any) => {
     if (config.method === "post") {

@@ -1,4 +1,4 @@
-import React, { ReactNode,useEffect } from 'react';
+import React, { ReactNode, useEffect } from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import loadable from 'react-loadable'
 import Market from "../pages/Marketplace2/Market";
@@ -23,23 +23,23 @@ interface RouterT {
 const LoadingTip = () => <div></div>
 
 const Home = loadable({
-  loader: () => import('../pages/home/Home'), 
-  loading: LoadingTip 
+  loader: () => import('../pages/home/Home'),
+  loading: LoadingTip
 })
 
 export default function Routers() {
   const location = useLocation()
 
-const checkAuth = (routers:any, path:String)=>{
-  for (const data of routers) {
-    if (data.path==path) return data
-    if (data.children) {
-      const res:any = checkAuth(data.children, path)
-      if (res) return res
+  const checkAuth = (routers: any, path: String) => {
+    for (const data of routers) {
+      if (data.path == path) return data
+      if (data.children) {
+        const res: any = checkAuth(data.children, path)
+        if (res) return res
+      }
     }
+    return null
   }
-  return null
-}
 
   const routesD: RouterT[] = [
     // {
@@ -70,7 +70,7 @@ const checkAuth = (routers:any, path:String)=>{
     },
     {
       path: "/dashboard",
-      component: <Dash/>,
+      component: <Dash />,
       children: [
         {
           path: 'vaults',
@@ -92,24 +92,24 @@ const checkAuth = (routers:any, path:String)=>{
     },
     {
       path: "*",
-      component:  <main style={{ padding: "1rem" }}>
-      <h1>404</h1>
-    </main>
+      component: <main style={{ padding: "1rem" }}>
+        <h1>404</h1>
+      </main>
     },
   ];
 
-  const RouteMap = (route:RouterT[]):ReactNode => {
-      return route.map((item:RouterT) => {
-        return(
-          <Route
-            element={item.component}
-            path={item.path}
-            key={item.path}
-            >
-            {item.children && RouteMap(item.children)}
-          </Route>
-        )
-      })
+  const RouteMap = (route: RouterT[]): ReactNode => {
+    return route.map((item: RouterT) => {
+      return (
+        <Route
+          element={item.component}
+          path={item.path}
+          key={item.path}
+        >
+          {item.children && RouteMap(item.children)}
+        </Route>
+      )
+    })
   }
 
   return (

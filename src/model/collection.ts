@@ -19,6 +19,7 @@ export class CollectionList {
   description?: string;
   bannerImageUrl?: string;
   minDp!: string;
+  platform!: string;
 
   @Expose()
   get sAdvanceRate() {
