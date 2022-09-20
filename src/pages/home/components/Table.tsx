@@ -12,6 +12,8 @@ import { Link } from 'react-router-dom'
 import { Icon } from 'component/Box'
 import SkeletonTable from './SkeletonTable'
 import openseaValidIcon from 'assets/images/market/nfts_opensea_valid.svg'
+import { useAppDispatch } from '../../../store/hooks'
+import { changePlatform } from '../../../store/platfrom'
 interface DataType {
   index: string
   key: React.Key
@@ -28,6 +30,7 @@ interface DataType {
   dayChange: number
   dayVolume: BigNumber
   address: string
+  platform: string
 }
 
 const BgTable = styled.div`
@@ -53,6 +56,7 @@ const BgTable = styled.div`
 `
 
 export default function MyTable() {
+  const dispatch = useAppDispatch()
   const [collections, setCollections] = useState<DataType[]>()
   const [showTable, setShowTable] = useState<boolean>(false)
 
@@ -60,6 +64,9 @@ export default function MyTable() {
     getData()
     // eslint-disable-next-line
   }, [])
+  const openCollection = (row: DataType) => {
+    dispatch(changePlatform(row.platform))
+  }
 
   function ScrollTop(): void {
     document.body.scrollTop = 0
@@ -93,6 +100,7 @@ export default function MyTable() {
             dayChange: changeData[i].sDayChange,
             dayVolume: new BigNumber(changeData[i].dayVolume),
             address: changeData[i].address,
+            platform: changeData[i].platform
           })
         }
         setCollections(relData)
@@ -122,7 +130,7 @@ export default function MyTable() {
       render: (text, row) => (
         <Link
           to={`/marketplace/collections/${row.address}`}
-          onClick={() => ScrollTop()}
+          onClick={() => openCollection(row)}
         >
           <div
             style={{

@@ -311,7 +311,7 @@ export default function Market() {
                   nft && nft?.sDayChange > 0 ? `#18CF15` : `#FF4949`
                 }
               >{
-                  nft && nft.sDayChange || 0
+                  nft && nft.sDayChange || "0.00"
                 }%</Typography>
             </Flex>
           </Flex>
