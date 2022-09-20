@@ -24,6 +24,7 @@ const Cover = styled.img`
 const ImageContainer = styled.div`
   padding: 50% 0;
   position: relative;
+  overflow: hidden;
 `
 
 const IconTest = styled.img`

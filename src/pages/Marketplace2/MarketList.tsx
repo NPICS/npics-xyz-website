@@ -114,7 +114,7 @@ export default function MarketList() {
   }, [params])
 
   useAsync(async () => {
-    if (nftAddress && !isLoading.current) {
+    if (nftAddress && !isLoading.current && platform !== "") {
       await loadData()
     }
   }, [nftAddress, pressEnter, currentPage, platform])

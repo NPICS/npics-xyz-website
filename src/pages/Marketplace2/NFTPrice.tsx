@@ -182,6 +182,7 @@ export default function NFTPrice(props: {
     action(updateARP());
   }, [props.item]);
 
+  //show other nft
   useAsync(async () => {
     if (props.item) {
       // get recommends

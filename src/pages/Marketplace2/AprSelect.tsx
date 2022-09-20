@@ -62,7 +62,7 @@ const PanelHead = ({ apr }: { apr: Iapr }) => {
     <Flex width={"100%"} justifyContent={"space-between"}>
       <Typography fontSize={"0.14rem"}>Vault APR</Typography>
       <Flex>
-        <Typography fontSize={"0.14rem"}>{apr.rewardAPR + Math.abs(apr.interestAPR)}%</Typography>
+        <Typography fontSize={"0.14rem"}>{(apr.rewardAPR - Math.abs(apr.interestAPR)).toFixed(2)}%</Typography>
       </Flex>
     </Flex>
   )
