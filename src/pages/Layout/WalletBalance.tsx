@@ -17,12 +17,13 @@ import {
   newClientContract,
 } from "../../utils/multicall";
 import Erc20Abi from "../../abis/erc20.json";
+import { useAppSelector } from "../../store/hooks";
 
 interface wallet {
   icon: string;
   text: string;
-  amount: BigNumber | string;
-  dollar: BigNumber | string;
+  amount: string;
+  dollar: string;
 }
 const Wrap = styled.div`
   display: grid;
@@ -63,10 +64,16 @@ export default function WalletBalance() {
   const [BDBalance, setBDBalance] = useState<BigNumber>();
   const [pWingBalance, setPWingBalance] = useState<BigNumber>();
   const [list, setList] = useState<wallet[]>();
-  const ETHdollar = useEthPrice(ETHBalance);
-  const WETHdollar = useEthPrice(WETHBalance);
-  const BDdollar = useBendPrice(BDBalance);
-  const pWingdollar = usePWingPrice(pWingBalance);
+  const {
+    pWingPrice,
+    bendExchangeRate,
+    data: { EthPrice },
+  } = useAppSelector((state) => state.app);
+  console.log({
+    pWingPrice,
+    bendExchangeRate,
+    EthPrice,
+  });
   useEffect(() => {
     getBalance();
     // eslint-disable-next-line
@@ -96,47 +103,86 @@ export default function WalletBalance() {
     );
     const calls = [
       wethContract.balanceOf(account),
+      wethContract.decimals(),
       bendDaoContract.balanceOf(account),
+      bendDaoContract.decimals(),
       pWingDaoContract.balanceOf(account),
+      pWingDaoContract.decimals(),
     ];
 
     Promise.all([balance, multicallClient(calls)]).then((values: any[]) => {
-      setETHBalance(new BigNumber(values[0].toString()));
-      setWETHBalance(new BigNumber(values[1][0].returnData));
-      setBDBalance(new BigNumber(values[1][1].returnData));
-      setPWingBalance(new BigNumber(values[1][2].returnData));
+      setETHBalance(new BigNumber(values[0].toString()).div(10 ** 18));
+      setWETHBalance(
+        new BigNumber(values[1][0].returnData).div(
+          10 ** values[1][1].returnData
+        )
+      );
+      setBDBalance(
+        new BigNumber(values[1][2].returnData).div(
+          10 ** values[1][3].returnData
+        )
+      );
+      setPWingBalance(
+        new BigNumber(values[1][4].returnData).div(
+          10 ** values[1][5].returnData
+        )
+      );
     });
   };
 
   useEffect(() => {
-    const data = [
+    const data: wallet[] = [
       {
         icon: imgurl.home.ethBlack22,
         text: "ETH",
-        amount: ETHBalance ?? TextPlaceholder,
-        dollar: ETHdollar ?? TextPlaceholder,
+        amount: ETHBalance?.dp(4).toFormat() ?? TextPlaceholder,
+        dollar: ETHBalance
+          ? new BigNumber(EthPrice).multipliedBy(ETHBalance).dp(4).toFormat()
+          : TextPlaceholder,
       },
       {
         icon: imgurl.home.ethOrange22,
         text: "WETH",
-        amount: WETHBalance ?? TextPlaceholder,
-        dollar: WETHdollar ?? TextPlaceholder,
+        amount: WETHBalance?.dp(4).toFormat() ?? TextPlaceholder,
+        dollar: WETHBalance
+          ? new BigNumber(EthPrice).multipliedBy(WETHBalance).dp(4).toFormat()
+          : TextPlaceholder,
       },
       {
         icon: imgurl.home.band22,
         text: "BEND",
-        amount: BDBalance ?? TextPlaceholder,
-        dollar: BDdollar ?? TextPlaceholder,
+        amount: BDBalance?.dp(6)?.toFormat() ?? TextPlaceholder,
+        dollar: BDBalance
+          ? new BigNumber(bendExchangeRate)
+              .multipliedBy(EthPrice)
+              .multipliedBy(BDBalance)
+              .dp(6)
+              .toFormat()
+          : TextPlaceholder,
       },
       {
         icon: imgurl.home.PWingIcon,
         text: "pWing",
-        amount: pWingBalance ?? TextPlaceholder,
-        dollar: pWingdollar ?? TextPlaceholder,
+        amount: pWingBalance?.dp(4).toFormat() ?? TextPlaceholder,
+        dollar:
+          typeof pWingBalance === "undefined"
+            ? TextPlaceholder
+            : new BigNumber(pWingPrice)
+                .multipliedBy(pWingBalance)
+                .dp(4)
+                .toFormat(),
       },
     ];
     setList(data);
-  }, [ETHBalance, ETHdollar, WETHBalance, WETHdollar, BDBalance, BDdollar]);
+  }, [
+    EthPrice,
+    ETHBalance,
+    WETHBalance,
+    BDBalance,
+    bendExchangeRate,
+    pWingBalance,
+    pWingPrice,
+  ]);
 
   return (
     <Wrap>
@@ -150,16 +196,8 @@ export default function WalletBalance() {
             <div className="right">
               {/*<span>{new BigNumber(item.amount.toString()).div(10 ** 18).dp(4).toFixed()}</span>*/}
               {/*<span>${item.dollar.dp(0).toFixed()}</span>*/}
-              <span>
-                {typeof item.amount === "string"
-                  ? item.amount
-                  : numberFormat(item.amount.div(10 ** 18).toFixed())}
-              </span>
-              <span>
-                {typeof item.dollar === "string"
-                  ? item.dollar
-                  : `$${numberFormat(item.dollar.toFixed())}`}
-              </span>
+              <span>{item.amount}</span>
+              <span>{item.dollar}</span>
             </div>
           </div>
         );

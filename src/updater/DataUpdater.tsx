@@ -3,7 +3,7 @@ import {
   updateARP,
   updateBENDExchangeRate,
   updateLoginState,
-  updatePWingExchangeRate,
+  updatePWingPrice,
   updateUSDTExchangeRate,
 } from "../store/app";
 import { useAppDispatch } from "../store/hooks";
@@ -28,7 +28,7 @@ export default function DataUpdater() {
     () => {
       dispatch(updateUSDTExchangeRate());
       dispatch(updateBENDExchangeRate());
-      dispatch(updatePWingExchangeRate());
+      dispatch(updatePWingPrice());
       dispatch(updateARP());
     },
     30 * 1000,

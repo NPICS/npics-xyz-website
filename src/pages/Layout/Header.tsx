@@ -1,73 +1,81 @@
-import React, { useState, useEffect, useRef } from 'react';
-import defaultAvatar from 'assets/images/home/defaultAvatar.svg'
-import login from 'assets/images/home/login.svg'
-import { imgurl } from 'utils/globalimport';
-import { notification, Popover, message } from 'antd';
-import { useWeb3React } from '@web3-react/core';
+import React, { useState, useEffect, useRef } from "react";
+import defaultAvatar from "assets/images/home/defaultAvatar.svg";
+import login from "assets/images/home/login.svg";
+import { imgurl } from "utils/globalimport";
+import { notification, Popover, message } from "antd";
+import { useWeb3React } from "@web3-react/core";
 import { connectors } from "utils/connectors";
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { clearUserData, fetchUser, fetchUser2, setIsShowConnect, setShowWalletModalOpen } from 'store/app';
-import { FlexDiv, Height, LogoLink, Nav, UserAvatar } from './headerStyled';
-import WalletBalance from './WalletBalance';
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import {
+  clearUserData,
+  fetchUser,
+  fetchUser2,
+  setIsShowConnect,
+  setShowWalletModalOpen,
+} from "store/app";
+import { FlexDiv, Height, LogoLink, Nav, UserAvatar } from "./headerStyled";
+import WalletBalance from "./WalletBalance";
 import { deserialize } from "class-transformer";
 import { User } from "../../model/user";
 import { SessionStorageKey } from "../../utils/enums";
 import { urls } from "../../utils/urls";
-import { NavLink, useLocation } from 'react-router-dom';
-import { Flex, Icon, Typography, Box } from 'component/Box';
-import styled from 'styled-components';
-import { CHAIN_ID, injected } from 'connectors/hooks';
+import { NavLink, useLocation } from "react-router-dom";
+import { Flex, Icon, Typography, Box } from "component/Box";
+import styled from "styled-components";
+import { CHAIN_ID, injected } from "connectors/hooks";
 
 const StyledtWallet = styled(Flex)`
   cursor: pointer;
   box-sizing: border-box;
-  background: #FFFFFF;
+  background: #ffffff;
   border: 0.01rem solid rgba(0, 0, 0, 0.1);
   border-radius: 0.1rem;
   padding: 0.1rem 0 0.1rem 0.25rem;
   min-width: 2.6rem;
   min-height: 0.6rem;
   &:hover {
-    background: #FFFFFF;
+    background: #ffffff;
     box-shadow: 0rem 0rem 0.2rem rgba(0, 0, 0, 0.1);
     border: 0.01rem solid #fff;
   }
-`
+`;
 
 const StyledHoverA = styled.a`
   &:hover {
-    color: #fff !important
+    color: #fff !important;
   }
-`
+`;
 const StyledHoverSpan = styled.span`
   &:hover {
-    color: #fff
+    color: #fff;
   }
-`
+`;
 
 function XHeader() {
-  const isFixed = useAppSelector(state => state.app.isFixed)
-  const { account, connector } = useWeb3React()
-  const oldAccount = useRef<string | undefined | null>()
-  const [accountPop, setAccountPop] = useState<boolean>(false)
-  const action = useAppDispatch()
-  const userInfo = useAppSelector(state => deserialize(User, state.app.currentUser))
-  const showConnect = useAppSelector(state => state.app.data.isShowConnect)
+  const isFixed = useAppSelector((state) => state.app.isFixed);
+  const { account, connector } = useWeb3React();
+  const oldAccount = useRef<string | undefined | null>();
+  const [accountPop, setAccountPop] = useState<boolean>(false);
+  const action = useAppDispatch();
+  const userInfo = useAppSelector((state) =>
+    deserialize(User, state.app.currentUser)
+  );
+  const showConnect = useAppSelector((state) => state.app.data.isShowConnect);
 
   const terms = [
     {
       darkIcon: imgurl.footer.darkT,
       lightIcon: imgurl.footer.lightT,
       link: urls.twitter,
-      name: "Twitter"
+      name: "Twitter",
     },
     {
       darkIcon: imgurl.footer.darkG,
       lightIcon: imgurl.footer.lightG,
       link: urls.discord,
-      name: "Game"
-    }
-  ]
+      name: "Game",
+    },
+  ];
 
   // useEffect(() => {
   //   console.log(`Account Change => New: ${account}, Old: ${oldAccount.current}`)
@@ -116,13 +124,12 @@ function XHeader() {
     // let token = localStorage.getItem(SessionStorageKey.AccessToken)
     // action(setIsLogin(token != null))
     // eslint-disable-next-line
-  }, [])
-
+  }, []);
 
   const connect = async () => {
     try {
       // TODO: wallet connect
-      await injected.activate(CHAIN_ID)
+      await injected.activate(CHAIN_ID);
       // await activate(connectors.injected, (error) => {
       //   const Error = JSON.parse(JSON.stringify(error))
       //   if (Error.name === "UnsupportedChainIdError") {
@@ -133,146 +140,165 @@ function XHeader() {
       //     notification.error({ message: "Please authorize to access your account" })
       //   }
       // })
-      action(fetchUser2())
+      action(fetchUser2());
     } catch (e: any) {
-      notification.error({ message: e.message })
+      notification.error({ message: e.message });
     } finally {
-      action(setIsShowConnect(false))
+      action(setIsShowConnect(false));
     }
-  }
+  };
 
   const walletPop = () => {
     if (account) {
-      setAccountPop(true)
+      setAccountPop(true);
     } else {
-      action(setIsShowConnect(true))
+      action(setIsShowConnect(true));
     }
-  }
+  };
 
   const onQuit = () => {
-    setAccountPop(false)
-    localStorage.removeItem(SessionStorageKey.WalletAuthorized)
+    setAccountPop(false);
+    localStorage.removeItem(SessionStorageKey.WalletAuthorized);
     // connector.deActivate()
-    console.log(injected)
-    injected.resetState()
+    console.log(injected);
+    injected.resetState();
     // deactivate.destroy()
     // console.log();
     console.log(account);
-    action(fetchUser(`{}`))
-    console.log('quit');
-  }
+    action(fetchUser(`{}`));
+    console.log("quit");
+  };
 
   const onCopy = () => {
-    if (!account) return
+    if (!account) return;
     const text = `${account}`;
     if (navigator.clipboard) {
       navigator.clipboard.writeText(text);
     } else {
-      var textarea = document.createElement('textarea');
+      var textarea = document.createElement("textarea");
       document.body.appendChild(textarea);
-      textarea.style.position = 'fixed';
-      textarea.style.clip = 'rect(0 0 0 0)';
-      textarea.style.top = '0.1rem';
+      textarea.style.position = "fixed";
+      textarea.style.clip = "rect(0 0 0 0)";
+      textarea.style.top = "0.1rem";
       textarea.value = text;
       textarea.select();
-      document.execCommand('copy', true);
+      document.execCommand("copy", true);
       document.body.removeChild(textarea);
     }
-    message.success('Copy successfully', 0.5)
-  }
+    message.success("Copy successfully", 0.5);
+  };
 
   const AccountHTML = () => {
-    return (<div className='account-content'>
-      <div>
-        <div>Connected Wallet</div>
-        <div onClick={onQuit}>Change Provider</div>
-      </div>
-      <div className='account-address'>
-        <img className='address-icon' src={imgurl.address} alt="" />
-        <div className='address-text'>
-          <span>{account && account.replace(account.substring(11, 30), '...')}</span>
-          <div className='connected'>
-            Connected with MetaMask
-          </div>
+    return (
+      <div className="account-content">
+        <div>
+          <div>Connected Wallet</div>
+          <div onClick={onQuit}>Change Provider</div>
         </div>
-        <img className='copy-icon' src={imgurl.copy} alt="" onClick={onCopy} />
+        <div className="account-address">
+          <img className="address-icon" src={imgurl.address} alt="" />
+          <div className="address-text">
+            <span>
+              {account && account.replace(account.substring(11, 30), "...")}
+            </span>
+            <div className="connected">Connected with MetaMask</div>
+          </div>
+          <img
+            className="copy-icon"
+            src={imgurl.copy}
+            alt=""
+            onClick={onCopy}
+          />
+        </div>
+        <div className="account-wallet">
+          <div className="wallet-title">Wallet Balance</div>
+          <WalletBalance></WalletBalance>
+        </div>
       </div>
-      <div className='account-wallet'>
-        <div className='wallet-title'>Wallet Balance</div>
-        <WalletBalance></WalletBalance>
-      </div>
-
-    </div>)
-  }
+    );
+  };
   const AccountTitle = () => {
-    return (<div className='account-title'>
-      <span>Account</span>
-      <span style={{ cursor: 'pointer' }}>
-        {/* <img src={imgurl.home.gearIcon} alt="" /> */}
-      </span>
-    </div>)
-  }
+    return (
+      <div className="account-title">
+        <span>Account</span>
+        <span style={{ cursor: "pointer" }}>
+          {/* <img src={imgurl.home.gearIcon} alt="" /> */}
+        </span>
+      </div>
+    );
+  };
   const ConnectWallet = () => {
-    return (<StyledtWallet onClick={connect} alignItems="center">
-      <Typography marginRight='0.2rem'><Icon width='0.4rem' height='0.4rem' src={imgurl.metamaskLogo} alt="" /></Typography>
-      <Typography fontSize='0.16rem' fontWeight='700' color='#000'>MetaMask</Typography>
-    </StyledtWallet>)
-  }
+    return (
+      <StyledtWallet onClick={connect} alignItems="center">
+        <Typography marginRight="0.2rem">
+          <Icon
+            width="0.4rem"
+            height="0.4rem"
+            src={imgurl.metamaskLogo}
+            alt=""
+          />
+        </Typography>
+        <Typography fontSize="0.16rem" fontWeight="700" color="#000">
+          MetaMask
+        </Typography>
+      </StyledtWallet>
+    );
+  };
 
-  document.addEventListener("click", event => {
-    if (!accountPop) return
+  document.addEventListener("click", (event) => {
+    if (!accountPop) return;
     var cDom = document.getElementById("baseAccount") || document.body;
     var tDom: any = event.target;
     if (cDom === tDom || cDom.contains(tDom)) {
     } else {
-      setAccountPop(false)
+      setAccountPop(false);
     }
   });
-  document.addEventListener("click", event => {
-    if (!showConnect) return
+  document.addEventListener("click", (event) => {
+    if (!showConnect) return;
     var cDom = document.getElementById("baseAccount") || document.body;
     var tDom: any = event.target;
     if (cDom === tDom || cDom.contains(tDom)) {
     } else {
-      action(setIsShowConnect(false))
+      action(setIsShowConnect(false));
     }
   });
 
   let normal = {
-    color: 'rgba(255,255,255,.5)',
-    fontWeight: '700',
-    fontSize: '0.16rem',
-    textDecoration: 'none',
-    marginRight: '1.3rem',
+    color: "rgba(255,255,255,.5)",
+    fontWeight: "700",
+    fontSize: "0.16rem",
+    textDecoration: "none",
+    marginRight: "1.3rem",
   };
   let active = {
-    color: '#fff',
-    fontWeight: '700',
-    fontSize: '0.16rem',
-    textDecoration: 'none',
-    marginRight: '1.3rem',
+    color: "#fff",
+    fontWeight: "700",
+    fontSize: "0.16rem",
+    textDecoration: "none",
+    marginRight: "1.3rem",
   };
-  const history = useLocation()
-  const [activiRoute, setActiviRoute] = useState<string>('')
+  const history = useLocation();
+  const [activiRoute, setActiviRoute] = useState<string>("");
   useEffect(() => {
     console.log(history.pathname.substring(1, 4));
     console.log(history.pathname.substring(1, 13));
-    if (history.pathname === '/') {
+    if (history.pathname === "/") {
       console.log("home");
-      setActiviRoute('home')
-    } else if (history.pathname.substring(1, 4) === 'nft') {
-      setActiviRoute('nft')
-      return
-    } else if (history.pathname.substring(1, 13) === 'vaultsDetail') {
-      setActiviRoute('vaultsDetail')
-      return
+      setActiviRoute("home");
+    } else if (history.pathname.substring(1, 4) === "nft") {
+      setActiviRoute("nft");
+      return;
+    } else if (history.pathname.substring(1, 13) === "vaultsDetail") {
+      setActiviRoute("vaultsDetail");
+      return;
     }
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
-    window.scrollTo(0, 0)
-    setActiviRoute('')
+    window.scrollTo(0, 0);
+    setActiviRoute("");
     // eslint-disable-next-line
-  }, [history.pathname])
+  }, [history.pathname]);
 
   return (
     <>
@@ -288,100 +314,134 @@ function XHeader() {
           </LogoLink>
           <NavLink
             to={"marketplace"}
-            style={({ isActive }) =>
-              isActive ? active : normal}
+            style={({ isActive }) => (isActive ? active : normal)}
           >
-            <StyledHoverSpan style={{ color: `${activiRoute === 'nft' || activiRoute === 'home' ? '#fff' : ''}` }}>Marketplace</StyledHoverSpan>
+            <StyledHoverSpan
+              style={{
+                color: `${
+                  activiRoute === "nft" || activiRoute === "home" ? "#fff" : ""
+                }`,
+              }}
+            >
+              Marketplace
+            </StyledHoverSpan>
           </NavLink>
-          <NavLink to={"/dashboard"}
-            style={({ isActive }) =>
-              isActive ? active : normal}
+          <NavLink
+            to={"/dashboard"}
+            style={({ isActive }) => (isActive ? active : normal)}
           >
-            <StyledHoverSpan style={{ color: `${activiRoute === 'vaultsDetail' || activiRoute === 'home' ? '#fff' : ''}` }}>Dashboard</StyledHoverSpan>
+            <StyledHoverSpan
+              style={{
+                color: `${
+                  activiRoute === "vaultsDetail" || activiRoute === "home"
+                    ? "#fff"
+                    : ""
+                }`,
+              }}
+            >
+              Dashboard
+            </StyledHoverSpan>
           </NavLink>
 
-          <StyledHoverA style={{
-            fontSize: "0.16rem",
-            fontWeight: "600",
-            color: activiRoute === 'home' ? '#fff' : 'rgba(255,255,255,.5)'
-          }} target="_blank" rel="noreferrer" href={urls.resource}>Resources</StyledHoverA>
+          <StyledHoverA
+            style={{
+              fontSize: "0.16rem",
+              fontWeight: "600",
+              color: activiRoute === "home" ? "#fff" : "rgba(255,255,255,.5)",
+            }}
+            target="_blank"
+            rel="noreferrer"
+            href={urls.resource}
+          >
+            Resources
+          </StyledHoverA>
         </FlexDiv>
 
         <FlexDiv>
-          <div className='tools'>
+          <div className="tools">
             {/* <button onClick={() => action(setShowWalletModalOpen(true))}>connect</button> */}
-            {
-              terms.map((item) => {
-                return (
-                  <a href={item.link} key={item.name} target="_blank" rel="noreferrer" >
-                    <div className='tools_bg'>
-                      <Icon className='tools_icon' style={{ cursor: 'pointer' }} width='0.22rem' height='0.22rem' src={item.darkIcon} />
-                    </div>
-                  </a>
-                )
-              })
-            }
+            {terms.map((item) => {
+              return (
+                <a
+                  href={item.link}
+                  key={item.name}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <div className="tools_bg">
+                    <Icon
+                      className="tools_icon"
+                      style={{ cursor: "pointer" }}
+                      width="0.22rem"
+                      height="0.22rem"
+                      src={item.darkIcon}
+                    />
+                  </div>
+                </a>
+              );
+            })}
           </div>
           {/* <ThemeImg src={imgurl.worldwideIcon} /> */}
           {/* <ThemeImg src={imgurl.gas_icon}/> */}
           {/* <ThemeImg src={imgurl.notificationIcon} /> */}
           {/* <ThemeImg src={imgurl.withoutNoticeIcon} /> */}
           <Flex
-            alignItems='center'
-            justifyContent='center'
-            background={`${showConnect ? "rgba(255,255,255,.1)" : 'rgba(255,255,255,.2)'}`}
+            alignItems="center"
+            justifyContent="center"
+            background={`${
+              showConnect ? "rgba(255,255,255,.1)" : "rgba(255,255,255,.2)"
+            }`}
             borderRadius="9999px"
-            width='0.35rem'
-            height='0.35rem'
+            width="0.35rem"
+            height="0.35rem"
             id="baseAccount"
-            style={{ cursor: 'pointer' }}
+            style={{ cursor: "pointer" }}
             onClick={walletPop}
           >
             {/* <Icon width={`${account ? '0.34rem' : '0.14rem' } `} height={`${account ? '0.34rem' : '0.16rem' } `} src={account ? defaultAvatar : login} /> */}
-            {
-              account ?
-                <UserAvatar>
-                  <Icon radius="9999px" src={defaultAvatar} />
-                </UserAvatar>
-
-                :
-                <Flex
-                  alignItems='center'
-                  justifyContent='center'
-                  width='0.34rem'
-                  height='0.34rem'
-                  borderRadius="0.1rem"
-                >
-                  <Icon width='0.14rem' height='0.16rem' src={login} />
-                </Flex>
-            }
-
+            {account ? (
+              <UserAvatar>
+                <Icon radius="9999px" src={defaultAvatar} />
+              </UserAvatar>
+            ) : (
+              <Flex
+                alignItems="center"
+                justifyContent="center"
+                width="0.34rem"
+                height="0.34rem"
+                borderRadius="0.1rem"
+              >
+                <Icon width="0.14rem" height="0.16rem" src={login} />
+              </Flex>
+            )}
           </Flex>
           <Popover
             content={AccountHTML}
             title={AccountTitle}
             trigger="click"
-            open={accountPop}
-            getPopupContainer={(triggerNode: any) => document.getElementById("baseAccount") || document.body}
-            placement={'bottomRight'}
+            visible={accountPop}
+            getPopupContainer={(triggerNode: any) =>
+              document.getElementById("baseAccount") || document.body
+            }
+            placement={"bottomRight"}
             overlayClassName="accountPopover"
-          >
-          </Popover>
+          ></Popover>
 
           <Popover
             content={ConnectWallet}
-            title={<Typography
-              fontSize="0.16rem"
-              fontWeight="700"
-              color="#000"
-            >Connect a wallet</Typography>}
+            title={
+              <Typography fontSize="0.16rem" fontWeight="700" color="#000">
+                Connect a wallet
+              </Typography>
+            }
             trigger="click"
-            open={showConnect}
-            getPopupContainer={(triggerNode: any) => document.getElementById("baseAccount") || document.body}
-            placement={'bottomRight'}
+            visible={showConnect}
+            getPopupContainer={(triggerNode: any) =>
+              document.getElementById("baseAccount") || document.body
+            }
+            placement={"bottomRight"}
             overlayClassName="walletPopover"
-          >
-          </Popover>
+          ></Popover>
         </FlexDiv>
         {/* <Modal
         footer={false}
@@ -396,7 +456,6 @@ function XHeader() {
       </Nav>
       <Height></Height>
     </>
-
   );
 }
 

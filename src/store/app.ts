@@ -33,10 +33,10 @@ interface IAppState {
   rewardsAPR?: number;
   // eth -> usdt rate
   usdtExchangeRate?: string;
-  // bend -> usdt rate
+  // bend -> eth rate
   bendExchangeRate: string;
   // pWing -> usdt rate
-  pWingExchangeRate: string;
+  pWingPrice: string;
   showWalletModalOpen: boolean;
 }
 
@@ -56,7 +56,7 @@ const initialState: IAppState = {
   },
   isLogin: false,
   bendExchangeRate: "",
-  pWingExchangeRate: "",
+  pWingPrice: "",
   showWalletModalOpen: false,
   isAnimate: false,
 };
@@ -124,8 +124,8 @@ export const updateBENDExchangeRate = createAsyncThunk(
   }
 );
 
-export const updatePWingExchangeRate = createAsyncThunk(
-  "app/updatePWingExchangeRate",
+export const updatePWingPrice = createAsyncThunk(
+  "app/updatePWingPrice",
   async (args, thunkAPI) => {
     let resp: any = await http.myPost(
       `https://api.defined.fi/`,
@@ -232,9 +232,9 @@ const appSlice = createSlice({
           state.bendExchangeRate = action.payload;
         }
       })
-      .addCase(updatePWingExchangeRate.fulfilled, (state, action) => {
+      .addCase(updatePWingPrice.fulfilled, (state, action) => {
         if (action.payload) {
-          state.pWingExchangeRate = action.payload;
+          state.pWingPrice = action.payload;
         }
       });
   },
