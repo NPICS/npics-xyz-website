@@ -78,7 +78,7 @@ export const useBendPrice = (value: BigNumber | undefined) => {
 
 export const usePWingPrice = (value: BigNumber | undefined) => {
   const [price, setPrice] = useState<BigNumber | undefined>();
-  const pWingPrice = useAppSelector((state) => state.app.pWingExchangeRate);
+  const pWingPrice = useAppSelector((state) => state.app.pWingPrice);
   useEffect(() => {
     if (!value) return;
     const OrgPrice = new BigNumber(value.toString())
