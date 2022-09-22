@@ -155,7 +155,7 @@ function VaultsTable(props: IProps) {
       );
 
       detailsPromiseList.push(
-        http.myPost(`/npics-nft/app-api/v2/nft/getCollectionItemsDetail`, {
+        http.myPost(`/npics-nft/app-api/v2/nft/getNftItem`, {
           address: downpays[i].nft,
           // paltfrom: BANK_NAME_MAP[downpays[i].bankId],
           tokenId: downpays[i].tokenId,

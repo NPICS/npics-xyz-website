@@ -319,7 +319,7 @@ export default function VaultsDetail() {
       await npics.getLoanReserveBorrowAmount(downpay.nft, downpay.tokenId);
 
     const imageUrlData: any = await http.myPost(
-      `/npics-nft/app-api/v2/nft/getCollectionItemsDetail`,
+      `/npics-nft/app-api/v2/nft/getNftItem`,
       {
         address: downpay.nft,
         tokenId: downpay.tokenId,
