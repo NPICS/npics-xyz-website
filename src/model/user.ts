@@ -273,6 +273,8 @@ export class CollectionDetail extends CollectionItems {
   bannerImageUrl?: string;
   externalUrl?: string;
   pairAddress?: string; //sudoswap
+  vaultApr?: string;
+  platform?: string;
 
   @Expose()
   get agreementPrice() {

@@ -167,7 +167,7 @@ export default function NFTPay(props: {
   //platform
   const platform = useAppSelector(state => state.platform.selectPlatform)
 
-  console.log(props.nft);
+  // console.log(props.nft);
   useAsync(async () => {
     if (account && provider) {
       // let signer = library.getSigner(account)
@@ -253,7 +253,6 @@ export default function NFTPay(props: {
       userSelectedAmount.isGreaterThanOrEqualTo(eth.plus(weth)) &&
       userSelectedAmount.isGreaterThanOrEqualTo(props.actualAmount)
     );
-    console.log(`${userSelectedAmount.toFixed()}`);
   }, [userSelectedAmount, ethAndWETHAmount, props.actualAmount]);
 
   async function checkoutBtnClick() {
@@ -420,7 +419,7 @@ export default function NFTPay(props: {
         market:
           ContractAddresses.getMarketAddressByName(props.nft.market) ?? "",
         wethAmt: weth,
-        bank: BANK_ENUM[platform as unknown as BANK_ENUM]
+        platform: platform as unknown as BANK_ENUM
       };
       let tx: any;
       if (payType & PayType.WETH) {

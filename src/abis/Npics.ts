@@ -16,7 +16,7 @@ export class Npics {
   constructor(signer: any) {
     this.signer = signer;
   }
-
+  //downPayWithETH
   async downPayWithETH(params: {
     nft: string;
     tokenId: string;
@@ -25,6 +25,7 @@ export class Npics {
     price: BigNumber;
     loadAmt: BigNumber;
     payEthAmt: BigNumber;
+    platform: BANK_ENUM;
   }) {
     // pay amount need + 2wei
     let contract = new ethers.Contract(
@@ -40,23 +41,27 @@ export class Npics {
       params.tradeDetail,
       params.price.dp(0).toFixed(),
       params.loadAmt.dp(0).toFixed(),
+      BANK_ENUM[params.platform],
       {
         value: params.payEthAmt.plus(2).dp(0).toFixed(),
       }
     );
-    return await contract.downPayWithETH(
+    return await contract[
+      "downPayWithETH(address,uint256,address,bytes,uint256,uint256,uint256)"
+    ](
       params.nft,
       params.tokenId,
       params.market,
       params.tradeDetail,
       params.price.dp(0).toFixed(),
       params.loadAmt.dp(0).toFixed(),
+      BANK_ENUM[params.platform],
       {
         value: params.payEthAmt.plus(2).dp(0).toFixed(),
       }
     );
   }
-
+  //downPayWithWETH
   async downPayWithWETH(params: {
     nft: string;
     tokenId: string;
@@ -66,6 +71,7 @@ export class Npics {
     loadAmt: BigNumber;
     payEthAmt: BigNumber;
     wethAmt: BigNumber;
+    platform: BANK_ENUM;
   }) {
     // weth authorization
 
@@ -78,6 +84,7 @@ export class Npics {
       params.price.dp(0).toFixed(),
       params.loadAmt.dp(0).toFixed(),
       params.wethAmt.dp(0).toFixed(),
+      BANK_ENUM[params.platform],
       {
         value: params.payEthAmt.plus(2).dp(0).toFixed(),
       }
@@ -95,7 +102,9 @@ export class Npics {
       NPICS_ABI,
       this.signer
     );
-    return await contract.downPayWithWETH(
+    return await contract[
+      "downPayWithWETH(address,uint256,address,bytes,uint256,uint256,uint256,uint256)"
+    ](
       params.nft,
       params.tokenId,
       params.market,
@@ -103,6 +112,7 @@ export class Npics {
       params.price.dp(0).toFixed(),
       params.loadAmt.dp(0).toFixed(),
       params.wethAmt.dp(0).toFixed(),
+      BANK_ENUM[params.platform],
       {
         value: params.payEthAmt.plus(2).dp(0).toFixed(),
       }
@@ -160,13 +170,19 @@ export class Npics {
     return await contract["claimRewards(uint256)"](bank);
   }
 
-  async getAvailableBorrowsln(nft: string): Promise<BigNumber> {
+  async getAvailableBorrowsln(
+    nft: string,
+    bank: BANK_ENUM
+  ): Promise<BigNumber> {
     let contract = new ethers.Contract(
       ContractAddresses.NpicsProxy,
       NPICS_ABI,
       this.signer
     );
-    const price = await contract.availableBorrowsInETH(nft);
+    const price = await contract["availableBorrowsInETH(address,uint256)"](
+      nft,
+      BANK_ENUM[bank]
+    );
     let result = new BigNumber(price.toString()).minus(
       new BigNumber("0.0001").times(10 ** 18)
     );

@@ -84,7 +84,7 @@ export default function CollectionCell(props: {
   >
     {/*<Cover src={props.item.imageUrl}/>*/}
     <ImageContainer>
-      <Cover src={props.item.imageUrl} />
+      <Cover style={{ height: "100%", width: "auto", margin: "0 auto" }} src={props.item.imageUrl} />
     </ImageContainer>
     {/* tag */}
     <Flex
