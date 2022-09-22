@@ -146,13 +146,25 @@ function VaultsTable(props: IProps) {
     const serverListDataMap = await getVaultsServerListDataMap();
 
     let debtValueCalls = [];
+    let detailsPromiseList = [];
     let npics = new Npics(null);
+    console.log("downpays", downpays);
     for (let i = 0; i < downpays.length; i++) {
       debtValueCalls.push(
         npics.getLoanReserveBorrowAmount(downpays[i].nft, downpays[i].tokenId)
       );
+
+      detailsPromiseList.push(
+        http.myPost(`/npics-nft/app-api/v2/nft/getCollectionItemsDetail`, {
+          address: downpays[i].nft,
+          // paltfrom: BANK_NAME_MAP[downpays[i].bankId],
+          tokenId: downpays[i].tokenId,
+        })
+      );
     }
     const debtValueList = await Promise.all(debtValueCalls);
+    const details: any[] = await Promise.all(detailsPromiseList);
+    console.log("details", details); //data.marketUrl
     for (let i = 0; i < downpays.length; i++) {
       const item =
         serverListDataMap[BANK_NAME_MAP[downpays[i].bankId]]
@@ -163,7 +175,7 @@ function VaultsTable(props: IProps) {
         floorPrice: new BigNumber(item.floorPrice),
         purchaseFloorPrice: new BigNumber(downpays[i].value),
         ltv: new BigNumber(item.ltv),
-        imageUrl: item.nftCoverImage,
+        imageUrl: details[i].data?.imageUrl || item.nftCoverImage,
         collectionName: item.name,
         liquidationThreshold: item.liquidationThreshold,
       } as unknown as VaultsItemData;
