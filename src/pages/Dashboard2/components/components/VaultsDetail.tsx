@@ -317,13 +317,21 @@ export default function VaultsDetail() {
     let npics = new Npics(null);
     const { repayDebtAmount: debtValue } =
       await npics.getLoanReserveBorrowAmount(downpay.nft, downpay.tokenId);
+
+    const imageUrlData: any = await http.myPost(
+      `/npics-nft/app-api/v2/nft/getCollectionItemsDetail`,
+      {
+        address: downpay.nft,
+        tokenId: downpay.tokenId,
+      }
+    );
     downpay = {
       ...downpay,
       debtValue,
       purchaseFloorPrice: new BigNumber(downpay.floorPrice).div(10 ** 18),
       floorPrice: new BigNumber(downpayItem.floorPrice),
       ltv: new BigNumber(downpayItem.ltv),
-      imageUrl: downpayItem.nftCoverImage,
+      imageUrl: imageUrlData.data?.imageUrl || downpayItem.nftCoverImage,
       collectionName: downpayItem.name,
       liquidationThreshold: downpayItem.liquidationThreshold,
     } as unknown as VaultsItemData;
@@ -430,7 +438,8 @@ export default function VaultsDetail() {
                     color={"rgba(0,0,0,.5)"}
                   >
                     {activities &&
-                      `${_toString(activities?.collectionName) ?? TextPlaceholder
+                      `${
+                        _toString(activities?.collectionName) ?? TextPlaceholder
                       } #${activities?.tokenId ?? TextPlaceholder}`}
                   </Typography>
                   <Icon
@@ -517,7 +526,8 @@ export default function VaultsDetail() {
                     color="#000"
                   >
                     {activities &&
-                      `NEO ${_toString(activities?.collectionName) ?? TextPlaceholder
+                      `NEO ${
+                        _toString(activities?.collectionName) ?? TextPlaceholder
                       } #${activities?.tokenId ?? TextPlaceholder}`}
                   </Typography>
                   <Icon
@@ -949,7 +959,7 @@ export default function VaultsDetail() {
                       onChange={(e: any) => handleCheck(e)}
                       // _checked={checked}
                       _checked={checked}
-                    // value={checked}
+                      // value={checked}
                     />
                     <Typography marginLeft="0.12rem" fontSize="0.14rem">
                       Repay all
