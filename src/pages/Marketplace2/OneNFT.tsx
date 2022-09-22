@@ -29,6 +29,7 @@ import {
   multicallClient,
   newClientContract,
 } from "../../utils/multicall";
+import { useAppSelector } from "store/hooks";
 
 function Label(props: { icon?: string; num: number }) {
   return (
@@ -67,6 +68,20 @@ const NFTMain = styled.div`
     "info activities activities"
     "props activities activities";
   min-width: calc(4.8rem + 6.5rem + 3rem);
+  .main_nft_box{
+    overflow: hidden;
+    border-radius: 0.15rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0.01rem solid rgba(0,0,0,0.1);
+    background: #00000008;
+    .nft_img{
+      width: auto;
+      height: 100%;
+      border-radius: 0%;
+    }
+  }
 `;
 
 const Cover = styled.img`
@@ -83,11 +98,11 @@ export default function OneNFT() {
   const { provider, account } = useWeb3React();
   const navigate = useNavigate();
   let urlParams: any = useParams();
-  const params: { address: string; tokenId: string, platform: string } = urlParams;
+  const params: { address: string; tokenId: string } = urlParams;
   const [openSeaIsNormalization, setOpenSeaIsNormalization] =
     useState<boolean>(true);
   const [rarityData, setRarityData] = useState<{ [key: string]: any }>();
-
+  const platform = useAppSelector(state => state.platform.selectPlatform)
   useAsync(async () => {
     if (!params) return;
     await loadDetailData();
@@ -104,6 +119,7 @@ export default function OneNFT() {
         setRarityData(resp.data);
       }
     }
+    console.log(platform);
   }, [params]);
 
   useAsync(async () => {
@@ -150,11 +166,12 @@ export default function OneNFT() {
   async function loadDetailData() {
     if (!params) return;
     /// nft detail data
+    console.log("======> OneNft update NFT data");
     const resp: any = await http.myPost(
       `/npics-nft/app-api/v2/nft/getCollectionItemsDetail`,
       {
         address: params.address,
-        paltfrom: params.platform,
+        paltfrom: platform,
         tokenId: params.tokenId,
       }
     );
@@ -316,8 +333,8 @@ export default function OneNFT() {
         </Flex>
         {/* main */}
         <NFTMain>
-          <Grid gridArea={"cover"}>
-            <Cover src={detailData?.imageUrl} />
+          <Grid className="main_nft_box" gridArea={"cover"}>
+            <Cover className="nft_img" src={detailData?.imageUrl} />
           </Grid>
           <Grid gridArea={"price"}>
             <NFTPrice item={detailData} refreshBlock={loadDetailData} />

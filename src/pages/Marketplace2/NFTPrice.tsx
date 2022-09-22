@@ -29,7 +29,7 @@ import { connectors } from "../../utils/connectors";
 import { getNFTStatusInOpensea } from "../../utils/opensea";
 import { listedPricePop, VaultAprPop, DownPaymentPop } from "utils/popover";
 import ethIcon from "../../assets/images/market/eth_icon.svg";
-import { SessionStorageKey } from "utils/enums";
+import { BANK_ENUM, SessionStorageKey } from "utils/enums";
 import { simpleRpcProvider } from "../../utils/rpcUrl";
 import { useAsync } from "react-use";
 import { injected } from "../../connectors/hooks";
@@ -39,7 +39,9 @@ import NFTPayCongratulations from "./NFTPayCongratulations";
 import NFTPayWrong from "./NFTPayWrong";
 import { Pop, Pop20 } from "component/Popover/Popover";
 import { imgurl } from "utils/globalimport";
-import AprSelect from "./AprSelect";
+import AprSelect, { Iapr } from "./AprSelect";
+import React from "react";
+import { changePlatform } from "store/platfrom";
 
 const Shadow = styled(Flex)`
   background: #fff;
@@ -88,7 +90,8 @@ const OtherNFT = styled.img`
   display: block;
   overflow: hidden;
   cursor: pointer;
-  height: 100%;
+  width: 100%;
+  /* height: 100%; */
   border-radius: 0.1rem;
   border: 0.01rem solid #eee;
   position: relative;
@@ -135,7 +138,7 @@ function MoreNFT(props: { img: string; total?: number; tap?(): void }) {
   );
 }
 
-export default function NFTPrice(props: {
+function NFTPrice(props: {
   item?: CollectionDetail;
   refreshBlock?(): void;
 }) {
@@ -143,12 +146,15 @@ export default function NFTPrice(props: {
   const ethRate = useAppSelector(
     (state) => new BigNumber(state.app.data.EthPrice)
   );
-  const vaultAPR = useAppSelector(
-    (state) => (state.app.rewardsAPR ?? 0) - (state.app.interestAPR ?? 0) / 100
-  );
+  // const vaultAPR = useAppSelector(
+  //   (state) => ((state.app.rewardsAPR ?? 0) - (state.app.interestAPR ?? 0))
+  // );
+  const [vaultAPR, setVaultAPR] = useState<number>(0)
   // const updater = useAppSelector(updater => updater.app)
-  const rewardsAPR = useAppSelector((state) => state.app.rewardsAPR);
-  const interestAPR = useAppSelector((state) => state.app.interestAPR);
+  const [rewardsAPR, setRewardsAPR] = useState<number>(0);
+  // const rewardsAPR = useAppSelector((state) => state.app.rewardsAPR);
+  // const interestAPR = useAppSelector((state) => state.app.interestAPR);
+  const [interestAPR, setInterestAPR] = useState<number>(0);
   const [recommendNFTs, setRecommendNFTs] = useState<CollectionItems[]>([]); // max is 6
   const [recommendNFTTotal, setRecommendNFTTotal] = useState<
     number | undefined
@@ -173,15 +179,39 @@ export default function NFTPrice(props: {
   const [showAprModal, setShowAprModal] = useState<boolean>(false);
   //select apr info
   const platform = useAppSelector(state => state.platform.selectPlatform)
+  // const [platform, setPlatform] = useState<string>("")
   const [aprInfo, setAprInfo] = useState<{ name: string, icon: any }>({
-    name: platform === 'bendao' ? 'BendDao' : 'Wing',
-    icon: platform === 'bendao' ? imgurl.market.bendaoPriceIcon : imgurl.market.wingPriceIcon
+    name: "",
+    icon: ""
   })
 
   useEffect(() => {
     action(updateARP());
+    //first join use item apr
+    if (props.item) {
+      aprInfo.icon === "" && setVaultAPR(parseFloat(props.item.vaultApr || "0"))
+      aprInfo.icon === "" && setAprInfo({
+        name: props.item.platform === 'bendao' ? 'BendDao' : 'Wing',
+        icon: props.item.platform === 'bendao' ? imgurl.market.bendaoPriceIcon : imgurl.market.wingPriceIcon
+      })
+      platform === "" && action(changePlatform(props.item.platform))
+    }
   }, [props.item]);
-
+  useAsync(async () => {
+    if (platform) {
+      let resp: any = await http.myPost(
+        `/npics-nft/app-api/v2/platform/getList`,
+        {
+          platform
+        }
+      )
+      if (resp.code === 200 && resp.data.records.length > 0) {
+        const list = resp.data.records
+        setRewardsAPR(parseFloat(list[0].borrowApy))
+        setInterestAPR(parseFloat(list[0].supplyApy))
+      }
+    }
+  }, [platform])
   //show other nft
   useAsync(async () => {
     if (props.item) {
@@ -194,6 +224,7 @@ export default function NFTPrice(props: {
           pageIndex: 1,
           pageSize: 10,
           search: null,
+          platform: platform,
           showNftx: globalConstant.showNftx,
         }
       );
@@ -210,16 +241,21 @@ export default function NFTPrice(props: {
     }
   }, [props.item]);
 
+  // get available borrow balance
   useAsync(async () => {
     if (props.item?.address && provider) {
+      console.log("platform change");
+      console.log(platform);
       let contract = new Npics(provider);
       const availableBorrow = await contract.getAvailableBorrowsln(
-        props.item.address
+        props.item.address,
+        platform as unknown as BANK_ENUM
       );
       setAvailableBorrow(availableBorrow);
     }
-  }, [props.item, provider]);
+  }, [props.item, provider, platform]);
 
+  //get you maybe need pay eth
   useEffect(() => {
     let _item = props.item;
     if (_item && availableBorrow) {
@@ -257,15 +293,18 @@ export default function NFTPrice(props: {
   const changeApr = () => {
     //show selecte modal
     console.log("show select apr modal");
+    console.log(props);
     setShowAprModal(true);
   }
 
-  const selectApr = (name: string) => {
+  const selectApr = (aprObj: Iapr) => {
     let apr = {
-      name: name,
-      icon: name === "Wing" ? imgurl.market.wingPriceIcon : imgurl.market.bendaoPriceIcon
+      name: aprObj.platform,
+      icon: aprObj.platform === "Wing" ? imgurl.market.wingPriceIcon : imgurl.market.bendaoPriceIcon
     }
     setAprInfo(apr);
+    setVaultAPR(aprObj.vaultAPR)
+    action(changePlatform(aprObj.platform === "Wing" ? 'wing' : 'bendao'))
     setShowAprModal(false)
   }
 
@@ -299,7 +338,7 @@ export default function NFTPrice(props: {
       </Modal>
       {/* show selece apr modal */}
       <Modal isOpen={showAprModal} onRequestClose={() => setShowAprModal(false)}>
-        <AprSelect defaultApr={aprInfo.name} onClose={() => setShowAprModal(false)} onSelect={selectApr} />
+        <AprSelect defaultApr={aprInfo.name} nft={props?.item?.address} onClose={() => setShowAprModal(false)} onSelect={selectApr} />
       </Modal>
       {/* popup loading */}
       <Modal isOpen={progressingPopupOpen}>
@@ -361,7 +400,7 @@ export default function NFTPrice(props: {
               Listed Price
             </Typography>
             <Pop20 content={listedPricePop}>
-              <TipsIcon width={"0.14rem"} src={tipsIcon} />
+              <TipsIcon style={{ marginBottom: '0.03rem' }} width={"0.14rem"} src={tipsIcon} />
             </Pop20>
           </Flex>
           <Flex flexDirection={"row"} alignItems={"center"} height={"70%"}>
@@ -404,7 +443,7 @@ export default function NFTPrice(props: {
           <Flex width={'100%'} height={'30%'} justifyContent={"space-between"}>
             <Flex justifyContent={"flex-start"} alignItems={"center"}>
               <Space>
-                <Icon src={aprInfo.icon} width={'0.22rem'} height={'0.22rem'} alt="" />
+                {aprInfo.icon && <Icon src={aprInfo.icon} width={'0.22rem'} height={'0.22rem'} alt="" />}
                 <Typography
                   fontSize={"0.14rem"}
                   fontWeight={500}
@@ -415,10 +454,10 @@ export default function NFTPrice(props: {
                 <Pop
                   content={VaultAprPop({
                     rewardAPR: rewardsAPR ?? 0,
-                    interestAPR: (interestAPR ?? 0) / 100,
+                    interestAPR: interestAPR ?? 0,
                   })}
                 >
-                  <TipsIcon width={"0.14rem"} src={tipsIcon} />
+                  <TipsIcon style={{ marginBottom: '0.03rem' }} width={"0.14rem"} src={tipsIcon} />
                 </Pop>
               </Space>
             </Flex>
@@ -478,15 +517,17 @@ export default function NFTPrice(props: {
                   }`
                   }`}
               >
-                <OtherNFT
-                  src={nft.imageUrl}
-                  onClick={() => {
-                    navigate(`/nft/${nft.address}/${nft.tokenId}`, {
-                      replace: true,
-                    });
-                  }}
-                  key={nft.tokenId}
-                />
+                <div style={{ width: "1rem", height: "1rem", borderRadius: "0.15rem", overflow: "hidden" }}>
+                  <OtherNFT
+                    src={nft.imageUrl}
+                    onClick={() => {
+                      navigate(`/nft/${nft.address}/${nft.tokenId}`, {
+                        replace: true,
+                      });
+                    }}
+                    key={nft.tokenId}
+                  />
+                </div>
               </Pop20>
             );
           }
@@ -551,3 +592,4 @@ export default function NFTPrice(props: {
     </Grid>
   );
 }
+export default React.memo(NFTPrice);

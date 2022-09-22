@@ -167,7 +167,7 @@ function Home() {
   }
   const openGitbook = () => {
     //click note
-    window.open("https://npics.gitbook.io/npics-v1.0/about-npics/introduce")
+    window.open("https://medium.com/@npics.xyz/community-noticeboard-df26affcd7af")
   }
   const closeNote = (e: any) => {
     e.stopPropagation();
@@ -180,7 +180,7 @@ function Home() {
         {/* show note */}
         <NoteBox hidden={!showNote}>
           <div className='note_content' onClick={openGitbook}>
-            <div className='note_text'>Npics has access to Wing NFT Pool lending protocol</div>
+            <div className='note_text'>Living Campaign: Contributor Rewards for Push NPics’ Funding Proposal with BendDAO</div>
             <div className='note_close' onClick={closeNote}>
               <img className='note_close_icon' src={imgurl.CloseIcon} />
             </div>

@@ -8,7 +8,8 @@ import { useEffect, useState } from "react";
 import http from "utils/http";
 const AprSelectBox = styled.div`
   width: 7.2rem;
-  min-height: 5rem;
+  /* min-height: 5rem; */
+  min-height: 3.5rem;
   background: #fff;
   border-radius: 20px;
   padding:0.4rem;
@@ -50,29 +51,52 @@ const CollapseBox = styled.div`
     }
   }
 `
-interface Iapr {
+export interface Iapr {
   id: number;
   platform: string;
   available: number;
   interestAPR: number;
   rewardAPR: number;
+  vaultAPR: number;
 }
 const PanelHead = ({ apr }: { apr: Iapr }) => {
   return (
     <Flex width={"100%"} justifyContent={"space-between"}>
       <Typography fontSize={"0.14rem"}>Vault APR</Typography>
       <Flex>
-        <Typography fontSize={"0.14rem"}>{(apr.rewardAPR - Math.abs(apr.interestAPR)).toFixed(2)}%</Typography>
+        {/* <Typography fontSize={"0.14rem"}>{(apr.rewardAPR - Math.abs(apr.interestAPR)).toFixed(2)}%</Typography> */}
+        <Typography fontSize={"0.14rem"}>{((apr.vaultAPR) * 100).toFixed(2)}%</Typography>
       </Flex>
     </Flex>
   )
 }
-const AprSelect = ({ defaultApr, onClose, onSelect }: { defaultApr: string, onClose: () => void, onSelect: (name: string) => void }) => {
+const AprSelect = ({ defaultApr, onClose, onSelect, nft }: { defaultApr: string, onClose: () => void, onSelect: (apr: Iapr) => void, nft?: string }) => {
   const { Panel } = Collapse;
   const [aprList, setAprList] = useState<Iapr[]>([]);
+  //doodles or space-doodles is dont support
+  const wingNotSupportedList = [
+    "0x8a90cab2b38dba80c64b7734e58ee1db38b8992e",
+    "0x620b70123fb810f6c653da7644b5dd0b6312e4d8"
+  ]
+  const bendaoNotSupportedList = [
+    "0x7bd29408f11d2bfc23c34f18275bbf23bb716bc7"
+  ]
   useEffect(() => {
     const getAllplatform = async () => {
-      const res: any = await http.myPost("npics-nft/app-api/v2/platform/getList", {});
+      let platformObj = {}
+      if (nft && wingNotSupportedList.includes(nft)) {
+        console.log("this nft is dont support wing");
+        platformObj = {
+          platform: "bendao"
+        }
+      }
+      if (nft && bendaoNotSupportedList.includes(nft)) {
+        console.log("this nft is dont support benddao");
+        platformObj = {
+          platform: "wing"
+        }
+      }
+      const res: any = await http.myPost("npics-nft/app-api/v2/platform/getList", platformObj);
       const list: Iapr[] = []
       if (res.code === 200 && res.data.records) {
         res.data.records.map((item: any) => {
@@ -82,6 +106,7 @@ const AprSelect = ({ defaultApr, onClose, onSelect }: { defaultApr: string, onCl
             available: parseFloat(parseFloat(item.suppliedBalance).toFixed(2)),
             rewardAPR: parseFloat((parseFloat(item.borrowApy) * 100).toFixed(2)),
             interestAPR: parseFloat((parseFloat(item.supplyApy) * 100).toFixed(2)),
+            vaultAPR: (parseFloat(item.borrowApy) - parseFloat(item.supplyApy))
           }
           list.push(obj)
         })
@@ -119,7 +144,7 @@ const AprSelect = ({ defaultApr, onClose, onSelect }: { defaultApr: string, onCl
                       <Icon hidden={apr.platform === defaultApr ? false : true} src={imgurl.market.SelectIcon} width={"0.18rem"} height={"0.18rem"} />
                     </Space>
                   </Flex>
-                  <SelectButton onClick={() => onSelect(apr.platform)} disabled={apr.platform === defaultApr ? true : false}>Check</SelectButton>
+                  <SelectButton onClick={() => onSelect(apr)} disabled={apr.platform === defaultApr ? true : false}>Check</SelectButton>
                 </Flex>
                 <Flex flexDirection={"column"} padding={"0.2rem 0.28rem 0 0.28rem"} background={"rgba(0,0,0,0.03)"} borderRadius={"0.1rem"} border={"1px solid rgba(0,0,0,0.1)"}>
                   <Flex width={"100%"} justifyContent={"space-between"}>
@@ -131,7 +156,7 @@ const AprSelect = ({ defaultApr, onClose, onSelect }: { defaultApr: string, onCl
                   </Flex>
                   <Flex>
                     <CollapseBox>
-                      <Collapse expandIconPosition={"end"} style={{ width: '100%' }} ghost>
+                      <Collapse expandIconPosition="end" style={{ width: '100%' }} ghost>
                         <Panel className="collapse_panel" header={<PanelHead apr={apr} />} key="1">
                           <Flex paddingBottom={"0.12rem"} justifyContent={"space-between"}>
                             <Typography fontSize={"0.14rem"}>Reward APR</Typography>
