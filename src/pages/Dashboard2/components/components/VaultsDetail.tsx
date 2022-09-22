@@ -430,8 +430,7 @@ export default function VaultsDetail() {
                     color={"rgba(0,0,0,.5)"}
                   >
                     {activities &&
-                      `${
-                        _toString(activities?.collectionName) ?? TextPlaceholder
+                      `${_toString(activities?.collectionName) ?? TextPlaceholder
                       } #${activities?.tokenId ?? TextPlaceholder}`}
                   </Typography>
                   <Icon
@@ -518,8 +517,7 @@ export default function VaultsDetail() {
                     color="#000"
                   >
                     {activities &&
-                      `NEO ${
-                        _toString(activities?.collectionName) ?? TextPlaceholder
+                      `NEO ${_toString(activities?.collectionName) ?? TextPlaceholder
                       } #${activities?.tokenId ?? TextPlaceholder}`}
                   </Typography>
                   <Icon
@@ -916,7 +914,7 @@ export default function VaultsDetail() {
                   min={0}
                   defaultValue={0}
                   value={inputPayDebt}
-                  onChange={(e) => handleIptDebt(e)}
+                  onChange={(e: any) => handleIptDebt(e)}
                   bordered={false}
                   precision={4}
                   disabled={progressVal === 1 ? true : false}
@@ -951,7 +949,7 @@ export default function VaultsDetail() {
                       onChange={(e: any) => handleCheck(e)}
                       // _checked={checked}
                       _checked={checked}
-                      // value={checked}
+                    // value={checked}
                     />
                     <Typography marginLeft="0.12rem" fontSize="0.14rem">
                       Repay all

@@ -21,7 +21,7 @@
     "@web3-react/network": "^8.0.26-beta.0",
     "@web3-react/types": "^8.0.19-beta.0",
     "@web3-react/walletconnect": "^8.0.34-beta.0",
-    "antd": "4.20.6",
+    "antd": "4.22.6",
     "axios": "^0.27.2",
     "babel-jest": "^27.4.2",
     "babel-loader": "^8.2.3",
