@@ -244,8 +244,6 @@ function NFTPrice(props: {
   // get available borrow balance
   useAsync(async () => {
     if (props.item?.address && provider) {
-      console.log("platform change");
-      console.log(platform);
       let contract = new Npics(provider);
       const availableBorrow = await contract.getAvailableBorrowsln(
         props.item.address,

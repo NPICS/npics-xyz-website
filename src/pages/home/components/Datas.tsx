@@ -76,7 +76,6 @@ const Datas = () => {
     const resp: any = await http.myGet("/npics-nft/app-api/v2/statistics/getStatistics", {})
     const res = resp.data;
     if (res.code === 200 && res.data) {
-      console.log(res.data);
       setAvailableTotal(parseFloat(res.data.availableTotal))
       setSupplyAva(parseFloat(res.data.supplyAva))
       setVaultApr(parseFloat(res.data.vaultApr) * 100)
