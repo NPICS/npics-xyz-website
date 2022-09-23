@@ -59,6 +59,13 @@ export const NoteBox = styled.div`
     align-items: center;
     font-size: 0.14rem;
     cursor: pointer;
+    .note_text {
+      display: flex;
+      align-items: center;
+      & > span {
+        margin-left: 0.1rem;
+      }
+    }
     .note_close {
       .note_close_icon {
         width: 0.24rem;

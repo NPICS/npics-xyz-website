@@ -32,6 +32,7 @@ import { useAppSelector } from "../../store/hooks"
 import CountUp from "react-countup";
 import { Icon } from 'component/Box'
 import Datas from './components/Datas'
+import { Space } from 'antd'
 const MyTable: any = styled(Table)`
   /* min-width: 16rem; */
   height: 7.47rem;
@@ -180,7 +181,10 @@ function Home() {
         {/* show note */}
         <NoteBox hidden={!showNote}>
           <div className='note_content' onClick={openGitbook}>
-            <div className='note_text'>Living Campaign: Contributor Rewards for Push NPics’ Funding Proposal with BendDAO</div>
+            <div className='note_text'>
+              <Icon width={"0.2rem"} src={imgurl.home.NoteIcon} />
+              <span>Living Campaign: Contributor Rewards for Push NPics’ Funding Proposal with BendDAO</span>
+            </div>
             <div className='note_close' onClick={closeNote}>
               <img className='note_close_icon' src={imgurl.CloseIcon} />
             </div>

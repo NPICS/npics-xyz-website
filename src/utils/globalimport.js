@@ -49,6 +49,7 @@ import gameIcon from '../assets/images/home/gameIcon.png'
 import CollectionProduct from '../assets/images/home/collection_product_bg.svg'
 import FrameBg from '../assets/images/home/frame_bg.png'
 import SwiperPartner from '../assets/images/home/swiper_bg.svg'
+import NoteIcon from '../assets/images/home/note.svg'
 
 import MetaMask from '../assets/images/home/MetaMask.png'
 import BendDAO from '../assets/images/home/BendDAO.png'
@@ -201,6 +202,7 @@ export const imgurl = {
     HomeImg5,
     HomeImg6,
     HomeImg7,
+    NoteIcon,
 
     MetaMask,
     BendDAO,
