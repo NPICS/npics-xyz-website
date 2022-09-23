@@ -54,6 +54,12 @@ const StyledThemeProvider = (props: any) => {
         action(setShowFrameAnimate(true))
       }
     }
+    if (DetailDom) {
+      const detailHeight = DetailDom.getBoundingClientRect().y;
+      if (detailHeight! <= windowHeight) {
+        action(setShowDetailAnimate(true))
+      }
+    }
     scrollTop > 150 ? action(setFixed(true)) : action(setFixed(false))
   }
   const isDark = isHome
