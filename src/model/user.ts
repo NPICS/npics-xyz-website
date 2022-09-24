@@ -169,13 +169,12 @@ export class CollectionItems {
 
   @Expose()
   downPaymentPriceFormat() {
-    // ltv: 3000 => 30%
-    let loadRate = new BigNumber(this.ltv).div(100).div(100);
-    let downPayment = this.currentBasePrice
-      .minus(this.floorPrice.times(loadRate))
-      .div(10 ** this.decimals)
-      .plus(0.0001);
-    return numberFormat(downPayment.toFixed(2, 1));
+    let basePrice = this.currentBasePrice.div(10 ** this.decimals).toNumber();
+    const floor = this.floorPrice.toNumber();
+    const dowmPaymentPrice = parseFloat(
+      (basePrice - this.ltv * floor).toFixed(2)
+    );
+    return dowmPaymentPrice;
   }
 
   @Expose()
