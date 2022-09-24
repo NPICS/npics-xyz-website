@@ -6,6 +6,7 @@ import ethIcon from "../../assets/images/market/eth_icon.svg"
 import { Collapse } from 'antd';
 import { useEffect, useState } from "react";
 import http from "utils/http";
+import BigNumber from "bignumber.js";
 const AprSelectBox = styled.div`
   width: 7.2rem;
   /* min-height: 5rem; */
@@ -70,7 +71,7 @@ const PanelHead = ({ apr }: { apr: Iapr }) => {
     </Flex>
   )
 }
-const AprSelect = ({ defaultApr, onClose, onSelect, nft }: { defaultApr: string, onClose: () => void, onSelect: (apr: Iapr) => void, nft?: string }) => {
+const AprSelect = ({ defaultApr, selectApr, onClose, onSelect, nft, selectFloorPrice }: { defaultApr?: string, selectApr: string, onClose: () => void, onSelect: (apr: Iapr) => void, nft?: string, selectFloorPrice?: BigNumber }) => {
   const { Panel } = Collapse;
   const [aprList, setAprList] = useState<Iapr[]>([]);
   //doodles or space-doodles is dont support
@@ -99,16 +100,23 @@ const AprSelect = ({ defaultApr, onClose, onSelect, nft }: { defaultApr: string,
       const res: any = await http.myPost("npics-nft/app-api/v2/platform/getList", platformObj);
       const list: Iapr[] = []
       if (res.code === 200 && res.data.records) {
+        console.log(selectFloorPrice);
+        const floor = selectFloorPrice?.toNumber() || 0;
         res.data.records.map((item: any) => {
+          const ltv = parseFloat(item.collectionsResultModel[0].ltv);
           const obj = {
             id: item.id,
             platform: item.platform === "wing" ? 'Wing' : 'BendDao',
-            available: parseFloat(parseFloat(item.suppliedBalance).toFixed(2)),
+            // available: parseFloat(parseFloat(item.suppliedBalance).toFixed(2)),
             rewardAPR: parseFloat((parseFloat(item.borrowApy) * 100).toFixed(2)),
             interestAPR: parseFloat((parseFloat(item.supplyApy) * 100).toFixed(2)),
-            vaultAPR: (parseFloat(item.borrowApy) - parseFloat(item.supplyApy))
+            vaultAPR: (parseFloat(item.borrowApy) - parseFloat(item.supplyApy)),
+            available: parseFloat((floor * ltv).toFixed(2))
           }
-          list.push(obj)
+          if (item.platform !== selectApr) {
+            return list.push(obj)
+          }
+          list.unshift(obj)
         })
       }
       setAprList(list)
@@ -141,10 +149,10 @@ const AprSelect = ({ defaultApr, onClose, onSelect, nft }: { defaultApr: string,
                     <Space>
                       <Icon src={apr.platform === 'Wing' ? imgurl.market.WingSelect : imgurl.dashboard.rewardBend} width={"0.32rem"} height={"0.32rem"} />
                       <Typography fontSize={"0.2rem"} fontWeight={"700"}>{apr.platform}</Typography>
-                      <Icon hidden={apr.platform === defaultApr ? false : true} src={imgurl.market.SelectIcon} width={"0.18rem"} height={"0.18rem"} />
+                      <Icon hidden={apr.platform === selectApr ? false : true} src={imgurl.market.SelectIcon} width={"0.18rem"} height={"0.18rem"} />
                     </Space>
                   </Flex>
-                  <SelectButton onClick={() => onSelect(apr)} disabled={apr.platform === defaultApr ? true : false}>Check</SelectButton>
+                  <SelectButton onClick={() => onSelect(apr)} disabled={apr.platform === selectApr ? true : false}>Check</SelectButton>
                 </Flex>
                 <Flex flexDirection={"column"} padding={"0.2rem 0.28rem 0 0.28rem"} background={"rgba(0,0,0,0.03)"} borderRadius={"0.1rem"} border={"1px solid rgba(0,0,0,0.1)"}>
                   <Flex width={"100%"} justifyContent={"space-between"}>
@@ -164,7 +172,7 @@ const AprSelect = ({ defaultApr, onClose, onSelect, nft }: { defaultApr: string,
                           </Flex>
                           <Flex paddingBottom={"0.2rem"} justifyContent={"space-between"}>
                             <Typography fontSize={"0.14rem"}>Interest APR</Typography>
-                            <Typography fontSize={"0.14rem"}>{apr.interestAPR}%</Typography>
+                            <Typography fontSize={"0.14rem"}>-{apr.interestAPR}%</Typography>
                           </Flex>
                         </Panel>
                       </Collapse>

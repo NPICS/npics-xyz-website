@@ -33,7 +33,8 @@ function MarketLabel(props: { icon?: string; name: string }) {
   );
 }
 
-export default function NFTPayProgressing(props: { nft: CollectionDetail }) {
+export default function NFTPayProgressing(props: { nft: CollectionDetail, platform: string }) {
+  console.log(props.platform);
   return (
     <Flex
       width={"8.8rem"}
@@ -69,7 +70,8 @@ export default function NFTPayProgressing(props: { nft: CollectionDetail }) {
           icon={props.nft.marketIcon()}
         />
         <MarketLabel name={"DYDX"} icon={imgurl.market.DYDXBuy} />
-        <MarketLabel name={"BendDAO"} icon={imgurl.market.BendDAOBuy} />
+        {props.platform === "bendao" && <MarketLabel name={"BendDAO"} icon={imgurl.market.BendDAOBuy} />}
+        {props.platform === "wing" && <MarketLabel name={"Wing"} icon={imgurl.market.WingSelect} />}
       </Flex>
       <Flex marginTop={"0.7rem"} justifyContent={"center"}>
         <Typography

@@ -565,7 +565,7 @@ export default function NFTPay(props: {
                 markIcon && <Icon style={{ marginRight: "0.05rem" }} src={markIcon} width={"0.2rem"} height={"0.22rem"} />
               }
               <Typography color={"#000"} fontSize={"0.14rem"} fontWeight={500}>
-                Listed Price
+                Listing Price
               </Typography>
             </Flex>
 

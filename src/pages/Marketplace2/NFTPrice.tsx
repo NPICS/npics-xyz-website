@@ -336,11 +336,11 @@ function NFTPrice(props: {
       </Modal>
       {/* show selece apr modal */}
       <Modal isOpen={showAprModal} onRequestClose={() => setShowAprModal(false)}>
-        <AprSelect defaultApr={aprInfo.name} nft={props?.item?.address} onClose={() => setShowAprModal(false)} onSelect={selectApr} />
+        <AprSelect selectFloorPrice={props.item?.floorPrice} selectApr={aprInfo.name} defaultApr={props?.item?.platform} nft={props?.item?.address} onClose={() => setShowAprModal(false)} onSelect={selectApr} />
       </Modal>
       {/* popup loading */}
       <Modal isOpen={progressingPopupOpen}>
-        {props.item && <NFTPayProgressing nft={props.item} />}
+        {props.item && <NFTPayProgressing nft={props.item} platform={platform} />}
       </Modal>
 
       {/* popup success ✅ */}
@@ -395,7 +395,7 @@ function NFTPrice(props: {
               fontWeight={500}
               color={"rgba(0,0,0,.5)"}
             >
-              Listed Price
+              Listing Price
             </Typography>
             <Pop20 content={listedPricePop}>
               <TipsIcon style={{ marginBottom: '0.03rem' }} width={"0.14rem"} src={tipsIcon} />
