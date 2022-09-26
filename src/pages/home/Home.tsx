@@ -93,6 +93,8 @@ function Home() {
     setCheckText(e + 1)
   }
 
+  //update github
+
   useEffect(
     () => {
       let startTimer
