@@ -186,7 +186,7 @@ export default function MyTable() {
               <img src={imgurl.whitePrice} alt="" />
             </div>
             <div>
-              <span style={{ fontSize: '0.14rem' }}>{text === 0 ? '0.00' : text}</span>
+              <span style={{ fontSize: '0.14rem' }}>{text === 0 ? '0.00' : text.toFixed(2)}</span>
               <span
                 style={{
                   fontSize: '0.14rem',

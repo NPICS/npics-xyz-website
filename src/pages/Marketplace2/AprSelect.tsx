@@ -100,7 +100,6 @@ const AprSelect = ({ defaultApr, selectApr, onClose, onSelect, nft, selectFloorP
       const res: any = await http.myPost("npics-nft/app-api/v2/platform/getList", platformObj);
       const list: Iapr[] = []
       if (res.code === 200 && res.data.records) {
-        console.log(selectFloorPrice);
         const floor = selectFloorPrice?.toNumber() || 0;
         res.data.records.map((item: any) => {
           const ltv = parseFloat(item.collectionsResultModel[0].ltv);
@@ -113,7 +112,7 @@ const AprSelect = ({ defaultApr, selectApr, onClose, onSelect, nft, selectFloorP
             vaultAPR: (parseFloat(item.borrowApy) - parseFloat(item.supplyApy)),
             available: parseFloat((floor * ltv).toFixed(2))
           }
-          if (item.platform !== selectApr) {
+          if (item.platform !== defaultApr) {
             return list.push(obj)
           }
           list.unshift(obj)
