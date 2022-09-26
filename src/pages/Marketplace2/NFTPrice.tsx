@@ -21,7 +21,7 @@ import { Npics } from "../../abis/Npics";
 import { ethers } from "ethers";
 import Modal from "../../component/Modal";
 import NFTPay from "./NFTPay";
-import { message, notification, Popover, Space } from "antd";
+import { message, notification, Popover, Skeleton, Space } from "antd";
 import { globalConstant } from "utils/globalConstant";
 import { useNavigate } from "react-router-dom";
 import { useWeb3React } from "@web3-react/core";
@@ -383,11 +383,24 @@ function NFTPrice(props: {
             onClick={() => window.open(`${props.item?.marketUrl}`)}
           >
             <Box borderRadius={"0.11rem"} overflow={"hidden"}>
-              <Icon
+              {props.item?.market ?
+                <Pop20
+                  content={`${props.item?.market}`}
+                >
+                  <Icon
+                    width={"0.22rem"}
+                    height={"0.22rem"}
+                    src={props.item?.marketIcon()}
+                  />
+                </Pop20>
+                :
+                <Skeleton.Avatar shape={'circle'} active size={"small"} />
+              }
+              {/* <Icon
                 width={"0.22rem"}
                 height={"0.22rem"}
                 src={props.item?.marketIcon()}
-              />
+              /> */}
             </Box>
 
             <Typography
@@ -441,7 +454,15 @@ function NFTPrice(props: {
           <Flex width={'100%'} height={'30%'} justifyContent={"space-between"}>
             <Flex justifyContent={"flex-start"} alignItems={"center"}>
               <Space>
-                {aprInfo.icon && <Icon src={aprInfo.icon} width={'0.22rem'} height={'0.22rem'} alt="" />}
+                {aprInfo.icon ?
+                  <Pop20
+                    content={`${aprInfo.name}`}
+                  >
+                    <Icon src={aprInfo.icon} width={'0.22rem'} height={'0.22rem'} alt="" />
+                  </Pop20>
+                  :
+                  <Skeleton.Avatar shape={'circle'} active size={"small"} />
+                }
                 <Typography
                   fontSize={"0.14rem"}
                   fontWeight={500}
@@ -494,42 +515,47 @@ function NFTPrice(props: {
         overflow={"hidden"}
         justifyContent={"start"}
       >
-        {recommendNFTs.map((nft, idx) => {
-          if (recommendNFTs.length === idx + 1) {
-            return (
-              <MoreNFT
-                tap={() => {
-                  navigate(`/marketplace/collections/${nft?.address}`);
-                }}
-                img={nft.imageUrl}
-                total={recommendNFTTotal}
-                key={nft.tokenId}
-              />
-            );
-          } else {
-            return (
-              <Pop20
-                key={nft.tokenId}
-                content={`${nft &&
-                  `${nft.nftName() ?? ""}${nft.isNoName() ? "" : " #"}${nft.tokenId
-                  }`
-                  }`}
-              >
-                <div style={{ width: "1rem", height: "1rem", borderRadius: "0.15rem", overflow: "hidden" }}>
-                  <OtherNFT
-                    src={nft.imageUrl}
-                    onClick={() => {
-                      navigate(`/nft/${nft.address}/${nft.tokenId}`, {
-                        replace: true,
-                      });
+        {
+          recommendNFTs && recommendNFTs.length > 0 ?
+            recommendNFTs.map((nft, idx) => {
+              if (recommendNFTs.length === idx + 1) {
+                return (
+                  <MoreNFT
+                    tap={() => {
+                      navigate(`/marketplace/collections/${nft?.address}`);
                     }}
+                    img={nft.imageUrl}
+                    total={recommendNFTTotal}
                     key={nft.tokenId}
                   />
-                </div>
-              </Pop20>
-            );
-          }
-        })}
+                );
+              } else {
+                return (
+                  <Pop20
+                    key={nft.tokenId}
+                    content={`${nft &&
+                      `${nft.nftName() ?? ""}${nft.isNoName() ? "" : " #"}${nft.tokenId
+                      }`
+                      }`}
+                  >
+                    <div style={{ width: "1rem", height: "1rem", borderRadius: "0.15rem", overflow: "hidden" }}>
+                      <OtherNFT
+                        src={nft.imageUrl}
+                        onClick={() => {
+                          navigate(`/nft/${nft.address}/${nft.tokenId}`, {
+                            replace: true,
+                          });
+                        }}
+                        key={nft.tokenId}
+                      />
+                    </div>
+                  </Pop20>
+                );
+              }
+            })
+            :
+            new Array(6).fill(0).map((item, index) => (<Skeleton.Button key={index} shape={'square'} active style={{ height: '1rem', minWidth: '1rem', borderRadius: '0.15rem' }}></Skeleton.Button>))
+        }
       </Grid>
       {/* Buy handler */}
       <BuyBox flexDirection={"column"} alignItems={"start"}>

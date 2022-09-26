@@ -7,6 +7,7 @@ import { Collapse } from 'antd';
 import { useEffect, useState } from "react";
 import http from "utils/http";
 import BigNumber from "bignumber.js";
+import progressIcon from "../../assets/images/market/nft_pay_progressing.gif";
 const AprSelectBox = styled.div`
   width: 7.2rem;
   /* min-height: 5rem; */
@@ -140,47 +141,52 @@ const AprSelect = ({ defaultApr, selectApr, onClose, onSelect, nft, selectFloorP
       {/* select */}
       <div className="select_box">
         {
-          aprList.map((apr: Iapr) => {
-            return (
-              <SelectItem key={apr.id}>
-                <Flex alignItems={"center"} justifyContent={"space-between"} paddingBottom={"0.18rem"}>
-                  <Flex alignItems={"center"}>
-                    <Space>
-                      <Icon src={apr.platform === 'Wing' ? imgurl.market.WingSelect : imgurl.dashboard.rewardBend} width={"0.32rem"} height={"0.32rem"} />
-                      <Typography fontSize={"0.2rem"} fontWeight={"700"}>{apr.platform}</Typography>
-                      <Icon hidden={apr.platform === selectApr ? false : true} src={imgurl.market.SelectIcon} width={"0.18rem"} height={"0.18rem"} />
-                    </Space>
+          aprList.length > 0 ?
+            aprList.map((apr: Iapr) => {
+              return (
+                <SelectItem key={apr.id}>
+                  <Flex alignItems={"center"} justifyContent={"space-between"} paddingBottom={"0.18rem"}>
+                    <Flex alignItems={"center"}>
+                      <Space>
+                        <Icon src={apr.platform === 'Wing' ? imgurl.market.WingSelect : imgurl.dashboard.rewardBend} width={"0.32rem"} height={"0.32rem"} />
+                        <Typography fontSize={"0.2rem"} fontWeight={"700"}>{apr.platform}</Typography>
+                        <Icon hidden={apr.platform === selectApr ? false : true} src={imgurl.market.SelectIcon} width={"0.18rem"} height={"0.18rem"} />
+                      </Space>
+                    </Flex>
+                    <SelectButton onClick={() => onSelect(apr)} disabled={apr.platform === selectApr ? true : false}>Check</SelectButton>
                   </Flex>
-                  <SelectButton onClick={() => onSelect(apr)} disabled={apr.platform === selectApr ? true : false}>Check</SelectButton>
-                </Flex>
-                <Flex flexDirection={"column"} padding={"0.2rem 0.28rem 0 0.28rem"} background={"rgba(0,0,0,0.03)"} borderRadius={"0.1rem"} border={"1px solid rgba(0,0,0,0.1)"}>
-                  <Flex width={"100%"} justifyContent={"space-between"}>
-                    <Typography>Available Borrow</Typography>
+                  <Flex flexDirection={"column"} padding={"0.2rem 0.28rem 0 0.28rem"} background={"rgba(0,0,0,0.03)"} borderRadius={"0.1rem"} border={"1px solid rgba(0,0,0,0.1)"}>
+                    <Flex width={"100%"} justifyContent={"space-between"}>
+                      <Typography>Available Borrow</Typography>
+                      <Flex>
+                        <Icon width={"0.2rem"} height={"0.2rem"} src={ethIcon} />
+                        <span>{apr.available}</span>
+                      </Flex>
+                    </Flex>
                     <Flex>
-                      <Icon width={"0.2rem"} height={"0.2rem"} src={ethIcon} />
-                      <span>{apr.available}</span>
+                      <CollapseBox>
+                        <Collapse expandIconPosition="end" style={{ width: '100%' }} ghost>
+                          <Panel className="collapse_panel" header={<PanelHead apr={apr} />} key="1">
+                            <Flex paddingBottom={"0.12rem"} justifyContent={"space-between"}>
+                              <Typography fontSize={"0.14rem"}>Reward APR</Typography>
+                              <Typography fontSize={"0.14rem"}>{apr.rewardAPR}%</Typography>
+                            </Flex>
+                            <Flex paddingBottom={"0.2rem"} justifyContent={"space-between"}>
+                              <Typography fontSize={"0.14rem"}>Interest APR</Typography>
+                              <Typography fontSize={"0.14rem"}>-{apr.interestAPR}%</Typography>
+                            </Flex>
+                          </Panel>
+                        </Collapse>
+                      </CollapseBox>
                     </Flex>
                   </Flex>
-                  <Flex>
-                    <CollapseBox>
-                      <Collapse expandIconPosition="end" style={{ width: '100%' }} ghost>
-                        <Panel className="collapse_panel" header={<PanelHead apr={apr} />} key="1">
-                          <Flex paddingBottom={"0.12rem"} justifyContent={"space-between"}>
-                            <Typography fontSize={"0.14rem"}>Reward APR</Typography>
-                            <Typography fontSize={"0.14rem"}>{apr.rewardAPR}%</Typography>
-                          </Flex>
-                          <Flex paddingBottom={"0.2rem"} justifyContent={"space-between"}>
-                            <Typography fontSize={"0.14rem"}>Interest APR</Typography>
-                            <Typography fontSize={"0.14rem"}>-{apr.interestAPR}%</Typography>
-                          </Flex>
-                        </Panel>
-                      </Collapse>
-                    </CollapseBox>
-                  </Flex>
-                </Flex>
-              </SelectItem>
-            )
-          })
+                </SelectItem>
+              )
+            })
+            :
+            <Flex justifyContent={"center"}>
+              <img style={{ width: "2.5rem" }} src={progressIcon} />
+            </Flex>
         }
       </div>
     </AprSelectBox>

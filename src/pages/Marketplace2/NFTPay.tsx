@@ -18,7 +18,7 @@ import { Erc20 } from "../../abis/Erc20";
 import { ContractAddresses } from "../../utils/addresses";
 import { useWeb3React } from "@web3-react/core";
 import http from "../../utils/http";
-import { message, notification } from "antd";
+import { message, notification, Skeleton } from "antd";
 import { Npics } from "../../abis/Npics";
 import Modal from "../../component/Modal";
 import NFTPayProgressing from "./NFTPayProgressing";
@@ -34,6 +34,7 @@ import openseaValidIcon from 'assets/images/market/nfts_opensea_valid.svg'
 import { imgurl } from "utils/globalimport";
 import { useAppSelector } from "store/hooks";
 import { BANK_ENUM } from "utils/enums";
+import { Pop20 } from "component/Popover/Popover";
 
 export function PopupTitle(props: { title: string; canClose: boolean }) {
   return (
@@ -562,7 +563,14 @@ export default function NFTPay(props: {
           <Flex alignItems={"center"}>
             <Flex alignContent={"center"}>
               {
-                markIcon && <Icon style={{ marginRight: "0.05rem" }} src={markIcon} width={"0.2rem"} height={"0.22rem"} />
+                props.nft && props.nft.market ?
+                  <Pop20
+                    content={`${props.nft?.market}`}
+                  >
+                    <Icon style={{ marginRight: "0.05rem" }} src={markIcon} width={"0.2rem"} height={"0.22rem"} />
+                  </Pop20>
+                  :
+                  <Skeleton.Avatar shape={'circle'} active size={"small"} />
               }
               <Typography color={"#000"} fontSize={"0.14rem"} fontWeight={500}>
                 Listing Price
@@ -582,7 +590,21 @@ export default function NFTPay(props: {
           </Flex>
           <Flex alignItems={"center"}>
             <Flex alignContent={"center"}>
-              <Icon style={{ marginRight: "0.05rem" }} width={"0.22rem"} height={"0.22rem"} src={props.aprInfo.icon} />
+              {props.aprInfo.name ?
+                <Pop20
+                  content={`${props.aprInfo?.name}`}
+                >
+                  <Icon
+                    style={{ marginRight: "0.05rem" }}
+                    width={"0.22rem"}
+                    height={"0.22rem"}
+                    src={props.aprInfo?.icon}
+                  />
+                </Pop20>
+                :
+                <Skeleton.Avatar shape={'circle'} active size={"small"} />
+              }
+              {/* <Icon style={{ marginRight: "0.05rem" }} width={"0.22rem"} height={"0.22rem"} src={props.aprInfo.icon} /> */}
               <Typography color={"#000"} fontSize={"0.14rem"} fontWeight={500}>
                 Loan Amount
               </Typography>

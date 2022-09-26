@@ -16,7 +16,7 @@ import { Banner } from "./Market";
 import nftWarningIcon from "../../assets/images/market/nft_warning_tips.png";
 import { getNFTStatusInOpensea } from "../../utils/opensea";
 import { useAsync } from "react-use";
-import { Popover } from "antd";
+import { Popover, Skeleton } from "antd";
 import rarity_1_icon from "../../assets/images/market/rarity_1.svg";
 import rarity_2_icon from "../../assets/images/market/rarity_2.svg";
 import { Pop20 } from "component/Popover/Popover";
@@ -102,7 +102,7 @@ export default function OneNFT() {
   const [openSeaIsNormalization, setOpenSeaIsNormalization] =
     useState<boolean>(true);
   const [rarityData, setRarityData] = useState<{ [key: string]: any }>();
-  const platform = useAppSelector(state => state.platform.selectPlatform)
+  // const platform = useAppSelector(state => state.platform.selectPlatform)
   useAsync(async () => {
     if (!params) return;
     await loadDetailData();
@@ -119,7 +119,6 @@ export default function OneNFT() {
         setRarityData(resp.data);
       }
     }
-    console.log(platform);
   }, [params]);
 
   useAsync(async () => {
@@ -171,7 +170,7 @@ export default function OneNFT() {
       `/npics-nft/app-api/v2/nft/getCollectionItemsDetail`,
       {
         address: params.address,
-        paltfrom: platform,
+        // paltfrom: platform,
         tokenId: params.tokenId,
       }
     );
@@ -268,23 +267,26 @@ export default function OneNFT() {
             width={"0.36rem"}
             src={PopIcon}
             onClick={() =>
-              navigate(`/marketplace/collections/${detailData?.address}`)
+              navigate(`/marketplace/collections/${params.address}`)
             }
           />
           <Flex flexDirection={"column"} gap={"0.05rem"}>
             {/* collection name */}
             <Typography fontSize={"0.16rem"} color={"#fff"} fontWeight={500}>
-              {detailData?.collectionName}
+              {detailData?.collectionName ?
+                detailData?.collectionName
+                :
+                <Skeleton.Button shape={'square'} active style={{ height: '0.2rem', minWidth: '3rem', borderRadius: '4px' }}></Skeleton.Button>
+              }
             </Typography>
             {/* nft name */}
             <Flex alignItems={"center"} gap={"0.12rem"}>
               <Typography fontSize={"0.3rem"} color={"#fff"} fontWeight={800}>
                 {
-                  // `${detailData?.singularForName()} #${detailData?.tokenId}`
-                  // detailData && `${detailData.nftName() ?? ""}${detailData.isNoName() ? "" : " #"}${detailData.tokenId}`
-                  detailData && detailData.name && detailData.name.length > 0
-                    ? detailData.name
-                    : `${detailData?.tokenId}`
+                  detailData && (detailData.name || detailData.tokenId) ?
+                    detailData.name || detailData?.tokenId
+                    :
+                    <Skeleton.Button shape={'square'} active style={{ height: '0.4rem', minWidth: '3rem', borderRadius: '8px' }}></Skeleton.Button>
                 }
               </Typography>
               {/* Reported */}
@@ -334,7 +336,13 @@ export default function OneNFT() {
         {/* main */}
         <NFTMain>
           <Grid className="main_nft_box" gridArea={"cover"}>
-            <Cover className="nft_img" src={detailData?.imageUrl} />
+            {
+              detailData?.imageUrl ?
+                <Cover className="nft_img" src={detailData?.imageUrl} />
+                :
+                <Skeleton.Button shape={'square'} active style={{ height: '4.8rem', minWidth: '4.8rem', borderRadius: '8px' }}></Skeleton.Button>
+            }
+            {/* <Cover className="nft_img" src={detailData?.imageUrl} /> */}
           </Grid>
           <Grid gridArea={"price"}>
             <NFTPrice item={detailData} refreshBlock={loadDetailData} />
