@@ -28,7 +28,7 @@ interface DataType {
   apr: number
   // vol: number
   dayChange: number
-  dayVolume: BigNumber
+  dayVolume: number
   address: string
   platform: string
 }
@@ -98,7 +98,7 @@ export default function MyTable() {
             // vol: +changeData[i].vol,
             apr: +changeData[i].svaultApr,
             dayChange: changeData[i].sDayChange,
-            dayVolume: new BigNumber(changeData[i].dayVolume),
+            dayVolume: parseFloat(changeData[i].dayVolume + "") || 0,
             address: changeData[i].address,
             platform: changeData[i].platform
           })
@@ -177,16 +177,16 @@ export default function MyTable() {
       className: 'table_col',
       defaultSortOrder: 'descend',
       sorter: (a, b) => {
-        return +a.dayVolume.toNumber() - +b.dayVolume.toNumber()
+        return +a.dayVolume - +b.dayVolume
       },
-      render: (text, row) => {
+      render: (text: number, row) => {
         return (
           <div className="descend">
             <div>
               <img src={imgurl.whitePrice} alt="" />
             </div>
             <div>
-              <span style={{ fontSize: '0.14rem' }}>{text.toFixed(2, 1) || 0.00}</span>
+              <span style={{ fontSize: '0.14rem' }}>{text === 0 ? '0.00' : text}</span>
               <span
                 style={{
                   fontSize: '0.14rem',
