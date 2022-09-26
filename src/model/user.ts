@@ -88,7 +88,9 @@ export class Collections {
 
   @Expose()
   get sDayChange() {
-    return this.dayChange.multipliedBy(100).toFixed(2);
+    return (
+      (this.dayChange && this.dayChange.multipliedBy(100).toFixed(2)) || "0.00"
+    );
   }
 }
 
