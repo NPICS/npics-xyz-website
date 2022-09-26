@@ -563,16 +563,16 @@ export default function NFTPay(props: {
           <Flex alignItems={"center"}>
             <Flex alignContent={"center"}>
               {
-                props.nft && props.nft.market ?
+                markIcon ?
                   <Pop20
                     content={`${props.nft?.market}`}
                   >
                     <Icon style={{ marginRight: "0.05rem" }} src={markIcon} width={"0.2rem"} height={"0.22rem"} />
                   </Pop20>
                   :
-                  <Skeleton.Avatar shape={'circle'} active size={"small"} />
+                  <Skeleton.Avatar style={{ marginRight: '0.08rem' }} shape={'circle'} active size={"small"} />
               }
-              <Typography color={"#000"} fontSize={"0.14rem"} fontWeight={500}>
+              <Typography style={{ display: 'flex', alignItems: "center" }} color={"#000"} fontSize={"0.14rem"} fontWeight={500}>
                 Listing Price
               </Typography>
             </Flex>
@@ -602,10 +602,10 @@ export default function NFTPay(props: {
                   />
                 </Pop20>
                 :
-                <Skeleton.Avatar shape={'circle'} active size={"small"} />
+                <Skeleton.Avatar style={{ marginRight: '0.08rem' }} shape={'circle'} active size={"small"} />
               }
               {/* <Icon style={{ marginRight: "0.05rem" }} width={"0.22rem"} height={"0.22rem"} src={props.aprInfo.icon} /> */}
-              <Typography color={"#000"} fontSize={"0.14rem"} fontWeight={500}>
+              <Typography style={{ display: 'flex', alignItems: "center" }} color={"#000"} fontSize={"0.14rem"} fontWeight={500}>
                 Loan Amount
               </Typography>
             </Flex>
