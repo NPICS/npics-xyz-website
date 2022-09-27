@@ -497,7 +497,7 @@ function NFTPrice(props: {
           </Flex>
           <Flex height={'70%'} justifyContent={"center"} alignItems={'center'}>
             <Typography
-              color={"#FF490F"}
+              color={vaultAPR > 0 ? '#18CF15' : '#FF490F'}
               fontSize={"0.24rem"}
               lineHeight={"100%"}
               fontWeight={700}

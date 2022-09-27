@@ -310,7 +310,7 @@ function XHeader() {
       > */}
         <FlexDiv>
           <LogoLink to={"/"}>
-            <img src={imgurl.logoBeta} alt="" />
+            <img src={imgurl.logo} alt="" />
           </LogoLink>
           <NavLink
             to={"marketplace"}
@@ -318,9 +318,8 @@ function XHeader() {
           >
             <StyledHoverSpan
               style={{
-                color: `${
-                  activiRoute === "nft" || activiRoute === "home" ? "#fff" : ""
-                }`,
+                color: `${activiRoute === "nft" || activiRoute === "home" ? "#fff" : ""
+                  }`,
               }}
             >
               Marketplace
@@ -332,11 +331,10 @@ function XHeader() {
           >
             <StyledHoverSpan
               style={{
-                color: `${
-                  activiRoute === "vaultsDetail" || activiRoute === "home"
-                    ? "#fff"
-                    : ""
-                }`,
+                color: `${activiRoute === "vaultsDetail" || activiRoute === "home"
+                  ? "#fff"
+                  : ""
+                  }`,
               }}
             >
               Dashboard
@@ -388,9 +386,8 @@ function XHeader() {
           <Flex
             alignItems="center"
             justifyContent="center"
-            background={`${
-              showConnect ? "rgba(255,255,255,.1)" : "rgba(255,255,255,.2)"
-            }`}
+            background={`${showConnect ? "rgba(255,255,255,.1)" : "rgba(255,255,255,.2)"
+              }`}
             borderRadius="9999px"
             width="0.35rem"
             height="0.35rem"
