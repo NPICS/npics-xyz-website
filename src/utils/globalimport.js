@@ -1,6 +1,6 @@
 import Vector from '../assets/images/Vector.png'
 import images11 from '../assets/images/image11.png'
-import logo from '../assets/images/logo.png'
+import logo from '../assets/images/logo.svg'
 import logoBeta from '../assets/images/logo_beta.svg'
 import lightLogo from '../assets/images/lightLogo.png'
 import copy from '../assets/images/copyBlack.png'
