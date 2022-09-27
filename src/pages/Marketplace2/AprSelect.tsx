@@ -107,7 +107,7 @@ const AprSelect = ({ defaultApr, selectApr, onClose, onSelect, nft, selectFloorP
           const ltv = parseFloat(selectItem.ltv);
           const obj = {
             id: item.id,
-            platform: item.platform === "wing" ? 'Wing' : 'BendDao',
+            platform: item.platform === "wing" ? 'Wing' : 'BendDAO',
             // available: parseFloat(parseFloat(item.suppliedBalance).toFixed(2)),
             rewardAPR: parseFloat((parseFloat(item.borrowApy) * 100).toFixed(2)),
             interestAPR: parseFloat((parseFloat(item.supplyApy) * 100).toFixed(2)),
