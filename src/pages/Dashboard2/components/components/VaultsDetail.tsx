@@ -130,17 +130,23 @@ export default function VaultsDetail() {
   const params: { graphId: string } = urlParams;
 
   useEffect(() => {
-    // get thw arp
-    http.myPost("/npics-nft/app-api/v2/nfthome/getAprInfo", {}).then((resp) => {
-      let _resp = resp as any;
-      if (_resp.code === 200) {
-        setAprData({
-          apr: parseFloat(_resp.data.apr) || 0,
-          rewardApr: parseFloat(_resp.data.rewardApr) || 0,
+    if (activities) {
+      // get thw arp
+      http
+        .myPost("/npics-nft/app-api/v2/nfthome/getAprInfo", {
+          platform: BANK_NAME_MAP[activities.bankId],
+        })
+        .then((resp) => {
+          let _resp = resp as any;
+          if (_resp.code === 200) {
+            setAprData({
+              apr: parseFloat(_resp.data.apr) || 0,
+              rewardApr: parseFloat(_resp.data.rewardApr) || 0,
+            });
+          }
         });
-      }
-    });
-  }, []);
+    }
+  }, [activities]);
 
   useEffect(() => {
     getBalance();
@@ -166,7 +172,6 @@ export default function VaultsDetail() {
   useEffect(() => {
     if (!activities || !contractCalcData) return;
     if (progressVal === 1) {
-      console.log("checked", checked);
       setChecked(true);
     } else {
       setChecked(false);
@@ -183,7 +188,6 @@ export default function VaultsDetail() {
     setPayDebt(pDebt);
     setRemainingDebt(rDebt);
     setInputPayDebt(showDebt);
-    console.log("pDebt", pDebt.toFixed());
 
     // eslint-disable-next-line
   }, [progressVal, activities, contractCalcData]);
@@ -305,7 +309,9 @@ export default function VaultsDetail() {
         }
       `,
       })
-      .then((res: any) => res.data.downpays && res.data.downpays[0]);
+      .then((res: any) => {
+        return res.data.downpays && res.data.downpays[0];
+      });
     if (!downpay) {
       return;
     }
@@ -334,11 +340,10 @@ export default function VaultsDetail() {
       imageUrl: imageUrlData.data?.imageUrl || downpayItem.nftCoverImage,
       collectionName: downpayItem.name,
       liquidationThreshold: downpayItem.liquidationThreshold,
+
+      rewardApr: downpayItem.rewardApr,
+      borrowApy: downpayItem.borrowApy,
     } as unknown as VaultsItemData;
-    console.log(
-      downpay.floorPrice.toString(),
-      downpay.purchaseFloorPrice.toString()
-    );
 
     const contractData: VaultsContractCalcData = await getVaultsContractData(
       downpay.nft,
@@ -713,20 +718,21 @@ export default function VaultsDetail() {
 
                     <Pop
                       content={VaultAprPop({
-                        rewardAPR: aprData.rewardApr ?? 0,
-                        interestAPR: aprData.apr / 100 ?? 0,
+                        rewardAPR: activities?.rewardApr || 0,
+                        interestAPR: activities?.borrowApy || 0,
                       })}
                     >
                       <Icon width={"0.14rem"} src={imgurl.market.tipsIcon} />
                     </Pop>
                   </Flex>
-                  <Typography
-                    fontSize="0.2rem"
-                    fontWeight="500"
-                    color="#000"
-                  >{`${(aprData.rewardApr * 100 - aprData.apr).toFixed(
-                    2
-                  )}%`}</Typography>
+                  <Typography fontSize="0.2rem" fontWeight="500" color="#000">
+                    {activities
+                      ? `${(
+                          +activities?.rewardApr * 100 +
+                          +activities.borrowApy
+                        ).toFixed(2)}%`
+                      : "-%"}
+                  </Typography>
                 </Flex>
                 <Flex
                   alignItems={"self-start"}

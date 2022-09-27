@@ -106,7 +106,7 @@ export const thirdPartyFeeConfig: IThirdPartyFeeConfig[] = [
     contract: CloneX,
     [OFFER_TYPE_ENUM.x2y2]: {
       marketFee: 0.005,
-      creatorFee: 0,
+      creatorFee: 0.05,
     },
     [OFFER_TYPE_ENUM.looksrare]: {
       marketFee: 0.02,
