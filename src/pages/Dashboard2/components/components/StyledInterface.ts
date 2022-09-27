@@ -171,6 +171,8 @@ export class VaultsItemData {
   repayAll!: boolean;
   acceptOfferValue!: string;
   liquidationThreshold!: string;
+  rewardApr!: string;
+  borrowApy!: string;
 
   @TransformBigNumber()
   purchaseFloorPrice!: BigNumber;

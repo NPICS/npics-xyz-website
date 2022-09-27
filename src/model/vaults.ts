@@ -44,6 +44,8 @@ export const getVaultsServerListDataMap = () =>
       const collectionsResultModel = list[i].collectionsResultModel || [];
       const collectionsResultModelMap: { [key: string]: any } = {};
       for (let j = 0; j < collectionsResultModel.length; j++) {
+        collectionsResultModel[j].rewardApr = list[i].borrowApy;
+        collectionsResultModel[j].borrowApy = list[i].supplyApy;
         collectionsResultModelMap[
           collectionsResultModel[j].address.toLowerCase()
         ] = collectionsResultModel[j];

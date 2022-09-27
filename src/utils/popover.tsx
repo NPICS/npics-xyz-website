@@ -16,7 +16,10 @@ export const listedPricePop = (
   <Typography>The Lowest Listing price in all markets.</Typography>
 );
 
-export function VaultAprPop(props: { rewardAPR: number; interestAPR: number }) {
+export function VaultAprPop(props: {
+  rewardAPR: number | string;
+  interestAPR: number | string;
+}) {
   return (
     <Grid width={"6rem"} gridGap="0.2rem" borderRadius="0.2rem">
       <Flex alignItems="center" justifyContent="space-between">
@@ -24,7 +27,7 @@ export function VaultAprPop(props: { rewardAPR: number; interestAPR: number }) {
           Reward APR (real-time)
         </Typography>
         <Typography fontSize="0.14rem" fontWeight="500" color="#000">
-          {(props.rewardAPR * 100).toFixed(2)}%
+          {(+props.rewardAPR * 100).toFixed(2)}%
         </Typography>
       </Flex>
       <Flex alignItems="center" justifyContent="space-between">
@@ -32,7 +35,7 @@ export function VaultAprPop(props: { rewardAPR: number; interestAPR: number }) {
           Interest APR (real-time)
         </Typography>
         <Typography fontSize="0.14rem" fontWeight="500" color="#000">
-          {-(props.interestAPR * 100).toFixed(2)}%
+          {-(+props.interestAPR).toFixed(2)}%
         </Typography>
       </Flex>
 
