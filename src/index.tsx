@@ -60,7 +60,7 @@ const StyledThemeProvider = (props: any) => {
         action(setShowDetailAnimate(true))
       }
     }
-    scrollTop > 150 ? action(setFixed(true)) : action(setFixed(false))
+    scrollTop > 30 ? action(setFixed(true)) : action(setFixed(false))
   }
   const isDark = isHome
   return <ThemeProvider theme={isDark ? darkColors : lightColors} {...props} />
