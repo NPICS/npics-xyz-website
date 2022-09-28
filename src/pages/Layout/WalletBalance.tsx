@@ -162,7 +162,7 @@ export default function WalletBalance() {
       },
       {
         icon: imgurl.home.PWingIcon,
-        text: "pWing",
+        text: "pWING",
         amount: pWingBalance?.dp(4).toFormat() ?? TextPlaceholder,
         dollar:
           typeof pWingBalance === "undefined"
@@ -197,7 +197,7 @@ export default function WalletBalance() {
               {/*<span>{new BigNumber(item.amount.toString()).div(10 ** 18).dp(4).toFixed()}</span>*/}
               {/*<span>${item.dollar.dp(0).toFixed()}</span>*/}
               <span>{item.amount}</span>
-              <span>{item.dollar}</span>
+              <span>${item.dollar}</span>
             </div>
           </div>
         );

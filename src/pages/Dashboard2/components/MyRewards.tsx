@@ -16,6 +16,7 @@ interface IRewardItem {
   icon: any;
   rewards: string;
   bank: BANK_ENUM;
+  decimals: number;
 }
 
 function RewardItem({
@@ -70,7 +71,7 @@ function RewardItem({
               {rewardItem.rewards &&
                 new BigNumber(rewardItem.rewards?.toString())
                   .dp(3, 1)
-                  .div(10 ** 18)
+                  .div(10 ** rewardItem.decimals)
                   .toFixed(4, 1)}
             </Typography>
           </Flex>
@@ -101,12 +102,14 @@ export default function MyRewards() {
       icon: imgurl.dashboard.rewardBend,
       rewards: "0",
       bank: BANK_ENUM.bend,
+      decimals: 18,
     },
     {
-      name: "pWing",
+      name: "pWING",
       icon: imgurl.dashboard.rewardPWing,
       rewards: "0",
       bank: BANK_ENUM.wing,
+      decimals: 9,
     },
   ]);
 
@@ -120,7 +123,6 @@ export default function MyRewards() {
       promiseList.push(npics.getRewardsBalance(account, rewardsList[i].bank));
     }
     Promise.all(promiseList).then((res) => {
-      console.log("res", res);
       for (let i = 0; i < rewardsList.length; i++) {
         rewardsList[i].rewards = res[i].toString();
       }
