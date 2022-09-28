@@ -99,7 +99,9 @@ export default function NFTPayCongratulations(props: {
                 href={urls.etherscanNft(props.nft.address, props.nft.tokenId)}
                 target={"_blank"}
               >
-                {`${props.nft.singularForName()} #${props.nft.tokenId}`}
+                {props.nft.name ? `${props.nft.name}` : `${props.nft.singularForName()} #${props.nft.tokenId}`}
+                {/* {`${props.nft.singularForName()} #${props.nft.tokenId}`} */}
+                {/* {`${props.nft.name}`} */}
               </AttrLink>{" "}
               and minted
             </Box>
@@ -122,8 +124,10 @@ export default function NFTPayCongratulations(props: {
                 color={"rgba(0,0,0,.5)"}
               >
                 {
+                  props.nft.name ? `NEO ${props.nft.name}` : props.nft.neoOneName()
                   // `NEO ${props.nft.collectionName} #${props.nft.tokenId}`
-                  props.nft.neoOneName()
+                  // `NEO ${props.nft.name}`
+                  //props.nft.neoOneName()
                 }
               </Typography>
               <Icon width={"0.14rem"} height={"0.14rem"} src={nftLinkIcon} />
