@@ -35,7 +35,7 @@ export function VaultAprPop(props: {
           Interest APR (real-time)
         </Typography>
         <Typography fontSize="0.14rem" fontWeight="500" color="#000">
-          {-(+props.interestAPR).toFixed(2)}%
+          -{(+props.interestAPR * 100).toFixed(2)}%
         </Typography>
       </Flex>
 

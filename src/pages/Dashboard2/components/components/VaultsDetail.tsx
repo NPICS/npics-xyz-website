@@ -377,7 +377,7 @@ export default function VaultsDetail() {
 
   const lendingProviderMap = {
     [BANK_ENUM.bend]: {
-      name: "BenDao",
+      name: "BendDAO",
       img: imgurl.market.BendDAOBuy,
     },
     [BANK_ENUM.wing]: {
@@ -728,8 +728,8 @@ export default function VaultsDetail() {
                   <Typography fontSize="0.2rem" fontWeight="500" color="#000">
                     {activities
                       ? `${(
-                          +activities?.rewardApr * 100 +
-                          +activities.borrowApy
+                          +activities?.rewardApr * 100 -
+                          +activities.borrowApy * 100
                         ).toFixed(2)}%`
                       : "-%"}
                   </Typography>
