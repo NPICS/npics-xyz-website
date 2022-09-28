@@ -86,9 +86,7 @@ export default function PaySuccessful(props: IProps) {
                 >
                   You've destroyed
                 </Typography>
-                {`NEO ${activities && _toString(activities?.collectionName)} #${
-                  activities?.tokenId
-                }`}
+                {`NEO ${activities && activities.nftName}`}
                 <Typography
                   marginLeft={"0.05rem"}
                   display="inline-block"
@@ -111,9 +109,7 @@ export default function PaySuccessful(props: IProps) {
                 fontWeight="500"
                 color="rgba(0,0,0,.5)"
               >
-                {`${activities && _toString(activities?.collectionName)} #${
-                  activities?.tokenId
-                }`}
+                {`${activities && activities.nftName}`}
               </Typography>
               <Icon
                 marginLeft="0.1rem"

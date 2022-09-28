@@ -56,7 +56,7 @@ export default function TableWarehouse(props: {
     if (e.terminated()) return;
     window.open(`https://cn.etherscan.com/nft/${e.neo}/${e.tokenId}`);
   };
-
+  console.log("Source", Source);
   return (
     <>
       <Table>
@@ -89,10 +89,8 @@ export default function TableWarehouse(props: {
                     <img className="avatar" src={item.imageUrl} alt="" />
                     <div className="text">
                       <div>
-                        <span title={item.singularForName()}>
-                          {item.singularForName()}
-                        </span>
-                        <span>&nbsp;{`#${item.tokenId}`}</span>
+                        <span></span>
+                        <span>&nbsp;{item.nftName}</span>
                       </div>
                       <div>
                         Floor:{" "}
@@ -114,10 +112,8 @@ export default function TableWarehouse(props: {
                     style={{ cursor: `${item.terminated() ? "" : "pointer"}` }}
                     onClick={() => jumpToNEOEthscan(item)}
                   >
-                    <span title={item.singularForName()}>
-                      NEO {item.singularForName()}
-                    </span>
-                    &nbsp;{`#${item.tokenId}`}
+                    <span title={item.singularForName()}>NEO</span>
+                    &nbsp;{item.nftName}
                     {item.terminated() ? null : (
                       <Icon
                         width="14px"

@@ -173,6 +173,7 @@ export class VaultsItemData {
   liquidationThreshold!: string;
   rewardApr!: string;
   borrowApy!: string;
+  nftName!: string;
 
   @TransformBigNumber()
   purchaseFloorPrice!: BigNumber;

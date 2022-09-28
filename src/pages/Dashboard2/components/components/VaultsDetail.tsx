@@ -343,6 +343,7 @@ export default function VaultsDetail() {
 
       rewardApr: downpayItem.rewardApr,
       borrowApy: downpayItem.borrowApy,
+      nftName: imageUrlData.data?.nftName,
     } as unknown as VaultsItemData;
 
     const contractData: VaultsContractCalcData = await getVaultsContractData(
@@ -442,10 +443,7 @@ export default function VaultsDetail() {
                     fontWeight={"500"}
                     color={"rgba(0,0,0,.5)"}
                   >
-                    {activities &&
-                      `${
-                        _toString(activities?.collectionName) ?? TextPlaceholder
-                      } #${activities?.tokenId ?? TextPlaceholder}`}
+                    {activities?.nftName ?? TextPlaceholder}
                   </Typography>
                   <Icon
                     style={{ cursor: "pointer" }}

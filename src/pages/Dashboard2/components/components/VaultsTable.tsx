@@ -178,6 +178,7 @@ function VaultsTable(props: IProps) {
         imageUrl: details[i].data?.imageUrl || item.nftCoverImage,
         collectionName: item.name,
         liquidationThreshold: item.liquidationThreshold,
+        nftName: details[i].data?.nftName,
       } as unknown as VaultsItemData;
     }
     const vaultsList_ = deserializeArray(
