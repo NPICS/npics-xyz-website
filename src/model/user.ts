@@ -113,6 +113,7 @@ export class CollectionItems {
   paymentSymbol!: string;
   tokenId!: string;
   collectionName!: string;
+  collectionSymbol!: string;
   ltv!: number;
 
   name?: string;
@@ -223,7 +224,7 @@ export class CollectionItems {
         return `NEO Azuki #${this.tokenId}`;
 
       default:
-        return `NEO ${this.collectionName} #${this.tokenId}`;
+        return `NEO ${this.collectionSymbol} #${this.tokenId}`;
     }
   }
 

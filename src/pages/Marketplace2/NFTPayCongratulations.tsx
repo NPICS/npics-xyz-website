@@ -55,12 +55,12 @@ export default function NFTPayCongratulations(props: {
       .myPost(NPICS_GRAPH_API, {
         query: `
       {
-  downpays(first: 1, where: {
-    user: "${account}",nft:"${props.nft.address}",tokenId:"${props.nft.tokenId}"
-  },orderBy: createdAt, orderDirection: desc) {
-    id
-  }
-}
+        downpays(first: 1, where: {
+          user: "${account}",nft:"${props.nft.address}",tokenId:"${props.nft.tokenId}"
+        },orderBy: createdAt, orderDirection: desc) {
+          id
+        }
+      }
       `,
       })
       .then((res: any) => res.data.downpays || []);
@@ -124,7 +124,7 @@ export default function NFTPayCongratulations(props: {
                 color={"rgba(0,0,0,.5)"}
               >
                 {
-                  props.nft.name ? `NEO ${props.nft.name}` : props.nft.neoOneName()
+                  props.nft.name ? `NEO ${props.nft.name}` : `NEO ${props.nft.collectionSymbol} #${props.nft.tokenId}`
                   // `NEO ${props.nft.collectionName} #${props.nft.tokenId}`
                   // `NEO ${props.nft.name}`
                   //props.nft.neoOneName()
