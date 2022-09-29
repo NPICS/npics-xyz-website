@@ -2,7 +2,7 @@ import Modal from "../../../../component/Modal";
 import { Box, Flex, Icon, Typography } from "../../../../component/Box";
 import refreshIcon from "../../../../assets/images/dashboard/refresh_icon.svg";
 import wethIcon from "../../../../assets/images/market/weth_icon.svg";
-import { Key, useState } from "react";
+import { Key, useMemo, useState } from "react";
 import styled from "styled-components";
 import { OfferModal } from "./TableWarehouse";
 import { OFFER_TYPE_ENUM, Offers } from "model/offers";
@@ -385,6 +385,15 @@ function AcceptOffersCell(props: {
     }
     return "";
   };
+
+  const [now, setNow] = useState(() => ~~(new Date().getTime() / 1000));
+  useMemo(() => {
+    const timeout = setTimeout(() => {
+      setNow(~~(new Date().getTime() / 1000));
+    }, 1000);
+    return () => clearTimeout(timeout);
+  }, [now]);
+
   return (
     <Flex
       border={"0.01rem solid #0000001A"}
@@ -447,11 +456,13 @@ function AcceptOffersCell(props: {
         fontWeight={500}
         color={"#000"}
       >
-        Expires {offerInfo.ExpiresTime()}
+        {now > offerInfo.end_at
+          ? "Expired"
+          : `Expires ${offerInfo.ExpiresTime()}`}
       </Typography>
       <Flex flex={1}></Flex>
       <ButtonDefault
-        disabled={offerInfo.price.lt(wethBalance)}
+        disabled={offerInfo.price.lt(wethBalance) || now > offerInfo.end_at}
         minWidth="1.5rem"
         height="0.45rem"
         types="normal"
