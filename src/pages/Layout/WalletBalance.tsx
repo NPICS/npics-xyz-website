@@ -68,16 +68,12 @@ export default function WalletBalance() {
     pWingPrice,
     bendExchangeRate,
     data: { EthPrice },
+    updateBalanceCount,
   } = useAppSelector((state) => state.app);
-  console.log({
-    pWingPrice,
-    bendExchangeRate,
-    EthPrice,
-  });
   useEffect(() => {
     getBalance();
     // eslint-disable-next-line
-  }, [account]);
+  }, [account, updateBalanceCount]);
 
   const getBalance = async () => {
     if (!account || !provider) {

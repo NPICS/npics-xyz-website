@@ -4,7 +4,7 @@ import ButtonDefault from "component/ButtonDefault";
 import { useWeb3React } from "@web3-react/core";
 import { Npics } from "abis/Npics";
 import { useAppDispatch } from "../../../store/hooks";
-import { setIsLoading } from "store/app";
+import { setIsLoading, setUpdateBalanceCount } from "store/app";
 import { message } from "antd";
 import BigNumber from "bignumber.js";
 import { imgurl } from "utils/globalimport";
@@ -35,7 +35,8 @@ function RewardItem({
       let npics = new Npics(signer);
       action(setIsLoading(true));
       await npics.claimRewards(rewardItem.bank);
-      getData();
+      action(setUpdateBalanceCount());
+      await getData();
       action(setIsLoading(false));
     } catch (e) {
       action(setIsLoading(false));
@@ -119,14 +120,16 @@ export default function MyRewards() {
     // TODO: library => provider @quan
     const signer = provider.getSigner(account);
     let npics = new Npics(signer);
-    for (let i = 0; i < rewardsList.length; i++) {
-      promiseList.push(npics.getRewardsBalance(account, rewardsList[i].bank));
+    const rewardsList_ = JSON.parse(JSON.stringify(rewardsList));
+    for (let i = 0; i < rewardsList_.length; i++) {
+      promiseList.push(npics.getRewardsBalance(account, rewardsList_[i].bank));
     }
-    Promise.all(promiseList).then((res) => {
-      for (let i = 0; i < rewardsList.length; i++) {
-        rewardsList[i].rewards = res[i].toString();
+    return Promise.all(promiseList).then((res) => {
+      for (let i = 0; i < rewardsList_.length; i++) {
+        rewardsList_[i].rewards = res[i].toString();
       }
-      setRewardsList(JSON.parse(JSON.stringify(rewardsList)));
+      console.log("refresh");
+      setRewardsList(rewardsList_);
     });
   };
 
