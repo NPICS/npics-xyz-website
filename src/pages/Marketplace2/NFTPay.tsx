@@ -499,7 +499,7 @@ export default function NFTPay(props: {
         gridColumnGap={"0.16rem"}
         gridRowGap={"0.16rem"}
       >
-        <Grid gridArea={"cover"}>
+        <Grid width={'2.7rem'} height={'2.8rem'} style={{ overflow: "hidden", borderRadius: "0.1rem" }} gridArea={"cover"}>
           <Cover src={props.nft.imageUrl} />
         </Grid>
         <Grid gridArea={"title"}>
@@ -524,7 +524,7 @@ export default function NFTPay(props: {
             fontSize={"0.2rem"}
             fontWeight={700}
             marginTop={"0.06rem"}
-          >{`${props.nft.collectionName} #${props.nft.tokenId}`}</Typography>
+          >{`${props.nft.name ? props.nft.name : `${props.nft.collectionName} #${props.nft.tokenId}`}`}</Typography>
         </Grid>
         <Grid
           gridArea={"payment"}
