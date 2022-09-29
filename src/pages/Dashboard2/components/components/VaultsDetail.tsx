@@ -350,6 +350,7 @@ export default function VaultsDetail() {
       downpay.nft,
       downpay.tokenId
     );
+    console.log("contractData", contractData);
     setContractCalcData(contractData);
     const [downpay_] = deserializeArray(
       VaultsItemData,

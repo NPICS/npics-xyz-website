@@ -74,12 +74,12 @@ export const getVaultsContractData = async (
   };
   return {
     debtString:
-      new BigNumber(debtData.totalDebt.toString())
+      new BigNumber(debtData.repayDebtAmount.toString())
         .div(10 ** 18)
         .toFixed(4, 1) || TextPlaceholder,
-    debt: new BigNumber(debtData.totalDebt.toString()),
-    maxDebt: new BigNumber(debtData.totalDebt.toString()).plus(
-      slippage(new BigNumber(debtData.totalDebt.toString()))
+    debt: new BigNumber(debtData.repayDebtAmount.toString()),
+    maxDebt: new BigNumber(debtData.repayDebtAmount.toString()).plus(
+      slippage(new BigNumber(debtData.repayDebtAmount.toString()))
     ),
     liquidationPrice:
       new BigNumber(liquidatePrice.liquidatePrice.toString())

@@ -2,6 +2,7 @@ import BigNumber from "bignumber.js";
 import { Contract, ethers } from "ethers";
 import { ContractAddresses } from "../utils/addresses";
 import LendPool_ABI from ".//lendPool.json";
+import NPICS_ABI from "./npics.json";
 import {
   ChainId,
   multicallClient,
@@ -25,28 +26,20 @@ export class LendPool {
     address: string,
     tokenId: string
   ): Promise<{
-    loanId: number;
     reserveAsset: string;
-    totalCollateral: BigNumber;
-    totalDebt: BigNumber;
-    availableBorrows: BigNumber;
-    healthFactor: BigNumber;
+    repayDebtAmount: BigNumber;
   }> {
     let c = newClientContract(
-      LendPool_ABI,
-      ContractAddresses.LendPoolProxy,
+      NPICS_ABI,
+      ContractAddresses.NpicsProxy,
       ChainId.ETH
     );
     let result = await multicallClient([
-      c.getNftDebtData(address, tokenId),
+      c.getLoanReserveBorrowAmount(address, tokenId),
     ]).then((res) => res[0].returnData);
     return {
-      loanId: result[0],
-      reserveAsset: result[1],
-      totalCollateral: result[2],
-      totalDebt: result[3],
-      availableBorrows: result[4],
-      healthFactor: result[5],
+      reserveAsset: result[0],
+      repayDebtAmount: new BigNumber(result[1]),
     };
   }
 
