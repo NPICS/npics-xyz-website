@@ -350,8 +350,11 @@ export default function VaultsDetail() {
       downpay.nft,
       downpay.tokenId
     );
-    console.log("contractData", contractData);
-    setContractCalcData(contractData);
+    setContractCalcData({
+      ...contractData,
+      debt: downpay.repayAll ? new BigNumber(0) : contractData.debt,
+      debtString: downpay.repayAll ? "0" : contractData.debtString,
+    });
     const [downpay_] = deserializeArray(
       VaultsItemData,
       JSON.stringify([downpay])
@@ -387,6 +390,7 @@ export default function VaultsDetail() {
       img: imgurl.market.wingPriceIcon,
     },
   };
+  console.log("activities", activities);
   return (
     <Flex
       position={"relative"}
@@ -444,7 +448,12 @@ export default function VaultsDetail() {
                     fontWeight={"500"}
                     color={"rgba(0,0,0,.5)"}
                   >
-                    {activities?.nftName ?? TextPlaceholder}
+                    {!activities
+                      ? TextPlaceholder
+                      : activities.nftName ||
+                        `${_toString(activities.collectionName)} #${
+                          activities?.tokenId ?? TextPlaceholder
+                        }`}
                   </Typography>
                   <Icon
                     style={{ cursor: "pointer" }}
@@ -529,10 +538,12 @@ export default function VaultsDetail() {
                     fontWeight="700"
                     color="#000"
                   >
-                    {activities &&
-                      `NEO ${
-                        _toString(activities?.collectionName) ?? TextPlaceholder
-                      } #${activities?.tokenId ?? TextPlaceholder}`}
+                    {!activities
+                      ? TextPlaceholder
+                      : "NEO " + activities.nftName ||
+                        `NEO ${_toString(activities.collectionName)} #${
+                          activities?.tokenId ?? TextPlaceholder
+                        }`}
                   </Typography>
                   <Icon
                     style={{ cursor: "pointer" }}

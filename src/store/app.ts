@@ -38,6 +38,7 @@ interface IAppState {
   // pWing -> usdt rate
   pWingPrice: string;
   showWalletModalOpen: boolean;
+  updateBalanceCount: number;
 }
 
 const initialState: IAppState = {
@@ -59,6 +60,7 @@ const initialState: IAppState = {
   pWingPrice: "",
   showWalletModalOpen: false,
   isAnimate: false,
+  updateBalanceCount: 0,
 };
 
 export const fetchUser2 = createAsyncThunk(
@@ -198,6 +200,9 @@ const appSlice = createSlice({
     setAnimate(state, action) {
       state.isAnimate = action.payload;
     },
+    setUpdateBalanceCount(state) {
+      state.updateBalanceCount = state.updateBalanceCount + 1;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -253,5 +258,6 @@ export const {
   updateLoginState,
   clearUserData,
   setShowWalletModalOpen,
+  setUpdateBalanceCount,
 } = appSlice.actions;
 export default appSlice;

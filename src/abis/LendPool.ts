@@ -36,7 +36,10 @@ export class LendPool {
     );
     let result = await multicallClient([
       c.getLoanReserveBorrowAmount(address, tokenId),
-    ]).then((res) => res[0].returnData);
+    ]).then((res) => {
+      console.log("res", res);
+      return res[0].returnData;
+    });
     return {
       reserveAsset: result[0],
       repayDebtAmount: new BigNumber(result[1]),
