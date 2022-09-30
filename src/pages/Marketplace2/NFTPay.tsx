@@ -17,7 +17,7 @@ import { numberFormat, urls } from "../../utils/urls";
 import { Erc20 } from "../../abis/Erc20";
 import { ContractAddresses } from "../../utils/addresses";
 import { useWeb3React } from "@web3-react/core";
-import http from "../../utils/http";
+import http, { GRAPH_API, myPost } from "../../utils/http";
 import { message, notification, Skeleton } from "antd";
 import { Npics } from "../../abis/Npics";
 import Modal from "../../component/Modal";
@@ -28,13 +28,14 @@ import { useAsync } from "react-use";
 import { TextPlaceholder } from "component/styled";
 import wethIcon from "../../assets/images/market/weth_icon.svg";
 import Checkbox from "../../component/Input/Checkbox";
-import axios from "axios";
 import { ethers } from "ethers";
 import openseaValidIcon from 'assets/images/market/nfts_opensea_valid.svg'
 import { imgurl } from "utils/globalimport";
 import { useAppSelector } from "store/hooks";
 import { BANK_ENUM } from "utils/enums";
 import { Pop20 } from "component/Popover/Popover";
+import { reject } from "lodash";
+import { useIntervalWhen } from "rooks";
 
 export function PopupTitle(props: { title: string; canClose: boolean }) {
   return (
@@ -167,7 +168,7 @@ export default function NFTPay(props: {
 
   //platform
   const platform = useAppSelector(state => state.platform.selectPlatform)
-
+  const [isGetLatest, setIsGetLatest] = useState<boolean>(true);
   // console.log(props.nft);
   useAsync(async () => {
     if (account && provider) {
@@ -255,6 +256,36 @@ export default function NFTPay(props: {
       userSelectedAmount.isGreaterThanOrEqualTo(props.actualAmount)
     );
   }, [userSelectedAmount, ethAndWETHAmount, props.actualAmount]);
+
+  //get latestBlockNumber
+  const getBlockNumer = () => {
+    const data = {
+      query: `
+      {
+        indexingStatusForCurrentVersion(subgraphName: "npics/npisc") {
+            synced
+            health
+            chains {
+                chainHeadBlock {
+                    number
+                }
+                latestBlock {
+                    number
+                }
+            }
+        }
+    }
+    `,
+    }
+    return new Promise((resolve, reject) => {
+      myPost(GRAPH_API, data).then((res: any) => {
+        const latestBlock = res.data.indexingStatusForCurrentVersion.chains[0].latestBlock.number
+        resolve(latestBlock)
+      }).catch((err) => {
+        reject(err)
+      })
+    })
+  }
 
   async function checkoutBtnClick() {
     if (!provider) return;
@@ -428,10 +459,28 @@ export default function NFTPay(props: {
       } else {
         tx = await c.downPayWithETH(contractParams);
       }
-
+      //get graph latestBlock
+      while (isGetLatest) {
+        const delayPrimise = (time = 3000) =>
+          new Promise((resolve) => {
+            setTimeout(async () => {
+              resolve(true)
+            }, time)
+          })
+        await delayPrimise(100)
+        try {
+          const nowBlock = await getBlockNumer() as number;
+          if (nowBlock >= tx.blockNumber) {
+            setIsGetLatest(false)
+            props.resultBlock?.(true, tx.hash);
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      }
       // setHash(tx.hash)
       // props.resultBlock?.(true)
-      props.resultBlock?.(true, tx.hash);
+      // props.resultBlock?.(true, tx.hash, tx.blockNumber);
       // setProgressingPopupOpen(false)
       // setSuccessPopupOpen(true)
     } catch (e: any) {
