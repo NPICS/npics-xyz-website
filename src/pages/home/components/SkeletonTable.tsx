@@ -97,6 +97,15 @@ export default function MyTable() {
       primePrice: "1",
       apr: "1"
     },
+    {
+      index: 9,
+      collection: "1",
+      dayVolume: "1",
+      floorPrice: "1",
+      advanceRate: "1",
+      primePrice: "1",
+      apr: "1"
+    },
   ])
   const [showTable, setShowTable] = useState<boolean>(false)
 

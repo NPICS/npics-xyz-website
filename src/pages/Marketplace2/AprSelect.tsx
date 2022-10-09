@@ -81,8 +81,10 @@ const AprSelect = ({ defaultApr, selectApr, onClose, onSelect, nft, selectFloorP
     "0x620b70123fb810f6c653da7644b5dd0b6312e4d8"
   ]
   const bendaoNotSupportedList = [
-    "0x7bd29408f11d2bfc23c34f18275bbf23bb716bc7"
+    "0x7bd29408f11d2bfc23c34f18275bbf23bb716bc7",
+    "0x23581767a106ae21c074b2276d25e5c3e136a68b"
   ]
+  console.log(selectApr);
   useEffect(() => {
     const getAllplatform = async () => {
       let platformObj = {}

@@ -191,7 +191,7 @@ function NFTPrice(props: {
     if (props.item) {
       aprInfo.icon === "" && setVaultAPR(parseFloat(props.item.vaultApr || "0"))
       aprInfo.icon === "" && setAprInfo({
-        name: props.item.platform === 'bendao' ? 'BendDao' : 'Wing',
+        name: props.item.platform === 'bendao' ? 'BendDAO' : 'Wing',
         icon: props.item.platform === 'bendao' ? imgurl.market.bendaoPriceIcon : imgurl.market.wingPriceIcon
       })
       platform === "" && action(changePlatform(props.item.platform))
