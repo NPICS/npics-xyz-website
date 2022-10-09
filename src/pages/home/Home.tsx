@@ -168,7 +168,7 @@ function Home() {
   }
   const openGitbook = () => {
     //click note
-    window.open("https://medium.com/@npics.xyz/community-noticeboard-df26affcd7af")
+    window.open("https://medium.com/@npics.xyz/nbp-financing-router-now-supports-wings-nft-lending-pool-1fdf5314439b")
   }
   const closeNote = (e: any) => {
     e.stopPropagation();
@@ -183,7 +183,7 @@ function Home() {
           <div className='note_content' onClick={openGitbook}>
             <div className='note_text'>
               <Icon width={"0.2rem"} src={imgurl.home.NoteIcon} />
-              <span>Living Campaign: Contributor Rewards for Push NPics’ Funding Proposal with BendDAO</span>
+              <span>NBP Financing Router now supports Wing’s NFT Lending Pool</span>
             </div>
             <div className='note_close' onClick={closeNote}>
               <img className='note_close_icon' src={imgurl.CloseIcon} />
