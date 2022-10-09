@@ -78,11 +78,11 @@ const AprSelect = ({ defaultApr, selectApr, onClose, onSelect, nft, selectFloorP
   //doodles or space-doodles is dont support
   const wingNotSupportedList = [
     "0x8a90cab2b38dba80c64b7734e58ee1db38b8992e",
-    "0x620b70123fb810f6c653da7644b5dd0b6312e4d8"
+    "0x620b70123fb810f6c653da7644b5dd0b6312e4d8",
+    "0x23581767a106ae21c074b2276d25e5c3e136a68b"
   ]
   const bendaoNotSupportedList = [
     "0x7bd29408f11d2bfc23c34f18275bbf23bb716bc7",
-    "0x23581767a106ae21c074b2276d25e5c3e136a68b"
   ]
   console.log(selectApr);
   useEffect(() => {
