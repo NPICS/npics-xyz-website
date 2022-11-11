@@ -2,7 +2,7 @@ import BigNumber from "bignumber.js";
 import http from "../utils/http";
 import { BANK_ENUM, BANK_NAME_MAP } from "../utils/enums";
 import { LendPool } from "../abis/LendPool";
-import { VaultsContractCalcData } from "../pages/Dashboard2/components/components/StyledInterface";
+import { VaultsContractCalcData } from "../pages/DownPayment/Dashboard2/components/components/StyledInterface";
 import { TextPlaceholder } from "../component/styled";
 interface Result {
   createTime: string;

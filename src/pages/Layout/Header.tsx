@@ -23,7 +23,6 @@ import { NavLink, useLocation } from "react-router-dom";
 import { Flex, Icon, Typography, Box } from "component/Box";
 import styled from "styled-components";
 import { CHAIN_ID, injected } from "connectors/hooks";
-
 const StyledtWallet = styled(Flex)`
   cursor: pointer;
   box-sizing: border-box;
@@ -76,70 +75,9 @@ function XHeader() {
       name: "Game",
     },
   ];
-
-  // useEffect(() => {
-  //   console.log(`Account Change => New: ${account}, Old: ${oldAccount.current}`)
-  //   // changed account
-  //   if (account && oldAccount.current) {
-  //     // remove old account data
-  //     localStorage.clear()
-  //     // save new account
-  //     localStorage.setItem(SessionStorageKey.WalletAuthorized, account)
-  //     // fetch new account data
-  //     action(clearUserData())
-  //     action(fetchUser2())
-  //     // make islogin false
-  //     action(setIsLogin(false))
-  //   }
-
-  //   /// disconnect
-  //   else if (oldAccount.current && !account) {
-  //     console.log(`?????, ${oldAccount.current}, ${account}`)
-  //     // remove all data
-  //     localStorage.clear()
-  //     // make unlogin
-  //     action(clearUserData())
-  //     action(setIsLogin(false))
-  //   }
-
-  //   /// first connect
-  //   else if (!oldAccount.current && account) {
-  //     localStorage.setItem(SessionStorageKey.WalletAuthorized, account)
-  //     action(fetchUser2())
-  //   }
-
-  //   // store old account
-  //   oldAccount.current = account
-  //   // eslint-disable-next-line
-  // }, [account])
-
-  // active wallet connect
-  useEffect(() => {
-    // check account, auto connect wallet
-    // let account = localStorage.getItem(SessionStorageKey.WalletAuthorized)
-    // if (account) {
-    //   activate(connectors.injected).then(() => { })
-    // }
-    // check token
-    // let token = localStorage.getItem(SessionStorageKey.AccessToken)
-    // action(setIsLogin(token != null))
-    // eslint-disable-next-line
-  }, []);
-
   const connect = async () => {
     try {
-      // TODO: wallet connect
       await injected.activate(CHAIN_ID);
-      // await activate(connectors.injected, (error) => {
-      //   const Error = JSON.parse(JSON.stringify(error))
-      //   if (Error.name === "UnsupportedChainIdError") {
-      //     localStorage.removeItem(SessionStorageKey.WalletAuthorized)
-      //     action(fetchUser(`{}`))
-      //     notification.error({ message: "Prompt connection failed, please use the Ethereum network" })
-      //   } else {
-      //     notification.error({ message: "Please authorize to access your account" })
-      //   }
-      // })
       action(fetchUser2());
     } catch (e: any) {
       notification.error({ message: e.message });
@@ -278,26 +216,21 @@ function XHeader() {
     textDecoration: "none",
     marginRight: "1.3rem",
   };
+  //router list
+  const DPPath = ["/downpayment", "/marketplace", "/nft"]
+  // const CPList = [""]
   const history = useLocation();
-  const [activiRoute, setActiviRoute] = useState<string>("");
+  const [menuList, setMenuList] = useState<{ to: string, name: string }[]>([]);
   useEffect(() => {
-    console.log(history.pathname.substring(1, 4));
-    console.log(history.pathname.substring(1, 13));
-    if (history.pathname === "/") {
-      console.log("home");
-      setActiviRoute("home");
-    } else if (history.pathname.substring(1, 4) === "nft") {
-      setActiviRoute("nft");
-      return;
-    } else if (history.pathname.substring(1, 13) === "vaultsDetail") {
-      setActiviRoute("vaultsDetail");
-      return;
+    //Judgment router and select different list
+    console.log(history.pathname.split("/"));
+    const routerPathList = history.pathname.split("/");
+    if (DPPath.includes(routerPathList[1])) {
+      // downpayment menu
     }
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
     window.scrollTo(0, 0);
-    setActiviRoute("");
-    // eslint-disable-next-line
   }, [history.pathname]);
 
   return (
@@ -313,15 +246,11 @@ function XHeader() {
             <img src={imgurl.logo} alt="" />
           </LogoLink>
           <NavLink
-            to={"marketplace"}
+            className="nav_item"
+            to={"/marketplace"}
             style={({ isActive }) => (isActive ? active : normal)}
           >
-            <StyledHoverSpan
-              style={{
-                color: `${activiRoute === "nft" || activiRoute === "home" ? "#fff" : ""
-                  }`,
-              }}
-            >
+            <StyledHoverSpan>
               Marketplace
             </StyledHoverSpan>
           </NavLink>
@@ -329,14 +258,7 @@ function XHeader() {
             to={"/dashboard"}
             style={({ isActive }) => (isActive ? active : normal)}
           >
-            <StyledHoverSpan
-              style={{
-                color: `${activiRoute === "vaultsDetail" || activiRoute === "home"
-                  ? "#fff"
-                  : ""
-                  }`,
-              }}
-            >
+            <StyledHoverSpan>
               Dashboard
             </StyledHoverSpan>
           </NavLink>
@@ -345,7 +267,7 @@ function XHeader() {
             style={{
               fontSize: "0.16rem",
               fontWeight: "600",
-              color: activiRoute === "home" ? "#fff" : "rgba(255,255,255,.5)",
+              color: "rgba(255,255,255,.5)",
             }}
             target="_blank"
             rel="noreferrer"

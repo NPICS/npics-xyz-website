@@ -1,18 +1,18 @@
 import React, { ReactNode, useEffect } from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import loadable from 'react-loadable'
-import Market from "../pages/Marketplace2/Market";
-import MarketList from "../pages/Marketplace2/MarketList";
-import Dash from "../pages/Dashboard2/Dashboard";
-import MyVaults from "pages/Dashboard2/components/MyVaults";
-import MyRewards2 from "pages/Dashboard2/components/MyRewards";
-import MyAirdop2 from "pages/Dashboard2/components/MyAirdop";
-import NFTPay from "../pages/Marketplace2/NFTPay";
-import NFTPayProgressing from "../pages/Marketplace2/NFTPayProgressing";
-import NFTPayCongratulations from "../pages/Marketplace2/NFTPayCongratulations";
-import NFTPayWrong from "../pages/Marketplace2/NFTPayWrong";
-import VaultsDetail from "pages/Dashboard2/components/components/VaultsDetail";
-import OneNFT from "../pages/Marketplace2/OneNFT";
+import Market from "../pages/DownPayment/Marketplace2/Market";
+import MarketList from "../pages/DownPayment/Marketplace2/MarketList";
+import Dash from "../pages/DownPayment/Dashboard2/Dashboard";
+import MyVaults from "pages/DownPayment/Dashboard2/components/MyVaults";
+import MyRewards2 from "pages/DownPayment/Dashboard2/components/MyRewards";
+import MyAirdop2 from "pages/DownPayment/Dashboard2/components/MyAirdop";
+import NFTPay from "../pages/DownPayment/Marketplace2/NFTPay";
+import NFTPayProgressing from "../pages/DownPayment/Marketplace2/NFTPayProgressing";
+import NFTPayCongratulations from "../pages/DownPayment/Marketplace2/NFTPayCongratulations";
+import NFTPayWrong from "../pages/DownPayment/Marketplace2/NFTPayWrong";
+import VaultsDetail from "pages/DownPayment/Dashboard2/components/components/VaultsDetail";
+import OneNFT from "../pages/DownPayment/Marketplace2/OneNFT";
 interface RouterT {
   name?: string;
   path: string;
@@ -23,7 +23,7 @@ interface RouterT {
 const LoadingTip = () => <div></div>;
 
 const Home = loadable({
-  loader: () => import('../pages/home/Home'),
+  loader: () => import('../pages/DownPayment/home/Home'),
   loading: LoadingTip
 })
 export default function Routers() {
