@@ -21,8 +21,11 @@ interface RouterT {
 }
 
 const LoadingTip = () => <div></div>;
-
 const Home = loadable({
+  loader: () => import('../pages/Home'),
+  loading: LoadingTip
+})
+const DownPaymentHome = loadable({
   loader: () => import('../pages/DownPayment/home/Home'),
   loading: LoadingTip
 })
@@ -40,18 +43,14 @@ export default function Routers() {
     return null
   }
   const routesD: RouterT[] = [
-    // {
-    //   path: 'web3',
-    //   component: <Web3 />
-    // },
     {
       path: "/",
       component: <Home />,
     },
-    // {
-    //   path: "/web3",
-    //   component: <Web3Example />
-    // },
+    {
+      path: "/downpayment",
+      component: <DownPaymentHome />,
+    },
     {
       path: "/marketplace",
       component: <Market />,
