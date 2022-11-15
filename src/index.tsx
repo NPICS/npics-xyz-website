@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import { Buffer } from "buffer"
 import App from './App';
-import { setShowDetailAnimate, setShowFrameAnimate, setFixed } from 'store/app';
+import { setShowDetailAnimate, setShowFrameAnimate, setFixed, setShowChipSwapAnimate } from 'store/app';
 import { useAppDispatch } from "./store/hooks"
 import './App.css'
 import reportWebVitals from './reportWebVitals';
@@ -23,61 +23,68 @@ import Updater from "./updater";
 window.Buffer = window.Buffer || Buffer
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+    document.getElementById('root') as HTMLElement
 );
 
 const StyledThemeProvider = (props: any) => {
-  // const isDark = useAppSelector(updater => updater.app.Theme.isDark)
-  // Temporary solution 😅
-  //That's it for now, it's alright 😁
-  const action = useAppDispatch()
-  const history = useLocation()
-  const [isHome, setIsHome] = useState<boolean>(true)
-  useEffect(() => {
-    if (history.pathname === '/') {
-      setIsHome(true);
-    } else {
-      setIsHome(false)
-    }
-    window.addEventListener('scroll', handleScroll, false)
-    // eslint-disable-next-line
-  }, [history.pathname])
+    // const isDark = useAppSelector(updater => updater.app.Theme.isDark)
+    // Temporary solution 😅
+    //That's it for now, it's alright 😁
+    const action = useAppDispatch()
+    const history = useLocation()
+    const [isHome, setIsHome] = useState<boolean>(true)
+    useEffect(() => {
+        if (history.pathname === '/') {
+            setIsHome(true);
+        } else {
+            setIsHome(false)
+        }
+        window.addEventListener('scroll', handleScroll, false)
+        // eslint-disable-next-line
+    }, [history.pathname])
 
-  const handleScroll = () => {
-    const FrameDom = document.querySelector('.frame_box')
-    const DetailDom = document.querySelector('.detail_img_box')
-    const scrollTop = document.documentElement.scrollTop
-    const windowHeight = window.innerHeight
-    if (FrameDom) {
-      const frameHeight = FrameDom.getBoundingClientRect().y;
-      if (frameHeight! <= windowHeight) {
-        action(setShowFrameAnimate(true))
-      }
+    const handleScroll = () => {
+        const FrameDom = document.querySelector('.frame_box')
+        const DetailDom = document.querySelector('.detail_img_box')
+        const chipSwapDom = document.querySelector('.chipSwap_content')
+        const scrollTop = document.documentElement.scrollTop
+        const windowHeight = window.innerHeight
+        if (FrameDom) {
+            const frameHeight = FrameDom.getBoundingClientRect().y;
+            if (frameHeight! <= windowHeight) {
+                action(setShowFrameAnimate(true))
+            }
+        }
+        if (DetailDom) {
+            const detailHeight = DetailDom.getBoundingClientRect().y;
+            if (detailHeight! <= windowHeight) {
+                action(setShowDetailAnimate(true))
+            }
+        }
+        if (chipSwapDom) {
+            const detailHeight = chipSwapDom.getBoundingClientRect().y;
+            if (detailHeight! <= windowHeight) {
+                action(setShowChipSwapAnimate(true))
+            }
+        }
+        scrollTop > 30 ? action(setFixed(true)) : action(setFixed(false))
     }
-    if (DetailDom) {
-      const detailHeight = DetailDom.getBoundingClientRect().y;
-      if (detailHeight! <= windowHeight) {
-        action(setShowDetailAnimate(true))
-      }
-    }
-    scrollTop > 30 ? action(setFixed(true)) : action(setFixed(false))
-  }
-  const isDark = isHome
-  return <ThemeProvider theme={isDark ? darkColors : lightColors} {...props} />
+    const isDark = isHome
+    return <ThemeProvider theme={isDark ? darkColors : lightColors} {...props} />
 }
 
 root.render(
-  <Provider store={store}>
-    <Router>
-      <StyledThemeProvider>
-        <Web3Provider>
-          <Updater />
-          <GlobalStyle />
-          <App />
-        </Web3Provider>
-      </StyledThemeProvider>
-    </Router>
-  </Provider>
+    <Provider store={store}>
+        <Router>
+            <StyledThemeProvider>
+                <Web3Provider>
+                    <Updater />
+                    <GlobalStyle />
+                    <App />
+                </Web3Provider>
+            </StyledThemeProvider>
+        </Router>
+    </Provider>
 );
 
 reportWebVitals();

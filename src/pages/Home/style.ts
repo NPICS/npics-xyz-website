@@ -101,10 +101,62 @@ export const ChipSwapBox = styled.div`
     position: relative;
     width: 16rem;
     margin: 0 auto;
+    padding-bottom: 1.7rem;
     .chipSwapBox_bg{
         position: absolute;
         right: 0;
-        top: 0;
+        top: -900px;
         width: 500px;
+    }
+    .chipSwap_content{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        .chipSwap_swiper_box{
+            display: flex;
+        }
+        .chipSwap_btn{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-top: 0.4rem;
+        }
+    }
+`
+
+export const NFTHedgingBox = styled.div`
+    width: 16rem;
+    margin: 0 auto;
+    .nftHedg_content{
+        padding:1.4rem 0;
+        display: flex;
+        .nftHedg_left{
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            color: #fff;
+            font-size: 0.2rem;
+            font-weight: 700;
+            .hedg_item{
+                margin-bottom: 0.7rem;
+            }
+        }
+        .nftHedg_right{
+            width: 50%;
+            display: flex;
+            .right_img_one{
+                width: 3.45rem;
+                height: 3.45rem;
+                background: #fff;
+                border-radius: 0.1rem;
+            }
+            .right_img_two{
+                width: 3.45rem;
+                height: 3.45rem;
+                background: #fff;
+                border-radius: 0.1rem;
+            }
+        }
     }
 `

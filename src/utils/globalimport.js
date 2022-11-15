@@ -154,6 +154,9 @@ import metamaskLogo from '../assets/images/home/metamask_logo.png'
 import BgLeft from "../assets/images/NewHome/bg_left.svg"
 import BgRight from "../assets/images/NewHome/bg_right.svg"
 import NFTIcons from "../assets/images/NewHome/nft_icons.png"
+import HomeChipSwapSwiper1 from "../assets/images/NewHome/chipswap_swiper_1.svg"
+import HomeChipSwapSwiper2 from "../assets/images/NewHome/chipswap_swiper_2.svg"
+import HomeChipSwapSwiper3 from "../assets/images/NewHome/chipswap_swiper_3.svg"
 export const imgurl = {
     logo,
     logoBeta,
@@ -312,6 +315,9 @@ export const imgurl = {
     newHome: {
         BgLeft,
         BgRight,
-        NFTIcons
+        NFTIcons,
+        HomeChipSwapSwiper1,
+        HomeChipSwapSwiper2,
+        HomeChipSwapSwiper3
     }
 }
