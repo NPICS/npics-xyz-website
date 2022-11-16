@@ -531,5 +531,19 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
 
-
+  /*  */
+  .dropdown_box{
+    top: 55px !important;
+    .ant-dropdown-menu{
+        background: #534852;
+        border-radius: 0.1rem;
+        padding: 0.2rem;
+        .ant-dropdown-menu-item:hover{
+            background-color: #534852 !important;
+        }
+    }
+  }
+  .ant-dropdown-menu-item:hover{
+            background-color: #534852 !important;
+        }
 `;

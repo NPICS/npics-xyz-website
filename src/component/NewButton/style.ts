@@ -7,6 +7,7 @@ export const ButtonBox = styled.div<{ color: string, bg: string, radius: string,
     height: ${props => props.height};
     line-height: ${props => props.height};
     text-align: center;
+    font-weight: 700;
     margin: ${props => props.margin};
     cursor: pointer;
     transition:all 0.1s;

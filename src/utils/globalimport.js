@@ -14,16 +14,25 @@ import CloseIcon from '../assets/images/home/close.svg'
 import CloseIconBlack from '../assets/images/closeBlack.svg'
 import WingIcon from '../assets/images/wing_icon.svg'
 
-import darkTG from '../assets/images/footer/darkTG.png'
-import darkT from '../assets/images/footer/darkT.png'
+// footer
+import darkTG from '../assets/images/footer/darkTelegram.svg'
+import darkT from '../assets/images/footer/darkTwitter.svg'
 import darkG from '../assets/images/footer/darkG.png'
-import darkM from '../assets/images/footer/darkM.png'
-import darkGH from '../assets/images/footer/darkGH.png'
-import lightTG from '../assets/images/footer/lightTG.png'
-import lightT from '../assets/images/footer/lightT.png'
+import darkM from '../assets/images/footer/darkMedium.svg'
+import darkGH from '../assets/images/footer/darkGithub.svg'
+import lightTG from '../assets/images/footer/lightTelegram.svg'
+import lightT from '../assets/images/footer/lightTwitter.svg'
 import lightG from '../assets/images/footer/lightG.png'
-import lightM from '../assets/images/footer/lightM.png'
-import lightGH from '../assets/images/footer/lightGH.png'
+import lightM from '../assets/images/footer/lightMedium.svg'
+import lightGH from '../assets/images/footer/lightGithub.svg'
+import darkEmail from "../assets/images/footer/darkEmail.svg"
+import lightEmail from "../assets/images/footer/lightEmail.svg"
+import darkYoutube from "../assets/images/footer/darkYoutube.svg"
+import lightYoutube from "../assets/images/footer/lightYoutube.svg"
+import darkCertik from "../assets/images/footer/darkCertik.svg"
+import lightCertik from "../assets/images/footer/lightCertik.svg"
+import darkDiscord from "../assets/images/footer/darkDiscord.svg"
+import lightDiscord from "../assets/images/footer/lightDiscord.svg"
 
 import login from '../assets/images/home/login.svg'
 import defaultAvatar from '../assets/images/home/defaultAvatar.svg'
@@ -190,6 +199,14 @@ export const imgurl = {
         lightM,
         lightGH,
         lightT,
+        darkEmail,
+        lightEmail,
+        darkYoutube,
+        lightYoutube,
+        darkCertik,
+        lightCertik,
+        darkDiscord,
+        lightDiscord
     },
     home: {
         defaultAvatar,
@@ -318,6 +335,6 @@ export const imgurl = {
         NFTIcons,
         HomeChipSwapSwiper1,
         HomeChipSwapSwiper2,
-        HomeChipSwapSwiper3
+        HomeChipSwapSwiper3,
     }
 }

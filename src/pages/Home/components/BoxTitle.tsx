@@ -3,7 +3,8 @@ import React from 'react'
 import styled from 'styled-components';
 const BoxTitleContent = styled.div`
     z-index: 10;
-    width: 100%;
+    width: 16rem;
+    margin: 0 auto;
     display: flex;
     justify-content: flex-start;
     align-items: center;

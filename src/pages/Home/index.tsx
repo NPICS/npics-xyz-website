@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useAppSelector } from "../../store/hooks"
 import { imgurl } from 'utils/globalimport';
 import Title from './components/Title';
-import { HomeWarp, BackgroundBox, NoteBox, HomeBox, HomeLeft, HomeNFT, DownPaymentBox, ChipSwapBox, NFTHedgingBox } from './style'
+import { HomeWarp, BackgroundBox, NoteBox, HomeBox, HomeLeft, HomeNFT, DownPaymentBox, ChipSwapBox, NFTHedgingBox, Partners, PartnerBox } from './style'
 import { Animate } from 'react-simple-animate'
 import BoxTitle from './components/BoxTitle';
 import Frame from './components/Frame';
@@ -17,6 +17,44 @@ const Home = () => {
         "HODL and hedge your rare NFTs instead of selling them.",
         "Access to call/put options without actually trading NFTs.",
         "Execrise the right at your desired price with no expiration."
+    ]
+    const PartnerData = [
+        {
+            url: imgurl.home.MetaMask,
+            width: '1.9rem'
+        },
+        {
+            url: imgurl.home.BendDAO,
+            width: '1.5rem'
+        },
+        {
+            url: imgurl.WingIcon,
+            width: '1.4rem'
+        },
+        {
+            url: imgurl.home.Opensea,
+            width: '1.9rem'
+        },
+        {
+            url: imgurl.home.X2Y2,
+            width: '1.4rem'
+        },
+        {
+            url: imgurl.home.DYDX,
+            width: '1.25rem'
+        },
+        {
+            url: imgurl.home.Looksrare,
+            width: '1.9rem'
+        },
+        {
+            url: imgurl.home.Aave,
+            width: '1.35rem'
+        },
+        {
+            url: imgurl.home.Galaxy,
+            width: '1.6rem'
+        },
     ]
     useEffect(() => {
         //get sessionStorage
@@ -106,21 +144,43 @@ const Home = () => {
             <NFTHedgingBox>
                 <BoxTitle title='NFT Hedging' desc='Offset the risk of market volatility on beloved NFTs.' />
                 <div className='nftHedg_content'>
-                    <div className='nftHedg_left'>
-                        {
-                            hedgingList.map((item, index) => {
-                                return (
-                                    <span className='hedg_item' key={index}>{item}</span>
-                                )
-                            })
-                        }
+                    <div className='nftHedg_content_top'>
+                        <div className='nftHedg_left'>
+                            {
+                                hedgingList.map((item, index) => {
+                                    return (
+                                        <span className='hedg_item' key={index}>{item}</span>
+                                    )
+                                })
+                            }
+                        </div>
+                        <div className='nftHedg_right'>
+                            <div className='right_img_one'></div>
+                            <div className='right_img_two'></div>
+                        </div>
                     </div>
-                    <div className='nftHedg_right'>
-                        <div className='right_img_one'></div>
-                        <div className='right_img_two'></div>
+                    {/* btn */}
+                    <div className='nftHedg_btn'>
+                        <NewButton text='Comminng Soon' bg="rgba(255,255,255,0.5)" color="#fff" radius='0.1rem' margin='0 0.2rem 0 0' />
+                        <NewButton text='Learn more' bg="#fff" color="#000" radius='0.1rem' />
                     </div>
                 </div>
             </NFTHedgingBox>
+            <Partners>
+                <div className='partners_bg'>
+                    <img src={imgurl.home.SwiperPartner} alt="" />
+                </div>
+                <div className="title">Our Partners & Ecosystem</div>
+                <div className="partnerGroup">
+                    {PartnerData.map((item, index) => {
+                        return (
+                            <PartnerBox key={index} width={item.width}>
+                                <img src={item.url} alt="" />
+                            </PartnerBox>
+                        )
+                    })}
+                </div>
+            </Partners>
         </HomeWarp>
     )
 };

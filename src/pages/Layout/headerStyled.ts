@@ -3,31 +3,31 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { font01671 } from "component/styled";
 export const accountNav = [
-  {
-    icon: imgurl.dashboard.agreement,
-    text: "Agreement",
-    path: "/dashboard/agreement",
-  },
-  {
-    icon: imgurl.dashboard.rewards,
-    text: "Rewards",
-    path: "/dashboard/rewards",
-  },
-  {
-    icon: imgurl.dashboard.airdrop,
-    text: "Airdop",
-    path: "/dashboard/airdrop",
-  },
-  {
-    icon: imgurl.dashboard.notify,
-    text: "Notification",
-    path: "",
-  },
-  {
-    icon: imgurl.dashboard.setting,
-    text: "Settings",
-    path: "",
-  },
+    {
+        icon: imgurl.dashboard.agreement,
+        text: "Agreement",
+        path: "/dashboard/agreement",
+    },
+    {
+        icon: imgurl.dashboard.rewards,
+        text: "Rewards",
+        path: "/dashboard/rewards",
+    },
+    {
+        icon: imgurl.dashboard.airdrop,
+        text: "Airdop",
+        path: "/dashboard/airdrop",
+    },
+    {
+        icon: imgurl.dashboard.notify,
+        text: "Notification",
+        path: "",
+    },
+    {
+        icon: imgurl.dashboard.setting,
+        text: "Settings",
+        path: "",
+    },
 ];
 
 export const Nav = styled.div`
@@ -37,14 +37,14 @@ export const Nav = styled.div`
   display: flex;
   justify-content: space-between;
   backdrop-filter: ${(props: { fixed: boolean }) =>
-    props.fixed ? "blur(10px)" : "blur(0)"};
+        props.fixed ? "blur(10px)" : "blur(0)"};
   align-items: center;
   margin: 0 auto;
   padding: 0.15rem 1.5rem;
   transition: all 0.1s ease-in-out;
   /* background: transparent; */
   background: ${(props: { fixed: boolean }) =>
-    props.fixed ? "rgba(0,0,0,.8)" : "transparent"};
+        props.fixed ? "rgba(0,0,0,.8)" : "transparent"};
   & > div {
     text-align: center;
   }
@@ -188,6 +188,9 @@ export const FlexDiv = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  .nav_item{
+    margin-right:0.8rem !important;
+  }
   .tools {
     display: flex;
     justify-content: center;
@@ -229,3 +232,8 @@ export const UserAvatar = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
+export const MoreItem = styled.div`
+    width: 100%;
+    color: rgba(255,255,255,0.5);
+`

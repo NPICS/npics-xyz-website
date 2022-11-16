@@ -1,12 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import {
-  updateARP,
-  updateUSDTExchangeRate,
-  updateBENDExchangeRate,
-  fetchUser,
-  // setIsLogin,
-  clearUserData,
-  fetchUser2, updateLoginState
+    updateARP,
+    updateUSDTExchangeRate,
+    updateBENDExchangeRate,
+    fetchUser,
+    // setIsLogin,
+    clearUserData,
+    fetchUser2, updateLoginState
 } from 'store/app';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { useAsync, useInterval } from "react-use";
@@ -25,6 +25,7 @@ import Content from 'pages/Layout/Content'
 import Footer from 'pages/Layout/Footer'
 import styled from 'styled-components';
 import TopLevelModals from 'component/TopLevelModals';
+import NewFooter from './pages/Layout/NewFooter';
 const Nav = styled.div`
   left: 0;
   right: 0;
@@ -50,67 +51,68 @@ const Flex = styled.div`
 `
 
 function App() {
-  const action = useAppDispatch()
-  const { account } = useWeb3React()
-  const oldAccount = useRef<string | undefined | null>()
-  const isShowLoading = useAppSelector(state => state.app.data.isShowLoading)
-  // const weth = useWETHContract()
-  // const npics = useLendPoolContract()
+    const action = useAppDispatch()
+    const { account } = useWeb3React()
+    const oldAccount = useRef<string | undefined | null>()
+    const isShowLoading = useAppSelector(state => state.app.data.isShowLoading)
+    // const weth = useWETHContract()
+    // const npics = useLendPoolContract()
 
 
-  useEffect(() => {
-    console.log(`Account Change => New: ${account}, Old: ${oldAccount.current}`)
-    // changed account
-    if (account && oldAccount.current) {
-      // remove old account data
-      localStorage.clear()
-      // store new account
-      localStorage.setItem(SessionStorageKey.WalletAuthorized, account)
-      // fetch new account data
-      action(clearUserData())
-      action(fetchUser2())
-      // make login false
-      // action(setIsLogin(false))
-      action(updateLoginState())
-    }
+    useEffect(() => {
+        console.log(`Account Change => New: ${account}, Old: ${oldAccount.current}`)
+        // changed account
+        if (account && oldAccount.current) {
+            // remove old account data
+            localStorage.clear()
+            // store new account
+            localStorage.setItem(SessionStorageKey.WalletAuthorized, account)
+            // fetch new account data
+            action(clearUserData())
+            action(fetchUser2())
+            // make login false
+            // action(setIsLogin(false))
+            action(updateLoginState())
+        }
 
-    /// disconnect
-    else if (oldAccount.current && !account) {
-      console.log(`?????, ${oldAccount.current}, ${account}`)
-      // remove all data
-      localStorage.clear()
-      // logout
-      action(clearUserData())
-      // action(setIsLogin(false))
-      action(updateLoginState())
-    }
+        /// disconnect
+        else if (oldAccount.current && !account) {
+            console.log(`?????, ${oldAccount.current}, ${account}`)
+            // remove all data
+            localStorage.clear()
+            // logout
+            action(clearUserData())
+            // action(setIsLogin(false))
+            action(updateLoginState())
+        }
 
-    /// first connect
-    else if (!oldAccount.current && account) {
-      localStorage.setItem(SessionStorageKey.WalletAuthorized, account)
-      action(fetchUser2())
-    }
+        /// first connect
+        else if (!oldAccount.current && account) {
+            localStorage.setItem(SessionStorageKey.WalletAuthorized, account)
+            action(fetchUser2())
+        }
 
-    // store old account
-    oldAccount.current = account
-  }, [account])
-  return (
-    <>
-      {isShowLoading ? <Loading></Loading> : null}
-      <TopLevelModals />
-      <Flex>
-        <Nav>
-          <XHeader></XHeader>
-        </Nav>
-        <ContentBox>
-          <Content></Content>
-        </ContentBox>
-        <FooterBox>
-          <Footer></Footer>
-        </FooterBox>
-      </Flex>
-    </>
-  );
+        // store old account
+        oldAccount.current = account
+    }, [account])
+    return (
+        <>
+            {isShowLoading ? <Loading></Loading> : null}
+            <TopLevelModals />
+            <Flex>
+                <Nav>
+                    <XHeader></XHeader>
+                </Nav>
+                <ContentBox>
+                    <Content></Content>
+                </ContentBox>
+                <FooterBox>
+                    {/* <Footer></Footer> */}
+                    <NewFooter />
+                </FooterBox>
+            </Flex>
+        </>
+    );
 }
 
 export default App;
