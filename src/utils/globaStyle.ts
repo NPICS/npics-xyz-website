@@ -140,7 +140,7 @@ export const GlobalStyle = createGlobalStyle`
     }
     .ant-table-thead {
       margin-bottom: 0.05rem;
-      background: #000000;
+      background: #fff;
       /* border: 0.01rem solid rgba(255, 255, 255, .2); */
       border-radius: 0.1rem;
       tr:first-child th:first-child {
@@ -161,7 +161,7 @@ export const GlobalStyle = createGlobalStyle`
       }
       &>tr {
         .ant-table-column-has-sorters:hover {
-          background: #000;
+          background: #fff;
         }
         th:first-child {
           width: 0.8rem;
@@ -170,9 +170,9 @@ export const GlobalStyle = createGlobalStyle`
           width: 4.4rem;
         }
         th {
-          color: #fff;
+          color: #000;
           border-bottom: none;
-          background-color: #000;
+          background-color: #fff;
           height: 0.68rem;
           /* width: 2.716rem; */
           width: 2.2rem;
@@ -185,13 +185,18 @@ export const GlobalStyle = createGlobalStyle`
           border-top-right-radius: 0.1rem;
         }
       }
-      color: #fff;
+      color: #000;
     }
     .ant-table-tbody {
       /* background: rgba(255, 255, 255, .1); */
       /* border: 0.01rem solid rgba(255, 255, 255, .2); */
       border-radius: 0.1rem;
       display: grid;
+      .ant-table-row{
+        :hover{
+          box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.16);
+        }
+      }
       &>tr td:first-child {
         width: 0.8rem;
         border-top-left-radius: 0.1rem;
@@ -213,7 +218,8 @@ export const GlobalStyle = createGlobalStyle`
         border-bottom: 0.05rem solid #1a1a1a;
         &:hover {
           td {
-            background: rgba(255, 255, 255, .1);
+            /* background: rgba(255, 255, 255, .1); */
+            /* box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.16); */
           }
         }
         &>td {
@@ -227,7 +233,7 @@ export const GlobalStyle = createGlobalStyle`
           width: 2.2rem;
         }
         &>.ant-table-cell {
-          background: rgba(255, 255, 255, .03);
+          background: #fff;
           .descend {
             display: flex;
             justify-content: flex-start;
@@ -473,7 +479,7 @@ export const GlobalStyle = createGlobalStyle`
           }
         }
         .ant-table-cell-row-hover {
-          background: transparent !important;
+          /* background: transparent !important; */
         }
       }
       .ant-table-placeholder {

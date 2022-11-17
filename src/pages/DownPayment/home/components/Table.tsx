@@ -118,7 +118,7 @@ export default function MyTable() {
       align: 'center',
       className: 'table_col',
       render: (text, row, index) => {
-        return <div>{index + 1}</div>
+        return <div style={{ color: '#000' }}>{index + 1}</div>
       },
     },
     {
@@ -146,14 +146,14 @@ export default function MyTable() {
                 width: '0.5rem',
                 height: '0.5rem',
                 marginRight: '0.1rem',
-                borderRadius: '0.3rem',
+                borderRadius: '0.18rem',
               }}
             />
             <span
               style={{
                 wordBreak: 'break-all',
                 fontSize: '0.14rem',
-                color: '#fff',
+                color: '#000',
                 marginRight: '0.1rem',
               }}
             >
@@ -183,10 +183,10 @@ export default function MyTable() {
         return (
           <div className="descend">
             <div>
-              <img src={imgurl.whitePrice} alt="" />
+              <img src={imgurl.BlackEth} alt="" />
             </div>
             <div>
-              <span style={{ fontSize: '0.14rem' }}>{text === 0 ? '0.00' : text.toFixed(2)}</span>
+              <span style={{ fontSize: '0.14rem', color: '#000' }}>{text === 0 ? '0.00' : text.toFixed(2)}</span>
               <span
                 style={{
                   fontSize: '0.14rem',
@@ -215,12 +215,12 @@ export default function MyTable() {
           }}
         >
           <img
-            src={imgurl.whitePrice}
+            src={imgurl.BlackEth}
             alt=""
             style={{ marginRight: '0.1rem' }}
           />
           <span
-            style={{ fontSize: '0.14rem', color: '#fff', fontWeight: '500' }}
+            style={{ fontSize: '0.14rem', color: '#000', fontWeight: '500' }}
           >
             {text}
           </span>
@@ -237,7 +237,7 @@ export default function MyTable() {
       sorter: (a, b) => a.advanceRate - b.advanceRate,
       render: (text) => (
         <div
-          style={{ fontSize: '0.14rem', color: '#fff', fontWeight: '500' }}
+          style={{ fontSize: '0.14rem', color: '#000', fontWeight: '500' }}
         >{`${text}%`}</div>
       ),
     },
@@ -258,12 +258,12 @@ export default function MyTable() {
           }}
         >
           <img
-            src={imgurl.whitePrice}
+            src={imgurl.BlackEth}
             alt=""
             style={{ marginRight: '0.1rem' }}
           />
           <span
-            style={{ fontSize: '0.14rem', color: '#fff', fontWeight: '500' }}
+            style={{ fontSize: '0.14rem', color: '#000', fontWeight: '500' }}
           >
             {text}
           </span>
@@ -287,7 +287,7 @@ export default function MyTable() {
           }}
         >
           <span
-            style={{ fontSize: '0.14rem', color: '#fff', fontWeight: '500' }}
+            style={{ fontSize: '0.14rem', color: '#000', fontWeight: '500' }}
           >
             {text}%
           </span>
