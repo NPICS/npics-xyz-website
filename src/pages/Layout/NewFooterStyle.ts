@@ -83,6 +83,9 @@ export const NewFooterRight = styled.div<{ isHome: boolean }>`
         justify-content: space-between;
         align-items: center;
         cursor: pointer;
+        &>a{
+          color: ${props => props.isHome ? ' #fff' : '#000'};
+        }
     }
     .footer_media{
         display: flex;

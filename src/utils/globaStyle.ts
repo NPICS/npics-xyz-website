@@ -537,13 +537,18 @@ export const GlobalStyle = createGlobalStyle`
     .ant-dropdown-menu{
         background: #534852;
         border-radius: 0.1rem;
-        padding: 0.2rem;
-        .ant-dropdown-menu-item:hover{
-            background-color: #534852 !important;
-        }
+        padding: 0.1rem;
     }
   }
+  .ant-dropdown-menu-item{
+    background-color: #534852 !important;
+    transition:none;
+    padding:8px 12px;
+  }
+  .ant-dropdownmenu-item-active{
+    background-color: #534852;
+  }
   .ant-dropdown-menu-item:hover{
-            background-color: #534852 !important;
+            background-color: #534852;
         }
 `;

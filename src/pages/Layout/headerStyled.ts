@@ -1,33 +1,33 @@
 import { imgurl } from "utils/globalimport";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import styled from "styled-components";
 import { font01671 } from "component/styled";
 export const accountNav = [
-    {
-        icon: imgurl.dashboard.agreement,
-        text: "Agreement",
-        path: "/dashboard/agreement",
-    },
-    {
-        icon: imgurl.dashboard.rewards,
-        text: "Rewards",
-        path: "/dashboard/rewards",
-    },
-    {
-        icon: imgurl.dashboard.airdrop,
-        text: "Airdop",
-        path: "/dashboard/airdrop",
-    },
-    {
-        icon: imgurl.dashboard.notify,
-        text: "Notification",
-        path: "",
-    },
-    {
-        icon: imgurl.dashboard.setting,
-        text: "Settings",
-        path: "",
-    },
+  {
+    icon: imgurl.dashboard.agreement,
+    text: "Agreement",
+    path: "/dashboard/agreement",
+  },
+  {
+    icon: imgurl.dashboard.rewards,
+    text: "Rewards",
+    path: "/dashboard/rewards",
+  },
+  {
+    icon: imgurl.dashboard.airdrop,
+    text: "Airdop",
+    path: "/dashboard/airdrop",
+  },
+  {
+    icon: imgurl.dashboard.notify,
+    text: "Notification",
+    path: "",
+  },
+  {
+    icon: imgurl.dashboard.setting,
+    text: "Settings",
+    path: "",
+  },
 ];
 
 export const Nav = styled.div`
@@ -37,14 +37,14 @@ export const Nav = styled.div`
   display: flex;
   justify-content: space-between;
   backdrop-filter: ${(props: { fixed: boolean }) =>
-        props.fixed ? "blur(10px)" : "blur(0)"};
+    props.fixed ? "blur(10px)" : "blur(0)"};
   align-items: center;
   margin: 0 auto;
   padding: 0.15rem 1.5rem;
   transition: all 0.1s ease-in-out;
   /* background: transparent; */
   background: ${(props: { fixed: boolean }) =>
-        props.fixed ? "rgba(0,0,0,.8)" : "transparent"};
+    props.fixed ? "rgba(0,0,0,.8)" : "transparent"};
   & > div {
     text-align: center;
   }
@@ -233,7 +233,51 @@ export const UserAvatar = styled.div`
   align-items: center;
 `;
 
-export const MoreItem = styled.div`
+export const MoreItem = styled.a`
     width: 100%;
-    color: rgba(255,255,255,0.5);
+    color: rgba(255,255,255,0.5) !important;
+    .more_item_img{
+      margin-right: 0.1rem;
+    }
+    :hover{
+      color:#fff !important;
+    }
 `
+export const MoreItemLink = styled(Link)`
+    width: 100%;
+    color: rgba(255,255,255,0.5) !important;
+    .more_item_img{
+      margin-right: 0.1rem;
+    }
+    :hover{
+      color:#fff !important;
+    }
+`
+
+
+export const WalletBox = styled.div`
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 0.1rem;
+  min-width: 2.4rem;
+  height: 0.48rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .wallet_eth_icon{
+    flex: 0.48rem 0 0;
+    background: rgba(255,255,255,0.1);
+    border-radius: 0.1rem;
+    width: 0.48rem;
+    height: 0.48rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .wallet_connect{
+    flex: 1;
+    padding: 0.12rem;
+    cursor: pointer;
+  }
+`
+
