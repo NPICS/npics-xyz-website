@@ -13,7 +13,11 @@ import CloseIcon from '../assets/images/home/close.svg'
 import CloseIconBlack from '../assets/images/closeBlack.svg'
 import WingIcon from '../assets/images/wing_icon.svg'
 import ETHIcon from "../assets/images/eth.svg"
+// new version eth icon
+// black
 import BlackEth from "../assets/images/blackEth.svg"
+// grey
+import GreyEth from "../assets/images/greyEth.svg"
 // footer
 import darkTG from '../assets/images/footer/darkTelegram.svg'
 import darkT from '../assets/images/footer/darkTwitter.svg'
@@ -170,6 +174,7 @@ export const imgurl = {
   logo,
   logoBeta,
   BlackEth,
+  GreyEth,
   lightLogo,
   Vector,
   images11,

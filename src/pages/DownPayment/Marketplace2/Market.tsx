@@ -17,6 +17,7 @@ import { TextPlaceholder } from "../../../component/styled";
 import { Pop20 } from "component/Popover/Popover";
 import { changePlatform } from "../../../store/platfrom";
 import { useAppDispatch } from "../../../store/hooks"
+import { imgurl } from "utils/globalimport";
 
 export const Banner = styled(Box) <{ url?: string }>`
   position: absolute;
@@ -246,7 +247,7 @@ export default function Market() {
             gap={"0.02rem"}
             minWidth={"1.36rem"}>
             <Flex alignItems={"center"} gap={"0.02rem"}>
-              <Icon width={"0.18rem"} height={"0.18rem"} src={ethIcon} />
+              <Icon width={"0.18rem"} height={"0.18rem"} src={imgurl.BlackEth} />
               <Typography
                 fontSize={"0.2rem"}
                 color={"#000"}
@@ -268,7 +269,7 @@ export default function Market() {
             gap={"0.02rem"}
             minWidth={"1.36rem"}>
             <Flex alignItems={"center"} gap={"0.02rem"}>
-              <Icon width={"0.18rem"} height={"0.18rem"} src={ethIcon} />
+              <Icon width={"0.18rem"} height={"0.18rem"} src={imgurl.BlackEth} />
               <Typography
                 fontSize={"0.2rem"}
                 color={"#000"}
@@ -290,7 +291,7 @@ export default function Market() {
             gap={"0.02rem"}
             minWidth={"1.36rem"}>
             <Flex alignItems={"center"} gap={"0.02rem"}>
-              <Icon width={"0.18rem"} height={"0.18rem"} src={ethIcon} />
+              <Icon width={"0.18rem"} height={"0.18rem"} src={imgurl.BlackEth} />
               <Typography
                 fontSize={"0.2rem"}
                 color={"#000"}

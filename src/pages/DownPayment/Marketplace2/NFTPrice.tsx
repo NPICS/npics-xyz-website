@@ -412,7 +412,7 @@ function NFTPrice(props: {
           </Flex>
           <Flex flexDirection={"row"} alignItems={"center"} height={"70%"}>
             <Flex alignSelf={"center"}>
-              <Icon width={"0.22rem"} height={"0.22rem"} src={ethIcon} />
+              <Icon width={"0.22rem"} height={"0.22rem"} src={imgurl.BlackEth} />
             </Flex>
             <Typography
               fontSize={"0.24rem"}
@@ -572,7 +572,7 @@ function NFTPrice(props: {
         </Flex>
         <Flex alignItems={"end"} marginTop={"0.22rem"}>
           <Flex gap={"0.02rem"} alignItems={"center"}>
-            <Icon width={"0.4rem"} height={"0.4rem"} src={ethIcon} />
+            <Icon width={"0.4rem"} height={"0.4rem"} src={imgurl.BlackEth} />
             <Typography
               fontSize={"0.4rem"}
               fontWeight={700}

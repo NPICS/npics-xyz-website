@@ -207,7 +207,7 @@ export const GlobalStyle = createGlobalStyle`
         width: 4.4rem;
       }
       &>tr td:last-child {
-        /* border-right: 0.01rem solid rgba(255,255,255,.2); */
+        border-right: 0.01rem solid rgba(255,255,255,.2);
         border-top-right-radius: 0.1rem;
         border-bottom-right-radius: 0.1rem;
       }
@@ -215,7 +215,9 @@ export const GlobalStyle = createGlobalStyle`
         border-bottom: none;
       } */
       &>tr {
-        border-bottom: 0.05rem solid #1a1a1a;
+        border-bottom: none;
+        margin-bottom: 0.05rem;
+        border-radius: 0.1rem;
         &:hover {
           td {
             /* background: rgba(255, 255, 255, .1); */

@@ -4,6 +4,7 @@ import { CollectionItems } from "../../../model/user";
 import { useNavigate } from 'react-router-dom';
 import ethIcon from "../../../assets/images/market/eth_icon_10x15.svg"
 import unselectedEthIcon from "../../../assets/images/market/unselect_eth.svg"
+import { imgurl } from "utils/globalimport";
 
 const Cover = styled.img`
   display: block;
@@ -130,7 +131,7 @@ export default function CollectionCell(props: {
         <Flex
           alignItems={"center"}
           gap={"0.06rem"}>
-          <Icon height={"0.15rem"} width={"0.1rem"} src={ethIcon} />
+          <Icon height={"0.2rem"} width={"0.16rem"} src={imgurl.BlackEth} />
           <Typography fontWeight={'700'}>{props.item.downPaymentPriceFormat()}</Typography>
         </Flex>
 
@@ -150,7 +151,7 @@ export default function CollectionCell(props: {
         <Flex flex={1}></Flex>
         <Icon style={{
           "flexShrink": 0
-        }} src={unselectedEthIcon} width={"0.1rem"} height={"0.15rem"}></Icon>
+        }} src={imgurl.GreyEth} width={"0.2rem"} height={"0.16rem"}></Icon>
         <Typography
           color={"#00000080"}
           fontSize={"0.14rem"}

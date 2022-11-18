@@ -78,9 +78,9 @@ export default function MyVaults() {
               Total Debt：
             </Typography>
             <Icon
-              width="0.18rem"
-              height="0.18rem"
-              src={imgurl.dashboard.ethGrey18}
+              width="0.15rem"
+              height="0.15rem"
+              src={imgurl.GreyEth}
             />
             <Typography
               fontWeight={500}

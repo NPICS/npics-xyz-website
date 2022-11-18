@@ -95,7 +95,8 @@ export default function TableWarehouse(props: {
                       <div>
                         Floor:{" "}
                         <span>
-                          <img src={imgurl.dashboard.ethGrey18} alt="" />
+                          <Icon width={"0.12rem"} height={"0.12rem"} src={imgurl.GreyEth} />
+                          {/* <img style={{ height: '0.15rem', width: '0.15rem' }} src={imgurl.GreyEth} alt="" /> */}
                           {item.floorPrice.toFixed(2, 1)}
                           <Typography marginLeft="5px">{`(${thousandFormat(
                             item.floorPrice.times(ethRate).toNumber()
@@ -203,7 +204,7 @@ export default function TableWarehouse(props: {
                         | "In Risk"
                         | "In Liquidation"
                         | "Terminated"
-                        ]
+                      ]
                         }`,
                     }}
                   >

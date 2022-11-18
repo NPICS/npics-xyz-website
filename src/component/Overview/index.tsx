@@ -8,8 +8,6 @@ const Overview = ({ type, dataList }: { type: string, dataList: number[] }) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   useEffect(() => {
     if (dataList.length > 0) {
-      console.log("数据加载完成");
-
       setIsLoading(false)
     }
   }, [dataList])
@@ -42,7 +40,7 @@ const Overview = ({ type, dataList }: { type: string, dataList: number[] }) => {
               }
               {
                 !isLoading && <CountUp
-                  duration={2}
+                  duration={1.7}
                   className="data_count"
                   start={0}
                   end={dataList[0]}
@@ -60,7 +58,8 @@ const Overview = ({ type, dataList }: { type: string, dataList: number[] }) => {
                   <img className="available_icon" src={imgurl.ETHIcon} />
                   <CountUp
                     className='data_count'
-                    duration={2}
+                    duration={1.5}
+                    decimals={2}
                     start={0}
                     end={dataList[1]}
                     separator={','}
