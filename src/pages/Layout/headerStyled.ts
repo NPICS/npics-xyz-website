@@ -181,7 +181,7 @@ export const LogoLink = styled(NavLink)`
   align-items: center;
   margin-right: 1.2rem;
   img {
-    width: 1.4rem;
+    /* width: 1.4rem; */
   }
 `;
 export const FlexDiv = styled.div`

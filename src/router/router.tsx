@@ -13,6 +13,7 @@ import NFTPayCongratulations from "../pages/DownPayment/Marketplace2/NFTPayCongr
 import NFTPayWrong from "../pages/DownPayment/Marketplace2/NFTPayWrong";
 import VaultsDetail from "pages/DownPayment/Dashboard2/components/components/VaultsDetail";
 import OneNFT from "../pages/DownPayment/Marketplace2/OneNFT";
+import ChipSwapHome from "../pages/Chipswap/Home"
 interface RouterT {
   name?: string;
   path: string;
@@ -86,6 +87,11 @@ export default function Routers() {
     {
       path: "vaultsDetail/:graphId",
       component: <VaultsDetail />,
+    },
+    // chipswap
+    {
+      path: "/chipswap",
+      component: <ChipSwapHome />,
     },
     {
       path: "*",

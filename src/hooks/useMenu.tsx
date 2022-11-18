@@ -69,6 +69,38 @@ export const useMenu = () => {
       label: "Airdop"
     }
   ]
+  const CPMenu = [
+    {
+      id: 1,
+      path: "/chipswap",
+      type: 1,
+      label: "Overview"
+    },
+    {
+      id: 2,
+      path: "/swap",
+      type: 1,
+      label: "Swap"
+    },
+    {
+      id: 3,
+      path: "/chinow",
+      type: 1,
+      label: "Chinow"
+    },
+    {
+      id: 4,
+      path: "/yielding",
+      type: 1,
+      label: "Yielding"
+    },
+    {
+      id: 5,
+      path: "/orders",
+      type: 1,
+      label: "Orders"
+    }
+  ]
   // more
   const HomeMore = [
     {
@@ -146,10 +178,46 @@ export const useMenu = () => {
       ),
     },
   ]
+  const CPMore = [
+    {
+      key: '1',
+      label: (
+        <MoreItemLink to={"/downpayment"}>
+          Downpayment
+        </MoreItemLink>
+      ),
+    },
+    {
+      key: '1',
+      label: (
+        <MoreItemLink to={"/hedg"}>
+          Hedging
+        </MoreItemLink>
+      ),
+    },
+    {
+      key: '1',
+      label: (
+        <MoreItemLink to={"/dashboard"}>
+          Dashboard
+        </MoreItemLink>
+      ),
+    },
+    {
+      key: '1',
+      label: (
+        <MoreItem target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
+          Resources
+        </MoreItem>
+      ),
+    },
+  ]
   // path
   const DPPath = ["downpayment", "marketplace", "nft"];
+  const CPPath = ["chipswap"]
   const [menuList, setMenuList] = useState<any[]>([])
   const [moreList, setMoreList] = useState<any[]>([])
+  const [logoUrl, setLogoUrl] = useState<any>("");
   const [pageType, setPageType] = useState<string>("")
   useEffect(() => {
     //Judgment router and select different list
@@ -159,15 +227,24 @@ export const useMenu = () => {
       // home menu
       setMenuList(val => HomeMenu)
       setMoreList(val => HomeMore)
+      setLogoUrl(imgurl.logo)
       setPageType("home")
     }
     if (DPPath.includes(routerPathList[1])) {
       // downpayment menu
       setMenuList(val => DPMenu)
       setMoreList(val => DPMore)
+      setLogoUrl(imgurl.LogoDP)
       setPageType("dp")
+    }
+    if (CPPath.includes(routerPathList[1])) {
+      // chipswap menu
+      setMenuList(val => CPMenu)
+      setMoreList(val => CPMore)
+      setLogoUrl(imgurl.LogoCP)
+      setPageType("cp")
     }
   }, [history.pathname]);
 
-  return { menuList, moreList, pageType };
+  return { menuList, moreList, pageType, logoUrl };
 }

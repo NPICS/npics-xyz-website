@@ -215,7 +215,7 @@ function XHeader() {
     textDecoration: "none",
     marginRight: "1.3rem",
   };
-  const { menuList, moreList, pageType } = useMenu();
+  const { menuList, moreList, pageType, logoUrl } = useMenu();
   const MoreMenu = (
     <Menu className="more_menu_box" items={moreList}>
     </Menu>
@@ -239,7 +239,7 @@ function XHeader() {
         <FlexDiv>
           {/* logo */}
           <LogoLink to={"/"}>
-            <img src={imgurl.logo} alt="" />
+            <img src={logoUrl} alt="" />
           </LogoLink>
           {/* menu */}
           {

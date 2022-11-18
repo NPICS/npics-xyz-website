@@ -19,8 +19,8 @@ const Overview = ({ type, dataList }: { type: string, dataList: number[] }) => {
           <div className='left_btn'>
             {
               type === "dp" && <Fragment>
-                <NewButton text='Discover' color='#fff' bg='#FF490F' radius='0.1rem' margin='0 0.2rem 0 0' />
-                <NewButton text='Vaults' color='#000' bg='#fff' radius='0.1rem' />
+                <NewButton text='Discover' color='#fff' bg='#FF490F' openUrl={false} url="/marketplace" radius='0.1rem' margin='0 0.2rem 0 0' />
+                <NewButton text='Vaults' color='#000' bg='#fff' openUrl={false} url="/valut" radius='0.1rem' />
               </Fragment>
             }
             {

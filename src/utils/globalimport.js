@@ -13,6 +13,9 @@ import CloseIcon from '../assets/images/home/close.svg'
 import CloseIconBlack from '../assets/images/closeBlack.svg'
 import WingIcon from '../assets/images/wing_icon.svg'
 import ETHIcon from "../assets/images/eth.svg"
+//new logo
+import LogoDP from '../assets/images/logo_dp.svg'
+import LogoCP from '../assets/images/logo_cp.svg'
 // new version eth icon
 // black
 import BlackEth from "../assets/images/blackEth.svg"
@@ -173,6 +176,8 @@ import HomeChipSwapSwiper3 from "../assets/images/NewHome/chipswap_swiper_3.svg"
 export const imgurl = {
   logo,
   logoBeta,
+  LogoDP,
+  LogoCP,
   BlackEth,
   GreyEth,
   lightLogo,

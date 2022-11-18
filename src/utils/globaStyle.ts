@@ -215,7 +215,7 @@ export const GlobalStyle = createGlobalStyle`
         border-bottom: none;
       } */
       &>tr {
-        border-bottom: none;
+        border-bottom: none !important;
         margin-bottom: 0.05rem;
         border-radius: 0.1rem;
         &:hover {

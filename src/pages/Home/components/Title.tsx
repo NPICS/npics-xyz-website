@@ -60,77 +60,77 @@ const TitleBox = styled.div`
   }
 `
 export default function Title() {
-    const [swiper, setSwiper] = useState<Swiper>()
-    const [selected, setSelected] = useState<number>(0)
-    const changSwiper = (e: any) => {
-        setSelected(e.activeIndex)
+  const [swiper, setSwiper] = useState<Swiper>()
+  const [selected, setSelected] = useState<number>(0)
+  const changSwiper = (e: any) => {
+    setSelected(e.activeIndex)
+  }
+  const getSwiper = (swiper: Swiper) => {
+    setSwiper(swiper)
+  }
+  const changePoint = (index: number) => {
+    if (swiper) {
+      setSelected(index)
+      swiper.slideTo(index)
     }
-    const getSwiper = (swiper: Swiper) => {
-        setSwiper(swiper)
-    }
-    const changePoint = (index: number) => {
-        if (swiper) {
-            setSelected(index)
-            swiper.slideTo(index)
-        }
-    }
-    return (
-        <TitleBox>
-            <Animate
-                play={true}
-                duration={0.5}
-                start={{ opacity: 0, transform: 'translateX(-1rem)' }}
-                end={{ opacity: 1, transform: 'translateX(0)' }}
-            >
-                <div className="title_box">
-                    <div className='title_top'>WEB3</div>
-                    <div className='title_bottom'>LIQUIDITY <span className='title_strong'>ENGINE</span></div>
-                </div>
-            </Animate>
-            <Animate
-                play={true}
-                duration={0.5}
-                delay={0.5}
-                start={{ opacity: 0, transform: 'translateX(-1rem)' }}
-                end={{ opacity: 1, transform: 'translateX(0)' }}
-            >
-                <div className="title_text">
-                    Trade NFTs in future, make put or down in one click. Maximum your explosure by NFT downpayment, Hedgeing and fragemental swap
-                </div>
-            </Animate>
+  }
+  return (
+    <TitleBox>
+      <Animate
+        play={true}
+        duration={0.5}
+        start={{ opacity: 0, transform: 'translateX(-1rem)' }}
+        end={{ opacity: 1, transform: 'translateX(0)' }}
+      >
+        <div className="title_box">
+          <div className='title_top'>WEB3</div>
+          <div className='title_bottom'>LIQUIDITY <span className='title_strong'>ENGINE</span></div>
+        </div>
+      </Animate>
+      <Animate
+        play={true}
+        duration={0.5}
+        delay={0.5}
+        start={{ opacity: 0, transform: 'translateX(-1rem)' }}
+        end={{ opacity: 1, transform: 'translateX(0)' }}
+      >
+        <div className="title_text">
+          Trade NFTs in future, make put or down in one click. Maximum your explosure by NFT downpayment, Hedgeing and fragemental swap
+        </div>
+      </Animate>
 
-            {/* <div className='title_point'>
+      {/* <div className='title_point'>
         <div className='title_point_item' onClick={() => changePoint(3)} style={{ background: selected === 3 || selected === 1 ? '#fff' : 'rgba(255, 255, 255, 0.4)' }}></div>
         <div className='title_point_item' onClick={() => changePoint(2)} style={{ background: selected === 2 || selected === 0 ? '#fff' : 'rgba(255, 255, 255, 0.4)' }}></div>
       </div> */}
-            <div className="title_btn">
-                <Animate
-                    play={true}
-                    duration={0.5}
-                    delay={1}
-                    start={{ opacity: 0, transform: 'translateX(-0.5rem)' }}
-                    end={{ opacity: 1, transform: 'translateX(0)' }}
-                >
-                    <Link to={'/marketplace'}>
-                        <ButtonDefault types="primary" isScale={true} color='#fff'>
-                            Down Payment
-                        </ButtonDefault>
-                    </Link>
-                </Animate>
-                <Animate
-                    play={true}
-                    duration={0.5}
-                    delay={1}
-                    start={{ opacity: 0, transform: 'translateX(0.5rem)' }}
-                    end={{ opacity: 1, transform: 'translateX(0)' }}
-                >
-                    <Link to={'/dashboard/vaults'}>
-                        <ButtonDefault types="second" isScale={true} color="#333">
-                            Chip Swap
-                        </ButtonDefault>
-                    </Link>
-                </Animate>
-            </div>
-        </TitleBox>
-    )
+      <div className="title_btn">
+        <Animate
+          play={true}
+          duration={0.5}
+          delay={1}
+          start={{ opacity: 0, transform: 'translateX(-0.5rem)' }}
+          end={{ opacity: 1, transform: 'translateX(0)' }}
+        >
+          <Link to={'/downpayment'}>
+            <ButtonDefault types="primary" isScale={true} color='#fff'>
+              Down Payment
+            </ButtonDefault>
+          </Link>
+        </Animate>
+        <Animate
+          play={true}
+          duration={0.5}
+          delay={1}
+          start={{ opacity: 0, transform: 'translateX(0.5rem)' }}
+          end={{ opacity: 1, transform: 'translateX(0)' }}
+        >
+          <Link to={'/chipswap'}>
+            <ButtonDefault types="second" isScale={true} color="#333">
+              Chip Swap
+            </ButtonDefault>
+          </Link>
+        </Animate>
+      </div>
+    </TitleBox>
+  )
 }
