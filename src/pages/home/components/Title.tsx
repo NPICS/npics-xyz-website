@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
-import { Animate } from 'react-simple-animate'
-import { Swiper as SwiperProvider, SwiperSlide } from 'swiper/react'
-import 'swiper/css'
-import 'swiper/css/pagination'
-import 'swiper/css/navigation'
-import Swiper from 'swiper/types/swiper-class'
-import { Autoplay } from 'swiper'
-import { Link } from 'react-router-dom'
-import ButtonDefault from 'component/ButtonDefault'
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import { Animate } from "react-simple-animate";
+import { Swiper as SwiperProvider, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import Swiper from "swiper/types/swiper-class";
+import { Autoplay } from "swiper";
+import { Link } from "react-router-dom";
+import ButtonDefault from "component/ButtonDefault";
 
 const TitleBox = styled.div`
   width: 7.03rem;
@@ -58,29 +58,29 @@ const TitleBox = styled.div`
       margin-right: 0.2rem;
     }
   }
-`
+`;
 export default function Title() {
-  const [swiper, setSwiper] = useState<Swiper>()
-  const [selected, setSelected] = useState<number>(0)
+  const [swiper, setSwiper] = useState<Swiper>();
+  const [selected, setSelected] = useState<number>(0);
   const changSwiper = (e: any) => {
-    setSelected(e.activeIndex)
-  }
+    setSelected(e.activeIndex);
+  };
   const getSwiper = (swiper: Swiper) => {
-    setSwiper(swiper)
-  }
+    setSwiper(swiper);
+  };
   const changePoint = (index: number) => {
     if (swiper) {
-      setSelected(index)
-      swiper.slideTo(index)
+      setSelected(index);
+      swiper.slideTo(index);
     }
-  }
+  };
   return (
     <TitleBox className="title_box">
       <Animate
         play={true}
         duration={0.5}
-        start={{ opacity: 0, transform: 'translateX(-1rem)' }}
-        end={{ opacity: 1, transform: 'translateX(0)' }}
+        start={{ opacity: 0, transform: "translateX(-1rem)" }}
+        end={{ opacity: 1, transform: "translateX(0)" }}
       >
         <div className="title_box">
           <SwiperProvider
@@ -89,7 +89,7 @@ export default function Title() {
             loop={true}
             autoplay={{
               delay: 6000,
-              disableOnInteraction: true
+              disableOnInteraction: true,
             }}
             modules={[Autoplay]}
             className="mySwiper"
@@ -98,7 +98,7 @@ export default function Title() {
           >
             <SwiperSlide>
               <div className="title_item">
-                Pay as Low as 60% to own your favorite NFT
+                Pay as Low as 40% to own your favorite NFT
               </div>
             </SwiperSlide>
             <SwiperSlide>
@@ -113,8 +113,8 @@ export default function Title() {
         play={true}
         duration={0.5}
         delay={0.5}
-        start={{ opacity: 0, transform: 'translateX(-1rem)' }}
-        end={{ opacity: 1, transform: 'translateX(0)' }}
+        start={{ opacity: 0, transform: "translateX(-1rem)" }}
+        end={{ opacity: 1, transform: "translateX(0)" }}
       >
         <div className="title_text">
           The First NFT Leveraged Trading Platform for Web3
@@ -130,11 +130,11 @@ export default function Title() {
           play={true}
           duration={0.5}
           delay={1}
-          start={{ opacity: 0, transform: 'translateX(-0.5rem)' }}
-          end={{ opacity: 1, transform: 'translateX(0)' }}
+          start={{ opacity: 0, transform: "translateX(-0.5rem)" }}
+          end={{ opacity: 1, transform: "translateX(0)" }}
         >
-          <Link to={'/marketplace'}>
-            <ButtonDefault types="primary" isScale={true} color='#fff'>
+          <Link to={"/marketplace"}>
+            <ButtonDefault types="primary" isScale={true} color="#fff">
               Discover
             </ButtonDefault>
           </Link>
@@ -143,10 +143,10 @@ export default function Title() {
           play={true}
           duration={0.5}
           delay={1}
-          start={{ opacity: 0, transform: 'translateX(0.5rem)' }}
-          end={{ opacity: 1, transform: 'translateX(0)' }}
+          start={{ opacity: 0, transform: "translateX(0.5rem)" }}
+          end={{ opacity: 1, transform: "translateX(0)" }}
         >
-          <Link to={'/dashboard/vaults'}>
+          <Link to={"/dashboard/vaults"}>
             <ButtonDefault types="second" isScale={true} color="#333">
               Vaults
             </ButtonDefault>
@@ -154,5 +154,5 @@ export default function Title() {
         </Animate>
       </div>
     </TitleBox>
-  )
+  );
 }
