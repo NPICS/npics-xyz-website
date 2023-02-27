@@ -1,36 +1,49 @@
-import React, { useEffect, useState } from 'react'
-import http from 'utils/http'
-import type { ColumnsType } from 'antd/lib/table'
-import { Skeleton, Table } from 'antd'
-import { Collections } from '../../../model/user'
-import { CollectionList } from 'model/collection'
-import { deserializeArray } from 'class-transformer'
-import styled from 'styled-components'
-import { imgurl } from 'utils/globalimport'
-import BigNumber from 'bignumber.js'
-import { Link } from 'react-router-dom'
-import { Icon } from 'component/Box'
-import SkeletonTable from './SkeletonTable'
-import openseaValidIcon from 'assets/images/market/nfts_opensea_valid.svg'
-import { useAppDispatch } from '../../../store/hooks'
-import { changePlatform } from '../../../store/platfrom'
+import React, { useEffect, useState } from "react";
+import http, { NEW_HTTP_API } from "utils/http";
+import type { ColumnsType } from "antd/lib/table";
+import { Skeleton, Table } from "antd";
+import { Collections } from "../../../model/user";
+import { CollectionList } from "model/collection";
+import { deserializeArray } from "class-transformer";
+import styled from "styled-components";
+import { imgurl } from "utils/globalimport";
+import BigNumber from "bignumber.js";
+import { Link } from "react-router-dom";
+import { Icon } from "component/Box";
+import SkeletonTable from "./SkeletonTable";
+import openseaValidIcon from "assets/images/market/nfts_opensea_valid.svg";
+import { useAppDispatch } from "../../../store/hooks";
+import { changePlatform } from "../../../store/platfrom";
+import axios from "axios";
+import { BANK_ENUM } from "../../../utils/enums";
+import { setIsLoading } from "../../../store/app";
 interface DataType {
-  index: string
-  key: React.Key
-  imageUrl: string
-  collection: string
-  realTotalSupply: number
-  floorPrice: number
-  advanceRate: number
-  ownerNum: number
-  activeCollaterals: string
-  primePrice: number
-  apr: number
-  // vol: number
-  dayChange: number
-  dayVolume: number
-  address: string
-  platform: string
+  index: string;
+  key: React.Key;
+  floorPrice: string;
+  miniDP: string;
+  total: string;
+  maxBorrowBank: {
+    bankId: BANK_ENUM;
+    address: string;
+    borrowAsset: string;
+    floorPrice: string;
+    ltv: string;
+    liquidationThreshold: string;
+    borrowApr: string;
+    rewardApr: string;
+    apr: string;
+  };
+  slug: string;
+  name: string;
+  description: string;
+  imageUrl: string;
+  symbol: string;
+  address: string;
+  totalSwhelves: number;
+  totalSupply: number;
+  dayChange: string;
+  dayVolume: string;
 }
 
 const BgTable = styled.div`
@@ -42,7 +55,7 @@ const BgTable = styled.div`
   .table_col {
     font-size: 0.14rem !important;
   }
-  .table_col_apr{
+  .table_col_apr {
     font-size: 0.14rem !important;
     padding: 0.1rem 0.16rem !important;
   }
@@ -53,80 +66,55 @@ const BgTable = styled.div`
       }
     }
   }
-`
+`;
 
 export default function MyTable() {
-  const dispatch = useAppDispatch()
-  const [collections, setCollections] = useState<DataType[]>()
-  const [showTable, setShowTable] = useState<boolean>(false)
+  const dispatch = useAppDispatch();
+  const [collections, setCollections] = useState<DataType[]>();
+  const [showTable, setShowTable] = useState<boolean>(false);
 
   useEffect(() => {
-    getData()
+    getData();
     // eslint-disable-next-line
-  }, [])
+  }, []);
   const openCollection = (row: DataType) => {
-    dispatch(changePlatform(row.platform))
-  }
+    dispatch(changePlatform(BANK_ENUM[row.maxBorrowBank.bankId]));
+  };
 
   function ScrollTop(): void {
-    document.body.scrollTop = 0
-    document.documentElement.scrollTop = 0
-    window.scrollTo(0, 0)
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+    window.scrollTo(0, 0);
   }
 
-  const url = '/npics-nft/app-api/v2/nft/getCollections2'
+  const url = "/npics-nft/app-api/v2/nft/getCollections2";
   const getData = async () => {
-    let result: any = await http.myPost(url, {})
-    if (result.code === 200 && result.data.length) {
-      const orgData = result.data
-      const changeData = deserializeArray(CollectionList, JSON.stringify(orgData))
-      const relData: DataType[] = []
-      if (changeData && changeData.length) {
-        setShowTable(true)
-        for (let i = 0; i < changeData.length; i++) {
-          relData.push({
-            index: `${i + 1}`,
-            key: `${i}`,
-            imageUrl: changeData[i].imageUrl,
-            collection: changeData[i].name,
-            realTotalSupply: changeData[i].realTotalSupply,
-            floorPrice: +changeData[i].sFloorPrice,
-            ownerNum: changeData[i].ownerNum,
-            advanceRate: +changeData[i].sAdvanceRate,
-            activeCollaterals: changeData[i].activeCollaterals,
-            primePrice: +changeData[i].sPrimePrice,
-            // vol: +changeData[i].vol,
-            apr: +changeData[i].svaultApr,
-            dayChange: changeData[i].sDayChange,
-            dayVolume: parseFloat(changeData[i].dayVolume + "") || 0,
-            address: changeData[i].address,
-            platform: changeData[i].platform
-          })
-        }
-        setCollections(relData)
-      }
-    } else {
-      setCollections([])
-    }
-
-  }
+    const newRes = await axios
+      .get(`${NEW_HTTP_API}/downpay/collection/list`)
+      .then((res) => res.data.data)
+      .catch(() => []);
+    setIsLoading(false);
+    setShowTable(true);
+    console.log("newRes", newRes);
+    setCollections(newRes);
+  };
   const columns: ColumnsType<DataType> = [
     {
-      title: '#',
-      dataIndex: 'index',
-      key: 'index',
-      align: 'center',
-      className: 'table_col',
+      title: "#",
+      dataIndex: "index",
+      key: "index",
+      align: "center",
+      className: "table_col",
       render: (text, row, index) => {
-        return <div>{index + 1}</div>
+        return <div>{index + 1}</div>;
       },
     },
     {
-      title: 'Collection',
-      dataIndex: 'collection',
-      key: 'collection',
-      align: 'left',
-      className: 'table_col',
+      title: "Collection",
+      dataIndex: "collection",
+      key: "collection",
+      align: "left",
+      className: "table_col",
       render: (text, row) => (
         <Link
           to={`/marketplace/collections/${row.address}`}
@@ -134,50 +122,50 @@ export default function MyTable() {
         >
           <div
             style={{
-              display: 'flex',
-              justifyContent: 'flex-start',
-              alignItems: 'center',
+              display: "flex",
+              justifyContent: "flex-start",
+              alignItems: "center",
             }}
           >
             <img
               src={row.imageUrl}
               alt=""
               style={{
-                width: '0.5rem',
-                height: '0.5rem',
-                marginRight: '0.1rem',
-                borderRadius: '0.3rem',
+                width: "0.5rem",
+                height: "0.5rem",
+                marginRight: "0.1rem",
+                borderRadius: "0.3rem",
               }}
             />
             <span
               style={{
-                wordBreak: 'break-all',
-                fontSize: '0.14rem',
-                color: '#fff',
-                marginRight: '0.1rem',
+                wordBreak: "break-all",
+                fontSize: "0.14rem",
+                color: "#fff",
+                marginRight: "0.1rem",
               }}
             >
-              {text}
+              {row.name}
             </span>
             <Icon
-              style={{ flexShrink: '0', margin: 0 }}
+              style={{ flexShrink: "0", margin: 0 }}
               src={openseaValidIcon}
-              width={'0.16rem'}
-              height={'0.16rem'}
+              width={"0.16rem"}
+              height={"0.16rem"}
             />
           </div>
         </Link>
       ),
     },
     {
-      title: '24H Vol',
-      dataIndex: 'dayVolume',
-      key: 'dayVolume',
-      align: 'left',
-      className: 'table_col',
-      defaultSortOrder: 'descend',
+      title: "24H Vol",
+      dataIndex: "dayVolume",
+      key: "dayVolume",
+      align: "left",
+      className: "table_col",
+      defaultSortOrder: "descend",
       sorter: (a, b) => {
-        return +a.dayVolume - +b.dayVolume
+        return +a.dayVolume - +b.dayVolume;
       },
       render: (text: number, row) => {
         return (
@@ -186,115 +174,126 @@ export default function MyTable() {
               <img src={imgurl.whitePrice} alt="" />
             </div>
             <div>
-              <span style={{ fontSize: '0.14rem' }}>{text === 0 ? '0.00' : text.toFixed(2)}</span>
+              <span style={{ fontSize: "0.14rem" }}>
+                {text === 0 ? "0.00" : (+text).toFixed(2)}
+              </span>
               <span
                 style={{
-                  fontSize: '0.14rem',
-                  color: `${+row.dayChange >= 0 ? '#7BD742' : '#D03434'}`,
+                  fontSize: "0.14rem",
+                  color: `${+row.dayChange >= 0 ? "#7BD742" : "#D03434"}`,
                 }}
-              >{`${+row.dayChange >= 0 ? '+' : ''}${row.dayChange === 0 ? '0.00' : row.dayChange}%`}</span>
+              >{`${+row.dayChange >= 0 ? "+" : ""}${
+                +row.dayChange === 0
+                  ? "0.00"
+                  : (+row.dayChange * 100).toFixed(2)
+              }%`}</span>
             </div>
           </div>
-        )
+        );
       },
     },
     {
-      title: 'Floor Price',
-      dataIndex: 'floorPrice',
-      key: 'floorPrice',
-      align: 'left',
-      className: 'table_col',
+      title: "Floor Price",
+      dataIndex: "maxBorrowBank",
+      key: "maxBorrowBank",
+      align: "left",
+      className: "table_col",
       // defaultSortOrder: 'descend',
-      sorter: (a, b) => a.floorPrice - b.floorPrice,
-      render: (text) => (
+      sorter: (a, b) =>
+        +a.maxBorrowBank.floorPrice - +b.maxBorrowBank.floorPrice,
+      render: (text, row) => (
         <div
           style={{
-            display: 'flex',
-            justifyContent: 'flex-start',
-            alignItems: 'center',
+            display: "flex",
+            justifyContent: "flex-start",
+            alignItems: "center",
           }}
         >
           <img
             src={imgurl.whitePrice}
             alt=""
-            style={{ marginRight: '0.1rem' }}
+            style={{ marginRight: "0.1rem" }}
           />
           <span
-            style={{ fontSize: '0.14rem', color: '#fff', fontWeight: '500' }}
+            style={{ fontSize: "0.14rem", color: "#fff", fontWeight: "500" }}
           >
-            {text}
+            {(+row.maxBorrowBank.floorPrice).toFixed(2)}
           </span>
         </div>
       ),
     },
     {
-      title: 'Down Payment ( % )',
-      dataIndex: 'advanceRate',
-      align: 'left',
-      className: 'table_col',
-      key: 'advanceRate',
+      title: "Down Payment ( % )",
+      dataIndex: "advanceRate",
+      align: "left",
+      className: "table_col",
+      key: "advanceRate",
       // defaultSortOrder: 'descend',
-      sorter: (a, b) => a.advanceRate - b.advanceRate,
-      render: (text) => (
+      sorter: (a, b) => +a.maxBorrowBank.ltv - +b.maxBorrowBank.ltv,
+      render: (text, d) => (
         <div
-          style={{ fontSize: '0.14rem', color: '#fff', fontWeight: '500' }}
-        >{`${text}%`}</div>
+          style={{ fontSize: "0.14rem", color: "#fff", fontWeight: "500" }}
+        >{`${(1 - +d.maxBorrowBank.ltv) * 100}%`}</div>
       ),
     },
     {
-      title: 'Down Payment',
-      dataIndex: 'primePrice',
-      key: 'primePrice',
-      align: 'left',
-      className: 'table_col',
+      title: "Down Payment",
+      dataIndex: "floorPrice",
+      key: "floorPrice",
+      align: "left",
+      className: "table_col",
       // defaultSortOrder: 'descend',
-      sorter: (a, b) => a.floorPrice - b.floorPrice,
-      render: (text) => (
+      sorter: (a, b) =>
+        +a.maxBorrowBank.floorPrice - +b.maxBorrowBank.floorPrice,
+      render: (text, row) => (
         <div
           style={{
-            display: 'flex',
-            justifyContent: 'flex-start',
-            alignItems: 'center',
+            display: "flex",
+            justifyContent: "flex-start",
+            alignItems: "center",
           }}
         >
           <img
             src={imgurl.whitePrice}
             alt=""
-            style={{ marginRight: '0.1rem' }}
+            style={{ marginRight: "0.1rem" }}
           />
           <span
-            style={{ fontSize: '0.14rem', color: '#fff', fontWeight: '500' }}
+            style={{ fontSize: "0.14rem", color: "#fff", fontWeight: "500" }}
           >
-            {text}
+            {(
+              (1 - +row.maxBorrowBank.ltv) *
+              +row.maxBorrowBank.floorPrice
+            ).toFixed(2)}
           </span>
         </div>
       ),
     },
     {
       title: "Vault APR",
-      dataIndex: 'apr',
-      key: 'apr',
-      align: 'left',
-      className: 'table_col_apr',
+      dataIndex: "apr",
+      key: "apr",
+      align: "left",
+      className: "table_col_apr",
       // defaultSortOrder: 'descend',
-      sorter: (a, b) => a.apr - b.apr,
-      render: (text) => (
+      sorter: (a, b) => +a.maxBorrowBank.apr - +b.maxBorrowBank.apr,
+      render: (text, row) => (
         <div
           style={{
-            display: 'flex',
-            justifyContent: 'flex-start',
-            alignItems: 'center',
+            display: "flex",
+            justifyContent: "flex-start",
+            alignItems: "center",
           }}
         >
           <span
-            style={{ fontSize: '0.14rem', color: '#fff', fontWeight: '500' }}
+            style={{ fontSize: "0.14rem", color: "#fff", fontWeight: "500" }}
           >
-            {text}%
+            {(+row.maxBorrowBank.apr * 100).toFixed(2)}%
           </span>
         </div>
       ),
-    }
-  ]
+    },
+  ];
 
   return (
     <BgTable>
@@ -309,5 +308,5 @@ export default function MyTable() {
         <SkeletonTable></SkeletonTable>
       )}
     </BgTable>
-  )
+  );
 }
